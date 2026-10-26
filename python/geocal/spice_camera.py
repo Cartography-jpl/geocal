@@ -3,10 +3,13 @@
 # separate functions for each type of camera. Perhaps we can consolidate these
 # somehow at some point.
 
+from __future__ import annotations
+
 import os
 
 import numpy as np
 from geocal_swig import (
+    Camera,
     CameraRadialDistortion,
     CameraRadialDistortionAndTransform,
     FrameCoordinate,
@@ -21,7 +24,7 @@ from .sqlite_shelf import read_shelve
 isis_camera_dir = os.path.abspath(os.path.dirname(__file__)) + "/data/isis_camera/"
 
 
-def hrsc_camera():
+def hrsc_camera() -> QuaternionCamera:
     """Return the HRSC camera. Note you should have loaded the instrument
     kernel already (e.g., os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker").
     We purposely don't load this, so you can direct to a different kernel
@@ -73,7 +76,9 @@ def hrsc_camera():
     return hrsc_cam
 
 
-def hirise_camera(ccd_number, bin_mode=1, tdi_mode=128):
+def hirise_camera(
+    ccd_number: int, bin_mode: int = 1, tdi_mode: int = 128
+) -> CameraRadialDistortionAndTransform:
     """Return the HIRSISE camera. Note you should have loaded the instrument
     kernel already (e.g., os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker").
     We purposely don't load this, so you can direct to a different kernel
@@ -121,7 +126,9 @@ def hirise_camera(ccd_number, bin_mode=1, tdi_mode=128):
     )
 
 
-def ctx_camera(start_sample=0, nsamp=None):
+def ctx_camera(
+    start_sample: int = 0, nsamp: int | None = None
+) -> CameraRadialDistortion | SubCamera:
     """Return the CTX camera. Note you should have loaded the instrument
     kernel already (e.g., os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker").
     We purposely don't load this, so you can direct to a different kernel
@@ -136,7 +143,7 @@ def ctx_camera(start_sample=0, nsamp=None):
         SpiceHelper.kernel_data_double("INS-74021_BORESIGHT_SAMPLE") - 0.5,
     )
     od_k = SpiceHelper.kernel_data_array_double("INS-74021_OD_K")
-    ctx_cam = CameraRadialDistortion(
+    ctx_cam: CameraRadialDistortion | SubCamera = CameraRadialDistortion(
         Quaternion_double(1, 0, 0, 0),
         od_k,
         1,
@@ -151,7 +158,7 @@ def ctx_camera(start_sample=0, nsamp=None):
     return ctx_cam
 
 
-def lro_nac_camera_from_isis(typ="left"):
+def lro_nac_camera_from_isis(typ: str = "left") -> Camera:
     """Return the LRO NAC camera. Type should be "left" or "right".
     This gets this directly from a GLAS model saved from ISIS. This was
     done initially for testing, we've left this in place for now"""
@@ -163,7 +170,9 @@ def lro_nac_camera_from_isis(typ="left"):
         raise RuntimeError("Typ should be 'right' or 'left'")
 
 
-def lro_nac_camera(typ="left", spatial_summing=1):
+def lro_nac_camera(
+    typ: str = "left", spatial_summing: int = 1
+) -> CameraRadialDistortionAndTransform:
     """Return the LRO NAC camera. Type should be "left" or "right"."""
     if typ == "left":
         bname = "INS-85600"
@@ -225,7 +234,9 @@ def lro_nac_camera(typ="left", spatial_summing=1):
     return nac_cam
 
 
-def lro_wac_camera(band=3, mode="COLOR"):
+def lro_wac_camera(
+    band: int = 3, mode: str = "COLOR"
+) -> CameraRadialDistortionAndTransform:
     """Return the LRO WAC camera. Note that this varies depending on the
     band. By convention the first two bands are the UV, the next 5 are
     the visible"""

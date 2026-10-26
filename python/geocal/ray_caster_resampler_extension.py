@@ -1,25 +1,32 @@
+from __future__ import annotations
+
 import logging
 import os
+import typing
 from functools import partial
 from tempfile import NamedTemporaryFile
+from typing import Any
 
 import numpy as np
 from geocal_swig import IgcRayCaster, RayCasterResampler
 
 from .mmap_file import mmap_file
 
+if typing.TYPE_CHECKING:
+    from geocal_swig import IpiImageGroundConnection, MapInfo
+
 
 def _ray_caster_project_subset(
-    igc,
-    number_line_framelet,
-    nline_process,
-    nintegration_step,
-    map_info,
-    scratch_file_name,
-    nsub_line,
-    nsub_sample,
-    start_line,
-):
+    igc: IpiImageGroundConnection,
+    number_line_framelet: int,
+    nline_process: int,
+    nintegration_step: int,
+    map_info: MapInfo,
+    scratch_file_name: str,
+    nsub_line: int,
+    nsub_sample: int,
+    start_line: int,
+) -> None:
     nline = min(nline_process, igc.number_line - start_line)
     rcast = IgcRayCaster(
         igc,
@@ -51,16 +58,16 @@ def _ray_caster_project_subset(
 
 
 def ray_caster_project(
-    out_fname,
-    igc,
-    map_info,
-    dtype=np.int16,
-    mmap_scratch=False,
-    pool=None,
-    nline_process=100,
-    nsub_line=-1,
-    nsub_sample=-1,
-):
+    out_fname: str,
+    igc: IpiImageGroundConnection,
+    map_info: MapInfo,
+    dtype: Any = np.int16,
+    mmap_scratch: bool = False,
+    pool: Any = None,
+    nline_process: int = 100,
+    nsub_line: int = -1,
+    nsub_sample: int = -1,
+) -> None:
     """This puts together everything to generate map projected data.
     We write the output to the given file, as a VICAR file of given
     dtype.
@@ -94,6 +101,7 @@ def ray_caster_project(
     log = logging.getLogger("geocal-python.ray_caster_resampler")
     log.info(f"Number subpixel {rcast.number_sub_line} x {rcast.number_sub_sample}")
     with NamedTemporaryFile(dir=os.path.dirname(out_fname)) as fh:
+        rcast_data: np.ndarray
         if mmap_scratch or pool is not None:
             rcast_data = np.memmap(
                 fh.name,

@@ -29,13 +29,12 @@ from geocal_swig import (
     RasterImage,
     SurfaceImageToImageMatch,
 )
-from matplotlib import cm
 
 from .ply_file import PlyFile
 from .ray_intersect import RayIntersect
 
 
-def _new_from_init(cls, version, *args):
+def _new_from_init(cls: Any, version: int, *args: Any) -> Any:
     if cls.pickle_format_version() < version:
         raise RuntimeError(
             f"Class is expecting a pickled object with version number {cls.pickle_format_version():d}, but we found {version:d}"
@@ -63,7 +62,7 @@ class DemGenerateMB(geocal_swig.CalcRasterMultiBand):
         surface_image2: RasterImage | None = None,
         max_dist_good_point: float = 0.5,
         buffer_size: int = 5,
-    ):
+    ) -> None:
         self.dem_generate = DemGenerate(
             igc1,
             igc2,
@@ -146,7 +145,7 @@ class DemGenerate:
         surface_image2: RasterImage | None = None,
         max_dist_good_point: float = 0.5,
         all_image: bool = False,
-    ):
+    ) -> None:
         self.igc1 = image_ground_connnection1
         self.igc2 = image_ground_connnection2
         # We may need to have more complicated logic to figure our the
@@ -473,7 +472,7 @@ class DemGenerate:
         if aoi_img is not None:
             plt.subplot(224)
             data = aoi_img.read(0, 0, aoi_img.number_line, aoi_img.number_sample)
-            plt.imshow(data, cmap=cm.gray)  # type: ignore[attr-defined]
+            plt.imshow(data, cmap="gray")
             plt.title("Image 1")
             plt.figure(2)
             x = []
@@ -496,7 +495,7 @@ class DemGenerate:
                     x.append(ic.sample)
             plt.subplot(111)
             plt.plot(x, y, ".")
-            plt.imshow(data, cmap=cm.gray)  # type: ignore[attr-defined]
+            plt.imshow(data, cmap="gray")
         plt.show()
 
     def match(

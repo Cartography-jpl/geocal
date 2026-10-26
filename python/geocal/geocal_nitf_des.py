@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+from typing import Any
+
 from geocal_swig import AttCsattb, GlasGfmCamera, OrbitDes, PosCsephb
 
 try:
@@ -27,7 +31,7 @@ if have_pynitf:
     DesCSEPHB.des_implementation_field = "pos_csephb"
     DesCSEPHB.des_implementation_class = PosCsephb
 
-    def _descsephb_handle_diff(self, t):
+    def _descsephb_handle_diff(self: DesCSEPHB, t: DesCSEPHB) -> bool:
         p1 = self.pos_csephb
         p2 = t.pos_csephb
         return (
@@ -36,7 +40,7 @@ if have_pynitf:
             and p1.ephemeris_source == p2.ephemeris_source
             and p1.lagrange_order == p2.lagrange_order
             and p1.is_cf == p2.is_cf
-            and p1.min_time == p1.min_time
+            and p1.min_time == p2.min_time
             and abs(p1.time_step - p2.time_step) < 1e-6
             and np.allclose(p1.position_data, p2.position_data)
         )
@@ -45,7 +49,7 @@ if have_pynitf:
     DesCSATTB.des_implementation_field = "att_csattb"
     DesCSATTB.des_implementation_class = AttCsattb
 
-    def _descsattb_handle_diff(self, t):
+    def _descsattb_handle_diff(self: DesCSATTB, t: DesCSATTB) -> bool:
         """Handle difference checking between 2 DesCSATTB"""
         d1 = self.att_csattb
         d2 = t.att_csattb
@@ -64,7 +68,7 @@ if have_pynitf:
 
     # Have search to find the pos_csephb and att_csattb that goes with a
     # image segment. We may extend this.
-    def _pos_csephb(iseg):
+    def _pos_csephb(iseg: NitfImageSegment) -> PosCsephb | None:
         lv = iseg.idlvl
         f = iseg.nitf_file
         if f is None:
@@ -88,7 +92,7 @@ if have_pynitf:
             )
         return possible[0].des.pos_csephb
 
-    def _pos_csephb_set(iseg, pos_csephb):
+    def _pos_csephb_set(iseg: NitfImageSegment, pos_csephb: PosCsephb) -> None:
         f = iseg.nitf_file
         if f is None:
             raise RuntimeError(
@@ -103,7 +107,7 @@ if have_pynitf:
             f.des_segment.append(NitfDesSegment(d))
         d.add_display_level(iseg.idlvl)
 
-    def _att_csattb(iseg):
+    def _att_csattb(iseg: NitfImageSegment) -> AttCsattb | None:
         lv = iseg.idlvl
         f = iseg.nitf_file
         if f is None:
@@ -127,7 +131,7 @@ if have_pynitf:
             )
         return possible[0].des.att_csattb
 
-    def _att_csattb_set(iseg, att_csattb):
+    def _att_csattb_set(iseg: NitfImageSegment, att_csattb: AttCsattb) -> None:
         f = iseg.nitf_file
         if f is None:
             raise RuntimeError(
@@ -142,7 +146,7 @@ if have_pynitf:
             f.des_segment.append(NitfDesSegment(d))
         d.add_display_level(iseg.idlvl)
 
-    def _camera_cssfab(d):
+    def _camera_cssfab(d: DesCSSFAB) -> GlasGfmCamera:
         if d.num_fl_pts != 1:
             raise RuntimeError("We don't currently support multiple focal lengths")
         cam = GlasGfmCamera()
@@ -223,7 +227,7 @@ if have_pynitf:
         cam.id = ""
         return cam
 
-    def _camera_cssfab_set(d, cam):
+    def _camera_cssfab_set(d: DesCSSFAB, cam: GlasGfmCamera) -> None:
         d.sensor_type = cam.sensor_type
         d.band_type = cam.band_type
         d.band_wavelength = cam.band_wavelength
@@ -285,7 +289,7 @@ if have_pynitf:
         else:
             raise RuntimeError(f"Unknown sensor type {cam.sensor_type}")
 
-    def _camera_glas_gfm(iseg):
+    def _camera_glas_gfm(iseg: NitfImageSegment) -> GlasGfmCamera | None:
         lv = iseg.idlvl
         f = iseg.nitf_file
         if f is None:
@@ -310,7 +314,7 @@ if have_pynitf:
         d = possible[0].des
         return d.camera
 
-    def _camera_glas_gfm_set(iseg, cam):
+    def _camera_glas_gfm_set(iseg: NitfImageSegment, cam: GlasGfmCamera) -> None:
         f = iseg.nitf_file
         if f is None:
             raise RuntimeError(
@@ -325,16 +329,16 @@ if have_pynitf:
             f.des_segment.append(NitfDesSegment(d))
         d.add_display_level(iseg.idlvl)
 
-    def _orbit_des(iseg):
+    def _orbit_des(iseg: NitfImageSegment) -> OrbitDes | None:
         if iseg.pos_csephb is None or iseg.att_csattb is None:
             return None
         return OrbitDes(iseg.pos_csephb, iseg.att_csattb)
 
-    def _orbit_des_set(iseg, orb):
+    def _orbit_des_set(iseg: NitfImageSegment, orb: OrbitDes) -> None:
         iseg.pos_csephb = orb.pos_csephb
         iseg.att_csattb = orb.att_csattb
 
-    def _find_des_by_uuid(f, id):
+    def _find_des_by_uuid(f: NitfFile, id: str) -> Any:
         """Find the DES that has a ID with the given value. This should be a
         unique value, so we should have at most one. Return None if we
         don't find it.
@@ -347,15 +351,16 @@ if have_pynitf:
                 return dseg.des
         return None
 
-    def _pos_csepha(iseg):
+    def _pos_csepha(iseg: NitfImageSegment) -> Any:
         """Older TRE version of ephemeris. This is used by WV-2, so we
         want to support reading this"""
+        # TODO This is a placeholder, it doesn't actually read the CSEPHA yet
         t = iseg.find_one_tre("CSEPHA")
         if t is None:
             return None
         return "hi there"
 
-    def _pos_csepha_set(iseg, pos_csepha):
+    def _pos_csepha_set(iseg: NitfImageSegment, pos_csepha: Any) -> None:
         raise NotImplementedError("Older TRE, we don't currently support writing this.")
 
     NitfFile.find_des_by_uuid = _find_des_by_uuid

@@ -1,5 +1,9 @@
+from __future__ import annotations
+
 import math
 import textwrap
+import typing
+from typing import Any
 
 import numpy as np
 import scipy
@@ -30,6 +34,17 @@ from .geocal_nitf_misc import (
 )
 from .glas_gfm_covariance import GlasGfmCovariance
 
+if typing.TYPE_CHECKING:
+    from geocal_swig import (
+        AttCsattb,
+        Dem,
+        FrameCoordinate,
+        ImageGroundConnection,
+        PosCsephb,
+        TimeTable,
+        VelocityAberration,
+    )
+
 try:
     import pynitf
 
@@ -43,7 +58,10 @@ class GlasGfm:
     This class collects all this together so we can treat this as
     "one thing"'''
 
-    def __init__(self, iseg, tre_csexrb):
+    def __init__(
+        self, iseg: pynitf.NitfImageSegment, tre_csexrb: pynitf.TreCSEXRB
+    ) -> None:
+        # tre_csexrb is None only while GlasGfm.create is filling this in
         self.iseg = iseg
         self.tre_csexrb = tre_csexrb
         self.naif_code = Ecr.EARTH_NAIF_CODE
@@ -52,7 +70,13 @@ class GlasGfm:
         else:
             self.des = []
 
-    def create(iseg, igc, refraction_flag=None, velocity_aberration_flag=None):
+    @staticmethod
+    def create(
+        iseg: pynitf.NitfImageSegment,
+        igc: ImageGroundConnection,
+        refraction_flag: bool | None = None,
+        velocity_aberration_flag: bool | None = None,
+    ) -> GlasGfm:
         """Create a GlasGfm from a igc, and put into the given
         NitfImageSegment. We add DES data to the file f as needed.
 
@@ -79,9 +103,9 @@ class GlasGfm:
         res = GlasGfm(iseg, None)
         t = pynitf.TreCSEXRB()
         t.generate_uuid_if_needed()
-        t.platform_id = igc.platform_id
-        t.payload_id = igc.payload_id
-        t.sensor_id = igc.sensor_id
+        t.platform_id = igc.platform_id  # type: ignore[attr-defined]
+        t.payload_id = igc.payload_id  # type: ignore[attr-defined]
+        t.sensor_id = igc.sensor_id  # type: ignore[attr-defined]
         if isinstance(igc, IpiImageGroundConnection):
             orb = igc.ipi.orbit
             cam = igc.ipi.camera
@@ -181,11 +205,11 @@ class GlasGfm:
 
     def igc(
         self,
-        include_image=False,
-        dem=SimpleDem(),
-        naif_code=None,
-        velocity_aberration_exact=False,
-    ):
+        include_image: bool = False,
+        dem: Dem = SimpleDem(),
+        naif_code: int | None = None,
+        velocity_aberration_exact: bool = False,
+    ) -> ImageGroundConnection:
         """Return ImageGroundConnection for GLAS/GFM.
         You can either have the raster_image or raster_image_multi_band
         from the NitfFile included in the igc or not, based on the
@@ -200,9 +224,14 @@ class GlasGfm:
         if naif_code is not None:
             self.naif_code = naif_code
         orb = self.orbit
-        cam = self.camera
+        if orb is None:
+            raise RuntimeError("GLAS/GFM needs both the CSEPHB and CSATTB DES")
+        cam = self._camera_required
+        igc: ImageGroundConnection
         if self.tre_csexrb.sensor_type in ("S", "P"):
             tt = self.time_table
+            if tt is None:
+                raise RuntimeError("GLAS/GFM push broom needs a time table in CSEXRB")
             ipi = Ipi(
                 orb,
                 cam,
@@ -235,12 +264,12 @@ class GlasGfm:
             )
         else:
             raise RuntimeError("Unrecognized tre_csexrb sensor type")
-        # Add some useful metadata
-        igc.platform_id = self.tre_csexrb.platform_id
-        igc.payload_id = self.tre_csexrb.payload_id
-        igc.sensor_id = self.tre_csexrb.sensor_id
-        igc.dyanmic_range = self.tre_csexrb.dynamic_range
-        igc.glas_gfm_covariance = self.glas_gfm_covariance
+        # Add some useful metadata, as python attributes
+        igc.platform_id = self.tre_csexrb.platform_id  # type: ignore[union-attr]
+        igc.payload_id = self.tre_csexrb.payload_id  # type: ignore[union-attr]
+        igc.sensor_id = self.tre_csexrb.sensor_id  # type: ignore[union-attr]
+        igc.dynamic_range = self.tre_csexrb.dynamic_range  # type: ignore[union-attr]
+        igc.glas_gfm_covariance = self.glas_gfm_covariance  # type: ignore[union-attr]
         if include_image:
             mb = self.iseg.raster_image_multi_band
             if mb.number_band == 1:
@@ -250,7 +279,7 @@ class GlasGfm:
         return igc
 
     @property
-    def camera(self):
+    def camera(self) -> GlasGfmCamera | None:
         """Return the camera"""
         d = self.find_one_des("CSSFAB")
         if d is None:
@@ -258,14 +287,24 @@ class GlasGfm:
         return d.camera
 
     @property
-    def refraction(self):
+    def _camera_required(self) -> GlasGfmCamera:
+        """Return the camera, which is required for most things"""
+        cam = self.camera
+        if cam is None:
+            raise RuntimeError("GLAS/GFM needs the CSSFAB DES")
+        return cam
+
+    @property
+    def refraction(self) -> RefractionMsp | None:
         """Return the Refraction object if we are including refraction, None
         otherwise"""
         if self.tre_csexrb.atm_refr_flag == 0:
             return None
-        return RefractionMsp(self.camera.band_wavelength)
+        return RefractionMsp(self._camera_required.band_wavelength)
 
-    def velocity_aberration(self, velocity_aberration_exact=False):
+    def velocity_aberration(
+        self, velocity_aberration_exact: bool = False
+    ) -> VelocityAberration | None:
         """Return the NoVelocityAberration object if we are not including
         velocity_aberration, VelocityAberrationExact or None otherwise"""
         # TODO Way to include full VelocityAberration?
@@ -276,7 +315,7 @@ class GlasGfm:
         return None
 
     @property
-    def time_table(self):
+    def time_table(self) -> TimeTable | None:
         """Return a TimeTable (for a push broom) or None for a
         frame camera"""
         if self.tre_csexrb.day_first_line_image is None:
@@ -290,7 +329,7 @@ class GlasGfm:
         if self.tre_csexrb.sensor_type == "S":
             return ConstantSpacingTimeTable(tstart, tend, (tend - tstart) / (nline - 1))
         elif self.tre_csexrb.sensor_type == "P":
-            nline_framelet = self.camera.number_line(0)
+            nline_framelet = self._camera_required.number_line(0)
             nframelet = int(math.floor(nline / nline_framelet))
             return ConstantSpacingFrameletTimeTable(
                 tstart, tend, nline_framelet, (tend - tstart) / (nframelet - 1)
@@ -298,7 +337,7 @@ class GlasGfm:
         else:
             raise RuntimeError("Unrecognized tre_csexrb sensor type")
 
-    def find_one_des(self, desid):
+    def find_one_des(self, desid: str) -> Any:
         res = [d for d in self.des if d.desid == desid]
         if len(res) == 0:
             return None
@@ -307,7 +346,7 @@ class GlasGfm:
         return res[0]
 
     @property
-    def glas_gfm_covariance(self):
+    def glas_gfm_covariance(self) -> GlasGfmCovariance | None:
         """Return the GlasGfmCovariance object associated with this GlasGfm"""
         d = self.find_one_des("CSCSDB")
         if d is None:
@@ -315,7 +354,7 @@ class GlasGfm:
         return GlasGfmCovariance.read_des(d)
 
     @property
-    def pos_csephb(self):
+    def pos_csephb(self) -> PosCsephb | None:
         """Return PosCsephb or None. Will trigger an error if we
         have more than one DES that matches."""
         d = self.find_one_des("CSEPHB")
@@ -324,7 +363,7 @@ class GlasGfm:
         return d.pos_csephb
 
     @property
-    def att_csattb(self):
+    def att_csattb(self) -> AttCsattb | None:
         """Return AttCsattb or None. Will trigger an error if we
         have more than one DES that matches."""
         d = self.find_one_des("CSATTB")
@@ -333,13 +372,13 @@ class GlasGfm:
         return d.att_csattb
 
     @property
-    def orbit(self):
+    def orbit(self) -> OrbitDes | None:
         """Return OrbitDes for GLAS/GFM"""
         if self.pos_csephb is None or self.att_csattb is None:
             return None
         return OrbitDes(self.pos_csephb, self.att_csattb, self.naif_code)
 
-    def __str__(self):
+    def __str__(self) -> str:
         res = "GlasGfm:\n"
         res += f"   Platform id:    {self.tre_csexrb.platform_id}\n"
         res += f"   Payload id:     {self.tre_csexrb.payload_id}\n"
@@ -366,7 +405,7 @@ class GlasGfm:
         return res
 
 
-def _glas_gfm(self):
+def _glas_gfm(self: pynitf.NitfImageSegment) -> GlasGfm | None:
     """Return GlasGfm if we find it, otherwise None"""
     t = self.find_one_tre("CSEXRB")
     if t is None:
@@ -378,7 +417,9 @@ def _glas_gfm(self):
     return GlasGfm(self, t)
 
 
-def _create_glas_gfm(self, igc):
+def _create_glas_gfm(
+    self: pynitf.NitfImageSegment, igc: ImageGroundConnection
+) -> GlasGfm:
     return GlasGfm.create(self, igc)
 
 
@@ -395,12 +436,12 @@ if have_pynitf:
 class _CameraForGlas(Camera):
     def __init__(
         self,
-        number_sample,
-        lv_arr,
-        focal_length,
-        sample_number_first=0,
-        delta_sample_pair=1,
-    ):
+        number_sample: int,
+        lv_arr: np.ndarray,
+        focal_length: float,
+        sample_number_first: int = 0,
+        delta_sample_pair: int = 1,
+    ) -> None:
         self.nsamp = number_sample
         self.focal_length = focal_length
         self.slv = scipy.interpolate.RegularGridInterpolator(
@@ -420,28 +461,28 @@ class _CameraForGlas(Camera):
         )
         super().__init__()
 
-    def number_line(self, b):
+    def number_line(self, b: int) -> int:
         return 1
 
-    def number_sample(self, b):
+    def number_sample(self, b: int) -> int:
         return self.nsamp
 
-    def sc_look_vector(self, fc, b):
+    def sc_look_vector(self, fc: FrameCoordinate, b: int) -> ScLookVector:
         return ScLookVector(*self.slv([fc.sample])[0])
 
 
 class _CameraForGfm(Camera):
     def __init__(
         self,
-        number_line,
-        number_sample,
-        lv_arr,
-        focal_length,
-        line_number_first=0,
-        sample_number_first=0,
-        delta_sample_pair=1,
-        delta_line_pair=1,
-    ):
+        number_line: int,
+        number_sample: int,
+        lv_arr: np.ndarray,
+        focal_length: float,
+        line_number_first: int = 0,
+        sample_number_first: int = 0,
+        delta_sample_pair: int = 1,
+        delta_line_pair: int = 1,
+    ) -> None:
         self.nline = number_line
         self.nsamp = number_sample
         self.focal_length = focal_length
@@ -464,26 +505,26 @@ class _CameraForGfm(Camera):
         )
         super().__init__()
 
-    def number_line(self, b):
+    def number_line(self, b: int) -> int:
         return self.nline
 
-    def number_sample(self, b):
+    def number_sample(self, b: int) -> int:
         return self.nsamp
 
-    def sc_look_vector(self, fc, b):
+    def sc_look_vector(self, fc: FrameCoordinate, b: int) -> ScLookVector:
         return ScLookVector(*self.slv([fc.line, fc.sample])[0])
 
 
 def _create_glas_from_sc_look_vector(
-    cls,
-    sclv_list,
-    focal_length=1,
-    focal_length_time=Time.parse_time("2020-01-01T00:00:00Z"),
-    sample_number_first=0,
-    delta_sample_pair=1,
-    band_type="N",
-    band_wavelength=1.45,
-):
+    cls: type[GlasGfmCamera],
+    sclv_list: list[ScLookVector],
+    focal_length: float = 1,
+    focal_length_time: Time = Time.parse_time("2020-01-01T00:00:00Z"),
+    sample_number_first: int = 0,
+    delta_sample_pair: int = 1,
+    band_type: str = "N",
+    band_wavelength: float = 1.45,
+) -> GlasGfmCamera:
     """Create a GLAS camera model. This gets created from a list of
     ScLookVector values, which should be evenly spaced with the
     delta_sample_pair spacing starting as sample_number_first."""
@@ -513,17 +554,17 @@ def _create_glas_from_sc_look_vector(
 
 
 def _create_gfm_from_look_vector(
-    cls,
-    lv_arr,
-    focal_length=1,
-    focal_length_time=Time.parse_time("2020-01-01T00:00:00Z"),
-    line_number_first=0,
-    sample_number_first=0,
-    delta_line_pair=1,
-    delta_sample_pair=1,
-    band_type="N",
-    band_wavelength=1.45,
-):
+    cls: type[GlasGfmCamera],
+    lv_arr: np.ndarray,
+    focal_length: float = 1,
+    focal_length_time: Time = Time.parse_time("2020-01-01T00:00:00Z"),
+    line_number_first: int = 0,
+    sample_number_first: int = 0,
+    delta_line_pair: int = 1,
+    delta_sample_pair: int = 1,
+    band_type: str = "N",
+    band_wavelength: float = 1.45,
+) -> GlasGfmCamera:
     """Create a GFM camera model. This gets created from a array of
     look vector values, which should be evenly spaced in line index
     (first one) and sample index (second one) with the
@@ -564,13 +605,18 @@ def _create_gfm_from_look_vector(
     return gcam
 
 
-def _create_glas_from_field_angle(cls, fa_x, fa_y, **keyword):
+def _create_glas_from_field_angle(
+    cls: type[GlasGfmCamera],
+    fa_x: list[float] | np.ndarray,
+    fa_y: list[float] | np.ndarray,
+    **keyword: Any,
+) -> GlasGfmCamera:
     """Variation of create_glas_from_sc_look_vector where we instead
     take the field angles in degrees."""
     sclv_list = [
         ScLookVector.create_from_field_angle(fa_x[i], fa_y[i]) for i in range(len(fa_x))
     ]
-    return cls.create_glas_from_sc_look_vector(sclv_list, **keyword)
+    return cls.create_glas_from_sc_look_vector(sclv_list, **keyword)  # type: ignore[attr-defined]
 
 
 # Python functions are added to SWIG classes below. mypy doesn't know

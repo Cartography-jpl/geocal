@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+from typing import IO, Any
+
 from geocal_swig import Rpc
 
 try:
@@ -18,17 +22,17 @@ except ImportError:
 if have_pynitf:
 
     class RpcImageSegmentHook(NitfSegmentHook):
-        def __init__(self):
+        def __init__(self) -> None:
             self.rpc_tre_tag_list = ["RPC00A", "RPC00B"]
 
-        def after_init_hook(self, seg, nitf_file):
+        def after_init_hook(self, seg: Any, nitf_file: Any) -> None:
             seg.rpc = None
 
-        def after_append_hook(self, seg, nitf_file):
+        def after_append_hook(self, seg: Any, nitf_file: Any) -> None:
             if not hasattr(seg, "rpc"):
                 seg.rpc = None
 
-        def before_write_hook(self, seg, nitf_file):
+        def before_write_hook(self, seg: Any, nitf_file: Any) -> None:
             """Remove all the existing RPC TREs (if any), and add the TREs
             to store seg.rpc"""
             seg.tre_list = [
@@ -47,7 +51,7 @@ if have_pynitf:
                 tre.rpc = seg.rpc
                 seg.tre_list.append(tre)
 
-        def after_read_hook(self, seg, nitf_file):
+        def after_read_hook(self, seg: Any, nitf_file: Any) -> None:
             """Read all the RPC TREs to fill in seg.rpc. If there are
             no RPC TREs, then set seg.rpc to None."""
             # Currently only handle one RPC TRE.
@@ -62,14 +66,16 @@ if have_pynitf:
             else:
                 seg.rpc = None
 
-        def before_str_hook(self, seg, nitf_file, fh):
+        def before_str_hook(self, seg: Any, nitf_file: Any, fh: IO[str]) -> None:
             """Called at the start of NitfSegment.__str__"""
             if seg.rpc:
                 print(seg.rpc, file=fh)
             else:
                 print("Rpc: None", file=fh)
 
-        def before_str_tre_hook(self, seg, tre, nitf_file, fh):
+        def before_str_tre_hook(
+            self, seg: Any, tre: Any, nitf_file: Any, fh: IO[str]
+        ) -> bool:
             """Called before printing a TRE. If this returns true we assume
             that this class has handled the TRE printing. Otherwise, we
             call print on the tre"""

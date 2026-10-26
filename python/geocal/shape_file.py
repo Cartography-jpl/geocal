@@ -1,3 +1,13 @@
+from __future__ import annotations
+
+import typing
+from collections.abc import Iterator, Sequence
+from types import TracebackType
+from typing import Any
+
+if typing.TYPE_CHECKING:
+    from typing import Self
+
 try:
     # Depending of the build options, this might be missing. Just skip
     # ShapeFile if we don't have this.
@@ -28,7 +38,9 @@ if have_shape_file:
         ogr.DataSource and ogr.Layer"""
 
         # Need to add support for using as a "with" file
-        def __init__(self, fname, mode="r", driver_name="ESRI Shapefile"):
+        def __init__(
+            self, fname: str, mode: str = "r", driver_name: str = "ESRI Shapefile"
+        ) -> None:
             """Open the given file, with the given mode. If you are writing,
             you can supply the driver name to use."""
             # Shape files don't like being overwritten, so we remove
@@ -56,40 +68,47 @@ if have_shape_file:
                 raise RuntimeError(f"Invalid mode {mode}")
 
         @property
-        def file_name(self):
+        def file_name(self) -> str:
             return self.data_source.GetName()
 
-        def __enter__(self):
+        def __enter__(self) -> Self:
             return self
 
-        def __exit__(self, type, value, traceback):
+        def __exit__(
+            self,
+            type: type[BaseException] | None,
+            value: BaseException | None,
+            traceback: TracebackType | None,
+        ) -> None:
             self.close()
 
-        def __len__(self):
+        def __len__(self) -> int:
             return self.layers.__len__()
 
-        def __iter__(self):
+        def __iter__(self) -> Iterator[str]:
             return self.layers.__iter__()
 
-        def __getitem__(self, key):
+        def __getitem__(self, key: str) -> ShapeLayer:
             return self.layers.__getitem__(key)
 
-        def close(self):
+        def close(self) -> None:
             """Close the file and write everything to disk"""
             if self.data_source is not None:
                 self.data_source.SyncToDisk()
             self.data_source = None
 
-        def __del__(self):
+        def __del__(self) -> None:
             self.close()
 
         def add_layer(
             self,
-            name,
-            geometry_type,
-            fields,
-            spatial_reference=osr.SpatialReference(osr.GetUserInputAsWKT("WGS84")),
-        ):
+            name: str,
+            geometry_type: int,
+            fields: list[list[Any]],
+            spatial_reference: osr.SpatialReference = osr.SpatialReference(
+                osr.GetUserInputAsWKT("WGS84")
+            ),
+        ) -> ShapeLayer:
             """Add a layer of the given geometry type with the given fields.
 
             For example:
@@ -118,7 +137,7 @@ if have_shape_file:
     class ShapeLayer(collections.abc.Sequence):
         """This class handles access to a single layers in a Shapefile."""
 
-        def __init__(self, shape_file, index):
+        def __init__(self, shape_file: ShapeFile, index: int) -> None:
             """Create ShapeLayer for given ShapeFile and index. This isn't
             normally called directly, instead go through ShapeFile"""
             self.shape_file = weakref.proxy(shape_file)
@@ -129,11 +148,11 @@ if have_shape_file:
             ]
 
         @property
-        def name(self):
+        def name(self) -> str:
             return self.layer.GetName()
 
         @staticmethod
-        def linear_ring_2d(v):
+        def linear_ring_2d(v: Sequence[Sequence[float]]) -> ogr.Geometry:
             """Create a linear  ring using 2d points. We pass in an array,
             with each entry in the array being an array of 2 values."""
             g = ogr.Geometry(ogr.wkbLinearRing)
@@ -142,7 +161,7 @@ if have_shape_file:
             return g
 
         @staticmethod
-        def polygon_2d(*v):
+        def polygon_2d(*v: Sequence[Sequence[float]]) -> ogr.Geometry:
             """Create a polygon using 2D points. A polygon has one exterior
             ring and zero or more interior rings. This gets passed as one or
             more arrays, with each array having arrays of 2 values.
@@ -157,13 +176,13 @@ if have_shape_file:
             return g
 
         @staticmethod
-        def point_2d(x, y):
+        def point_2d(x: float, y: float) -> ogr.Geometry:
             """Create a 2D point"""
             g = ogr.Geometry(ogr.wkbPoint)
             g.AddPoint_2D(x, y)
             return g
 
-        def add_feature(self, d):
+        def add_feature(self, d: dict[str, Any]) -> ShapeLayer:
             """Add a feature. We pass in a dictionary of keyword/value pairs. The
             keyword "Geometry" is used to set the geometry. You can optionally
             include a "Style" to pass in a style string.
@@ -181,14 +200,14 @@ if have_shape_file:
             self.layer.CreateFeature(f)
             return self
 
-        def set_filter_rect(self, x1, y1, x2, y2):
+        def set_filter_rect(self, x1: float, y1: float, x2: float, y2: float) -> None:
             """Filter the features so only those that intersect the rectangle
             are returned. The x and y are given in whatever the spatial
             reference is for the layer, e.g., longitude and latitude
             (note the order, X is longitude)"""
             self.layer.SetSpatialFilterRect(x1, y1, x2, y2)
 
-        def set_spatial_filter(self, ogr_geometry):
+        def set_spatial_filter(self, ogr_geometry: ogr.Geometry) -> None:
             """Filter the features based on a spatial filter. The spatial filter
             should be an Ogr::Geometry, and we filter based on intersecting
             that geometry. Note that the special case of a rectangle filter is
@@ -200,18 +219,18 @@ if have_shape_file:
             set_attribute_filter."""
             self.layer.SetSpatialFilter(ogr_geometry)
 
-        def set_attribute_filter(self, where_clause):
+        def set_attribute_filter(self, where_clause: str) -> None:
             """Filter the features based on an SQL where clause on the attributes.
             Note that this is in addition to any spatial filters, you can have
             both a spatial and an attribute filter at the same time."""
             self.layer.SetAttributeFilter(where_clause)
 
-        def clear_filter(self):
+        def clear_filter(self) -> None:
             """Clear whatever filters have been set."""
             self.layer.SetSpatialFilter(None)
             self.layer.SetAttributeFilter(None)
 
-        def geometry_collection(self):
+        def geometry_collection(self) -> ogr.Geometry:
             """Return the geometry union of all the features. This is useful for
             example if this layer is POI list and we are finding the intersection
             with a footprint layer."""
@@ -220,35 +239,35 @@ if have_shape_file:
                 gcol.AddGeometry(ft["Geometry"])
             return gcol
 
-        def __getitem__(self, index):
+        def __getitem__(self, index: int) -> ShapeFeature:  # type: ignore[override]
             if index < 0 or index >= len(self):
                 raise IndexError
             self.layer.SetNextByIndex(index)
             return ShapeFeature(self, self.layer.GetNextFeature())
 
-        def __len__(self):
+        def __len__(self) -> int:
             return self.layer.GetFeatureCount()
 
 
 class ShapeFeature(collections.abc.Mapping):
     """This handles a Feature in a Layer."""
 
-    def __init__(self, shape_layer, ogr_feature):
+    def __init__(self, shape_layer: ShapeLayer, ogr_feature: ogr.Feature) -> None:
         self.layer = weakref.proxy(shape_layer)
         self.feature = ogr_feature
 
-    def keys(self):
+    def keys(self) -> list[str]:  # type: ignore[override]
         res = ["Geometry"]
         res.extend(self.layer.field_list)
         return res
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[str]:
         yield from list(self.keys())
 
-    def __len__(self, key):
+    def __len__(self) -> int:
         return 1 + len(self.layer.field_list)
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: str) -> Any:
         if key == "Geometry":
             return self.feature.GetGeometryRef()
         else:

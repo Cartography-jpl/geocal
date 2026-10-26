@@ -1,5 +1,9 @@
+from __future__ import annotations
+
 import collections
 import collections.abc
+from collections.abc import Iterable, Iterator
+from typing import Any, ClassVar
 
 
 # Note this is a duplicate of the PriorityHandleSet in pynitf. We have this
@@ -7,71 +11,77 @@ import collections.abc
 # renamed this to GeoCalPriorityHandleSet, so to prevent any conflicts where both
 # pynitf and geocal are being used.
 class GeoCalPriorityHandleSet(collections.abc.Set):
-    def __init__(self):
-        self.handle_set = collections.defaultdict(lambda: set())
+    # Created by default_handle_set the first time it is needed
+    _default_handle_set: ClassVar[GeoCalPriorityHandleSet]
 
-    def __contains__(self, itm):
-        return itm[0] in self.handle_set[itm[1]]
+    def __init__(self) -> None:
+        self.handle_set: collections.defaultdict[int, set[Any]] = (
+            collections.defaultdict(lambda: set())
+        )
 
-    def __len__(self):
+    def __contains__(self, itm: object) -> bool:
+        # itm is a (handle, priority_order) pair
+        return itm[0] in self.handle_set[itm[1]]  # type: ignore[index]
+
+    def __len__(self) -> int:
         res = 0
         for t in self.handle_set.values():
             res += len(t)
         return res
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[tuple[Any, int]]:
         for k in sorted(self.handle_set.keys(), reverse=True):
             for h in self.handle_set[k]:
                 yield (h, k)
 
     @classmethod
-    def _from_iterable(cls, it):
+    def _from_iterable(cls, it: Iterable[Any]) -> GeoCalPriorityHandleSet:
         obj = cls()
         for i in it:
             obj.add_handle(i[0], priority_order=i[1])
         return obj
 
-    def __copy__(self):
+    def __copy__(self) -> GeoCalPriorityHandleSet:
         """Copy the PrioritySet. This is a shallow copy, we have our our
         handle set but all the objects in it are the same as the original
         set."""
         return self.__class__._from_iterable(iter(self))
 
-    def add_handle(self, h, priority_order=0):
+    def add_handle(self, h: Any, priority_order: int = 0) -> None:
         """Add a handler. The higher priority_order (larger number) items are
         tried first."""
         self.handle_set[priority_order].add(h)
 
-    def discard_handle(self, h):
+    def discard_handle(self, h: Any) -> None:
         """Discard the handle h. It is ok if h isn't actually in the set
         of handles."""
         for k in sorted(self.handle_set.keys()):
             self.handle_set[k].discard(h)
 
-    def clear(self):
+    def clear(self) -> None:
         """Remove all handles in the set."""
         self.handle_set.clear()
 
     @classmethod
-    def default_handle_set(cls):
+    def default_handle_set(cls) -> Any:
         """Return the default set of handlers to use."""
         if not hasattr(cls, "_default_handle_set"):
             cls._default_handle_set = cls()
         return cls._default_handle_set
 
     @classmethod
-    def add_default_handle(cls, h, priority_order=0):
+    def add_default_handle(cls, h: Any, priority_order: int = 0) -> None:
         """Add the given handle to the default set of handlers.  The
         higher priority_order (larger number) items are tried first."""
         cls.default_handle_set().add_handle(h, priority_order)
 
     @classmethod
-    def discard_default_handle(cls, h):
+    def discard_default_handle(cls, h: Any) -> None:
         """Discard the handle h from the default list. It is ok if h isn't
         actually in the set of handles."""
         cls.default_handle_set().discard_handle(h)
 
-    def handle(self, *args, **keywords):
+    def handle(self, *args: Any, **keywords: Any) -> Any:
         """Find the first handle that says it can process the given arguments,
         and return the results from that handle."""
         could_handle = False
@@ -92,7 +102,7 @@ class GeoCalPriorityHandleSet(collections.abc.Set):
                 return res
         raise RuntimeError(f"No handle was found. args={args}, keywords={keywords}")
 
-    def handle_h(self, h, *args, **keywords):
+    def handle_h(self, h: Any, *args: Any, **keywords: Any) -> tuple[bool, Any]:
         raise NotImplementedError
 
 

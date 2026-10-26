@@ -1,5 +1,13 @@
+from __future__ import annotations
+
+import typing
+from typing import Any
+
 import numpy as np
 import scipy
+
+if typing.TYPE_CHECKING:
+    from geocal_swig import CartesianFixed, Dem, IgcCollection, TiePointCollection
 
 
 class _coo_helper:
@@ -8,13 +16,13 @@ class _coo_helper:
     lil_matrix, but really just accumulates everthing for producing a
     coo_matrix."""
 
-    def __init__(self, shape):
-        self.row = []
-        self.col = []
-        self.data = []
+    def __init__(self, shape: tuple[int, int]) -> None:
+        self.row: list[int] = []
+        self.col: list[int] = []
+        self.data: list[float] = []
         self.shape = shape
 
-    def __setitem__(self, key, value):
+    def __setitem__(self, key: tuple[int | slice, int | slice], value: Any) -> None:
         if type(key[0]) is slice:
             r0 = list(range(*key[0].indices(self.shape[0])))
             if type(key[1]) is slice:
@@ -45,9 +53,10 @@ class _coo_helper:
                     self.col.append(key[1])
                     self.data.append(value)
 
-    def coo_matrix(self):
+    def coo_matrix(self) -> scipy.sparse.coo_matrix:
         return scipy.sparse.coo_matrix(
-            (self.data, (self.row, self.col)), shape=self.shape
+            (np.array(self.data), (np.array(self.row), np.array(self.col))),
+            shape=self.shape,
         )
 
 
@@ -94,19 +103,19 @@ class SimultaneousBundleAdjustment:
 
     def __init__(
         self,
-        igc_coll,
-        tpcol,
-        dem,
-        dem_sigma=10,
-        gcp_sigma=10,
-        tp_sigma=None,
-        tp_epsilon=1,
-        p0=None,
-        psigma=None,
-        hold_gcp_fixed=False,
-        ecr_fd_step_size=None,
-        parameter_fd_step_size=None,
-    ):
+        igc_coll: IgcCollection,
+        tpcol: TiePointCollection,
+        dem: Dem,
+        dem_sigma: float = 10,
+        gcp_sigma: float = 10,
+        tp_sigma: float | None = None,
+        tp_epsilon: float = 1,
+        p0: np.ndarray | None = None,
+        psigma: np.ndarray | None = None,
+        hold_gcp_fixed: bool = False,
+        ecr_fd_step_size: float | None = None,
+        parameter_fd_step_size: float | None = None,
+    ) -> None:
         """Constructor. This takes a IgcCollection, and a
         TiePointCollection. The camera order used in each TiePoint
         should match the order of IgcCollection.
@@ -176,7 +185,7 @@ class SimultaneousBundleAdjustment:
         # Determine the slices for each of the parameter types. We have
         # the location each tiepoint first, followed by the parameters for
         # igc_coll.
-        self.tp_slice = []
+        self.tp_slice: list[slice | None] = []
         j = 0
         for i, tp in enumerate(self.tpcol):
             if not self.hold_gcp_fixed or not tp.is_gcp:
@@ -186,24 +195,24 @@ class SimultaneousBundleAdjustment:
                 self.tp_slice.append(None)
 
     @property
-    def tp_offset_slice(self):
+    def tp_offset_slice(self) -> slice:
         """The portion of parameter that gives the tie point offsets"""
         return slice(0, len(self.tp_offset))
 
     @property
-    def len_surface_constraint(self):
+    def len_surface_constraint(self) -> int:
         res = len(self.tpcol)
         if self.hold_gcp_fixed:
             res -= self.tpcol.number_gcp
         return res
 
     @property
-    def surface_constraint_slice(self):
+    def surface_constraint_slice(self) -> slice:
         """The portion of the sba equations that gives the surface constraint"""
         return slice(0, self.len_surface_constraint)
 
     @property
-    def len_gcp_constraint(self):
+    def len_gcp_constraint(self) -> int:
         if self.tp_sigma is not None:
             res = len(self.tpcol) * 3
         else:
@@ -213,7 +222,7 @@ class SimultaneousBundleAdjustment:
         return res
 
     @property
-    def gcp_constraint_slice(self):
+    def gcp_constraint_slice(self) -> slice:
         """The portion of sba equation that gives the GCP constraint"""
         return slice(
             self.len_surface_constraint,
@@ -221,11 +230,11 @@ class SimultaneousBundleAdjustment:
         )
 
     @property
-    def len_collinearity_constraint(self):
+    def len_collinearity_constraint(self) -> int:
         return self.niloc * 2
 
     @property
-    def collinearity_constraint_slice(self):
+    def collinearity_constraint_slice(self) -> slice:
         """The portion of the sba equations that gives the collinearity
         constraint"""
         return slice(
@@ -236,7 +245,7 @@ class SimultaneousBundleAdjustment:
         )
 
     @property
-    def parameter_constraint_slice(self):
+    def parameter_constraint_slice(self) -> slice:
         """The portion of the sba equations that gives the parameter
         constraint"""
         return slice(
@@ -247,30 +256,30 @@ class SimultaneousBundleAdjustment:
         )
 
     @property
-    def igc_coll_param_slice(self):
+    def igc_coll_param_slice(self) -> slice:
         """The portion of parameter that gives the parameters of igc_coll"""
         return slice(len(self.tp_offset), None)
 
     @property
-    def parameter(self):
+    def parameter(self) -> np.ndarray:
         """This is the list of parameters for the SBA. This contains the
         offset for each tie point, along with the parameters for igc_coll."""
         return np.append(self.tp_offset, self.igc_coll.parameter_subset)
 
     @parameter.setter
-    def parameter(self, value):
+    def parameter(self, value: np.ndarray) -> None:
         """This sets the list of parameters"""
         self.tp_offset[:] = value[self.tp_offset_slice]
         self.igc_coll.parameter_subset = value[self.igc_coll_param_slice]
 
-    def index_to_tp_offset(self, tp_index):
+    def index_to_tp_offset(self, tp_index: int) -> np.ndarray | None:
         """Return the tp offset for the given tie point index number."""
         t = self.tp_slice[tp_index]
         if t is None:
             return None
         return self.tp_offset[t]
 
-    def tp_index_to_parameter_index(self, tp_index):
+    def tp_index_to_parameter_index(self, tp_index: int) -> int:
         """Return the first index in the parameter for the tp offset
         corresponding to the tiepoint tp_index"""
         res = 0
@@ -279,7 +288,7 @@ class SimultaneousBundleAdjustment:
                 res += 3
         return res
 
-    def ground_location(self, tp_index):
+    def ground_location(self, tp_index: int) -> CartesianFixed:
         """Using the current value of the parameters, determine
         the ground location of the given tie point"""
         # Note subtle memory problem here. We initially did not have
@@ -295,7 +304,7 @@ class SimultaneousBundleAdjustment:
             pt = gp
         return pt
 
-    def sba_eq(self, parm):
+    def sba_eq(self, parm: np.ndarray) -> np.ndarray:
         """Return all the constraints"""
         self.parameter = parm
         return np.append(
@@ -306,7 +315,7 @@ class SimultaneousBundleAdjustment:
             self.parameter_constraint(),
         )
 
-    def sba_jacobian(self, parm):
+    def sba_jacobian(self, parm: np.ndarray) -> scipy.sparse.coo_matrix:
         """Return Jacobian for SBA equation"""
         self.parameter = parm
         len_igc_parameter = self.igc_coll.parameter_subset.shape[0]
@@ -327,24 +336,28 @@ class SimultaneousBundleAdjustment:
         self.__parameter_constraint_jacobian(res)
         return res.coo_matrix()
 
-    def gcp_constraint(self):
+    def gcp_constraint(self) -> np.ndarray:
         """Calculate the GCP constraint equations. This is the penalty
         we get from placing a tiepoint somewhere other than the location
         given by the GCP"""
         res = np.empty(self.len_gcp_constraint)
         i = 0
         for tp_index, tp in enumerate(self.tpcol):
-            if tp.is_gcp and not self.hold_gcp_fixed:
-                res[i : (i + 3)] = self.index_to_tp_offset(tp_index) / self.gcp_sigma
-                i += 3
-            elif tp.is_gcp and self.hold_gcp_fixed:
-                pass
-            elif self.tp_sigma is not None:
-                res[i : (i + 3)] = self.index_to_tp_offset(tp_index) / self.tp_sigma
-                i += 3
+            if tp.is_gcp and self.hold_gcp_fixed:
+                continue
+            # Tiepoints that aren't GCPs are only constrained if we have
+            # a tp_sigma
+            sigma = self.gcp_sigma if tp.is_gcp else self.tp_sigma
+            if sigma is None:
+                continue
+            t = self.index_to_tp_offset(tp_index)
+            # Only GCPs held fixed don't have an offset
+            assert t is not None
+            res[i : (i + 3)] = t / sigma
+            i += 3
         return res
 
-    def __gcp_constraint_jacobian(self, res):
+    def __gcp_constraint_jacobian(self, res: _coo_helper) -> None:
         """Calculate the Jacobian of the GCP constraint equations. Takes
         matrix to fill in, and row to start at. The row gets updated to
         just past the end of what we fill out"""
@@ -362,7 +375,7 @@ class SimultaneousBundleAdjustment:
                     res[self.row_index + j, pind + j] = 1.0 / self.tp_sigma
                 self.row_index += 3
 
-    def surface_constraint(self):
+    def surface_constraint(self) -> np.ndarray:
         """Calculate all the surface constraint equations. This is
         the penalty we get from placing a tiepoint somewhere other than
         the surface given by the Dem."""
@@ -375,7 +388,7 @@ class SimultaneousBundleAdjustment:
         res /= self.dem_sigma
         return res
 
-    def __surface_constraint_jacobian(self, res):
+    def __surface_constraint_jacobian(self, res: _coo_helper) -> None:
         """Calculate the Jacobian of the surface constraint equations. Takes
         matrix to fill in, and row to start at. The row gets updated to
         just past the end of what we fill out"""
@@ -394,7 +407,7 @@ class SimultaneousBundleAdjustment:
                 gp.position = p0
                 self.row_index += 1
 
-    def collinearity_constraint(self):
+    def collinearity_constraint(self) -> np.ndarray:
         """Calculate the collinearity constraint equations. This is
         difference between the predicted location in each image vs.
         the actual location."""
@@ -420,7 +433,7 @@ class SimultaneousBundleAdjustment:
                     ind += 2
         return res
 
-    def __collinearity_constraint_jacobian(self, res):
+    def __collinearity_constraint_jacobian(self, res: _coo_helper) -> None:
         """Calculate the Jacobian of the collinearity constraint equations."""
         self.igc_coll.add_identity_gradient()
         ind = self.row_index
@@ -448,13 +461,13 @@ class SimultaneousBundleAdjustment:
                     ind += 2
         self.row_index = ind
 
-    def parameter_constraint(self):
+    def parameter_constraint(self) -> np.ndarray:
         """Calculate the parameter constraint. This is the penalty for
         moving a particular parameter from its initial value."""
         # This needs to be scaled, but for now just do this
         return (self.igc_coll.parameter_subset - self.p0) / self.psigma
 
-    def __parameter_constraint_jacobian(self, res):
+    def __parameter_constraint_jacobian(self, res: _coo_helper) -> None:
         istart = self.parameter_constraint_slice.start
         jstart = self.igc_coll_param_slice.start
         for i in range(self.igc_coll.parameter_subset.shape[0]):

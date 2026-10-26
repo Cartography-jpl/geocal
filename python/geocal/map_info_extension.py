@@ -1,10 +1,18 @@
+from __future__ import annotations
+
 import math
+import typing
 
 import numpy as np
 from geocal_swig import Geodetic, ImageCoordinate, MapInfo
 
+if typing.TYPE_CHECKING:
+    from geocal_swig import GroundCoordinate, ImageGroundConnection
 
-def _rotated_map_gc(self, gc1, gc2):
+
+def _rotated_map_gc(
+    self: MapInfo, gc1: GroundCoordinate, gc2: GroundCoordinate
+) -> MapInfo:
     """Rotate a MapInfo so it follows the path between gc1 and gc2.
     This is something like the minimum gore for passing between the two
     points.
@@ -38,7 +46,7 @@ def _rotated_map_gc(self, gc1, gc2):
     return mi
 
 
-def _rotated_map(self, igc):
+def _rotated_map(self: MapInfo, igc: ImageGroundConnection) -> MapInfo:
     """Rotate a MapInfo so it follows the ground path of the center of
     the igc. This is something like the minimum gore for passing between
     the two points of the center top and bottom edge of of the igc.

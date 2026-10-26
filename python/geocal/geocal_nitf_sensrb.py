@@ -1,7 +1,10 @@
+from __future__ import annotations
+
 from geocal_swig import (
     AircraftOrbitData,
     Ecr,
     FrameCoordinate,
+    OrbitData,
     Quaternion_double,
     SensrbCamera,
     Time,
@@ -28,7 +31,7 @@ except ImportError:
 # ---------------------------------------------------------
 if have_pynitf:
 
-    def _orbit_data_sensrb_get(self):
+    def _orbit_data_sensrb_get(self: NitfImageSegment) -> AircraftOrbitData:
         t = self.find_exactly_one_tre("SENSRB")
         if not (
             t.general_data == "Y"
@@ -69,7 +72,9 @@ if have_pynitf:
 
     NitfImageSegment.orbit_data_sensrb = property(_orbit_data_sensrb_get)
 
-    def _attitude_quaternion_sensrb_get(self):
+    def _attitude_quaternion_sensrb_get(
+        self: NitfImageSegment,
+    ) -> Quaternion_double | None:
         t = self.find_exactly_one_tre("SENSRB")
         if t.attitude_quaternion == "N":
             return None
@@ -81,7 +86,7 @@ if have_pynitf:
         _attitude_quaternion_sensrb_get
     )
 
-    def _camera_sensrb_get(self):
+    def _camera_sensrb_get(self: NitfImageSegment) -> SensrbCamera:
         t = self.find_exactly_one_tre("SENSRB")
         if not (
             t.sensor_array_data == "Y"
@@ -129,11 +134,18 @@ if have_pynitf:
 
     NitfImageSegment.camera_sensrb = property(_camera_sensrb_get)
 
-    def _orbit_data_set(self, od, integration_time=0.0):
+    def _orbit_data_set(
+        self: NitfImageSegment, od: OrbitData, integration_time: float = 0.0
+    ) -> None:
         """Set orbit data only, do don't include camera information"""
         _orbit_data_and_cam_sensrb_set(self, od, None, integration_time)
 
-    def _orbit_data_and_cam_sensrb_set(self, od, cam, integration_time=0.0):
+    def _orbit_data_and_cam_sensrb_set(
+        self: NitfImageSegment,
+        od: OrbitData,
+        cam: SensrbCamera | None,
+        integration_time: float = 0.0,
+    ) -> None:
         """Set orbit data and camera. We need to do this at the
         same time because they are tied together.  Camera can be none if you
         want to set just the orbit data (also have a separate function since

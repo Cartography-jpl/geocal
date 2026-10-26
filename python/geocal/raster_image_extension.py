@@ -1,13 +1,25 @@
+from __future__ import annotations
+
+import typing
+
 import geocal_swig
 import matplotlib.pyplot as plt
 import numpy as np
 
 from .shape_file import ShapeLayer, have_shape_file
 
+if typing.TYPE_CHECKING:
+    from osgeo import ogr
+
 # Add some useful functions to RasterImage
 
 
-def _display(self, ic, sz, cross_hair=True):
+def _display(
+    self: geocal_swig.RasterImage,
+    ic: geocal_swig.ImageCoordinate,
+    sz: int,
+    cross_hair: bool = True,
+) -> None:
     """This executes plt.imshow for the image centered as the given
     image coordinate, with the given number of lines and samples. It
     is ok if this goes past the end of the image data, we just fill
@@ -29,17 +41,17 @@ def _display(self, ic, sz, cross_hair=True):
         plt.plot(ic.sample, ic.line, "r+", markersize=20, markeredgewidth=1.0)
     plt.imshow(
         d,
-        cmap=plt.cm.gray,
+        cmap="gray",
         vmin=min,
         vmax=max,
-        extent=[smp, smp + nsamp, ln + nline, ln],
+        extent=(smp, smp + nsamp, ln + nline, ln),
     )
 
 
 geocal_swig.RasterImage.display = _display  # type: ignore[attr-defined]
 
 
-def _read_all(self):
+def _read_all(self: geocal_swig.RasterImage) -> np.ndarray:
     """Do a read for the whole image. We do this often enough that it is
     nice to have a function for this."""
     return self.read(0, 0, self.number_line, self.number_sample)
@@ -48,7 +60,7 @@ def _read_all(self):
 geocal_swig.RasterImage.read_all = _read_all  # type: ignore[attr-defined]
 
 
-def _read_all2(self):
+def _read_all2(self: geocal_swig.RasterImageMultiBand) -> np.ndarray:
     """Do a read for the whole image. We do this often enough that it is
     nice to have a function for this."""
     return self.read(
@@ -59,7 +71,7 @@ def _read_all2(self):
 geocal_swig.RasterImageMultiBand.read_all = _read_all2  # type: ignore[attr-defined]
 
 
-def _read_all_double(self):
+def _read_all_double(self: geocal_swig.RasterImage) -> np.ndarray:
     """Do a read for the whole image. We do this often enough that it is
     nice to have a function for this."""
     return self.read_double(0, 0, self.number_line, self.number_sample)
@@ -68,7 +80,7 @@ def _read_all_double(self):
 geocal_swig.RasterImage.read_all_double = _read_all_double  # type: ignore[attr-defined]
 
 
-def _read_all_double2(self):
+def _read_all_double2(self: geocal_swig.RasterImageMultiBand) -> np.ndarray:
     """Do a read for the whole image. We do this often enough that it is
     nice to have a function for this."""
     return self.read_double(
@@ -79,12 +91,14 @@ def _read_all_double2(self):
 geocal_swig.RasterImageMultiBand.read_all_double = _read_all_double2  # type: ignore[attr-defined]
 
 
-def _read_all_byte_scale(self):
+def _read_all_byte_scale(
+    self: geocal_swig.RasterImage | geocal_swig.RasterImageMultiBand,
+) -> np.ndarray:
     """OpenCV has some functions that only work with byte data. This function
     reads all the data, and then scaled this to byte. Right now we just scale
     by the maximum value - we may want to do something more sophisticated in
     the future if we find that we need to."""
-    d = self.read_all_double()
+    d = self.read_all_double()  # type: ignore[union-attr]
     return (d / float(d.max()) * 255).round().astype(np.uint8)
 
 
@@ -92,7 +106,10 @@ geocal_swig.RasterImage.read_all_byte_scale = _read_all_byte_scale  # type: igno
 geocal_swig.RasterImageMultiBand.read_all_byte_scale = _read_all_byte_scale  # type: ignore[attr-defined]
 
 
-def _footprint_geometry(self, cconver=geocal_swig.GeodeticConverter()):
+def _footprint_geometry(
+    self: geocal_swig.RasterImage,
+    cconver: geocal_swig.CoordinateConverter = geocal_swig.GeodeticConverter(),
+) -> ogr.Geometry:
     """Return a ogr Geometry object describing the footprint of the
     RasterImage. This includes the 4 corners of the image.
 

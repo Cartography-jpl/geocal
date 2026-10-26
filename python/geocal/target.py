@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 
 from .misc import makedirs_p
@@ -31,46 +33,46 @@ class Target:
 
     """
 
-    def exists(self):
+    def exists(self) -> bool:
         """Return true if the target exists already, false otherwise"""
         return False
 
-    def error_exists(self):
+    def error_exists(self) -> bool:
         """Return true if an error version of the output exists."""
         return False
 
-    def remove(self):
+    def remove(self) -> None:
         """Delete all the files associated with the target. Normally an input
         target will only delete possibly cached versions of these (leaving the
         original file in place), but the output targets will delete all the
         files."""
 
-    def filename(self):
+    def filename(self) -> str:
         """The real, permanent name of the file."""
         raise NotImplementedError()
 
-    def local_filename(self):
+    def local_filename(self) -> str:
         """The working, local name of the file. Might be a copy on a local disk
         of the final file."""
         return self.filename()
 
-    def local_mkdir(self):
+    def local_mkdir(self) -> None:
         """Make the directory local_filename is in."""
         makedirs_p(os.path.dirname(self.local_filename()))
 
-    def prepare(self):
+    def prepare(self) -> None:
         """Do any work with the target needed to get the local_filename
         file ready."""
 
-    def finish(self):
+    def finish(self) -> None:
         """Do any work with the Target needed when we are finished generating
         it."""
 
-    def finish_error(self):
+    def finish_error(self) -> None:
         """Do any work needed with Target when an error occurred in the
         generation of the file."""
 
-    def silent_remove(self, fname):
+    def silent_remove(self, fname: str) -> None:
         """This removes a file fname, but doesn't complain if the file
         doesn't exist. All other errors do trigger an exception (e.g.,
         permission problem when removing a file)."""
@@ -81,18 +83,18 @@ class Target:
 class InFileTarget(Target):
     """Implementation of Target which is just a file on the disk."""
 
-    def __init__(self, fname):
+    def __init__(self, fname: str) -> None:
         self.fname = fname
 
-    def exists(self):
+    def exists(self) -> bool:
         """Return true if the target exists already, false otherwise"""
         return os.path.exists(self.filename())
 
-    def error_exists(self):
+    def error_exists(self) -> bool:
         """Return true if an error version of the output exists."""
         return os.path.exists(self.filename() + ".error")
 
-    def filename(self):
+    def filename(self) -> str:
         """The real, permanent name of the file."""
         return self.fname
 
@@ -100,21 +102,21 @@ class InFileTarget(Target):
 class LogFileTarget(Target):
     """Implementation of Log file. We don't do anything with renaming these."""
 
-    def __init__(self, fname):
+    def __init__(self, fname: str) -> None:
         self.fname = fname
         if os.path.dirname(self.fname) != "":
             makedirs_p(os.path.dirname(self.fname))
 
-    def exists(self):
+    def exists(self) -> bool:
         """Return true if the target exists already, false otherwise"""
         # Always consider this as existing. We don't want to force a rerun
         # just to get a log file.
         return True
 
-    def remove(self):
+    def remove(self) -> None:
         self.silent_remove(self.fname)
 
-    def filename(self):
+    def filename(self) -> str:
         """The real, permanent name of the file."""
         return self.fname
 
@@ -125,40 +127,40 @@ class OutFileTarget(Target):
     to the final name when done. If an error occurs, we rename the file
     ".error"'''
 
-    def __init__(self, fname, generating_extension=".generating"):
+    def __init__(self, fname: str, generating_extension: str = ".generating") -> None:
         self.fname = fname
         self.generating_extension = generating_extension
         if os.path.dirname(self.fname) != "":
             makedirs_p(os.path.dirname(self.fname))
 
-    def exists(self):
+    def exists(self) -> bool:
         """Return true if the target exists already, false otherwise"""
         return os.path.exists(self.filename())
 
-    def error_exists(self):
+    def error_exists(self) -> bool:
         """Return true if an error version of the output exists."""
         return os.path.exists(self.filename() + ".error")
 
-    def filename(self):
+    def filename(self) -> str:
         """The real, permanent name of the file."""
         return self.fname
 
-    def local_filename(self):
+    def local_filename(self) -> str:
         """The working, name of file."""
         return self.filename() + self.generating_extension
 
-    def remove(self):
+    def remove(self) -> None:
         self.silent_remove(self.fname)
         self.silent_remove(self.fname + ".error")
         self.silent_remove(self.local_filename())
 
-    def finish(self):
+    def finish(self) -> None:
         """Do any work with the Target needed when we are finished generating
         it."""
         if self.local_filename() != self.fname:
             os.rename(self.local_filename(), self.fname)
 
-    def finish_error(self):
+    def finish_error(self) -> None:
         """Do any work needed with Target when an error occurred in the
         generation of the file."""
         try:

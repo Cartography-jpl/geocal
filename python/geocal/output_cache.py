@@ -1,10 +1,17 @@
+from __future__ import annotations
+
 import glob
 import hashlib
 import os
 import shutil
 import subprocess
+import typing
+from collections.abc import Sequence
 
 from .misc import makedirs_p
+
+if typing.TYPE_CHECKING:
+    from .target import Target
 
 # This is python 3 only
 try:
@@ -30,21 +37,23 @@ class OutputCache:
     vary from one run to the next).
     """
 
-    def __init__(self, output_cache_dir):
+    def __init__(self, output_cache_dir: str) -> None:
         self.output_cache_dir = os.path.abspath(output_cache_dir)
 
-    def _cache_dir(self, key_arr):
+    def _cache_dir(self, key_arr: Sequence[str]) -> str:
         """Create directory we will use to store output cache data."""
         m = hashlib.sha1()
         m.update(" ".join(key_arr).encode("utf-8"))
         return self.output_cache_dir + "/output_cache_" + m.hexdigest()
 
-    def contains(self, key_arr):
+    def contains(self, key_arr: Sequence[str]) -> bool:
         """Returns True if we have a cache entry for the given key.
         Note key_arr should be an array of strings."""
         return os.path.exists(self._cache_dir(key_arr))
 
-    def load(self, key_arr, targets, overwrite=False):
+    def load(
+        self, key_arr: Sequence[str], targets: Sequence[Target], overwrite: bool = False
+    ) -> bytes | None:
         """This copies the cached output to the given list of targets. Note
         that there is no requirement that targets use the same name as what
         was originally saved, we just match up the first target to the first
@@ -81,7 +90,12 @@ class OutputCache:
                 stdout = fh.read()
         return stdout
 
-    def store(self, key_arr, targets, stdout=None):
+    def store(
+        self,
+        key_arr: Sequence[str],
+        targets: Sequence[Target],
+        stdout: bytes | None = None,
+    ) -> None:
         """Store the given list of Targets, and if supplied stdout."""
         d = self._cache_dir(key_arr)
         shutil.rmtree(d, True)

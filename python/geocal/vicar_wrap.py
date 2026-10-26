@@ -36,7 +36,7 @@ class __scinterp(VicarInterface):
         t_pos_subsequent: Time,
         att_subsequent: Quaternion_double,
         t_att_subsequent: Time,
-    ):
+    ) -> None:
         VicarInterface.__init__(self)
         self.cmd = "scinterp"
         self.pos_sample = pos_previous
@@ -174,7 +174,7 @@ class __sc2rpc(VicarInterface):
         sc_to_cam_q: Quaternion_double,
         fu: float,
         fv: float,
-    ):
+    ) -> None:
         VicarInterface.__init__(self)
         # Note, the number of rows here needs to exactly match what urange, vrange
         # and hrange produce. If you are off, you'll get garbage in the output. In

@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+import typing
+
 import numpy as np
 from geocal_swig import (
     CartesianFixedLookVector,
@@ -7,8 +11,16 @@ from geocal_swig import (
     determine_quat_rot,
 )
 
+if typing.TYPE_CHECKING:
+    from geocal_swig import GroundCoordinate, ImageCoordinate
 
-def _determine_orbit_parm(self, gp, ic, i):
+
+def _determine_orbit_parm(
+    self: IgcCollectionRollingShutter,
+    gp: GroundCoordinate,
+    ic: ImageCoordinate,
+    i: int,
+) -> None:
     """This adjust the orbit parameters so that the given ground point
     return an image coordinate of ic for igc i.
 
@@ -35,7 +47,9 @@ def _determine_orbit_parm(self, gp, ic, i):
         self.orbit.update_quaterion(i * len(tlist) + j, determine_quat_rot(v2, v1))
 
 
-def _determine_orbit_to_match(self, ic, ind):
+def _determine_orbit_to_match(
+    self: IgcCollectionRollingShutter, ic: ImageCoordinate, ind: int
+) -> None:
     """This adds an orbit model on top of the existing orbit. We adjust the
     orbit model so that all the image ground connections see the same point
     on the ground, which is whatever image_ground_connection(ind) see from
@@ -59,7 +73,7 @@ def _determine_orbit_to_match(self, ic, ind):
         self.orbit.insert_attitude_time_point(tm)
         self.orbit.insert_attitude_time_point(igc.time_table.max_time)
     for i in range(self.number_image):
-        self._determine_orbit_parm(gp, ic, i)
+        self._determine_orbit_parm(gp, ic, i)  # type: ignore[attr-defined]
 
 
 # Python functions are added to SWIG classes below. mypy doesn't know

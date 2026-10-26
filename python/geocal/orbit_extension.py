@@ -1,6 +1,19 @@
+from __future__ import annotations
+
 import math
+import typing
+from typing import Any
 
 import numpy as np
+
+if typing.TYPE_CHECKING:
+    from geocal_swig import (
+        Dem,
+        GroundCoordinate,
+        ImageCoordinate,
+        RasterImage,
+    )
+
 from geocal_swig import (
     KeplerOrbit,
     QuaternionOrbitData,
@@ -15,7 +28,7 @@ from geocal_swig import (
 )
 
 
-def _kepler_orbit_from_tle(cls, tle):
+def _kepler_orbit_from_tle(cls: type[KeplerOrbit], tle: str) -> KeplerOrbit:
     """This creates a Kepler orbit from a two-line element set (TLE,
     see https://en.wikipedia.org/wiki/Two-line_element_set). Note that
     the Kepler orbit completely ignores the sorts of perturbation that
@@ -44,7 +57,17 @@ def _kepler_orbit_from_tle(cls, tle):
     # orb_num = int(tle_arr[16][11:-1])
     a = pow(mu / pow(n * 2 * math.pi / (24 * 3600), 2), 1.0 / 3)
     return KeplerOrbit(
-        Time.min_valid_time, Time.max_valid_time, epoch, a, ecc, inc, ra, ap, ma
+        # min_valid_time and max_valid_time are static attributes that SWIG
+        # adds after the class is defined
+        Time.min_valid_time,  # type: ignore[attr-defined]
+        Time.max_valid_time,  # type: ignore[attr-defined]
+        epoch,
+        a,
+        ecc,
+        inc,
+        ra,
+        ap,
+        ma,
     )
 
 
@@ -54,7 +77,9 @@ def _kepler_orbit_from_tle(cls, tle):
 KeplerOrbit.orbit_from_tle = classmethod(_kepler_orbit_from_tle)  # type: ignore[attr-defined]
 
 
-def _quat_from_principal_gp(self, gp, twist=0):
+def _quat_from_principal_gp(
+    self: QuaternionOrbitData, gp: GroundCoordinate, twist: float = 0
+) -> None:
     """Find a quaternion that maps the principal point to the given
     ground location. This isn't unique, so we also take a "twist" and
     an angle in degrees to rotate about the camera z axis."""
@@ -69,7 +94,13 @@ def _quat_from_principal_gp(self, gp, twist=0):
 QuaternionOrbitData.quat_from_principal_gp = _quat_from_principal_gp  # type: ignore[attr-defined]
 
 
-def _quat_from_principal_gic(self, ic, image, dem, twist=0):
+def _quat_from_principal_gic(
+    self: QuaternionOrbitData,
+    ic: ImageCoordinate,
+    image: RasterImage,
+    dem: Dem,
+    twist: float = 0,
+) -> None:
     """Find a quaternion that maps the principal point to the given
     ground location. This isn't unique, so we also take a "twist"
     an angle in degrees to rotate about the camera z axis.
@@ -77,13 +108,15 @@ def _quat_from_principal_gic(self, ic, image, dem, twist=0):
     This variation takes the gp determined by the image coordinate in the
     given image"""
     gp = image.ground_coordinate(ic, dem)
-    self.quat_from_principal_gp(gp, twist=twist)
+    self.quat_from_principal_gp(gp, twist=twist)  # type: ignore[attr-defined]
 
 
 QuaternionOrbitData.quat_from_principal_gic = _quat_from_principal_gic  # type: ignore[attr-defined]
 
 
-def _principal_gp(self, dem, resolution=1, max_height=9000):
+def _principal_gp(
+    self: QuaternionOrbitData, dem: Dem, resolution: float = 1, max_height: float = 9000
+) -> tuple[Any, float]:
     """Inverse of quat_from_principal_gp, returns gp and twist"""
     cflv = self.cf_look_vector(ScLookVector(0, 0, 1))
     gp = dem.intersect(self.position_cf, cflv, resolution, max_height)
@@ -100,9 +133,17 @@ def _principal_gp(self, dem, resolution=1, max_height=9000):
 QuaternionOrbitData.principal_gp = _principal_gp  # type: ignore[attr-defined]
 
 
-def _principal_gic(self, image, dem, resolution=1, max_height=9000):
+def _principal_gic(
+    self: QuaternionOrbitData,
+    image: RasterImage,
+    dem: Dem,
+    resolution: float = 1,
+    max_height: float = 9000,
+) -> tuple[ImageCoordinate, float]:
     """Inverse of quat_from_principal_gic, returns ic and twist"""
-    gp, twist = self.principal_gp(dem, resolution=resolution, max_height=max_height)
+    gp, twist = self.principal_gp(  # type: ignore[attr-defined]
+        dem, resolution=resolution, max_height=max_height
+    )
     return image.coordinate(gp), twist
 
 

@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 import re
+from typing import IO, Any
 
 from geocal_swig import (
     Rsm,
@@ -82,7 +85,7 @@ if have_pynitf and not suppress_rsm:
 if have_pynitf and not suppress_rsm:
 
     class RsmImageSegmentHook(NitfSegmentHook):
-        def __init__(self):
+        def __init__(self) -> None:
             # Temporarily take out the direct and indirect error covariances
             # self.rsm_tre_tag_list =  ['RSMIDA', 'RSMPIA','RSMPCA', 'RSMDCA',
             #                          'RSMDCB',
@@ -100,14 +103,14 @@ if have_pynitf and not suppress_rsm:
                 "RSMGGA",
             ]
 
-        def after_init_hook(self, seg, nitf_file):
+        def after_init_hook(self, seg: Any, nitf_file: Any) -> None:
             seg.rsm = None
 
-        def after_append_hook(self, seg, nitf_file):
+        def after_append_hook(self, seg: Any, nitf_file: Any) -> None:
             if not hasattr(seg, "rsm"):
                 seg.rsm = None
 
-        def _rsm_add_rec(self, seg, v):
+        def _rsm_add_rec(self, seg: Any, v: Any) -> None:
             if isinstance(v, RsmRpPlusGrid):
                 self._rsm_add_rec(seg, v.rational_polynomial)
                 self._rsm_add_rec(seg, v.correction_grid)
@@ -142,7 +145,7 @@ if have_pynitf and not suppress_rsm:
             else:
                 raise TypeError("Unknown Rsm element " + str(v))
 
-        def before_write_hook(self, seg, nitf_file):
+        def before_write_hook(self, seg: Any, nitf_file: Any) -> None:
             """Remove all the existing RSM TREs (if any), and add the TREs
             to store seg.rsm"""
             # Remove any existing RSM Tres
@@ -173,7 +176,14 @@ if have_pynitf and not suppress_rsm:
                     seg.tre_list.append(t)
                 self._rsm_add_rec(seg, seg.rsm.rsm_base)
 
-        def _rsm_find_tre_list(self, seg, tre_tag, edition, sec_row=None, sec_col=None):
+        def _rsm_find_tre_list(
+            self,
+            seg: Any,
+            tre_tag: str,
+            edition: str | None,
+            sec_row: int | None = None,
+            sec_col: int | None = None,
+        ) -> list[Any]:
             if sec_row is None:
                 return [
                     i
@@ -190,7 +200,14 @@ if have_pynitf and not suppress_rsm:
                 and i.col_section_number == sec_col
             ]
 
-        def _rsm_find_tre(self, seg, tre_tag, edition=None, sec_row=None, sec_col=None):
+        def _rsm_find_tre(
+            self,
+            seg: Any,
+            tre_tag: str,
+            edition: str | None = None,
+            sec_row: int | None = None,
+            sec_col: int | None = None,
+        ) -> Any:
             t = self._rsm_find_tre_list(seg, tre_tag, edition, sec_row, sec_col)
             if len(t) > 1:
                 raise RuntimeError(
@@ -198,7 +215,7 @@ if have_pynitf and not suppress_rsm:
                 )
             return t[0] if len(t) == 1 else None
 
-        def after_read_hook(self, seg, nitf_file):
+        def after_read_hook(self, seg: Any, nitf_file: Any) -> None:
             """Read all the RSM TREs to fill in seg.rsm. If there are no RSM TREs,
             then set seg.rsm to None."""
             # Currently only handle one RSM TRE set. We could extend this if needed.
@@ -265,14 +282,16 @@ if have_pynitf and not suppress_rsm:
                 r.rsm_base = rsm_g
             seg.rsm = r
 
-        def before_str_hook(self, seg, nitf_file, fh):
+        def before_str_hook(self, seg: Any, nitf_file: Any, fh: IO[str]) -> None:
             """Called at the start of NitfSegment.__str__"""
             if seg.rsm:
                 print(seg.rsm, file=fh)
             else:
                 print("Rsm: None", file=fh)
 
-        def before_str_tre_hook(self, seg, tre, nitf_file, fh):
+        def before_str_tre_hook(
+            self, seg: Any, tre: Any, nitf_file: Any, fh: IO[str]
+        ) -> bool:
             """Called before printing a TRE. If this returns true we assume
             that this class has handled the TRE printing. Otherwise, we
             call print on the tre"""
@@ -283,14 +302,15 @@ if have_pynitf and not suppress_rsm:
 
     NitfSegmentHookSet.add_default_hook(RsmImageSegmentHook())
 
-    def tre_str_to_rsm(t):
+    def tre_str_to_rsm(t: str) -> Rsm | None:
         """MSP dumps a RSM it generates out as a string that is a set of TREs.
         This function interprets this string."""
 
         # Wrap up as an image segment, just to reuse code we already have. This
         # just provides a tre_list and a place to stick rsm.
         class FakeSeg:
-            pass
+            tre_list: list[Any]
+            rsm: Rsm | None = None
 
         fseg = FakeSeg()
         fseg.tre_list = read_tre_data(re.sub(r"\n", "", t).encode("utf8"))

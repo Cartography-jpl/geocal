@@ -1,4 +1,8 @@
-from geocal_swig import GdalRasterImage, Rpc
+from __future__ import annotations
+
+from typing import Any
+
+from geocal_swig import GdalMultiBand, GdalRasterImage, Rpc
 
 try:
     from pynitf import TreRPC00A, TreRPC00B, TreUSE00A
@@ -17,26 +21,30 @@ import re
 
 
 class _GdalRasterImageHelper:
-    def __init__(self, tre_name, tre_class, nitf_literal=False):
+    def __init__(
+        self, tre_name: str, tre_class: type, nitf_literal: bool = False
+    ) -> None:
         self.tre_name = tre_name
         self.tre_class = tre_class
         self.nitf_literal = nitf_literal
 
-    def __get__(self, d):
+    def __get__(self, d: GdalRasterImage) -> Any:
         t = self.tre_class()
         t.read_from_tre_bytes(
             d["TRE", self.tre_name].encode("utf-8"), self.nitf_literal
         )
         return t
 
-    def exists(self, d):
+    def exists(self, d: GdalRasterImage) -> bool:
         return d.has_metadata(self.tre_name, "TRE")
 
-    def __set__(self, d, val):
+    def __set__(self, d: GdalRasterImage, val: Any) -> None:
         d["TRE", self.tre_name] = val.tre_bytes().decode("utf-8")
 
 
-def _add_tre_to_gdal(tre, raster_name, help_desc, nitf_literal=False):
+def _add_tre_to_gdal(
+    tre: Any, raster_name: str, help_desc: str, nitf_literal: bool = False
+) -> None:
     h = _GdalRasterImageHelper(tre.tre_tag, tre, nitf_literal=nitf_literal)
     setattr(
         GdalRasterImage, raster_name, property(h.__get__, h.__set__, None, help_desc)
@@ -50,7 +58,7 @@ if have_pynitf:
     _add_tre_to_gdal(TreUSE00A, "use00a", "USEOOA metadata")
 
 
-def _use00a_from_gdal(self, f):
+def _use00a_from_gdal(self: Any, f: GdalRasterImage) -> None:
     '''Fill in TRE based on GDAL parameters. These are the metadata field
     starting with "NITF_USE00A", for example "NITF_USE00A_SUN_EL"'''
     for field in self.field_names():
@@ -64,7 +72,7 @@ def _use00a_from_gdal(self, f):
             setattr(self, field, f["NITF_" + field.upper()])
 
 
-def _use00a_to_vicar(self, f):
+def _use00a_to_vicar(self: Any, f: Any) -> None:
     '''Fill in VICAR metadata based on TRE. These are the metadata field
     starting with "NITF_USE00A_"'''
     for field in self.field_names():
@@ -73,7 +81,7 @@ def _use00a_to_vicar(self, f):
         )
 
 
-def _use00a_to_gdal(self, f):
+def _use00a_to_gdal(self: Any, f: GdalRasterImage) -> None:
     '''Fill in VICAR metadata based on TRE. These are the metadata field
     starting with "NITF_USE00A_"'''
     for field in self.field_names():
@@ -86,23 +94,25 @@ if have_pynitf:
     TreUSE00A.to_gdal = _use00a_to_gdal
 
 
-def tre_use00a_to_gdal(fin, fout):
+def tre_use00a_to_gdal(fin: GdalRasterImage, fout: GdalRasterImage) -> None:
     """Function to copy use00a structure from TRE in input to output vicar file."""
-    if fin.has_use00a:
-        fin.use00a.to_gdal(fout)
+    if fin.has_use00a:  # type: ignore[attr-defined]
+        fin.use00a.to_gdal(fout)  # type: ignore[attr-defined]
 
 
-def tre_use00a_pretty_print(f):
+def tre_use00a_pretty_print(f: GdalRasterImage) -> None:
     """Pretty print of TRE"""
-    if f.has_use00a:
+    if f.has_use00a:  # type: ignore[attr-defined]
         print("Use00A tre:")
-        s = re.sub(r"^", "  ", str(f.use00a), flags=re.MULTILINE)
+        s = re.sub(r"^", "  ", str(f.use00a), flags=re.MULTILINE)  # type: ignore[attr-defined]
         print(s)
 
 
-def tre_use00a(fin, fout, creation_option):
+def tre_use00a(
+    fin: GdalMultiBand, fout: GdalRasterImage, creation_option: list[str]
+) -> None:
     """Function that copies the use00a structure from fin to a TRE in the
-    output file. Both of these should be GdalRasterImage objects. Note
+    output file. fin should be a GdalMultiBand, and fout a GdalRasterImage. Note
     that some of the data needs to be passed as creation options (pretty much
     anything in the file or image header). We fill in an array creation_option
     with anything we need to add to this."""
@@ -111,7 +121,7 @@ def tre_use00a(fin, fout, creation_option):
     ) or "NITF_ANGLE_TO_NORTH" in fin.raster_image(0):
         tre = TreUSE00A()
         tre.from_gdal(fin.raster_image(0))
-        fout.use00a = tre
+        fout.use00a = tre  # type: ignore[attr-defined]
 
 
 if have_pynitf:
@@ -119,11 +129,11 @@ if have_pynitf:
     _add_tre_to_gdal(TreRPC00B, "rpc00b", "RPC B metadata")
 
 
-def tre_is_rpc_a(self):
+def tre_is_rpc_a(self: Any) -> bool:
     return True
 
 
-def tre_isnot_rpc_a(self):
+def tre_isnot_rpc_a(self: Any) -> bool:
     return False
 
 
@@ -137,7 +147,7 @@ if have_pynitf:
     )
 
 
-def tre_get_rpc(self):
+def tre_get_rpc(self: Any) -> Rpc:
     """Get a Rpc object directly from a TRE object"""
     rpc = Rpc()
     rpc.rpc_type = Rpc.RPC_A if (self.is_rpc_a) else Rpc.RPC_B
@@ -162,7 +172,7 @@ def tre_get_rpc(self):
     return rpc
 
 
-def tre_set_from_rpc(self, rpc):
+def tre_set_from_rpc(self: Any, rpc: Rpc) -> None:
     """Set a TRE object object directly from a geocal RPC object"""
     if self.is_rpc_a and not rpc.rpc_type == Rpc.RPC_A:
         raise RuntimeError("Attempt to set a TRE of RPC type A with a RPC of type B")

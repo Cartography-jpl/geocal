@@ -1,8 +1,12 @@
 # Various miscellaneous functions to help with GeoCal NITF support
+from __future__ import annotations
+
 import geocal_swig
 
 
-def nitf_date_second_field_to_geocal_time(date, second=0):
+def nitf_date_second_field_to_geocal_time(
+    date: str | int, second: float | str = 0
+) -> geocal_swig.Time:
     """There are a number of ways that time is represented in NITF.
     This version takes the date a CCYYMMDD and seconds from that date.
     We convert this to a geocal time. Depending how it comes, date
@@ -13,7 +17,7 @@ def nitf_date_second_field_to_geocal_time(date, second=0):
     return geocal_swig.Time.parse_time(tstring) + float(second)
 
 
-def geocal_time_to_nitf_date_second_field(t):
+def geocal_time_to_nitf_date_second_field(t: geocal_swig.Time) -> tuple[str, float]:
     """Convert geocal time to date and seconds. date is as a
     string CCYYMMDD, time is a float"""
     ts = str(t)
@@ -22,7 +26,7 @@ def geocal_time_to_nitf_date_second_field(t):
     return date, second
 
 
-def geocal_time_to_timestamp(t):
+def geocal_time_to_timestamp(t: geocal_swig.Time) -> str:
     """Convert time to base timestamp string of YYYYMMDDhhmmss.nnnnnnnnn"""
     # Note we don't actually keep time accurate to the nearest nanosecond.
     # If this actually matters, we would need to modify our geocal time
@@ -31,7 +35,7 @@ def geocal_time_to_timestamp(t):
     return f"{ts[0:4]}{ts[5:7]}{ts[8:10]}{ts[11:13]}{ts[14:16]}{ts[17:26]}000"
 
 
-def timestamp_to_geocal_time(t):
+def timestamp_to_geocal_time(t: str) -> geocal_swig.Time:
     """Reverse of geocal_time_to_timestamp"""
     return geocal_swig.Time.parse_time(
         f"{t[0:4]}-{t[4:6]}-{t[6:8]}T{t[8:10]}:{t[10:12]}:{t[12:]}Z"

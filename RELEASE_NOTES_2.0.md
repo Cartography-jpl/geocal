@@ -85,6 +85,39 @@ fixtures and `require_*` skip markers now live in `python/tests/fixtures/`.
   - `geocal` passes mypy cleanly. Several wrong type hints were corrected;
     e.g. `RayIntersect2.ray_intersect` and `RayIntersect3.ray_intersect`
     are now documented as returning `TiePoint | None`.
+- Bug fixes found while adding type hints (`mypy --disallow-untyped-defs`):
+  - Writing or reading a GLAS/GFM covariance with a separate error
+    covariance for each post (a 3-D `errcov_c2`) didn't work: the shape
+    check always failed, the write used the wrong field and never set
+    `common_posts_cov`, and the cov wrapper looked up the matrix size with
+    the wrong index.
+  - `DesCSEPHB` difference checking compared `min_time` with itself, so a
+    difference in start time was never reported.
+  - `TiePointCollectPicmtch` (and its helper) failed with the default
+    `log_file=None`.
+  - `SpiceIgc.image_coordinate` raised `TypeError` instead of
+    `RuntimeError("ImageGroundConnectionFailed")` when it couldn't find a
+    point.
+  - `OutTempLocalTarget.error_exists` raised `TypeError`.
+  - `ShapeFeature.__len__` took an extra argument, so `len()` failed.
+  - The `isis_to_igc` HiRISE handler passed a float sample spacing where an
+    integer is expected.
+  - Log handler flushing in tie point collection used a misspelled logger
+    name (`geoca1-python`).
+- Small behavior changes from the same work:
+  - The metadata attribute that `GlasGfm.igc` adds to the igc is now
+    spelled `dynamic_range` (was `dyanmic_range`).
+  - `GlasGfm.igc` raises a `RuntimeError` naming the missing DES if the
+    CSSFAB, CSEPHB or CSATTB DES is missing, rather than failing later with
+    an `AttributeError` on `None`. Similarly for other required inputs
+    (e.g., `tie_point_grid` with an `aoi` but no `dem`, `pleides_rpc` with a
+    missing XML element, `SpiceKernelByTime` with `.bsp`/`.bc` files but no
+    `kernel_file`).
+  - `GlasGfm.create` is now a `staticmethod` (it was always called that way).
+  - `GlasGfmSpdcfComposite` raises an error for an unrecognized SPDCF
+    family, rather than storing `None`.
+  - Uses the non-deprecated `cv2.SIFT.create` instead of
+    `cv2.xfeatures2d.SIFT_create`.
 - `safe_matplotlib_import` works again. An earlier cleanup had removed its
   test import of `matplotlib.pyplot`, so it never fell back to the `agg`
   backend. The fallback also used `matplotlib.use(warn=...)`, which

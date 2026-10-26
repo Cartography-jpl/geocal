@@ -113,3 +113,34 @@ def test_spdcf_list():
     print(d_write)
     lis2 = GlasGfmSpdcfList.read_des(d_write)
     print(lis2)
+
+
+@require_pynitf
+def test_per_post_cov():
+    """Round trip of a group that has a separate covariance for each post
+    (errcov_c2 num_post x num_adj_parm x num_adj_parm), rather than one
+    common covariance for all the posts."""
+    cov = GlasGfmCovariance()
+    cov.cov_version_date = "20211019"
+    cov.core_set.append(
+        GlasGfmCoreSet(GlasGfmCoreSet.ORBITAL_FRAME, GlasGfmCoreSet.SENSOR_FRAME)
+    )
+    post_cov_m = np.zeros((3, 3, 3))
+    for k in range(3):
+        post_cov_m[k, :, :] = np.diag([5.0 + k, 6, 7])
+    cov.core_set[0].sensor_error_parameter_group.append(
+        GlasGfmGroup(
+            corr_ref_t=Time.parse_time("2021-10-19T12:00:00Z"),
+            adjustable_parameter=[1, 2, 3],
+            errcov_c1=np.diag([1.0, 2, 3]),
+            post_sub_alloc=True,
+            post_start_t=Time.parse_time("2021-10-19T12:01:00Z"),
+            post_delta=10.0,
+            num_post=3,
+            errcov_c2=post_cov_m,
+        )
+    )
+    cov2 = GlasGfmCovariance.read_des(cov.create_des())
+    g = cov2.core_set[0].sensor_error_parameter_group[0]
+    assert g.errcov_c2.shape == (3, 3, 3)
+    np.testing.assert_allclose(g.errcov_c2, post_cov_m)

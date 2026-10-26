@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import multiprocessing as mp
 import os
 import time
@@ -11,30 +13,30 @@ class JobHandle(mp.Process):
     notify other interested classes when a child finishs (to allow for
     make like dependencies between objects)."""
 
-    pool: ClassVar[dict] = {}
+    pool: ClassVar[dict[int, JobHandle]] = {}
     maxpool = mp.cpu_count()
     next_id = 0
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize job. This waits if too many jobs are already running"""
         mp.Process.__init__(self)
         # We want to kill this if the parent dies
         self.daemon = True
         self.job_id = JobHandle.next_id
-        self.done_observer = []
+        self.done_observer: list[JobHandle] = []
         self.is_done = False
         JobHandle.next_id += 1
         while len(JobHandle.pool) >= JobHandle.maxpool:
             JobHandle.wait()
 
-    def start(self):
+    def start(self) -> None:
         while len(JobHandle.pool) >= JobHandle.maxpool:
             JobHandle.wait()
         JobHandle.pool[self.job_id] = self
         mp.Process.start(self)
 
     # Version of join that checks exit status
-    def join(self):
+    def join(self) -> None:  # type: ignore[override]
         if not self.is_done:
             mp.Process.join(self)
             self.is_done = True
@@ -42,14 +44,14 @@ class JobHandle(mp.Process):
                 raise RuntimeError("Child process failed")
 
     @staticmethod
-    def wait_all_done():
+    def wait_all_done() -> None:
         """Wait until all jobs are done"""
         while len(JobHandle.pool) > 0:
             JobHandle.wait()
 
     # Wait for the next process to finish
     @staticmethod
-    def wait():
+    def wait() -> None:
         """Wait until the next job finishes."""
         while True:
             for id, obj in JobHandle.pool.items():
@@ -61,15 +63,15 @@ class JobHandle(mp.Process):
                     return
             time.sleep(0.1)
 
-    def add_done_observer(self, obj):
+    def add_done_observer(self, obj: JobHandle) -> None:
         """Add an object as interested when this object finishs processing"""
         self.done_observer.append(obj)
 
-    def process_is_done(self, process):
+    def process_is_done(self, process: JobHandle | None) -> None:
         """Called when a process we are watching is done"""
         # Default is do nothing.
 
-    def notify_done(self):
+    def notify_done(self) -> None:
         """Called to notify observers when we are done with this process."""
         self.is_done = True
         for i in self.done_observer:
@@ -84,13 +86,13 @@ class JobDependent(JobHandle):
     Derived classes may want to call process_is_done is their constructor,
     to handle the case of all the dependencies already being satisfied."""
 
-    def __init__(self, depend_on):
+    def __init__(self, depend_on: list[JobHandle]) -> None:
         JobHandle.__init__(self)
         self.depend_on = depend_on
         for i in self.depend_on:
             i.add_done_observer(self)
 
-    def process_is_done(self, process):
+    def process_is_done(self, process: JobHandle | None) -> None:
         ready_run = True
         for i in self.depend_on:
             if not i.is_done:
@@ -98,7 +100,7 @@ class JobDependent(JobHandle):
         if ready_run:
             self.start()
 
-    def run_if_needed(self, file):
+    def run_if_needed(self, file: str | None) -> None:
         """This checks to see if the given file exists, and if not then it
         starts this process to generate the file"""
         if file and os.path.exists(file):

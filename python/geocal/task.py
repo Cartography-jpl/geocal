@@ -1,10 +1,19 @@
+from __future__ import annotations
+
 import os
 import shutil
 import sys
 import time
 import traceback
+import typing
 from io import StringIO
 from threading import RLock
+from typing import Any
+
+if typing.TYPE_CHECKING:
+    from multiprocessing.pool import Pool
+
+    from .target import Target
 
 
 class Task:
@@ -17,19 +26,18 @@ class Task:
     A Task is anything that can be run to generate output. We specify other
     tasks that it requires to provide input before we can run."""
 
-    def __init__(self, local_dir=None, force=False):
+    def __init__(self, local_dir: str | None = None, force: bool = False) -> None:
         """Initialize with the given local directory used in the final
         cleanup.
 
         You can pass force=True to force the task to run, even if the output
         already exists."""
+        self.local_dir: str | None = None
         if local_dir is not None:
             self.local_dir = os.path.abspath(local_dir)
-        else:
-            self.local_dir = None
         self.force = force
 
-    def run(self):
+    def run(self) -> None:
         '''Do the work of the Task. Note you don't need to worry about doing
         any cleanup here if an error occurs, just raise an exception and the
         rest of the Task infrastructure will handle this.
@@ -38,7 +46,7 @@ class Task:
         tasks just calculate other tasks to run. For this second category, run
         can update what is returned by "run_after_tasks"'''
 
-    def tasks_to_run_after(self):
+    def tasks_to_run_after(self) -> list[Task]:
         """Return list of tasks to run after this one. May be calculated by
         "run".
 
@@ -50,13 +58,13 @@ class Task:
         """
         return []
 
-    def requires(self):
+    def requires(self) -> list[Task]:
         """Return a list of Tasks we depend on. Note that these are *not*
         Targets, instead this is the Tasks that can generate the Targets we
         require as input."""
         return []
 
-    def output(self):
+    def output(self) -> list[Target]:
         """Return a list of output Targets we generate when we successfully
         run.
 
@@ -77,12 +85,12 @@ class Task:
         """
         return []
 
-    def remove_output(self):
+    def remove_output(self) -> None:
         """Remove all output."""
         for f in self.output():
             f.remove()
 
-    def remove_process_level(self, level):
+    def remove_process_level(self, level: str) -> None:
         """Remove all output from a given process level on. Currently this
         just supports 'sba', which cleans the results of the sba and
         everything that follows. This is really just meant as a way to redo
@@ -96,7 +104,7 @@ class Task:
             )
         # Do nothing else
 
-    def task_unique_name(self):
+    def task_unique_name(self) -> str:
         """Return a unique name that we can use to identify this task.
 
         By default we return file name for the first output. This can often be
@@ -105,14 +113,14 @@ class Task:
         override this function in derived classes."""
         return self.output()[0].filename()
 
-    def output_exists(self):
+    def output_exists(self) -> bool:
         """Return True if all the output exists, False otherwise"""
         for target in self.output():
             if not target.exists():
                 return False
         return True
 
-    def output_error_exists(self):
+    def output_error_exists(self) -> bool:
         """Return True if any of the possible output exists in error form,
         False otherwise"""
         for target in self.output():
@@ -120,12 +128,14 @@ class Task:
                 return True
         return False
 
-    def task_need_run(self):
+    def task_need_run(self) -> bool:
         """Return True if the task needs to be run. Default is just to
         run this unless the output_exists"""
         return self.force or not self.output_exists()
 
-    def run_pipeline(self, pool=None, skip_cleanup_on_error=False):
+    def run_pipeline(
+        self, pool: Pool | None = None, skip_cleanup_on_error: bool = False
+    ) -> None:
         """Run all the precursors etc. to generate the output for this task.
 
         Normally we remove the temporary local directory in all cases. If you
@@ -137,7 +147,11 @@ class Task:
         )
 
     @staticmethod
-    def run_pipeline_arr(task_list, pool=None, skip_cleanup_on_error=False):
+    def run_pipeline_arr(
+        task_list: list[Task],
+        pool: Pool | None = None,
+        skip_cleanup_on_error: bool = False,
+    ) -> None:
         """Run a pipeline over a list of Tasks. The advantage of this
         function vs. just calling run_pipeline on each task is that we
         can keep the multiprocessing.Pool fully used, starting a second task
@@ -145,7 +159,7 @@ class Task:
         tr = TaskRunner(task_list, pool, skip_cleanup_on_error=skip_cleanup_on_error)
         tr.run()
 
-    def _run_with_finish(self):
+    def _run_with_finish(self) -> tuple[str, list[Task]]:
         """This is an internal function. We run the task, then make sure
         all the output Targets have "finish" or "finish_error" called."""
         try:
@@ -162,10 +176,12 @@ class Task:
                     pass  # Ignore errors in cleaning up error
             fh = StringIO()
             traceback.print_exception(tp, v, tb, file=fh)
-            e.task_unique_name = self.task_unique_name()
+            # Attach information to the exception, so the error callback
+            # can report it (this also passes through a multiprocessing Pool)
+            e.task_unique_name = self.task_unique_name()  # type: ignore[attr-defined]
             # For some reason, __traceback__ doesn't go through when called
             # by pool. Save this information
-            e.print_exception_string = fh.getvalue()
+            e.print_exception_string = fh.getvalue()  # type: ignore[attr-defined]
             raise
 
 
@@ -173,20 +189,27 @@ class TaskRunner:
     """This is a helper class for Task that actually handled running it
     and the pipeline needed to create it."""
 
-    def __init__(self, task_list, pool, skip_cleanup_on_error=False):
+    def __init__(
+        self,
+        task_list: list[Task],
+        pool: Pool | None,
+        skip_cleanup_on_error: bool = False,
+    ) -> None:
         # Lock needed to avoid race conditions
         self.lock = RLock()
         self.skip_cleanup_on_error = skip_cleanup_on_error
         self.task_list = task_list
-        self.tasks_to_run = {}
+        self.tasks_to_run: dict[str, dict[str, Any]] = {}
         for task in task_list:
             self.process_task(task)
         self.pool = pool
         # How often we check if we can run a new job
         self.polling_time = 0.1
-        self.error = []
+        # Exceptions from Task._run_with_finish, which have task_unique_name
+        # and print_exception_string attached
+        self.error: list[Any] = []
 
-    def requires_satisfied(self, task):
+    def requires_satisfied(self, task: Task) -> bool:
         """True if all the required input has been generated, False
         otherwise. We check both that the required task successfully ran (if
         it is in the list of tasks to run) and that all the output exists."""
@@ -201,7 +224,7 @@ class TaskRunner:
                     return False
             return True
 
-    def process_task(self, task, force_update=False):
+    def process_task(self, task: Task, force_update: bool = False) -> None:
         with self.lock:
             if not task.task_need_run():
                 return
@@ -214,7 +237,7 @@ class TaskRunner:
             for tsk in task.requires():
                 self.process_task(tsk)
 
-    def number_task_left(self):
+    def number_task_left(self) -> int:
         """Return the number of processes we have left to finish up with."""
         with self.lock:
             return sum(
@@ -223,14 +246,14 @@ class TaskRunner:
                 if t["state"] not in ("done", "error")
             )
 
-    def number_task_running(self):
+    def number_task_running(self) -> int:
         """Return the number of processes we have running."""
         with self.lock:
             return sum(
                 1 for k, t in self.tasks_to_run.items() if t["state"] == "running"
             )
 
-    def next_task_to_process(self):
+    def next_task_to_process(self) -> Task | None:
         """Find the next task that hasn't been run yet, but has all the
         required input ready."""
         with self.lock:
@@ -239,7 +262,7 @@ class TaskRunner:
                     return t["task"]
             return None
 
-    def run_callback(self, x):
+    def run_callback(self, x: tuple[str, list[Task]]) -> None:
         with self.lock:
             self.task_has_finished = True
             ofname, tsklist = x
@@ -247,7 +270,7 @@ class TaskRunner:
                 self.process_task(tsk, force_update=True)
             self.tasks_to_run[ofname]["state"] = "done"
 
-    def run_callback_error(self, e):
+    def run_callback_error(self, e: Any) -> None:
         with self.lock:
             self.task_has_finished = True
             self.tasks_to_run[e.task_unique_name]["state"] = "error"
@@ -259,7 +282,7 @@ class TaskRunner:
             print(e.print_exception_string)
             print("======= Waiting for pipeline to finish =======")
 
-    def run_next_tasks(self):
+    def run_next_tasks(self) -> None:
         with self.lock:
             task = self.next_task_to_process()
             # Make sure we have at least one task to process, or still
@@ -271,6 +294,9 @@ class TaskRunner:
 
             # Just run the task, if we don't have a pool
             if self.pool is None:
+                # Without a pool nothing is running in the background, so
+                # we raised an error above if there is no task
+                assert task is not None
                 try:
                     res = task._run_with_finish()
                     self.run_callback(res)
@@ -291,7 +317,7 @@ class TaskRunner:
                 )
                 task = self.next_task_to_process()
 
-    def run(self):
+    def run(self) -> None:
         try:
             # Optimization to avoid polling run_text_task constantly,
             # Only check when the number of tasks left has changed, e.g,

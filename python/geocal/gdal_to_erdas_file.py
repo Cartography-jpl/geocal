@@ -3,7 +3,7 @@ import subprocess
 from geocal_swig import GdalRasterImage
 
 
-def gdal_to_erdas_file(infname, outfname):
+def gdal_to_erdas_file(infname: str, outfname: str) -> None:
     """This converts a GDAL file to ERDAS. We include the calculation of
     statistics and an image pyramid"""
     subprocess.check_call(

@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 import textwrap
 import warnings
+from typing import Any
 
 import numpy as np
 from geocal_swig import Time
@@ -22,18 +25,18 @@ class GlasGfmNitfTimeWrapper:
     this internal to this module but we could export it if this
     proves useful."""
 
-    def __init__(self, field_base, cscsdb):
+    def __init__(self, field_base: str, cscsdb: pynitf.DesCSCSDB) -> None:
         self.cscsdb = cscsdb
         self.field_base = field_base
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: int | tuple[int, ...]) -> Time:
         dt = self.cscsdb.get_raw_bytes(self.field_base + "_date", key).decode("utf-8")
         tm = self.cscsdb.get_raw_bytes(self.field_base + "_time", key).decode("utf-8")
         return Time.parse_time(
             f"{dt[0:4]}-{dt[4:6]}-{dt[6:8]}T{tm[0:2]}:{tm[2:4]}:{tm[4:]}Z"
         )
 
-    def __setitem__(self, key, val):
+    def __setitem__(self, key: int | tuple[int, ...], val: Time) -> None:
         # Split between date and time
         dt, tm = str(val).split("T")
         # Remove "-" in date, giving a string like 20210203, and assign
@@ -50,16 +53,16 @@ class GlasGfmNitfTime2Wrapper:
     """For no obvious reason, there are other times in the file that use a
     date and time in seconds from midnight."""
 
-    def __init__(self, field_base, cscsdb):
+    def __init__(self, field_base: str, cscsdb: pynitf.DesCSCSDB) -> None:
         self.cscsdb = cscsdb
         self.field_base = field_base
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: int | tuple[int, ...]) -> Time:
         dt = self.cscsdb.get_raw_bytes(self.field_base + "_date", key).decode("utf-8")
         tm = self.cscsdb.get_raw_bytes(self.field_base + "_time", key).decode("utf-8")
         return Time.parse_time(f"{dt[0:4]}-{dt[4:6]}-{dt[6:8]}T00:00:00Z") + float(tm)
 
-    def __setitem__(self, key, val):
+    def __setitem__(self, key: int | tuple[int, ...], val: Time) -> None:
         # Split between date and time
         dt, _tm = str(val).split("T")
         # Remove "-" in date, giving a string like 20210203, and assign
@@ -78,16 +81,16 @@ class GlasGfmNitfArrayWrapper:
 
     On assignment, the size field gets updated."""
 
-    def __init__(self, field, size_field, cscsdb):
+    def __init__(self, field: str, size_field: str, cscsdb: pynitf.DesCSCSDB) -> None:
         self.cscsdb = cscsdb
         self.field = field
         self.size_field = size_field
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: tuple[int, ...]) -> list[Any]:
         sz = getattr(self.cscsdb, self.size_field)[key]
         return [getattr(self.cscsdb, self.field)[(*key, i)] for i in range(sz)]
 
-    def __setitem__(self, key, val):
+    def __setitem__(self, key: tuple[int, ...], val: list[Any]) -> None:
         getattr(self.cscsdb, self.size_field)[key] = len(val)
         for i, v in enumerate(val):
             getattr(self.cscsdb, self.field)[(*key, i)] = v
@@ -100,15 +103,18 @@ class GlasGfmNitfCovWrapper:
 
     On assignment, we check against the size field but don't update it.
     This is because the covariance goes against something already in the
-    file, so we just need to be consistent with it."""
+    file, so we just need to be consistent with it.
 
-    def __init__(self, field, size_field, cscsdb):
+    The size field is indexed by the group (the first two indices of the
+    key). The key can have a third index, for the per post covariances."""
+
+    def __init__(self, field: str, size_field: str, cscsdb: pynitf.DesCSCSDB) -> None:
         self.cscsdb = cscsdb
         self.field = field
         self.size_field = size_field
 
-    def __getitem__(self, key):
-        sz = getattr(self.cscsdb, self.size_field)[key]
+    def __getitem__(self, key: tuple[int, ...]) -> np.ndarray:
+        sz = getattr(self.cscsdb, self.size_field)[key[:2]]
         res = np.empty((sz, sz))
         k = 0
         for i in range(sz):
@@ -118,8 +124,8 @@ class GlasGfmNitfCovWrapper:
                 k += 1
         return res
 
-    def __setitem__(self, key, val):
-        sz = getattr(self.cscsdb, self.size_field)[key]
+    def __setitem__(self, key: tuple[int, ...], val: np.ndarray) -> None:
+        sz = getattr(self.cscsdb, self.size_field)[key[:2]]
         if val.shape[0] != sz or val.shape[1] != sz:
             raise RuntimeError(f"Matrix needs to be {sz} x {sz}")
         k = 0
@@ -159,7 +165,7 @@ class GlasGfmCovariance:
     but there isn't really any strong reason now to need something that
     tightly coupled."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.cov_version_date = "20000101"
         self.core_set = GlasGfmCoreSetList()
         self.io = GlasGfmIO()
@@ -170,7 +176,7 @@ class GlasGfmCovariance:
         self.id = None
 
     @classmethod
-    def read_des(cls, cscsdb):
+    def read_des(cls, cscsdb: pynitf.DesCSCSDB) -> GlasGfmCovariance:
         """Populate this object from the information in the supplied
         pynitf.DesCSCSDB object."""
         res = cls()
@@ -183,7 +189,7 @@ class GlasGfmCovariance:
         res.direct_covariance = GlasGfmDirectCovariance.read_des(cscsdb)
         return res
 
-    def write_des(self, cscsdb):
+    def write_des(self, cscsdb: pynitf.DesCSCSDB) -> None:
         """Write to an existing DesCSCSDB."""
         cscsdb.cov_version_date = self.cov_version_date
         self.core_set.write_des(cscsdb)
@@ -193,13 +199,13 @@ class GlasGfmCovariance:
         self.spdcf.write_des(cscsdb)
         self.direct_covariance.write_des(cscsdb)
 
-    def create_des(self):
+    def create_des(self) -> pynitf.DesCSCSDB:
         """Create a pynitf.DesCSCSDB from the information in this object"""
         res = pynitf.DesCSCSDB()
         self.write_des(res)
         return res
 
-    def __str__(self):
+    def __str__(self) -> str:
         res = "GlasGfmCovariance:\n"
         res += f"   Covariance Version Date: {self.cov_version_date}\n"
         res += textwrap.indent(str(self.core_set), "   ") + "\n"
@@ -217,22 +223,22 @@ class GlasGfmIO:
 
     Note we haven't actually implemented this yet."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
     @classmethod
-    def read_des(cls, cscsdb):
+    def read_des(cls, cscsdb: pynitf.DesCSCSDB) -> GlasGfmIO:
         if cscsdb.io_cal_ap != 0:
             warnings.warn(
                 "Skipping IO section of covariance, we don't support this yet"
             )
         return cls()
 
-    def write_des(self, cscsdb):
+    def write_des(self, cscsdb: pynitf.DesCSCSDB) -> None:
         # Not implemented,
         cscsdb.io_cal_ap = 0
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "No IO"
 
 
@@ -242,22 +248,22 @@ class GlasGfmDirectCovariance:
 
     Note we haven't actually implemented this yet."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
     @classmethod
-    def read_des(cls, cscsdb):
+    def read_des(cls, cscsdb: pynitf.DesCSCSDB) -> GlasGfmDirectCovariance:
         if cscsdb.direct_covariance_flag != 0:
             warnings.warn(
                 "Skipping Direct Covariance section of covariance, we don't support this yet"
             )
         return cls()
 
-    def write_des(self, cscsdb):
+    def write_des(self, cscsdb: pynitf.DesCSCSDB) -> None:
         # Not implemented,
         cscsdb.direct_covariance_flag = 0
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "No Direct Covariance"
 
 
@@ -267,36 +273,41 @@ class GlasGfmTS:
 
     Note we haven't actually implemented this yet."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
     @classmethod
-    def read_des(cls, cscsdb):
+    def read_des(cls, cscsdb: pynitf.DesCSCSDB) -> GlasGfmTS:
         if cscsdb.ts_cal_ap != 0:
             warnings.warn(
                 "Skipping TS section of covariance, we don't support this yet"
             )
         return cls()
 
-    def write_des(self, cscsdb):
+    def write_des(self, cscsdb: pynitf.DesCSCSDB) -> None:
         # Not implemented,
         cscsdb.ts_cal_ap = 0
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "No TS"
 
 
 class GlasGfmUnmodeledError:
     """Unmodeled error for covariance"""
 
-    def __init__(self, cov=None, line_spdcf_id=None, sample_spdcf_id=None):
+    def __init__(
+        self,
+        cov: np.ndarray | None = None,
+        line_spdcf_id: int | None = None,
+        sample_spdcf_id: int | None = None,
+    ) -> None:
         """The matrix is number_line x number_sample x 2 x 2."""
         self.cov = cov
         self.line_spdcf_id = line_spdcf_id
         self.sample_spdcf_id = sample_spdcf_id
 
     @classmethod
-    def read_des(cls, cscsdb):
+    def read_des(cls, cscsdb: pynitf.DesCSCSDB) -> GlasGfmUnmodeledError:
         res = cls(line_spdcf_id=cscsdb.line_spdcf, sample_spdcf_id=cscsdb.sample_spdcf)
         if cscsdb.ue_flag == 1:
             res.cov = np.empty((cscsdb.line_dimension, cscsdb.sample_dimension, 2, 2))
@@ -308,7 +319,7 @@ class GlasGfmUnmodeledError:
                     res.cov[i, j, 1, 0] = res.cov[i, j, 0, 1]
         return res
 
-    def write_des(self, cscsdb):
+    def write_des(self, cscsdb: pynitf.DesCSCSDB) -> None:
         if self.cov is None:
             cscsdb.ue_flag = 0
             return
@@ -323,7 +334,7 @@ class GlasGfmUnmodeledError:
                 cscsdb.urc[i, j] = self.cov[i, j, 0, 1]
                 cscsdb.ucc[i, j] = self.cov[i, j, 1, 1]
 
-    def __str__(self):
+    def __str__(self) -> str:
         if self.cov is None:
             return "No Unmodeled Error\n"
         res = f"Unmodeled Error covariance matrix (shape {self.cov.shape}):\n"
@@ -337,18 +348,18 @@ class GlasGfmGroupList(list):
     """The list of GlasGfmGroup. Adds a few extra functions"""
 
     @classmethod
-    def _read_des(cls, cscsdb, i):
+    def _read_des(cls, cscsdb: pynitf.DesCSCSDB, i: int) -> GlasGfmGroupList:
         res = cls()
         for j in range(cscsdb.num_groups[i]):
             res.append(GlasGfmGroup._read_des(cscsdb, i, j))
         return res
 
-    def _write_des(self, cscsdb, i):
+    def _write_des(self, cscsdb: pynitf.DesCSCSDB, i: int) -> None:
         cscsdb.num_groups[i] = len(self)
         for j, s in enumerate(self):
             s._write_des(cscsdb, i, j)
 
-    def __str__(self):
+    def __str__(self) -> str:
         if len(self) == 0:
             return "Empty GlasGfmGroupList"
         res = ""
@@ -363,19 +374,19 @@ class GlasGfmCoreSetList(list):
     functions."""
 
     @classmethod
-    def read_des(cls, cscsdb):
+    def read_des(cls, cscsdb: pynitf.DesCSCSDB) -> GlasGfmCoreSetList:
         res = cls()
         for i in range(cscsdb.core_sets):
             t = GlasGfmCoreSet._read_des(cscsdb, i)
             res.append(t)
         return res
 
-    def write_des(self, cscsdb):
+    def write_des(self, cscsdb: pynitf.DesCSCSDB) -> None:
         cscsdb.core_sets = len(self)
         for i, s in enumerate(self):
             s._write_des(cscsdb, i)
 
-    def __str__(self):
+    def __str__(self) -> str:
         if len(self) == 0:
             return "Empty GlasGfmCoreSetList"
         res = f"GlasGfmCoreSetList of {len(self)} core sets\n"
@@ -396,14 +407,19 @@ class GlasGfmCoreSet:
     ECI = 5
     SENSOR_CENTERED_EARTH_FIXED = 6
 
-    def __init__(self, ref_frame_position=ECF, ref_frame_attitude=ECF, group=None):
+    def __init__(
+        self,
+        ref_frame_position: int = ECF,
+        ref_frame_attitude: int = ECF,
+        group: GlasGfmGroupList | None = None,
+    ) -> None:
         self.ref_frame_position = ref_frame_position
         self.ref_frame_attitude = ref_frame_attitude
         self.sensor_error_parameter_group = (
             group if group is not None else GlasGfmGroupList()
         )
 
-    def _frame_id_to_name(self, i):
+    def _frame_id_to_name(self, i: int) -> str:
         if i == self.ECF:
             return "ECF"
         if i == self.SENSOR_FRAME:
@@ -419,7 +435,7 @@ class GlasGfmCoreSet:
         return f"Unknown, ID={i}"
 
     @classmethod
-    def _read_des(cls, cscsdb, i):
+    def _read_des(cls, cscsdb: pynitf.DesCSCSDB, i: int) -> GlasGfmCoreSet:
         res = cls(
             cscsdb.ref_frame_position[i],
             cscsdb.ref_frame_attitude[i],
@@ -427,12 +443,12 @@ class GlasGfmCoreSet:
         )
         return res
 
-    def _write_des(self, cscsdb, i):
+    def _write_des(self, cscsdb: pynitf.DesCSCSDB, i: int) -> None:
         cscsdb.ref_frame_position[i] = self.ref_frame_position
         cscsdb.ref_frame_attitude[i] = self.ref_frame_attitude
         self.sensor_error_parameter_group._write_des(cscsdb, i)
 
-    def __str__(self):
+    def __str__(self) -> str:
         res = "GlasGfmCoreSet:\n"
         res += f"   Reference frame position: {self._frame_id_to_name(self.ref_frame_position)}\n"
         res += f"   Reference frame attitude: {self._frame_id_to_name(self.ref_frame_attitude)}\n"
@@ -451,20 +467,20 @@ class GlasGfmGroup:
 
     def __init__(
         self,
-        corr_ref_t=Time.parse_time("2000-01-01T00:00:00Z"),
-        adjustable_parameter=None,
-        basic_sub_alloc=True,
-        errcov_c1=None,
-        sr_spdcf_id=None,
-        post_sub_alloc=False,
-        post_start_t=Time.parse_time("2000-01-01T00:00:00Z"),
-        num_post=1,
-        post_delta=None,
-        errcov_c2=None,
-        post_interp=POST_INTERP_NEAREST_NEIGHBOR,
-        post_sr_spdcf_id=None,
-        post_corr_only=True,
-    ):
+        corr_ref_t: Time = Time.parse_time("2000-01-01T00:00:00Z"),
+        adjustable_parameter: list[int] | None = None,
+        basic_sub_alloc: bool = True,
+        errcov_c1: np.ndarray | None = None,
+        sr_spdcf_id: int | None = None,
+        post_sub_alloc: bool = False,
+        post_start_t: Time = Time.parse_time("2000-01-01T00:00:00Z"),
+        num_post: int = 1,
+        post_delta: float | None = None,
+        errcov_c2: np.ndarray | None = None,
+        post_interp: int = POST_INTERP_NEAREST_NEIGHBOR,
+        post_sr_spdcf_id: int | None = None,
+        post_corr_only: bool = True,
+    ) -> None:
         """Note errcov_c2 for the posts can either be a
         num_adj_parm x num_adj_parm or num_post x num_adj_parm x num_adj_parm.
         This changes the common_posts_cov flag"""
@@ -485,7 +501,7 @@ class GlasGfmGroup:
         self.post_corr_only = bool(post_corr_only)
 
     @classmethod
-    def _read_des(cls, cscsdb, i, j):
+    def _read_des(cls, cscsdb: pynitf.DesCSCSDB, i: int, j: int) -> GlasGfmGroup:
         # Warn about pieces we don't handle. Note that we don't need special handling
         # for basic_sub_alloc being False, both 0 and None map to False
         if cscsdb.basic_pf_flag[i, j]:
@@ -522,7 +538,7 @@ class GlasGfmGroup:
                     res.errcov_c2[k, :, :] = cscsdb.errcov_c2_1_array[i, j, k]
         return res
 
-    def _write_des(self, cscsdb, i, j):
+    def _write_des(self, cscsdb: pynitf.DesCSCSDB, i: int, j: int) -> None:
         cscsdb.corr_ref_geocal_time[i, j] = self.corr_ref_t
         cscsdb.adj_parm_id_array[i, j] = self.adjustable_parameter
         cscsdb.basic_sub_alloc[i, j] = int(self.basic_sub_alloc)
@@ -553,19 +569,22 @@ class GlasGfmGroup:
                 cscsdb.post_sr_flag[i, j] = 0
             # self.errcov_c2 is either 2d or 3d, depending on if we
             # have a common post covariance matrix
+            if self.errcov_c2 is None:
+                raise RuntimeError("Need errcov_c2 when post_sub_alloc is True")
             if len(self.errcov_c2.shape) == 2:
                 cscsdb.common_posts_cov[i, j] = 1
                 cscsdb.errcov_c2_array[i, j] = self.errcov_c2
             else:
                 if (
-                    self.errcov_c2.shape != 3
+                    len(self.errcov_c2.shape) != 3
                     or self.errcov_c2.shape[0] != self.num_post
                 ):
                     raise RuntimeError("errcov_c2 must have first dim of num_post")
+                cscsdb.common_posts_cov[i, j] = 0
                 for k in range(self.num_post):
-                    cscsdb.errcov_c2_array[i, j, k] = self.errcov_c2[k, :, :]
+                    cscsdb.errcov_c2_1_array[i, j, k] = self.errcov_c2[k, :, :]
 
-    def __str__(self):
+    def __str__(self) -> str:
         res = f"Date of last De-Correlation event: {self.corr_ref_t!s}\n"
         res += "Adjustable parameter id:\n"
         res += textwrap.indent(str(self.adjustable_parameter), "   ") + "\n"
@@ -606,7 +625,7 @@ class GlasGfmSpdcfList(list):
     functions."""
 
     @classmethod
-    def read_des(cls, cscsdb):
+    def read_des(cls, cscsdb: pynitf.DesCSCSDB) -> GlasGfmSpdcfList:
         res = cls()
         if cscsdb.spdcf_flag == 1:
             for i in range(cscsdb.num_spdcf):
@@ -614,7 +633,7 @@ class GlasGfmSpdcfList(list):
                 res.append(t)
         return res
 
-    def write_des(self, cscsdb):
+    def write_des(self, cscsdb: pynitf.DesCSCSDB) -> None:
         if len(self) == 0:
             cscsdb.spdcf_flag = 0
             return
@@ -623,7 +642,7 @@ class GlasGfmSpdcfList(list):
         for i, s in enumerate(self):
             s._write_des(cscsdb, i)
 
-    def __str__(self):
+    def __str__(self) -> str:
         if len(self) == 0:
             return "Empty GlasGfmSpdcfList"
         res = f"GlasGfmSpdcfList of {len(self)} SPDCFs\n"
@@ -638,21 +657,23 @@ class GlasGfmSpdcf:
     describes the time behavior of the correlation between parameters
     at different times."""
 
-    def __init__(self, weight=1.0, id_number=None):
+    def __init__(self, weight: float = 1.0, id_number: int | None = None) -> None:
         self.weight = weight
         self.id_number = id_number
         # Filled in by derived classes
         self.family_id = None
 
-    def number_constituent_spdcf(self):
+    def number_constituent_spdcf(self) -> int:
         return 1
 
-    def scalar_value(self, delta_t):
+    def scalar_value(self, delta_t: float) -> float:
         """The scalar value p(delta_t) for the SPDCF."""
         raise NotImplementedError()
 
     @classmethod
-    def _read_des(cls, cscsdb, n, j=None):
+    def _read_des(
+        cls, cscsdb: pynitf.DesCSCSDB, n: int, j: int | None = None
+    ) -> GlasGfmSpdcf | None:
         """Try to read the information for the n,j SDPCF in the DesCSCSDB.
         return object if successful, None otherwise"""
         id_number = None
@@ -673,18 +694,28 @@ class GlasGfmSpdcf:
                 return res
         return None
 
-    def _write_des(self, cscsdb, n, j=None):
+    def _write_des(
+        self, cscsdb: pynitf.DesCSCSDB, n: int, j: int | None = None
+    ) -> None:
         """Write information for the n,j SDPCF in the DesCSCSDB"""
         raise NotImplementedError()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "GlasGfmSpdcf"
 
 
 class GlasGfmSpdcfCsm(GlasGfmSpdcf):
     """This is a CSM four parameter SPDCF"""
 
-    def __init__(self, A, alpha, beta, T, weight=1.0, id_number=None):
+    def __init__(
+        self,
+        A: float,
+        alpha: float,
+        beta: float,
+        T: float,
+        weight: float = 1.0,
+        id_number: int | None = None,
+    ) -> None:
         super().__init__(weight, id_number)
         # Note this breaks the normal python naming convention, but
         # because this is how the parameters are called in the NITF
@@ -695,14 +726,18 @@ class GlasGfmSpdcfCsm(GlasGfmSpdcf):
         self.beta = beta
         self.T = T
 
-    def __str__(self):
+    def __str__(self) -> str:
         return (
             f"CSM four parameter SPDCF ({self.A}, {self.alpha}, {self.beta}, {self.T})"
         )
 
     @classmethod
-    def _read_des(cls, cscsdb, n, j):
+    def _read_des(
+        cls, cscsdb: pynitf.DesCSCSDB, n: int, j: int | None = None
+    ) -> GlasGfmSpdcfCsm | None:
         """Read the information for the n,j SDPCF in the DesCSCSDB"""
+        if j is None:
+            j = 0
         if cscsdb.spdcf_fam[n, j] != 0:
             return None
         return cls(
@@ -713,7 +748,9 @@ class GlasGfmSpdcfCsm(GlasGfmSpdcf):
             weight=cscsdb.spdcf_weight[n, j],
         )
 
-    def _write_des(self, cscsdb, n, j=None):
+    def _write_des(
+        self, cscsdb: pynitf.DesCSCSDB, n: int, j: int | None = None
+    ) -> None:
         """Write information for the n,j SDPCF in the DesCSCSDB"""
         if j is None:
             cscsdb.spdcf_id[n] = self.id_number
@@ -731,20 +768,28 @@ class GlasGfmSpdcfPiecwiseLinear(GlasGfmSpdcf):
     """This is a piecewise linear SPDCF"""
 
     def __init__(
-        self, max_correlation, tau_max_correlation, weight=1.0, id_number=None
-    ):
+        self,
+        max_correlation: list[float],
+        tau_max_correlation: list[float],
+        weight: float = 1.0,
+        id_number: int | None = None,
+    ) -> None:
         super().__init__(weight, id_number)
         self.max_correlation = max_correlation
         self.tau_max_correlation = tau_max_correlation
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"""Piecewise linear SPDCF
    {self.max_correlation}   
    {self.tau_max_correlation}"""
 
     @classmethod
-    def _read_des(cls, cscsdb, n, j):
+    def _read_des(
+        cls, cscsdb: pynitf.DesCSCSDB, n: int, j: int | None = None
+    ) -> GlasGfmSpdcfPiecwiseLinear | None:
         """Read the information for the n,j SDPCF in the DesCSCSDB"""
+        if j is None:
+            j = 0
         if cscsdb.spdcf_fam[n, j] != 1:
             return None
         nseg = cscsdb.num_segs[n, j]
@@ -754,7 +799,9 @@ class GlasGfmSpdcfPiecwiseLinear(GlasGfmSpdcf):
             weight=cscsdb.spdcf_weight[n, j],
         )
 
-    def _write_des(self, cscsdb, n, j=None):
+    def _write_des(
+        self, cscsdb: pynitf.DesCSCSDB, n: int, j: int | None = None
+    ) -> None:
         """Write information for the n,j SDPCF in the DesCSCSDB"""
         if j is None:
             cscsdb.spdcf_id[n] = self.id_number
@@ -771,7 +818,14 @@ class GlasGfmSpdcfPiecwiseLinear(GlasGfmSpdcf):
 class GlasGfmSpdcfDampedCosine(GlasGfmSpdcf):
     """This is a damped cosine SPDCF"""
 
-    def __init__(self, A, T, P, weight=1.0, id_number=None):
+    def __init__(
+        self,
+        A: float,
+        T: float,
+        P: float,
+        weight: float = 1.0,
+        id_number: int | None = None,
+    ) -> None:
         super().__init__(weight, id_number)
         # Note this breaks the normal python naming convention, but
         # because this is how the parameters are called in the NITF
@@ -781,12 +835,16 @@ class GlasGfmSpdcfDampedCosine(GlasGfmSpdcf):
         self.T = T
         self.P = P
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Damped cosine SPDCF ({self.A}, {self.T}, {self.P})"
 
     @classmethod
-    def _read_des(cls, cscsdb, n, j):
+    def _read_des(
+        cls, cscsdb: pynitf.DesCSCSDB, n: int, j: int | None = None
+    ) -> GlasGfmSpdcfDampedCosine | None:
         """Read the information for the n,j SDPCF in the DesCSCSDB"""
+        if j is None:
+            j = 0
         if cscsdb.spdcf_fam[n, j] != 2:
             return None
         return cls(
@@ -796,7 +854,9 @@ class GlasGfmSpdcfDampedCosine(GlasGfmSpdcf):
             weight=cscsdb.spdcf_weight[n, j],
         )
 
-    def _write_des(self, cscsdb, n, j=None):
+    def _write_des(
+        self, cscsdb: pynitf.DesCSCSDB, n: int, j: int | None = None
+    ) -> None:
         """Write information for the n,j SDPCF in the DesCSCSDB"""
         if j is None:
             cscsdb.spdcf_id[n] = self.id_number
@@ -812,11 +872,13 @@ class GlasGfmSpdcfDampedCosine(GlasGfmSpdcf):
 class GlasGfmSpdcfComposite(GlasGfmSpdcf):
     """A composite SPDCF, made up of a number of SPDCFs with weights"""
 
-    def __init__(self, spdcf_list, id_number=None):
+    def __init__(
+        self, spdcf_list: list[GlasGfmSpdcf], id_number: int | None = None
+    ) -> None:
         super().__init__(id_number=id_number)
         self.spdcf_list = spdcf_list
 
-    def __str__(self):
+    def __str__(self) -> str:
         res = "GlasGfmSpdcfComposite:\n"
         for s in self.spdcf_list:
             res += f"   Weight {s.weight}\n"
@@ -824,16 +886,23 @@ class GlasGfmSpdcfComposite(GlasGfmSpdcf):
         return res
 
     @classmethod
-    def _read_des(cls, cscsdb, n, j=None):
+    def _read_des(
+        cls, cscsdb: pynitf.DesCSCSDB, n: int, j: int | None = None
+    ) -> GlasGfmSpdcf | None:
         """Read the information for the n,j SDPCF in the DesCSCSDB"""
         if j is not None:
             return None
-        return cls(
-            [GlasGfmSpdcf._read_des(cscsdb, n, i) for i in range(cscsdb.spdcf_p[n])],
-            id_number=cscsdb.spdcf_id[n],
-        )
+        spdcf_list = []
+        for i in range(cscsdb.spdcf_p[n]):
+            s = GlasGfmSpdcf._read_des(cscsdb, n, i)
+            if s is None:
+                raise RuntimeError(f"Unrecognized SPDCF family for SPDCF {n}, {i}")
+            spdcf_list.append(s)
+        return cls(spdcf_list, id_number=cscsdb.spdcf_id[n])
 
-    def _write_des(self, cscsdb, n, j=None):
+    def _write_des(
+        self, cscsdb: pynitf.DesCSCSDB, n: int, j: int | None = None
+    ) -> None:
         """Write information for the n,j SDPCF in the DesCSCSDB"""
         if j is not None:
             raise RuntimeError("This shouldn't happen")
@@ -843,7 +912,7 @@ class GlasGfmSpdcfComposite(GlasGfmSpdcf):
             s._write_des(cscsdb, n, jind)
 
 
-def _glas_gfm_covariance(iseg):
+def _glas_gfm_covariance(iseg: pynitf.NitfImageSegment) -> GlasGfmCovariance | None:
     """Search for GlasGfmCovariance that goes with a image segment"""
     lv = iseg.idlvl
     f = iseg.nitf_file
@@ -864,7 +933,9 @@ def _glas_gfm_covariance(iseg):
     return GlasGfmCovariance().read_des(possible[0].des)
 
 
-def _glas_gfm_covariance_set(iseg, glas_gfm_cov):
+def _glas_gfm_covariance_set(
+    iseg: pynitf.NitfImageSegment, glas_gfm_cov: GlasGfmCovariance
+) -> None:
     f = iseg.nitf_file
     if f is None:
         raise RuntimeError(

@@ -1,14 +1,21 @@
+from __future__ import annotations
+
 import math
 import os.path
 import re
+import typing
+from typing import Any
 
 import geocal_swig
 import numpy as np
 
 from .shape_file import ShapeLayer, have_shape_file
 
+if typing.TYPE_CHECKING:
+    from osgeo import ogr
 
-def _new_from_init(cls, version, *args):
+
+def _new_from_init(cls: Any, version: int, *args: Any) -> Any:
     """Handle older versions"""
     if cls.pickle_format_version() < version:
         raise RuntimeError(
@@ -32,14 +39,14 @@ class GdalImageGroundConnection(geocal_swig.RpcImageGroundConnection):
 
     def __init__(
         self,
-        fname,
-        dem,
-        rpc=None,
-        title=None,
-        image_mask=None,
-        ground_mask=None,
-        fit_height_offset=False,
-    ):
+        fname: str,
+        dem: geocal_swig.Dem,
+        rpc: geocal_swig.Rpc | None = None,
+        title: str | None = None,
+        image_mask: geocal_swig.ImageMask | None = None,
+        ground_mask: geocal_swig.GroundMask | None = None,
+        fit_height_offset: bool = False,
+    ) -> None:
         self.fname = fname
         img = geocal_swig.GdalMultiBand(fname)
         if not rpc:
@@ -53,10 +60,10 @@ class GdalImageGroundConnection(geocal_swig.RpcImageGroundConnection):
         )
 
     @classmethod
-    def pickle_format_version(cls):
+    def pickle_format_version(cls) -> int:
         return 2
 
-    def __reduce__(self):
+    def __reduce__(self) -> tuple[Any, ...]:
         """Base class RpcImageGroundConnection can be pickled, but the
         init function for this class is different. Give a simple reduce
         to handle this."""
@@ -81,31 +88,34 @@ class VicarImageGroundConnection(geocal_swig.RpcImageGroundConnection):
 
     def __init__(
         self,
-        fname,
-        dem,
-        rpc=None,
-        title=None,
-        image_mask=None,
-        ground_mask=None,
-        fit_height_offset=False,
-    ):
+        fname: str,
+        dem: geocal_swig.Dem,
+        rpc: geocal_swig.Rpc | None = None,
+        title: str | None = None,
+        image_mask: geocal_swig.ImageMask | None = None,
+        ground_mask: geocal_swig.GroundMask | None = None,
+        fit_height_offset: bool = False,
+    ) -> None:
         self.fname = fname
         # Check for multiple bands
         m = re.match(r"(.*)(\d+):(\d+)(.*)", fname)
+        img: geocal_swig.RasterImage | geocal_swig.RasterImageMultiBand
         if m:
             base = m.group(1)
             baseend = m.group(4)
-            img = geocal_swig.RasterImageMultiBandVariable()
+            mb = geocal_swig.RasterImageMultiBandVariable()
             for i in range(int(m.group(2)), int(m.group(3)) + 1):
-                img.add_raster_image(
+                mb.add_raster_image(
                     geocal_swig.VicarLiteRasterImage(f"{base}{i:d}{baseend}")
                 )
             if not rpc:
-                rpc = img.raster_image(0).rpc
+                rpc = mb.raster_image(0).rpc
+            img = mb
         else:
-            img = geocal_swig.VicarLiteRasterImage(fname)
+            vimg = geocal_swig.VicarLiteRasterImage(fname)
             if not rpc:
-                rpc = img.rpc
+                rpc = vimg.rpc
+            img = vimg
         if not title:
             title = os.path.basename(fname)
         geocal_swig.RpcImageGroundConnection.__init__(
@@ -113,7 +123,7 @@ class VicarImageGroundConnection(geocal_swig.RpcImageGroundConnection):
         )
 
     @classmethod
-    def is_vicar_file(cls, fname):
+    def is_vicar_file(cls, fname: str) -> bool:
         """Return true if file is a vicar file"""
         m = re.match(r"(.*)(\d+):(\d+)(.*)", fname)
         if m:
@@ -125,10 +135,10 @@ class VicarImageGroundConnection(geocal_swig.RpcImageGroundConnection):
             return geocal_swig.VicarLiteFile.is_vicar_file(fname)
 
     @classmethod
-    def pickle_format_version(cls):
+    def pickle_format_version(cls) -> int:
         return 2
 
-    def __reduce__(self):
+    def __reduce__(self) -> tuple[Any, ...]:
         """Base class RpcImageGroundConnection can be pickled, but the
         init function for this class is different. Give a simple reduce
         to handle this."""
@@ -145,7 +155,11 @@ class VicarImageGroundConnection(geocal_swig.RpcImageGroundConnection):
         )
 
 
-def _view_angle(self, image_coordinate=None, delta_h=100):
+def _view_angle(
+    self: geocal_swig.ImageGroundConnection,
+    image_coordinate: geocal_swig.ImageCoordinate | None = None,
+    delta_h: float = 100,
+) -> tuple[float, float]:
     """This return the zenith and azimuth view angles for a particular
     image coordinate as seen on the surface.
 
@@ -206,7 +220,10 @@ def _view_angle(self, image_coordinate=None, delta_h=100):
 geocal_swig.ImageGroundConnection.view_angle = _view_angle  # type: ignore[attr-defined]
 
 
-def _footprint_geometry(self, cconver=geocal_swig.GeodeticConverter()):
+def _footprint_geometry(
+    self: geocal_swig.ImageGroundConnection,
+    cconver: geocal_swig.CoordinateConverter = geocal_swig.GeodeticConverter(),
+) -> ogr.Geometry:
     """Return a ogr Geometry object describing the footprint of the
     ImageGroundConnection. This includes the 4 corners of the image
     projected to the surface.
@@ -231,7 +248,11 @@ if have_shape_file:
     geocal_swig.ImageGroundConnection.footprint_geometry = _footprint_geometry  # type: ignore[attr-defined]
 
 
-def _gsd_values(self, image_coordinate=None, height=None):
+def _gsd_values(
+    self: geocal_swig.ImageGroundConnection,
+    image_coordinate: geocal_swig.ImageCoordinate | None = None,
+    height: float | None = None,
+) -> tuple[float, float, float]:
     """This return the row/along track, column/cross track, and mean
     Ground Sampling Distance, in meters.
 

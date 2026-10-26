@@ -1,8 +1,14 @@
+from __future__ import annotations
+
+from typing import Any
+
 import numpy as np
 from geocal_swig import VicarFile, VicarRasterImage
 
 
-def _new_memmap(version, args, kwargs):
+def _new_memmap(
+    version: int, args: tuple[Any, ...], kwargs: dict[str, Any]
+) -> memmap_wrap:
     """For use with pickle, covers common case where we just store the
     arguments needed to create an object. See for example HdfFile"""
     cls = memmap_wrap
@@ -16,7 +22,7 @@ def _new_memmap(version, args, kwargs):
 class memmap_wrap(np.memmap):
     """This adds a wrapper for being able to pickle this object"""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         # Note we don't need to call np.memmap __init__, because there
         # isn't one. Instead the class has __new__ that sets things up
         # We don't override __new__, so nothing special needs to be done
@@ -25,14 +31,14 @@ class memmap_wrap(np.memmap):
         self.__kwargs_save = kwargs
 
     @classmethod
-    def pickle_format_version(cls):
+    def pickle_format_version(cls) -> int:
         return 1
 
-    def __reduce__(self):
+    def __reduce__(self) -> tuple[Any, ...]:
         return _new_memmap, (1, self.__args_save, self.__kwargs_save)
 
 
-def mmap_file(*args, **kwargs):
+def mmap_file(*args: Any, **kwargs: Any) -> memmap_wrap:
     """Open a VICAR file as a memmap. This either opens for reading or
     creates a new Vicar file with the given map info and data type.
 
@@ -85,7 +91,7 @@ def mmap_file(*args, **kwargs):
             raise ValueError("Unsupport data type")
         if kwargs.get("nodata") is not None:
             t["NODATA"] = kwargs.get("nodata")
-        t = None  # Force write to disk
+        t = None  # type: ignore[assignment]  # Force write to disk
         mode = kwargs.get("mode", "r+")
     else:
         mode = kwargs.get("mode", "r")

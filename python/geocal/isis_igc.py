@@ -1,7 +1,10 @@
+from __future__ import annotations
+
 import csv
 import json
 import os
 import subprocess
+import typing
 
 import numpy as np
 import pandas as pd
@@ -20,6 +23,9 @@ from geocal_swig import (
 
 from .isis_support import setup_isis
 from .tempdir import run_in_tempdir
+
+if typing.TYPE_CHECKING:
+    from geocal_swig import Dem, GroundCoordinate
 
 
 class IsisIgc(ImageGroundConnection):
@@ -50,7 +56,7 @@ class IsisIgc(ImageGroundConnection):
     any time soon.
     """
 
-    def __init__(self, isis_fname):
+    def __init__(self, isis_fname: str | os.PathLike[str]) -> None:
         self.fname = os.path.abspath(isis_fname)
         self.f = GdalRasterImage(self.fname)
         self.d = json.loads(self.f.metadata_list("json:ISIS3")[0])
@@ -62,7 +68,7 @@ class IsisIgc(ImageGroundConnection):
         super().__init__(dem, self.f, None, "ISIS IGC")
 
     @run_in_tempdir()
-    def ground_coordinate_dem(self, ic, d):
+    def ground_coordinate_dem(self, ic: ImageCoordinate, d: Dem) -> PlanetFixed:
         # We ignore the DEM. Could perhaps add some kind of check
         # for this, but we are only using this for comparison with ISIS
         # so not worth trying to get that sorted out.
@@ -89,7 +95,7 @@ class IsisIgc(ImageGroundConnection):
         )
 
     @run_in_tempdir()
-    def cf_look_vector_pos(self, ic):
+    def cf_look_vector_pos(self, ic: ImageCoordinate) -> PlanetFixed:
         """Note that ISIS use LT+S, which means that this position is
         the *apparent* position as seen from the ground, including
         aberration. This will be different than what we have in our
@@ -117,7 +123,7 @@ class IsisIgc(ImageGroundConnection):
         )
 
     @run_in_tempdir()
-    def cf_look_vector_lv(self, ic):
+    def cf_look_vector_lv(self, ic: ImageCoordinate) -> CartesianFixedLookVector:
         """Note that ISIS use LT+S, which means that its look vector
         (correctly) does not include a velocity aberration correction. So
         In general this won't agree with our IGC, but the points on the
@@ -144,7 +150,7 @@ class IsisIgc(ImageGroundConnection):
         )
 
     @run_in_tempdir()
-    def image_coordinate(self, gc):
+    def image_coordinate(self, gc: GroundCoordinate) -> ImageCoordinate:
         # We ignore the gc height here. Could perhaps add some kind of check
         # for this, but we are only using this for comparison with ISIS
         # so not worth trying to get that sorted out.
@@ -170,7 +176,7 @@ class IsisIgc(ImageGroundConnection):
         return ImageCoordinate(t["Line"][0] - 0.5, t["Sample"][0] - 0.5)
 
     @run_in_tempdir()
-    def pixel_time(self, ic):
+    def pixel_time(self, ic: ImageCoordinate) -> Time:
         setup_isis()
         subprocess.run(
             [
@@ -189,7 +195,7 @@ class IsisIgc(ImageGroundConnection):
         return Time.parse_time(t["UTC"][0])
 
     @run_in_tempdir()
-    def glas_cam_model(self, focal_length):
+    def glas_cam_model(self, focal_length: float) -> GlasGfmCamera:
         """Brute force a GLAS camera model by calculating for every
         point in a full line."""
         with open("points.csv", "w") as f:
@@ -214,12 +220,12 @@ class IsisIgc(ImageGroundConnection):
         y = t["LookDirectionCameraY"][:]
         z = t["LookDirectionCameraZ"][:]
         sclist = [ScLookVector(x[i], y[i], z[i]) for i in range(len(x))]
-        return GlasGfmCamera.create_glas_from_sc_look_vector(
+        return GlasGfmCamera.create_glas_from_sc_look_vector(  # type: ignore[attr-defined]
             sclist, focal_length=focal_length
         )
 
     @run_in_tempdir()
-    def gfm_cam_model(self, focal_length, number_line):
+    def gfm_cam_model(self, focal_length: float, number_line: int) -> GlasGfmCamera:
         """Brute force a GFM camera model by calculating for every
         point in given number of lines."""
         with open("points.csv", "w") as f:
@@ -251,7 +257,7 @@ class IsisIgc(ImageGroundConnection):
             (number_line, self.number_sample)
         )
         lv = np.array([x, y, z]).transpose(1, 2, 0)
-        return GlasGfmCamera.create_gfm_from_look_vector(lv, focal_length)
+        return GlasGfmCamera.create_gfm_from_look_vector(lv, focal_length)  # type: ignore[attr-defined]
 
 
 __all__ = [

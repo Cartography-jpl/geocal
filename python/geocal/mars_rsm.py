@@ -1,12 +1,15 @@
 # This generates an RSM form various instruments. There is already general
 # RSM code, but this has the various choices appropriate to each instrument.
 
+from __future__ import annotations
+
 import matplotlib as mpl
 import matplotlib.pylab as plt
 import numpy as np
 import seaborn as sns
 from geocal_swig import (
     ImageCoordinate,
+    ImageGroundConnection,
     LocalRcConverter,
     LocalRcParameter,
     PlanetConstant,
@@ -21,7 +24,13 @@ from geocal_swig import (
 from matplotlib.backends.backend_pdf import PdfPages
 
 
-def rsm_plot_diff(r, igc, fname=None, min_height=-5000, max_height=-1500):
+def rsm_plot_diff(
+    r: Rsm,
+    igc: ImageGroundConnection,
+    fname: str | None = None,
+    min_height: float = -5000,
+    max_height: float = -1500,
+) -> None:
     """This provides a quick plot/summary of the differences between the RSM
     we calculate and the underlying igc.
 
@@ -78,7 +87,12 @@ def rsm_plot_diff(r, igc, fname=None, min_height=-5000, max_height=-1500):
     pdf.close()
 
 
-def rsm_context(igc, diagnostic=False, min_height=-5000, max_height=-1500):
+def rsm_context(
+    igc: ImageGroundConnection,
+    diagnostic: bool = False,
+    min_height: float = -5000,
+    max_height: float = -1500,
+) -> Rsm:
     """Generate a RSM for MRO CTX. The igc should come from something
     like igc_mro_context.
 
@@ -113,7 +127,12 @@ def rsm_context(igc, diagnostic=False, min_height=-5000, max_height=-1500):
     return r
 
 
-def rsm_hrsc(igc, diagnostic=False, min_height=-5000, max_height=-1500):
+def rsm_hrsc(
+    igc: ImageGroundConnection,
+    diagnostic: bool = False,
+    min_height: float = -5000,
+    max_height: float = -1500,
+) -> Rsm:
     """Generate a RSM for MEX HRSC. The igc should come from something
     like igc_mex_hrsc.
 
@@ -156,7 +175,12 @@ def rsm_hrsc(igc, diagnostic=False, min_height=-5000, max_height=-1500):
     return r
 
 
-def rsm_hirise(igc, diagnostic=False, min_height=-5000, max_height=-1500):
+def rsm_hirise(
+    igc: ImageGroundConnection,
+    diagnostic: bool = False,
+    min_height: float = -5000,
+    max_height: float = -1500,
+) -> Rsm:
     """Generate a RSM for MRO HiRISE. The igc should come from something
     like igc_mro_hirise.
 

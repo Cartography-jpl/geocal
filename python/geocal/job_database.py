@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import datetime
 import logging
 import os
@@ -5,14 +7,17 @@ import pickle
 import signal
 import sqlite3
 import subprocess
+from types import FrameType
 
 from .misc import makedirs_p, pid_exists
 
-db_save = None
+db_save: sqlite3.Connection | None = None
 job_id_save = None
 
 
-def _signal_handle(signum, stack):
+def _signal_handle(signum: int, stack: FrameType | None) -> None:
+    if db_save is None:
+        return
     db_save.execute(
         """
 update job_status SET status='interrupted', 
@@ -34,7 +39,7 @@ class JobDatabase:
     job management software, this is primarily meant for use as a quick
     an dirty system for use with the ABCD system."""
 
-    def __init__(self, db_name):
+    def __init__(self, db_name: str) -> None:
         """This create a handle for the JobDatabase. You pass in the
         name of the sqlite file to use.
 
@@ -48,19 +53,26 @@ CREATE TABLE IF NOT EXISTS job_status
 (job_id INTEGER PRIMARY KEY ASC, working_directory text not null, user text not null, key test not null, creation_time datetime not null, modify_time datetime not null, status text not null, pid INTEGER, job_start_time datetime, job_to_run BLOB)
 """)
 
-    def __del__(self):
+    def __del__(self) -> None:
         self.close()
 
-    def close(self):
+    def close(self) -> None:
         """Commit changes and close the file"""
         if self.db is not None:
             self.db.commit()
             self.db.close()
-            self.db = None
+            # The object can't be used after close
+            self.db = None  # type: ignore[assignment]
 
     def add_job(
-        self, working_dir, user, key, log_file, job_to_run, start_if_available=True
-    ):
+        self,
+        working_dir: str,
+        user: str,
+        key: str,
+        log_file: str,
+        job_to_run: list[str],
+        start_if_available: bool = True,
+    ) -> int | None:
         """Submit a job to run. You supply the working directory (can
         be relative if desired, we call os.path.abspath on this), and
         a job to run. The job should be an array like what can be
@@ -94,20 +106,20 @@ strftime('%Y-%m-%d %H:%M:%f', 'now'), 'queued', null, null, ?)""",
 
     def abcd_job(
         self,
-        working_dir,
-        user,
-        key,
-        log_file,
-        pre_pan,
-        post_pan,
-        pre_ms=None,
-        post_ms=None,
-        subset=None,
-        resolution=0.5,
-        number_process=1,
-        dem_file=None,
-        start_if_available=True,
-    ):
+        working_dir: str,
+        user: str,
+        key: str,
+        log_file: str,
+        pre_pan: str,
+        post_pan: str,
+        pre_ms: str | None = None,
+        post_ms: str | None = None,
+        subset: list[int] | None = None,
+        resolution: float = 0.5,
+        number_process: int = 1,
+        dem_file: str | None = None,
+        start_if_available: bool = True,
+    ) -> int | None:
         """Submit an abachd job.
 
         You need to supply a working direction, and a pre and post
@@ -153,7 +165,7 @@ strftime('%Y-%m-%d %H:%M:%f', 'now'), 'queued', null, null, ?)""",
             working_dir, user, key, log_file, cmd, start_if_available=start_if_available
         )
 
-    def __getitem__(self, job_id):
+    def __getitem__(self, job_id: int) -> sqlite3.Row:
         """Return information about a job with the given job_id."""
         r = self.db.execute(
             "select * from job_status where job_id=?", (job_id,)
@@ -162,23 +174,23 @@ strftime('%Y-%m-%d %H:%M:%f', 'now'), 'queued', null, null, ?)""",
             raise KeyError(job_id)
         return r
 
-    def get_by_key(self, key):
+    def get_by_key(self, key: str) -> sqlite3.Row:
         """Return information about a job with the given key."""
         r = self.db.execute("select * from job_status where key=?", (key,)).fetchone()
         if r is None:
             raise KeyError(key)
         return r
 
-    def keys(self):
+    def keys(self) -> list[int]:
         """Return the list of jobs ids."""
         return [row[0] for row in self.db.execute("select job_id from job_status")]
 
-    def __delitem__(self, job_id):
+    def __delitem__(self, job_id: int) -> None:
         self.db.execute("DELETE FROM job_status WHERE job_id=?", [job_id])
         log = logging.getLogger("geocal-python.job_database")
         log.info(f"Removing job {job_id:d} from the job queue")
 
-    def set_status(self, job_id, status):
+    def set_status(self, job_id: int, status: str) -> None:
         """Set a job id to the given status."""
         if status == "running":
             self.db.execute(
@@ -203,7 +215,7 @@ job_start_time=null where job_id=?
 
         self.db.commit()
 
-    def check_and_run(self):
+    def check_and_run(self) -> bool:
         """This checks if:
 
         1. There is currently no running job

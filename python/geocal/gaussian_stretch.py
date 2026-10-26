@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import numpy as np
 from geocal_swig import VicarRasterImage
 
@@ -6,26 +8,29 @@ from .vicar_interface import VicarInterface
 
 
 class GaussianStretch(VicarInterface):
-    def __init__(self, data):
+    def __init__(self, data: np.ndarray) -> None:
         super().__init__()
         self.data = data
         self.timing = False
         self.cmd = "stretch in.img out.img 'gauss DNMIN=0 DNMAX=255"
 
-    def pre_run(self):
-        t = VicarRasterImage("in.img", "HALF", self.data.shape[0], self.data.shape[1])
-        t = None  # noqa - F841
+    def pre_run(self) -> None:
+        # Create the file, and close it again by dropping the reference
+        t: VicarRasterImage | None = VicarRasterImage(
+            "in.img", "HALF", self.data.shape[0], self.data.shape[1]
+        )
+        t = None  # noqa: F841
         d = mmap_file("in.img", mode="r+")
         d[:] = np.where(
             self.data > 0, self.data * 32768.0 / max(self.data.max(), 1e-8), 0
         ).astype(np.int16)
-        self.run_out = ""
+        self.run_out = b""
 
-    def post_run(self):
-        self.out = VicarRasterImage("out.img").read_all()
+    def post_run(self) -> None:
+        self.out = VicarRasterImage("out.img").read_all()  # type: ignore[attr-defined]
 
 
-def gaussian_stretch(data):
+def gaussian_stretch(data: np.ndarray) -> np.ndarray:
     """This does histogram equalization on the given data, doing a Gaussian
     stretch.
 

@@ -1,6 +1,11 @@
+from __future__ import annotations
+
 import json
 import math
+import os
 import re
+import typing
+from typing import Any
 
 import numpy as np
 from geocal_swig import (
@@ -34,8 +39,14 @@ from .spice_camera import ctx_camera, hirise_camera, lro_nac_camera, lro_wac_cam
 from .spice_igc import SpiceIgc
 from .sqlite_shelf import write_shelve
 
+if typing.TYPE_CHECKING:
+    from geocal_swig import ImageGroundConnection, RasterImage, Rsm
 
-def _adjust_delta_sample(delta_sample, cam_nsamp):
+    # The handlers return an igc, or a pair of igc and rsm if rsm=True
+    IsisIgcResult = ImageGroundConnection | tuple[ImageGroundConnection, Rsm]
+
+
+def _adjust_delta_sample(delta_sample: float, cam_nsamp: int) -> int:
     """Adjust the delta_sample so it evenly divides cam_nsamp. We find the
     number closest to delta_sample that evenly divides cam_nsamp"""
     # This is pretty brute force, but cam_nsamp should be at most ~10K, so
@@ -46,7 +57,7 @@ def _adjust_delta_sample(delta_sample, cam_nsamp):
     # Check if we are already ok. delta_sample is chosen to divide the
     # nominal camera sample number, so this is a good first guess
     if cam_nsamp % delta_sample == 0:
-        return delta_sample
+        return int(delta_sample)
     # Note even if cam_nsamp is prime, there will be at least one number
     # in this list because include cam_nsamp in the divisors we try
     ntry = np.arange(2, cam_nsamp + 1)
@@ -64,7 +75,14 @@ class IsisToIgcHandleSet(GeoCalPriorityHandleSet):
     downstream programs to add handles for new instruments.
     """
 
-    def handle_h(self, h, isis_img, isis_metadata, klist, **keywords):
+    def handle_h(
+        self,
+        h: Any,
+        isis_img: GdalRasterImage,
+        isis_metadata: dict[str, Any],
+        klist: SpiceKernelList,
+        **keywords: Any,
+    ) -> tuple[bool, IsisIgcResult | None]:
         return h.isis_to_igc(isis_img, isis_metadata, klist, **keywords)
 
 
@@ -77,7 +95,9 @@ class IsisToIgcHandleSet(GeoCalPriorityHandleSet):
 
 
 class CtxIsisToIgc:
-    def igc_to_glas(self, igc_r, focal_length):
+    def igc_to_glas(
+        self, igc_r: IpiImageGroundConnection, focal_length: float
+    ) -> IpiImageGroundConnection:
         """Convert IGC to a GLAS model."""
         tspace = igc_r.ipi.time_table.time_space
         porb = PosCsephb(
@@ -117,26 +137,26 @@ class CtxIsisToIgc:
             igc_r.ipi.time_table,
         )
         igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, igc_r.image)
-        igc_g.platform_id = "MRO"
-        igc_g.payload_id = "MRO"
-        igc_g.sensor_id = "CTX"
+        igc_g.platform_id = "MRO"  # type: ignore[attr-defined]
+        igc_g.payload_id = "MRO"  # type: ignore[attr-defined]
+        igc_g.sensor_id = "CTX"  # type: ignore[attr-defined]
         return igc_g
 
     def isis_to_igc(
         self,
-        isis_img,
-        isis_metadata,
-        klist_in,
-        subset=None,
-        glas_gfm=False,
-        rsm=False,
-        min_height=-5000,
-        max_height=-1500,
-        igc_out_fname=None,
-        match_isis=False,
-        spice_igc=False,
-        **keywords,
-    ):
+        isis_img: GdalRasterImage,
+        isis_metadata: dict[str, Any],
+        klist_in: SpiceKernelList,
+        subset: list[int] | None = None,
+        glas_gfm: bool = False,
+        rsm: bool = False,
+        min_height: float = -5000,
+        max_height: float = -1500,
+        igc_out_fname: str | None = None,
+        match_isis: bool = False,
+        spice_igc: bool = False,
+        **keywords: Any,
+    ) -> tuple[bool, IsisIgcResult | None]:
         idata = isis_metadata["IsisCube"]["Instrument"]
         if idata["InstrumentId"] != "CTX":
             return (False, None)
@@ -150,6 +170,7 @@ class CtxIsisToIgc:
         t.extend(klist_in.kernel_list)
         klist = SpiceKernelList(t)
         sline = 0
+        img: RasterImage
         if subset is not None:
             sline = subset[0]
             img = SubRasterImage(isis_img, subset[0], subset[1], subset[2], subset[3])
@@ -221,7 +242,9 @@ IsisToIgcHandleSet.add_default_handle(CtxIsisToIgc())
 
 
 class HrscIsisToIgc:
-    def igc_to_glas(self, igc_r, focal_length):
+    def igc_to_glas(
+        self, igc_r: IpiImageGroundConnection, focal_length: float
+    ) -> IpiImageGroundConnection:
         """Convert IGC to a GLAS model."""
         tspace = igc_r.ipi.time_table.time_space
         porb = PosCsephb(
@@ -262,31 +285,32 @@ class HrscIsisToIgc:
             igc_r.ipi.time_table,
         )
         igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, igc_r.image)
-        igc_g.platform_id = "MEX"
-        igc_g.payload_id = "MEX"
-        igc_g.sensor_id = "HRSC"
+        igc_g.platform_id = "MEX"  # type: ignore[attr-defined]
+        igc_g.payload_id = "MEX"  # type: ignore[attr-defined]
+        igc_g.sensor_id = "HRSC"  # type: ignore[attr-defined]
         return igc_g
 
     def isis_to_igc(
         self,
-        isis_img,
-        isis_metadata,
-        klist_in,
-        subset=None,
-        glas_gfm=False,
-        rsm=False,
-        min_height=-5000,
-        max_height=-1500,
-        igc_out_fname=None,
-        match_isis=False,
-        spice_igc=False,
-        **keywords,
-    ):
+        isis_img: GdalRasterImage,
+        isis_metadata: dict[str, Any],
+        klist_in: SpiceKernelList,
+        subset: list[int] | None = None,
+        glas_gfm: bool = False,
+        rsm: bool = False,
+        min_height: float = -5000,
+        max_height: float = -1500,
+        igc_out_fname: str | None = None,
+        match_isis: bool = False,
+        spice_igc: bool = False,
+        **keywords: Any,
+    ) -> tuple[bool, IsisIgcResult | None]:
         # TODO Update this
         idata = isis_metadata["IsisCube"]["Instrument"]
         if idata["InstrumentId"] != "HRSC":
             return (False, None)
         sline = 0
+        img: RasterImage
         if subset is not None:
             sline = subset[0]
             img = SubRasterImage(isis_img, subset[0], subset[1], subset[2], subset[3])
@@ -365,13 +389,15 @@ class LroCombineEvenOdd(CalcRaster):
     of processing the data hasn't been combined yet. This simple class
     just puts this two together."""
 
-    def __init__(self, f_even, f_odd, framelet_size):
+    def __init__(
+        self, f_even: RasterImage, f_odd: RasterImage, framelet_size: int
+    ) -> None:
         self.f_even = f_even
         self.f_odd = f_odd
         self.framelet_size = framelet_size
         super().__init__(f_even.number_line, f_even.number_sample)
 
-    def calc(self, lstart, sstart):
+    def calc(self, lstart: int, sstart: int) -> None:
         ln = lstart
         while ln < lstart + self.data.shape[0]:
             frameindex = math.floor(ln / self.framelet_size)
@@ -392,7 +418,9 @@ class LroCombineEvenOdd(CalcRaster):
 
 
 class LroWacIsisToIgc:
-    def igc_to_glas(self, igc_r, focal_length):
+    def igc_to_glas(
+        self, igc_r: IpiImageGroundConnection, focal_length: float
+    ) -> IpiImageGroundConnection:
         """Convert IGC to a GLAS model."""
         tspace = igc_r.ipi.time_table.time_space
         porb = PosCsephb(
@@ -439,28 +467,28 @@ class LroWacIsisToIgc:
             igc_r.ipi.time_table,
         )
         igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, igc_r.image)
-        igc_g.platform_id = "LRO"
-        igc_g.payload_id = "LRO"
-        igc_g.sensor_id = "WAC"
+        igc_g.platform_id = "LRO"  # type: ignore[attr-defined]
+        igc_g.payload_id = "LRO"  # type: ignore[attr-defined]
+        igc_g.sensor_id = "WAC"  # type: ignore[attr-defined]
         return igc_g
 
     def isis_to_igc(
         self,
-        isis_img,
-        isis_metadata,
-        klist,
-        subset=None,
-        glas_gfm=False,
-        rsm=False,
-        min_height=-5000,
-        max_height=-1500,
-        igc_out_fname=None,
-        match_isis=False,
-        spice_igc=False,
-        band=3,
-        rad_scale=10000,
-        **keywords,
-    ):
+        isis_img: GdalRasterImage,
+        isis_metadata: dict[str, Any],
+        klist: SpiceKernelList,
+        subset: list[int] | None = None,
+        glas_gfm: bool = False,
+        rsm: bool = False,
+        min_height: float = -5000,
+        max_height: float = -1500,
+        igc_out_fname: str | None = None,
+        match_isis: bool = False,
+        spice_igc: bool = False,
+        band: int = 3,
+        rad_scale: float | None = 10000,
+        **keywords: Any,
+    ) -> tuple[bool, IsisIgcResult | None]:
         """This takes the band number. By convention, we have 1 and 2 as
         the UV bands, 3-7 as the visible bands."""
         idata = isis_metadata["IsisCube"]["Instrument"]
@@ -512,18 +540,21 @@ class LroWacIsisToIgc:
         else:
             raise RuntimeError(f"Unknown band number {band}. Should be 1-7")
 
-        isis_img = LroCombineEvenOdd(f_even, f_odd, framelet_size)
+        combined_img = LroCombineEvenOdd(f_even, f_odd, framelet_size)
         sline = 0
-        nline = isis_img.number_line
+        nline = combined_img.number_line
+        img: RasterImage
         if subset is not None:
             sline = subset[0]
             nline = subset[2]
             # Adjust so this a even multiple of the framelet_size
             sline = int(round(sline / framelet_size)) * framelet_size
             nline = int(round(nline / framelet_size)) * framelet_size
-            img = SubRasterImage(isis_img, sline, 0, nline, isis_img.number_sample)
+            img = SubRasterImage(
+                combined_img, sline, 0, nline, combined_img.number_sample
+            )
         else:
-            img = isis_img
+            img = combined_img
         if rad_scale is not None:
             img = ScaleImage(img, rad_scale)
         # Note IsisIgc uses LT+S. this is actually *wrong*, see the
@@ -585,7 +616,9 @@ IsisToIgcHandleSet.add_default_handle(LroWacIsisToIgc())
 
 
 class LroNacIsisToIgc:
-    def igc_to_glas(self, igc_r, focal_length):
+    def igc_to_glas(
+        self, igc_r: IpiImageGroundConnection, focal_length: float
+    ) -> IpiImageGroundConnection:
         """Convert IGC to a GLAS model."""
         tspace = igc_r.ipi.time_table.time_space
         porb = PosCsephb(
@@ -626,27 +659,27 @@ class LroNacIsisToIgc:
             igc_r.ipi.time_table,
         )
         igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, igc_r.image)
-        igc_g.platform_id = "LRO"
-        igc_g.payload_id = "LRO"
-        igc_g.sensor_id = "NAC"
+        igc_g.platform_id = "LRO"  # type: ignore[attr-defined]
+        igc_g.payload_id = "LRO"  # type: ignore[attr-defined]
+        igc_g.sensor_id = "NAC"  # type: ignore[attr-defined]
         return igc_g
 
     def isis_to_igc(
         self,
-        isis_img,
-        isis_metadata,
-        klist,
-        subset=None,
-        glas_gfm=False,
-        rsm=False,
-        min_height=-5000,
-        max_height=-1500,
-        igc_out_fname=None,
-        match_isis=False,
-        spice_igc=False,
-        rad_scale=100,
-        **keywords,
-    ):
+        isis_img: GdalRasterImage,
+        isis_metadata: dict[str, Any],
+        klist: SpiceKernelList,
+        subset: list[int] | None = None,
+        glas_gfm: bool = False,
+        rsm: bool = False,
+        min_height: float = -5000,
+        max_height: float = -1500,
+        igc_out_fname: str | None = None,
+        match_isis: bool = False,
+        spice_igc: bool = False,
+        rad_scale: float | None = 100,
+        **keywords: Any,
+    ) -> tuple[bool, IsisIgcResult | None]:
         idata = isis_metadata["IsisCube"]["Instrument"]
         if idata["InstrumentId"] == "NACL":
             typ = "left"
@@ -663,6 +696,7 @@ class LroNacIsisToIgc:
 
         sline = 0
         nline = isis_img.number_line
+        img: RasterImage
         if subset is not None:
             sline = subset[0]
             nline = subset[2]
@@ -732,10 +766,12 @@ class HiriseIsisToIgc:
     """Note that the HiRISE data is small floating point numbers. We
     scale to get a reasonable looking image."""
 
-    def __init__(self, rad_scale=10000):
+    def __init__(self, rad_scale: float | None = 10000) -> None:
         self.rad_scale = rad_scale
 
-    def igc_to_glas(self, igc_r, focal_length):
+    def igc_to_glas(
+        self, igc_r: IpiImageGroundConnection, focal_length: float
+    ) -> IpiImageGroundConnection:
         """Convert IGC to a GLAS model."""
         tspace = igc_r.ipi.time_table.time_space
         porb = PosCsephb(
@@ -778,30 +814,31 @@ class HiriseIsisToIgc:
             igc_r.ipi.time_table,
         )
         igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, igc_r.image)
-        igc_g.platform_id = "MRO"
-        igc_g.payload_id = "MRO"
-        igc_g.sensor_id = "HIRISE"
+        igc_g.platform_id = "MRO"  # type: ignore[attr-defined]
+        igc_g.payload_id = "MRO"  # type: ignore[attr-defined]
+        igc_g.sensor_id = "HIRISE"  # type: ignore[attr-defined]
         return igc_g
 
     def isis_to_igc(
         self,
-        isis_img,
-        isis_metadata,
-        klist,
-        subset=None,
-        glas_gfm=False,
-        rsm=False,
-        min_height=-5000,
-        max_height=-1500,
-        igc_out_fname=None,
-        match_isis=False,
-        spice_igc=False,
-        **keywords,
-    ):
+        isis_img: GdalRasterImage,
+        isis_metadata: dict[str, Any],
+        klist: SpiceKernelList,
+        subset: list[int] | None = None,
+        glas_gfm: bool = False,
+        rsm: bool = False,
+        min_height: float = -5000,
+        max_height: float = -1500,
+        igc_out_fname: str | None = None,
+        match_isis: bool = False,
+        spice_igc: bool = False,
+        **keywords: Any,
+    ) -> tuple[bool, IsisIgcResult | None]:
         idata = isis_metadata["IsisCube"]["Instrument"]
         if idata["InstrumentId"] != "HIRISE":
             return (False, None)
         sline = 0
+        img: RasterImage
         if subset is not None:
             img = SubRasterImage(isis_img, subset[0], subset[1], subset[2], subset[3])
         else:
@@ -888,7 +925,7 @@ class HiriseIsisToIgc:
 IsisToIgcHandleSet.add_default_handle(HiriseIsisToIgc())
 
 
-def isis_to_igc(isis_fname, **keywords):
+def isis_to_igc(isis_fname: str | os.PathLike[str], **keywords: Any) -> IsisIgcResult:
     """Create an IGC for the given ISIS cube file. This should have
     already had spiceinit run on it (e.g., you called pds_to_isis).
 

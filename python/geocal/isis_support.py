@@ -1,14 +1,17 @@
+from __future__ import annotations
+
 import json
 import os
 import re
 import subprocess
+from typing import Any
 
 from geocal_swig import GdalRasterImage, SpiceKernelList, gdal_driver_name
 
 from .priority_handle_set import GeoCalPriorityHandleSet
 
 
-def setup_isis():
+def setup_isis() -> None:
     """Set up ISISROOT and ISISDATA environment variables with defaults,
     if not already set"""
     if "ISISROOT" not in os.environ:
@@ -23,7 +26,9 @@ def setup_isis():
             raise RuntimeError("Need to set ISISDATA environment variable")
 
 
-def read_kernel_from_isis(fname, Skip_load=True):
+def read_kernel_from_isis(
+    fname: str | os.PathLike[str], Skip_load: bool = True
+) -> SpiceKernelList:
     """This takes a ISIS cube file which has had spiceinit run on it,
     and determines the kernels listed in the file. Returned as a
     SpiceKernelList, which has *not* been loaded yet."""
@@ -52,7 +57,7 @@ def read_kernel_from_isis(fname, Skip_load=True):
     return SpiceKernelList(klist, Skip_load)
 
 
-def find_isis_kernel_file(f):
+def find_isis_kernel_file(f: str) -> str:
     """This finds a single ISIS kernel file. See find_isis_kernel, which
     is probably the function you actually want to be using."""
     setup_isis()
@@ -133,7 +138,7 @@ def find_isis_kernel_file(f):
     raise RuntimeError(f"Can't find kernel {f}")
 
 
-def find_isis_kernel(klist, Skip_load=True):
+def find_isis_kernel(klist: SpiceKernelList, Skip_load: bool = True) -> SpiceKernelList:
     """This takes a SpiceKernelList which might have various
     variables like $base or $mro that spiceinit uses. We then
     try to find that file on the system (in ISISDATA or SPICECACHE).
@@ -155,7 +160,14 @@ class PdsToIsisHandleSet(GeoCalPriorityHandleSet):
     downstream programs to add handles for new instruments.
     """
 
-    def handle_h(self, h, fin, pds_fname, isis_fname, pds_fname2):
+    def handle_h(
+        self,
+        h: Any,
+        fin: GdalRasterImage,
+        pds_fname: str | os.PathLike[str],
+        isis_fname: str | os.PathLike[str],
+        pds_fname2: str | os.PathLike[str] | None,
+    ) -> tuple[bool, str | os.PathLike[str] | None]:
         return h.pds_to_isis(fin, pds_fname, isis_fname, pds_fname2=pds_fname2)
 
 
@@ -163,7 +175,13 @@ class CtxPdsToIsis:
     """The data format is described at https://pds-imaging.jpl.nasa.gov/data/mro/mars_reconnaissance_orbiter/ctx/mrox_0001/document/ctxsis.pdf if you
     need information about the labels."""
 
-    def pds_to_isis(self, fin, pds_fname, isis_fname, pds_fname2=None):
+    def pds_to_isis(
+        self,
+        fin: GdalRasterImage,
+        pds_fname: str | os.PathLike[str],
+        isis_fname: str | os.PathLike[str],
+        pds_fname2: str | os.PathLike[str] | None = None,
+    ) -> tuple[bool, str | os.PathLike[str] | None]:
         if fin["INSTRUMENT_ID"] != "CTX":
             return (False, None)
         setup_isis()
@@ -191,7 +209,13 @@ PdsToIsisHandleSet.add_default_handle(CtxPdsToIsis())
 
 
 class HrscPdsToIsis:
-    def pds_to_isis(self, fin, pds_fname, isis_fname, pds_fname2=None):
+    def pds_to_isis(
+        self,
+        fin: GdalRasterImage,
+        pds_fname: str | os.PathLike[str],
+        isis_fname: str | os.PathLike[str],
+        pds_fname2: str | os.PathLike[str] | None = None,
+    ) -> tuple[bool, str | os.PathLike[str] | None]:
         if fin["INSTRUMENT_ID"] != "HRSC":
             return (False, None)
         setup_isis()
@@ -234,7 +258,13 @@ PdsToIsisHandleSet.add_default_handle(HrscPdsToIsis())
 class LroPdsToIsis:
     """The data format is described at http://pds.lroc.asu.edu/data/LRO-L-LROC-2-EDR-V1.0/LROLRC_0001/DOCUMENT/LROCSIS.PDF if you need information about the labels."""
 
-    def pds_to_isis(self, fin, pds_fname, isis_fname, pds_fname2=None):
+    def pds_to_isis(
+        self,
+        fin: GdalRasterImage,
+        pds_fname: str | os.PathLike[str],
+        isis_fname: str | os.PathLike[str],
+        pds_fname2: str | os.PathLike[str] | None = None,
+    ) -> tuple[bool, str | os.PathLike[str] | None]:
         if fin["INSTRUMENT_ID"] != "LROC":
             return (False, None)
 
@@ -266,7 +296,12 @@ class LroPdsToIsis:
         )
         return (True, isis_fname)
 
-    def pds_wac_to_isis(self, fin, pds_fname, isis_fname):
+    def pds_wac_to_isis(
+        self,
+        fin: GdalRasterImage,
+        pds_fname: str | os.PathLike[str],
+        isis_fname: str | os.PathLike[str],
+    ) -> None:
         subprocess.run(
             [
                 f"{os.environ['ISISROOT']}/bin/lrowac2isis",
@@ -367,7 +402,12 @@ class LroPdsToIsis:
         else:
             os.symlink(f"{t}.vis.even.cub", isis_fname)
 
-    def pds_edr_nac_to_isis(self, fin, pds_fname, isis_fname):
+    def pds_edr_nac_to_isis(
+        self,
+        fin: GdalRasterImage,
+        pds_fname: str | os.PathLike[str],
+        isis_fname: str | os.PathLike[str],
+    ) -> None:
         subprocess.run(
             [
                 f"{os.environ['ISISROOT']}/bin/lronac2isis",
@@ -377,7 +417,12 @@ class LroPdsToIsis:
             check=True,
         )
 
-    def pds_cdr_nac_to_isis(self, fin, pds_fname, isis_fname):
+    def pds_cdr_nac_to_isis(
+        self,
+        fin: GdalRasterImage,
+        pds_fname: str | os.PathLike[str],
+        isis_fname: str | os.PathLike[str],
+    ) -> None:
         raise RuntimeError(
             "We don't currently support CDR format for NAC. Not sure if ISIS supports this, we'll need to dig a bit to see."
         )
@@ -397,7 +442,13 @@ PdsToIsisHandleSet.add_default_handle(LroPdsToIsis())
 class DummyPdsToIsis:
     """Degenerate case of file already being a isis file"""
 
-    def pds_to_isis(self, fin, pds_fname, isis_fname, pds_fname2=None):
+    def pds_to_isis(
+        self,
+        fin: GdalRasterImage,
+        pds_fname: str | os.PathLike[str],
+        isis_fname: str | os.PathLike[str],
+        pds_fname2: str | os.PathLike[str] | None = None,
+    ) -> tuple[bool, str | os.PathLike[str] | None]:
         if gdal_driver_name(str(pds_fname)) != "ISIS3":
             return (False, None)
         # Degenerate case of output file being the same as input
@@ -416,7 +467,13 @@ PdsToIsisHandleSet.add_default_handle(DummyPdsToIsis(), priority_order=1000)
 class HirisePdsToIsis:
     """Documentation in HiRISE format is at https://hirise-pds.lpl.arizona.edu/PDS/DOCUMENT/HIRISE_EDR_SIS.PDF"""
 
-    def pds_to_isis(self, fin, pds_fname, isis_fname, pds_fname2=None):
+    def pds_to_isis(
+        self,
+        fin: GdalRasterImage,
+        pds_fname: str | os.PathLike[str],
+        isis_fname: str | os.PathLike[str],
+        pds_fname2: str | os.PathLike[str] | None = None,
+    ) -> tuple[bool, str | os.PathLike[str] | None]:
         if (
             fin["INSTRUMENT_ID"] != "HIRISE" and fin["INSTRUMENT_ID"] != '"HIRISE"'
         ) or pds_fname2 is None:
@@ -494,7 +551,11 @@ class HirisePdsToIsis:
 PdsToIsisHandleSet.add_default_handle(HirisePdsToIsis())
 
 
-def pds_to_isis(pds_fname, isis_fname, pds_fname2=None):
+def pds_to_isis(
+    pds_fname: str | os.PathLike[str],
+    isis_fname: str | os.PathLike[str],
+    pds_fname2: str | os.PathLike[str] | None = None,
+) -> str | os.PathLike[str]:
     """Take a unprojected PDS file, and import it into an ISIS file - based
     on the instrument listed the PDS file.
 

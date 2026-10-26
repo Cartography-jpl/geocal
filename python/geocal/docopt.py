@@ -28,7 +28,7 @@ class DocoptExit(SystemExit):
 
     usage = ""
 
-    def __init__(self, message=""):
+    def __init__(self, message: str = "") -> None:
         SystemExit.__init__(self, (message + "\n" + self.usage).strip())
 
 
@@ -107,11 +107,11 @@ class Pattern:
 
 
 class ChildPattern(Pattern):
-    def __init__(self, name, value=None):
+    def __init__(self, name, value=None) -> None:
         self.name = name
         self.value = value
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.name!r}, {self.value!r})"
 
     def flat(self, *types):
@@ -138,10 +138,10 @@ class ChildPattern(Pattern):
 
 
 class ParentPattern(Pattern):
-    def __init__(self, *children):
+    def __init__(self, *children) -> None:
         self.children = list(children)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "{}({})".format(
             self.__class__.__name__,
             ", ".join(repr(a) for a in self.children),
@@ -168,7 +168,7 @@ class Argument(ChildPattern):
 
 
 class Command(Argument):
-    def __init__(self, name, value=False):
+    def __init__(self, name, value: bool = False) -> None:
         self.name = name
         self.value = value
 
@@ -183,7 +183,7 @@ class Command(Argument):
 
 
 class Option(ChildPattern):
-    def __init__(self, short=None, long=None, argcount=0, value=False):
+    def __init__(self, short=None, long=None, argcount=0, value: bool = False) -> None:
         assert argcount in (0, 1)
         self.short, self.long = short, long
         self.argcount, self.value = argcount, value
@@ -216,7 +216,7 @@ class Option(ChildPattern):
     def name(self):
         return self.long or self.short
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return (
             f"Option({self.short!r}, {self.long!r}, {self.argcount!r}, {self.value!r})"
         )
@@ -281,7 +281,7 @@ class Either(ParentPattern):
 
 
 class TokenStream(list):
-    def __init__(self, source, error):
+    def __init__(self, source, error) -> None:
         self += source.split() if hasattr(source, "split") else source
         self.error = error
 
@@ -425,7 +425,7 @@ def parse_atom(tokens, options):
         return [Command(tokens.move())]
 
 
-def parse_argv(tokens, options, options_first=False):
+def parse_argv(tokens, options, options_first: bool = False):
     """Parse command-line argument vector.
 
     If options_first:
@@ -474,7 +474,7 @@ def formal_usage(printable_usage):
     return "( " + " ".join(") | (" if s == pu[0] else s for s in pu[1:]) + " )"
 
 
-def extras(help, version, options, doc):
+def extras(help, version, options, doc) -> None:
     if help and any((o.name in ("-h", "--help")) and o.value for o in options):
         print(doc.strip("\n"))
         sys.exit()
@@ -484,13 +484,15 @@ def extras(help, version, options, doc):
 
 
 class Dict(dict):
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "{{{}}}".format(
             ",\n ".join("{!r}: {!r}".format(*i) for i in sorted(self.items()))
         )
 
 
-def docopt(doc, argv=None, help=True, version=None, options_first=False):
+def docopt(
+    doc, argv=None, help: bool = True, version=None, options_first: bool = False
+):
     """Parse `argv` based on command-line interface described in `doc`.
 
     `docopt` creates your command-line interface based on its

@@ -1,6 +1,13 @@
+from __future__ import annotations
+
+import typing
 from itertools import chain
+from typing import Any
 
 from geocal_swig import FeatureDetector
+
+if typing.TYPE_CHECKING:
+    from geocal_swig import ImageMask, InterestPoint, RasterImage
 
 
 class InterestPointGridRawWrap:
@@ -8,7 +15,15 @@ class InterestPointGridRawWrap:
     We can't directly use pool.map on _interest_point_grid_raw because
     python can't pickle a instance function"""
 
-    def __init__(self, fd, img, mask, number_grid_line, number_grid_sample, border):
+    def __init__(
+        self,
+        fd: FeatureDetector,
+        img: RasterImage,
+        mask: ImageMask | None,
+        number_grid_line: int,
+        number_grid_sample: int,
+        border: int,
+    ) -> None:
         self.fd = fd
         self.img = img
         self.mask = mask
@@ -16,7 +31,7 @@ class InterestPointGridRawWrap:
         self.number_grid_sample = number_grid_sample
         self.border = border
 
-    def __call__(self, i):
+    def __call__(self, i: int) -> list[InterestPoint]:
         res = []
         for j in range(self.number_grid_sample):
             if self.mask is None:
@@ -45,8 +60,14 @@ class InterestPointGridRawWrap:
 
 # Add some useful functions to FeatureDetector
 def interest_point_grid(
-    self, img, number_grid_line, number_grid_sample, border=0, mask=None, pool=None
-):
+    self: FeatureDetector,
+    img: RasterImage,
+    number_grid_line: int,
+    number_grid_sample: int,
+    border: int = 0,
+    mask: ImageMask | None = None,
+    pool: Any = None,
+) -> list[InterestPoint]:
     """This is used to generate a set of interest points. We divide
     the Image into the given number of grid line and samples, and in
     each grid point find the point with the interest point with the

@@ -29,7 +29,7 @@ class DocOptSimple:
         default_help: bool = True,
         version: str | None = None,
         options_first: bool = False,
-    ):
+    ) -> None:
         self.args = docopt(
             doc,
             argv=argv,

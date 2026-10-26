@@ -1,9 +1,14 @@
+from __future__ import annotations
+
 import itertools
 import logging
 import math
 import multiprocessing
 import os
 import time
+import typing
+from collections.abc import Iterable
+from typing import Any, TextIO
 
 import numpy as np
 from geocal_swig import (
@@ -26,6 +31,18 @@ from tabulate import tabulate
 
 from .misc import cib01_mapinfo
 from .ray_intersect import RayIntersect3
+
+if typing.TYPE_CHECKING:
+    from multiprocessing.pool import Pool
+
+    from geocal_swig import (
+        Dem,
+        IgcCollection,
+        ImageGroundConnection,
+        ImageMatcher,
+        ImageToImageMatch,
+        MapInfo,
+    )
 
 # Might not have cv2 available
 #
@@ -54,10 +71,12 @@ class TiePointWrap:
     directly use pool.map on tp_collect.tie_point because python can\'t
     pickle a instance function"""
 
-    def __init__(self, tp_collect):
+    def __init__(self, tp_collect: TiePointCollect) -> None:
         self.tp_collect = tp_collect
 
-    def __call__(self, ic):
+    def __call__(
+        self, ic: ImageCoordinate
+    ) -> tuple[TiePoint | None, np.ndarray | None]:
         log = logging.getLogger("geocal-python.tie_point_collect")
         log.debug(f"Processing point ({ic.line:f}, {ic.sample:f})")
         for h in logging.getLogger("geocal-python").handlers:
@@ -75,7 +94,7 @@ class TiePointWrap:
             # the surface). In that case, just skip this point and
             # go to the next one
             log.debug("Got 0 matches")
-        for h in logging.getLogger("geoca1-python").handlers:
+        for h in logging.getLogger("geocal-python").handlers:
             h.flush()
         return None, None
 
@@ -83,7 +102,7 @@ class TiePointWrap:
 class TiePointDiagnostic:
     """This contains information about tiepoint matching."""
 
-    def __init__(self, num_image):
+    def __init__(self, num_image: int) -> None:
         """Initialize all counts to 0."""
         # Have diagnostic codes from 0 to 10.
         max_diag_code = 11
@@ -95,7 +114,7 @@ class TiePointDiagnostic:
         max_tp_diag_code = 3
         self.tp_diagnostic = np.zeros((max_tp_diag_code + 1,), dtype=int)
 
-    def add_tp_diag(self, d):
+    def add_tp_diag(self, d: np.ndarray) -> None:
         """Update fields based on the contents of diag returned by
         TiePointCollect.tie_point"""
         for i in range(self.image_match_diagnostic.shape[0]):
@@ -103,21 +122,23 @@ class TiePointDiagnostic:
                 self.image_match_diagnostic[i, d[i]] += 1
         self.tp_diagnostic[d[-1]] += 1
 
-    def _print_or_log(self, v):
+    def _print_or_log(self, v: str) -> None:
         if self.log:
             self.log.info(v)
         else:
             print(v, file=self.fh)
 
-    def _print_tab_helper(self, a, b):
+    def _print_tab_helper(self, a: Any, b: Iterable[Any]) -> list[Any]:
         """In python 3, this is just [a, *b]. But we can not do that in
         python 2, so use this simple helper function."""
         return list(itertools.chain([a], b))
 
-    def print_report(self, fh=None, log=None):
+    def print_report(
+        self, fh: TextIO | None = None, log: logging.Logger | None = None
+    ) -> None:
         self.log = log
         self.fh = fh
-        d = self.image_match_diagnostic
+        d: np.ndarray = self.image_match_diagnostic
         self._print_or_log("        Tiepoint Matching")
         tp_tab = [self._print_tab_helper("Reason", range(d.shape[0]))]
         for i, v in enumerate(
@@ -157,22 +178,22 @@ class TiePointCollect:
 
     def __init__(
         self,
-        igc_collection,
-        map_info=None,
-        base_image_index=0,
-        max_ground_covariance=20 * 20,
-        start_image_index=0,
-        end_image_index=None,
-        avg_level=0,
-        use_intersection=False,
-        grid_spacing=1,
-        image_matcher=None,
-        gcp_image_matcher=None,
-        ref_image=None,
-        ref_dem=None,
-        surface_image=None,
-        scale_factor=None,
-    ):
+        igc_collection: IgcCollection,
+        map_info: MapInfo | None = None,
+        base_image_index: int = 0,
+        max_ground_covariance: float = 20 * 20,
+        start_image_index: int = 0,
+        end_image_index: int | None = None,
+        avg_level: int = 0,
+        use_intersection: bool = False,
+        grid_spacing: int = 1,
+        image_matcher: ImageMatcher | None = None,
+        gcp_image_matcher: ImageMatcher | None = None,
+        ref_image: RasterImage | None = None,
+        ref_dem: Dem | None = None,
+        surface_image: list[RasterImage] | None = None,
+        scale_factor: float | None = None,
+    ) -> None:
         """This sets up for doing tie point collection. A IgcCollection
         needs to be supplied.
 
@@ -208,6 +229,7 @@ class TiePointCollect:
         Can supply a reference image. If present, we use this as ground
         truth and generate GCPs if we can.
         """
+        self.image_matcher: ImageMatcher
         if image_matcher is None:
             self.image_matcher = CcorrLsmMatcher()
             if avg_level > 0:
@@ -236,6 +258,8 @@ class TiePointCollect:
             self.ri = RayIntersect3(
                 self.igc_collection, max_ground_covariance=max_ground_covariance
             )
+        # Entry for base_image_index isn't used, so it stays None
+        self.itoim: list[ImageToImageMatch | None]
         if self.ref_image is not None:
             self.itoim = [None] * (self.igc_collection.number_image + 1)
         else:
@@ -263,7 +287,7 @@ class TiePointCollect:
                 self.itoim[j] = SurfaceImageToImageMatch(
                     igc1, igc2, map_info, self.image_matcher, grid_spacing
                 )
-        if self.ref_image is not None:
+        if ref_image is not None:
             dem = self.ref_dem
             if dem is None:
                 dem = igc1.dem
@@ -287,7 +311,7 @@ class TiePointCollect:
                     igc1, self.ref_igc, mi, self.gcp_image_matcher, grid_spacing
                 )
 
-    def __getstate__(self):
+    def __getstate__(self) -> dict[str, Any]:
         return {
             "igc_collection": self.igc_collection,
             "map_info": self.map_info,
@@ -304,8 +328,8 @@ class TiePointCollect:
             "scale_factor": self.scale_factor,
         }
 
-    def __setstate__(self, dict):
-        self.__init__(
+    def __setstate__(self, dict: dict[str, Any]) -> None:
+        self.__init__(  # type: ignore[misc]
             dict["igc_collection"],
             map_info=dict["map_info"],
             base_image_index=dict["base_image_index"],
@@ -322,12 +346,19 @@ class TiePointCollect:
         )
 
     @property
-    def number_image(self):
+    def number_image(self) -> int:
         return self.igc_collection.number_image
 
     def tie_point_grid(
-        self, num_x, num_y, aoi=None, dem=None, border=100, pool=None, diagnostic=None
-    ):
+        self,
+        num_x: int,
+        num_y: int,
+        aoi: MapInfo | None = None,
+        dem: Dem | None = None,
+        border: int = 100,
+        pool: Pool | None = None,
+        diagnostic: TiePointDiagnostic | None = None,
+    ) -> tuple[TiePointCollection, TiePointDiagnostic]:
         """Return a grid of tie points. Note that we may be missing results
         for particular grid points if matching isn\'t successful.
 
@@ -347,6 +378,8 @@ class TiePointCollect:
         tstart = time.time()
         log = logging.getLogger("geocal-python.tie_point_collect")
         if aoi:
+            if dem is None:
+                raise RuntimeError("Need to supply a dem if we supply an aoi")
             nline = aoi.number_y_pixel
             nsamp = aoi.number_x_pixel
             step_line = max(int(math.floor((nline - 2 * border) / num_y)), 1)
@@ -372,7 +405,7 @@ class TiePointCollect:
             img = self.igc_collection.image(self.base_image_index)
             if self.scale_factor:
                 img = ScaleImage(img, self.scale_factor)
-            iplist = fd.interest_point_grid(img, num_y, num_x, border, pool=pool)
+            iplist = fd.interest_point_grid(img, num_y, num_x, border, pool=pool)  # type: ignore[attr-defined]
         log.info("Done with interest point")
         log.info("Time: %f" % (time.time() - tstart))
         log.info("Starting matching")
@@ -386,7 +419,7 @@ class TiePointCollect:
         log.info("Done with matching")
         log.info("Time: %f" % (time.time() - tstart))
         res2 = TiePointCollection()
-        res2.extend([i for i, diag in res if i is not None])
+        res2.extend([i for i, diag in res if i is not None])  # type: ignore[attr-defined]
         if diagnostic is not None:
             diagsum = diagnostic
         else:
@@ -398,7 +431,7 @@ class TiePointCollect:
         log.info(f"Number GCPs:     {res2.number_gcp:d}")
         return res2, diagsum
 
-    def tie_point(self, ic1):
+    def tie_point(self, ic1: ImageCoordinate) -> tuple[TiePoint | None, np.ndarray]:
         """Return a tie point that is roughly at the given location in the
         first image. Note that we try matching all the other images to the
         first image, i.e., we don\'t chain by map 2 to 3 and 3 to 4.
@@ -426,7 +459,9 @@ class TiePointCollect:
         tp.image_coordinate(self.base_image_index, ic1, 0.05, 0.05)
         for i in range(self.start_image_index, self.end_image_index):
             if i != self.base_image_index:
-                ic2, lsigma, ssigma, success, diagnostic = self.itoim[i].match(ic1)
+                itoim = self.itoim[i]
+                assert itoim is not None
+                ic2, lsigma, ssigma, success, diagnostic = itoim.match(ic1)
                 diag[i] = diagnostic
                 if success:
                     tp.image_coordinate(i, ic2, lsigma, ssigma)
@@ -471,17 +506,17 @@ class TiePointCollectFM:
 
     def __init__(
         self,
-        igc_collection,
-        max_ground_covariance=20 * 20,
-        ref_image=None,
-        number_feature=500,
-        number_octave_levels=4,
-        number_ref_feature=1000,
-        skip_ray_intersect=False,
-        norm_type=None,
-        fdetect=None,
-        fdetect_ref=None,
-    ):
+        igc_collection: IgcCollection,
+        max_ground_covariance: float = 20 * 20,
+        ref_image: RasterImage | None = None,
+        number_feature: int = 500,
+        number_octave_levels: int = 4,
+        number_ref_feature: int = 1000,
+        skip_ray_intersect: bool = False,
+        norm_type: int | None = None,
+        fdetect: Any = None,
+        fdetect_ref: Any = None,
+    ) -> None:
         """Note if you have a reference image, make sure fdetect and
         fdetect_ref are the same type (e.g., both SURF). They can have
         different parameters, but need to be the same time so the matching
@@ -493,6 +528,7 @@ class TiePointCollectFM:
         self.raster_image = [
             igc_collection.image(i) for i in range(igc_collection.number_image)
         ]
+        self.ri: RayIntersect3 | None
         if igc_collection.number_image > 1 and not skip_ray_intersect:
             self.ri = RayIntersect3(
                 igc_collection, max_ground_covariance=max_ground_covariance
@@ -503,15 +539,12 @@ class TiePointCollectFM:
         if fdetect is not None:
             self.fdetect = fdetect
         else:
-            self.fdetect = cv2.xfeatures2d.SIFT_create(
-                number_feature, number_octave_levels
-            )
+            self.fdetect = cv2.SIFT.create(number_feature, number_octave_levels)
         if fdetect_ref is not None:
             self.fdetect_ref = fdetect_ref
         else:
-            self.fdetect_ref = cv2.xfeatures2d.SIFT_create(
-                number_ref_feature, number_octave_levels
-            )
+            self.fdetect_ref = cv2.SIFT.create(number_ref_feature, number_octave_levels)
+        self.ref_image: RasterImage | None
         if ref_image is not None:
             mi = ref_image.map_info
             mi_ref = None
@@ -529,21 +562,25 @@ class TiePointCollectFM:
         else:
             self.bf = cv2.BFMatcher(norm_type)
 
-    def detect_and_compute(self, ind, log):
+    def detect_and_compute(self, ind: int, log: logging.Logger) -> list[Any]:
         """Detect keypoints and compute descriptor the given raster image."""
         log.info(f"Detecting features for image {ind:d} ")
         d = self.raster_image[ind].read_all_byte_scale()
         kp, des = self.fdetect.detectAndCompute(d, None)
         return [kp, des]
 
-    def detect_and_compute_ref(self, log):
+    def detect_and_compute_ref(self, log: logging.Logger) -> list[Any]:
         """Detect keypoints and compute descriptor in the reference image."""
         log.info("Detecting features for reference image")
-        d = self.ref_image.read_all_byte_scale()
+        if self.ref_image is None:
+            raise RuntimeError("Need a reference image")
+        d = self.ref_image.read_all_byte_scale()  # type: ignore[attr-defined]
         kp, des = self.fdetect_ref.detectAndCompute(d, None)
         return [kp, des]
 
-    def match_feature(self, kp_and_desc, ind1, ind2):
+    def match_feature(
+        self, kp_and_desc: list[list[Any]], ind1: int, ind2: int
+    ) -> list[list[Any]]:
         """Match features between two images"""
         kp1, des1 = kp_and_desc[ind1]
         kp2, des2 = kp_and_desc[ind2]
@@ -563,7 +600,9 @@ class TiePointCollectFM:
             res.append([ic1, ic2, g.queryIdx])
         return res
 
-    def match_feature_ref(self, kp_and_desc, kp_and_desc_ref, ind1):
+    def match_feature_ref(
+        self, kp_and_desc: list[list[Any]], kp_and_desc_ref: list[Any], ind1: int
+    ) -> list[list[Any]]:
         """Match features between two images"""
         kp1, des1 = kp_and_desc[ind1]
         kp2, des2 = kp_and_desc_ref
@@ -583,9 +622,14 @@ class TiePointCollectFM:
             res.append([ic1, ic2, g.queryIdx])
         return res
 
-    def tp_list(self, kp_and_desc, kp_and_desc_ref, ind):
+    def tp_list(
+        self,
+        kp_and_desc: list[list[Any]],
+        kp_and_desc_ref: list[Any] | None,
+        ind: int,
+    ) -> dict[int, TiePoint]:
         """Generate list of tie points, starting with the given image."""
-        res = {}
+        res: dict[int, TiePoint] = {}
         for i in range(ind + 1, len(self.raster_image)):
             good = self.match_feature(kp_and_desc, ind, i)
             for ic1, ic2, idx in good:
@@ -597,6 +641,8 @@ class TiePointCollectFM:
                 tp.image_coordinate(i, ic2, 0.5, 0.5)
                 res[idx] = tp
         if kp_and_desc_ref is not None:
+            # We only have kp_and_desc_ref if we have a ref_image
+            assert self.ref_image is not None
             good = self.match_feature_ref(kp_and_desc, kp_and_desc_ref, ind)
             for ic1, ic2, idx in good:
                 if idx in res:
@@ -612,7 +658,7 @@ class TiePointCollectFM:
 
         return res
 
-    def tie_point_list(self, pool=None):
+    def tie_point_list(self, pool: Pool | None = None) -> TiePointCollection:
         """Generate a TiePointCollect."""
         res = TiePointCollection()
         tstart = time.time()
@@ -642,7 +688,11 @@ class TiePointCollectFM:
         return res
 
 
-def _point_list(ind1, ind2_or_ref_image, tpcol):
+def _point_list(
+    ind1: int,
+    ind2_or_ref_image: int | RasterImage,
+    tpcol: TiePointCollection | list[TiePoint],
+) -> list[np.ndarray]:
     """Internal function, gives list of points between 2 images."""
     pt1 = []
     pt2 = []
@@ -663,7 +713,14 @@ def _point_list(ind1, ind2_or_ref_image, tpcol):
     return [np.array(pt1), np.array(pt2), np.array(ind)]
 
 
-def _point_list_surface_proj(ind1, ind2_or_ref_image, tpcol, igc1, igc2, ref_image):
+def _point_list_surface_proj(
+    ind1: int,
+    ind2_or_ref_image: int | RasterImage,
+    tpcol: TiePointCollection | list[TiePoint],
+    igc1: ImageGroundConnection,
+    igc2: ImageGroundConnection | None,
+    ref_image: RasterImage,
+) -> list[np.ndarray]:
     """Internal function, gives list of points between 2 images. This version
     uses the supplied igc and reference image to first project to the surface,
     and then collect points in the reference image space. This is useful for
@@ -685,6 +742,8 @@ def _point_list_surface_proj(ind1, ind2_or_ref_image, tpcol, igc1, igc2, ref_ima
             else:
                 ic2 = None
         else:
+            if igc2 is None:
+                raise RuntimeError("Need igc2 if ind2_or_ref_image is an index")
             if tp.image_coordinate(ind2_or_ref_image) is not None:
                 ic2 = ref_image.coordinate(
                     igc2.ground_coordinate(tp.image_coordinate(ind2_or_ref_image))
@@ -699,8 +758,14 @@ def _point_list_surface_proj(ind1, ind2_or_ref_image, tpcol, igc1, igc2, ref_ima
 
 
 def _outlier_reject_ransac(
-    ind1, ind2_or_ref_image, tpcol, threshold, igc1=None, igc2=None, ref_image=None
-):
+    ind1: int,
+    ind2_or_ref_image: int | RasterImage,
+    tpcol: TiePointCollection | list[TiePoint],
+    threshold: float,
+    igc1: ImageGroundConnection | None = None,
+    igc2: ImageGroundConnection | None = None,
+    ref_image: RasterImage | None = None,
+) -> TiePointCollection | list[TiePoint]:
     """Internal function used to filter bad points between 2 images."""
     if not have_cv2:
         raise RuntimeError(
@@ -709,6 +774,8 @@ def _outlier_reject_ransac(
     if igc1 is None:
         pt1, pt2, ind = _point_list(ind1, ind2_or_ref_image, tpcol)
     else:
+        if ref_image is None:
+            raise RuntimeError("Need ref_image if igc1 is supplied")
         pt1, pt2, ind = _point_list_surface_proj(
             ind1, ind2_or_ref_image, tpcol, igc1, igc2, ref_image
         )
@@ -726,8 +793,12 @@ def _outlier_reject_ransac(
 
 
 def outlier_reject_ransac(
-    tpcol, ref_image=None, threshold=3.0, igccol=None, diagnostic=None
-):
+    tpcol: TiePointCollection,
+    ref_image: RasterImage | None = None,
+    threshold: float = 3.0,
+    igccol: IgcCollection | None = None,
+    diagnostic: TiePointDiagnostic | None = None,
+) -> TiePointCollection:
     """This remove outliers from a TiePointCollection. This fits the
     tiepoints between pairs of images to create the Fundamental Matrix,
     rejecting outliers using Random sample consensus (RANSAC).
@@ -749,7 +820,7 @@ def outlier_reject_ransac(
     update with points that are rejected.
     """
     nimg = tpcol[0].number_image
-    res = tpcol
+    res: TiePointCollection | list[TiePoint] = tpcol
     log = logging.getLogger("geocal-python.tie_point_collect")
     log.info("Starting using RANSAC to reject outliers")
     if igccol is not None:
@@ -792,7 +863,7 @@ def outlier_reject_ransac(
 
     len3 = len(res)
     res2 = TiePointCollection()
-    res2.extend(res)
+    res2.extend(res)  # type: ignore[attr-defined]
     log.info(f"Removed {len1 - len2:d} tiepoints")
     log.info(f"Removed {len2 - len3:d} more GCPs")
     log.info(f"Ending {res2}")

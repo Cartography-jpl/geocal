@@ -30,6 +30,7 @@ except ImportError:
 
 if typing.TYPE_CHECKING:
     import pynitf
+    from geocal_swig import Rsm
 
 
 class classproperty:
@@ -91,7 +92,7 @@ class IgcMsp(ImageGroundConnection):
         self,
         report: str | os.PathLike[str] | None = None,
         rsm_config: str | os.PathLike[str] | None = None,
-    ):
+    ) -> str:
         return self._msp.generate_rsm_tre(
             str(report) if report is not None else "",
             str(rsm_config) if rsm_config is not None else "",
@@ -101,7 +102,7 @@ class IgcMsp(ImageGroundConnection):
         self,
         report: str | os.PathLike[str] | None = None,
         rsm_config: str | os.PathLike[str] | None = None,
-    ):
+    ) -> Rsm | None:
         from .geocal_nitf_rsm import tre_str_to_rsm
 
         t = self.generate_rsm_tre(report, rsm_config)
@@ -116,7 +117,9 @@ class IgcMsp(ImageGroundConnection):
             self._msp.pixel_time_base(ic.line, ic.sample)
         ) + self._msp.pixel_time_offset(ic.line, ic.sample)
 
-    def ground_coordinate(self, ic: ImageCoordinate, dem=None):
+    def ground_coordinate(
+        self, ic: ImageCoordinate, dem: Dem | None = None
+    ) -> GroundCoordinate:
         return self.ground_coordinate_dem(ic, self.dem)
 
     def ground_coordinate_dem(self, ic: ImageCoordinate, dem: Dem) -> GroundCoordinate:

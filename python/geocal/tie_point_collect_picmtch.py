@@ -1,6 +1,10 @@
+from __future__ import annotations
+
 import os
 import tempfile
+import typing
 from pathlib import Path
+from typing import Any
 
 from geocal_swig import (
     IbisFile,
@@ -15,6 +19,9 @@ from geocal_swig import (
 
 from .misc import makedirs_p
 from .mmap_file import mmap_file
+
+if typing.TYPE_CHECKING:
+    from geocal_swig import Dem, IgcCollection, MapInfo
 from .vicar_interface import VicarInterface
 
 
@@ -25,26 +32,26 @@ class _tpcol(VicarInterface):
 
     def __init__(
         self,
-        img1_fname,
-        img2_fname,
-        fftgrid=(42, 42),
-        fftsize=256,
-        magnify=4.0,
-        magmin=2.0,
-        toler=1.5,
-        redo=36,
-        search=None,
-        ffthalf=2,
-        seed=562,
-        autofit=14,
-        thr_res=10.0,
-        log_file=None,
-        run_dir_name=None,
-        quiet=True,
-    ):
+        img1_fname: str | os.PathLike[str],
+        img2_fname: str | os.PathLike[str],
+        fftgrid: tuple[int, int] = (42, 42),
+        fftsize: int = 256,
+        magnify: float = 4.0,
+        magmin: float = 2.0,
+        toler: float = 1.5,
+        redo: int = 36,
+        search: int | None = None,
+        ffthalf: int = 2,
+        seed: int = 562,
+        autofit: int = 14,
+        thr_res: float = 10.0,
+        log_file: str | os.PathLike[str] | None = None,
+        run_dir_name: str | None = None,
+        quiet: bool = True,
+    ) -> None:
         VicarInterface.__init__(self)
         self.title = "tpcol"
-        self.log_file = Path(log_file)
+        self.log_file = Path(log_file) if log_file is not None else None
         self.run_dir_name = Path(run_dir_name) if run_dir_name is not None else None
         self.input = [Path(img1_fname), Path(img2_fname)]
         self.print_output = not quiet
@@ -190,12 +197,12 @@ end-if
             self.keep_run_dir = True
         self.vicar_run()
 
-    def post_run(self):
+    def post_run(self) -> None:
         f = IbisFile("tpcol.ibis")
-        ln1 = f.column(2)[:]
-        smp1 = f.column(3)[:]
-        ln2 = f.column(5)[:]
-        smp2 = f.column(6)[:]
+        ln1 = f.column(2)[:]  # type: ignore[attr-defined]
+        smp1 = f.column(3)[:]  # type: ignore[attr-defined]
+        ln2 = f.column(5)[:]  # type: ignore[attr-defined]
+        smp2 = f.column(6)[:]  # type: ignore[attr-defined]
         # z1 = f.column(4)[:]
         # z2 = f.column(7)[:]
         self.res = [
@@ -210,28 +217,28 @@ end-if
 class TiePointCollectPicmtch:
     def __init__(
         self,
-        igc_collection,
-        surface_image_fname,
-        image_index1=0,
-        image_index2=-1,
-        ref_image_fname=None,
-        ref_dem=None,
-        fftsize=256,
-        magnify=4.0,
-        magmin=2.0,
-        toler=1.5,
-        redo=36,
-        ffthalf=2,
-        seed=562,
-        autofit=14,
-        thr_res=10.0,
-        map_info=None,
-        grid_spacing=10,
-        search=None,
-        log_file=None,
-        run_dir_name=None,
-        quiet=True,
-    ):
+        igc_collection: IgcCollection,
+        surface_image_fname: list[str | None],
+        image_index1: int = 0,
+        image_index2: int = -1,
+        ref_image_fname: str | None = None,
+        ref_dem: Dem | None = None,
+        fftsize: int = 256,
+        magnify: float = 4.0,
+        magmin: float = 2.0,
+        toler: float = 1.5,
+        redo: int = 36,
+        ffthalf: int = 2,
+        seed: int = 562,
+        autofit: int = 14,
+        thr_res: float = 10.0,
+        map_info: MapInfo | None = None,
+        grid_spacing: int = 10,
+        search: int | None = None,
+        log_file: str | os.PathLike[str] | None = None,
+        run_dir_name: str | None = None,
+        quiet: bool = True,
+    ) -> None:
         """This sets up for doing a tie point collection, using pictmtch5.
         This is similar to TiePointCollect.
 
@@ -297,7 +304,7 @@ class TiePointCollectPicmtch:
         self.seed = seed
         self.autofit = autofit
         self.thr_res = thr_res
-        self.log_file = Path(log_file)
+        self.log_file = Path(log_file) if log_file is not None else None
         self.run_dir_name = run_dir_name
         if (self.image_index2 >= 0 and self.ref_image_fname is not None) or (
             self.image_index2 < 0 and self.ref_image_fname is None
@@ -331,7 +338,9 @@ class TiePointCollectPicmtch:
             mi = VicarLiteRasterImage(self.surface_image_fname[image_index1]).map_info
             self._proj_img(image_index2, mi, grid_spacing)
 
-    def _proj_img(self, index, mi, grid_spacing):
+    def _proj_img(self, index: int, mi: MapInfo, grid_spacing: int) -> None:
+        # Set in __init__ before we need to project images
+        assert self.run_dir_name is not None
         igc = self.igc_collection.image_ground_connection(index)
         igc_proj = IgcMapProjected(mi, igc, grid_spacing, -1, False)
         self.surface_image_fname[index] = self.run_dir_name + f"/img{index:d}_surf.img"
@@ -343,10 +352,12 @@ class TiePointCollectPicmtch:
         m[:, :] = igc_proj.read(0, 0, igc_proj.number_line, igc_proj.number_sample)
 
     @property
-    def number_image(self):
+    def number_image(self) -> int:
         return self.igc_collection.number_image
 
-    def tie_point_grid(self, num_x, num_y, diagnostic=None):
+    def tie_point_grid(
+        self, num_x: int, num_y: int, diagnostic: Any = None
+    ) -> TiePointCollection:
         """Return a grid of tie points. Note that we may be missing results
         for particular grid points if matching isn\'t successful."""
         img1_fname = self.surface_image_fname[self.image_index1]
@@ -354,6 +365,8 @@ class TiePointCollectPicmtch:
             img2_fname = self.surface_image_fname[self.image_index2]
         else:
             img2_fname = self.ref_image_fname
+        # Filled in by __init__
+        assert img1_fname is not None and img2_fname is not None
         tpcollect = _tpcol(
             img1_fname,
             img2_fname,

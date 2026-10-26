@@ -5,9 +5,16 @@
 # in place short term
 # *******************************************************************
 
+from __future__ import annotations
+
 import os
 import struct
 import subprocess
+import typing
+from typing import Any
+
+if typing.TYPE_CHECKING:
+    from geocal_swig import ImageGroundConnection, RasterImage
 
 from geocal_swig import (
     AttCsattb,
@@ -50,15 +57,15 @@ from .sqlite_shelf import read_shelve
 
 
 def igc_mro_context(
-    fname,
-    lbl=None,
-    kernel_file=None,
-    kernel_file_post=None,
-    kernel_json=None,
-    subset=None,
-    left_mask=38,
-    right_mask=18,
-):
+    fname: str,
+    lbl: dict[str, str] | None = None,
+    kernel_file: str | None = None,
+    kernel_file_post: str | None = None,
+    kernel_json: Any = None,
+    subset: list[int] | None = None,
+    left_mask: int = 38,
+    right_mask: int = 18,
+) -> ImageGroundConnection:
     """Note that this is DEPRECATED, replaced with isis_to_igc. We'll leave this
      in place sort term
 
@@ -103,7 +110,7 @@ def igc_mro_context(
     if kpfile:
         klist.append(kpfile)
     orb = SpicePlanetOrbit("MRO", "MRO_CTX", klist, PlanetConstant.MARS_NAIF_CODE)
-    img = GdalRasterImage(fname)
+    img: RasterImage = GdalRasterImage(fname)
     sline = 0
     nline = img.number_line
     if subset is not None:
@@ -148,7 +155,9 @@ def igc_mro_context(
     return igc
 
 
-def igc_mro_context_to_glas(igc_r):
+def igc_mro_context_to_glas(
+    igc_r: IpiImageGroundConnection,
+) -> IpiImageGroundConnection:
     """Note that this is DEPRECATED, replaced with isis_to_igc. We'll leave this
      in place sort term
 
@@ -190,20 +199,20 @@ def igc_mro_context_to_glas(igc_r):
         igc_r.ipi.time_table,
     )
     igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, None)
-    igc_g.platform_id = "MRO"
-    igc_g.payload_id = "MRO"
-    igc_g.sensor_id = "CTX"
+    igc_g.platform_id = "MRO"  # type: ignore[attr-defined]
+    igc_g.payload_id = "MRO"  # type: ignore[attr-defined]
+    igc_g.sensor_id = "CTX"  # type: ignore[attr-defined]
     return igc_g
 
 
 def igc_mex_hrsc(
-    fname,
-    lbl=None,
-    kernel_file=None,
-    kernel_file_post=None,
-    kernel_json=None,
-    subset=None,
-):
+    fname: str,
+    lbl: dict[str, str] | None = None,
+    kernel_file: str | None = None,
+    kernel_file_post: str | None = None,
+    kernel_json: Any = None,
+    subset: list[int] | None = None,
+) -> ImageGroundConnection:
     """Note that this is DEPRECATED, replaced with isis_to_igc. We'll leave this
     in place sort term
 
@@ -271,7 +280,7 @@ def igc_mex_hrsc(
     dem = PlanetSimpleDem(PlanetConstant.MARS_NAIF_CODE)
     orb_cache = OrbitListCache(orb, tt)
     ipi = Ipi(orb_cache, hrsc_camera(), 0, tt.min_time, tt.max_time, tt)
-    igc = IpiImageGroundConnection(ipi, dem, img)
+    igc: ImageGroundConnection = IpiImageGroundConnection(ipi, dem, img)
     if subset is not None:
         igc = OffsetImageGroundConnection(
             igc, subset[0], subset[1], subset[2], subset[3]
@@ -280,14 +289,14 @@ def igc_mex_hrsc(
 
 
 def igc_mro_hirise(
-    fname,
-    lbl=None,
-    kernel_file=None,
-    kernel_file_post=None,
-    kernel_json=None,
-    subset=None,
-    rad_scale=10000,
-):
+    fname: str,
+    lbl: dict[str, str] | None = None,
+    kernel_file: str | None = None,
+    kernel_file_post: str | None = None,
+    kernel_json: Any = None,
+    subset: list[int] | None = None,
+    rad_scale: float = 10000,
+) -> ImageGroundConnection:
     """Note that this is DEPRECATED, replaced with isis_to_igc. We'll leave this
     in place sort term
 
@@ -345,7 +354,7 @@ def igc_mro_hirise(
     orb = SpicePlanetOrbit(
         "MRO", "MRO_HIRISE_OPTICAL_AXIS", klist, PlanetConstant.MARS_NAIF_CODE
     )
-    img = ScaleImage(GdalRasterImage(fname), rad_scale)
+    img: RasterImage = ScaleImage(GdalRasterImage(fname), rad_scale)
     sline = 0
     nline = img.number_line
     if subset is not None:
@@ -392,7 +401,7 @@ def igc_mro_hirise(
     return igc
 
 
-def igc_mro_hirise_to_glas(igc_r):
+def igc_mro_hirise_to_glas(igc_r: IpiImageGroundConnection) -> IpiImageGroundConnection:
     """Note that this is DEPRECATED, replaced with isis_to_igc. We'll leave this
     in place sort term
 
@@ -434,15 +443,15 @@ def igc_mro_hirise_to_glas(igc_r):
         igc_r.ipi.time_table,
     )
     igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, None)
-    igc_g.platform_id = "MRO"
-    igc_g.payload_id = "MRO"
-    igc_g.sensor_id = "HiRISE"
+    igc_g.platform_id = "MRO"  # type: ignore[attr-defined]
+    igc_g.payload_id = "MRO"  # type: ignore[attr-defined]
+    igc_g.sensor_id = "HiRISE"  # type: ignore[attr-defined]
     return igc_g
 
 
 # Not sure if this actually fits here or not, but not an obvious other place
 # for this
-def vicar_update_glas(fin, fout, orbit_updated):
+def vicar_update_glas(fin: str, fout: str, orbit_updated: Any) -> None:
     """Copy an existing VICAR file with a GLAS igc, and update the orbit
     used in the file (e.g., after doing a OrbitOffsetCorrection or something
     like that)"""

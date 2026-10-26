@@ -1,4 +1,8 @@
-from geocal_swig import GdalMultiBand
+from __future__ import annotations
+
+from typing import IO, Any
+
+from geocal_swig import GdalMultiBand, GdalRasterImage
 
 try:
     from pynitf import (
@@ -25,15 +29,15 @@ if have_pynitf:
     class NitfImageGdal(NitfImageWithSubset):
         """Implementation that used GDAL to read the data."""
 
-        def __init__(self, seg=None):
+        def __init__(self, seg: Any = None) -> None:
             super().__init__(seg)
-            self.data_start = None
-            self.fh_in_name = None
+            self.data_start: int | None = None
+            self.fh_in_name: str | None = None
 
-        def __str__(self):
+        def __str__(self) -> str:
             return "Gdal image"
 
-        def __getitem__(self, ind):
+        def __getitem__(self, ind: Any) -> np.ndarray:
             """Return data read from image segment. This takes band, line, and
             sample or line, sample. Because it is so common, we can take
             only 2 values, and assume the band number is held at 0. This
@@ -43,9 +47,9 @@ if have_pynitf:
             """
             # This should be more efficient, but for now just read everything
             # in.
-            return self.data.read_all()[ind]
+            return self.data.read_all()[ind]  # type: ignore[attr-defined]
 
-        def read_from_file(self, fh, segindex):
+        def read_from_file(self, fh: IO[bytes], segindex: int | None) -> bool:
             """Read an image from a file."""
             if segindex is None:
                 return False
@@ -58,7 +62,7 @@ if have_pynitf:
             fh.seek(self._seg().data_size, 1)
             return True
 
-        def write_to_file(self, fh):
+        def write_to_file(self, fh: IO[bytes]) -> None:
             """Write an image to a file."""
             # Useful to be able to copy from an input file to a output file.
             # So, for the special case of having read an input file
@@ -66,6 +70,8 @@ if have_pynitf:
             # writing.
             if self.fh_in_name is None:
                 raise NotImplementedError("Can't write a NitfImageGdal")
+            # Set at the same time as fh_in_name
+            assert self.data_start is not None
             bytes_left = self.data_size
             buffer_size = 1024 * 1024
             with open(self.fh_in_name, "rb") as fh_in:
@@ -90,7 +96,9 @@ if have_pynitf:
     logger = logging.getLogger("nitf_diff")
 
     class ImageGdalDiff(NitfDiffHandle):
-        def handle_diff(self, d1, d2, nitf_diff):
+        def handle_diff(
+            self, d1: Any, d2: Any, nitf_diff: Any
+        ) -> tuple[bool, bool | None]:
             if not isinstance(d1, NitfImageGdal) or not isinstance(d2, NitfImageGdal):
                 return (False, None)
             is_same = True
@@ -98,7 +106,8 @@ if have_pynitf:
             t2 = d2[:, :, :]
             # TODO Expose tolerance as configuration parameters
             if not np.allclose(t1, t2):
-                logger.difference("Image '%s is different", d1.subheader.iid1)
+                # pynitf adds "difference" to its logger
+                logger.difference("Image '%s is different", d1.subheader.iid1)  # type: ignore[attr-defined]
                 is_same = False
             return (True, is_same)
 
@@ -109,7 +118,7 @@ if have_pynitf:
         NitfDiffHandleSet.add_default_handle(ImageGdalDiff())
 
     # Alternative interface, access a nitf image segment as a GdalRasterImage
-    def _gdal_multi_band(self):
+    def _gdal_multi_band(self: NitfImageSegment) -> GdalMultiBand:
         """Access a NITF image as a GdalMultiBand."""
         if self.nitf_file is None:
             raise RuntimeError("Need nitf_file to get gdal_multi_band")
@@ -120,7 +129,7 @@ if have_pynitf:
         )
         return GdalMultiBand(f"NITF_IM:{segindex:d}:{self.nitf_file.file_name}")
 
-    def _gdal_raster_image(self):
+    def _gdal_raster_image(self: NitfImageSegment) -> GdalRasterImage:
         """Because it is pretty common to have a 1 band image, return
         the data as a raster image."""
         return _gdal_multi_band(self).gdal_raster_image(0)

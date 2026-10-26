@@ -14,7 +14,7 @@ class LandsatUpdate(geocal.VicarCartLabMultifileSetup):
     right now we just populate this ourself.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         dname = "/bigdata/tllogan30/sentinel_GRI/l1c_vicar5par5x5/ortho_b8_corrected"
         # Note actual files have 7201, but this overlaps the next tile with 1 pixel, a
         # pretty standard cartlab convention
@@ -39,7 +39,7 @@ class LandsatUpdate(geocal.VicarCartLabMultifileSetup):
         num_per_deg_lon = int(round(x1 - x0))
 
         # Get offset relative to our reference tile for each file
-        d = []
+        d: list[tuple[int, int, str]] = []
         for fname in glob.glob(f"{dname}/*.vic"):
             m = re.match(
                 r"([ns])(\d+)([ew])(\d+)_gcp_15m_b8.vic", os.path.basename(fname)
@@ -49,7 +49,7 @@ class LandsatUpdate(geocal.VicarCartLabMultifileSetup):
                 lon = int(m[4]) * (1 if m[3] == "e" else -1)
                 loff = (lat - int(lat_ref)) * num_per_deg_lat
                 soff = (lon - int(lon_ref)) * num_per_deg_lon
-                d.append([loff, soff, fname])
+                d.append((loff, soff, fname))
 
         # Determine overall bounding box for map, and the add all the files
         # relative to that bounding box.

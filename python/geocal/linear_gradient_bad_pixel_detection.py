@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import numpy as np
 
 import geocal
@@ -48,13 +50,13 @@ class LinearGradientBadPixelDetection:
 
     def __init__(
         self,
-        window_size=7,
-        percentile=90.0,
-        thresh_fact=2,
-        nfail_thresh_percentage=75.0,
-        edge_handle=geocal.ARRAY_LOCAL_MEDIAN_TRUNCATE,
-        number_task=1,
-    ):
+        window_size: int = 7,
+        percentile: float = 90.0,
+        thresh_fact: float = 2,
+        nfail_thresh_percentage: float = 75.0,
+        edge_handle: int = geocal.ARRAY_LOCAL_MEDIAN_TRUNCATE,
+        number_task: int = 1,
+    ) -> None:
         self.window_size = window_size
         self.percentile = percentile
         self.thresh_fact = thresh_fact
@@ -62,7 +64,7 @@ class LinearGradientBadPixelDetection:
         self.edge_handle = edge_handle
         self.number_task = number_task
 
-    def bad_pixel_detection(self, img):
+    def bad_pixel_detection(self, img: np.ndarray) -> np.ndarray:
         """Take the given image as a 2d numpy array. Return a boolean array
         with a True value for bad pixels.
 
@@ -80,7 +82,7 @@ class LinearGradientBadPixelDetection:
             self.number_task,
         )
 
-    def _bad_pixel_detection_python(self, img):
+    def _bad_pixel_detection_python(self, img: np.ndarray) -> np.ndarray:
         """This is the original python implementation of this. This wasn't super slow,
         but this turns out to be a bottle neck so we moved this to C++ code. But leave
         the reference implementation here, since it makes it clearer what the C++ code

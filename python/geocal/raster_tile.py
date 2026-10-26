@@ -1,7 +1,14 @@
-from geocal_swig import RasterImageMultiBand, RasterImageTileIterator
+from __future__ import annotations
+
+from collections.abc import Iterator
+
+import numpy as np
+from geocal_swig import RasterImage, RasterImageMultiBand, RasterImageTileIterator
 
 
-def tile_iterator(data):
+def tile_iterator(
+    data: RasterImage | RasterImageMultiBand,
+) -> Iterator[RasterImageTileIterator]:
     """
     This gives a tile_iterator. This returns a RasterImageTileIterator
     that can be used to step through a file. See also read_iterator for
@@ -24,7 +31,7 @@ def tile_iterator(data):
         t.next()
 
 
-def read_iterator(data):
+def read_iterator(data: RasterImage | RasterImageMultiBand) -> Iterator[np.ndarray]:
     """
     This is similar to tile_iterator, but it is used as a short cut when
     all you want to do is read the tile given by tile_iterator. Instead

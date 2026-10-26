@@ -1,12 +1,16 @@
+from __future__ import annotations
+
 import bisect
 import os
 import re
 import subprocess
+from collections.abc import Iterable
+from typing import Any
 
 from geocal_swig import Time
 
 
-def pds_label_text(fname):
+def pds_label_text(fname: str | os.PathLike[str]) -> bytes:
     """While GDAL can read PDS format, it doesn't read most of the metadata.
     So this routine extracts out the front PDS metadata, which we could either
     process further, or store as a  "LBL" file (which is a detached header).
@@ -25,11 +29,11 @@ def pds_label_text(fname):
     return res
 
 
-def pds_label(fname):
+def pds_label(fname: str | os.PathLike[str]) -> dict[str, str]:
     """Read PDS data in and convert to a dict. Not sure how robust this is,
     we'll have to try this on a number of datasets and see what breaks."""
     txt = pds_label_text(fname)
-    res = {}
+    res: dict[str, str] = {}
     for ln in txt.split(b"\n"):
         m = re.match(rb"\s*(\^?\w+)\s*=(.+)*", ln)
         if m:
@@ -61,7 +65,9 @@ class SpiceKernelByTime:
     mro_create_json.ker
     """
 
-    def __init__(self, lbl_or_binary_file_list, kernel_file=None):
+    def __init__(
+        self, lbl_or_binary_file_list: Iterable[str], kernel_file: str | None = None
+    ) -> None:
         """Parse each PDS label file. Note that we assume the spice kernel is
         in the same directory as each PDS label.
 
@@ -73,15 +79,19 @@ class SpiceKernelByTime:
         We also support directly reading .bc or .bsp files, since SPICE seems
         to have dropped creating the .lbl files.
         """
-        self.data = []
+        # (start time et, end time et, kernel file name)
+        self.data: list[tuple[float, float, str]] = []
         for f in lbl_or_binary_file_list:
             ext = os.path.splitext(f)[1]
             if ext == ".lbl":
                 self.process_lbl(f)
-            elif ext == ".bsp":
-                self.process_bsp(f, kernel_file)
-            elif ext == ".bc":
-                self.process_bc(f, kernel_file)
+            elif ext in (".bsp", ".bc"):
+                if kernel_file is None:
+                    raise RuntimeError("Need kernel_file to read .bsp and .bc files")
+                if ext == ".bsp":
+                    self.process_bsp(f, kernel_file)
+                else:
+                    self.process_bc(f, kernel_file)
             else:
                 raise RuntimeError(f"Unrecognized file extension {ext}")
 
@@ -91,7 +101,7 @@ class SpiceKernelByTime:
         self.tend_et = [v[1] for v in self.data]
         self.kernel_file = [v[2] for v in self.data]
 
-    def process_lbl(self, f):
+    def process_lbl(self, f: str) -> None:
         d = pds_label(f)
         self.data.append(
             (
@@ -101,7 +111,7 @@ class SpiceKernelByTime:
             )
         )
 
-    def process_bsp(self, f, kernel_file):
+    def process_bsp(self, f: str, kernel_file: str) -> None:
         res = subprocess.run(["brief", f, kernel_file], check=True, capture_output=True)
         # From looking at the output, this is the string with start and
         # end time"
@@ -112,7 +122,7 @@ class SpiceKernelByTime:
         tend = Time.parse_time(tm_line[40:].decode("utf-8"))
         self.data.append((tstart.et, tend.et, os.path.abspath(f)))
 
-    def process_bc(self, f, kernel_file):
+    def process_bc(self, f: str, kernel_file: str) -> None:
         res = subprocess.run(
             ["ckbrief", f, kernel_file], check=True, capture_output=True
         )
@@ -127,16 +137,16 @@ class SpiceKernelByTime:
         )
         self.data.append((tstart.et, tend.et, os.path.abspath(f)))
 
-    def __getstate__(self):
+    def __getstate__(self) -> dict[str, Any]:
         return {"data": self.data}
 
-    def __setstate__(self, d):
+    def __setstate__(self, d: dict[str, Any]) -> None:
         self.data = d["data"]
         self.tstart_et = [v[0] for v in self.data]
         self.tend_et = [v[1] for v in self.data]
         self.kernel_file = [v[2] for v in self.data]
 
-    def kernel(self, tm):
+    def kernel(self, tm: Time) -> str:
         """Return the kernel covering the given time. If nothing
         matches, we raise a ValueError."""
         # Find largest value less than or equal to tm

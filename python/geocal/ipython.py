@@ -8,11 +8,18 @@
 
 # The interact gives a warning everytime we load it. Kind of annoying, so
 # turn off.
+from __future__ import annotations
+
+import typing
 import warnings
+from typing import Any
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
 import matplotlib.pyplot as plt
 from ipywidgets import interact
+
+if typing.TYPE_CHECKING:
+    from geocal_swig import IgcCollection, RasterImage, TiePointCollection
 
 try:
     # Use prettier plots, if available
@@ -23,12 +30,18 @@ except ImportError:
     pass
 
 
-def tie_point_display(tpcol, igccol, surface_image=None, ref_image=None, tpind=0):
+def tie_point_display(
+    tpcol: TiePointCollection,
+    igccol: IgcCollection,
+    surface_image: list[RasterImage] | None = None,
+    ref_image: RasterImage | None = None,
+    tpind: int = 0,
+) -> None:
     """This function is a simple wrapper around the tiepoint display
     routine, which allows some simple widget modifications.
     """
 
-    def tpdisp(scale=3, size="50", tpind="0"):
+    def tpdisp(scale: float = 3, size: str = "50", tpind: str = "0") -> None:
         plt.rcParams["figure.figsize"] = (6 * scale, 4 * scale)
         tp = tpcol[int(tpind)]
         tp.display(igccol, int(size), surface_image=surface_image, ref_image=ref_image)
@@ -52,10 +65,10 @@ def tie_point_display(tpcol, igccol, surface_image=None, ref_image=None, tpind=0
     interact(tpdisp, scale=3, size="50", tpind=str(tpind))
 
 
-def load_ipython_extension(ipython):
+def load_ipython_extension(ipython: Any) -> None:
     ipython.ex("from geocal.ipython import tie_point_display")
 
 
-def unload_ipython_extension(ipython):
+def unload_ipython_extension(ipython: Any) -> None:
     # Nothing to do here
     pass

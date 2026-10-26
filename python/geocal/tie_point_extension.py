@@ -53,7 +53,7 @@ def _tp_read_old_mspi_format(
     ingest old test cases, but is probably not of much use other than
     that. This is a simple ASCII format file, see the test example for
     examples of how this works."""
-    with open(filename, "r") as f:
+    with open(filename) as f:
         ln = f.readline()
         m = re.search(r"ground_loc(\d+)", ln)
         if m is None:
@@ -167,7 +167,7 @@ def _tp_display(
             plt.subplot(number_row, number_col, i + 1)
             plt.title(igc_coll.title(i))
             d = np.zeros((sz, sz))
-            plt.imshow(d, cmap=plt.cm.gray, vmin=-1, vmax=0, extent=(0, sz, 0, sz))  # type: ignore[attr-defined]
+            plt.imshow(d, cmap="gray", vmin=-1, vmax=0, extent=(0, sz, 0, sz))
         else:
             plt.subplot(number_row, number_col, i + 1)
             plt.title(igc_coll.title(i))
@@ -194,7 +194,7 @@ def _tp_display(
             ref_image.display(ic, sz)  # type: ignore[attr-defined]
         else:
             d = np.zeros((sz, sz))
-            plt.imshow(d, cmap=plt.cm.gray, vmin=-1, vmax=0, extent=(0, sz, 0, sz))  # type: ignore[attr-defined]
+            plt.imshow(d, cmap="gray", vmin=-1, vmax=0, extent=(0, sz, 0, sz))
     plt.tight_layout()
 
 

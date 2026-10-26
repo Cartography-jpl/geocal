@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 import re
 import shutil
@@ -19,7 +21,7 @@ class InLocalTarget(Target):
     file is used as input to multiple processes in a pipeline).
     """
 
-    def __init__(self, fname, local_directory):
+    def __init__(self, fname: str, local_directory: str | None) -> None:
         """Give a file, and local directory to copy and read the file from.
         Note that it is ok for local_directory to be None, in that case this
         acts the same as InFileTarget"""
@@ -30,7 +32,7 @@ class InLocalTarget(Target):
         else:
             self.lfname = self.fname
 
-    def prepare(self):
+    def prepare(self) -> None:
         """Do any work with the target needed to get the local_filename
         file ready."""
         if self.local_directory is None:
@@ -41,23 +43,23 @@ class InLocalTarget(Target):
                 ["rsync", "--copy-links", self.fname, self.lfname], check=True
             )
 
-    def exists(self):
+    def exists(self) -> bool:
         """Return true if the target exists already, false otherwise"""
         return os.path.exists(self.filename())
 
-    def error_exists(self):
+    def error_exists(self) -> bool:
         """Return true if an error version of the output exists."""
         return os.path.exists(self.filename() + ".error")
 
-    def filename(self):
+    def filename(self) -> str:
         """The real, permanent name of the file."""
         return self.fname
 
-    def local_filename(self):
+    def local_filename(self) -> str:
         """The working, local name of the file."""
         return self.lfname
 
-    def remove(self):
+    def remove(self) -> None:
         if self.filename() != self.local_filename():
             self.silent_remove(self.local_filename())
 
@@ -76,7 +78,12 @@ class OutLocalTarget(Target):
     On finish, we copy the file from it local copy to it final copy.
     """
 
-    def __init__(self, fname, local_directory, generating_extension=".generating"):
+    def __init__(
+        self,
+        fname: str,
+        local_directory: str | None,
+        generating_extension: str = ".generating",
+    ) -> None:
         """Give a file, and local directory to write the file to and copy to
         the final location. Note that it is ok for local_directory to be
         None, in that case this acts the same as OutFileTarget"""
@@ -89,29 +96,29 @@ class OutLocalTarget(Target):
             self.lfname = self.fname
         makedirs_p(os.path.dirname(self.lfname))
 
-    def exists(self):
+    def exists(self) -> bool:
         """Return true if the target exists already, false otherwise"""
         return os.path.exists(self.filename())
 
-    def error_exists(self):
+    def error_exists(self) -> bool:
         """Return true if an error version of the output exists."""
         return os.path.exists(self.filename() + ".error")
 
-    def filename(self):
+    def filename(self) -> str:
         """The real, permanent name of the file."""
         return self.fname
 
-    def local_filename(self):
+    def local_filename(self) -> str:
         """The working, local name of the file."""
         return self.lfname + self.generating_extension
 
-    def remove(self):
+    def remove(self) -> None:
         self.silent_remove(self.fname)
         self.silent_remove(self.fname + ".error")
         self.silent_remove(self.local_filename())
         self.silent_remove(self.lfname)
 
-    def finish(self):
+    def finish(self) -> None:
         """Do any work with the Target needed when we are finished generating
         it."""
         if self.local_filename() != self.lfname:
@@ -121,7 +128,7 @@ class OutLocalTarget(Target):
         makedirs_p(os.path.dirname(self.fname))
         subprocess.run(["rsync", "--links", self.lfname, self.fname], check=True)
 
-    def finish_error(self):
+    def finish_error(self) -> None:
         """Do any work needed with Target when an error occurred in the
         generation of the file."""
         makedirs_p(os.path.dirname(self.fname))
@@ -155,38 +162,38 @@ class OutTempLocalTarget(Target):
     to be deleted.
     """
 
-    def __init__(self, fname, local_directory):
+    def __init__(self, fname: str, local_directory: str) -> None:
         self.fname = os.path.abspath(fname)
         self.lfname = os.path.abspath(local_directory + self.fname)
         makedirs_p(os.path.dirname(self.lfname))
 
-    def exists(self):
+    def exists(self) -> bool:
         """Return true if the target exists already, false otherwise. This
         checks the local version of the filename, not the file final version.
         I think that is what we want, but we can rethink the logic of this
         if needed."""
         return os.path.exists(self.lfname)
 
-    def error_exists(self):
+    def error_exists(self) -> bool:
         """Return true if an error version of the output exists."""
-        return os.path.exists(self.lfname() + ".error")
+        return os.path.exists(self.lfname + ".error")
 
-    def filename(self):
+    def filename(self) -> str:
         """The real, permanent name of the file. We never actually create
         this file."""
         return self.fname
 
-    def local_filename(self):
+    def local_filename(self) -> str:
         """The working, local name of the file."""
         return self.lfname + ".generating"
 
-    def remove(self):
+    def remove(self) -> None:
         self.silent_remove(self.fname)
         self.silent_remove(self.lfname + ".error")
         self.silent_remove(self.local_filename())
         self.silent_remove(self.lfname)
 
-    def remove_temporary(self):
+    def remove_temporary(self) -> None:
         """This immediately removes the temporary file. You don't need to
         call this usually, but it can be useful if you know you are done
         with the file and want to clean up the disk space. Otherwise you can
@@ -197,12 +204,12 @@ class OutTempLocalTarget(Target):
             except OSError:
                 pass  # Ok if this cleanup fails
 
-    def finish(self):
+    def finish(self) -> None:
         """Do any work with the Target needed when we are finished generating
         it."""
         os.rename(self.lfname + ".generating", self.lfname)
 
-    def finish_error(self):
+    def finish_error(self) -> None:
         """Do any work needed with Target when an error occurred in the
         generation of the file."""
         makedirs_p(os.path.dirname(self.fname))
@@ -219,7 +226,7 @@ class OutTempDirLocalTarget(Target):
     a directory. This is how the ray caster code works
     """
 
-    def __init__(self, dname, local_directory):
+    def __init__(self, dname: str, local_directory: str) -> None:
         self.dname = os.path.abspath(dname)
         self.lfname = os.path.abspath(local_directory + self.dname)
         self.gfname = (
@@ -237,34 +244,34 @@ class OutTempDirLocalTarget(Target):
         # This is really just a key used to uniquely identify this file
         self.fname = os.path.dirname(self.dname) + "_" + os.path.basename(self.dname)
 
-    def exists(self):
+    def exists(self) -> bool:
         """Return true if the target exists already, false otherwise. This
         checks the local version of the filename, not the file final version.
         I think that is what we want, but we can rethink the logic of this
         if needed."""
         return os.path.exists(self.lfname)
 
-    def error_exists(self):
+    def error_exists(self) -> bool:
         """Return true if an error version of the output exists."""
         return os.path.exists(self.lfname + ".error")
 
-    def filename(self):
+    def filename(self) -> str:
         """The real, permanent name of the file. We never actually create
         this file."""
         return self.fname
 
-    def local_filename(self):
+    def local_filename(self) -> str:
         """The working, local name of the file."""
         return self.gfname
 
-    def remove(self):
+    def remove(self) -> None:
         for f in (self.lfname, self.gfname, self.efname):
             try:
                 shutil.rmtree(f, True)
             except OSError:
                 pass  # Ok if this cleanup fails
 
-    def remove_temporary(self):
+    def remove_temporary(self) -> None:
         """This immediately removes the temporary file. You don't need to
         call this usually, but it can be useful if you know you are done
         with the file and want to clean up the disk space. Otherwise you can
@@ -275,13 +282,13 @@ class OutTempDirLocalTarget(Target):
             except OSError:
                 pass  # Ok if this cleanup fails
 
-    def finish(self):
+    def finish(self) -> None:
         """Do any work with the Target needed when we are finished generating
         it."""
         makedirs_p(os.path.dirname(self.lfname))
         os.rename(self.gfname, self.lfname)
 
-    def finish_error(self):
+    def finish_error(self) -> None:
         """Do any work needed with Target when an error occurred in the
         generation of the file."""
         makedirs_p(os.path.dirname(self.efname))
@@ -302,54 +309,57 @@ class GeneratedOutLocalTarget(Target):
     Target to handle this.
     """
 
-    def __init__(self, fname, local_directory, generating_name=None):
+    def __init__(
+        self,
+        fname: str,
+        local_directory: str | None,
+        generating_name: str | None = None,
+    ) -> None:
         """This can be fed the explicit name to use for the generating file.
         If not supplied, we replace whatever comes before the extension
         with "_generating"."""
         self.fname = os.path.abspath(fname)
         self.local_directory = local_directory
-        if self.local_directory is not None:
+        if local_directory is not None:
             self.lfname = os.path.abspath(local_directory + self.fname)
         else:
             self.lfname = self.fname
         makedirs_p(os.path.dirname(self.lfname))
-        self.generating_name = generating_name
-        if self.generating_name is None:
+        if generating_name is None:
             stem, ext = os.path.splitext(self.fname)
-            self.generating_name = stem + "_generating" + ext
-        if self.local_directory is not None:
-            self.generating_name = os.path.abspath(
-                local_directory + self.generating_name
-            )
+            generating_name = stem + "_generating" + ext
+        if local_directory is not None:
+            generating_name = os.path.abspath(local_directory + generating_name)
+        self.generating_name: str = generating_name
 
-    def exists(self):
+    def exists(self) -> bool:
         return os.path.exists(self.filename())
 
-    def error_exists(self):
+    def error_exists(self) -> bool:
         """Return true if an error version of the output exists."""
         return os.path.exists(self.filename() + ".error")
 
-    def filename(self):
+    def filename(self) -> str:
         return self.fname
 
-    def local_filename(self):
+    def local_filename(self) -> str:
         """The working, local name of the file."""
         return self.generating_name
 
-    def remove(self):
+    def remove(self) -> None:
         self.silent_remove(self.fname)
         self.silent_remove(self.fname + ".error")
         self.silent_remove(self.local_filename())
         self.silent_remove(self.lfname)
         self.silent_remove(self.lfname + ".error")
 
-    def finish(self):
+    def finish(self) -> None:
         os.rename(self.local_filename(), self.lfname)
         if self.local_directory:
             makedirs_p(os.path.dirname(self.fname))
             subprocess.run(["rsync", "--links", self.lfname, self.fname], check=True)
 
-    def finish_error(self):
+    def finish_error(self) -> None:
         makedirs_p(os.path.dirname(self.fname))
         try:
             os.rename(self.local_filename(), self.lfname + ".error")
@@ -375,7 +385,7 @@ class XmlLocalTarget(Target):
     local.
     """
 
-    def __init__(self, fname, local_directory):
+    def __init__(self, fname: str, local_directory: str | None) -> None:
         """Give a file, and local directory to copy and read the file from.
         Note that it is ok for local_directory to be None, in that case this
         acts the same as InFileTarget"""
@@ -386,7 +396,7 @@ class XmlLocalTarget(Target):
         else:
             self.lfname = self.fname
 
-    def prepare(self):
+    def prepare(self) -> None:
         """Do any work with the target needed to get the local_filename
         file ready."""
         if self.local_directory is None:
@@ -424,23 +434,23 @@ class XmlLocalTarget(Target):
         for f in fname:
             InLocalTarget(f, self.local_directory).prepare()
 
-    def exists(self):
+    def exists(self) -> bool:
         """Return true if the target exists already, false otherwise"""
         return os.path.exists(self.filename())
 
-    def error_exists(self):
+    def error_exists(self) -> bool:
         """Return true if an error version of the output exists."""
         return os.path.exists(self.filename() + ".error")
 
-    def filename(self):
+    def filename(self) -> str:
         """The real, permanent name of the file."""
         return self.fname
 
-    def local_filename(self):
+    def local_filename(self) -> str:
         """The working, local name of the file."""
         return self.lfname
 
-    def remove(self):
+    def remove(self) -> None:
         self.silent_remove(self.fname)
         # Note we don't remove support files. I'm not 100% sure this
         # is what we want, but I think we only want to remove the xml file.

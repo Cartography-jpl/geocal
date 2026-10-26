@@ -12,11 +12,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+from __future__ import annotations
+
 import os
 import shutil
 import tempfile
+import typing
+from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from functools import wraps
+from typing import Any
+
+if typing.TYPE_CHECKING:
+    from typing import Self
 
 
 class TempDir:
@@ -59,26 +67,28 @@ class TempDir:
     >>>     pass
     """
 
-    def __init__(self, suffix="", prefix="tmp", basedir=None):
+    def __init__(
+        self, suffix: str = "", prefix: str = "tmp", basedir: str | None = None
+    ) -> None:
         self.name = tempfile.mkdtemp(suffix=suffix, prefix=prefix, dir=basedir)
 
-    def __del__(self):
+    def __del__(self) -> None:
         if "name" in self.__dict__:
             self.__exit__(None, None, None)
 
-    def __enter__(self):
+    def __enter__(self) -> Self:
         return self
 
-    def __exit__(self, *errstuff):
+    def __exit__(self, *errstuff: object) -> None:
         return self.dissolve()
 
-    def dissolve(self):
+    def dissolve(self) -> None:
         """remove all files and directories created within the tempdir"""
         if self.name:
             shutil.rmtree(self.name)
         self.name = ""
 
-    def __str__(self):
+    def __str__(self) -> str:
         if self.name:
             return f"temporary directory at: {self.name}"
         else:
@@ -86,7 +96,7 @@ class TempDir:
 
 
 @contextmanager
-def in_tempdir(*args, **kwargs):
+def in_tempdir(*args: Any, **kwargs: Any) -> Iterator[TempDir]:
     """Create a temporary directory and change to it."""
     old_path = os.getcwd()
     try:
@@ -97,14 +107,16 @@ def in_tempdir(*args, **kwargs):
         os.chdir(old_path)
 
 
-def run_in_tempdir(*args, **kwargs):
+def run_in_tempdir(
+    *args: Any, **kwargs: Any
+) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
     """Make a function execute in a new tempdir.
     Any time the function is called, a new tempdir is created and destroyed.
     """
 
-    def change_dird(fnc):
+    def change_dird(fnc: Callable[..., Any]) -> Callable[..., Any]:
         @wraps(fnc)
-        def wrapper(*funcargs, **funckwargs):
+        def wrapper(*funcargs: Any, **funckwargs: Any) -> Any:
             with in_tempdir(*args, **kwargs):
                 return fnc(*funcargs, **funckwargs)
 

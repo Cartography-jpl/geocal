@@ -187,6 +187,8 @@ class VicarLiteFile(geocal_swig.generic_object.GenericObject):
         __init__(VicarLiteFile self, std::string const & Fname, int Number_line, int Number_sample, std::string const & Type) -> VicarLiteFile
 
         GeoCal::VicarLiteFile::VicarLiteFile
+        Create a new VICAR file with the given size.  
+
         """
         _vicar_lite_file.VicarLiteFile_swiginit(self, _vicar_lite_file.new_VicarLiteFile(*args))
     __swig_destroy__ = _vicar_lite_file.delete_VicarLiteFile

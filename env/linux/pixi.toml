@@ -11,6 +11,9 @@ configure = "/ssdata/smyth/geocal-repo/configure --prefix=$CONDA_PREFIX --enable
 [dependencies]
 afids = "*"
 afids-development-tools = "*"
+# Use the afids build of libblitz, which patches the blitz headers to fix
+# GCC compiler warnings (see afids-conda-package/libblitz).
+libblitz = { version = "1.0.2.*", build = "*_1000", channel = "fake-afids-conda-channel" }
 conda = "*"
 pandas-stubs = "*"
 # The committed SWIG wrappers in bindings/python/swig are generated with

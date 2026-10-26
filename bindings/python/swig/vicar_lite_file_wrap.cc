@@ -11190,6 +11190,8 @@ static PyMethodDef SwigMethods[] = {
 		"new_VicarLiteFile(std::string const & Fname, int Number_line, int Number_sample, std::string const & Type) -> VicarLiteFile\n"
 		"\n"
 		"GeoCal::VicarLiteFile::VicarLiteFile\n"
+		"Create a new VICAR file with the given size.  \n"
+		"\n"
 		""},
 	 { "delete_VicarLiteFile", _wrap_delete_VicarLiteFile, METH_O, "\n"
 		"delete_VicarLiteFile(VicarLiteFile self)\n"
@@ -11305,6 +11307,8 @@ static PyMethodDef SwigMethods[] = {
 		"VicarLiteFile__v_map_info(VicarLiteFile self, MapInfo V)\n"
 		"\n"
 		"GeoCal::VicarLiteFile::map_info\n"
+		"Set metadata for MapInfo.  \n"
+		"\n"
 		""},
 	 { "VicarLiteFile__v_rpc", _wrap_VicarLiteFile__v_rpc, METH_VARARGS, "\n"
 		"VicarLiteFile__v_rpc(VicarLiteFile self) -> Rpc\n"
@@ -11472,6 +11476,8 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"new_VicarLiteFile(std::string const & Fname, int Number_line, int Number_sample, std::string const & Type) -> VicarLiteFile\n"
 		"\n"
 		"GeoCal::VicarLiteFile::VicarLiteFile\n"
+		"Create a new VICAR file with the given size.  \n"
+		"\n"
 		""},
 	 { "delete_VicarLiteFile", _wrap_delete_VicarLiteFile, METH_O, "\n"
 		"delete_VicarLiteFile(VicarLiteFile self)\n"
@@ -11587,6 +11593,8 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"_v_map_info(VicarLiteFile self, MapInfo V)\n"
 		"\n"
 		"GeoCal::VicarLiteFile::map_info\n"
+		"Set metadata for MapInfo.  \n"
+		"\n"
 		""},
 	 { "VicarLiteFile__v_rpc", _wrap_VicarLiteFile__v_rpc, METH_VARARGS, "\n"
 		"_v_rpc(VicarLiteFile self) -> Rpc\n"

@@ -4,6 +4,8 @@
 #include <boost/asio/thread_pool.hpp>
 #include <boost/asio/post.hpp>
 #include <boost/shared_ptr.hpp>
+#include <mutex>
+#include <tuple>
 
 namespace GeoCal {
 /****************************************************************//**
@@ -41,17 +43,29 @@ public:
 /// larger than that.
 //-----------------------------------------------------------------------
   
-  template<typename ExecutionContext, class... Types> void add_task(ExecutionContext & ctx, Types... args) { boost::asio::post(*tpool, [&ctx, &args...](){ ctx(args...);});}
+  template<typename ExecutionContext, class... Types> void add_task(ExecutionContext & ctx, Types... args)
+  {
+    // The task runs after add_task returns, so we need to copy the
+    // arguments into the task rather than refer to them.
+    boost::asio::post(pool(), [&ctx, targs = std::make_tuple(args...)]() mutable
+		      { std::apply(ctx, targs); });
+  }
 
 //-----------------------------------------------------------------------
 /// Wait for all the tasks to finish.
 //-----------------------------------------------------------------------
 
-  void wait_tasks_finish() { tpool->join(); }
+  void wait_tasks_finish();
 private:
   ThreadPool(int Number_thread = default_number_thread);
+  boost::asio::thread_pool& pool();
   static ThreadPool the_thread_pool;
+  // Created when first needed, so we don't start threads unless we
+  // use them (e.g., this matters if python later forks the process).
+  // A boost::asio::thread_pool can't be reused after join, so
+  // wait_tasks_finish releases it and we create a new one as needed.
   boost::shared_ptr<boost::asio::thread_pool> tpool;
+  std::mutex tpool_mutex;
   int number_thread_;
 };
 }

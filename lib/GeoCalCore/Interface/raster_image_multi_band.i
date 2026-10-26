@@ -15,7 +15,7 @@ class RasterImageMultiBand : public GenericObject {
 public:
   %rename(raster_image) raster_image_ptr;
   %python_attribute(number_band, int)
-  virtual boost::shared_ptr<RasterImage> raster_image_ptr(int band) = 0;
+  virtual boost::shared_ptr<RasterImage> raster_image_ptr(int band) const = 0;
   blitz::Array<int, 3> read(int Lstart, int Sstart, int Nline, 
 				  int Nsamp) const; 
   blitz::Array<double, 3> read_double(int Lstart, int Sstart, int Nline, 

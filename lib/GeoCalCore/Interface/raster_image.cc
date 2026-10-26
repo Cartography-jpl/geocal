@@ -269,8 +269,6 @@ void GeoCal::copy(const RasterImage& Img_in, RasterImage& Img_out, bool Diagnost
     tnl = Tile_nline;
   if(Tile_nsamp > 0)
     tns = Tile_nsamp;
-  int ntile = int(ceil(double(Img_out.number_line()) / tnl) *
-		  ceil(double(Img_out.number_sample()) / tns));
   std::vector<int> buf;
   if(!Img_in.copy_needs_double())
     buf.resize(tnl * tns);
@@ -350,8 +348,6 @@ void GeoCal::fill_image
     tnl = Tile_nline;
   if(Tile_nsamp > 0)
     tns = Tile_nsamp;
-  int ntile = int(ceil(double(Img.number_line()) / tnl) *
-		  ceil(double(Img.number_sample()) / tns));
   for(int istart = 0; istart < Img.number_line();
       istart += tnl)
     for(int jstart = 0; jstart < Img.number_sample();

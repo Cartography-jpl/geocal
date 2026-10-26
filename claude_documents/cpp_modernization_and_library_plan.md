@@ -994,11 +994,13 @@ GeoCal-side rewrite of the flags). Then decide about `-Wunused-parameter`
 Unnamed parameters in virtual overrides are normal.
 
 ### 8.2 Real issues the compile check found (fix by hand, tiny)
-* `lib/GeoCalCore/Support/dir_change.h`: the **destructor throws**
-  (`-Wterminate`, which means `std::terminate` will be called). The
-  constructor also leaks `dirhandle` if `chdir` fails. Log or ignore the
-  error in the destructor, and close the handle on the constructor's error
-  path.
+* ~~`lib/GeoCalCore/Support/dir_change.h`: the destructor throws, and the
+  constructor leaks `dirhandle` if `chdir` fails.~~ **Done (2026-10-25)**:
+  the destructor reports the error to `std::cerr` instead, and the
+  constructor closes the handle. Other compiler warnings were fixed at the
+  same time; the only ones left in a gcc 15 `-Wall` build are Blitz++
+  `-Warray-bounds`/`-Wmaybe-uninitialized` false positives (rank-generic
+  slice and reduce code), plus two in SWIG generated boilerplate.
 * `MapInfo` has a user-declared copy constructor but an implicit copy
   assignment (`-Wdeprecated-copy`, seen through `srtm_dem.h` and
   `dem_map_info_offset.h`). Add `operator=` (or `= default` both).

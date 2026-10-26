@@ -13,7 +13,7 @@ namespace GeoCal {
 
 class CalcRasterMultiBand: public RasterImageMultiBandVariable {
 public:
-  virtual boost::shared_ptr<RasterImage> raster_image_ptr(int band);
+  virtual boost::shared_ptr<RasterImage> raster_image_ptr(int band) const;
 protected:
   %python_attribute2_nonconst(data, data_ptr, blitz::Array<double, 3>&)
   virtual std::string desc() const;

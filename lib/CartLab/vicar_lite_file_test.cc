@@ -71,7 +71,6 @@ void do_test()
 BOOST_AUTO_TEST_CASE(vicar_lite_file)
 {
   VicarLiteFileTest f(fname);
-  typedef std::pair<std::string, std::string> mt;
   BOOST_CHECK(VicarLiteFile::is_vicar_file(fname));
   BOOST_CHECK(!VicarLiteFile::is_vicar_file(fname2));
   BOOST_CHECK_EQUAL(f.number_band(), 1);

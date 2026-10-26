@@ -6145,7 +6145,7 @@ SwigDirector_CalcRasterMultiBand::SwigDirector_CalcRasterMultiBand(PyObject *sel
 SwigDirector_CalcRasterMultiBand::~SwigDirector_CalcRasterMultiBand() {
 }
 
-boost::shared_ptr< GeoCal::RasterImage > SwigDirector_CalcRasterMultiBand::raster_image_ptr(int band) {
+boost::shared_ptr< GeoCal::RasterImage > SwigDirector_CalcRasterMultiBand::raster_image_ptr(int band) const {
   void *swig_argp ;
   int swig_res = 0 ;
   
@@ -6981,8 +6981,8 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_raster_image(PyObject *self, PyOb
   int arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::CalcRasterMultiBand > tempshared1 ;
-  boost::shared_ptr< GeoCal::CalcRasterMultiBand > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand const > tempshared1 ;
+  boost::shared_ptr< GeoCal::CalcRasterMultiBand const > *smartarg1 = 0 ;
   int val2 ;
   int ecode2 = 0 ;
   PyObject *swig_obj[2] ;
@@ -6996,14 +6996,14 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_raster_image(PyObject *self, PyOb
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CalcRasterMultiBand_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_raster_image" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CalcRasterMultiBand_raster_image" "', argument " "1"" of type '" "GeoCal::CalcRasterMultiBand const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CalcRasterMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::CalcRasterMultiBand > * >(argp1);
       arg1 = const_cast< GeoCal::CalcRasterMultiBand * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::CalcRasterMultiBand > * >(argp1);
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::CalcRasterMultiBand > * >(argp1);
       arg1 = const_cast< GeoCal::CalcRasterMultiBand * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
@@ -7018,9 +7018,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_raster_image(PyObject *self, PyOb
     {
       try {
         if (upcall) {
-          result = (arg1)->GeoCal::CalcRasterMultiBand::raster_image_ptr(arg2);
+          result = ((GeoCal::CalcRasterMultiBand const *)arg1)->GeoCal::CalcRasterMultiBand::raster_image_ptr(arg2);
         } else {
-          result = (arg1)->raster_image_ptr(arg2);
+          result = ((GeoCal::CalcRasterMultiBand const *)arg1)->raster_image_ptr(arg2);
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail;

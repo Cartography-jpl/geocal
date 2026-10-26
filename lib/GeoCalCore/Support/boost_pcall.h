@@ -99,7 +99,7 @@ inline void boost_pcall_run(const std::string& Command,
 /// object. This is meant for short utility programs where something
 /// is much easier to do in python than in C++, e.g., boost_nitf_rsm.
 ///
-/// The Command can include arguments (e.g., boost_nitf_rsm to_nitf <fname>).
+/// The Command can include arguments (e.g., boost_nitf_rsm to_nitf \<fname\>).
 //-----------------------------------------------------------------------
 template<class In, class Out>
 boost::shared_ptr<Out> boost_pcall(const std::string& Command,

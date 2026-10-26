@@ -81,7 +81,9 @@ def test_tie_point(geocal_test_igc, geocal_test_tpcol):
     print(tpcol.data_frame2())
 
 
-@pytest.mark.skp
+@pytest.mark.skip(
+    reason="Only run by hand, this regenerates the simulated test data in geocal_test_data"
+)
 def test_generate_tie_point_collection(
     geocal_test_igc, geocal_test_tpcol, geocal_test_igc_sim_error
 ):

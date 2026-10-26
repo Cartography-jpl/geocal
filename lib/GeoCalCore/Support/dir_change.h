@@ -5,6 +5,7 @@
 #include <errno.h>
 #include <string.h>
 #include <fcntl.h>
+#include <iostream>
 #include "geocal_exception.h"
 
 namespace GeoCal {
@@ -26,20 +27,24 @@ public:
     }
     int status = chdir(newdir.c_str());
     if(status != 0) {
+      close(dirhandle);
       Exception e;
       e << "Could not change to directory: " << newdir;
       throw e;
     }
   }
+  // We can't throw an exception from a destructor (this calls
+  // std::terminate), so just report a failure to change back.
   ~DirChange() 
   {
     int status = fchdir(dirhandle);
-    if(status != 0) {
-      close(dirhandle);
-      throw Exception("Call to fchdir failed");
-    }
+    if(status != 0)
+      std::cerr << "DirChange: failed to change back to the original directory: "
+		<< strerror(errno) << "\n";
     close(dirhandle);
   }
+  DirChange(const DirChange&) = delete;
+  DirChange& operator=(const DirChange&) = delete;
 private:
   int dirhandle;
 };

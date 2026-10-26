@@ -8051,7 +8051,7 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_p_distort(PyObject *self, PyObject *a
     }
   }
   {
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,203,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {

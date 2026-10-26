@@ -85,6 +85,26 @@ fixtures and `require_*` skip markers now live in `python/tests/fixtures/`.
   - `geocal` passes mypy cleanly. Several wrong type hints were corrected;
     e.g. `RayIntersect2.ray_intersect` and `RayIntersect3.ray_intersect`
     are now documented as returning `TiePoint | None`.
+- `ThreadPool` fixes. These affected anything run with more than one
+  task, in particular `array_local_median` and
+  `linear_gradient_bad_pixel_detection` (and the python
+  `LinearGradientBadPixelDetection`) with `Number_task > 1`, which gave
+  wrong results:
+  - Tasks referred to the arguments of `add_task` after it returned
+    (dangling references), so tasks could process the wrong data.
+  - The pool couldn't be used again after `wait_tasks_finish`, so a second
+    use in the same process silently ran nothing.
+  - The pool's 10 threads were started when `libgeocal` was loaded, even if
+    never used. This made every python process using geocal
+    multi-threaded, which matters when multiprocessing forks. Threads are
+    now only started when the pool is used.
+- Development environment pins SWIG to 4.4, matching the committed
+  wrappers (it was pinned to `<4.4.0`, so regenerated wrappers used an
+  older SWIG than the rest).
+- Python test warnings cleaned up; `pytest.ini` now uses `--strict-markers`.
+  A misspelled `pytest.mark.skp` meant `test_generate_tie_point_collection`
+  ran wherever the geocal test data was available, overwriting the
+  simulated test data file.
 - Bug fixes found while adding type hints (`mypy --disallow-untyped-defs`):
   - Writing or reading a GLAS/GFM covariance with a separate error
     covariance for each post (a 3-D `errcov_c2`) didn't work: the shape

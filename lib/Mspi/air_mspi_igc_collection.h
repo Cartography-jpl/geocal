@@ -120,7 +120,7 @@ public:
 
 //-----------------------------------------------------------------------
 /// Return specific time table we are using, needed for some routines that
-/// depend on the details of the time table..
+/// depend on the details of the time table.
 //-----------------------------------------------------------------------
 
   boost::shared_ptr<TimeTable> time_table(int Index) const

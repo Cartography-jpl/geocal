@@ -23,7 +23,7 @@ public:
 ///   we just return 0.
 /// \param Scale Value to multiple underlying data by to get meters
 ///   (e.g., DEM might be in US survey foot).
-/// \param Nodata value. Treated like outside dem (so an error or
+/// \param No_data_value Nodata value. Treated like outside dem (so an error or
 ///   translated to 0.
 //-----------------------------------------------------------------------
 
@@ -64,7 +64,7 @@ protected:
 ///   we just return 0.
 /// \param Scale Value to multiple underlying data by to get meters
 ///   (e.g., DEM might be in US survey foot).
-/// \param Nodata value. Treated like outside dem (so an error or
+/// \param No_data_value Nodata value. Treated like outside dem (so an error or
 ///   translated to 0.
 //-----------------------------------------------------------------------
 

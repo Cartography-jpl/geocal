@@ -25,8 +25,8 @@ ThreadPool& ThreadPool::thread_pool()
 //-----------------------------------------------------------------------
 
 ThreadPool::ThreadPool(int Number_thread)
+  : number_thread_(Number_thread)
 {
-  number_thread(Number_thread);
 }
 
 //-----------------------------------------------------------------------
@@ -35,8 +35,38 @@ ThreadPool::ThreadPool(int Number_thread)
 
 void ThreadPool::number_thread(int V)
 {
+  std::lock_guard<std::mutex> lock(tpool_mutex);
   number_thread_ = V;
-  tpool = boost::make_shared<boost::asio::thread_pool>(V);
+  // Any existing pool is replaced with one of the new size when it is
+  // next needed.
+  tpool.reset();
+}
+
+//-----------------------------------------------------------------------
+/// Return the boost thread pool, creating it if needed.
+//-----------------------------------------------------------------------
+
+boost::asio::thread_pool& ThreadPool::pool()
+{
+  std::lock_guard<std::mutex> lock(tpool_mutex);
+  if(!tpool)
+    tpool = boost::make_shared<boost::asio::thread_pool>(number_thread_);
+  return *tpool;
+}
+
+//-----------------------------------------------------------------------
+/// Wait for all the tasks to finish.
+//-----------------------------------------------------------------------
+
+void ThreadPool::wait_tasks_finish()
+{
+  boost::shared_ptr<boost::asio::thread_pool> t;
+  {
+    std::lock_guard<std::mutex> lock(tpool_mutex);
+    t.swap(tpool);
+  }
+  if(t)
+    t->join();
 }
 
 void ThreadPool::print(std::ostream& Os) const

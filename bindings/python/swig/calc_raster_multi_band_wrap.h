@@ -21,7 +21,7 @@ public:
     SwigDirector_CalcRasterMultiBand(PyObject *self,int Nline,int Nsamp,int Nband,int Number_tile_line=-1,int Number_tile_sample=-1,int Number_tile=4);
     SwigDirector_CalcRasterMultiBand(PyObject *self,GeoCal::MapInfo const &Mi,int Nband,int Number_tile_line=-1,int Number_tile_sample=-1,int Number_tile=4);
     virtual ~SwigDirector_CalcRasterMultiBand();
-    virtual boost::shared_ptr< GeoCal::RasterImage > raster_image_ptr(int band);
+    virtual boost::shared_ptr< GeoCal::RasterImage > raster_image_ptr(int band) const;
     virtual std::string desc() const;
     virtual std::string descSwigPublic() const {
       return GeoCal::CalcRasterMultiBand::desc();

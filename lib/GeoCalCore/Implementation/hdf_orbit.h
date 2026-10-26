@@ -12,15 +12,15 @@ namespace GeoCal {
 
   The file should have the following fields:
 
-  <Base group>/Attitude/Time  - natt in size, time of attitude
+  \<Base group\>/Attitude/Time  - natt in size, time of attitude
       measurement as doubles.
-  <Base group>/Attitude/Quaternion - natt x 4 in size, quaternion
+  \<Base group\>/Attitude/Quaternion - natt x 4 in size, quaternion
       to take same coordinate system as Position (e.g., ECI)
-  <Base group>/Ephemeris/Time - neph in size, time of ephemeris
+  \<Base group\>/Ephemeris/Time - neph in size, time of ephemeris
       measurement as doubles
-  <Base group>/Ephemeris/Position - neph x 3 in size, position
+  \<Base group\>/Ephemeris/Position - neph x 3 in size, position
       measurement as doubles in meters
-  <Base group>/Ephemeris/Velocity - neph x 3 in size, velocity
+  \<Base group\>/Ephemeris/Velocity - neph x 3 in size, velocity
       measurement as doubles in meter/second
 
    Because it is useful, we allow the type of position measurement

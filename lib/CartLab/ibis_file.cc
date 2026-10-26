@@ -480,7 +480,9 @@ void IbisFile::set_column_type(int i, data_type dt)
     throw Exception("This shouldn't be able to happen");
   }
   
-  int status = IbisFile::IBISColumnSetw(ibis_fh(), "U_FORMAT",
+  // The VICAR C API takes char*, but doesn't modify the strings
+  int status = IbisFile::IBISColumnSetw(ibis_fh(),
+					const_cast<char*>("U_FORMAT"),
 					const_cast<char*>(val.c_str()),
 					i + 1);
   if(status != 1)

@@ -1,5 +1,5 @@
 #ifndef REFRACTION_SDP_H
-#define REFRACTION_SPD_H
+#define REFRACTION_SDP_H
 #include "refraction.h"
 #include <cmath>
 

@@ -20,7 +20,7 @@ using namespace boost::filesystem;
 /// so new.
 //-----------------------------------------------------------------------
 
-path GeoCal::lexically_normal(const path& p)
+boost::filesystem::path GeoCal::lexically_normal(const boost::filesystem::path& p)
 {
   const char dot = '.';
   const char separator = '/';

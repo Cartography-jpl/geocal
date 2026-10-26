@@ -17,7 +17,7 @@ public:
   RasterImageMultiBandVariable
   (const std::vector<boost::shared_ptr<RasterImage> >& Raster_image);
   void add_raster_image(const boost::shared_ptr<RasterImage>& Ri);
-  virtual boost::shared_ptr<RasterImage> raster_image_ptr(int band);
+  virtual boost::shared_ptr<RasterImage> raster_image_ptr(int band) const;
   %pickle_serialization();
 };
 }

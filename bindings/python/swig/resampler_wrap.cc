@@ -8440,7 +8440,7 @@ SWIGINTERN PyObject *_wrap_Resampler_resample_field__SWIG_0(PyObject *self, Py_s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,203,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8572,7 +8572,7 @@ SWIGINTERN PyObject *_wrap_Resampler_resample_field__SWIG_1(PyObject *self, Py_s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,203,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8696,7 +8696,7 @@ SWIGINTERN PyObject *_wrap_Resampler_resample_field__SWIG_2(PyObject *self, Py_s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,203,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8812,7 +8812,7 @@ SWIGINTERN PyObject *_wrap_Resampler_resample_field__SWIG_3(PyObject *self, Py_s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,203,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8920,7 +8920,7 @@ SWIGINTERN PyObject *_wrap_Resampler_resample_field__SWIG_4(PyObject *self, Py_s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,203,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -9020,7 +9020,7 @@ SWIGINTERN PyObject *_wrap_Resampler_resample_field__SWIG_5(PyObject *self, Py_s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,203,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -10050,7 +10050,7 @@ SWIGINTERN PyObject *_wrap_Resampler_map_values(PyObject *self, PyObject *args) 
   resultobj = SWIG_Py_Void();
   {
     PyObject *res;
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,203,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -10073,7 +10073,7 @@ SWIGINTERN PyObject *_wrap_Resampler_map_values(PyObject *self, PyObject *args) 
   }
   {
     PyObject *res;
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,203,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -10096,7 +10096,7 @@ SWIGINTERN PyObject *_wrap_Resampler_map_values(PyObject *self, PyObject *args) 
   }
   {
     PyObject *res;
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,203,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {

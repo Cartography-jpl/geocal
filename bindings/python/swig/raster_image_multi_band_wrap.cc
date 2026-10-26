@@ -6703,8 +6703,8 @@ SWIGINTERN PyObject *_wrap_RasterImageMultiBand_raster_image(PyObject *self, PyO
   int arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RasterImageMultiBand > tempshared1 ;
-  boost::shared_ptr< GeoCal::RasterImageMultiBand > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImageMultiBand const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RasterImageMultiBand const > *smartarg1 = 0 ;
   int val2 ;
   int ecode2 = 0 ;
   PyObject *swig_obj[2] ;
@@ -6716,14 +6716,14 @@ SWIGINTERN PyObject *_wrap_RasterImageMultiBand_raster_image(PyObject *self, PyO
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImageMultiBand_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImageMultiBand_raster_image" "', argument " "1"" of type '" "GeoCal::RasterImageMultiBand *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RasterImageMultiBand_raster_image" "', argument " "1"" of type '" "GeoCal::RasterImageMultiBand const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImageMultiBand > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImageMultiBand > * >(argp1);
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageMultiBand > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageMultiBand > * >(argp1);
       arg1 = const_cast< GeoCal::RasterImageMultiBand * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RasterImageMultiBand > * >(argp1);
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImageMultiBand > * >(argp1);
       arg1 = const_cast< GeoCal::RasterImageMultiBand * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
@@ -6734,7 +6734,7 @@ SWIGINTERN PyObject *_wrap_RasterImageMultiBand_raster_image(PyObject *self, PyO
   arg2 = static_cast< int >(val2);
   {
     try {
-      result = (arg1)->raster_image_ptr(arg2);
+      result = ((GeoCal::RasterImageMultiBand const *)arg1)->raster_image_ptr(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail;
     } catch (const PythonException& e) {
@@ -6840,7 +6840,7 @@ SWIGINTERN PyObject *_wrap_RasterImageMultiBand_read(PyObject *self, PyObject *a
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,203,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[3], stride[3];
     for(int i = 0; i < 3; ++i) {
@@ -6946,7 +6946,7 @@ SWIGINTERN PyObject *_wrap_RasterImageMultiBand_read_double(PyObject *self, PyOb
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,203,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[3], stride[3];
     for(int i = 0; i < 3; ++i) {

@@ -18,6 +18,23 @@ BOOST_AUTO_TEST_CASE(array_local_median_test)
   BOOST_CHECK_CLOSE(res(0,0), (data(0,1) + data(0,2)) / 2.0, 1e-2);
 }
 
+BOOST_AUTO_TEST_CASE(array_local_median_multiple_task)
+{
+  // Results should be the same using multiple tasks. Do this twice, to
+  // check that the ThreadPool can be reused.
+  blitz::Array<double, 2> data(100,100);
+  for(int i = 0; i < data.rows(); ++i)
+    for(int j = 0; j < data.cols(); ++j)
+      data(i,j) = (i * 37 + j * 11) % 23;
+  blitz::Array<double, 2> expect =
+    array_local_median(data, 3, 5, ARRAY_LOCAL_MEDIAN_TRUNCATE, 1);
+  for(int pass = 0; pass < 2; ++pass) {
+    blitz::Array<double, 2> res =
+      array_local_median(data, 3, 5, ARRAY_LOCAL_MEDIAN_TRUNCATE, 5);
+    BOOST_CHECK(blitz::all(res == expect));
+  }
+}
+
 BOOST_AUTO_TEST_CASE(linear_gradient_bad_pixel_detection_test)
 {
   int sz = 512;

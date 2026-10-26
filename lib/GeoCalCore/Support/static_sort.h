@@ -121,6 +121,7 @@ public:
 	 * Sorts the array/container arr.
 	 * \param  arr     The array/container to be sorted.
 	 * \tparam Compare The less than comparator.
+	 * \param  lt      The less than comparator.
 	 */
 	template <class Container, class Compare>
 	inline void operator() (Container &arr, Compare &lt) const
@@ -133,6 +134,7 @@ public:
 	 * Sorts the array arr.
 	 * \param  arr     The array to be sorted.
 	 * \tparam Compare The less than comparator.
+	 * \param  lt      The less than comparator.
 	 */
 	template <class T, class Compare>
 	inline void operator() (T *arr, Compare &lt) const
@@ -145,6 +147,7 @@ public:
 	 * Sorts the array/container arr.
 	 * \param  arr     The array/container to be sorted.
 	 * \tparam Compare The less than comparator.
+	 * \param  lt      The less than comparator.
 	 */
 	template <class Container, class Compare>
 	inline void operator() (Container &arr, const Compare &lt) const
@@ -157,6 +160,7 @@ public:
 	 * Sorts the array arr.
 	 * \param  arr     The array to be sorted.
 	 * \tparam Compare The less than comparator.
+	 * \param  lt      The less than comparator.
 	 */
 	template <class T, class Compare>
 	inline void operator() (T *arr, const Compare &lt) const
@@ -262,6 +266,7 @@ public:
 	 * Sorts the array/container arr.
 	 * \param  arr     The array/container to be sorted.
 	 * \tparam Compare The less than comparator.
+	 * \param  lt      The less than comparator.
 	 */
 	template <class Container, class Compare>
 	inline void operator() (Container &arr, Compare &lt) const
@@ -275,6 +280,7 @@ public:
 	 * Sorts the array arr.
 	 * \param  arr     The array to be sorted.
 	 * \tparam Compare The less than comparator.
+	 * \param  lt      The less than comparator.
 	 */
 	template <class T, class Compare>
 	inline void operator() (T *arr, Compare &lt) const
@@ -288,6 +294,7 @@ public:
 	 * Sorts the array/container arr.
 	 * \param  arr     The array/container to be sorted.
 	 * \tparam Compare The less than comparator.
+	 * \param  lt      The less than comparator.
 	 */
 	template <class Container, class Compare>
 	inline void operator() (Container &arr, const Compare &lt) const
@@ -301,6 +308,7 @@ public:
 	 * Sorts the array arr.
 	 * \param  arr     The array to be sorted.
 	 * \tparam Compare The less than comparator.
+	 * \param  lt      The less than comparator.
 	 */
 	template <class T, class Compare>
 	inline void operator() (T *arr, const Compare &lt) const

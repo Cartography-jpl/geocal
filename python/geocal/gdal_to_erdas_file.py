@@ -1,5 +1,6 @@
-from geocal_swig import GdalRasterImage
 import subprocess
+
+from geocal_swig import GdalRasterImage
 
 
 def gdal_to_erdas_file(infname, outfname):

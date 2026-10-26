@@ -1,13 +1,16 @@
 from __future__ import annotations
-from .docopt import docopt  # type: ignore
-from geocal_swig import VicarArgument  # type: ignore
-import sys
-import re
+
 import os
+import re
+import sys
 from typing import Any
 
+from geocal_swig import VicarArgument  # type: ignore
 
-class DocOptSimple(object):
+from .docopt import docopt  # type: ignore
+
+
+class DocOptSimple:
     """The package docopt (http://docopt.org) is a nice package,
     but it has the disadvantage that getting the options etc. from it
     uses a somewhat unnatural interface (e.g., --my-opt=n comes as
@@ -72,7 +75,7 @@ class DocOptSimple(object):
         return v
 
 
-class DocOptSimpleVicar(object):
+class DocOptSimpleVicar:
     """Make VicarArgument look like DocOptSimple."""
 
     def __init__(

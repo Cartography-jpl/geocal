@@ -1,15 +1,18 @@
 from __future__ import annotations
-from .vicar_interface import VicarInterface
-from .sqlite_shelf import write_shelve
+
+import os
+from pathlib import Path
+
+import numpy as np
 from geocal_swig import (  # type: ignore
     IbisFile,
-    VicarImageCoordinate,
     TiePointCollection,
+    VicarImageCoordinate,
     VicarLiteRasterImage,
 )
-import os
-import numpy as np
-from pathlib import Path
+
+from .sqlite_shelf import write_shelve
+from .vicar_interface import VicarInterface
 
 
 class _warp(VicarInterface):
@@ -59,14 +62,14 @@ local interp string
 local distort string
 local gridout string
 """
-        self.cmd = 'let img_in="%s"\n' % Path(img_in).name
-        self.cmd += 'let ref_img="%s"\n' % self.ref_img.name
-        self.cmd += 'let img_out="%s"\n' % self.img_out.name
+        self.cmd = f'let img_in="{Path(img_in).name}"\n'
+        self.cmd += f'let ref_img="{self.ref_img.name}"\n'
+        self.cmd += f'let img_out="{self.img_out.name}"\n'
         self.cmd += 'let distort="distort.ibis"\n'
-        self.cmd += "let nah=%d\n" % nah
-        self.cmd += "let nav=%d\n" % nav
+        self.cmd += f"let nah={nah:d}\n"
+        self.cmd += f"let nav={nav:d}\n"
         self.cmd += 'let polyfit="%s"\n' % (polyfit if polyfit else "")
-        self.cmd += 'let interp="%s"\n' % interp
+        self.cmd += f'let interp="{interp}"\n'
         self.cmd += 'let gridout="gridout"\n'
         self.cmd += """
 gtwarpxd inp=&img_in out=&img_out ref=&ref_img 'coverref interp=&interp +

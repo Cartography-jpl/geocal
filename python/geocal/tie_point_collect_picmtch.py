@@ -1,19 +1,21 @@
-from .vicar_interface import VicarInterface
-from .mmap_file import mmap_file
-from .misc import makedirs_p
+import os
+import tempfile
+from pathlib import Path
+
 from geocal_swig import (
     IbisFile,
-    ImageCoordinate,
-    VicarImageCoordinate,
-    TiePoint,
     IgcMapProjected,
-    VicarRasterImage,
+    ImageCoordinate,
+    TiePoint,
     TiePointCollection,
+    VicarImageCoordinate,
     VicarLiteRasterImage,
+    VicarRasterImage,
 )
-import tempfile
-import os
-from pathlib import Path
+
+from .misc import makedirs_p
+from .mmap_file import mmap_file
+from .vicar_interface import VicarInterface
 
 
 class _tpcol(VicarInterface):
@@ -91,25 +93,25 @@ local img2 string
 local ref_lowres string
 local ref_resf string
 """
-        self.cmd = "let toler = %f\n" % toler
-        self.cmd += 'let ref_lowres = "%s"\n' % ref_lowres
-        self.cmd += 'let inp = "%s"\n' % os.path.basename(str(img1_fname))
-        self.cmd += 'let ref = "%s"\n' % os.path.basename(str(img2_fname))
+        self.cmd = f"let toler = {toler:f}\n"
+        self.cmd += f'let ref_lowres = "{ref_lowres}"\n'
+        self.cmd += f'let inp = "{os.path.basename(str(img1_fname))}"\n'
+        self.cmd += f'let ref = "{os.path.basename(str(img2_fname))}"\n'
         # Not currently used. This is a parameter that appears in
         # gtpwarp, so we'll carry it. But for now this is just an empty
         # value.
         self.cmd += 'let ref_res = ""\n'
-        self.cmd += "let fftgrid1 = %d\n" % fftgrid[0]
-        self.cmd += "let fftgrid2 = %d\n" % fftgrid[1]
-        self.cmd += "let seed = %d\n" % seed
-        self.cmd += "let magmin = %f\n" % magmin
-        self.cmd += "let magnify = %f\n" % magnify
-        self.cmd += "let fftsize = %d\n" % fftsize
-        self.cmd += "let search = %d\n" % (fftsize if search is None else search)
-        self.cmd += "let autofit = %d\n" % autofit
-        self.cmd += "let redo = %d\n" % redo
-        self.cmd += "let ffthalf = %d\n" % ffthalf
-        self.cmd += "let thr_res = %f\n" % thr_res
+        self.cmd += f"let fftgrid1 = {fftgrid[0]:d}\n"
+        self.cmd += f"let fftgrid2 = {fftgrid[1]:d}\n"
+        self.cmd += f"let seed = {seed:d}\n"
+        self.cmd += f"let magmin = {magmin:f}\n"
+        self.cmd += f"let magnify = {magnify:f}\n"
+        self.cmd += f"let fftsize = {fftsize:d}\n"
+        self.cmd += f"let search = {fftsize if search is None else search:d}\n"
+        self.cmd += f"let autofit = {autofit:d}\n"
+        self.cmd += f"let redo = {redo:d}\n"
+        self.cmd += f"let ffthalf = {ffthalf:d}\n"
+        self.cmd += f"let thr_res = {thr_res:f}\n"
         self.cmd += 'let out = "tpcol.ibis"\n'
         self.cmd += """
 let bigtoler = toler*4.0
@@ -205,7 +207,7 @@ end-if
         ]
 
 
-class TiePointCollectPicmtch(object):
+class TiePointCollectPicmtch:
     def __init__(
         self,
         igc_collection,
@@ -332,7 +334,7 @@ class TiePointCollectPicmtch(object):
     def _proj_img(self, index, mi, grid_spacing):
         igc = self.igc_collection.image_ground_connection(index)
         igc_proj = IgcMapProjected(mi, igc, grid_spacing, -1, False)
-        self.surface_image_fname[index] = self.run_dir_name + "/img%d_surf.img" % index
+        self.surface_image_fname[index] = self.run_dir_name + f"/img{index:d}_surf.img"
         out = VicarRasterImage(
             self.surface_image_fname[index], igc_proj.map_info, "HALF"
         )

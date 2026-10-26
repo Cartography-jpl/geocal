@@ -1,13 +1,13 @@
-import shutil
-import time
-import sys
 import os
+import shutil
+import sys
+import time
 import traceback
 from io import StringIO
 from threading import RLock
 
 
-class Task(object):
+class Task:
     """This class is a interface class describing a 'Task'. This is inspired
     by the Luigi package (see https://luigi.readthedocs.io/en/stable/index.html
     However we don't actually use the luigi packages, it turns out that we
@@ -37,7 +37,6 @@ class Task(object):
         Most tasks will produce output files (given by output). However, some
         tasks just calculate other tasks to run. For this second category, run
         can update what is returned by "run_after_tasks"'''
-        pass
 
     def tasks_to_run_after(self):
         """Return list of tasks to run after this one. May be calculated by
@@ -159,7 +158,7 @@ class Task(object):
             for f in self.output():
                 try:
                     f.finish_error()
-                except BaseException:
+                except BaseException:  # noqa: BLE001, S110
                     pass  # Ignore errors in cleaning up error
             fh = StringIO()
             traceback.print_exception(tp, v, tb, file=fh)
@@ -167,10 +166,10 @@ class Task(object):
             # For some reason, __traceback__ doesn't go through when called
             # by pool. Save this information
             e.print_exception_string = fh.getvalue()
-            raise e
+            raise
 
 
-class TaskRunner(object):
+class TaskRunner:
     """This is a helper class for Task that actually handled running it
     and the pipeline needed to create it."""
 
@@ -235,7 +234,7 @@ class TaskRunner(object):
         """Find the next task that hasn't been run yet, but has all the
         required input ready."""
         with self.lock:
-            for k, t in self.tasks_to_run.items():
+            for t in self.tasks_to_run.values():
                 if t["state"] == "not_started" and self.requires_satisfied(t["task"]):
                     return t["task"]
             return None
@@ -255,7 +254,7 @@ class TaskRunner(object):
             self.tasks_to_run[e.task_unique_name]["exception"] = e
             self.error.append(e)
             print("======== Task failed =======")
-            print("Failure while trying to generate %s" % e.task_unique_name)
+            print(f"Failure while trying to generate {e.task_unique_name}")
             print("Error:")
             print(e.print_exception_string)
             print("======= Waiting for pipeline to finish =======")
@@ -275,7 +274,8 @@ class TaskRunner(object):
                 try:
                     res = task._run_with_finish()
                     self.run_callback(res)
-                except BaseException as e:
+                except BaseException as e:  # noqa: BLE001
+                    # Pass any error on, like a pool would
                     self.run_callback_error(e)
                 return
 
@@ -298,7 +298,7 @@ class TaskRunner(object):
             # something has finished since the last time through the
             # loop.
             self.task_has_finished = True
-            while not self.number_task_left() == 0:
+            while self.number_task_left() != 0:
                 with self.lock:
                     if self.task_has_finished:
                         self.task_has_finished = False
@@ -309,17 +309,18 @@ class TaskRunner(object):
                 print("======= Pipeline failed =======")
                 print("Summary of errors:")
                 for i, e in enumerate(self.error):
-                    print("Error %d" % (i + 1))
+                    print(f"Error {i + 1:d}")
                     print("------------------------")
-                    print("Failure while trying to generate %s" % e.task_unique_name)
+                    print(f"Failure while trying to generate {e.task_unique_name}")
                     print(e.print_exception_string)
                     print("------------------------")
             for task in self.task_list:
-                if task.local_dir is not None:
-                    # Leave in place if we end on an error and user
-                    # requests this not to be cleaned up
-                    if not self.skip_cleanup_on_error or len(self.error) == 0:
-                        shutil.rmtree(task.local_dir, True)
+                # Leave in place if we end on an error and user
+                # requests this not to be cleaned up
+                if task.local_dir is not None and (
+                    not self.skip_cleanup_on_error or len(self.error) == 0
+                ):
+                    shutil.rmtree(task.local_dir, True)
             if len(self.error) > 0:
                 raise RuntimeError("Pipeline failed")
 

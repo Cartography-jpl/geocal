@@ -1,6 +1,7 @@
 import textwrap
-import numpy as np
 import warnings
+
+import numpy as np
 from geocal_swig import Time
 
 try:
@@ -39,7 +40,9 @@ class GlasGfmNitfTimeWrapper:
         getattr(self.cscsdb, self.field_base + "_date")[key] = dt.replace("-", "")
         # Put in HHMMSS.nnnnnnnnn format and assign
         getattr(self.cscsdb, self.field_base + "_time")[key] = pynitf.NitfLiteral(
-            ("%016.9lf" % float(tm.replace("Z", "").replace(":", ""))).encode("utf-8")
+            ("{:016.9f}".format(float(tm.replace("Z", "").replace(":", "")))).encode(
+                "utf-8"
+            )
         )
 
 
@@ -58,13 +61,13 @@ class GlasGfmNitfTime2Wrapper:
 
     def __setitem__(self, key, val):
         # Split between date and time
-        dt, tm = str(val).split("T")
+        dt, _tm = str(val).split("T")
         # Remove "-" in date, giving a string like 20210203, and assign
         getattr(self.cscsdb, self.field_base + "_date")[key] = dt.replace("-", "")
         tmidnight = Time.parse_time(f"{dt}T00:00:00Z")
         # Time in seconds from midnight
         getattr(self.cscsdb, self.field_base + "_time")[key] = pynitf.NitfLiteral(
-            ("%015.9lf" % float(val - tmidnight)).encode("utf-8")
+            (f"{float(val - tmidnight):015.9f}").encode()
         )
 
 
@@ -148,7 +151,7 @@ if have_pynitf:
     )
 
 
-class GlasGfmCovariance(object):
+class GlasGfmCovariance:
     """This is the GLAS/GFM Covariance object. We map this to and
     from the CSCSDB DES. Right now this isn't a C++ implemenation
     (such as RsmIndirectCovarianceB), but rather than a class that
@@ -209,7 +212,7 @@ class GlasGfmCovariance(object):
 
 
 # TODO Implement GlasGfmIO
-class GlasGfmIO(object):
+class GlasGfmIO:
     """Interior orientation for covariance
 
     Note we haven't actually implemented this yet."""
@@ -234,7 +237,7 @@ class GlasGfmIO(object):
 
 
 # TODO Implement GlasGfmDirectCovariance
-class GlasGfmDirectCovariance(object):
+class GlasGfmDirectCovariance:
     """Direct covariance for covariance
 
     Note we haven't actually implemented this yet."""
@@ -259,7 +262,7 @@ class GlasGfmDirectCovariance(object):
 
 
 # Implement GlasGfmTS
-class GlasGfmTS(object):
+class GlasGfmTS:
     """Time sync for covariance
 
     Note we haven't actually implemented this yet."""
@@ -283,7 +286,7 @@ class GlasGfmTS(object):
         return "No TS"
 
 
-class GlasGfmUnmodeledError(object):
+class GlasGfmUnmodeledError:
     """Unmodeled error for covariance"""
 
     def __init__(self, cov=None, line_spdcf_id=None, sample_spdcf_id=None):
@@ -382,7 +385,7 @@ class GlasGfmCoreSetList(list):
         return res
 
 
-class GlasGfmCoreSet(object):
+class GlasGfmCoreSet:
     """Core set for covariance"""
 
     # Reference frames
@@ -393,12 +396,12 @@ class GlasGfmCoreSet(object):
     ECI = 5
     SENSOR_CENTERED_EARTH_FIXED = 6
 
-    def __init__(
-        self, ref_frame_position=ECF, ref_frame_attitude=ECF, group=GlasGfmGroupList()
-    ):
+    def __init__(self, ref_frame_position=ECF, ref_frame_attitude=ECF, group=None):
         self.ref_frame_position = ref_frame_position
         self.ref_frame_attitude = ref_frame_attitude
-        self.sensor_error_parameter_group = group
+        self.sensor_error_parameter_group = (
+            group if group is not None else GlasGfmGroupList()
+        )
 
     def _frame_id_to_name(self, i):
         if i == self.ECF:
@@ -440,7 +443,7 @@ class GlasGfmCoreSet(object):
 
 # TODO Implement PF handling
 # TODO Implement PL handling
-class GlasGfmGroup(object):
+class GlasGfmGroup:
     """A Independent Sensor Error Parameter Group"""
 
     POST_INTERP_NEAREST_NEIGHBOR = 0
@@ -449,7 +452,7 @@ class GlasGfmGroup(object):
     def __init__(
         self,
         corr_ref_t=Time.parse_time("2000-01-01T00:00:00Z"),
-        adjustable_parameter=[],
+        adjustable_parameter=None,
         basic_sub_alloc=True,
         errcov_c1=None,
         sr_spdcf_id=None,
@@ -466,7 +469,9 @@ class GlasGfmGroup(object):
         num_adj_parm x num_adj_parm or num_post x num_adj_parm x num_adj_parm.
         This changes the common_posts_cov flag"""
         self.corr_ref_t = corr_ref_t
-        self.adjustable_parameter = adjustable_parameter
+        self.adjustable_parameter = (
+            adjustable_parameter if adjustable_parameter is not None else []
+        )
         self.basic_sub_alloc = bool(basic_sub_alloc)
         self.post_sub_alloc = bool(post_sub_alloc)
         self.errcov_c1 = errcov_c1
@@ -561,7 +566,7 @@ class GlasGfmGroup(object):
                     cscsdb.errcov_c2_array[i, j, k] = self.errcov_c2[k, :, :]
 
     def __str__(self):
-        res = f"Date of last De-Correlation event: {str(self.corr_ref_t)}\n"
+        res = f"Date of last De-Correlation event: {self.corr_ref_t!s}\n"
         res += "Adjustable parameter id:\n"
         res += textwrap.indent(str(self.adjustable_parameter), "   ") + "\n"
         if self.basic_sub_alloc:
@@ -628,7 +633,7 @@ class GlasGfmSpdcfList(list):
         return res
 
 
-class GlasGfmSpdcf(object):
+class GlasGfmSpdcf:
     """This is a strictly positive definite correlation function. This
     describes the time behavior of the correlation between parameters
     at different times."""
@@ -834,8 +839,8 @@ class GlasGfmSpdcfComposite(GlasGfmSpdcf):
             raise RuntimeError("This shouldn't happen")
         cscsdb.spdcf_id[n] = self.id_number
         cscsdb.spdcf_p[n] = len(self.spdcf_list)
-        for j, s in enumerate(self.spdcf_list):
-            s._write_des(cscsdb, n, j)
+        for jind, s in enumerate(self.spdcf_list):
+            s._write_des(cscsdb, n, jind)
 
 
 def _glas_gfm_covariance(iseg):
@@ -843,7 +848,7 @@ def _glas_gfm_covariance(iseg):
     lv = iseg.idlvl
     f = iseg.nitf_file
     if f is None:
-        raise RuntimeError("Need to have nitf_file set for image segment level %d" % lv)
+        raise RuntimeError(f"Need to have nitf_file set for image segment level {lv:d}")
     possible = [
         d
         for d in f.des_segment
@@ -854,8 +859,7 @@ def _glas_gfm_covariance(iseg):
         return None
     if len(possible) > 1:
         raise RuntimeError(
-            "Found more than one possible covariance_cscsdb for image esegment level %d"
-            % lv
+            f"Found more than one possible covariance_cscsdb for image esegment level {lv:d}"
         )
     return GlasGfmCovariance().read_des(possible[0].des)
 
@@ -881,15 +885,15 @@ if have_pynitf:
     )
 
 __all__ = [
-    "GlasGfmCovariance",
-    "GlasGfmGroupList",
-    "GlasGfmGroup",
     "GlasGfmCoreSet",
     "GlasGfmCoreSetList",
-    "GlasGfmSpdcfList",
+    "GlasGfmCovariance",
+    "GlasGfmGroup",
+    "GlasGfmGroupList",
     "GlasGfmSpdcf",
-    "GlasGfmSpdcfCsm",
-    "GlasGfmSpdcfPiecwiseLinear",
-    "GlasGfmSpdcfDampedCosine",
     "GlasGfmSpdcfComposite",
+    "GlasGfmSpdcfCsm",
+    "GlasGfmSpdcfDampedCosine",
+    "GlasGfmSpdcfList",
+    "GlasGfmSpdcfPiecwiseLinear",
 ]

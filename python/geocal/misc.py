@@ -1,12 +1,14 @@
 from __future__ import annotations
-import os
+
 import errno
-import sys
+import os
 import re
-import geocal_swig  # type: ignore
 import subprocess
+import sys
 from pathlib import Path
 from typing import IO
+
+import geocal_swig  # type: ignore
 
 try:
     # This has a deprecation warning for python 3.7 and GDAL 2.4.2. We can't do
@@ -15,7 +17,7 @@ try:
 
     with warnings.catch_warnings():
         warnings.filterwarnings("ignore", category=DeprecationWarning)
-        import osgeo.gdal as gdal  # type: ignore
+        from osgeo import gdal  # type: ignore
     have_osgeo = True
 except ImportError:
     have_osgeo = False
@@ -120,7 +122,7 @@ def comment_remover(text: str) -> str:
 
     def replacer(mtch: re.Match) -> str:
         s = mtch.group(0)
-        if s.startswith("/") or s.startswith("#"):
+        if s.startswith(("/", "#")):
             return " "  # note: a space and not an empty string
         else:
             return s
@@ -248,12 +250,12 @@ def mars_fix_projection(
 
 
 __all__ = [
-    "makedirs_p",
     "cib01_data",
     "cib01_mapinfo",
-    "planet_mapinfo",
-    "pid_exists",
     "comment_remover",
-    "run_tee",
+    "makedirs_p",
     "mars_fix_projection",
+    "pid_exists",
+    "planet_mapinfo",
+    "run_tee",
 ]

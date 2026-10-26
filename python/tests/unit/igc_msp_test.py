@@ -1,6 +1,7 @@
-from fixtures.require_check import require_msp
-from geocal import IgcMsp, ImageCoordinate, distance, GdalRasterImage, Time
 import pytest
+from fixtures.require_check import require_msp
+
+from geocal import GdalRasterImage, IgcMsp, ImageCoordinate, Time, distance
 
 
 @require_msp

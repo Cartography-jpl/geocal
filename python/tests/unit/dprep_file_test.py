@@ -1,15 +1,16 @@
+import numpy as np
+
 from geocal import (
-    DprepEphemerisFile,
     DprepAttitudeFile,
+    DprepEphemerisFile,
     DprepOrbit,
-    rad_to_deg,
     KeplerOrbit,
+    SpiceHelper,
+    SpiceKeplerOrbit,
     Time,
     distance,
-    SpiceKeplerOrbit,
-    SpiceHelper,
+    rad_to_deg,
 )
-import numpy as np
 
 
 def test_dprep_ephemeris(unit_test_data):

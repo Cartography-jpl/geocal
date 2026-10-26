@@ -1,12 +1,13 @@
+import numpy as np
+
 from geocal import (
-    TiePoint,
-    TiePointCollection,
     ImageCoordinate,
     SimultaneousBundleAdjustment,
+    TiePoint,
+    TiePointCollection,
     lm_optimize,
     read_shelve,
 )
-import numpy as np
 
 # Note the test data igccol_rolling_shutter.xml is created in
 # igc_collection_extension_test.py, in case you need to regenerate it

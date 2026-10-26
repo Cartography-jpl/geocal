@@ -1,14 +1,16 @@
 from __future__ import annotations
-import numpy as np
-import matplotlib.cm as cm
-import matplotlib.colors as mcolors
-import struct
-from typing import Self
+
 import os
+import struct
 from types import TracebackType
+from typing import Self
+
+import matplotlib.colors as mcolors
+import numpy as np
+from matplotlib import cm
 
 
-class PlyFile(object):
+class PlyFile:
     """This is a simple class for writing basic Stanford PLY files. Note
     that there are more complete libraries such as RPly
     (http://w3.impa.br/~diego/software/rply/), but our currently needs are
@@ -64,10 +66,10 @@ class PlyFile(object):
                 h += "format binary_little_endian 1.0\n"
             else:
                 h += "format ascii 1.0\n"
-            h += """element vertex %d
+            h += f"""element vertex {v.shape[0]:d}
 property float x
 property float y
-property float z\n""" % v.shape[0]
+property float z\n"""
             if have_color:
                 h += """property uchar red
 property uchar green
@@ -102,7 +104,7 @@ property uchar alpha\n"""
                             end=" ",
                             file=fh,
                         )
-                    print("", file=fh)
+                    print(file=fh)
         self.is_closed = True
 
     def __enter__(self) -> Self:

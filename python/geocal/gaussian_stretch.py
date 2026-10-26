@@ -1,7 +1,8 @@
-from .vicar_interface import VicarInterface
-from .mmap_file import mmap_file
-from geocal_swig import VicarRasterImage
 import numpy as np
+from geocal_swig import VicarRasterImage
+
+from .mmap_file import mmap_file
+from .vicar_interface import VicarInterface
 
 
 class GaussianStretch(VicarInterface):

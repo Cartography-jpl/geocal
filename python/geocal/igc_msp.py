@@ -1,22 +1,24 @@
 from __future__ import annotations
+
+import os
+import re
+import typing
+from typing import Any
+
+import numpy as np
 from geocal_swig import (  # type: ignore
     CartesianFixed,
     CartesianFixedLookVector,
+    Dem,
     Ecr,
-    ImageGroundConnection,
-    SimpleDem,
-    distance,
-    ImageCoordinate,
     Geodetic,
     GroundCoordinate,
-    Dem,
+    ImageCoordinate,
+    ImageGroundConnection,
+    SimpleDem,
     Time,
+    distance,
 )
-import os
-import typing
-from typing import Any
-import numpy as np
-import re
 
 have_msp = False
 try:
@@ -119,7 +121,7 @@ class IgcMsp(ImageGroundConnection):
 
     def ground_coordinate_dem(self, ic: ImageCoordinate, dem: Dem) -> GroundCoordinate:
         if not isinstance(dem, SimpleDem):
-            raise RuntimeError(
+            raise TypeError(
                 "Right now, IgcMsp only works with constant DEMs for SimpleDem"
             )
         return self.ground_coordinate_approx_height(ic, dem.h)
@@ -245,7 +247,7 @@ class IgcMsp(ImageGroundConnection):
         If the corner_tol is > 0, then if we check the corners we compare against
         that tolerance. Similarly if distance_tol > 0, we check that tolerance.
         If either is <=0, we skip that check."""
-        desc = "file '%s' image id '%s' plugin '%s'" % (f.file_name, iid1, plugin)
+        desc = f"file '{f.file_name}' image id '{iid1}' plugin '{plugin}'"
         try:
             iseg = f.iseg_by_iid1(iid1)
             if len(iseg) == 0:
@@ -255,7 +257,7 @@ class IgcMsp(ImageGroundConnection):
                 print("More than one image id found in " + desc)
                 return False
             iseg = iseg[0]
-            segindx = [t for t, isg in enumerate(f.image_segment) if isg is iseg][0]
+            segindx = next(t for t, isg in enumerate(f.image_segment) if isg is iseg)
             try:
                 igc = cls(f.file_name, None, segindx, plugin, plugin)
             except RuntimeError:
@@ -280,10 +282,10 @@ class IgcMsp(ImageGroundConnection):
                 ic4 = igc.image_coordinate(gpt4)
                 nline = iseg.subheader.nrows
                 nsamp = iseg.subheader.ncols
-                print("ic1: ", ic1, " (Expected %d, %d)" % (0, 0))
-                print("ic2: ", ic2, " (Expected %d, %d)" % (0, nsamp))
-                print("ic3: ", ic3, " (Expected %d, %d)" % (nline, nsamp))
-                print("ic4: ", ic4, " (Expected %d, %d)" % (nline, 0))
+                print("ic1: ", ic1, f" (Expected {0:d}, {0:d})")
+                print("ic2: ", ic2, f" (Expected {0:d}, {nsamp:d})")
+                print("ic3: ", ic3, f" (Expected {nline:d}, {nsamp:d})")
+                print("ic4: ", ic4, f" (Expected {nline:d}, {0:d})")
                 gpt1_calc = igc.ground_coordinate_approx_height(
                     ImageCoordinate(0, 0), gpt1.height_reference_surface
                 )
@@ -300,7 +302,7 @@ class IgcMsp(ImageGroundConnection):
                 print("dist2: ", distance(gpt2_calc, gpt2), "m")
                 print("dist3: ", distance(gpt3_calc, gpt3), "m")
                 print("dist4: ", distance(gpt4_calc, gpt4), "m")
-                print("Image %d x %d" % (nline, nsamp))
+                print(f"Image {nline:d} x {nsamp:d}")
                 if corner_tol > 0:
                     if (
                         abs(ic1.line - 0) > corner_tol

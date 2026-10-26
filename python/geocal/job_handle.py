@@ -1,6 +1,7 @@
 import multiprocessing as mp
-import time
 import os
+import time
+from typing import ClassVar
 
 
 class JobHandle(mp.Process):
@@ -10,7 +11,7 @@ class JobHandle(mp.Process):
     notify other interested classes when a child finishs (to allow for
     make like dependencies between objects)."""
 
-    pool = dict()
+    pool: ClassVar[dict] = {}
     maxpool = mp.cpu_count()
     next_id = 0
 
@@ -66,7 +67,7 @@ class JobHandle(mp.Process):
 
     def process_is_done(self, process):
         """Called when a process we are watching is done"""
-        pass  # Default is do nothing.
+        # Default is do nothing.
 
     def notify_done(self):
         """Called to notify observers when we are done with this process."""
@@ -106,4 +107,4 @@ class JobDependent(JobHandle):
             self.process_is_done(None)
 
 
-__all__ = ["JobHandle", "JobDependent"]
+__all__ = ["JobDependent", "JobHandle"]

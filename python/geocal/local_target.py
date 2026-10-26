@@ -1,10 +1,11 @@
-from .target import Target
-from .misc import makedirs_p
 import os
-import subprocess
-import shutil
 import re
+import shutil
+import subprocess
 import xml.etree.ElementTree as ET
+
+from .misc import makedirs_p
+from .target import Target
 
 
 class InLocalTarget(Target):
@@ -129,7 +130,8 @@ class OutLocalTarget(Target):
             # Don't bother checking run, we just give up if rsync fails
             if self.local_directory is not None:
                 subprocess.run(
-                    ["rsync", "--links", self.lfname + ".error", self.fname + ".error"]
+                    ["rsync", "--links", self.lfname + ".error", self.fname + ".error"],
+                    check=False,
                 )
         except OSError:
             # File might not have been generated. If it is missing, just
@@ -354,7 +356,8 @@ class GeneratedOutLocalTarget(Target):
             if self.local_directory:
                 # Don't bother checking run, we just give up if rsync fails
                 subprocess.run(
-                    ["rsync", "--links", self.lfname + ".error", self.fname + ".error"]
+                    ["rsync", "--links", self.lfname + ".error", self.fname + ".error"],
+                    check=False,
                 )
         except OSError:
             # File might not have been generated. If it is missing, just
@@ -396,7 +399,7 @@ class XmlLocalTarget(Target):
 
         doc = ET.parse(self.fname)
         curdir = os.getcwd()
-        dirn, fb = os.path.split(self.fname)
+        dirn, _fb = os.path.split(self.fname)
         try:
             if dirn:
                 os.chdir(dirn)
@@ -446,10 +449,10 @@ class XmlLocalTarget(Target):
 
 
 __all__ = [
+    "GeneratedOutLocalTarget",
     "InLocalTarget",
     "OutLocalTarget",
-    "OutTempLocalTarget",
     "OutTempDirLocalTarget",
-    "GeneratedOutLocalTarget",
+    "OutTempLocalTarget",
     "XmlLocalTarget",
 ]

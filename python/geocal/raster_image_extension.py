@@ -1,7 +1,8 @@
 import geocal_swig
-import numpy as np
 import matplotlib.pyplot as plt
-from .shape_file import have_shape_file, ShapeLayer
+import numpy as np
+
+from .shape_file import ShapeLayer, have_shape_file
 
 # Add some useful functions to RasterImage
 
@@ -106,7 +107,7 @@ def _footprint_geometry(self, cconver=geocal_swig.GeodeticConverter()):
         geocal_swig.ImageCoordinate(self.number_line, self.number_sample),
         geocal_swig.ImageCoordinate(0, self.number_sample),
     ]:
-        x, y, z = cconver.convert_to_coordinate(self.ground_coordinate(pt))
+        x, y, _z = cconver.convert_to_coordinate(self.ground_coordinate(pt))
         corners.append((x, y))
     return ShapeLayer.polygon_2d(corners)
 

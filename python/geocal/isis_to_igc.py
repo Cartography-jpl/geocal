@@ -1,36 +1,38 @@
+import json
+import math
+import re
+
+import numpy as np
 from geocal_swig import (
-    GdalRasterImage,
-    SpiceKernelList,
-    SpicePlanetOrbit,
-    SubRasterImage,
-    ConstantSpacingTimeTable,
+    AttCsattb,
+    CalcRaster,
     ConstantSpacingFrameletTimeTable,
-    PlanetConstant,
-    PlanetSimpleDem,
-    OrbitListCache,
+    ConstantSpacingTimeTable,
+    GdalRasterImage,
+    GlasGfmCamera,
     Ipi,
     IpiImageGroundConnection,
-    Time,
-    PosCsephb,
-    AttCsattb,
-    OrbitDes,
-    GlasGfmCamera,
-    ScaleImage,
     NoVelocityAberration,
-    SubCamera,
-    CalcRaster,
+    OrbitDes,
+    OrbitListCache,
+    PlanetConstant,
+    PlanetSimpleDem,
+    PosCsephb,
+    ScaleImage,
     SpiceHelper,
+    SpiceKernelList,
+    SpicePlanetOrbit,
+    SubCamera,
+    SubRasterImage,
+    Time,
 )
+
 from .isis_support import read_kernel_from_isis
+from .mars_rsm import rsm_context, rsm_hirise
 from .priority_handle_set import GeoCalPriorityHandleSet
-from .spice_camera import ctx_camera, hirise_camera, lro_wac_camera, lro_nac_camera
-from .mars_rsm import rsm_hirise, rsm_context
-from .sqlite_shelf import write_shelve
+from .spice_camera import ctx_camera, hirise_camera, lro_nac_camera, lro_wac_camera
 from .spice_igc import SpiceIgc
-import json
-import re
-import math
-import numpy as np
+from .sqlite_shelf import write_shelve
 
 
 def _adjust_delta_sample(delta_sample, cam_nsamp):
@@ -379,8 +381,7 @@ class LroCombineEvenOdd(CalcRaster):
             even = frameindex % 2 == 1
             f_to_read = self.f_even if even else self.f_odd
             lend = (frameindex + 1) * self.framelet_size
-            if lend > lstart + self.data.shape[0]:
-                lend = lstart + self.data.shape[0]
+            lend = min(lend, lstart + self.data.shape[0])
             self.data[(ln - lstart) : (lend - lstart), :] = f_to_read.read_double(
                 ln, sstart, lend - ln, self.data.shape[1]
             )

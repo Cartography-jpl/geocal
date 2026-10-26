@@ -2,22 +2,24 @@ try:
     import pynitf
 except ImportError:
     pass
-from geocal import (
-    Time,
-    KeplerOrbit,
-    FrameCoordinate,
-    SimpleDem,
-    SensrbCamera,
-    AircraftOrbitData,
-    distance,
-    ImageCoordinate,
-    Geodetic,
-    OrbitDataImageGroundConnection,
-    IgcMsp,
-)
-from fixtures.require_check import require_pynitf, require_msp
-import numpy as np
 import io
+
+import numpy as np
+from fixtures.require_check import require_msp, require_pynitf
+
+from geocal import (
+    AircraftOrbitData,
+    FrameCoordinate,
+    Geodetic,
+    IgcMsp,
+    ImageCoordinate,
+    KeplerOrbit,
+    OrbitDataImageGroundConnection,
+    SensrbCamera,
+    SimpleDem,
+    Time,
+    distance,
+)
 
 
 def create_image_seg(f):

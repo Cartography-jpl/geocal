@@ -1,8 +1,10 @@
-from geocal import WorldView2Reflectance
+import os
+
 import numpy as np
 import numpy.testing as npt
 import pytest
-import os
+
+from geocal import WorldView2Reflectance
 
 
 def test_print(unit_test_data):

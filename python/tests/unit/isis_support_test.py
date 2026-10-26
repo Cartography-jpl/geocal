@@ -1,8 +1,10 @@
-from geocal import find_isis_kernel_file, read_kernel_from_isis, pds_to_isis
-from fixtures.require_check import require_isis
 import os
-import pytest
 from pathlib import Path
+
+import pytest
+from fixtures.require_check import require_isis
+
+from geocal import find_isis_kernel_file, pds_to_isis, read_kernel_from_isis
 
 
 @require_isis

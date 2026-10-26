@@ -1,6 +1,7 @@
-from geocal import IkonosReflectance
 import numpy as np
 import numpy.testing as npt
+
+from geocal import IkonosReflectance
 
 
 def test_print(unit_test_data):

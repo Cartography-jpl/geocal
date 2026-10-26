@@ -1,5 +1,6 @@
+from xml.etree.ElementTree import parse
+
 from geocal_swig import Rpc
-from xml.etree.cElementTree import parse
 
 
 def pleides_rpc(fname):
@@ -34,10 +35,10 @@ def pleides_rpc(fname):
     samp_num = []
     samp_den = []
     for i in range(20):
-        line_num.append(float(t.findtext("LINE_NUM_COEFF_%d" % (i + 1))))
-        line_den.append(float(t.findtext("LINE_DEN_COEFF_%d" % (i + 1))))
-        samp_num.append(float(t.findtext("SAMP_NUM_COEFF_%d" % (i + 1))))
-        samp_den.append(float(t.findtext("SAMP_DEN_COEFF_%d" % (i + 1))))
+        line_num.append(float(t.findtext(f"LINE_NUM_COEFF_{i + 1:d}")))
+        line_den.append(float(t.findtext(f"LINE_DEN_COEFF_{i + 1:d}")))
+        samp_num.append(float(t.findtext(f"SAMP_NUM_COEFF_{i + 1:d}")))
+        samp_den.append(float(t.findtext(f"SAMP_DEN_COEFF_{i + 1:d}")))
     rpc.line_numerator = line_num
     rpc.line_denominator = line_den
     rpc.sample_numerator = samp_num

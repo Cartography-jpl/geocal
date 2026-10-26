@@ -1,9 +1,11 @@
-from geocal import AirMspiIgc, ImageCoordinate
-from fixtures.require_check import require_raid, require_hdf5
+import os
 import pickle
+
 import numpy.testing as npt
 import pytest
-import os
+from fixtures.require_check import require_hdf5, require_raid
+
+from geocal import AirMspiIgc, ImageCoordinate
 
 test_data = "/raid3/test_data/AirMSPI_ER2_Hanford_GRP_ELLIPSOID_20130118_174900Z_286F_F01_V001.hdf"
 

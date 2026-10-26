@@ -1,5 +1,6 @@
-from geocal import vicar_to_numpy
 from fixtures.require_check import require_vicar, require_vicarb
+
+from geocal import vicar_to_numpy
 
 
 @require_vicarb

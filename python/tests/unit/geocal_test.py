@@ -1,5 +1,6 @@
-from geocal import Time, distance, Ecr, Geodetic
 import numpy.testing as npt
+
+from geocal import Ecr, Geodetic, Time, distance
 
 
 # Test time. Note that we check for pickling in the pickle_test.py
@@ -12,12 +13,12 @@ def test_time():
     npt.assert_almost_equal(t2 - (t1 + 100.0), 0)
     npt.assert_almost_equal(t2 - (100 + t1), 0)
     npt.assert_almost_equal((t2 - 100) - t1, 0)
-    assert t1 == t1
+    assert t1 == t1  # noqa: PLR0124
     assert t1 < t2
     assert t1 <= t2
     assert t2 > t1
     assert t2 >= t1
-    assert t2 <= t2
+    assert t2 <= t2  # noqa: PLR0124
 
 
 def test_eci_to_ecr():

@@ -1,7 +1,8 @@
-import geocal
 import glob
 import os
 import re
+
+import geocal
 
 
 # We tested this interactively

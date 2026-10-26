@@ -1,12 +1,13 @@
+from fixtures.require_check import require_vicar
+
 from geocal import (
-    VicarLiteDem,
-    VicarImageGroundConnection,
-    VicarLiteRasterImage,
     IgcMapProjected,
+    VicarImageGroundConnection,
+    VicarLiteDem,
+    VicarLiteRasterImage,
     VicarRasterImage,
     copy_raster,
 )
-from fixtures.require_check import require_vicar
 
 
 @require_vicar

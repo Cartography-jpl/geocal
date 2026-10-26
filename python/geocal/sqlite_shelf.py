@@ -9,16 +9,17 @@
 # This class gives a Shelve like interface to sqlite.
 
 from __future__ import annotations
-from collections.abc import MutableMapping as DictMixin
 
+import os
+import os.path
 import pickle
 import sqlite3
-import os.path
-import geocal_swig  # type: ignore
-import os
+from collections.abc import Iterator
+from collections.abc import MutableMapping as DictMixin
 from pathlib import Path
 from typing import Any
-from collections.abc import Iterator
+
+import geocal_swig  # type: ignore
 
 # Allow jsonpickle to be used, if available.
 try:
@@ -88,24 +89,24 @@ def read_shelve(fn: str | os.PathLike[str]) -> Any:
             os.chdir(dirn)
         if os.path.splitext(f)[1] == ".xml":
             if os.path.exists("extra_python_init.py"):
-                exec(open("extra_python_init.py").read())
+                exec(Path("extra_python_init.py").read_text())  # noqa: S102
             return geocal_swig.serialize_read_generic(fb)
         if os.path.splitext(f)[1] == ".bin":
             if os.path.exists("extra_python_init.py"):
-                exec(open("extra_python_init.py").read())
+                exec(Path("extra_python_init.py").read_text())  # noqa: S102
             return geocal_swig.serialize_read_binary_generic(fb)
         if os.path.splitext(f)[1] == ".json":
             if os.path.exists("extra_python_init.py"):
-                exec(open("extra_python_init.py").read())
+                exec(Path("extra_python_init.py").read_text())  # noqa: S102
             if have_jsonpickle:
-                return jsonpickle.decode(open(fb).read())
+                return jsonpickle.decode(Path(fb).read_text())
             else:
                 raise RuntimeError(
                     "Use of .json file requires jsonpickle package to be installed"
                 )
         t = SQLiteShelf(fb, "r")
         if "_extra_python_init" in list(t.keys()):
-            exec(t["_extra_python_init"])
+            exec(t["_extra_python_init"])  # noqa: S102
         key = f.split(":")[1]
         return t[key]
     finally:
@@ -280,4 +281,4 @@ class SQLiteShelf(DictMixin):
         raise RuntimeError("Not implemented yet")
 
 
-__all__ = ["read_shelve", "shelve_time_after", "write_shelve", "SQLiteShelf"]
+__all__ = ["SQLiteShelf", "read_shelve", "shelve_time_after", "write_shelve"]

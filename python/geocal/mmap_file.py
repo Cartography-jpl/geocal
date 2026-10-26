@@ -1,5 +1,5 @@
-from geocal_swig import VicarFile, VicarRasterImage
 import numpy as np
+from geocal_swig import VicarFile, VicarRasterImage
 
 
 def _new_memmap(version, args, kwargs):
@@ -8,8 +8,7 @@ def _new_memmap(version, args, kwargs):
     cls = memmap_wrap
     if cls.pickle_format_version() != version:
         raise RuntimeError(
-            "Class is expecting a pickled object with version number %d, but we found %d"
-            % (cls.pickle_format_version(), version)
+            f"Class is expecting a pickled object with version number {cls.pickle_format_version():d}, but we found {version:d}"
         )
     return memmap_wrap(*args, **kwargs)
 

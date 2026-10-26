@@ -1,8 +1,9 @@
-from geocal_swig import FeatureDetector
 from itertools import chain
 
+from geocal_swig import FeatureDetector
 
-class InterestPointGridRawWrap(object):
+
+class InterestPointGridRawWrap:
     """Wrapper around _interest_point_grid_raw that can be pickled.
     We can't directly use pool.map on _interest_point_grid_raw because
     python can't pickle a instance function"""
@@ -76,6 +77,6 @@ def interest_point_grid(
     return list(chain.from_iterable(res))
 
 
-setattr(FeatureDetector, "interest_point_grid", interest_point_grid)
+FeatureDetector.interest_point_grid = interest_point_grid
 
 __all__ = []

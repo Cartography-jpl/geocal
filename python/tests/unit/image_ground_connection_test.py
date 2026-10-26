@@ -1,16 +1,18 @@
-from geocal import (
-    have_shape_file,
-    VicarLiteRasterImage,
-    RpcImageGroundConnection,
-    VicarImageGroundConnection,
-    ImageCoordinate,
-    GdalImageGroundConnection,
-    SimpleDem,
-)
 import pickle
-from fixtures.require_check import require_serialize
+
 import numpy.testing as npt
 import pytest
+from fixtures.require_check import require_serialize
+
+from geocal import (
+    GdalImageGroundConnection,
+    ImageCoordinate,
+    RpcImageGroundConnection,
+    SimpleDem,
+    VicarImageGroundConnection,
+    VicarLiteRasterImage,
+    have_shape_file,
+)
 
 dem = SimpleDem()
 
@@ -61,6 +63,7 @@ def p_view_zenith(igc, ic):
     """Independent calculation of view angles, using pyorbital. Not
     identical to our calculation, but shoule be pretty close."""
     import datetime
+
     import pyorbital.orbital
 
     gp = igc.ground_coordinate(ic)

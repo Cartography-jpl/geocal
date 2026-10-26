@@ -1,5 +1,6 @@
-from .misc import makedirs_p
 import os
+
+from .misc import makedirs_p
 
 # This is python 3 only
 try:
@@ -9,7 +10,7 @@ except ImportError:
     pass
 
 
-class Target(object):
+class Target:
     """A Target is a generalization of a file, it has a permanent
     "filename" and a "local_filename".  Depending on the type of
     target, these file names may or may not be the same. A Target has
@@ -43,7 +44,6 @@ class Target(object):
         target will only delete possibly cached versions of these (leaving the
         original file in place), but the output targets will delete all the
         files."""
-        pass
 
     def filename(self):
         """The real, permanent name of the file."""
@@ -61,17 +61,14 @@ class Target(object):
     def prepare(self):
         """Do any work with the target needed to get the local_filename
         file ready."""
-        pass
 
     def finish(self):
         """Do any work with the Target needed when we are finished generating
         it."""
-        pass
 
     def finish_error(self):
         """Do any work needed with Target when an error occurred in the
         generation of the file."""
-        pass
 
     def silent_remove(self, fname):
         """This removes a file fname, but doesn't complain if the file
@@ -172,4 +169,4 @@ class OutFileTarget(Target):
             pass
 
 
-__all__ = ["Target", "InFileTarget", "LogFileTarget", "OutFileTarget"]
+__all__ = ["InFileTarget", "LogFileTarget", "OutFileTarget", "Target"]

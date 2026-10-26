@@ -1,18 +1,21 @@
 from __future__ import annotations
-from geocal_swig import (  # type: ignore
-    Geodetic,
-    IbisFile,
-    Quaternion_double,
-    QuaternionOrbitData,
-    ImageCoordinate,
-    Time,
-    GroundCoordinate,
-)
-from .vicar_interface import VicarInterface
-import numpy as np
+
 import math
 import os
 from pathlib import Path
+
+import numpy as np
+from geocal_swig import (  # type: ignore
+    Geodetic,
+    GroundCoordinate,
+    IbisFile,
+    ImageCoordinate,
+    Quaternion_double,
+    QuaternionOrbitData,
+    Time,
+)
+
+from .vicar_interface import VicarInterface
 
 # This wraps various VICAR routines to allow them to be called through
 # python
@@ -292,4 +295,4 @@ def sc2rpc(
     return t.res
 
 
-__all__ = ["scinterp", "sc2rpc"]
+__all__ = ["sc2rpc", "scinterp"]

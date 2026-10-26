@@ -1,19 +1,21 @@
-from geocal import (
-    makedirs_p,
-    cib01_mapinfo,
-    cib01_data,
-    planet_mapinfo,
-    comment_remover,
-    PlanetConstant,
-)
-from fixtures.require_check import (
-    require_serialize,
-    require_afids_data,
-    require_vicar,
-)
 import json
 import os
+
 import pytest
+from fixtures.require_check import (
+    require_afids_data,
+    require_serialize,
+    require_vicar,
+)
+
+from geocal import (
+    PlanetConstant,
+    cib01_data,
+    cib01_mapinfo,
+    comment_remover,
+    makedirs_p,
+    planet_mapinfo,
+)
 
 
 def test_makedirs_p(isolated_dir):

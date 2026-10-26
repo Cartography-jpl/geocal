@@ -1,35 +1,36 @@
-from builtins import range
+import os
+from multiprocessing import Pool
+
+import geocal_swig
+import numpy.testing as npt
+import pytest
 import scipy
 import scipy.optimize
+from fixtures.require_check import geocal_test_data
+
 from geocal import (
-    write_shelve,
-    read_shelve,
-    ImageCoordinate,
-    RollingShutterConstantTimeTable,
-    IgcCollectionRollingShutter,
+    Ecr,
     FrameCoordinate,
-    QuaternionCamera,
-    quat_rot,
-    SimpleDem,
-    VicarLiteDem,
+    Geodetic,
+    IgcArray,
+    IgcCollectionRollingShutter,
+    IgcSimulated,
+    ImageCoordinate,
+    KeplerOrbit,
     OrbitOffsetCorrection,
+    QuaternionCamera,
+    RollingShutterConstantTimeTable,
+    Rpc,
+    SimpleDem,
+    VicarImageGroundConnection,
+    VicarLiteDem,
     VicarLiteRasterImage,
     VicarRasterImage,
-    IgcSimulated,
-    KeplerOrbit,
-    Ecr,
-    IgcArray,
-    VicarImageGroundConnection,
-    Rpc,
     distance,
-    Geodetic,
+    quat_rot,
+    read_shelve,
+    write_shelve,
 )
-import geocal_swig
-from fixtures.require_check import geocal_test_data
-from multiprocessing import Pool
-import numpy.testing as npt
-import os
-import pytest
 
 # Some test data we have on pistol, along with a point of
 # "interesting features"
@@ -232,7 +233,7 @@ def create_image_data(index):
     f = VicarLiteRasterImage(raster_source)
     ras = IgcSimulated(igccol.image_ground_connection(index), f, -1, False)
     fout = VicarRasterImage(
-        geocal_test_data + "igc_rolling_shutter_image%d.img" % index,
+        geocal_test_data + f"igc_rolling_shutter_image{index:d}.img",
         "HALF",
         ras.number_line,
         ras.number_sample,
@@ -281,13 +282,13 @@ def create_igc_collection_rolling_shutter():
         t = tmin + 10 * i
         tspace = 1.0 / cam.number_line(0)
         tt = RollingShutterConstantTimeTable(t, t + cam.number_line(0) * tspace, tspace)
-        title = "Image %d" % (i + 1)
+        title = f"Image {i + 1:d}"
         igccol.add_image(None, tt, title)
     ic = ImageCoordinate(cam.number_line(0) / 2.0, cam.number_sample(0) / 2.0)
     igccol.determine_orbit_to_match(ic, 10)
     orb = OrbitOffsetCorrection(igccol.orbit)
     for i in range(10):
-        tm, fc = igccol.image_ground_connection(i).time_table.time(ic)
+        tm, _fc = igccol.image_ground_connection(i).time_table.time(ic)
         orb.insert_attitude_time_point(tm)
     igccol.orbit = orb
     write_shelve(geocal_test_data + "igccol_rolling_shutter_temp.xml", igccol)
@@ -297,7 +298,7 @@ def create_igc_collection_rolling_shutter():
         tt = igccol.image_ground_connection(i).time_table
         title = igccol.image_ground_connection(i).title
         ras = VicarLiteRasterImage(
-            geocal_test_data + "igc_rolling_shutter_image%d.img" % i
+            geocal_test_data + f"igc_rolling_shutter_image{i:d}.img"
         )
         igccol_final.add_image(ras, tt, title)
     write_shelve(geocal_test_data + "igccol_rolling_shutter.xml", igccol_final)
@@ -330,7 +331,7 @@ def test_igc_collection_rolling_shutter():
         t = tmin + 10 * i
         tspace = 1.0 / cam.number_line(0)
         tt = RollingShutterConstantTimeTable(t, t + cam.number_line(0) * tspace, tspace)
-        title = "Image %d" % (i + 1)
+        title = f"Image {i + 1:d}"
         igccol.add_image(None, tt, title)
     ic = ImageCoordinate(cam.number_line(0) / 2.0, cam.number_sample(0) / 2.0)
     igccol.determine_orbit_to_match(ic, 4)

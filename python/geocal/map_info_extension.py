@@ -1,6 +1,7 @@
-from geocal_swig import MapInfo, ImageCoordinate, Geodetic
 import math
+
 import numpy as np
+from geocal_swig import Geodetic, ImageCoordinate, MapInfo
 
 
 def _rotated_map_gc(self, gc1, gc2):

@@ -1,14 +1,15 @@
+from conftest import long_test
+from fixtures.require_check import require_mars_spice, require_spice
+
 from geocal import (
-    igc_mro_context,
     igc_mex_hrsc,
+    igc_mro_context,
     igc_mro_hirise,
     rsm_context,
-    rsm_hrsc,
     rsm_hirise,
+    rsm_hrsc,
     rsm_plot_diff,
 )
-from conftest import long_test
-from fixtures.require_check import require_spice, require_mars_spice
 
 
 @long_test

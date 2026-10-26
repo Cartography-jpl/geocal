@@ -1,17 +1,19 @@
 # Check for various things needed for tests
 
-from geocal import (
-    have_serialize_supported,
-    VicarFile,
-    SpiceHelper,
-    setup_isis,
-    have_msp,
-)
-import geocal_swig
 import os
-import sys
-import pytest
 import subprocess
+import sys
+
+import geocal_swig
+import pytest
+
+from geocal import (
+    SpiceHelper,
+    VicarFile,
+    have_msp,
+    have_serialize_supported,
+    setup_isis,
+)
 
 have_pynitf = False
 try:
@@ -23,10 +25,6 @@ try:
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
     pass
-
-# In any case, for python < 3 we can't use pynitf
-if sys.version_info < (3,):
-    have_pynitf = False
 
 # Data is way too big to check into source, so we put it here. This means
 # we have tests that can only be run on pistol. We may fold this into
@@ -61,17 +59,13 @@ def check_vicarb():
         return False
     # AFIDS uses python 3.5, so don't bother supporting python 2 with this code.
     # We just skip all the tests if we are using python 2.
-    if sys.version_info < (3, 5):
-        return False
     # We may have vicarb in our path, but not have actually set up AFIDS.
     # Will this can sort of work, but mostly this causes problems since
     # expected vicar procs aren't in the TAE_PATH. So say we  don't have
     # vicarb if we don't have AFIDS setup, even if we find it in our path.
     # We can revisit this if it becomes an issue, perhaps a refined
     # require_vicarb_and_afids or something like that.
-    if "AFIDSTOP" not in os.environ:
-        return False
-    return True
+    return "AFIDSTOP" in os.environ
 
 
 def check_isis():
@@ -179,7 +173,7 @@ require_vicar_gdalplugin = pytest.mark.skipif(
 
 require_rsm_sample_data = pytest.mark.skipif(
     not os.path.exists(rsm_sample_data),
-    reason="need to have RSM sample data (%s) available to run." % rsm_sample_data,
+    reason=f"need to have RSM sample data ({rsm_sample_data}) available to run.",
 )
 
 require_pynitf = pytest.mark.skipif(

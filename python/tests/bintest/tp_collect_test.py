@@ -1,6 +1,8 @@
-import geocal
 import subprocess
+
 from fixtures.require_check import require_serialize
+
+import geocal
 
 
 @require_serialize

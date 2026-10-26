@@ -1,6 +1,7 @@
-from geocal import Geoeye1Reflectance
 import numpy as np
 import numpy.testing as npt
+
+from geocal import Geoeye1Reflectance
 
 
 def test_print(unit_test_data):

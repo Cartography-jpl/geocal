@@ -1,7 +1,9 @@
 from __future__ import annotations
-from .instrument_reflectance import InstrumentReflectance
+
 import math
 import os
+
+from .instrument_reflectance import InstrumentReflectance
 
 
 class QuickBirdReflectance(InstrumentReflectance):
@@ -57,7 +59,8 @@ class QuickBirdReflectance(InstrumentReflectance):
 
     def readMetaData(self, filename: str | os.PathLike[str]) -> None:
         """Read metadata needed to set up the instrument"""
-        metafile = open(filename, "r")
+        with open(filename) as fh:
+            metafile = fh.readlines()
         isPanMetafile = False
 
         index = -1

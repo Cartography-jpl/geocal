@@ -1,13 +1,10 @@
 #!/usr/bin/env python
-import sys
 import os
+import sys
 
-f = open("all_bckgd_plots.txt")
 cmdstr = 'geneplot "inp=('
-inps = []
-for line in f:
-    inps.append(line.strip())
-f.close()
+with open("all_bckgd_plots.txt") as f:
+    inps = [line.strip() for line in f]
 for inp in inps:
     cmdstr = cmdstr + inp
     if inps.index(inp) == len(inps) - 1:

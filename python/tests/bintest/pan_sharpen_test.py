@@ -1,10 +1,11 @@
-import geocal
 from fixtures.require_check import (
     require_serialize,
     require_vicar_gdalplugin,
     require_vicarb,
 )
 from fixtures.vicar_func import vicarb_run
+
+import geocal
 
 
 @require_serialize
@@ -15,7 +16,7 @@ def test_pan_sharpen_map_projected(
 ):
     """Test the pan_sharpen PDF. This test is for already map projected data"""
     vicarb_run(
-        f'pan_sharpen inp=("{str(shiva_test_data / "post_pan_sub.img")}", "{str(shiva_test_data / "post_b1:8.img")}") out=ps1_b1.img, force_rpc=n'
+        f'pan_sharpen inp=("{shiva_test_data / "post_pan_sub.img"!s}", "{shiva_test_data / "post_b1:8.img"!s}") out=ps1_b1.img, force_rpc=n'
     )
     res = geocal.GdalMultiBand("ps1_b1:8.img")
     expected_dir = unit_test_data / "expected_results" / "pan_sharpen"
@@ -45,7 +46,7 @@ def test_pan_sharpen_map_projected(
 def test_pan_sharpen_rpc(vicarb_env, isolated_dir, unit_test_data):
     """Test the pan_sharpen PDF. This test is for data with an RPC"""
     vicarb_run(
-        f"pan_sharpen inp=({str(unit_test_data / 'pan.tif')}, {str(unit_test_data / 'mul.tif')}) out=ps2_b1.img"
+        f"pan_sharpen inp=({unit_test_data / 'pan.tif'!s}, {unit_test_data / 'mul.tif'!s}) out=ps2_b1.img"
     )
     res = geocal.GdalMultiBand("ps2_b1:8.img")
     expected_dir = unit_test_data / "expected_results" / "pan_sharpen"

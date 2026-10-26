@@ -1,7 +1,9 @@
+from pathlib import Path
+
 import numpy as np
 import numpy.testing as npt
 import pytest
-from pathlib import Path
+
 import geocal
 
 # Optional support for running matlab from python

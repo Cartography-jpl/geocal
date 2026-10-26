@@ -1,20 +1,23 @@
 from __future__ import annotations
-import numpy as np
-import math
-from .lm_optimize import lm_optimize
-from geocal_swig import (  # type: ignore
-    RayIntersect,
-    IgcCollection,
-    TiePoint,
-    CartesianFixed,
-    ImageCoordinate,
-)
-import scipy.sparse as sp
+
 import logging
-from typing import Sequence
+import math
+from collections.abc import Sequence
+
+import numpy as np
+import scipy.sparse as sp
+from geocal_swig import (  # type: ignore
+    CartesianFixed,
+    IgcCollection,
+    ImageCoordinate,
+    RayIntersect,
+    TiePoint,
+)
+
+from .lm_optimize import lm_optimize
 
 
-class RayIntersect2(object):
+class RayIntersect2:
     """This class is used to find the intersection of two or more rays
     on the surface. Note that in general the points don\'t actually
     intersect, this finds the values that are closest to the rays."""
@@ -62,8 +65,7 @@ class RayIntersect2(object):
                 self.sample_cf_pt = t
             if type(t) is not type(self.sample_cf_pt):
                 raise RuntimeError(
-                    "Got unexpected type from self.two_ray_intersect. Original sample point is %s and point returned is %s"
-                    % (self.sample_cf_pt, t)
+                    f"Got unexpected type from self.two_ray_intersect. Original sample point is {self.sample_cf_pt} and point returned is {t}"
                 )
             max_dist = max(abs(skew), max_dist)
             t = np.array([t.position[0], t.position[1], t.position[2]])
@@ -80,8 +82,7 @@ class RayIntersect2(object):
         for v in [max(v, max_dist * max_dist) for v in var]:
             if v > self.max_ground_covariance:
                 logging.getLogger("geocal-python.ray_intersect").debug(
-                    "Point with %d matches rejected by ray intersect, sqrt variance %f"
-                    % (cnt, math.sqrt(v))
+                    f"Point with {cnt:d} matches rejected by ray intersect, sqrt variance {math.sqrt(v):f}"
                 )
                 return None
         if self.sample_cf_pt is None:
@@ -112,7 +113,7 @@ class RayIntersect2(object):
         return ri.two_ray_intersect(ic1, ic2)
 
 
-class RayIntersect3(object):
+class RayIntersect3:
     """This class is used to find the intersection of two or more rays
     on the surface. Note that in general the points don\'t actually
     intersect, this finds the values that minimizes the residual."""
@@ -139,7 +140,7 @@ class RayIntersect3(object):
                     res[j + 1] = (ic.sample - icpred.sample) / self.tp.sample_sigma(i)
                 except RuntimeError as e:
                     if str(e) != "ImageGroundConnectionFailed":
-                        raise e
+                        raise
                     res[j] = 0
                     res[j + 1] = 0
                 j += 2
@@ -157,7 +158,7 @@ class RayIntersect3(object):
                     res[j + 1, :] = -jac[1, :] / self.tp.sample_sigma(i)
                 except RuntimeError as e:
                     if str(e) != "ImageGroundConnectionFailed":
-                        raise e
+                        raise
                     res[j, :] = 0
                     res[j + 1, :] = 0
                 j += 2

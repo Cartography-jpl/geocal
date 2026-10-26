@@ -1,8 +1,11 @@
-from geocal import Task, OutLocalTarget, TaskRunner, InLocalTarget
-from multiprocessing import Pool
-from fixtures.require_check import require_rsync
 import os
+from multiprocessing import Pool
+from pathlib import Path
+
 import pytest
+from fixtures.require_check import require_rsync
+
+from geocal import InLocalTarget, OutLocalTarget, Task, TaskRunner
 
 
 class TaskA(Task):
@@ -54,7 +57,7 @@ class TaskB(Task):
 
     def run(self):
         ft = InLocalTarget(self.fname_in, self.local_dir)
-        t = open(ft.local_filename(), "r").read()
+        t = Path(ft.local_filename()).read_text()
         for target in self.output_list:
             with open(target.local_filename(), "w") as fh:
                 print(t, file=fh)
@@ -85,11 +88,11 @@ class TaskC(Task):
 
     def run(self):
         ft = InLocalTarget("./output/a1.out", self.local_dir)
-        t1 = open(ft.local_filename(), "r").read()
+        t1 = Path(ft.local_filename()).read_text()
         ft = InLocalTarget("./output/b1.out", self.local_dir)
-        t2 = open(ft.local_filename(), "r").read()
+        t2 = Path(ft.local_filename()).read_text()
         ft = InLocalTarget("./output/b2.out", self.local_dir)
-        t3 = open(ft.local_filename(), "r").read()
+        t3 = Path(ft.local_filename()).read_text()
         for target in self.output_list:
             with open(target.local_filename(), "w") as fh:
                 print(t1, file=fh)
@@ -109,7 +112,7 @@ class TaskDFailed(Task):
         self.require_list = []
         self.output_list = [OutLocalTarget("./output/c.out", self.local_dir)]
         for i in range(20):
-            self.require_list.append(TaskA("./output/a%d.out" % i, self.local_dir))
+            self.require_list.append(TaskA(f"./output/a{i:d}.out", self.local_dir))
         self.require_list.append(TaskAFailed("./output/a_failed.out", self.local_dir))
         self.require_list.append(TaskAFailed("./output/a_failed2.out", self.local_dir))
 

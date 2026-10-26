@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # AFIDS/GeoCal documentation build configuration file, created by
 # sphinx-quickstart on Wed Jan 18 14:42:37 2012.
@@ -11,7 +10,6 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys, os
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the

@@ -1,9 +1,10 @@
-from geocal import IbisFile, VicarImageCoordinate
-import pytest
 import numpy as np
 import numpy.testing as npt
+import pytest
 from fixtures.require_check import require_vicar, require_vicarb
-from fixtures.vicar_func import vicarb_run, require_picmtch5
+from fixtures.vicar_func import require_picmtch5, vicarb_run
+
+from geocal import IbisFile, VicarImageCoordinate
 
 
 # Setup for picmtch5 tests. We do normal vicar setup, and then generate

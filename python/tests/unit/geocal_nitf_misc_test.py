@@ -1,9 +1,10 @@
+import numpy.testing as npt
+
 from geocal import (
     Time,
     geocal_time_to_nitf_date_second_field,
     nitf_date_second_field_to_geocal_time,
 )
-import numpy.testing as npt
 
 
 def test_time_conversion():

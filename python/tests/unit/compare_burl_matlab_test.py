@@ -2,22 +2,24 @@
 # matlab code. This set of tests lets us compare between the 2 codes to
 # make sure things are mostly consistent.
 
-from geocal import (
-    FrameCoordinate,
-    Quaternion_double,
-    CameraRationalPolyomial,
-    distance,
-    Geodetic,
-    Time,
-    SpiceHelper,
-    EciTod,
-    Ecr,
-    ScLookVector,
-    quaternion_to_array,
-)
 import os
+
 import numpy as np
 import pytest
+
+from geocal import (
+    CameraRationalPolyomial,
+    EciTod,
+    Ecr,
+    FrameCoordinate,
+    Geodetic,
+    Quaternion_double,
+    ScLookVector,
+    SpiceHelper,
+    Time,
+    distance,
+    quaternion_to_array,
+)
 
 # Optional support for running matlab from python
 try:
@@ -28,7 +30,7 @@ except ImportError:
     have_matlab = False
 
 
-class MatlabWrapper(object):
+class MatlabWrapper:
     """Light wrapper on Matlab object that adds checks of status of calls."""
 
     def __init__(self, diagnostic=False):
@@ -45,16 +47,18 @@ class MatlabWrapper(object):
         if self.mlab_v is None:
             self.mlab_v = Matlab()
             self.mlab_v.start()
-            self.mlab_v.run_code("addpath('%s')" % self.burl_path)
+            self.mlab_v.run_code(f"addpath('{self.burl_path}')")
         return self.mlab_v
 
     def run_code(self, v):
         if self.diagnostic:
-            print('Running matlab code "%s"' % v)
+            print(f'Running matlab code "{v}"')
         res = self.mlab.run_code(v)
         if not res["success"]:
             raise RuntimeError(
-                "Matlab code failed: %s\nMessage:\n%s" % (v, res["content"]["stdout"])
+                "Matlab code failed: {}\nMessage:\n{}".format(
+                    v, res["content"]["stdout"]
+                )
             )
         if self.diagnostic:
             print(res["content"]["stdout"])
@@ -66,7 +70,7 @@ class MatlabWrapper(object):
     def set_variable(self, v, val):
         res = self.mlab.set_variable(v, val)
         if not res["success"]:
-            raise RuntimeError("Matlab setting variable %s to %s failed" % (v, val))
+            raise RuntimeError(f"Matlab setting variable {v} to {val} failed")
         if self.diagnostic:
             self.print_variable(v)
 
@@ -78,7 +82,7 @@ class MatlabWrapper(object):
 mlab = MatlabWrapper(diagnostic=False)
 
 
-class BurlMatlabCamera(object):
+class BurlMatlabCamera:
     def __init__(self, nu, nv, xi, u0, v0, pld_q_c, kappa, kappa_inv):
         mlab.set_variable("nu", nu)
         mlab.set_variable("nv", nv)
@@ -137,8 +141,9 @@ class BurlMatlabCamera(object):
 def ecr_to_tod(gp, t, delta_ut1=0):
     mlab.set_variable("delta_ut1", delta_ut1)
     mlab.run_code(
-        "[tt, ut1] = utc_iso_time_string_to_tt_and_ut1('%s',delta_ut1)"
-        % str(t).replace("Z", "")
+        "[tt, ut1] = utc_iso_time_string_to_tt_and_ut1('{}',delta_ut1)".format(
+            str(t).replace("Z", "")
+        )
     )
     mlab.run_code("[j2000_r_tod, ecef_r_tod] = eos_coords(tt, ut1)")
     e = Ecr(gp)
@@ -154,8 +159,9 @@ def test_utc_iso_time():
     t = Time.parse_time("2016-10-08T11:48:12.3457Z")
     # The ISO time this takes is basically CCSDS without the trailing Z
     mlab.run_code(
-        "[tt, ut1] = utc_iso_time_string_to_tt_and_ut1('%s',0)"
-        % str(t).replace("Z", "")
+        "[tt, ut1] = utc_iso_time_string_to_tt_and_ut1('{}',0)".format(
+            str(t).replace("Z", "")
+        )
     )
     tt = mlab.get_variable("tt")
     # ut1 = mlab.get_variable('ut1')

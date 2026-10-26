@@ -1,8 +1,8 @@
 # Basic test of typing in geocal_swig. This is pretty minimal now, but checkpoint what we
 # have
 
-from geocal_swig import ImageCoordinate, VicarImageCoordinate
 import pytest
+from geocal_swig import ImageCoordinate, VicarImageCoordinate
 
 
 def test_temp() -> None:
@@ -10,7 +10,7 @@ def test_temp() -> None:
     # Should get a typing error here, wrong argument to constructor
     with pytest.raises(TypeError):
         ImageCoordinate("Foo", 20)
-    f = "hi"  # noqa: F841
+    f = "hi"
     # And here, assigning a float to a str variable
     f = ic.line  # noqa: F841
     # This should work, testing handling overloading correctly

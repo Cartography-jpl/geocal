@@ -1,6 +1,7 @@
-from geocal import WithParameter
 import numpy as np
 import numpy.testing as npt
+
+from geocal import WithParameter
 
 
 class WithParameterTest(WithParameter):

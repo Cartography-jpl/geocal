@@ -1,22 +1,23 @@
-from geocal import (
-    PiecewiseLinear,
-    OrbitPiecewiseCorrection,
-    TiePoint,
-    TiePointCollection,
-    SimultaneousBundleAdjustment,
-    lm_optimize,
-    read_shelve,
-    write_shelve,
-    distance,
-    vector_int,
-)
-from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib as mpl
 import matplotlib.pylab as plt
 import numpy as np
 import pytest
 import scipy.sparse as sp
+from matplotlib.backends.backend_pdf import PdfPages
 from scipy.sparse.linalg import spsolve
+
+from geocal import (
+    OrbitPiecewiseCorrection,
+    PiecewiseLinear,
+    SimultaneousBundleAdjustment,
+    TiePoint,
+    TiePointCollection,
+    distance,
+    lm_optimize,
+    read_shelve,
+    vector_int,
+    write_shelve,
+)
 
 # Needs the AirMSPI SBA data, which is only available on some systems. Tests
 # are skipped if not found.
@@ -78,7 +79,7 @@ def test_jac():
     sba = SimultaneousBundleAdjustment(igccol, tpcol2, dem, gcp_sigma=5)
     p0 = sba.parameter
     jac = sba.sba_jacobian(p0)
-    eps = np.zeros((p0.shape[0]))
+    eps = np.zeros(p0.shape[0])
     eps[:] = 10
     eps[sba.igc_coll_param_slice.start : (sba.igc_coll_param_slice.start + 6)] = 1e-4
     y0 = sba.sba_eq(p0)
@@ -200,7 +201,7 @@ def gcp_diff_plot(pdf, tpcol_original, tpcol_sba):
 
 
 def plot_cam(pdf, cmap, igc, tpcol, i):
-    vn = "View %d" % i
+    vn = f"View {i:d}"
     df = tpcol.data_frame(igc, i)
     df_gcp = df[df.is_gcp]
     df_tp = df[~df.is_gcp]
@@ -215,7 +216,7 @@ def plot_cam(pdf, cmap, igc, tpcol, i):
             vmin=-10,
             vmax=10,
         )
-        plt.title("%s after SBA Line residual, GCP only" % vn)
+        plt.title(f"{vn} after SBA Line residual, GCP only")
         plt.xlabel("Sample")
         plt.ylabel("Line")
         plt.colorbar()
@@ -230,7 +231,7 @@ def plot_cam(pdf, cmap, igc, tpcol, i):
             vmin=-10,
             vmax=10,
         )
-        plt.title("%s after SBA Sample residual, GCP only" % vn)
+        plt.title(f"{vn} after SBA Sample residual, GCP only")
         plt.xlabel("Sample")
         plt.ylabel("Line")
         plt.colorbar()
@@ -241,7 +242,7 @@ def plot_cam(pdf, cmap, igc, tpcol, i):
         plt.scatter(
             df_tp.line, df_tp.samp, c=df_tp.line_residual, cmap=cmap, vmin=-10, vmax=10
         )
-        plt.title("%s after SBA Line residual, TP only" % vn)
+        plt.title(f"{vn} after SBA Line residual, TP only")
         plt.xlabel("Sample")
         plt.ylabel("Line")
         plt.colorbar()
@@ -251,7 +252,7 @@ def plot_cam(pdf, cmap, igc, tpcol, i):
         plt.scatter(
             df_tp.line, df_tp.samp, c=df_tp.samp_residual, cmap=cmap, vmin=-10, vmax=10
         )
-        plt.title("%s after SBA Sample residual, TP only" % vn)
+        plt.title(f"{vn} after SBA Sample residual, TP only")
         plt.xlabel("Sample")
         plt.ylabel("Line")
         plt.colorbar()
@@ -262,7 +263,7 @@ def plot_cam(pdf, cmap, igc, tpcol, i):
     plt.ylim((-10, 10))
     plt.plot(df_tp.samp, df_tp.line_residual, "o", label="TP")
     plt.legend()
-    plt.title("%s after SBA Line residual" % vn)
+    plt.title(f"{vn} after SBA Line residual")
     plt.xlabel("Sample")
     plt.ylabel("Line residual")
     pdf.savefig()
@@ -272,7 +273,7 @@ def plot_cam(pdf, cmap, igc, tpcol, i):
     plt.ylim((-10, 10))
     plt.plot(df_tp.samp, df_tp.samp_residual, "o", label="TP")
     plt.legend()
-    plt.title("%s after SBA Sample residual" % vn)
+    plt.title(f"{vn} after SBA Sample residual")
     plt.xlabel("Sample")
     plt.ylabel("Sample residual")
     pdf.savefig()

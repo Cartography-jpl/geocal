@@ -1,5 +1,6 @@
-from geocal import QuickBirdReflectance
 import numpy as np
+
+from geocal import QuickBirdReflectance
 
 
 def test_print(unit_test_data):

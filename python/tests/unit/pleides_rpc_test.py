@@ -1,5 +1,6 @@
-from geocal import pleides_rpc, Rpc
 from numpy.testing import assert_almost_equal
+
+from geocal import Rpc, pleides_rpc
 
 
 def test_pleides_rpc(unit_test_data):

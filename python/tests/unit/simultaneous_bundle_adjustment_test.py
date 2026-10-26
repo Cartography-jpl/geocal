@@ -1,21 +1,23 @@
-from geocal import (
-    VicarLiteDem,
-    VicarImageGroundConnection,
-    VicarLiteRasterImage,
-    IgcArray,
-    TiePointCollect,
-    SimultaneousBundleAdjustment,
-    lm_optimize,
-    distance,
-    read_shelve,
-    write_shelve,
-)
-from pathlib import Path
 import logging
+import pickle
+from pathlib import Path
+
 import numpy as np
 import pytest
 import scipy.optimize
-import pickle
+
+from geocal import (
+    IgcArray,
+    SimultaneousBundleAdjustment,
+    TiePointCollect,
+    VicarImageGroundConnection,
+    VicarLiteDem,
+    VicarLiteRasterImage,
+    distance,
+    lm_optimize,
+    read_shelve,
+    write_shelve,
+)
 
 # This is really verbose, so we don't in general want to see this
 log_python = logging.getLogger("geocal-python")

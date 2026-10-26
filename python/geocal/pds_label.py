@@ -1,8 +1,9 @@
-import re
 import bisect
-from geocal_swig import Time
-import subprocess
 import os
+import re
+import subprocess
+
+from geocal_swig import Time
 
 
 def pds_label_text(fname):
@@ -28,7 +29,7 @@ def pds_label(fname):
     """Read PDS data in and convert to a dict. Not sure how robust this is,
     we'll have to try this on a number of datasets and see what breaks."""
     txt = pds_label_text(fname)
-    res = dict()
+    res = {}
     for ln in txt.split(b"\n"):
         m = re.match(rb"\s*(\^?\w+)\s*=(.+)*", ln)
         if m:
@@ -41,7 +42,7 @@ def pds_label(fname):
     return res
 
 
-class SpiceKernelByTime(object):
+class SpiceKernelByTime:
     """In some cases, we have a range of SPICE kernels with one for a range
     of times. These kernels have PDS labels associated with them that give
     the time ranges. So for example the mro spk kernels.
@@ -82,7 +83,7 @@ class SpiceKernelByTime(object):
             elif ext == ".bc":
                 self.process_bc(f, kernel_file)
             else:
-                raise RuntimeError("Unrecognized file extension %s" % ext)
+                raise RuntimeError(f"Unrecognized file extension {ext}")
 
         # Sort by start time
         self.data.sort(key=lambda v: v[0])
@@ -146,10 +147,8 @@ class SpiceKernelByTime(object):
         # Check that this matches the upper range (since there may be
         # gaps in the data)
         if tm_et > self.tend_et[i - 1]:
-            raise ValueError(
-                "Kernel file %s time %f" % (self.kernel_file[i - 1], tm_et)
-            )
+            raise ValueError(f"Kernel file {self.kernel_file[i - 1]} time {tm_et:f}")
         return self.kernel_file[i - 1]
 
 
-__all__ = ["pds_label_text", "pds_label", "SpiceKernelByTime"]
+__all__ = ["SpiceKernelByTime", "pds_label", "pds_label_text"]

@@ -1,16 +1,20 @@
 from __future__ import annotations
+
+import contextlib
 import os
 import shutil
-import tempfile
 import subprocess
+import tempfile
 import time
-import geocal_swig  # type: ignore
-from .misc import makedirs_p, run_tee
-import numpy as np
 from pathlib import Path
 
+import geocal_swig  # type: ignore
+import numpy as np
 
-class VicarInterface(object):
+from .misc import makedirs_p, run_tee
+
+
+class VicarInterface:
     """This provides a basic interface for calling a vicar routine
     from Python. This include several helper routines for building up
     and running a command."""
@@ -34,15 +38,15 @@ class VicarInterface(object):
         and everything set up, but before we actually run. This can be
         overridden by derived classes to put any special set up in place
         (e.g., copy other files)"""
-        pass
 
     def post_run(self) -> None:
         """This after the run, but before we have destroyed the
         temporary directory. This can be overridden by derived classes
         to put any special set up in place (e.g., copy other files)"""
-        pass
 
-    def build_command(self, arg_list: list[str], extra_text: list[str] = []) -> None:
+    def build_command(
+        self, arg_list: list[str], extra_text: list[str] | None = None
+    ) -> None:
         """This builds up a VICAR command by adding the given argument list
         to what is already in self.cmd. The arg_list is looked up in the
         attributes of this class. If a particular attribute is not found,
@@ -54,7 +58,8 @@ class VicarInterface(object):
         for a in arg_list:
             if a in self.__dict__:
                 res.append(self.argstring(a))
-        res.extend(extra_text)
+        if extra_text is not None:
+            res.extend(extra_text)
         if len(res) > 0:
             self.cmd += " " + " +\n".join(res) + "\n"
 
@@ -68,9 +73,7 @@ class VicarInterface(object):
                 arg2 = [str(x) for x in self.__dict__[arg]]
             if len(arg2) == 0:
                 return ""
-            if isinstance(self.__dict__[arg][0], int) or isinstance(
-                self.__dict__[arg][0], float
-            ):
+            if isinstance(self.__dict__[arg][0], (int, float)):
                 res = arg + "="
                 is_string = False
             else:
@@ -81,9 +84,7 @@ class VicarInterface(object):
             else:
                 res += "(" + ",".join(arg2) + ")"
         else:
-            if isinstance(self.__dict__[arg], int) or isinstance(
-                self.__dict__[arg], float
-            ):
+            if isinstance(self.__dict__[arg], (int, float)):
                 res = arg + "="
                 is_string = False
             else:
@@ -181,27 +182,28 @@ class VicarInterface(object):
             #    os.mkdir(f)
             with open("tmppdf.pdf", "w") as f:
                 f.write(
-                    """procedure
-%s
+                    f"""procedure
+{self.before_body}
 body
-%s
+{self.cmd}
 
 end-proc
 """
-                    % (self.before_body, self.cmd)
                 )
 
             self.pre_run()
             self.run_out = None
             try:
-                fh = None
-                if self.log_file:
-                    fh = open(self.log_file, "w")
-                self.run_out = run_tee(
-                    ["vicarb", "tmppdf"],
-                    out_fh=fh,
-                    quiet=(not self.debug and not self.print_output),
-                )
+                with (
+                    open(self.log_file, "w")
+                    if self.log_file
+                    else contextlib.nullcontext()
+                ) as fh:
+                    self.run_out = run_tee(
+                        ["vicarb", "tmppdf"],
+                        out_fh=fh,
+                        quiet=(not self.debug and not self.print_output),
+                    )
             except subprocess.CalledProcessError:
                 print("Vicar call failed. Log of VICAR:")
                 if self.run_out:
@@ -214,11 +216,13 @@ end-proc
         finally:
             if curdir:
                 os.chdir(curdir)
-            if self.force_cleanup or (
-                successfully_done and d and not self.keep_run_dir and not self.debug
-            ):
-                if d is not None:
-                    shutil.rmtree(d)
+            if (
+                self.force_cleanup
+                or (
+                    successfully_done and d and not self.keep_run_dir and not self.debug
+                )
+            ) and d is not None:
+                shutil.rmtree(d)
         if self.timing:
             print("Done with " + self.title + ". Time: ", time.time() - time_start)
 

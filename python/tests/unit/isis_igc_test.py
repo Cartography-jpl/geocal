@@ -1,6 +1,7 @@
-from geocal import pds_to_isis, IsisIgc
-from fixtures.require_check import require_isis
 import pytest
+from fixtures.require_check import require_isis
+
+from geocal import IsisIgc, pds_to_isis
 
 
 @pytest.mark.long_test

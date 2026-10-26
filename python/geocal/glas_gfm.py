@@ -1,32 +1,34 @@
+import math
+import textwrap
+
+import numpy as np
+import scipy
 from geocal_swig import (
-    OrbitDes,
-    ConstantSpacingTimeTable,
-    Ecr,
-    ImageCoordinate,
-    RefractionMsp,
-    NoVelocityAberration,
-    VelocityAberrationExact,
     Camera,
     ConstantSpacingFrameletTimeTable,
+    ConstantSpacingTimeTable,
+    Ecr,
     GlasGfmCamera,
-    Time,
-    SimpleDem,
-    IpiImageGroundConnection,
+    ImageCoordinate,
     Ipi,
-    ScLookVector,
+    IpiImageGroundConnection,
+    NoVelocityAberration,
     OrbitDataImageGroundConnection,
+    OrbitDes,
+    RefractionMsp,
+    ScLookVector,
+    SimpleDem,
+    Time,
+    VelocityAberrationExact,
 )
+
 from .geocal_nitf_misc import (
-    nitf_date_second_field_to_geocal_time,
     geocal_time_to_nitf_date_second_field,
     geocal_time_to_timestamp,
+    nitf_date_second_field_to_geocal_time,
     timestamp_to_geocal_time,
 )
 from .glas_gfm_covariance import GlasGfmCovariance
-import math
-import textwrap
-import scipy
-import numpy as np
 
 try:
     import pynitf
@@ -36,7 +38,7 @@ except ImportError:
     have_pynitf = False
 
 
-class GlasGfm(object):
+class GlasGfm:
     '''The GLAS/GFM structure in a NITF file crosses multiple TRE/DESs.
     This class collects all this together so we can treat this as
     "one thing"'''
@@ -109,7 +111,7 @@ class GlasGfm(object):
             t.rolling_shutter_flag = 0
             t.dt[0] = 0
         else:
-            raise RuntimeError("Unrecognized ImageGroundConnection type")
+            raise TypeError("Unrecognized ImageGroundConnection type")
         # ground_ref_point
         t.num_lines = igc.number_line
         t.num_samples = igc.number_sample
@@ -301,9 +303,7 @@ class GlasGfm(object):
         if len(res) == 0:
             return None
         if len(res) > 1:
-            raise RuntimeError(
-                "Found more than one possible DES %s in GLAS/GFM" % desid
-            )
+            raise RuntimeError(f"Found more than one possible DES {desid} in GLAS/GFM")
         return res[0]
 
     @property

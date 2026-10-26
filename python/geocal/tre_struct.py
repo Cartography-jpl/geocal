@@ -1,13 +1,12 @@
-from geocal_swig import Rpc, GdalRasterImage
+from geocal_swig import GdalRasterImage, Rpc
 
 try:
-    from pynitf import TreUSE00A, TreRPC00B, TreRPC00A
+    from pynitf import TreRPC00A, TreRPC00B, TreUSE00A
 
     have_pynitf = True
 except ImportError:
     have_pynitf = False
 import re
-import sys
 
 # This bit of code may go away. It was an older way of handling TREs before
 # we wrote pynitf. It attaches the TRE to existing GdalRasterImage class.
@@ -17,7 +16,7 @@ import sys
 # in place. For new code, you most likely don't want to use this.
 
 
-class _GdalRasterImageHelper(object):
+class _GdalRasterImageHelper:
     def __init__(self, tre_name, tre_class, nitf_literal=False):
         self.tre_name = tre_name
         self.tre_class = tre_class
@@ -34,10 +33,7 @@ class _GdalRasterImageHelper(object):
         return d.has_metadata(self.tre_name, "TRE")
 
     def __set__(self, d, val):
-        if sys.version_info > (3,):
-            d["TRE", self.tre_name] = val.tre_bytes().decode("utf-8")
-        else:
-            d["TRE", self.tre_name] = val.tre_bytes()
+        d["TRE", self.tre_name] = val.tre_bytes().decode("utf-8")
 
 
 def _add_tre_to_gdal(tre, raster_name, help_desc, nitf_literal=False):
@@ -100,7 +96,7 @@ def tre_use00a_pretty_print(f):
     """Pretty print of TRE"""
     if f.has_use00a:
         print("Use00A tre:")
-        s = re.sub(r"^", "  ", str(f.use00a), flags=re.M)
+        s = re.sub(r"^", "  ", str(f.use00a), flags=re.MULTILINE)
         print(s)
 
 
@@ -132,16 +128,12 @@ def tre_isnot_rpc_a(self):
 
 
 if have_pynitf:
-    setattr(
-        TreRPC00B,
-        "is_rpc_a",
-        property(tre_isnot_rpc_a, None, None, "Return true if this is type A"),
+    TreRPC00B.is_rpc_a = property(
+        tre_isnot_rpc_a, None, None, "Return true if this is type A"
     )
 
-    setattr(
-        TreRPC00A,
-        "is_rpc_a",
-        property(tre_is_rpc_a, None, None, "Return true if this is type A"),
+    TreRPC00A.is_rpc_a = property(
+        tre_is_rpc_a, None, None, "Return true if this is type A"
     )
 
 
@@ -197,36 +189,22 @@ def tre_set_from_rpc(self, rpc):
 
 
 if have_pynitf:
-    setattr(
-        TreRPC00B,
-        "rpc",
-        property(
-            tre_get_rpc,
-            tre_set_from_rpc,
-            None,
-            "TRE RPC structure as a GeoCal RPC object",
-        ),
+    TreRPC00B.rpc = property(
+        tre_get_rpc, tre_set_from_rpc, None, "TRE RPC structure as a GeoCal RPC object"
     )
 
-    setattr(
-        TreRPC00A,
-        "rpc",
-        property(
-            tre_get_rpc,
-            tre_set_from_rpc,
-            None,
-            "TRE RPC structure as a GeoCal RPC object",
-        ),
+    TreRPC00A.rpc = property(
+        tre_get_rpc, tre_set_from_rpc, None, "TRE RPC structure as a GeoCal RPC object"
     )
 
 if have_pynitf:
     __all__ = [
-        "tre_use00a_to_gdal",
-        "tre_use00a_pretty_print",
-        "tre_use00a",
         "TreRPC00A",
         "TreRPC00B",
         "TreUSE00A",
+        "tre_use00a",
+        "tre_use00a_pretty_print",
+        "tre_use00a_to_gdal",
     ]
 else:
-    __all__ = ["tre_use00a_to_gdal", "tre_use00a_pretty_print", "tre_use00a"]
+    __all__ = ["tre_use00a", "tre_use00a_pretty_print", "tre_use00a_to_gdal"]

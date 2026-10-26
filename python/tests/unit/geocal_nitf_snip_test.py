@@ -2,26 +2,28 @@ try:
     import pynitf
 except ImportError:
     pass
-from geocal import (
-    IgcMsp,
-    SimpleDem,
-    ImageCoordinate,
-    distance,
-    OrbitDataImageGroundConnection,
-    PosCsephb,
-    AttCsattb,
-    KeplerOrbit,
-    Time,
-    OrbitDes,
-    LnLookVector,
-    Ecr,
-    GlasGfmCamera,
-)
-from fixtures.require_check import require_pynitf, require_msp
-import os
 import math
+import os
+
 import numpy as np
 import pytest
+from fixtures.require_check import require_msp, require_pynitf
+
+from geocal import (
+    AttCsattb,
+    Ecr,
+    GlasGfmCamera,
+    IgcMsp,
+    ImageCoordinate,
+    KeplerOrbit,
+    LnLookVector,
+    OrbitDataImageGroundConnection,
+    OrbitDes,
+    PosCsephb,
+    SimpleDem,
+    Time,
+    distance,
+)
 
 
 def create_image_seg(f):
@@ -119,13 +121,13 @@ def test_snip_create(isolated_dir):
     # they are all listed in the associated tre stuff. We might be able
     # to remove the covariance if it is not listed, or perhaps this really
     # is needed.
-    csattb = [d for d in f.des_segment if d.subheader.desid == "CSATTB"][0]
+    csattb = next(d for d in f.des_segment if d.subheader.desid == "CSATTB")
     f2.des_segment.append(csattb)
-    csephb = [d for d in f.des_segment if d.subheader.desid == "CSEPHB"][0]
+    csephb = next(d for d in f.des_segment if d.subheader.desid == "CSEPHB")
     f2.des_segment.append(csephb)
-    cssfab = [d for d in f.des_segment if d.subheader.desid == "CSSFAB"][0]
+    cssfab = next(d for d in f.des_segment if d.subheader.desid == "CSSFAB")
     f2.des_segment.append(cssfab)
-    cscsdb = [d for d in f.des_segment if d.subheader.desid == "CSCSDB"][0]
+    cscsdb = next(d for d in f.des_segment if d.subheader.desid == "CSCSDB")
     f2.des_segment.append(cscsdb)
     f2.write("test.ntf")
     igc1 = IgcMsp(fname, SimpleDem(), 1, "GLAS", "GLAS")

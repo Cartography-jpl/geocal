@@ -1,35 +1,37 @@
 # This contains various tests to make sure pickling of low level GeoCal objects
 # work correctly.
 import pickle
-from geocal import (
-    Time,
-    ImageCoordinate,
-    FrameCoordinate,
-    QuaternionCamera,
-    Quaternion_double,
-    GdalRasterImage,
-    distance,
-    VicarLiteFile,
-    VicarLiteRasterImage,
-    VicarLiteDem,
-    VicarRasterImage,
-    SrtmDem,
-    SimpleDem,
-    ForstnerFeatureDetector,
-    GdalDem,
-    SimpleDatum,
-    Ipi,
-    KeplerOrbit,
-    SimpleCamera,
-    ConstantSpacingTimeTable,
-)
+
 from fixtures.require_check import (
-    require_serialize,
-    require_vicar,
     require_afids_data,
+    require_serialize,
     require_srtm_data,
+    require_vicar,
 )
 from numpy.testing import assert_almost_equal
+
+from geocal import (
+    ConstantSpacingTimeTable,
+    ForstnerFeatureDetector,
+    FrameCoordinate,
+    GdalDem,
+    GdalRasterImage,
+    ImageCoordinate,
+    Ipi,
+    KeplerOrbit,
+    Quaternion_double,
+    QuaternionCamera,
+    SimpleCamera,
+    SimpleDatum,
+    SimpleDem,
+    SrtmDem,
+    Time,
+    VicarLiteDem,
+    VicarLiteFile,
+    VicarLiteRasterImage,
+    VicarRasterImage,
+    distance,
+)
 
 # Simple test to see if we have AFIDS data available. We check for the
 # presence of one of the AFIDS environment variables, and if there
@@ -119,10 +121,10 @@ def test_quaternion_pickle():
 def create_rpc_sample(rpc, unit_test_data):
     """Small routine to create a sample RPC that can be used elsewhere. We
     only run this when we need to update the file"""
-    out = open(str(unit_test_data / "rpc_example.pkl"), "wb")
     # Use protocol 0, since it is the most portable. This is just a small test
     # example, so size/efficiency isn't any kind of an issue.
-    pickle.dump(rpc, out, 0)
+    with open(str(unit_test_data / "rpc_example.pkl"), "wb") as out:
+        pickle.dump(rpc, out, 0)
 
 
 # create_rpc_sample()

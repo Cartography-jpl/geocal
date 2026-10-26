@@ -1,6 +1,8 @@
 # Fixtures that don't really fit in one of the other files.
-import pytest
 import os
+
+import pytest
+
 from geocal import Rpc
 
 

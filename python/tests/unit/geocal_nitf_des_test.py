@@ -1,15 +1,16 @@
-from geocal import (
-    PosCsephb,
-    AttCsattb,
-    OrbitDes,
-    Time,
-    KeplerOrbit,
-    GlasGfmCamera,
-    distance,
-)
 import numpy as np
 import numpy.testing as npt
 from fixtures.require_check import require_pynitf
+
+from geocal import (
+    AttCsattb,
+    GlasGfmCamera,
+    KeplerOrbit,
+    OrbitDes,
+    PosCsephb,
+    Time,
+    distance,
+)
 
 try:
     import pynitf

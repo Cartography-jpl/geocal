@@ -10,6 +10,26 @@
 requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
 
+[tool.ruff.lint]
+ignore = [
+    # Explicit int() around round/floor/ceil. The values are often numpy
+    # scalars, where the int() is needed to get a python integer (e.g.,
+    # for indexing), so we keep it.
+    "RUF046",
+]
+
+[tool.ruff.lint.flake8-bugbear]
+# These are used as default arguments, and are not modified, so it is
+# fine to share a single instance.
+extend-immutable-calls = [
+    "geocal_swig.Time.parse_time",
+    "geocal_swig.GeodeticConverter",
+    "geocal_swig.SimpleDem",
+    "geocal_swig.CcorrLsmMatcher",
+    "osgeo.osr.SpatialReference",
+    "osgeo.osr.GetUserInputAsWKT",
+]
+
 [tool.ruff.lint.per-file-ignores]
 
 # __init__ includes things it doesn't use (e.g., __version__), which

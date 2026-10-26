@@ -2,10 +2,11 @@ try:
     import pynitf
 except ImportError:
     pass
-from geocal import ImageCoordinate, IgcMsp, distance
-from fixtures.require_check import require_pynitf, require_msp
 import numpy as np
 import numpy.testing as npt
+from fixtures.require_check import require_msp, require_pynitf
+
+from geocal import IgcMsp, ImageCoordinate, distance
 
 
 def create_image_seg(f):

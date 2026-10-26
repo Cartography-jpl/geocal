@@ -1,29 +1,31 @@
-from geocal_swig import (
-    TiePointCollection,
-    MemoryRasterImage,
-    RasterImage,
-    TiePoint,
-    ImageCoordinate,
-    SubRasterImage,
-    ScaleImage,
-    ForstnerFeatureDetector,
-    SurfaceImageToImageMatch,
-    MapInfoImageGroundConnection,
-    IgcImageToImageMatch,
-    ScaleImageGroundConnection,
-    PyramidImageMatcher,
-    CcorrLsmMatcher,
-)
-from .misc import cib01_mapinfo
-from .ray_intersect import RayIntersect3
-import math
 import itertools
+import logging
+import math
 import multiprocessing
 import os
 import time
-import logging
-from tabulate import tabulate
+
 import numpy as np
+from geocal_swig import (
+    CcorrLsmMatcher,
+    ForstnerFeatureDetector,
+    IgcImageToImageMatch,
+    ImageCoordinate,
+    MapInfoImageGroundConnection,
+    MemoryRasterImage,
+    PyramidImageMatcher,
+    RasterImage,
+    ScaleImage,
+    ScaleImageGroundConnection,
+    SubRasterImage,
+    SurfaceImageToImageMatch,
+    TiePoint,
+    TiePointCollection,
+)
+from tabulate import tabulate
+
+from .misc import cib01_mapinfo
+from .ray_intersect import RayIntersect3
 
 # Might not have cv2 available
 #
@@ -47,7 +49,7 @@ finally:
     del _ld_library_path
 
 
-class TiePointWrap(object):
+class TiePointWrap:
     """Wrapper around tp_collect.tie_point that can be pickled. We can\'t
     directly use pool.map on tp_collect.tie_point because python can\'t
     pickle a instance function"""
@@ -57,7 +59,7 @@ class TiePointWrap(object):
 
     def __call__(self, ic):
         log = logging.getLogger("geocal-python.tie_point_collect")
-        log.debug("Processing point (%f, %f)" % (ic.line, ic.sample))
+        log.debug(f"Processing point ({ic.line:f}, {ic.sample:f})")
         for h in logging.getLogger("geocal-python").handlers:
             h.flush()
         try:
@@ -65,7 +67,7 @@ class TiePointWrap(object):
             if tp is None:
                 log.debug("Got 0 matches")
             else:
-                log.debug("Got %d matches" % tp.number_image_location)
+                log.debug(f"Got {tp.number_image_location:d} matches")
             return tp, diag
         except RuntimeError:
             # We may try to find points that don't actually intersect
@@ -73,13 +75,12 @@ class TiePointWrap(object):
             # the surface). In that case, just skip this point and
             # go to the next one
             log.debug("Got 0 matches")
-            pass
         for h in logging.getLogger("geoca1-python").handlers:
             h.flush()
         return None, None
 
 
-class TiePointDiagnostic(object):
+class TiePointDiagnostic:
     """This contains information about tiepoint matching."""
 
     def __init__(self, num_image):
@@ -151,7 +152,7 @@ class TiePointDiagnostic(object):
         self._print_or_log(tabulate(filt_tab, headers="firstrow"))
 
 
-class TiePointCollect(object):
+class TiePointCollect:
     """Given a IgcCollection, collect tiepoints by image matching."""
 
     def __init__(
@@ -393,8 +394,8 @@ class TiePointCollect(object):
         for i, diag in res:
             if diag is not None:
                 diagsum.add_tp_diag(diag)
-        log.info("Total number tp: %d" % len(res2))
-        log.info("Number GCPs:     %d" % res2.number_gcp)
+        log.info(f"Total number tp: {len(res2):d}")
+        log.info(f"Number GCPs:     {res2.number_gcp:d}")
         return res2, diagsum
 
     def tie_point(self, ic1):
@@ -450,7 +451,7 @@ class TiePointCollect(object):
             return None, diag
 
 
-class TiePointCollectFM(object):
+class TiePointCollectFM:
     """Given a IgcCollection, collect tiepoints by feature matching. This is
     very similar to TiePointCollect, except we use feature matching.
 
@@ -530,7 +531,7 @@ class TiePointCollectFM(object):
 
     def detect_and_compute(self, ind, log):
         """Detect keypoints and compute descriptor the given raster image."""
-        log.info("Detecting features for image %d " % ind)
+        log.info(f"Detecting features for image {ind:d} ")
         d = self.raster_image[ind].read_all_byte_scale()
         kp, des = self.fdetect.detectAndCompute(d, None)
         return [kp, des]
@@ -754,7 +755,7 @@ def outlier_reject_ransac(
     if igccol is not None:
         log.info("Projecting to surface first")
     len1 = len(tpcol)
-    log.info("Starting %s" % tpcol)
+    log.info(f"Starting {tpcol}")
     for i in range(nimg):
         for j in range(i + 1, nimg):
             if igccol is None:
@@ -792,9 +793,9 @@ def outlier_reject_ransac(
     len3 = len(res)
     res2 = TiePointCollection()
     res2.extend(res)
-    log.info("Removed %d tiepoints" % (len1 - len2))
-    log.info("Removed %d more GCPs" % (len2 - len3))
-    log.info("Ending %s" % res2)
+    log.info(f"Removed {len1 - len2:d} tiepoints")
+    log.info(f"Removed {len2 - len3:d} more GCPs")
+    log.info(f"Ending {res2}")
     log.info("Completed using RANSAC to reject outliers")
     if diagnostic:
         ransac_diag_code = 3
@@ -803,9 +804,9 @@ def outlier_reject_ransac(
 
 
 __all__ = [
-    "TiePointDiagnostic",
     "TiePointCollect",
     "TiePointCollectFM",
-    "outlier_reject_ransac",
+    "TiePointDiagnostic",
     "have_cv2",
+    "outlier_reject_ransac",
 ]

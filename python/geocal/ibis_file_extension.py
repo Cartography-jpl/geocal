@@ -22,7 +22,7 @@ def _column(self, cindex):
     elif t == IbisFile.VICAR_ASCII:
         return self.column_string(cindex)
     else:
-        raise "Unrecognized type %d" % t
+        raise RuntimeError(f"Unrecognized type {t:d}")
 
 
 if have_ibis_file:

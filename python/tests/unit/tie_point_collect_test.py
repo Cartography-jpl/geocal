@@ -1,22 +1,24 @@
-from geocal import (
-    VicarLiteDem,
-    VicarImageGroundConnection,
-    IgcArray,
-    VicarLiteRasterImage,
-    TiePointCollect,
-    TiePointCollectFM,
-    read_shelve,
-    have_cv2,
-    ImageCoordinate,
-    Geodetic,
-    distance,
-)
-from multiprocessing import Pool
 import pickle
+from multiprocessing import Pool
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import pytest
 from fixtures.require_check import require_serialize
-from pathlib import Path
+
+from geocal import (
+    Geodetic,
+    IgcArray,
+    ImageCoordinate,
+    TiePointCollect,
+    TiePointCollectFM,
+    VicarImageGroundConnection,
+    VicarLiteDem,
+    VicarLiteRasterImage,
+    distance,
+    have_cv2,
+    read_shelve,
+)
 
 dr = Path(__file__).parent.parent.parent.parent.absolute() / "unit_test_data" / "Stereo"
 demin = VicarLiteDem(str(dr / "nevada_elv_aoi.img"), True)
@@ -34,7 +36,7 @@ def test_tp():
     ic = igc1.image_coordinate(demin.surface_point(gaoi.ground_coordinate(550, 550)))
     ic.line = round(ic.line)
     ic.sample = round(ic.sample)
-    tp, diag = tp_collect.tie_point(ic)
+    tp, _diag = tp_collect.tie_point(ic)
     assert (
         distance(
             tp.ground_location, Geodetic(36.7731575234, -116.116743146, 1276.36490196)
@@ -59,7 +61,7 @@ def test_pickle():
 
 @pytest.mark.skip
 def test_show_image():
-    tp, diag = tp_collect.tie_point(ImageCoordinate(500, 500))
+    tp, _diag = tp_collect.tie_point(ImageCoordinate(500, 500))
     tp.display(igc_coll)
     plt.show()
 

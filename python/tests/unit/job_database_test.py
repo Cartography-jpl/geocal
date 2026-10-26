@@ -1,5 +1,6 @@
-from geocal import JobDatabase
 import pytest
+
+from geocal import JobDatabase
 
 
 def test_job_database(isolated_dir):

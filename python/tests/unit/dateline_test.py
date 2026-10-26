@@ -1,4 +1,4 @@
-from geocal import GdalRasterImage, MapInfo, Geodetic360Converter
+from geocal import GdalRasterImage, Geodetic360Converter, MapInfo
 
 # Various tests for handling dateline.
 

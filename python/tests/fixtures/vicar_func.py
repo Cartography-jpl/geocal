@@ -1,22 +1,20 @@
-import sys
-import subprocess
-import re
-import pytest
 import os
+import re
+import subprocess
+
+import pytest
 
 
 def check_for_proc(proc):
     """Check for the existence of a vicar/AFIDS proc."""
     # AFIDS uses python 3.5, so don't bother supporting python 2 with this code.
     # We just skip all the tests if we are using python 2.
-    if sys.version_info < (3, 5):
-        return False
     cmd2 = re.sub(r"\+?\n", "", proc)
     cmd2 = re.sub(r'"', '\\"', cmd2)
-    res = subprocess.run('vicarb "%s"' % cmd2, shell=True, stdout=subprocess.PIPE)
-    if re.search(rb"\[TAE-NOPROC\]", res.stdout):
-        return False
-    return True
+    res = subprocess.run(
+        f'vicarb "{cmd2}"', shell=True, stdout=subprocess.PIPE, check=False
+    )
+    return not re.search(rb"\[TAE-NOPROC\]", res.stdout)
 
 
 def vicarb_run(cmd, print_results=False):
@@ -29,7 +27,7 @@ def vicarb_run(cmd, print_results=False):
     cmd2 = re.sub(r'"', '\\"', cmd2)
     if not print_results:
         res = subprocess.run(
-            'vicarb "%s"' % cmd2,
+            f'vicarb "{cmd2}"',
             shell=True,
             check=True,
             stdout=subprocess.PIPE,
@@ -41,7 +39,7 @@ def vicarb_run(cmd, print_results=False):
     # all bunched up at the end - so a long running process will have
     # output while we wait
     process = subprocess.Popen(
-        'vicarb "%s"' % cmd2,
+        f'vicarb "{cmd2}"',
         shell=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
@@ -56,7 +54,7 @@ def vicarb_run(cmd, print_results=False):
             print(output.strip().decode("utf-8"))
     if process.poll() != 0:
         raise subprocess.CalledProcessError(
-            process.poll(), 'vicarb "%s"' % cmd2, output=res
+            process.poll(), f'vicarb "{cmd2}"', output=res
         )
     return res
 

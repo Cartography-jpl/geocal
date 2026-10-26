@@ -1,5 +1,6 @@
-from geocal import GeoCalPriorityHandleSet
 import copy
+
+from geocal import GeoCalPriorityHandleSet
 
 
 class PriorityHandleSet1(GeoCalPriorityHandleSet):

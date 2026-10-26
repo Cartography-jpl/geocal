@@ -1,7 +1,8 @@
 import os
 
+
 def findepend(pdf, pdfDir):
-    print "finding dependencies of " + pdf + " in " + pdfDir + " ..."
+    print("finding dependencies of " + pdf + " in " + pdfDir + " ...")
 
     dirList = os.listdir(pdfDir)
 
@@ -13,7 +14,7 @@ def findepend(pdf, pdfDir):
 
     for entry in dirList:
         if os.path.isdir(pdfDir + "/" + entry):
-            print "ignoring directory " + entry
+            print("ignoring directory " + entry)
             continue
 
         if entry[-4:] == ".pdf":
@@ -39,19 +40,39 @@ def findepend(pdf, pdfDir):
 
     depends = finalDepends
 
-    print pdf + " depends on " + str(len(depends)) + " files in " + pdfDir + " including " + str(binaryCount) + \
-        " binaries and " + str(pdfCount) + " pdf script files"
-    print "There are " + str(len(pdfList)) + " pdf files among " + str(len(dirList)) + " total files in " + pdfDir
+    print(
+        pdf
+        + " depends on "
+        + str(len(depends))
+        + " files in "
+        + pdfDir
+        + " including "
+        + str(binaryCount)
+        + " binaries and "
+        + str(pdfCount)
+        + " pdf script files"
+    )
+    print(
+        "There are "
+        + str(len(pdfList))
+        + " pdf files among "
+        + str(len(dirList))
+        + " total files in "
+        + pdfDir
+    )
 
     return depends
+
 
 def findepend_0(pdf, pdfDir, pdfList, allList, depends):
     if not os.path.exists(pdfDir + "/" + pdf + ".pdf"):
         return depends
 
     thisDepends = []
+    with open(pdfDir + "/" + pdf + ".pdf") as fh:
+        pdfLines = fh.readlines()
     for entry in allList:
-        for line in open(pdfDir + "/" + pdf + ".pdf"):
+        for line in pdfLines:
             if entry in line and not entry in thisDepends:
                 thisDepends.append(entry)
 
@@ -62,10 +83,12 @@ def findepend_0(pdf, pdfDir, pdfList, allList, depends):
 
     return depends
 
+
 if __name__ == "__main__":
     import sys
+
     if len(sys.argv) == 3:
-        print findepend(sys.argv[1], sys.argv[2])
+        print(findepend(sys.argv[1], sys.argv[2]))
     else:
-        print "usage: python findepend.py pdfWithoutSuffix pdfDir"
-        print "  e.g. python findepend.py ikqbcall2 /data/afids/install/afids/vdev"
+        print("usage: python findepend.py pdfWithoutSuffix pdfDir")
+        print("  e.g. python findepend.py ikqbcall2 /data/afids/install/afids/vdev")

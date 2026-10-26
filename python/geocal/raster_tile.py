@@ -50,4 +50,4 @@ def read_iterator(data):
         t.next()
 
 
-__all__ = ["tile_iterator", "read_iterator"]
+__all__ = ["read_iterator", "tile_iterator"]

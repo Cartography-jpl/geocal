@@ -1,13 +1,15 @@
-from geocal import (
-    MemoryRasterImage,
-    SimpleDem,
-    ImageToImageConnection,
-    ImageCoordinate,
-    RpcImageGroundConnection,
-)
 import pickle
-from fixtures.require_check import require_serialize
+
 import numpy.testing as npt
+from fixtures.require_check import require_serialize
+
+from geocal import (
+    ImageCoordinate,
+    ImageToImageConnection,
+    MemoryRasterImage,
+    RpcImageGroundConnection,
+    SimpleDem,
+)
 
 
 @require_serialize

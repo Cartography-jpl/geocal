@@ -11,8 +11,8 @@
 import warnings
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
-from ipywidgets import interact  # noqa: E402
-import matplotlib.pyplot as plt  # noqa: E402
+import matplotlib.pyplot as plt
+from ipywidgets import interact
 
 try:
     # Use prettier plots, if available
@@ -43,9 +43,9 @@ def tie_point_display(tpcol, igccol, surface_image=None, ref_image=None, tpind=0
         plt.xlabel("Image index")
         plt.ylabel("Residual")
         if tp.is_gcp:
-            plt.title("GCP ID %d residual" % tp.id)
+            plt.title(f"GCP ID {tp.id:d} residual")
         else:
-            plt.title("Tiepoint ID %d residual" % tp.id)
+            plt.title(f"Tiepoint ID {tp.id:d} residual")
         plt.legend()
         plt.show()
 

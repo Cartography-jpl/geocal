@@ -1,11 +1,11 @@
+import numpy as np
 from geocal_swig import (
+    CartesianFixedLookVector,
+    FrameCoordinate,
     IgcCollectionRollingShutter,
     OrbitOffsetCorrection,
     determine_quat_rot,
-    CartesianFixedLookVector,
-    FrameCoordinate,
 )
-import numpy as np
 
 
 def _determine_orbit_parm(self, gp, ic, i):
@@ -16,7 +16,7 @@ def _determine_orbit_parm(self, gp, ic, i):
     comments of _determine_orbit_to_match."""
     # Vector that we have now
     igc = self.image_ground_connection(i)
-    tmpt, fc = igc.time_table.time(ic)
+    tmpt, _fc = igc.time_table.time(ic)
     tlist = [igc.time_table.min_time, tmpt, igc.time_table.max_time]
     for j, tm in enumerate(tlist):
         od = igc.orbit.orbit_data(tm)
@@ -54,7 +54,7 @@ def _determine_orbit_to_match(self, ic, ind):
     gp = self.ground_coordinate(ind, ic)
     for i in range(self.number_image):
         igc = self.image_ground_connection(i)
-        tm, fc = igc.time_table.time(ic)
+        tm, _fc = igc.time_table.time(ic)
         self.orbit.insert_attitude_time_point(igc.time_table.min_time)
         self.orbit.insert_attitude_time_point(tm)
         self.orbit.insert_attitude_time_point(igc.time_table.max_time)

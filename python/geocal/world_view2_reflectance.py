@@ -1,9 +1,12 @@
 from __future__ import annotations
-from geocal_swig import GdalRasterImage  # type: ignore
-from .instrument_reflectance import InstrumentReflectance
+
 import math
-import re
 import os
+import re
+
+from geocal_swig import GdalRasterImage  # type: ignore
+
+from .instrument_reflectance import InstrumentReflectance
 
 
 class WorldView2Reflectance(InstrumentReflectance):
@@ -83,7 +86,8 @@ class WorldView2Reflectance(InstrumentReflectance):
 
     def readMetaData(self, filename: str | os.PathLike[str]) -> None:
         """Read metadata needed to set up the instrument"""
-        metafile = open(filename, "r")
+        with open(filename) as fh:
+            metafile = fh.readlines()
         isPanMetafile = False
 
         index = -1
@@ -260,7 +264,7 @@ class WorldView2Reflectance(InstrumentReflectance):
         """Scale factor to convert DN to TOA reflectance. As a convention,
         we treat band 8 as the pan band."""
         if band < 8:
-            return super(WorldView2Reflectance, self).dn2TOAReflectance_factor(band)
+            return super().dn2TOAReflectance_factor(band)
 
         if self.pan_solarDist == -999.0 or self.pan_solarZenithAngleInRadians == -999.0:
             raise ValueError("Pan solar distance and/or solar angle not set.")

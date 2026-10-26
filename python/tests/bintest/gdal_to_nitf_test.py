@@ -1,7 +1,9 @@
-import geocal
 import subprocess
+
 import numpy.testing as npt
 from fixtures.require_check import require_pynitf, require_vicar_gdalplugin
+
+import geocal
 
 
 @require_pynitf

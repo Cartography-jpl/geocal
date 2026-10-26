@@ -1,18 +1,19 @@
 # This contains support for doing parallel processing.
 
-from .sqlite_shelf import write_shelve
-from functools import partial
-import numpy as np
-import geocal_swig
-from multiprocessing import Pool
 import logging
+from functools import partial
+from multiprocessing import Pool
+
+import geocal_swig
+import numpy as np
+
+from .sqlite_shelf import write_shelve
 
 
 def parallel_process_tile(img_in, lstart, sstart, nline, nsamp, out):
     log = logging.getLogger("geocal-python.parallel_process")
     log.info(
-        "Processing (%d, %d) to (%d, %d)"
-        % (lstart, sstart, lstart + nline, sstart + nsamp)
+        f"Processing ({lstart:d}, {sstart:d}) to ({lstart + nline:d}, {sstart + nsamp:d})"
     )
     # Initialize to 0 in case an error occurs. Better to have a blank
     # block in an image than a block with mangled data
@@ -35,8 +36,7 @@ def parallel_process_tile(img_in, lstart, sstart, nline, nsamp, out):
 def parallel_process_tile2(img_in, lstart, sstart, nline, nsamp, out):
     log = logging.getLogger("geocal-python.parallel_process")
     log.info(
-        "Processing (%d, %d) to (%d, %d)"
-        % (lstart, sstart, lstart + nline, sstart + nsamp)
+        f"Processing ({lstart:d}, {sstart:d}) to ({lstart + nline:d}, {sstart + nsamp:d})"
     )
     for h in logging.getLogger("geocal-python").handlers:
         h.flush()
@@ -86,7 +86,7 @@ def parallel_process_image(
                 tile_nsamp = nsamp - sstart
             job = partial(func, img_in, lstart, sstart, tile_nline, tile_nsamp, out)
             if shelve_name is not None:
-                write_shelve(shelve_name + ":job_%d" % job_index, job)
+                write_shelve(shelve_name + f":job_{job_index:d}", job)
             job_index += 1
             process_list.append(job)
     if shelve_name is None:

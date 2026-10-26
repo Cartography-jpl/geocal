@@ -2,7 +2,7 @@ import numpy as np
 import scipy
 
 
-class _coo_helper(object):
+class _coo_helper:
     """scipy.sparse.coo_matrix has an akward interface, but is much, much
     faster than lil_matrix. This helper class gives an interface similar to
     lil_matrix, but really just accumulates everthing for producing a
@@ -51,7 +51,7 @@ class _coo_helper(object):
         )
 
 
-class SimultaneousBundleAdjustment(object):
+class SimultaneousBundleAdjustment:
     """This class is used to do a simultaneous bundle adjustment. This
     takes a set of tie points along with a set of ImageGroundConnection.
     We then vary the ground location the tie points and the parameters
@@ -444,8 +444,7 @@ class SimultaneousBundleAdjustment(object):
                         res[rs, ps] = jac[:, ps2] * weight
                     except RuntimeError as e:
                         if str(e) != "ImageGroundConnectionFailed":
-                            raise e
-                        pass
+                            raise
                     ind += 2
         self.row_index = ind
 

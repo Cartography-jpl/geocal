@@ -1,17 +1,18 @@
-import geocal_swig
 import math
-import numpy as np
 import os.path
 import re
-from .shape_file import have_shape_file, ShapeLayer
+
+import geocal_swig
+import numpy as np
+
+from .shape_file import ShapeLayer, have_shape_file
 
 
 def _new_from_init(cls, version, *args):
     """Handle older versions"""
     if cls.pickle_format_version() < version:
         raise RuntimeError(
-            "Class is expecting a pickled object with version number %d, but we found %d"
-            % (cls.pickle_format_version(), version)
+            f"Class is expecting a pickled object with version number {cls.pickle_format_version():d}, but we found {version:d}"
         )
     inst = cls.__new__(cls)
     # Added Fit_height_offset in version 2. For version 1, just set this to
@@ -97,7 +98,7 @@ class VicarImageGroundConnection(geocal_swig.RpcImageGroundConnection):
             img = geocal_swig.RasterImageMultiBandVariable()
             for i in range(int(m.group(2)), int(m.group(3)) + 1):
                 img.add_raster_image(
-                    geocal_swig.VicarLiteRasterImage("%s%d%s" % (base, i, baseend))
+                    geocal_swig.VicarLiteRasterImage(f"{base}{i:d}{baseend}")
                 )
             if not rpc:
                 rpc = img.raster_image(0).rpc
@@ -119,9 +120,7 @@ class VicarImageGroundConnection(geocal_swig.RpcImageGroundConnection):
             base = m.group(1)
             baseend = m.group(4)
             i = int(m.group(2))
-            return geocal_swig.VicarLiteFile.is_vicar_file(
-                "%s%d%s" % (base, i, baseend)
-            )
+            return geocal_swig.VicarLiteFile.is_vicar_file(f"{base}{i:d}{baseend}")
         else:
             return geocal_swig.VicarLiteFile.is_vicar_file(fname)
 
@@ -223,7 +222,7 @@ def _footprint_geometry(self, cconver=geocal_swig.GeodeticConverter()):
         geocal_swig.ImageCoordinate(self.image.number_line, self.image.number_sample),
         geocal_swig.ImageCoordinate(0, self.image.number_sample),
     ]:
-        x, y, z = cconver.convert_to_coordinate(self.ground_coordinate(pt))
+        x, y, _z = cconver.convert_to_coordinate(self.ground_coordinate(pt))
         corners.append((x, y))
     return ShapeLayer.polygon_2d(corners)
 

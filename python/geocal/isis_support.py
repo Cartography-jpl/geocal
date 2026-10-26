@@ -1,9 +1,11 @@
-import os
-from geocal_swig import GdalRasterImage, SpiceKernelList, gdal_driver_name
-from .priority_handle_set import GeoCalPriorityHandleSet
 import json
+import os
 import re
 import subprocess
+
+from geocal_swig import GdalRasterImage, SpiceKernelList, gdal_driver_name
+
+from .priority_handle_set import GeoCalPriorityHandleSet
 
 
 def setup_isis():
@@ -118,12 +120,15 @@ def find_isis_kernel_file(f):
                 os.path.dirname(t),
             ],
             stdout=subprocess.DEVNULL,
+            check=False,
         )
         if os.path.exists(t):
             return t
         # If we didn't get it from ISIS, try downloading directly from
         # the JPL NAIF site
-        subprocess.run(["curl", "-sL", t3, "-o", t], stdout=subprocess.DEVNULL)
+        subprocess.run(
+            ["curl", "-sL", t3, "-o", t], stdout=subprocess.DEVNULL, check=False
+        )
         return t
     raise RuntimeError(f"Can't find kernel {f}")
 
@@ -503,10 +508,10 @@ def pds_to_isis(pds_fname, isis_fname, pds_fname2=None):
 
 
 __all__ = [
-    "setup_isis",
-    "read_kernel_from_isis",
-    "find_isis_kernel_file",
-    "find_isis_kernel",
-    "pds_to_isis",
     "PdsToIsisHandleSet",
+    "find_isis_kernel",
+    "find_isis_kernel_file",
+    "pds_to_isis",
+    "read_kernel_from_isis",
+    "setup_isis",
 ]

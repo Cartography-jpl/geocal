@@ -1,17 +1,17 @@
 from geocal_swig import (
-    nitf_to_quaternion,
-    quaternion_to_nitf,
-    Ecr,
-    Time,
-    SensrbCamera,
-    Quaternion_double,
-    FrameCoordinate,
     AircraftOrbitData,
+    Ecr,
+    FrameCoordinate,
+    Quaternion_double,
+    SensrbCamera,
+    Time,
+    nitf_to_quaternion,
     quaternion_to_array,
+    quaternion_to_nitf,
 )
 
 try:
-    from pynitf import TreSENSRB, NitfImageSegment
+    from pynitf import NitfImageSegment, TreSENSRB
 
     have_pynitf = True
 except ImportError:
@@ -47,9 +47,7 @@ if have_pynitf:
         )
         v = [t.velocity_north_or_x, t.velocity_east_or_y, t.velocity_down_or_z]
         tms = str(t.start_date)
-        tm_day_start = Time.parse_time(
-            "%s-%s-%sT00:00:00Z" % (tms[0:4], tms[4:6], tms[6:8])
-        )
+        tm_day_start = Time.parse_time(f"{tms[0:4]}-{tms[4:6]}-{tms[6:8]}T00:00:00Z")
         tm = tm_day_start + t.start_time
         if t.platform_relative == "Y":
             # We must have angles if platform_relative is "Y"

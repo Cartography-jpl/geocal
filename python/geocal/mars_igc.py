@@ -5,35 +5,37 @@
 # in place short term
 # *******************************************************************
 
-from geocal_swig import (
-    OrbitDes,
-    AttCsattb,
-    PosCsephb,
-    VicarFile,
-    VicarRasterImage,
-    IpiImageGroundConnection,
-    Ipi,
-    GlasGfmCamera,
-    PlanetConstant,
-    OrbitListCache,
-    PlanetSimpleDem,
-    ConstantSpacingTimeTable,
-    Time,
-    SubRasterImage,
-    GdalRasterImage,
-    ScaleImage,
-    SpicePlanetOrbit,
-    OffsetImageGroundConnection,
-    MeasuredTimeTable,
-    Vector_Time,
-    ContextSqrtDecodeImage,
-)
-from .pds_label import pds_label
-from .sqlite_shelf import read_shelve
-from .spice_camera import ctx_camera, hrsc_camera, hirise_camera
+import os
 import struct
 import subprocess
-import os
+
+from geocal_swig import (
+    AttCsattb,
+    ConstantSpacingTimeTable,
+    ContextSqrtDecodeImage,
+    GdalRasterImage,
+    GlasGfmCamera,
+    Ipi,
+    IpiImageGroundConnection,
+    MeasuredTimeTable,
+    OffsetImageGroundConnection,
+    OrbitDes,
+    OrbitListCache,
+    PlanetConstant,
+    PlanetSimpleDem,
+    PosCsephb,
+    ScaleImage,
+    SpicePlanetOrbit,
+    SubRasterImage,
+    Time,
+    Vector_Time,
+    VicarFile,
+    VicarRasterImage,
+)
+
+from .pds_label import pds_label
+from .spice_camera import ctx_camera, hirise_camera, hrsc_camera
+from .sqlite_shelf import read_shelve
 
 # Note, when adding a new instrument there are a few good sanity things to
 # check:
@@ -76,8 +78,9 @@ def igc_mro_context(
         lbl = pds_label(fname)
     if lbl["INSTRUMENT_NAME"] != "CONTEXT CAMERA":
         raise RuntimeError(
-            "igc_mro_context called for file %s which is actually INSTRUMENT_NAME %s"
-            % (fname, lbl["INSTRUMENT_NAME"])
+            "igc_mro_context called for file {} which is actually INSTRUMENT_NAME {}".format(
+                fname, lbl["INSTRUMENT_NAME"]
+            )
         )
     tstart = Time.parse_time(lbl["START_TIME"])
     bdir = os.environ["MARS_KERNEL"] + "/mro_kernel/"
@@ -220,8 +223,9 @@ def igc_mex_hrsc(
         lbl = pds_label(fname)
     if lbl["INSTRUMENT_NAME"] != "HIGH RESOLUTION STEREO CAMERA":
         raise RuntimeError(
-            "igc_mex_hrsc called for file %s which is actually INSTRUMENT_NAME %s"
-            % (fname, lbl["INSTRUMENT_NAME"])
+            "igc_mex_hrsc called for file {} which is actually INSTRUMENT_NAME {}".format(
+                fname, lbl["INSTRUMENT_NAME"]
+            )
         )
     tstart = Time.parse_time(lbl["START_TIME"])
     # tend = Time.parse_time(lbl["STOP_TIME"])
@@ -314,8 +318,9 @@ def igc_mro_hirise(
         lbl = pds_label(fname)
     if lbl["InstrumentId"] != "HIRISE":
         raise RuntimeError(
-            "igc_mro_hirise called for file %s which is actually INSTRUMENT_NAME %s"
-            % (fname, lbl["InstrumentId"])
+            "igc_mro_hirise called for file {} which is actually INSTRUMENT_NAME {}".format(
+                fname, lbl["InstrumentId"]
+            )
         )
     tstart = Time.parse_time(lbl["StartTime"])
     bdir = os.environ["MARS_KERNEL"] + "/mro_kernel/"
@@ -478,9 +483,9 @@ def vicar_update_glas(fin, fout, orbit_updated):
 
 
 __all__ = [
+    "igc_mex_hrsc",
     "igc_mro_context",
     "igc_mro_context_to_glas",
-    "igc_mex_hrsc",
     "igc_mro_hirise",
     "igc_mro_hirise_to_glas",
     "vicar_update_glas",

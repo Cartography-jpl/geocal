@@ -1,9 +1,10 @@
-from .misc import makedirs_p
-import os
+import glob
 import hashlib
+import os
 import shutil
 import subprocess
-import glob
+
+from .misc import makedirs_p
 
 # This is python 3 only
 try:
@@ -13,7 +14,7 @@ except ImportError:
     pass
 
 
-class OutputCache(object):
+class OutputCache:
     """This class is used to manage a 'output cache'. This is used to support
     doing unit and system testing. It maintains a copy of the output from
     a long running task, e.g., running one of the MSPI executables. We store
@@ -63,9 +64,9 @@ class OutputCache(object):
             raise RuntimeError("The requested key isn't found in the OutputCache")
         d = self._cache_dir(key_arr)
         for i, t in enumerate(targets):
-            g = glob.glob("%s/%d_*" % (d, i))
+            g = glob.glob(f"{d}/{i:d}_*")
             if len(g) == 0:
-                raise RuntimeError("Output %d not found in the OutputCache %s" % (i, d))
+                raise RuntimeError(f"Output {i:d} not found in the OutputCache {d}")
             if len(g) > 1:
                 raise RuntimeError("This shouldn't be able to happen")
             t.local_mkdir()
@@ -87,10 +88,8 @@ class OutputCache(object):
         makedirs_p(d)
         for i, t in enumerate(targets):
             if not os.path.exists(t.local_filename()):
-                raise RuntimeError(
-                    "Output target %s doesn't eixst" % t.local_filename()
-                )
-            cfile = "%s/%d_%s" % (d, i, os.path.basename(t.filename()))
+                raise RuntimeError(f"Output target {t.local_filename()} doesn't eixst")
+            cfile = f"{d}/{i:d}_{os.path.basename(t.filename())}"
             if os.path.isdir(t.local_filename()):
                 subprocess.run(
                     [

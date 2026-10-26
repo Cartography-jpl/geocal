@@ -1,7 +1,7 @@
-import subprocess
 import os
-import sys
-from fixtures.require_check import require_vicarb, require_vicar
+import subprocess
+
+from fixtures.require_check import require_vicar, require_vicarb
 
 local_dir = os.path.abspath(os.path.dirname(__file__))
 
@@ -18,6 +18,5 @@ def test_call_sample_vicar_python(vicarb_env):
     # This should return the string "ret=101", along with the normal VICAR
     # verbage
     res = subprocess.check_output(["vicarb", "call_sample_vicar_python"])
-    if sys.version_info > (3,):
-        res = res.decode("utf-8")
+    res = res.decode("utf-8")
     assert res.find("ret=101") != -1

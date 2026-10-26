@@ -730,6 +730,42 @@ Python API changes are accepted for 2.0 (§10). If the move goes ahead, the
 remaining SWIG limits on headers go away (§4, §7.2), C++23 becomes worth
 switching on (§7.5), and CMake becomes worth reconsidering (§6).
 
+**Cleanup items for this phase.** These were deferred until the new
+bindings exist:
+
+* **C++ type check failures should reach Python as `TypeError`** (deferred
+  2026-10-25). On `develop_2_0`, the Python code now raises `TypeError`
+  instead of `RuntimeError` when an argument has the wrong type (see
+  `RELEASE_NOTES_2.0.md`). The C++ code can't do the same yet, because SWIG
+  (`swig_rules/include/swig_exception.i`) turns every `std::exception` into
+  `RuntimeError`.
+  * *Known case:* `IgcMspImp::ground_coordinate_dem`
+    (`lib/Msp/igc_msp.cc`, about line 294) throws `Exception` when the `Dem`
+    isn't a `SimpleDem`. The Python `IgcMsp.ground_coordinate_dem`
+    (`python/geocal/igc_msp.py`) makes the same check, and now raises
+    `TypeError`.
+  * *Why it waits:* don't add this to the SWIG rules. The Python bindings
+    may be broken from Phase 5 until Phase 6, and the SWIG rules go away with
+    nanobind. Do it once the nanobind bindings can turn a C++ exception into a
+    Python `TypeError`.
+  * *Steps:*
+    1. Add a GeoCal exception type for wrong-type arguments, for example
+       `TypeError : Exception` in `geocal_exception.h`. It must be a GeoCal
+       type, not nanobind's `nb::type_error`, because `libgeocal` stays free
+       of nanobind and Python (§4).
+    2. Register an exception translator in the binding module that maps it
+       to Python `TypeError`. Don't rely on nanobind's default translations:
+       as far as I know, none of the standard exceptions maps to `TypeError`
+       (`std::invalid_argument` becomes `ValueError`). Check this against the
+       pinned nanobind version.
+    3. Throw the new type from `IgcMspImp::ground_coordinate_dem`.
+    4. Change the Python `IgcMsp` code to match. If the C++ error now reaches
+       Python as `TypeError`, the Python check duplicates it and can be
+       removed. Add a test (it needs an MSP build).
+    5. Look for other C++ type checks (typically a failed `dynamic_cast`
+       followed by `throw Exception`) that should use the new type, and add
+       the change to `RELEASE_NOTES_2.0.md`.
+
 ### Phase 7: Optional / later
 * FFTW → pocketfft (§3.5). Move it earlier when threading
   `PhaseCorrelationMatcher` (for example in tie-point collection) becomes a goal.
@@ -1105,6 +1141,10 @@ Measured on `lib/` (652 files, 106k lines, generated wrappers and
   4a). The upstream `swig-rules-repo` / `autoconf-repo` are left alone; merging
   back may be looked at later (with nanobind, `swig-rules-repo` may go away).
 * **Python bindings may be broken from Phase 5 until Phase 6** (§5 Phase 5).
+* **Type check failures raise `TypeError`** in 2.0 (decided 2026-10-25). The
+  Python code was changed on `develop_2_0`. The C++ side, starting with
+  `IgcMspImp::ground_coordinate_dem` in `igc_msp.cc`, is deferred to a
+  Phase 6 cleanup item, once the nanobind bindings can produce a `TypeError`.
 
 **Still open:**
 1. **Downstream archive inventory.** ECOSTRESS is probably the only

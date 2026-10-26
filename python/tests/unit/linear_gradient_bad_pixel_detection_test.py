@@ -1,10 +1,12 @@
-from geocal import IterativeMorphologicalDilation, LinearGradientBadPixelDetection
-import matplotlib.pyplot as plt
 import math
 import re
 import timeit
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pytest
+
+from geocal import IterativeMorphologicalDilation, LinearGradientBadPixelDetection
 
 
 def test_linear_gradient_bad_pixel_detection():
@@ -27,7 +29,7 @@ def test_linear_gradient_bad_pixel_detection():
     bpixdetect = LinearGradientBadPixelDetection(thresh_fact=2.5)
     is_bad = bpixdetect.bad_pixel_detection(original_data)
     assert (
-        np.argwhere(is_bad == True)  # noqa: E712
+        np.argwhere(is_bad == True)
         == [
             [0, 100],
             [100, 200],
@@ -72,7 +74,7 @@ def test_bad_pixel_fill():
         m.fill_missing_data()
     except RuntimeError as e:
         if not re.search(r"requires C\+\+ 11 features", str(e)):
-            raise e
+            raise
         # Test will fail if compiler doesn't have C++11. This is true on
         # centos 6 systems
         pytest.skip("fill_missing_data failed, likely because we don't have C++11")
@@ -114,7 +116,7 @@ def test_timing_linear_gradient_bad_pixel_detection():
     is_bad = bpixdetect.bad_pixel_detection(original_data)
     print(f"Time: {timeit.default_timer() - start_time}")
     assert (
-        np.argwhere(is_bad == True)  # noqa: E712
+        np.argwhere(is_bad == True)
         == [
             [0, 100],
             [100, 200],

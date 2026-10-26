@@ -1,27 +1,30 @@
 from __future__ import annotations
+
 import math
+import os
+import re
+from pathlib import Path
+from typing import Any
+
 import matplotlib.pyplot as plt
-from .misc import makedirs_p
+import numpy as np
 from geocal_swig import (  # type: ignore
-    IgcMapProjected,
     CartesianFixedLookVector,
-    LnLookVector,
     Ecr,
+    IgcCollection,
+    IgcMapProjected,
     ImageCoordinate,
+    ImageGroundConnection,
+    LnLookVector,
+    MapInfo,
+    RasterImage,
+    SimpleDem,
     TiePoint,
     TiePointCollection,
     distance,
-    SimpleDem,
-    RasterImage,
-    IgcCollection,
-    MapInfo,
-    ImageGroundConnection,
 )
-import numpy as np
-import re
-import os
-from pathlib import Path
-from typing import Any
+
+from .misc import makedirs_p
 
 # Optional support for pandas
 try:
@@ -57,9 +60,23 @@ def _tp_read_old_mspi_format(
         if m is None:
             raise RuntimeError(f"Trouble reading {filename}")
         id = int(m.group(1))
-        x, y, z, c11, c12, c13, c21, c22, c23, c31, c32, c33, is_gcp, numcam, trash = (
-            ln.split(" ", 14)
-        )
+        (
+            x,
+            y,
+            z,
+            _c11,
+            _c12,
+            _c13,
+            _c21,
+            _c22,
+            _c23,
+            _c31,
+            _c32,
+            _c33,
+            is_gcp,
+            numcam,
+            _trash,
+        ) = ln.split(" ", 14)
         tp = cls(int(numcam))
         tp.id = id
         tp.ground_location = Ecr(float(x), float(y), float(z))
@@ -67,7 +84,7 @@ def _tp_read_old_mspi_format(
         # We don't currently do anything with the covariance
         for i in range(tp.number_image):
             ln = f.readline()
-            iline, isamp, c11, c12, c21, c22, available, trash = ln.split(" ", 7)
+            iline, isamp, c11, _c12, _c21, c22, available, _trash = ln.split(" ", 7)
             if int(available) == 1:
                 tp.image_coordinate(
                     i,
@@ -87,45 +104,23 @@ def _tp__write_old_mspi_format(
     """This writes the old MSPI tie-point format. This can be used to
     compare with the old SBA code. The file name is fixed by the
     tiepoint id, but you specify the dirname to put the file."""
-    filename = "%s/tie_point_%03d.dat" % (dirname, self.id)
+    filename = f"{dirname}/tie_point_{self.id:03d}.dat"
     with open(filename, "w") as f:
         tp_cov = gcp_sigma * gcp_sigma if self.is_gcp else 1e8
         f.write(
-            "%0.17e %0.17e %0.17e %0.17e 0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 %0.17e 0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 %0.17e %d %d : ground_loc%d # %0.6f N %0.6f E\n"
-            % (
-                self.ground_location.position[0],
-                self.ground_location.position[1],
-                self.ground_location.position[2],
-                tp_cov,
-                tp_cov,
-                tp_cov,
-                1 if self.is_gcp else 0,
-                self.number_image,
-                self.id,
-                self.ground_location.latitude,
-                self.ground_location.longitude,
-            )
+            f"{self.ground_location.position[0]:0.17e} {self.ground_location.position[1]:0.17e} {self.ground_location.position[2]:0.17e} {tp_cov:0.17e} 0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 {tp_cov:0.17e} 0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 {tp_cov:0.17e} {1 if self.is_gcp else 0:d} {self.number_image:d} : ground_loc{self.id:d} # {self.ground_location.latitude:0.6f} N {self.ground_location.longitude:0.6f} E\n"
         )
         for i in range(self.number_image):
             if self.image_coordinate(i) is None:
                 f.write(
-                    "0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 0 : image_loc%d_view%d\n"
-                    % (self.id, i)
+                    f"0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 0.00000000000000000e+00 0 : image_loc{self.id:d}_view{i:d}\n"
                 )
             else:
                 ic = self.image_coordinate(i)
                 ln_sigma = self.line_sigma(i)
                 smp_sigma = self.sample_sigma(i)
                 f.write(
-                    "%0.17e %0.17e %0.17e 0.00000000000000000e+00 0.00000000000000000e+00 %0.17e 1 : image_loc%d_view%d\n"
-                    % (
-                        ic.line,
-                        ic.sample,
-                        ln_sigma * ln_sigma,
-                        smp_sigma * smp_sigma,
-                        self.id,
-                        i,
-                    )
+                    f"{ic.line:0.17e} {ic.sample:0.17e} {ln_sigma * ln_sigma:0.17e} 0.00000000000000000e+00 0.00000000000000000e+00 {smp_sigma * smp_sigma:0.17e} 1 : image_loc{self.id:d}_view{i:d}\n"
                 )
 
 
@@ -252,16 +247,16 @@ def _tpcol_tp_info(self: TiePointCollection) -> tuple[pd.DataFrame, list[str]]:
     cols = ["Is GCP", "Number Image Location"]
     d = {"Is GCP": is_gcp, "Number Image Location": nimgloc}
     for i in range(self[0].number_image):
-        d["Line View %d" % (i + 1)] = [
+        d[f"Line View {i + 1:d}"] = [
             tp.image_coordinate(i).line if tp.image_coordinate(i) else None
             for tp in self
         ]
-        d["Sample View %d" % (i + 1)] = [
+        d[f"Sample View {i + 1:d}"] = [
             tp.image_coordinate(i).sample if tp.image_coordinate(i) else None
             for tp in self
         ]
-        cols.append("Line View %d" % (i + 1))
-        cols.append("Sample View %d" % (i + 1))
+        cols.append(f"Line View {i + 1:d}")
+        cols.append(f"Sample View {i + 1:d}")
     return pd.DataFrame(d, index=ind), cols
 
 
@@ -292,11 +287,11 @@ def _tpcol_tp_res(
                     max_res[j] = max(abs(lres[j]), abs(sres[j]), max_res[j])
                 except RuntimeError as e:
                     if str(e) != "ImageGroundConnectionFailed":
-                        raise e
-        d["Line Res %d" % (i + 1)] = lres
-        d["Samp Res %d" % (i + 1)] = sres
-        cols.append("Line Res %d" % (i + 1))
-        cols.append("Samp Res %d" % (i + 1))
+                        raise
+        d[f"Line Res {i + 1:d}"] = lres
+        d[f"Samp Res {i + 1:d}"] = sres
+        cols.append(f"Line Res {i + 1:d}")
+        cols.append(f"Samp Res {i + 1:d}")
     d["Max Residual"] = max_res
     return pd.DataFrame(d, index=ind), cols
 
@@ -395,7 +390,7 @@ def _tpcol_data_frame(
                 )
             except RuntimeError as e:
                 if str(e) != "ImageGroundConnectionFailed":
-                    raise e
+                    raise
     data[:, 7] = data[:, 0] - data[:, 4]
     data[:, 8] = data[:, 1] - data[:, 5]
     return pd.DataFrame(
@@ -484,10 +479,10 @@ def _tpcol_data_frame2(
     for i in range(self[0].number_image):
         header.extend(
             [
-                "Line Image %d" % (i + 1),
-                "Sample Image %d" % (i + 1),
-                "Line Sigma Image %d" % (i + 1),
-                "Sample Sigma Image %d" % (i + 1),
+                f"Line Image {i + 1:d}",
+                f"Sample Image {i + 1:d}",
+                f"Line Sigma Image {i + 1:d}",
+                f"Sample Sigma Image {i + 1:d}",
             ]
         )
     df = pd.DataFrame(data=self.data_array(ref_image), columns=header)

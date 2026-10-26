@@ -90,9 +90,7 @@ class GeoCalPriorityHandleSet(collections.abc.Set):
                     res = r
             if could_handle:
                 return res
-        raise RuntimeError(
-            "No handle was found. args=%s, keywords=%s" % (args, keywords)
-        )
+        raise RuntimeError(f"No handle was found. args={args}, keywords={keywords}")
 
     def handle_h(self, h, *args, **keywords):
         raise NotImplementedError

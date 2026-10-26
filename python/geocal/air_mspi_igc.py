@@ -1,30 +1,32 @@
 from __future__ import annotations
-from geocal_swig import (  # type: ignore
-    ImageCoordinate,
-    SimpleDem,
-    Ecr,
-    CartesianFixedLookVector,
-    SubRasterImage,
-    GdalRasterImage,
-    GroundMaskImage,
-    ImageMaskImage,
-    ScaleImage,
-    ImageGroundConnection,
-    HdfFile,
-)
+
 import math
-import numpy as np
-import scipy.optimize
 import typing
 from typing import Any
 
+import numpy as np
+import scipy.optimize
+from geocal_swig import (  # type: ignore
+    CartesianFixedLookVector,
+    Ecr,
+    GdalRasterImage,
+    GroundMaskImage,
+    HdfFile,
+    ImageCoordinate,
+    ImageGroundConnection,
+    ImageMaskImage,
+    ScaleImage,
+    SimpleDem,
+    SubRasterImage,
+)
+
 if typing.TYPE_CHECKING:
-    from geocal_swig import RasterImage, GroundCoordinate, Dem
+    from geocal_swig import Dem, GroundCoordinate, RasterImage
 
 try:
     # Depending on the options used when building, this class might
     # be available
-    HdfFile
+    HdfFile  # noqa: B018
     have_hdf = True
 except NameError:
     have_hdf = False
@@ -63,12 +65,9 @@ class AirMspiIgc(ImageGroundConnection):
         # it fails we then try the HDF 5 format. We can tell which by
         # using our HdfFile.is_hdf, which returns True only for HDF 5 files.
         if HdfFile.is_hdf(fname):
-            self.gdal_base = 'HDF5:"%s"://HDFEOS/GRIDS/%s/Data_Fields/' % (
-                fname,
-                group_name,
-            )
+            self.gdal_base = f'HDF5:"{fname}"://HDFEOS/GRIDS/{group_name}/Data_Fields/'
         else:
-            self.gdal_base = "HDF4_EOS:EOS_GRID:%s:%s:" % (fname, group_name)
+            self.gdal_base = f"HDF4_EOS:EOS_GRID:{fname}:{group_name}:"
         im = ImageMaskImage(GdalRasterImage(self.gdal_base + "I.mask"))
         self.bounding_box = im.unmasked_bounding_box()
         # Now read in the reset of the data
@@ -167,7 +166,7 @@ class AirMspiIgc(ImageGroundConnection):
     def cf_look_vector_lv(self, ic: ImageCoordinate) -> CartesianFixedLookVector:
         """Return look vector."""
         if self.image_mask.mask_ic(ic):
-            raise RuntimeError("Masked data at (%f, %f)" % (ic.line, ic.sample))
+            raise RuntimeError(f"Masked data at ({ic.line:f}, {ic.sample:f})")
         az = self.view_azimuth(ic)
         zen = self.view_zenith(ic)
         lc = [
@@ -205,20 +204,13 @@ class AirMspiIgc(ImageGroundConnection):
         return ImageCoordinate(xsol["x"][0], xsol["x"][1])
 
     def __str__(self) -> str:
-        return """AirMspiIgc:
-  File name:        %s
-  Group name:       %s
-  Data field:       %s
-  Data scale:       %f
-  Title:            %s
-  Ellipsoid Height: %f""" % (
-            self.fname,
-            self.group_name,
-            self.data_field,
-            self.data_scale,
-            self.title,
-            self.dem.h,
-        )
+        return f"""AirMspiIgc:
+  File name:        {self.fname}
+  Group name:       {self.group_name}
+  Data field:       {self.data_field}
+  Data scale:       {self.data_scale:f}
+  Title:            {self.title}
+  Ellipsoid Height: {self.dem.h:f}"""
 
 
 __all__ = ["AirMspiIgc"]

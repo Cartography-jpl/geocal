@@ -1,11 +1,12 @@
+import datetime
+import logging
 import os
 import pickle
-import sqlite3
 import signal
+import sqlite3
 import subprocess
-from .misc import pid_exists, makedirs_p
-import logging
-import datetime
+
+from .misc import makedirs_p, pid_exists
 
 db_save = None
 job_id_save = None
@@ -24,7 +25,7 @@ job_start_time=null where job_id=?
     db_save.commit()
 
 
-class JobDatabase(object):
+class JobDatabase:
     """This handles a simple database used for job management,
     checking and starting jobs. This is a very simple job management
     software, it is meant to be something like PBS but much simpler.
@@ -81,13 +82,12 @@ strftime('%Y-%m-%d %H:%M:%f', 'now'), 'queued', null, null, ?)""",
         self.db.commit()
         with open(log_file, "a") as fh:
             print(
-                "%s INFO:geocal-python.job_database Added job %d to the job queue"
-                % (datetime.datetime.now().isoformat(), cur.lastrowid),
+                f"{datetime.datetime.now().isoformat()} INFO:geocal-python.job_database Added job {cur.lastrowid:d} to the job queue",
                 file=fh,
             )
         if start_if_available:
             subprocess.call(
-                "job_database_check_and_run %s %s &" % (self.db_name, log_file),
+                f"job_database_check_and_run {self.db_name} {log_file} &",
                 shell=True,
             )
         return cur.lastrowid
@@ -144,10 +144,10 @@ strftime('%Y-%m-%d %H:%M:%f', 'now'), 'queued', null, null, ?)""",
         args.append(working_dir)
         cmd.append("--diagnostic")
         cmd.append("--verbose")
-        cmd.append("--resolution=%f" % resolution)
-        cmd.append("--number-process=%d" % number_process)
+        cmd.append(f"--resolution={resolution:f}")
+        cmd.append(f"--number-process={number_process:d}")
         if dem_file is not None:
-            cmd.append("--dem-file=%s" % dem_file)
+            cmd.append(f"--dem-file={dem_file}")
         cmd.extend(args)
         return self.add_job(
             working_dir, user, key, log_file, cmd, start_if_available=start_if_available
@@ -176,7 +176,7 @@ strftime('%Y-%m-%d %H:%M:%f', 'now'), 'queued', null, null, ?)""",
     def __delitem__(self, job_id):
         self.db.execute("DELETE FROM job_status WHERE job_id=?", [job_id])
         log = logging.getLogger("geocal-python.job_database")
-        log.info("Removing job %d from the job queue" % job_id)
+        log.info(f"Removing job {job_id:d} from the job queue")
 
     def set_status(self, job_id, status):
         """Set a job id to the given status."""
@@ -226,8 +226,9 @@ select job_id, pid from job_status where status = 'running'
                 # Job running, so don't start another one
                 return False
             log.info(
-                "Job %d had a run status, but the process %d is not on the system. Apparently this died, so marking job as 'interrupted"
-                % (r["job_id"], r["pid"])
+                "Job {:d} had a run status, but the process {:d} is not on the system. Apparently this died, so marking job as 'interrupted".format(
+                    r["job_id"], r["pid"]
+                )
             )
             # We may have had the job disappear (e.g., a SIGKILL occurred).
             self.db.execute(
@@ -261,17 +262,17 @@ order by job_id
             self.set_status(r["job_id"], "running")
             makedirs_p(r["working_directory"])
             with open(r["working_directory"] + "/job.log", "w") as joblog:
-                log.info("Running job %d" % r["job_id"])
+                log.info("Running job {:d}".format(r["job_id"]))
                 subprocess.check_call(
                     pickle.loads(r["job_to_run"]),
                     stdout=joblog,
                     stderr=subprocess.STDOUT,
                 )
             self.set_status(r["job_id"], "success")
-            log.info("Job %d ran successfully" % r["job_id"])
+            log.info("Job {:d} ran successfully".format(r["job_id"]))
         except subprocess.CalledProcessError:
             self.set_status(r["job_id"], "failure")
-            log.info("Job %d failed" % r["job_id"])
+            log.info("Job {:d} failed".format(r["job_id"]))
         finally:
             for s in siglist:
                 if s in old_signal:

@@ -1,24 +1,26 @@
-from geocal import (
-    TiePoint,
-    distance,
-    Ecr,
-    read_shelve,
-    write_shelve,
-    RayIntersect2,
-    TiePointCollection,
-    ForstnerFeatureDetector,
-    IgcMultiplePass,
-)
 import shutil
-from fixtures.require_check import require_serialize
+
 import numpy as np
 import pytest
+from fixtures.require_check import require_serialize
+
+from geocal import (
+    Ecr,
+    ForstnerFeatureDetector,
+    IgcMultiplePass,
+    RayIntersect2,
+    TiePoint,
+    TiePointCollection,
+    distance,
+    read_shelve,
+    write_shelve,
+)
 
 
 def test_basic():
     """Basic test of tiepoint"""
     t = TiePoint(5)
-    assert t.number_image, 5
+    assert t.number_image == 5
 
 
 def test_old_mspi_format(isolated_dir, mspi_unit_test_data):

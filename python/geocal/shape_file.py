@@ -7,16 +7,15 @@ try:
 
     with warnings.catch_warnings():
         warnings.filterwarnings("ignore", category=DeprecationWarning)
-        import osgeo.ogr as ogr
-        import osgeo.osr as osr
+        from osgeo import ogr, osr
     osr.UseExceptions()
     have_shape_file = True
 except ImportError:
     have_shape_file = False
 
-import os.path
 import collections
 import collections.abc
+import os.path
 import weakref
 
 if have_shape_file:
@@ -45,7 +44,7 @@ if have_shape_file:
             if mode == "r":
                 self.data_source = ogr.Open(fname)
                 if self.data_source is None:
-                    raise RuntimeError("Error opening file %s" % fname)
+                    raise RuntimeError(f"Error opening file {fname}")
                 for i in range(self.data_source.GetLayerCount()):
                     lay = ShapeLayer(self, i)
                     self.layers[lay.name] = lay
@@ -54,7 +53,7 @@ if have_shape_file:
                     fname
                 )
             else:
-                raise RuntimeError("Invalid mode %s" % mode)
+                raise RuntimeError(f"Invalid mode {mode}")
 
         @property
         def file_name(self):
@@ -244,9 +243,7 @@ class ShapeFeature(collections.abc.Mapping):
         return res
 
     def __iter__(self):
-        for k in list(self.keys()):
-            yield k
-        return
+        yield from list(self.keys())
 
     def __len__(self, key):
         return 1 + len(self.layer.field_list)
@@ -262,6 +259,6 @@ class ShapeFeature(collections.abc.Mapping):
 
 
 if have_shape_file:
-    __all__ = ["ShapeFile", "ShapeLayer", "ShapeFeature", "have_shape_file"]
+    __all__ = ["ShapeFeature", "ShapeFile", "ShapeLayer", "have_shape_file"]
 else:
     __all__ = ["have_shape_file"]

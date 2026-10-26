@@ -1,14 +1,16 @@
-from geocal import (
-    SQLiteShelf,
-    shelve_time_after,
-    read_shelve,
-    write_shelve,
-    ImageCoordinate,
-)
-from fixtures.require_check import require_serialize
 import os
 import time
+
 import pytest
+from fixtures.require_check import require_serialize
+
+from geocal import (
+    ImageCoordinate,
+    SQLiteShelf,
+    read_shelve,
+    shelve_time_after,
+    write_shelve,
+)
 
 
 def test_sqlite_shelf(isolated_dir):

@@ -1,6 +1,7 @@
+import functools
 import multiprocessing
 from multiprocessing import Pool
-import functools
+
 import pytest
 
 

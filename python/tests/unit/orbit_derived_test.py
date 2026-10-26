@@ -1,6 +1,8 @@
-from geocal import Orbit, Time, KeplerOrbit, read_shelve, write_shelve
-from fixtures.require_check import require_serialize
 import pickle
+
+from fixtures.require_check import require_serialize
+
+from geocal import KeplerOrbit, Orbit, Time, read_shelve, write_shelve
 
 
 class PythonOrbit(Orbit):

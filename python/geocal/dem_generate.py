@@ -1,41 +1,43 @@
 from __future__ import annotations
+
+import logging
+import math
+import multiprocessing
+import os
+import re
+from multiprocessing.pool import Pool
+from typing import Any
+
 import geocal_swig  # type: ignore
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy.interpolate
 from geocal_swig import (  # type: ignore
-    ImageCoordinate,
-    SurfaceImageToImageMatch,
-    IgcImageToImageMatch,
-    DemMatch,
-    PlanetocentricConverter,
-    GeodeticConverter,
-    CoordinateConverter,
-    CcorrLsmMatcher,
     CalcRasterMultiBand,
+    CcorrLsmMatcher,
+    CoordinateConverter,
+    DemMatch,
+    GeodeticConverter,
+    GroundCoordinate,
+    IgcImageToImageMatch,
+    ImageCoordinate,
     ImageGroundConnection,
     ImageMatcher,
     MapInfo,
+    PlanetocentricConverter,
     RasterImage,
-    GroundCoordinate,
+    SurfaceImageToImageMatch,
 )
-import math
-import scipy.interpolate
-from .ray_intersect import RayIntersect
-import multiprocessing
-from multiprocessing.pool import Pool
-import numpy as np
+from matplotlib import cm
+
 from .ply_file import PlyFile
-import matplotlib.pyplot as plt
-import matplotlib.cm as cm
-import logging
-import re
-import os
-from typing import Any
+from .ray_intersect import RayIntersect
 
 
 def _new_from_init(cls, version, *args):  # type: ignore
     if cls.pickle_format_version() < version:
         raise RuntimeError(
-            "Class is expecting a pickled object with version number %d, but we found %d"
-            % (cls.pickle_format_version(), version)
+            f"Class is expecting a pickled object with version number {cls.pickle_format_version():d}, but we found {version:d}"
         )
     inst = cls.__new__(cls)
     inst.__init__(*args)
@@ -104,7 +106,7 @@ class DemGenerateMB(geocal_swig.CalcRasterMultiBand):
         self.data[1, :, :] = self.dem_generate.h_fill
 
 
-class SurfacePointWrap(object):
+class SurfacePointWrap:
     """Wrapper around demg.surface_point that can be pickled. We can't
     directly use pool.map on demg.surface_point because python can't
     pickle a instance function"""
@@ -116,7 +118,7 @@ class SurfacePointWrap(object):
         return self.demg.surface_point(*it)
 
 
-class DemGenerate(object):
+class DemGenerate:
     """This uses image matching between two images to determine a surface
     Dem. The aoi should be a MapInfo giving the desired ground coverage.
 
@@ -220,24 +222,24 @@ class DemGenerate(object):
         else:
             raise RuntimeError("Wrong number of arguments to surface_point")
         log = logging.getLogger("geocal-python.dem_generate")
-        log.info("Number point:   %d" % (self.dem_match.number_point))
-        log.info("Number match:   %d" % (self.dem_match.number_match))
-        log.info("Number success: %d" % (self.dem_match.number_success))
-        log.info("All distance:\n%s" % self.dem_match.all_distance_stat)
-        log.info("Good distance:\n%s" % self.dem_match.good_distance_stat)
+        log.info(f"Number point:   {self.dem_match.number_point:d}")
+        log.info(f"Number match:   {self.dem_match.number_match:d}")
+        log.info(f"Number success: {self.dem_match.number_success:d}")
+        log.info(f"All distance:\n{self.dem_match.all_distance_stat}")
+        log.info(f"Good distance:\n{self.dem_match.good_distance_stat}")
         log.info("Points not matched:")
-        log.info("  Image masked:                 %d" % (self.dem_match.diagnostic[1]))
-        log.info("  Too close to image edge:      %d" % (self.dem_match.diagnostic[2]))
-        log.info("  Variance too low:             %d" % (self.dem_match.diagnostic[3]))
-        log.info("  Correlation too low:          %d" % (self.dem_match.diagnostic[4]))
-        log.info("  Exceed max sigma:             %d" % (self.dem_match.diagnostic[5]))
-        log.info("  Exceed max radiance variance: %d" % (self.dem_match.diagnostic[6]))
-        log.info("  Exceed precision requirement: %d" % (self.dem_match.diagnostic[7]))
-        log.info("  Move past target:             %d" % (self.dem_match.diagnostic[8]))
-        log.info("  Solve failed:                 %d" % (self.dem_match.diagnostic[9]))
-        log.info("  Ray Intersect failed:         %d" % (self.dem_match.diagnostic[10]))
-        log.info("  ImageGroundConnection failed: %d" % (self.dem_match.diagnostic[11]))
-        log.info("  Unknown:                      %d" % (self.dem_match.diagnostic[12]))
+        log.info(f"  Image masked:                 {self.dem_match.diagnostic[1]:d}")
+        log.info(f"  Too close to image edge:      {self.dem_match.diagnostic[2]:d}")
+        log.info(f"  Variance too low:             {self.dem_match.diagnostic[3]:d}")
+        log.info(f"  Correlation too low:          {self.dem_match.diagnostic[4]:d}")
+        log.info(f"  Exceed max sigma:             {self.dem_match.diagnostic[5]:d}")
+        log.info(f"  Exceed max radiance variance: {self.dem_match.diagnostic[6]:d}")
+        log.info(f"  Exceed precision requirement: {self.dem_match.diagnostic[7]:d}")
+        log.info(f"  Move past target:             {self.dem_match.diagnostic[8]:d}")
+        log.info(f"  Solve failed:                 {self.dem_match.diagnostic[9]:d}")
+        log.info(f"  Ray Intersect failed:         {self.dem_match.diagnostic[10]:d}")
+        log.info(f"  ImageGroundConnection failed: {self.dem_match.diagnostic[11]:d}")
+        log.info(f"  Unknown:                      {self.dem_match.diagnostic[12]:d}")
         return r
 
     def find_intersection(
@@ -412,9 +414,9 @@ class DemGenerate(object):
                     fill_value=fill_value,
                 )
             except RuntimeError as e:
-                print("Got exception %s" % e)
+                print(f"Got exception {e}")
                 if not re.search("Qhull", str(e)):
-                    raise e
+                    raise
                 # May fail because we have too few points, or they are in
                 # a line
                 self.h_fill = np.zeros(
@@ -501,7 +503,7 @@ class DemGenerate(object):
         None if this fails or a pair [ic1, ic2] which is the image coordinates
         in image 1 and the match in image 2"""
         ic1 = ImageCoordinate(img1_line, img1_sample)
-        ic2, lsigma, ssigma, success, diagnostic = self.itoim.match(ic1)
+        ic2, _lsigma, _ssigma, success, _diagnostic = self.itoim.match(ic1)
         return [ic1, ic2] if (success) else [None, None]
 
     def range_image1(self) -> list[int]:
@@ -528,4 +530,4 @@ class DemGenerate(object):
         return [lstart, sstart, lend, send]
 
 
-__all__ = ["DemGenerateMB", "DemGenerate"]
+__all__ = ["DemGenerate", "DemGenerateMB"]

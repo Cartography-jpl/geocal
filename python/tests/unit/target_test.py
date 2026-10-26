@@ -1,6 +1,8 @@
-from geocal import InFileTarget, OutFileTarget
-from fixtures.require_check import require_rsync
 import os
+
+from fixtures.require_check import require_rsync
+
+from geocal import InFileTarget, OutFileTarget
 
 
 @require_rsync

@@ -1,14 +1,16 @@
+import os
+import subprocess
+
+import numpy.testing as npt
+from fixtures.require_check import require_pynitf, require_vicar_gdalplugin
+
 from geocal import (
     GdalRasterImage,
     Rpc,
+    VicarFile,
     VicarLiteRasterImage,
     VicarRasterImage,
-    VicarFile,
 )
-import subprocess
-from fixtures.require_check import require_pynitf, require_vicar_gdalplugin
-import numpy.testing as npt
-import os
 
 try:
     import pynitf

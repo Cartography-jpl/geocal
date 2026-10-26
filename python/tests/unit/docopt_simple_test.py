@@ -1,5 +1,6 @@
-from geocal import docopt_simple
 import pickle
+
+from geocal import docopt_simple
 
 usage = """
 Usage: my_test [options] <in1> <in2> <out>

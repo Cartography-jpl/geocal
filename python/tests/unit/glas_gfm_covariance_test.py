@@ -3,19 +3,20 @@ try:
 except ImportError:
     pass
 
-from geocal import (
-    GlasGfmCovariance,
-    GlasGfmSpdcfList,
-    GlasGfmSpdcfDampedCosine,
-    GlasGfmSpdcfPiecwiseLinear,
-    GlasGfmSpdcfCsm,
-    GlasGfmSpdcfComposite,
-    GlasGfmGroup,
-    Time,
-    GlasGfmCoreSet,
-)
-from fixtures.require_check import require_pynitf
 import numpy as np
+from fixtures.require_check import require_pynitf
+
+from geocal import (
+    GlasGfmCoreSet,
+    GlasGfmCovariance,
+    GlasGfmGroup,
+    GlasGfmSpdcfComposite,
+    GlasGfmSpdcfCsm,
+    GlasGfmSpdcfDampedCosine,
+    GlasGfmSpdcfList,
+    GlasGfmSpdcfPiecwiseLinear,
+    Time,
+)
 
 if False:
     pynitf.nitf_field.DEBUG = True

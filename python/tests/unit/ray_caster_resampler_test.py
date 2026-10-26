@@ -1,11 +1,13 @@
+from multiprocessing import Pool
+
+import pytest
+
 from geocal import (
-    read_shelve,
     GdalRasterImage,
     IgcMapProjected,
     ray_caster_project,
+    read_shelve,
 )
-from multiprocessing import Pool
-import pytest
 
 
 @pytest.mark.skip(

@@ -1,6 +1,7 @@
-from geocal import SpotReflectance
 import numpy as np
 import pytest
+
+from geocal import SpotReflectance
 
 
 # Doesn't currently work

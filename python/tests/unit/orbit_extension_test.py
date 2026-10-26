@@ -1,14 +1,15 @@
+import pytest
+
 from geocal import (
+    FrameCoordinate,
+    Geodetic,
     KeplerOrbit,
+    Quaternion_double,
+    QuaternionCamera,
+    SimpleDem,
     Time,
     distance,
-    Geodetic,
-    QuaternionCamera,
-    Quaternion_double,
-    FrameCoordinate,
-    SimpleDem,
 )
-import pytest
 
 
 def test_orbit_from_tle():

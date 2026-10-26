@@ -1,8 +1,10 @@
 # This defines fixtures that gives the paths to various directories with
 # test data
-from pathlib import Path
-import pytest
 import warnings
+from pathlib import Path
+
+import pytest
+
 from geocal import SpiceHelper
 
 

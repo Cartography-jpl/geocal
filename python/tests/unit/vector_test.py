@@ -1,5 +1,6 @@
-from geocal import MapInfo, GeodeticConverter
 import numpy.testing as npt
+
+from geocal import GeodeticConverter, MapInfo
 
 
 def test_convert_vector():

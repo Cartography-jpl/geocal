@@ -1,5 +1,6 @@
-from geocal import Time, KeplerOrbit, OrbitArray_Eci_TimeJ2000
 import numpy as np
+
+from geocal import KeplerOrbit, OrbitArray_Eci_TimeJ2000, Time
 
 
 def test_orbit_array():

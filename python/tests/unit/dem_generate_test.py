@@ -1,16 +1,18 @@
+import pickle
+from multiprocessing import Pool
+
+import numpy.testing as npt
+import pytest
+from fixtures.require_check import require_serialize
+
 from geocal import (
-    VicarLiteRasterImage,
-    VicarLiteDem,
-    VicarImageGroundConnection,
     DemGenerate,
     GdalRasterImage,
     SubRasterImage,
+    VicarImageGroundConnection,
+    VicarLiteDem,
+    VicarLiteRasterImage,
 )
-from multiprocessing import Pool
-import pickle
-import pytest
-import numpy.testing as npt
-from fixtures.require_check import require_serialize
 
 
 @pytest.fixture(scope="function")

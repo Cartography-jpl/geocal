@@ -1,8 +1,10 @@
-from geocal import pds_label_text, pds_label, SpiceKernelByTime, Time
-from fixtures.require_check import require_mars_spice
-import os
 import glob
+import os
+
 import pytest
+from fixtures.require_check import require_mars_spice
+
+from geocal import SpiceKernelByTime, Time, pds_label, pds_label_text
 
 
 def test_pds_label_text(unit_test_data):

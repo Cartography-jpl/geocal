@@ -1,5 +1,6 @@
-from .vicar_func import add_tae_path, set_original_env
 import pytest
+
+from .vicar_func import add_tae_path, set_original_env
 
 
 @pytest.fixture(scope="function")

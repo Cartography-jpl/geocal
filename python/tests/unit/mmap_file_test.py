@@ -1,8 +1,10 @@
-from geocal import MapInfo, GeodeticConverter, mmap_file
-from fixtures.require_check import require_vicar
-import numpy as np
 import pickle
+
+import numpy as np
 import pytest
+from fixtures.require_check import require_vicar
+
+from geocal import GeodeticConverter, MapInfo, mmap_file
 
 
 @require_vicar

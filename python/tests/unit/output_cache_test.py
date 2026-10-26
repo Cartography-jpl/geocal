@@ -1,7 +1,9 @@
-from geocal import OutputCache, OutLocalTarget, OutTempDirLocalTarget, makedirs_p
-from fixtures.require_check import require_rsync
 import os
 import shutil
+
+from fixtures.require_check import require_rsync
+
+from geocal import OutLocalTarget, OutputCache, OutTempDirLocalTarget, makedirs_p
 
 
 @require_rsync

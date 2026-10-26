@@ -1,19 +1,20 @@
+import math
+
 from geocal import (
-    HdfOrbit_EciTod_TimeAcs,
-    OrbitOffsetCorrection,
-    QuaternionCamera,
-    Quaternion_double,
     FrameCoordinate,
-    SimpleDem,
-    Time,
+    HdfOrbit_EciTod_TimeAcs,
     IgcCollectionOrbitData,
     ImageCoordinate,
+    OrbitOffsetCorrection,
+    Quaternion_double,
+    QuaternionCamera,
+    SimpleDem,
+    SimultaneousBundleAdjustment,
     TiePoint,
     TiePointCollection,
-    SimultaneousBundleAdjustment,
+    Time,
     lm_optimize,
 )
-import math
 
 
 def test_time(unit_test_data):
@@ -48,7 +49,7 @@ def test_time(unit_test_data):
     igc_coll = IgcCollectionOrbitData(orb, cam, demin)
     for i in range(nimg):
         tm = t1 + i * 0.2
-        igc_coll.add_image(None, tm, "Image %d" % i)
+        igc_coll.add_image(None, tm, f"Image {i:d}")
         igc_coll.orbit.insert_attitude_time_point(tm)
         parameter_true.extend([100, 4 + 0.1 * i, 3 - 0.1 * i])
 

@@ -17,11 +17,12 @@ Now, Bar.foo.__doc__ == Bar().foo.__doc__ == Foo.foo.__doc__ == "Frobber"
 """
 
 from __future__ import annotations
+
 from functools import wraps
 from typing import Any
 
 
-class DocInherit(object):
+class DocInherit:
     """
     Docstring inheriting method descriptor
 
@@ -61,11 +62,11 @@ class DocInherit(object):
 
     def use_parent_doc(self, func: Any, source: Any) -> Any:
         if source is None:
-            raise NameError("Can't find '%s' in parents" % self.name)
+            raise NameError(f"Can't find '{self.name}' in parents")
         func.__doc__ = source.__doc__
         return func
 
 
 doc_inherit = DocInherit
 
-__all__ = ["doc_inherit", "DocInherit"]
+__all__ = ["DocInherit", "doc_inherit"]

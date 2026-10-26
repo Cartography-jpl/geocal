@@ -1,30 +1,31 @@
+import re
+
 from geocal_swig import (
     Rsm,
-    RsmId,
-    RsmMultiSection,
-    RsmRationalPolynomial,
-    RsmGrid,
-    RsmRpPlusGrid,
     RsmAdjustableParameterA,
     RsmAdjustableParameterB,
     RsmDirectCovarianceA,
+    RsmGrid,
+    RsmId,
     RsmIndirectCovarianceB,
+    RsmMultiSection,
+    RsmRationalPolynomial,
+    RsmRpPlusGrid,
 )
-import re
 
 try:
     from pynitf import (
         NitfSegmentHook,
         NitfSegmentHookSet,
-        TreRSMIDA,
+        TreRSMAPA,
+        TreRSMAPB,
+        TreRSMDCA,
+        TreRSMECB,
         TreRSMGGA,
         TreRSMGIA,
+        TreRSMIDA,
         TreRSMPCA,
         TreRSMPIA,
-        TreRSMAPA,
-        TreRSMDCA,
-        TreRSMAPB,
-        TreRSMECB,
         read_tre_data,
     )
 
@@ -132,14 +133,14 @@ if have_pynitf and not suppress_rsm:
                     t.update_raw_field()
                     seg.tre_list.append(t)
                 else:
-                    raise RuntimeError(
+                    raise TypeError(
                         "Unknown section in RsmMultiSection " + str(v.section(0, 0))
                     )
                 for i in range(v.number_row_section):
                     for j in range(v.number_col_section):
                         self._rsm_add_rec(seg, v.section(i, j))
             else:
-                raise RuntimeError("Unknown Rsm element " + str(v))
+                raise TypeError("Unknown Rsm element " + str(v))
 
         def before_write_hook(self, seg, nitf_file):
             """Remove all the existing RSM TREs (if any), and add the TREs
@@ -193,7 +194,7 @@ if have_pynitf and not suppress_rsm:
             t = self._rsm_find_tre_list(seg, tre_tag, edition, sec_row, sec_col)
             if len(t) > 1:
                 raise RuntimeError(
-                    "Found multiple TRE %s where only one expected" % tre_tag
+                    f"Found multiple TRE {tre_tag} where only one expected"
                 )
             return t[0] if len(t) == 1 else None
 
@@ -229,7 +230,7 @@ if have_pynitf and not suppress_rsm:
                         )
                         if t is None:
                             raise RuntimeError(
-                                "Could find RSMPCA for (%d, %d)" % (i + 1, j + 1)
+                                f"Could find RSMPCA for ({i + 1:d}, {j + 1:d})"
                             )
                         rsm_rp.section(i, j, t.rsm_rational_polynomial)
             if self._rsm_find_tre(seg, "RSMGIA", edition) is not None:
@@ -241,7 +242,7 @@ if have_pynitf and not suppress_rsm:
                         )
                         if t is None:
                             raise RuntimeError(
-                                "Could find RSMGGA for (%d, %d)" % (i + 1, j + 1)
+                                f"Could find RSMGGA for ({i + 1:d}, {j + 1:d})"
                             )
                         rsm_g.section(i, j, t.rsm_grid)
             if (
@@ -276,7 +277,7 @@ if have_pynitf and not suppress_rsm:
             that this class has handled the TRE printing. Otherwise, we
             call print on the tre"""
             if tre.tre_tag in self.rsm_tre_tag_list:
-                print("%s: See RSM above" % tre.tre_tag, file=fh)
+                print(f"{tre.tre_tag}: See RSM above", file=fh)
                 return True
             return False
 

@@ -1,24 +1,24 @@
 # This generates an RSM form various instruments. There is already general
 # RSM code, but this has the various choices appropriate to each instrument.
 
-from geocal_swig import (
-    LocalRcParameter,
-    LocalRcConverter,
-    RsmGrid,
-    RsmRationalPolynomial,
-    RsmMultiSection,
-    RsmRpPlusGrid,
-    Rsm,
-    distance,
-    PlanetConstant,
-    SpiceHelper,
-    ImageCoordinate,
-)
-import matplotlib.pylab as plt
 import matplotlib as mpl
-import seaborn as sns
-from matplotlib.backends.backend_pdf import PdfPages
+import matplotlib.pylab as plt
 import numpy as np
+import seaborn as sns
+from geocal_swig import (
+    ImageCoordinate,
+    LocalRcConverter,
+    LocalRcParameter,
+    PlanetConstant,
+    Rsm,
+    RsmGrid,
+    RsmMultiSection,
+    RsmRationalPolynomial,
+    RsmRpPlusGrid,
+    SpiceHelper,
+    distance,
+)
+from matplotlib.backends.backend_pdf import PdfPages
 
 
 def rsm_plot_diff(r, igc, fname=None, min_height=-5000, max_height=-1500):
@@ -28,7 +28,7 @@ def rsm_plot_diff(r, igc, fname=None, min_height=-5000, max_height=-1500):
     If a file is supplied, we also write out the cross section plots."""
 
     dem_nominal = (max_height + min_height) / 2.0
-    ln, smp, lncalc, smpcalc, distance_true_vs_calc = r.compare_igc(
+    ln, smp, lncalc, smpcalc, _distance_true_vs_calc = r.compare_igc(
         igc, igc.number_line, 5, dem_nominal
     )
     print(
@@ -50,7 +50,11 @@ def rsm_plot_diff(r, igc, fname=None, min_height=-5000, max_height=-1500):
     plt.clf()
     plt.ylim(-2, 2)
     for i in range(smp.shape[1]):
-        plt.plot(ln[:, i], lncalc[:, i] - ln[:, i], label="Sample %d" % smp[0, i])
+        plt.plot(
+            ln[:, i],
+            lncalc[:, i] - ln[:, i],
+            label=f"Sample {int(smp[0, i]):d}",
+        )
     plt.legend()
     plt.title("Line diff")
     plt.xlabel("Line")
@@ -59,7 +63,11 @@ def rsm_plot_diff(r, igc, fname=None, min_height=-5000, max_height=-1500):
     plt.clf()
     plt.ylim(-2, 2)
     for i in range(smp.shape[1]):
-        plt.plot(ln[:, i], smpcalc[:, i] - smp[:, i], label="Sample %d" % smp[0, i])
+        plt.plot(
+            ln[:, i],
+            smpcalc[:, i] - smp[:, i],
+            label=f"Sample {int(smp[0, i]):d}",
+        )
     plt.legend()
     plt.title("Sample diff")
     plt.xlabel("Line")
@@ -180,4 +188,4 @@ def rsm_hirise(igc, diagnostic=False, min_height=-5000, max_height=-1500):
     return r
 
 
-__all__ = ["rsm_plot_diff", "rsm_context", "rsm_hrsc", "rsm_hirise"]
+__all__ = ["rsm_context", "rsm_hirise", "rsm_hrsc", "rsm_plot_diff"]

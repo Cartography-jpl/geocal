@@ -1,10 +1,12 @@
 try:
-    from geocal import ShapeFile, ShapeLayer
     from osgeo import ogr
+
+    from geocal import ShapeFile, ShapeLayer
 except ImportError:
     # Let this fail, it just means we can't run the unit test
     pass
 import shutil
+
 import pytest
 
 
@@ -14,7 +16,7 @@ import pytest
 def test_read(unit_test_data):
     """Test basic reading"""
     try:
-        ShapeFile
+        ShapeFile  # noqa: B018
     except NameError:
         pytest.skip("ShapeFile not available")
     sf = ShapeFile(str(unit_test_data / "FRST_POIof090514.shp"))
@@ -32,16 +34,16 @@ def test_read(unit_test_data):
 def test_footprint_poi_intersect(unit_test_data):
     """Test finding footprints that match a particular POI set."""
     try:
-        ShapeFile
+        ShapeFile  # noqa: B018
     except NameError:
         pytest.skip("ShapeFile not available")
     sh = ShapeFile(str(unit_test_data / "poi.shp"))
     fp = ShapeFile(str(unit_test_data / "footprint.shp"))
     ly = fp["footprint"]
-    assert len(ly), 16830
+    assert len(ly) == 16830
     ly.set_spatial_filter(sh["poi"].geometry_collection())
     ly.set_attribute_filter("Camera = 1")
-    assert len(ly), 30
+    assert len(ly) == 30
 
 
 @pytest.mark.skip(
@@ -50,7 +52,7 @@ def test_footprint_poi_intersect(unit_test_data):
 def test_write():
     """Test basic writing"""
     try:
-        ShapeFile
+        ShapeFile  # noqa: B018
     except NameError:
         pytest.skip("ShapeFile not available")
     shutil.rmtree("test_dir", True)

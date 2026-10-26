@@ -1,17 +1,18 @@
-from geocal_swig import (
-    QuaternionOrbitData,
-    rad_to_deg,
-    determine_quat_rot,
-    speed_of_light,
-    ScLookVector,
-    quat_normalize,
-    deg_to_rad,
-    quat_rot_z,
-    KeplerOrbit,
-    Time,
-)
 import math
+
 import numpy as np
+from geocal_swig import (
+    KeplerOrbit,
+    QuaternionOrbitData,
+    ScLookVector,
+    Time,
+    deg_to_rad,
+    determine_quat_rot,
+    quat_normalize,
+    quat_rot_z,
+    rad_to_deg,
+    speed_of_light,
+)
 
 
 @classmethod
@@ -30,7 +31,7 @@ def _kepler_orbit_from_tle(self, tle):
     # Note we assume year is for 20xx. We'd need to add handling for
     # older TLEs for 19xx.
     epoch = (
-        Time.parse_time("20%s-01-01T00:00:00Z" % t[0:2])
+        Time.parse_time(f"20{t[0:2]}-01-01T00:00:00Z")
         + (float(t[2:]) - 1) * 24 * 60 * 60
     )
     # Look for mu at http://www.orbiterwiki.org/wiki/Orbital_elements

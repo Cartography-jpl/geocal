@@ -1,23 +1,25 @@
-from geocal_swig import (
-    ImageGroundConnection,
-    GdalRasterImage,
-    PlanetSimpleDem,
-    PlanetConstant,
-    PlanetFixed,
-    Time,
-    ImageCoordinate,
-    GlasGfmCamera,
-    CartesianFixedLookVector,
-    ScLookVector,
-)
+import csv
 import json
 import os
-from .tempdir import run_in_tempdir
-from .isis_support import setup_isis
 import subprocess
-import pandas as pd
-import csv
+
 import numpy as np
+import pandas as pd
+from geocal_swig import (
+    CartesianFixedLookVector,
+    GdalRasterImage,
+    GlasGfmCamera,
+    ImageCoordinate,
+    ImageGroundConnection,
+    PlanetConstant,
+    PlanetFixed,
+    PlanetSimpleDem,
+    ScLookVector,
+    Time,
+)
+
+from .isis_support import setup_isis
+from .tempdir import run_in_tempdir
 
 
 class IsisIgc(ImageGroundConnection):
@@ -71,8 +73,8 @@ class IsisIgc(ImageGroundConnection):
                 f"from={self.fname}",
                 "to=campt.csv",
                 "type=IMAGE",
-                f"line={str(ic.line + 0.5)}",
-                f"sample={str(ic.sample + 0.5)}",
+                f"line={ic.line + 0.5!s}",
+                f"sample={ic.sample + 0.5!s}",
                 "format=flat",
             ],
             check=True,
@@ -99,8 +101,8 @@ class IsisIgc(ImageGroundConnection):
                 f"from={self.fname}",
                 "to=campt.csv",
                 "type=IMAGE",
-                f"line={str(ic.line + 0.5)}",
-                f"sample={str(ic.sample + 0.5)}",
+                f"line={ic.line + 0.5!s}",
+                f"sample={ic.sample + 0.5!s}",
                 "format=flat",
             ],
             check=True,
@@ -127,8 +129,8 @@ class IsisIgc(ImageGroundConnection):
                 f"from={self.fname}",
                 "to=campt.csv",
                 "type=IMAGE",
-                f"line={str(ic.line + 0.5)}",
-                f"sample={str(ic.sample + 0.5)}",
+                f"line={ic.line + 0.5!s}",
+                f"sample={ic.sample + 0.5!s}",
                 "format=flat",
             ],
             check=True,
@@ -157,8 +159,8 @@ class IsisIgc(ImageGroundConnection):
                 f"from={self.fname}",
                 "to=campt.csv",
                 "type=GROUND",
-                f"latitude={str(lat)}",
-                f"longitude={str(lon)}",
+                f"latitude={lat!s}",
+                f"longitude={lon!s}",
                 "format=flat",
             ],
             check=True,
@@ -176,8 +178,8 @@ class IsisIgc(ImageGroundConnection):
                 f"from={self.fname}",
                 "to=campt.csv",
                 "type=IMAGE",
-                f"line={str(ic.line + 0.5)}",
-                f"sample={str(ic.sample + 0.5)}",
+                f"line={ic.line + 0.5!s}",
+                f"sample={ic.sample + 0.5!s}",
                 "format=flat",
             ],
             check=True,

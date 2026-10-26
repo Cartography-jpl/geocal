@@ -1,15 +1,16 @@
 import geocal
 
 try:
+    import cv2
     import matplotlib.pyplot as plt
+    import numpy as np
     from matplotlib.backends.backend_pdf import PdfPages
     from pptx import Presentation
     from pptx.util import Inches
-    import numpy as np
-    import cv2
 except ImportError:
     pass
 from io import BytesIO
+
 import pytest
 
 
@@ -84,8 +85,8 @@ def test_sift_default(pdf_file, ppt_file, igccol):
     fdetect = cv2.xfeatures2d.SIFT_create(number_feature, number_octave_levels)
     tp_gen = geocal.TiePointCollectFM(igccol, fdetect=fdetect, skip_ray_intersect=True)
     tplist = tp_gen.tie_point_list()
-    print("SIFT - %d points" % len(tplist))
-    plot_data(igccol, tplist, "SIFT default\n%d points" % len(tplist))
+    print(f"SIFT - {len(tplist):d} points")
+    plot_data(igccol, tplist, f"SIFT default\n{len(tplist):d} points")
     ppt_save(ppt_file)
     pdf_file.savefig()
 
@@ -96,8 +97,8 @@ def test_surf_default(pdf_file, ppt_file, igccol):
     fdetect = cv2.xfeatures2d.SURF_create(hessian_threshold)
     tp_gen = geocal.TiePointCollectFM(igccol, fdetect=fdetect, skip_ray_intersect=True)
     tplist = tp_gen.tie_point_list()
-    print("Surf - %d points" % len(tplist))
-    plot_data(igccol, tplist, "SURF default\n%d points" % len(tplist))
+    print(f"Surf - {len(tplist):d} points")
+    plot_data(igccol, tplist, f"SURF default\n{len(tplist):d} points")
     ppt_save(ppt_file)
     pdf_file.savefig()
 
@@ -107,8 +108,8 @@ def test_kaze_default(pdf_file, ppt_file, igccol):
     fdetect = cv2.KAZE.create()
     tp_gen = geocal.TiePointCollectFM(igccol, fdetect=fdetect, skip_ray_intersect=True)
     tplist = tp_gen.tie_point_list()
-    print("KAZE - %d points" % len(tplist))
-    plot_data(igccol, tplist, "KAZE default\n%d points" % len(tplist))
+    print(f"KAZE - {len(tplist):d} points")
+    plot_data(igccol, tplist, f"KAZE default\n{len(tplist):d} points")
     ppt_save(ppt_file)
     pdf_file.savefig()
 
@@ -120,8 +121,8 @@ def test_akaze_default(pdf_file, ppt_file, igccol):
         igccol, fdetect=fdetect, norm_type=cv2.NORM_HAMMING, skip_ray_intersect=True
     )
     tplist = tp_gen.tie_point_list()
-    print("AKAZE - %d points" % len(tplist))
-    plot_data(igccol, tplist, "AKAZE default\n%d points" % len(tplist))
+    print(f"AKAZE - {len(tplist):d} points")
+    plot_data(igccol, tplist, f"AKAZE default\n{len(tplist):d} points")
     ppt_save(ppt_file)
     pdf_file.savefig()
 
@@ -134,8 +135,8 @@ def test_brisk_default(pdf_file, ppt_file, igccol):
         igccol, fdetect=fdetect, norm_type=cv2.NORM_HAMMING, skip_ray_intersect=True
     )
     tplist = tp_gen.tie_point_list()
-    print("BRISK - %d points" % len(tplist))
-    plot_data(igccol, tplist, "BRISK default\n%d points" % len(tplist))
+    print(f"BRISK - {len(tplist):d} points")
+    plot_data(igccol, tplist, f"BRISK default\n{len(tplist):d} points")
     ppt_save(ppt_file)
     pdf_file.savefig()
 
@@ -148,7 +149,7 @@ def test_orb_default(pdf_file, ppt_file, igccol):
         igccol, fdetect=fdetect, norm_type=cv2.NORM_HAMMING, skip_ray_intersect=True
     )
     tplist = tp_gen.tie_point_list()
-    print("ORB - %d points" % len(tplist))
-    plot_data(igccol, tplist, "ORB default\n%d points" % len(tplist))
+    print(f"ORB - {len(tplist):d} points")
+    plot_data(igccol, tplist, f"ORB default\n{len(tplist):d} points")
     ppt_save(ppt_file)
     pdf_file.savefig()

@@ -283,6 +283,10 @@ All tests are currently built into a single executable (`geocal_test_all`) that 
 
 ## Recent Changes and Migrations
 
+### GeoCal 2.0 (`develop_2_0` branch)
+
+The `develop_2_0` branch deliberately allows API breaking changes, so prefer the more correct design over backwards compatibility (e.g., raising `TypeError` rather than `RuntimeError` for type check failures). Record every user visible change, breaking changes especially, in `RELEASE_NOTES_2.0.md` at the top of the repository.
+
 ### CombineOrbit Migration (2026-06-20)
 
 The `CombineOrbit` class was moved from the `ecostress-level1` repository to `geocal-repo`:

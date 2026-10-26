@@ -1,6 +1,7 @@
-from geocal import pds_to_isis, isis_to_igc, ImageCoordinate, Planetocentric
-from conftest import long_test
 import pytest
+from conftest import long_test
+
+from geocal import ImageCoordinate, Planetocentric, isis_to_igc, pds_to_isis
 
 
 # Needs ISIS and Mars data. The original had a hard coded path to a ctx.cub

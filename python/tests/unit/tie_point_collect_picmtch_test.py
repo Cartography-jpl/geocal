@@ -1,26 +1,28 @@
+import subprocess
+
+import pytest
+from fixtures.require_check import (
+    require_vicar,
+    require_vicar_gdalplugin,
+    require_vicarb,
+)
+
 from geocal import (
-    VicarLiteDem,
-    RsmImageGroundConnection,
-    IgcArray,
-    TiePointCollectPicmtch,
-    VicarLiteRasterImage,
-    read_shelve,
-    write_shelve,
-    warp_image,
-    VicarImageCoordinate,
     IbisFile,
-    VicarImageGroundConnection,
+    IgcArray,
     MapInfoImageGroundConnection,
     PlanetConstant,
     PlanetSimpleDem,
+    RsmImageGroundConnection,
+    TiePointCollectPicmtch,
+    VicarImageCoordinate,
+    VicarImageGroundConnection,
+    VicarLiteDem,
+    VicarLiteRasterImage,
+    read_shelve,
+    warp_image,
+    write_shelve,
 )
-import subprocess
-from fixtures.require_check import (
-    require_vicarb,
-    require_vicar_gdalplugin,
-    require_vicar,
-)
-import pytest
 
 
 @require_vicarb
@@ -97,7 +99,8 @@ def test_mars_tp_picmtch(isolated_dir):
             bdir + "../mygdalcompare.py",
             "ctx1_full_corr_6m.img",
             bdir + "ctx1_full_corr_6m.img",
-        ]
+        ],
+        check=False,
     )
 
 

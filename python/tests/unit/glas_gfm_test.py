@@ -3,40 +3,42 @@ try:
 except ImportError:
     pass
 
-from geocal import (
-    IgcMsp,
-    SimpleDem,
-    ImageCoordinate,
-    distance,
-    Geodetic,
-    PosCsephb,
-    AttCsattb,
-    OrbitDes,
-    Ecr,
-    RefractionMsp,
-    quat_rot_x,
-    quat_rot_y,
-    deg_to_rad,
-    ConstantSpacingTimeTable,
-    write_shelve,
-    VelocityAberrationExact,
-    IpiImageGroundConnection,
-    Ipi,
-    GlasGfmCamera,
-    NoVelocityAberration,
-    Quaternion_double,
-    QuaternionOrbitData,
-    quaternion_to_array,
-)
-from fixtures.require_check import require_pynitf, require_msp
-import matplotlib.pylab as plt
-import matplotlib as mpl
-import seaborn as sns
-from matplotlib.backends.backend_pdf import PdfPages
-import numpy as np
 import subprocess
+
+import matplotlib as mpl
+import matplotlib.pylab as plt
+import numpy as np
 import pandas as pd
 import pytest
+import seaborn as sns
+from fixtures.require_check import require_msp, require_pynitf
+from matplotlib.backends.backend_pdf import PdfPages
+
+from geocal import (
+    AttCsattb,
+    ConstantSpacingTimeTable,
+    Ecr,
+    Geodetic,
+    GlasGfmCamera,
+    IgcMsp,
+    ImageCoordinate,
+    Ipi,
+    IpiImageGroundConnection,
+    NoVelocityAberration,
+    OrbitDes,
+    PosCsephb,
+    Quaternion_double,
+    QuaternionOrbitData,
+    RefractionMsp,
+    SimpleDem,
+    VelocityAberrationExact,
+    deg_to_rad,
+    distance,
+    quat_rot_x,
+    quat_rot_y,
+    quaternion_to_array,
+    write_shelve,
+)
 
 
 # This also works with an igc.
@@ -47,7 +49,7 @@ def rsm_plot_diff(r, igc, fname=None, min_height=-5000, max_height=-1500):
     If a file is supplied, we also write out the cross section plots."""
 
     dem_nominal = (max_height + min_height) / 2.0
-    ln, smp, lncalc, smpcalc, distance_true_vs_calc = r.compare_igc(
+    ln, smp, lncalc, smpcalc, _distance_true_vs_calc = r.compare_igc(
         igc, 1000, 5, dem_nominal
     )
     print(ln)
@@ -71,7 +73,11 @@ def rsm_plot_diff(r, igc, fname=None, min_height=-5000, max_height=-1500):
     plt.clf()
     plt.ylim(-0.1, 0.1)
     for i in range(smp.shape[1]):
-        plt.plot(ln[:, i], lncalc[:, i] - ln[:, i], label="Sample %d" % smp[0, i])
+        plt.plot(
+            ln[:, i],
+            lncalc[:, i] - ln[:, i],
+            label=f"Sample {int(smp[0, i]):d}",
+        )
     plt.legend()
     plt.title("Line diff")
     plt.xlabel("Line")
@@ -80,7 +86,11 @@ def rsm_plot_diff(r, igc, fname=None, min_height=-5000, max_height=-1500):
     plt.clf()
     plt.ylim(-0.2, 0.2)
     for i in range(smp.shape[1]):
-        plt.plot(ln[:, i], smpcalc[:, i] - smp[:, i], label="Sample %d" % smp[0, i])
+        plt.plot(
+            ln[:, i],
+            smpcalc[:, i] - smp[:, i],
+            label=f"Sample {int(smp[0, i]):d}",
+        )
     plt.legend()
     plt.title("Sample diff")
     plt.xlabel("Line")
@@ -108,13 +118,13 @@ def test_rip_glas(nitf_sample_rip):
     )
     print("Reference Point:", Geodetic(ref_pt))
     print(igc1.image_coordinate(ref_pt))
-    print("Refraction flag: %d" % glas.tre_csexrb.atm_refr_flag)
-    print("Velocity flag: %d" % glas.tre_csexrb.vel_aber_flag)
+    print(f"Refraction flag: {glas.tre_csexrb.atm_refr_flag:d}")
+    print(f"Velocity flag: {glas.tre_csexrb.vel_aber_flag:d}")
     igc2 = glas.igc()
     igc3 = IgcMsp(nitf_sample_rip, SimpleDem(), iseg_index, "RSM", "RSM")
-    print("Resolution %f m" % igc1.resolution_meter())
-    print("Resolution %f m" % igc2.resolution_meter())
-    print("Resolution %f m" % igc3.resolution_meter())
+    print(f"Resolution {igc1.resolution_meter():f} m")
+    print(f"Resolution {igc2.resolution_meter():f} m")
+    print(f"Resolution {igc3.resolution_meter():f} m")
     max_diff1 = -1e8
     max_diff2 = -1e8
     for i in range(0, igc2.number_line, 20):
@@ -182,8 +192,8 @@ def test_create_glas(nitf_sample_rip, isolated_dir):
     igc2 = IgcMsp("glas_test.ntf", SimpleDem(), 0, "GLAS", "GLAS")
     rsm_plot_diff(igc1, igc2, "diff.pdf")
     igc3 = f2.image_segment[0].glas_gfm.igc()
-    print("Resolution %f m" % igc1.resolution_meter())
-    print("Resolution %f m" % igc2.resolution_meter())
+    print(f"Resolution {igc1.resolution_meter():f} m")
+    print(f"Resolution {igc2.resolution_meter():f} m")
     max_diff1 = -1e8
     max_diff2 = -1e8
     for i in range(0, igc1.number_line, 20):
@@ -323,8 +333,8 @@ def test_create_gfm(isolated_dir, igc_gfm):
     rsm_plot_diff(igc_gfm, igc2, "diff.pdf")
     igc3 = f2.image_segment[0].glas_gfm.igc()
 
-    print("Resolution %f m" % igc_gfm.resolution_meter())
-    print("Resolution %f m" % igc_gfm.resolution_meter())
+    print(f"Resolution {igc_gfm.resolution_meter():f} m")
+    print(f"Resolution {igc_gfm.resolution_meter():f} m")
     max_diff1 = -1e8
     max_diff2 = -1e8
     for i in range(0, igc_gfm.number_line, 20):
@@ -464,7 +474,7 @@ def test_create_many_gfm(isolated_dir, igc_gfm):
 
     pt = igc_gfm.ground_coordinate(ImageCoordinate(1024, 1024))
     for i in range(300):
-        print("Doing %d" % i)
+        print(f"Doing {i:d}")
         img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8, idlvl=2 + i)
         for i1 in range(9):
             for i2 in range(10):
@@ -525,7 +535,9 @@ def test_gfm_nitfdiff(isolated_dir, igc_gfm):
     t.atm_refr_flag = 0
     f.write("gfm_test2.ntf")
     subprocess.run(
-        "NITF_PLUGIN=geocal nitf_diff gfm_test1.ntf gfm_test2.ntf", shell=True
+        "NITF_PLUGIN=geocal nitf_diff gfm_test1.ntf gfm_test2.ntf",
+        shell=True,
+        check=False,
     )
 
 
@@ -882,3 +894,15 @@ def test_create_dataset_refraction(igc_gfm, igc_staring, isolated_dir, unit_test
     igc_staring.velocity_aberration = VelocityAberrationExact()
     igc_staring.refraction = RefractionMsp(igc_gfm.camera.band_wavelength)
     write_shelve(unit_test_data / "igc_refraction_glas.xml", igc_staring)
+
+
+@require_pynitf
+def test_create_glas_gfm_unknown_igc_type():
+    """Creating a GlasGfm from an unsupported igc type is a TypeError"""
+    from types import SimpleNamespace
+
+    from geocal.glas_gfm import GlasGfm
+
+    igc = SimpleNamespace(platform_id="PLAT", payload_id="PAY", sensor_id="SEN")
+    with pytest.raises(TypeError):
+        GlasGfm.create(pynitf.NitfImageSegment(), igc)

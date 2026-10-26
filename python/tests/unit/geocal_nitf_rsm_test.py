@@ -1,73 +1,75 @@
 try:
-    import pynitf
-
     # Turn this on if errors are getting sucked up during testing and turned
     # into TreUnknown. We don't want this on all the time, because we have
     # some unit tests that really do want warnings only
     import warnings
 
+    import pynitf
+
     if True:
         warnings.filterwarnings("error", category=pynitf.TreWarning)
 except ImportError:
     pass
-from geocal import (
-    GdalRasterImage,
-    VicarRasterImage,
-    VicarLiteRasterImage,
-    RsmRationalPolynomial,
-    Rsm,
-    ImageCoordinate,
-    IgcMsp,
-    RsmBUnmodeledCovariance,
-    RsmIndirectCovarianceB,
-    RsmIdTiming,
-    RsmAdjustableParameterB,
-    Time,
-    WithParameter,
-    ArrayAd_double_1,
-    rad_to_arcsecond,
-    arcsecond_to_rad,
-    LocalRcParameter,
-    LocalRcConverter,
-    OrbitDataImageGroundConnection,
-    MemoryRasterImage,
-    SimpleDem,
-    FrameCoordinate,
-    QuaternionCamera,
-    Quaternion_double,
-    KeplerOrbit,
-    write_shelve,
-    RsmMultiSection,
-    RsmGrid,
-    RsmRpPlusGrid,
-    Geodetic,
-    distance,
-    GlasGfmCamera,
-    OrbitDes,
-    AttCsattb,
-    PosCsephb,
-    RsmBSubgroup,
-    IgcArray,
-    OrbitOffsetCorrection,
-    vector_string,
-)
+import io
+import itertools
+import math
+from multiprocessing import Pool
+
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import pytest
+import seaborn as sns
 from fixtures.require_check import (
-    require_pynitf,
     require_msp,
+    require_pynitf,
     require_serialize,
     require_vicar,
 )
-import io
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib as mpl
-import seaborn as sns
 from matplotlib.backends.backend_pdf import PdfPages
-import itertools
-from multiprocessing import Pool
-import math
-import pytest
+
+from geocal import (
+    ArrayAd_double_1,
+    AttCsattb,
+    FrameCoordinate,
+    GdalRasterImage,
+    Geodetic,
+    GlasGfmCamera,
+    IgcArray,
+    IgcMsp,
+    ImageCoordinate,
+    KeplerOrbit,
+    LocalRcConverter,
+    LocalRcParameter,
+    MemoryRasterImage,
+    OrbitDataImageGroundConnection,
+    OrbitDes,
+    OrbitOffsetCorrection,
+    PosCsephb,
+    Quaternion_double,
+    QuaternionCamera,
+    Rsm,
+    RsmAdjustableParameterB,
+    RsmBSubgroup,
+    RsmBUnmodeledCovariance,
+    RsmGrid,
+    RsmIdTiming,
+    RsmIndirectCovarianceB,
+    RsmMultiSection,
+    RsmRationalPolynomial,
+    RsmRpPlusGrid,
+    SimpleDem,
+    Time,
+    VicarLiteRasterImage,
+    VicarRasterImage,
+    WithParameter,
+    arcsecond_to_rad,
+    distance,
+    rad_to_arcsecond,
+    vector_string,
+    write_shelve,
+)
 
 
 def create_image_seg(f, num_line=9, num_sample=10, iid1="Test data"):
@@ -811,7 +813,7 @@ def test_tre_rsmida(rsm):
 # 1. Point calculation
 
 # This is row, col, height, latitude, longitude
-pcalc = dict()
+pcalc = {}
 pcalc["i_6130a.ntf"] = [
     [0, 0, -500, 33.1616263666, -117.0386236785],
     [1024, 0, -500, 33.1616140061, -117.0337581906],
@@ -1261,7 +1263,7 @@ def test_rsm_sample(isolated_dir, rsm_sample_data):
 
         for ln, smp, h, lat, lon in pcalc[fname]:
             ic_expect = ImageCoordinate(ln, smp)
-            ic_calc, in_valid_range = r.image_coordinate(Geodetic(lat, lon, h))
+            ic_calc, _in_valid_range = r.image_coordinate(Geodetic(lat, lon, h))
             if (
                 abs(ic_expect.line - ic_calc.line) >= 0.2
                 or abs(ic_expect.sample - ic_calc.sample) >= 0.2
@@ -1668,3 +1670,12 @@ def test_rsm_cov(isolated_dir):
         pd.DataFrame(np.abs(true_sample - calc_sample).flatten()).describe(),
     )
     print("Distance:\n", pd.DataFrame(distance_true_vs_calc.flatten()).describe())
+
+
+@require_pynitf
+def test_rsm_add_rec_unknown_type():
+    """An unrecognized Rsm element is a TypeError"""
+    from geocal.geocal_nitf_rsm import RsmImageSegmentHook
+
+    with pytest.raises(TypeError):
+        RsmImageSegmentHook()._rsm_add_rec(None, object())

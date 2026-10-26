@@ -1,12 +1,14 @@
 from __future__ import annotations
-import geocal_swig  # type: ignore
-import subprocess
+
 import os
+import subprocess
 import tempfile
 import typing
 
+import geocal_swig  # type: ignore
+
 if typing.TYPE_CHECKING:
-    from geocal_swig import GdalRasterImage, CartLabMultifile
+    from geocal_swig import CartLabMultifile, GdalRasterImage
 
 
 # Useful extensions to CartLabMultifile
@@ -85,7 +87,7 @@ def _create_image_chip(
             check=True,
         )
         subprocess.run(
-            f"gdalwarp -q -t_srs {tdir}/ichip.wkt -tr {res_x} {res_y} {tdir}/ichip_landsat.tif -overwrite -of {out_format} -r {resampling_method} {str(out_fname)}",
+            f"gdalwarp -q -t_srs {tdir}/ichip.wkt -tr {res_x} {res_y} {tdir}/ichip_landsat.tif -overwrite -of {out_format} -r {resampling_method} {out_fname!s}",
             shell=True,
             check=True,
         )

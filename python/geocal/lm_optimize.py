@@ -1,9 +1,11 @@
 from __future__ import annotations
+
+import logging
+import time
+from collections.abc import Callable, Sequence
+
 import numpy as np
 import scipy.sparse as sp
-import time
-import logging
-from typing import Sequence, Callable
 
 
 def lm_optimize(
@@ -85,13 +87,13 @@ def lm_optimize(
                 break
             else:
                 lam *= boost
-                log.info("Rejected Chisq: %f" % chisq)
-                log.info("Redoing iteration with lambda boosted to %f" % lam)
+                log.info(f"Rejected Chisq: {chisq:f}")
+                log.info(f"Redoing iteration with lambda boosted to {lam:f}")
         else:
             raise RuntimeError("Exceeded maximum number of iterators")
         if chisq < min_chisqr or (chisqold - chisq) / chisq < stopping_criteria:
             break
-        log.info("Done with iteration %d, chisq %f" % (i, chisq))
+        log.info(f"Done with iteration {i:d}, chisq {chisq:f}")
     else:
         raise RuntimeError("Exceeded maximum number of iterators")
     log.info("Done with optimize.")

@@ -2,11 +2,11 @@ from geocal_swig import GdalMultiBand
 
 try:
     from pynitf import (
-        NitfSegmentDataHandleSet,
-        NitfImageWithSubset,
-        NitfImageSegment,
         NitfDiffHandle,
         NitfDiffHandleSet,
+        NitfImageSegment,
+        NitfImageWithSubset,
+        NitfSegmentDataHandleSet,
     )
 
     have_pynitf = True
@@ -14,6 +14,7 @@ except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
     have_pynitf = False
 import logging
+
 import numpy as np
 
 # ---------------------------------------------------------
@@ -49,7 +50,7 @@ if have_pynitf:
             if segindex is None:
                 return False
             try:
-                self.data = GdalMultiBand("NITF_IM:%d:%s" % (segindex, fh.name))
+                self.data = GdalMultiBand(f"NITF_IM:{segindex:d}:{fh.name}")
             except RuntimeError:
                 return False
             self.data_start = fh.tell()
@@ -114,10 +115,10 @@ if have_pynitf:
             raise RuntimeError("Need nitf_file to get gdal_multi_band")
         if self.nitf_file.file_name is None:
             raise RuntimeError("Need nitf_file.file_name to get gdal_multi_band")
-        segindex = [
+        segindex = next(
             t for t, iseg in enumerate(self.nitf_file.image_segment) if iseg is self
-        ][0]
-        return GdalMultiBand("NITF_IM:%d:%s" % (segindex, self.nitf_file.file_name))
+        )
+        return GdalMultiBand(f"NITF_IM:{segindex:d}:{self.nitf_file.file_name}")
 
     def _gdal_raster_image(self):
         """Because it is pretty common to have a 1 band image, return

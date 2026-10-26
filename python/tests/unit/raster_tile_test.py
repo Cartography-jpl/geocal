@@ -1,4 +1,4 @@
-from geocal import GdalRasterImage, tile_iterator, read_iterator
+from geocal import GdalRasterImage, read_iterator, tile_iterator
 
 
 # Nothing special about this data, it is just a reasonable size for

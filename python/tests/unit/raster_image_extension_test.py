@@ -1,6 +1,7 @@
-from geocal import VicarLiteRasterImage, ImageCoordinate
 import numpy as np
 import pytest
+
+from geocal import ImageCoordinate, VicarLiteRasterImage
 
 
 @pytest.fixture(scope="function")
@@ -17,9 +18,7 @@ def test_past_edge(img, d):
     t = img.read_with_pad(-1, -2, 10, 9)
     for i in range(10):
         for j in range(9):
-            if i - 1 < 0:
-                assert t[i, j] == 0
-            elif j - 2 < 0:
+            if i - 1 < 0 or j - 2 < 0:
                 assert t[i, j] == 0
             else:
                 assert t[i, j] == d[i - 1, j - 2]
@@ -29,9 +28,7 @@ def test_past_edge2(img, d):
     t = img.read_with_pad(2, 3, 10, 9)
     for i in range(10):
         for j in range(9):
-            if i + 2 >= 10:
-                assert t[i, j] == 0
-            elif j + 3 >= 10:
+            if i + 2 >= 10 or j + 3 >= 10:
                 assert t[i, j] == 0
             else:
                 assert t[i, j] == d[i + 2, j + 3]
@@ -41,9 +38,7 @@ def test_past_edge3(img, d):
     t = img.read_with_pad(-1, -2, 15, 15)
     for i in range(10):
         for j in range(9):
-            if i - 1 < 0 or i - 1 > 10:
-                assert t[i, j] == 0
-            elif j - 2 < 0 or j - 2 > 10:
+            if i - 1 < 0 or i - 1 > 10 or j - 2 < 0 or j - 2 > 10:
                 assert t[i, j] == 0
             else:
                 assert t[i, j] == d[i - 1, j - 2]

@@ -13,13 +13,13 @@
 # THE SOFTWARE.
 
 import os
-import tempfile
 import shutil
-from functools import wraps
+import tempfile
 from contextlib import contextmanager
+from functools import wraps
 
 
-class TempDir(object):
+class TempDir:
     """class for temporary directories
     creates a (named) directory which is deleted after use.
     All files created within the directory are destroyed
@@ -80,7 +80,7 @@ class TempDir(object):
 
     def __str__(self):
         if self.name:
-            return "temporary directory at: %s" % (self.name,)
+            return f"temporary directory at: {self.name}"
         else:
             return "dissolved temporary directory"
 

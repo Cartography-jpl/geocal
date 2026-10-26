@@ -1,9 +1,12 @@
 from __future__ import annotations
-from .instrument_reflectance import InstrumentReflectance, PanInstrumentReflectance
-import xml.etree.ElementTree as ET
+
 import math
 import os
+import xml.etree.ElementTree as ET
+
 import numpy as np
+
+from .instrument_reflectance import InstrumentReflectance, PanInstrumentReflectance
 
 
 class SpotReflectance(InstrumentReflectance, PanInstrumentReflectance):

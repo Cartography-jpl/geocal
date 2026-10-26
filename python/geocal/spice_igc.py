@@ -1,11 +1,11 @@
-from geocal_swig import (
-    ImageGroundConnection,
-    PlanetSimpleDem,
-    ImageCoordinate,
-    distance,
-    ImageGroundConnectionFailed,
-)
 import scipy.optimize
+from geocal_swig import (
+    ImageCoordinate,
+    ImageGroundConnection,
+    ImageGroundConnectionFailed,
+    PlanetSimpleDem,
+    distance,
+)
 
 
 class SpiceIgc(ImageGroundConnection):
@@ -39,7 +39,7 @@ class SpiceIgc(ImageGroundConnection):
         super().__init__(dem, self._img, None, "SPICE IGC")
 
     def pixel_time(self, ic):
-        tm, fc = self.time_table.time(ic)
+        tm, _fc = self.time_table.time(ic)
         return tm
 
     def ground_coordinate_dem(self, ic, dem):

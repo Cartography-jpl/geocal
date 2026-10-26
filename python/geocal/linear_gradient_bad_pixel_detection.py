@@ -1,8 +1,9 @@
 import numpy as np
+
 import geocal
 
 
-class LinearGradientBadPixelDetection(object):
+class LinearGradientBadPixelDetection:
     """This class is used to detect bad/outlier pixels in an image. This class
     looks at the gradient in 4 directions for each pixel (up/down/left/right)
     and looks for pixels with larger than normal gradients in a threshold

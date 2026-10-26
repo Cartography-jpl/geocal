@@ -3,18 +3,20 @@
 # separate functions for each type of camera. Perhaps we can consolidate these
 # somehow at some point.
 
-from geocal_swig import (
-    SpiceHelper,
-    QuaternionCamera,
-    Quaternion_double,
-    CameraRadialDistortionAndTransform,
-    SubCamera,
-    CameraRadialDistortion,
-    FrameCoordinate,
-)
-from .sqlite_shelf import read_shelve
-import numpy as np
 import os
+
+import numpy as np
+from geocal_swig import (
+    CameraRadialDistortion,
+    CameraRadialDistortionAndTransform,
+    FrameCoordinate,
+    Quaternion_double,
+    QuaternionCamera,
+    SpiceHelper,
+    SubCamera,
+)
+
+from .sqlite_shelf import read_shelve
 
 isis_camera_dir = os.path.abspath(os.path.dirname(__file__)) + "/data/isis_camera/"
 
@@ -49,7 +51,9 @@ def hrsc_camera():
     # Note that we would subtract here, except that we have
     # "INCREASE_IS_NEGATIVE", so this flips the sign
     center_x, center_y = SpiceHelper.kernel_data_array_double("INS-41215_CCD_CENTER")
-    bore_x, bore_y, bore_z = SpiceHelper.kernel_data_array_double("INS-41215_BORESIGHT")
+    bore_x, bore_y, _bore_z = SpiceHelper.kernel_data_array_double(
+        "INS-41215_BORESIGHT"
+    )
     principal_point = FrameCoordinate(
         center_y - 0.5 + bore_y / pitch_y,
         center_x - 0.5 - left_shield + bore_x / pitch_x,
@@ -82,11 +86,11 @@ def hirise_camera(ccd_number, bin_mode=1, tdi_mode=128):
     focal_length = SpiceHelper.kernel_data_double("INS-74699_FOCAL_LENGTH")
     pitch = SpiceHelper.kernel_data_double("INS-74699_PIXEL_PITCH")
     ik_code = -74600 - ccd_number
-    nsamp = SpiceHelper.kernel_data_double("INS%d_PIXEL_SAMPLES" % ik_code)
+    nsamp = SpiceHelper.kernel_data_double(f"INS{ik_code:d}_PIXEL_SAMPLES")
     od_k = SpiceHelper.kernel_data_array_double("INS-74699_OD_K")
-    trans_x = SpiceHelper.kernel_data_array_double("INS%d_TRANSX" % ik_code)
-    trans_y = SpiceHelper.kernel_data_array_double("INS%d_TRANSY" % ik_code)
-    ccd_cen = SpiceHelper.kernel_data_array_double("INS%d_CCD_CENTER" % ik_code)
+    trans_x = SpiceHelper.kernel_data_array_double(f"INS{ik_code:d}_TRANSX")
+    trans_y = SpiceHelper.kernel_data_array_double(f"INS{ik_code:d}_TRANSY")
+    ccd_cen = SpiceHelper.kernel_data_array_double(f"INS{ik_code:d}_CCD_CENTER")
     # Extra 0.5 pixel is because the convention in the SPICE kernels is to
     # have (0,0) be the upper left hand corner of first pixel, while we
     # use (0,0) for the center of the pixel.
@@ -289,10 +293,10 @@ def lro_wac_camera(band=3, mode="COLOR"):
 
 
 __all__ = [
-    "hrsc_camera",
     "ctx_camera",
     "hirise_camera",
-    "lro_wac_camera",
+    "hrsc_camera",
     "lro_nac_camera",
     "lro_nac_camera_from_isis",
+    "lro_wac_camera",
 ]

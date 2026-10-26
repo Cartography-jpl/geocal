@@ -1,13 +1,15 @@
+import os
+
+import pytest
+from fixtures.require_check import require_rsync
+
 from geocal import (
-    makedirs_p,
+    InLocalTarget,
+    OutLocalTarget,
     OutTempDirLocalTarget,
     OutTempLocalTarget,
-    OutLocalTarget,
-    InLocalTarget,
+    makedirs_p,
 )
-import os
-from fixtures.require_check import require_rsync
-import pytest
 
 
 @pytest.fixture(scope="function")

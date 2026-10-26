@@ -1,19 +1,19 @@
-from geocal_swig import PosCsephb, AttCsattb, OrbitDes, GlasGfmCamera
+from geocal_swig import AttCsattb, GlasGfmCamera, OrbitDes, PosCsephb
 
 try:
     from pynitf import (
-        DesCSEPHB,
         DesCSATTB,
+        DesCSEPHB,
         DesCSSFAB,
-        NitfImageSegment,
-        NitfFile,
         NitfDesSegment,
+        NitfFile,
+        NitfImageSegment,
     )
 
     have_pynitf = True
     from .geocal_nitf_misc import (
-        nitf_date_second_field_to_geocal_time,
         geocal_time_to_nitf_date_second_field,
+        nitf_date_second_field_to_geocal_time,
     )
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
@@ -69,7 +69,7 @@ if have_pynitf:
         f = iseg.nitf_file
         if f is None:
             raise RuntimeError(
-                "Need to have nitf_file set for image segment level %d" % lv
+                f"Need to have nitf_file set for image segment level {lv:d}"
             )
         possible = [
             d
@@ -84,8 +84,7 @@ if have_pynitf:
             return None
         if len(possible) > 1:
             raise RuntimeError(
-                "Found more than one possible pos_csephb for image esegment level %d"
-                % lv
+                f"Found more than one possible pos_csephb for image esegment level {lv:d}"
             )
         return possible[0].des.pos_csephb
 
@@ -109,7 +108,7 @@ if have_pynitf:
         f = iseg.nitf_file
         if f is None:
             raise RuntimeError(
-                "Need to have nitf_file set for image segment level %d" % lv
+                f"Need to have nitf_file set for image segment level {lv:d}"
             )
         possible = [
             d
@@ -124,8 +123,7 @@ if have_pynitf:
             return None
         if len(possible) > 1:
             raise RuntimeError(
-                "Found more than one possible pos_csephb for image esegment level %d"
-                % lv
+                f"Found more than one possible pos_csephb for image esegment level {lv:d}"
             )
         return possible[0].des.att_csattb
 
@@ -216,12 +214,12 @@ if have_pynitf:
                 cam.set_number_line(int(maxln))
                 cam.set_number_sample(int(maxsmp))
             else:
-                raise RuntimeError("Unknown field angle type %d" % d.field_angle_type)
+                raise RuntimeError(f"Unknown field angle type {d.field_angle_type:d}")
             if d.telescope_optics_flag != 0:
                 # We could perhaps add this if needed in the future
                 raise RuntimeError("We don't support telescope optics correction")
         else:
-            raise RuntimeError("Unknown sensor type %s" % d.sensor_type)
+            raise RuntimeError(f"Unknown sensor type {d.sensor_type}")
         cam.id = ""
         return cam
 
@@ -279,21 +277,20 @@ if have_pynitf:
                             d.fa_y3[i1, i2, i3] = fa[i2, i3, 1, 1, 1]
                             d.fa_x4[i1, i2, i3] = fa[i2, i3, 1, 0, 0]
                             d.fa_y4[i1, i2, i3] = fa[i2, i3, 1, 0, 1]
-                pass
             else:
-                raise RuntimeError("Unknown field angle type %d" % cam.field_angle_type)
+                raise RuntimeError(f"Unknown field angle type {cam.field_angle_type:d}")
             # We don't support the telescope optics correction. We could
             # perhaps add this in the future
             d.telescope_optics_flag = 0
         else:
-            raise RuntimeError("Unknown sensor type %s" % cam.sensor_type)
+            raise RuntimeError(f"Unknown sensor type {cam.sensor_type}")
 
     def _camera_glas_gfm(iseg):
         lv = iseg.idlvl
         f = iseg.nitf_file
         if f is None:
             raise RuntimeError(
-                "Need to have nitf_file set for image segment level %d" % lv
+                f"Need to have nitf_file set for image segment level {lv:d}"
             )
         possible = [
             d
@@ -308,8 +305,7 @@ if have_pynitf:
             return None
         if len(possible) > 1:
             raise RuntimeError(
-                "Found more than one possible camera_glas_gfm for image segment level %d"
-                % lv
+                f"Found more than one possible camera_glas_gfm for image segment level {lv:d}"
             )
         d = possible[0].des
         return d.camera

@@ -1,9 +1,10 @@
+from multiprocessing import Pool
+
 from geocal import (
-    VicarLiteRasterImage,
     ForstnerFeatureDetector,
+    VicarLiteRasterImage,
     have_serialize_supported,
 )
-from multiprocessing import Pool
 
 
 def test_feature_detector(stereo_unit_test_data):

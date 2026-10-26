@@ -1,5 +1,6 @@
-from geocal import GdalRasterImage, Landsat7Global
 from fixtures.require_check import require_panchromatic_orthobase
+
+from geocal import GdalRasterImage, Landsat7Global
 
 
 @require_panchromatic_orthobase

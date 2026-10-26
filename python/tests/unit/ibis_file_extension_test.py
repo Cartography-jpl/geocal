@@ -1,7 +1,8 @@
-from fixtures.require_check import require_vicar
-from geocal import IbisFile
 import numpy as np
 import numpy.testing as npt
+from fixtures.require_check import require_vicar
+
+from geocal import IbisFile
 
 
 @require_vicar

@@ -1,7 +1,7 @@
 from geocal_swig import Rpc
 
 try:
-    from pynitf import NitfSegmentHook, NitfSegmentHookSet, TreRPC00B, TreRPC00A
+    from pynitf import NitfSegmentHook, NitfSegmentHookSet, TreRPC00A, TreRPC00B
 
     have_pynitf = True
 except ImportError:
@@ -74,7 +74,7 @@ if have_pynitf:
             that this class has handled the TRE printing. Otherwise, we
             call print on the tre"""
             if tre.tre_tag in self.rpc_tre_tag_list:
-                print("%s: See RPC above" % tre.tre_tag, file=fh)
+                print(f"{tre.tre_tag}: See RPC above", file=fh)
                 return True
             return False
 

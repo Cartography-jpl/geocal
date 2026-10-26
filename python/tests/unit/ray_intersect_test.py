@@ -1,16 +1,17 @@
+import pytest
+
 from geocal import (
-    SimpleDem,
-    VicarImageGroundConnection,
-    VicarLiteDem,
+    Geodetic,
     IgcArray,
+    ImageCoordinate,
     RayIntersect2,
     RayIntersect3,
-    ImageCoordinate,
+    SimpleDem,
     TiePoint,
-    Geodetic,
+    VicarImageGroundConnection,
+    VicarLiteDem,
     distance,
 )
-import pytest
 
 
 def test_ray_intersect(stereo_unit_test_data):

@@ -69,6 +69,13 @@ fixtures and `require_*` skip markers now live in `python/tests/fixtures/`.
   type. Before, it tried to raise a string, which itself fails with a
   `TypeError`.
 - `VicarInterface` now closes the VICAR log file after the run.
+- Python lists can now be passed where the C++ takes a `std::vector` of
+  `Time`, `ImageCoordinate`, `InterestPoint` or `AutoDerivative<double>`,
+  e.g., `PiecewiseLinear([t0, t1, t2], ...)`, `MeasuredTimeTable([t0, t1])`
+  or `Vector_Time([t0, t1])`. Before, these raised a `TypeError` and you had
+  to build a `Vector_Time` (etc.) with `push_back`. Iterating over these
+  vectors now returns the actual objects. Before, it returned untyped SWIG
+  pointers (and leaked memory). `Vector_Time` can now be pickled.
 - `PiecewiseLinear` no longer has a `FunctionType` attribute. This was
   an unused variable of an anonymous enum type, not the type of the
   enum. The enum is now named `PiecewiseLinear::FunctionType`; the values

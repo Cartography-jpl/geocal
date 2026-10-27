@@ -6122,12 +6122,43 @@ namespace swig {
 }
 
 
-  namespace swig {
-    template <>  struct traits< GeoCal::AutoDerivative< double > > {
-      typedef pointer_category category;
-      static const char* type_name() { return"GeoCal::AutoDerivative< double >"; }
-    };
-  }
+namespace swig {
+  template <>  struct traits< GeoCal::AutoDerivative< double > > {
+    typedef pointer_category category;
+    static const char* type_name() { return"GeoCal::AutoDerivative< double >"; }
+  };
+
+  template <> struct traits_asptr< GeoCal::AutoDerivative< double > > {
+    static int asptr(PyObject *obj, GeoCal::AutoDerivative< double > **val) {
+      static swig_type_info *descriptor =
+	SWIG_TypeQuery("boost::shared_ptr< ""GeoCal::AutoDerivative< double >" " > *");
+      if(!descriptor)
+	return SWIG_ERROR;
+      boost::shared_ptr< GeoCal::AutoDerivative< double > > *p = 0;
+      int newmem = 0;
+      int res = SWIG_ConvertPtrAndOwn(obj, (void **)&p, descriptor, 0,
+				      &newmem);
+      if(!SWIG_IsOK(res))
+	return res;
+      if(!p || !*p)
+	res = SWIG_ERROR;
+      else if(val) {
+	*val = new GeoCal::AutoDerivative< double >(**p);
+	res = SWIG_NEWOBJ;
+      } else
+	res = SWIG_OK;
+      if(newmem & SWIG_CAST_NEW_MEMORY)
+	delete p;
+      return res;
+    }
+  };
+
+  template <> struct traits_from< GeoCal::AutoDerivative< double > > {
+    static PyObject *from(const GeoCal::AutoDerivative< double >& v) {
+      return SWIG_MAPPER_NAMESPACE::swig_to_python(boost::shared_ptr< GeoCal::AutoDerivative< double > >(new GeoCal::AutoDerivative< double >(v)));
+    }
+  };
+}
 
 
 #include <functional>

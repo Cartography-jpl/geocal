@@ -6211,12 +6211,43 @@ namespace swig {
 }
 
 
-  namespace swig {
-    template <>  struct traits< GeoCal::InterestPoint > {
-      typedef pointer_category category;
-      static const char* type_name() { return"GeoCal::InterestPoint"; }
-    };
-  }
+namespace swig {
+  template <>  struct traits< GeoCal::InterestPoint > {
+    typedef pointer_category category;
+    static const char* type_name() { return"GeoCal::InterestPoint"; }
+  };
+
+  template <> struct traits_asptr< GeoCal::InterestPoint > {
+    static int asptr(PyObject *obj, GeoCal::InterestPoint **val) {
+      static swig_type_info *descriptor =
+	SWIG_TypeQuery("boost::shared_ptr< ""GeoCal::InterestPoint" " > *");
+      if(!descriptor)
+	return SWIG_ERROR;
+      boost::shared_ptr< GeoCal::InterestPoint > *p = 0;
+      int newmem = 0;
+      int res = SWIG_ConvertPtrAndOwn(obj, (void **)&p, descriptor, 0,
+				      &newmem);
+      if(!SWIG_IsOK(res))
+	return res;
+      if(!p || !*p)
+	res = SWIG_ERROR;
+      else if(val) {
+	*val = new GeoCal::InterestPoint(**p);
+	res = SWIG_NEWOBJ;
+      } else
+	res = SWIG_OK;
+      if(newmem & SWIG_CAST_NEW_MEMORY)
+	delete p;
+      return res;
+    }
+  };
+
+  template <> struct traits_from< GeoCal::InterestPoint > {
+    static PyObject *from(const GeoCal::InterestPoint& v) {
+      return SWIG_MAPPER_NAMESPACE::swig_to_python(boost::shared_ptr< GeoCal::InterestPoint >(new GeoCal::InterestPoint(v)));
+    }
+  };
+}
 
 
 #include <functional>

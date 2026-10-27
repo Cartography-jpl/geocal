@@ -185,12 +185,18 @@ class Vector_Time(object):
     reserve = _swig_new_instance_method(_look_vector.Vector_Time_reserve)
     capacity = _swig_new_instance_method(_look_vector.Vector_Time_capacity)
 
+    @classmethod
+    def pickle_format_version(cls):
+      return 1
+
+    def to_list(self):
+       res = []
+       for i in range(self.size()):
+          res.append(self[i])
+       return res
+
     def __reduce__(self):
-    #Special handling for when we are doing boost serialization, we set
-    #"this" to None
-      if(self.this is None):
-        return super().__reduce__()
-      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
+      return _new_vector, (self.__class__, 1, self.to_list())
 
     __swig_destroy__ = _look_vector.delete_Vector_Time
 

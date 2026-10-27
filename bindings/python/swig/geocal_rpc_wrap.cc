@@ -6440,12 +6440,43 @@ namespace swig {
       }
     
 
-  namespace swig {
-    template <>  struct traits< GeoCal::ImageCoordinate > {
-      typedef pointer_category category;
-      static const char* type_name() { return"GeoCal::ImageCoordinate"; }
-    };
-  }
+namespace swig {
+  template <>  struct traits< GeoCal::ImageCoordinate > {
+    typedef pointer_category category;
+    static const char* type_name() { return"GeoCal::ImageCoordinate"; }
+  };
+
+  template <> struct traits_asptr< GeoCal::ImageCoordinate > {
+    static int asptr(PyObject *obj, GeoCal::ImageCoordinate **val) {
+      static swig_type_info *descriptor =
+	SWIG_TypeQuery("boost::shared_ptr< ""GeoCal::ImageCoordinate" " > *");
+      if(!descriptor)
+	return SWIG_ERROR;
+      boost::shared_ptr< GeoCal::ImageCoordinate > *p = 0;
+      int newmem = 0;
+      int res = SWIG_ConvertPtrAndOwn(obj, (void **)&p, descriptor, 0,
+				      &newmem);
+      if(!SWIG_IsOK(res))
+	return res;
+      if(!p || !*p)
+	res = SWIG_ERROR;
+      else if(val) {
+	*val = new GeoCal::ImageCoordinate(**p);
+	res = SWIG_NEWOBJ;
+      } else
+	res = SWIG_OK;
+      if(newmem & SWIG_CAST_NEW_MEMORY)
+	delete p;
+      return res;
+    }
+  };
+
+  template <> struct traits_from< GeoCal::ImageCoordinate > {
+    static PyObject *from(const GeoCal::ImageCoordinate& v) {
+      return SWIG_MAPPER_NAMESPACE::swig_to_python(boost::shared_ptr< GeoCal::ImageCoordinate >(new GeoCal::ImageCoordinate(v)));
+    }
+  };
+}
 
 
       namespace swig {

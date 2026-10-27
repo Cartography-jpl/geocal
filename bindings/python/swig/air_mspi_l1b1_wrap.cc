@@ -6061,12 +6061,43 @@ SWIG_From_std_string  (const std::string& s)
 }
 
 
-  namespace swig {
-    template <>  struct traits< GeoCal::Time > {
-      typedef pointer_category category;
-      static const char* type_name() { return"GeoCal::Time"; }
-    };
-  }
+namespace swig {
+  template <>  struct traits< GeoCal::Time > {
+    typedef pointer_category category;
+    static const char* type_name() { return"GeoCal::Time"; }
+  };
+
+  template <> struct traits_asptr< GeoCal::Time > {
+    static int asptr(PyObject *obj, GeoCal::Time **val) {
+      static swig_type_info *descriptor =
+	SWIG_TypeQuery("boost::shared_ptr< ""GeoCal::Time" " > *");
+      if(!descriptor)
+	return SWIG_ERROR;
+      boost::shared_ptr< GeoCal::Time > *p = 0;
+      int newmem = 0;
+      int res = SWIG_ConvertPtrAndOwn(obj, (void **)&p, descriptor, 0,
+				      &newmem);
+      if(!SWIG_IsOK(res))
+	return res;
+      if(!p || !*p)
+	res = SWIG_ERROR;
+      else if(val) {
+	*val = new GeoCal::Time(**p);
+	res = SWIG_NEWOBJ;
+      } else
+	res = SWIG_OK;
+      if(newmem & SWIG_CAST_NEW_MEMORY)
+	delete p;
+      return res;
+    }
+  };
+
+  template <> struct traits_from< GeoCal::Time > {
+    static PyObject *from(const GeoCal::Time& v) {
+      return SWIG_MAPPER_NAMESPACE::swig_to_python(boost::shared_ptr< GeoCal::Time >(new GeoCal::Time(v)));
+    }
+  };
+}
 
 
 #include <functional>

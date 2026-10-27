@@ -65,6 +65,11 @@
 %include "swig_iostream_inc.i"
 %import "swig_iostream.i"
 %include "swig_vector_shared_ptr.i"
+// Types wrapped as shared_ptr, but also used by value in a std::vector
+%shared_ptr_value_traits(GeoCal::Time)
+%shared_ptr_value_traits(GeoCal::ImageCoordinate)
+%shared_ptr_value_traits(GeoCal::InterestPoint)
+%shared_ptr_value_traits(GeoCal::AutoDerivative< double >)
 %import "swig_rational.i"
 %include "director_serialization.i"
 %define %geocal_director_serialization(BNAME, TYPE...)

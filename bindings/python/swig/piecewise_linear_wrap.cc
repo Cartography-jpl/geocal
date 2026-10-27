@@ -6764,22 +6764,6 @@ SWIGINTERN std::vector< boost::shared_ptr< GeoCal::Time > >::iterator std_vector
 SWIGINTERN std::vector< boost::shared_ptr< GeoCal::Time > >::iterator std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg__insert__SWIG_0(std::vector< boost::shared_ptr< GeoCal::Time > > *self,std::vector< boost::shared_ptr< GeoCal::Time > >::iterator pos,std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &x){ return self->insert(pos, x); }
 SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Time_Sg__Sg__insert__SWIG_1(std::vector< boost::shared_ptr< GeoCal::Time > > *self,std::vector< boost::shared_ptr< GeoCal::Time > >::iterator pos,std::vector< boost::shared_ptr< GeoCal::Time > >::size_type n,std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &x){ self->insert(pos, n, x); }
 
-SWIGINTERN int
-SWIG_AsVal_int (PyObject * obj, int *val)
-{
-  long v;
-  int res = SWIG_AsVal_long (obj, &v);
-  if (SWIG_IsOK(res)) {
-    if ((v < INT_MIN || v > INT_MAX)) {
-      return SWIG_OverflowError;
-    } else {
-      if (val) *val = static_cast< int >(v);
-    }
-  }  
-  return res;
-}
-
-
   #define SWIG_From_double   PyFloat_FromDouble 
 
 
@@ -12872,84 +12856,6 @@ SWIGINTERN PyObject *Vector_Time2_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObj
   return SWIG_Python_InitShadowInstance(args);
 }
 
-SWIGINTERN PyObject *_wrap_PiecewiseLinear_FunctionType_set(PyObject *self, PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::PiecewiseLinear *arg1 = 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::PiecewiseLinear > tempshared1 ;
-  boost::shared_ptr< GeoCal::PiecewiseLinear > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject *swig_obj[2] ;
-  
-  (void)self;
-  if (!SWIG_Python_UnpackTuple(args, "PiecewiseLinear_FunctionType_set", 2, 2, swig_obj)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PiecewiseLinear_FunctionType_set" "', argument " "1"" of type '" "GeoCal::PiecewiseLinear *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::PiecewiseLinear > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::PiecewiseLinear > * >(argp1);
-      arg1 = const_cast< GeoCal::PiecewiseLinear * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::PiecewiseLinear > * >(argp1);
-      arg1 = const_cast< GeoCal::PiecewiseLinear * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "PiecewiseLinear_FunctionType_set" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  if (arg1 && sizeof(int) == sizeof((arg1)->FunctionType)) *(int*)(void*)&((arg1)->FunctionType) = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_PiecewiseLinear_FunctionType_get(PyObject *self, PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::PiecewiseLinear *arg1 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::PiecewiseLinear > tempshared1 ;
-  boost::shared_ptr< GeoCal::PiecewiseLinear > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  int result;
-  
-  (void)self;
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PiecewiseLinear_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PiecewiseLinear_FunctionType_get" "', argument " "1"" of type '" "GeoCal::PiecewiseLinear *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::PiecewiseLinear > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::PiecewiseLinear > * >(argp1);
-      arg1 = const_cast< GeoCal::PiecewiseLinear * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::PiecewiseLinear > * >(argp1);
-      arg1 = const_cast< GeoCal::PiecewiseLinear * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  result = (int) ((arg1)->FunctionType);
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_new_PiecewiseLinear(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > *arg1 = 0 ;
@@ -13541,8 +13447,6 @@ static PyMethodDef SwigMethods[] = {
 	 { "delete_Vector_Time2", _wrap_delete_Vector_Time2, METH_O, "delete_Vector_Time2(Vector_Time2 self)"},
 	 { "Vector_Time2_swigregister", Vector_Time2_swigregister, METH_O, NULL},
 	 { "Vector_Time2_swiginit", Vector_Time2_swiginit, METH_VARARGS, NULL},
-	 { "PiecewiseLinear_FunctionType_set", _wrap_PiecewiseLinear_FunctionType_set, METH_VARARGS, "PiecewiseLinear_FunctionType_set(PiecewiseLinear self, int FunctionType)"},
-	 { "PiecewiseLinear_FunctionType_get", _wrap_PiecewiseLinear_FunctionType_get, METH_O, "PiecewiseLinear_FunctionType_get(PiecewiseLinear self) -> int"},
 	 { "new_PiecewiseLinear", _wrap_new_PiecewiseLinear, METH_VARARGS, "\n"
 		"new_PiecewiseLinear(Vector_Time X, BlitzArray_int_1 T) -> PiecewiseLinear\n"
 		"\n"
@@ -13718,8 +13622,6 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "delete_Vector_Time2", _wrap_delete_Vector_Time2, METH_O, "delete_Vector_Time2(Vector_Time2 self)"},
 	 { "Vector_Time2_swigregister", Vector_Time2_swigregister, METH_O, NULL},
 	 { "Vector_Time2_swiginit", Vector_Time2_swiginit, METH_VARARGS, NULL},
-	 { "PiecewiseLinear_FunctionType_set", _wrap_PiecewiseLinear_FunctionType_set, METH_VARARGS, "PiecewiseLinear_FunctionType_set(PiecewiseLinear self, int FunctionType)"},
-	 { "PiecewiseLinear_FunctionType_get", _wrap_PiecewiseLinear_FunctionType_get, METH_O, "PiecewiseLinear_FunctionType_get(PiecewiseLinear self) -> int"},
 	 { "new_PiecewiseLinear", _wrap_new_PiecewiseLinear, METH_VARARGS, "\n"
 		"new_PiecewiseLinear(Vector_Time X, BlitzArray_int_1 T) -> PiecewiseLinear\n"
 		"\n"

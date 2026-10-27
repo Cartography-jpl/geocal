@@ -7971,7 +7971,6 @@ GeoCal::ImageCoordinate SwigDirector_ImageGroundConnection::image_coordinate(Geo
 
 void SwigDirector_ImageGroundConnection::image_coordinate_with_status(GeoCal::GroundCoordinate const &Gc,GeoCal::ImageCoordinate &OUTPUT2,bool &OUTPUT) const {
   boost::shared_ptr< GeoCal::GroundCoordinate const > *smartarg1 = 0 ;
-  boost::shared_ptr< GeoCal::ImageCoordinate > *smartarg2 = 0 ;
   
   swig::SwigVar_PyObject obj0;
   
@@ -8003,7 +8002,6 @@ void SwigDirector_ImageGroundConnection::image_coordinate_with_status(GeoCal::Gr
 
 void SwigDirector_ImageGroundConnection::image_coordinate_extended(GeoCal::GroundCoordinate const &Gc,GeoCal::ImageCoordinate &OUTPUT2,bool &OUTPUT) const {
   boost::shared_ptr< GeoCal::GroundCoordinate const > *smartarg1 = 0 ;
-  boost::shared_ptr< GeoCal::ImageCoordinate > *smartarg2 = 0 ;
   
   swig::SwigVar_PyObject obj0;
   

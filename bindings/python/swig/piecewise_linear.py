@@ -266,7 +266,6 @@ class PiecewiseLinear(geocal_swig.with_parameter.WithParameter):
     
     LINEAR_TO_ZERO = _piecewise_linear.PiecewiseLinear_LINEAR_TO_ZERO
     
-    FunctionType = property(_piecewise_linear.PiecewiseLinear_FunctionType_get, _piecewise_linear.PiecewiseLinear_FunctionType_set, doc=r"""FunctionType : enum $unnamed1$""")
 
     def __init__(self, X, T):
         r"""

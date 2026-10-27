@@ -28,6 +28,11 @@ namespace GeoCal {
   $1 = &temp;
  }
 
+ // OUTPUT2 is only returned, not passed to python in a director call.
+ // Without this the shared_ptr directorin typemap declares an unused
+ // variable.
+ %typemap(directorin) ImageCoordinate &OUTPUT2 ""
+
  %typemap(argout) ImageCoordinate &OUTPUT2 {
    SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype> *smartresult = new SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<$1_basetype>(new $1_basetype(*$1));
    %append_output(SWIG_NewPointerObj(%as_voidptr(smartresult), $descriptor(SWIG_SHARED_PTR_QNAMESPACE::shared_ptr<GeoCal::ImageCoordinate> *), SWIG_POINTER_OWN));

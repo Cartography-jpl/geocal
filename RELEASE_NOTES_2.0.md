@@ -69,6 +69,10 @@ fixtures and `require_*` skip markers now live in `python/tests/fixtures/`.
   type. Before, it tried to raise a string, which itself fails with a
   `TypeError`.
 - `VicarInterface` now closes the VICAR log file after the run.
+- `PiecewiseLinear` no longer has a `FunctionType` attribute. This was
+  an unused variable of an anonymous enum type, not the type of the
+  enum. The enum is now named `PiecewiseLinear::FunctionType`; the values
+  `PiecewiseLinear.LINEAR`, `CONSTANT` and `LINEAR_TO_ZERO` are unchanged.
 - Python code updated for ruff 0.17 (f-strings, sorted imports, file
   handles closed with `with`, removed Python 2 compatibility code).
   `bin/findepend.py` was updated from Python 2.

@@ -11,7 +11,7 @@ namespace GeoCal {
 class PiecewiseLinear : public WithParameter, 
 			public Printable<PiecewiseLinear> {
 public:
-  enum {LINEAR, CONSTANT, LINEAR_TO_ZERO} FunctionType;
+  enum FunctionType {LINEAR, CONSTANT, LINEAR_TO_ZERO};
   PiecewiseLinear(const blitz::Array<Time, 1>& X, 
 		  const ArrayAd<double, 1>& Y,
 		  const blitz::Array<int, 1>& T);

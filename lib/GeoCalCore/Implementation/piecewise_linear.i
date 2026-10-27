@@ -11,7 +11,7 @@
 namespace GeoCal {
 class PiecewiseLinear : public WithParameter {
 public:
-  enum {LINEAR, CONSTANT, LINEAR_TO_ZERO} FunctionType;
+  enum FunctionType {LINEAR, CONSTANT, LINEAR_TO_ZERO};
   PiecewiseLinear(const std::vector<Time>& X,
 		  const blitz::Array<int, 1>& T);
   %python_attribute_with_set(parameter_mask, blitz::Array<bool, 1>);

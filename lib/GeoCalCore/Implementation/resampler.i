@@ -18,12 +18,12 @@ public:
 	    const boost::shared_ptr<RasterImage>& Y_coor,
 	    const MapInfo& Mi, int Num_sub_pixel = 2,
 	    bool Exactly_match_mi = false,
-	    double Mark_missing=-1000.0);
+	    double Mark_missing=-1000.0, int Number_task = -1);
   Resampler(const blitz::Array<double, 2>& X_coor_interpolated,
 	    const blitz::Array<double, 2>& Y_coor_interpolated,
 	    const MapInfo& Mi, int Num_sub_pixel = 2,
 	    bool Exactly_match_mi = false,
-	    double Mark_missing=-1000.0);
+	    double Mark_missing=-1000.0, int Number_task = -1);
   void clear();
   static void determine_range(const blitz::Array<double, 2>& X_coor_interpolated,
 			      const blitz::Array<double, 2>& Y_coor_interpolated,

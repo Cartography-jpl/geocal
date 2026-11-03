@@ -1,6 +1,5 @@
 #include "resampler.h"
 #include "geocal_serialize_support.h"
-#include "magnify_bilinear.h"
 #include "geodetic.h"
 #include "vicar_raster_image.h"
 #include "geocal_thread_pool.h"
@@ -54,78 +53,183 @@ Resampler::Resampler
 (const boost::shared_ptr<RasterImage>& X_coor,
  const boost::shared_ptr<RasterImage>& Y_coor,
  const MapInfo& Mi, int Num_sub_pixel, bool Exactly_match_mi,
- double Mark_missing)
+ double Mark_missing, int Number_task)
   : nsub(Num_sub_pixel)
 {
-  MagnifyBilinear xmag(X_coor, Num_sub_pixel);
-  MagnifyBilinear ymag(Y_coor, Num_sub_pixel);
-  blitz::Array<double, 2> x = xmag.read_double(0,0, xmag.number_line(),
-					       xmag.number_sample());
-  blitz::Array<double, 2> y = ymag.read_double(0,0, ymag.number_line(),
-					       ymag.number_sample());
-  init(x, y, Mi, Exactly_match_mi, Mark_missing);
+  range_min_check(Num_sub_pixel, 1);
+  // We interpolate the coordinates as we go, rather than creating
+  // the full size interpolated arrays. This gives exactly the same
+  // values as MagnifyBilinear (which we used to use): subpixel i is
+  // at raw position i / nsub, so the interpolated arrays are
+  // (number_line - 1) * nsub x (number_sample - 1) * nsub, and we
+  // never need to extrapolate.
+  blitz::Array<double, 2> x = X_coor->read_double(0, 0, X_coor->number_line(),
+						  X_coor->number_sample());
+  blitz::Array<double, 2> y = Y_coor->read_double(0, 0, Y_coor->number_line(),
+						  Y_coor->number_sample());
+  if(x.rows() != y.rows() || x.cols() != y.cols())
+    throw Exception("X_coor and Y_coor need to be the same size");
+  int nrow = std::max(x.rows() - 1, 0) * nsub;
+  int ncol = std::max(x.cols() - 1, 0) * nsub;
+  std::vector<double> frac(nsub);
+  for(int k = 0; k < nsub; ++k)
+    frac[k] = 1.0 / nsub * k;
+  auto coor = [&x, &y, &frac, this](int i, int j, double& X, double& Y)
+  {
+    int iy = i / nsub, ix = j / nsub;
+    double ln = frac[i % nsub], smp = frac[j % nsub];
+    // Same order of operations as MagnifyBilinear, so we get
+    // identical results.
+    X = x(iy,ix) * (1 - ln) * (1 - smp) + x(iy, ix + 1) * (1 - ln) * smp
+      + x(iy + 1, ix) * ln * (1 - smp) + x(iy + 1, ix + 1) * ln * smp;
+    Y = y(iy,ix) * (1 - ln) * (1 - smp) + y(iy, ix + 1) * (1 - ln) * smp
+      + y(iy + 1, ix) * ln * (1 - smp) + y(iy + 1, ix + 1) * ln * smp;
+  };
+  init(nrow, ncol, coor, Mi, Exactly_match_mi, Mark_missing, Number_task);
 }
 
 //-------------------------------------------------------------------------
 /// Alternative constructor where we get the lat/lon from something
 /// other than a file. The data should already be interpolated (e.g.,
 /// in python do scipy.ndimage.interpolation.zoom(t,Num_sub_pixel,order=2)
+///
+/// See resample_field for a description of Number_task.
 //-------------------------------------------------------------------------
 
 Resampler::Resampler
 (const blitz::Array<double, 2>& X_coor_interpolated,
  const blitz::Array<double, 2>& Y_coor_interpolated,
  const MapInfo& Mi, int Num_sub_pixel, bool Exactly_match_mi,
- double Mark_missing)
+ double Mark_missing, int Number_task)
   : nsub(Num_sub_pixel)
 {
-  init(X_coor_interpolated, Y_coor_interpolated, Mi, Exactly_match_mi, Mark_missing);
+  range_min_check(Num_sub_pixel, 1);
+  if(X_coor_interpolated.rows() != Y_coor_interpolated.rows() ||
+     X_coor_interpolated.cols() != Y_coor_interpolated.cols())
+    throw Exception("X_coor_interpolated and Y_coor_interpolated need to be the same size");
+  auto coor = [&X_coor_interpolated, &Y_coor_interpolated]
+    (int i, int j, double& X, double& Y)
+  {
+    X = X_coor_interpolated(i, j);
+    Y = Y_coor_interpolated(i, j);
+  };
+  init(X_coor_interpolated.rows(), X_coor_interpolated.cols(), coor, Mi,
+       Exactly_match_mi, Mark_missing, Number_task);
 }
 
-void Resampler::init(const blitz::Array<double, 2>& X_coor,
-		     const blitz::Array<double, 2>& Y_coor,
-		     const MapInfo& Mi, bool Exactly_match_mi,
-		     double Mark_missing)
-{
-  blitz::Range ra = blitz::Range::all();
+//-------------------------------------------------------------------------
+/// Number of tasks to use for the given number of subpixels. A
+/// Number_task < 0 is the default: 4 x the number of threads, or 1 if
+/// the data is smaller than min_parallel_size.
+//-------------------------------------------------------------------------
 
-  data_index_.resize(X_coor.rows(), X_coor.cols(), 2);
-  blitz::Array<double, 2> xindex, yindex;
-  Mi.coordinate_to_index(X_coor, Y_coor, xindex, yindex);
-  data_index_(ra,ra,0) = blitz::cast<int>(blitz::rint(yindex));
-  data_index_(ra,ra,1) = blitz::cast<int>(blitz::rint(xindex));
+int Resampler::default_number_task(long Size, int Number_task)
+{
+  if(ThreadPool::thread_pool().number_thread() == 1)
+    return 1;
+  if(Number_task >= 0)
+    return std::max(Number_task, 1);
+  if(Size < min_parallel_size)
+    return 1;
+  return 4 * ThreadPool::thread_pool().number_thread();
+}
+
+//-------------------------------------------------------------------------
+/// Fill in data_index_ and mi. Coor(i, j, X, Y) returns the X and Y
+/// coordinate of subpixel i, j, for i in [0, Number_row) and j in
+/// [0, Number_col). This gets called from several threads at once, so it
+/// needs to be thread safe.
+///
+/// Note that we only use the inline MapInfo::coordinate_to_index in the
+/// threads, which is just arithmetic on the MapInfo parameters. We
+/// don't use the CoordinateConverter, which isn't thread safe in
+/// general (e.g., OgrCoordinateConverter).
+//-------------------------------------------------------------------------
+
+template<class F> void Resampler::init
+(int Number_row, int Number_col, F Coor,
+ const MapInfo& Mi, bool Exactly_match_mi, double Mark_missing,
+ int Number_task)
+{
+  data_index_.resize(Number_row, Number_col, 2);
+  int ntask = default_number_task((long) Number_row * Number_col, Number_task);
+  // Min and max index of the points that aren't fill, for each task.
+  struct Range {
+    bool found = false;
+    int minx = 0, miny = 0, maxx = 0, maxy = 0;
+  };
+  std::vector<Range> trange(std::max(std::min(ntask, Number_row), 1));
+  // Points where both coordinates are fill are marked with this in
+  // the first pass, so we don't need to calculate the coordinates
+  // again (which can be expensive if Coor interpolates). A real index
+  // can't be this value (lrint gives this for values out of range of
+  // int, e.g., NaN, and those points were never used anyway).
+  const int fill_flag = std::numeric_limits<int>::min();
+  parallel_row_blocks(Number_row, ntask,
+    [&](int k, int istart, int iend)
+    {
+      Range r;
+      for(int i = istart; i < iend; ++i)
+	for(int j = 0; j < Number_col; ++j) {
+	  double x, y, xindex, yindex;
+	  Coor(i, j, x, y);
+	  Mi.coordinate_to_index(x, y, xindex, yindex);
+	  // This is the same as blitz::cast<int>(blitz::rint(..)) that
+	  // we used to use.
+	  int ln = (int) std::rint(yindex);
+	  int smp = (int) std::rint(xindex);
+	  data_index_(i,j,0) = ln;
+	  data_index_(i,j,1) = smp;
+	  if(!Exactly_match_mi && y <= Mark_missing && x <= Mark_missing)
+	    data_index_(i,j,0) = fill_flag;
+	  if(!Exactly_match_mi && y > Mark_missing && x > Mark_missing) {
+	    if(!r.found) {
+	      r.found = true;
+	      r.minx = r.maxx = smp;
+	      r.miny = r.maxy = ln;
+	    }
+	    r.minx = std::min(smp, r.minx);
+	    r.maxx = std::max(smp, r.maxx);
+	    r.miny = std::min(ln, r.miny);
+	    r.maxy = std::max(ln, r.maxy);
+	  }
+	}
+      trange[k] = r;
+    });
   if(Exactly_match_mi) {
     mi = Mi;
     return;
   }
   // Determine min and max xindex and yindex, but exclude all points
   // with lat/lon that are fill values.
-  bool first = true;
-  int minx = 0, miny = 0, maxx = 0, maxy = 0;
-  for(int i = 0; i < X_coor.rows(); ++i)
-    for(int j = 0; j < X_coor.cols(); ++j)
-      if(Y_coor(i, j) > Mark_missing && X_coor(i, j) > Mark_missing) {
-	if(first) {
-	  minx = data_index_(i,j,1);
-	  miny = data_index_(i,j,0);
-	  maxx = minx;
-	  maxy = miny;
-	  first = false;
+  Range r;
+  for(const auto& t : trange)
+    if(t.found) {
+      if(!r.found)
+	r = t;
+      r.minx = std::min(t.minx, r.minx);
+      r.maxx = std::max(t.maxx, r.maxx);
+      r.miny = std::min(t.miny, r.miny);
+      r.maxy = std::max(t.maxy, r.maxy);
+    }
+  mi = Mi.subset(r.minx, r.miny, r.maxx - r.minx + 1, r.maxy - r.miny + 1);
+  // Shift to the subsetted MapInfo, and make sure all the lat/lon
+  // fill values have data_index out of range so we don't use the
+  // data.
+  parallel_row_blocks(Number_row, ntask,
+    [&](int, int istart, int iend)
+    {
+      for(int i = istart; i < iend; ++i)
+	for(int j = 0; j < Number_col; ++j) {
+	  if(data_index_(i,j,0) == fill_flag) {
+	    data_index_(i,j,0) = -9999;
+	    data_index_(i,j,1) = -9999;
+	  } else {
+	    data_index_(i,j,0) -= r.miny;
+	    data_index_(i,j,1) -= r.minx;
+	  }
 	}
-	minx = std::min(data_index_(i,j,1),minx);
-	maxx = std::max(data_index_(i,j,1),maxx);
-	miny = std::min(data_index_(i,j,0),miny);
-	maxy = std::max(data_index_(i,j,0),maxy);
-      }
-  mi = Mi.subset(minx, miny, maxx - minx + 1, maxy - miny + 1);
-  data_index_(ra,ra,0) -= miny;
-  data_index_(ra,ra,1) -= minx;
-  // Make sure all the lat/lon fill values have data_index out of
-  // range so we don't use the data.
-  for(int i = 0; i < X_coor.rows(); ++i)
-    for(int j = 0; j < X_coor.cols(); ++j)
-      if(Y_coor(i, j) <= Mark_missing && X_coor(i, j) <= Mark_missing)
-	data_index_(i,j,ra) = -9999;
+    });
 }
 
 //-------------------------------------------------------------------------
@@ -159,31 +263,55 @@ void Resampler::determine_range(const blitz::Array<double, 2>& X_coor_interpolat
 				const MapInfo& Mi, int Num_sub_pixel,
 				int& lstart, int& lend, int& sstart, int& send)
 {
-  lstart = X_coor_interpolated.rows();
+  if(X_coor_interpolated.rows() != Y_coor_interpolated.rows() ||
+     X_coor_interpolated.cols() != Y_coor_interpolated.cols())
+    throw Exception("X_coor_interpolated and Y_coor_interpolated need to be the same size");
+  int nrow = X_coor_interpolated.rows();
+  int ncol = X_coor_interpolated.cols();
+  int ntask = default_number_task((long) nrow * ncol, -1);
+  struct Range {
+    int lstart, lend, sstart, send;
+  };
+  std::vector<Range> trange(std::max(std::min(ntask, nrow), 1),
+			    Range{nrow, -1, ncol, -1});
+  parallel_row_blocks(nrow, ntask,
+    [&](int k, int istart, int iend)
+    {
+      Range r{nrow, -1, ncol, -1};
+      for(int i = istart; i < iend; ++i)
+	for(int j = 0; j < ncol; ++j) {
+	  double xindex, yindex;
+	  Mi.coordinate_to_index(X_coor_interpolated(i,j),
+				 Y_coor_interpolated(i,j), xindex, yindex);
+	  int ln = (int) std::round(yindex);
+	  int smp = (int) std::round(xindex);
+	  if(ln >= 0 && ln < Mi.number_y_pixel() &&
+	     smp >=0 && smp < Mi.number_x_pixel()) {
+	    r.lstart = std::min(r.lstart, i);
+	    r.lend = std::max(r.lend, i);
+	    r.sstart = std::min(r.sstart, j);
+	    r.send = std::max(r.send, j);
+	  }
+	}
+      trange[k] = r;
+    });
+  lstart = nrow;
   lend = -1;
-  sstart = X_coor_interpolated.cols();
+  sstart = ncol;
   send = -1;
-  blitz::Array<double, 2> xindex, yindex;
-  Mi.coordinate_to_index(X_coor_interpolated, Y_coor_interpolated, xindex, yindex);
-  for(int i = 0; i < xindex.rows(); ++i)
-    for(int j = 0; j < xindex.cols(); ++j) {
-      int ln = (int) std::round(yindex(i,j));
-      int smp = (int) std::round(xindex(i,j));
-      if(ln >= 0 && ln < Mi.number_y_pixel() &&
-	 smp >=0 && smp < Mi.number_x_pixel()) {
-	lstart = std::min(lstart, i);
-	lend = std::max(lend, i);
-	sstart = std::min(sstart, j);
-	send = std::max(send, j);
-      }
-    }
+  for(const auto& r : trange) {
+    lstart = std::min(lstart, r.lstart);
+    lend = std::max(lend, r.lend);
+    sstart = std::min(sstart, r.sstart);
+    send = std::max(send, r.send);
+  }
   // Tweak to make divisible by Num_sub_pixel
   lstart = std::floor(double(lstart) / Num_sub_pixel) * Num_sub_pixel;
   lend = std::ceil(double(lend) / Num_sub_pixel) * Num_sub_pixel;
-  lend = std::min(lend, xindex.rows());
+  lend = std::min(lend, nrow);
   sstart = std::floor(double(sstart) / Num_sub_pixel) * Num_sub_pixel;
   send = std::ceil(double(send) / Num_sub_pixel) * Num_sub_pixel;
-  send = std::min(send, xindex.cols());
+  send = std::min(send, ncol);
 }
 
 //-------------------------------------------------------------------------
@@ -341,13 +469,8 @@ blitz::Array<double, 2> Resampler::resample_field
       v = 0;
     return v;
   };
-  int ntask = Number_task;
-  if(ntask < 0)
-    ntask = ((long) nrow * ncol < min_parallel_size ? 1 :
-	     4 * ThreadPool::thread_pool().number_thread());
-  if(ThreadPool::thread_pool().number_thread() == 1)
-    ntask = 1;
-  
+  int ntask = default_number_task((long) nrow * ncol, Number_task);
+
   // Divide data_index into tiles. We want a reasonable number of
   // tiles for each task, but not so small that the bounding boxes
   // overlap a lot.

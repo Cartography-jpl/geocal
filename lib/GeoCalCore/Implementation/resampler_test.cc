@@ -2,6 +2,8 @@
 #include "resampler.h"
 #include "geocal_thread_pool.h"
 #include "memory_raster_image.h"
+#include "memory_raster_image_float.h"
+#include "magnify_bilinear.h"
 #include "gdal_raster_image.h"
 #include "landsat7_global.h"
 #include <boost/make_shared.hpp>
@@ -90,6 +92,99 @@ public:
     if(Negative_to_zero)
       res = blitz::where(res < 0, 0, res);
     return res;
+  }
+  // Reference implementation of the old init. Returns data_index, and
+  // fills in Mi_out.
+  blitz::Array<int, 3> reference_init
+  (const blitz::Array<double, 2>& X_coor, const blitz::Array<double, 2>& Y_coor,
+   const MapInfo& Mi, bool Exactly_match_mi, double Mark_missing,
+   MapInfo& Mi_out)
+  {
+    Range ra = Range::all();
+    blitz::Array<int, 3> data_index(X_coor.rows(), X_coor.cols(), 2);
+    blitz::Array<double, 2> xindex, yindex;
+    Mi.coordinate_to_index(X_coor, Y_coor, xindex, yindex);
+    data_index(ra,ra,0) = blitz::cast<int>(blitz::rint(yindex));
+    data_index(ra,ra,1) = blitz::cast<int>(blitz::rint(xindex));
+    if(Exactly_match_mi) {
+      Mi_out = Mi;
+      return data_index;
+    }
+    bool first = true;
+    int minx = 0, miny = 0, maxx = 0, maxy = 0;
+    for(int i = 0; i < X_coor.rows(); ++i)
+      for(int j = 0; j < X_coor.cols(); ++j)
+	if(Y_coor(i, j) > Mark_missing && X_coor(i, j) > Mark_missing) {
+	  if(first) {
+	    minx = data_index(i,j,1);
+	    miny = data_index(i,j,0);
+	    maxx = minx;
+	    maxy = miny;
+	    first = false;
+	  }
+	  minx = std::min(data_index(i,j,1),minx);
+	  maxx = std::max(data_index(i,j,1),maxx);
+	  miny = std::min(data_index(i,j,0),miny);
+	  maxy = std::max(data_index(i,j,0),maxy);
+	}
+    Mi_out = Mi.subset(minx, miny, maxx - minx + 1, maxy - miny + 1);
+    data_index(ra,ra,0) -= miny;
+    data_index(ra,ra,1) -= minx;
+    for(int i = 0; i < X_coor.rows(); ++i)
+      for(int j = 0; j < X_coor.cols(); ++j)
+	if(Y_coor(i, j) <= Mark_missing && X_coor(i, j) <= Mark_missing)
+	  data_index(i,j,ra) = -9999;
+    return data_index;
+  }
+  // Reference implementation of the old determine_range
+  void reference_determine_range
+  (const blitz::Array<double, 2>& X, const blitz::Array<double, 2>& Y,
+   const MapInfo& Mi, int Num_sub_pixel,
+   int& lstart, int& lend, int& sstart, int& send)
+  {
+    lstart = X.rows();
+    lend = -1;
+    sstart = X.cols();
+    send = -1;
+    blitz::Array<double, 2> xindex, yindex;
+    Mi.coordinate_to_index(X, Y, xindex, yindex);
+    for(int i = 0; i < xindex.rows(); ++i)
+      for(int j = 0; j < xindex.cols(); ++j) {
+	int ln = (int) std::round(yindex(i,j));
+	int smp = (int) std::round(xindex(i,j));
+	if(ln >= 0 && ln < Mi.number_y_pixel() &&
+	   smp >=0 && smp < Mi.number_x_pixel()) {
+	  lstart = std::min(lstart, i);
+	  lend = std::max(lend, i);
+	  sstart = std::min(sstart, j);
+	  send = std::max(send, j);
+	}
+      }
+    lstart = std::floor(double(lstart) / Num_sub_pixel) * Num_sub_pixel;
+    lend = std::ceil(double(lend) / Num_sub_pixel) * Num_sub_pixel;
+    lend = std::min(lend, xindex.rows());
+    sstart = std::floor(double(sstart) / Num_sub_pixel) * Num_sub_pixel;
+    send = std::ceil(double(send) / Num_sub_pixel) * Num_sub_pixel;
+    send = std::min(send, xindex.cols());
+  }
+  // Check that two MapInfo are the same
+  void check_map_info(const MapInfo& M1, const MapInfo& M2)
+  {
+    BOOST_CHECK_EQUAL(M1.number_x_pixel(), M2.number_x_pixel());
+    BOOST_CHECK_EQUAL(M1.number_y_pixel(), M2.number_y_pixel());
+    BOOST_CHECK_MATRIX_CLOSE_TOL(M1.transform(), M2.transform(), 1e-12);
+  }
+  // Coordinates with some fill values. Includes points where only one
+  // of x and y is fill, which the old code treats differently in the
+  // range calculation and the marking.
+  void coor_with_fill(blitz::Array<double, 2>& Xf, blitz::Array<double, 2>& Yf)
+  {
+    Xf.reference(x.copy());
+    Yf.reference(y.copy());
+    Xf(Range(10, 30), Range(0, 40)) = -9999;
+    Yf(Range(10, 30), Range(0, 40)) = -9999;
+    Xf(Range(100, 110), Range(200, 220)) = -9999;
+    Yf(Range(150, 160), Range(100, 120)) = -9999;
   }
   // Number of output pixels that have data
   int number_with_data(const blitz::Array<double, 2>& Res, double Fill_value)
@@ -313,6 +408,113 @@ BOOST_AUTO_TEST_CASE(empty_resample)
   BOOST_CHECK(!r.empty_resample(data_fill, -9000));
 }
 
+BOOST_AUTO_TEST_CASE(ctor_matches_reference)
+{
+  blitz::Array<double, 2> xf, yf;
+  coor_with_fill(xf, yf);
+  for(int nthread : {1, 4, 10}) {
+    ThreadPool::thread_pool().number_thread(nthread);
+    for(bool exact : {false, true})
+      for(bool fill : {false, true})
+	for(int ntask : {-1, 1, 7, 100}) {
+	  const blitz::Array<double, 2>& xc = (fill ? xf : x);
+	  const blitz::Array<double, 2>& yc = (fill ? yf : y);
+	  MapInfo mi_expect;
+	  blitz::Array<int, 3> expect =
+	    reference_init(xc, yc, mi, exact, -1000.0, mi_expect);
+	  Resampler r(xc, yc, mi, nsub, exact, -1000.0, ntask);
+	  BOOST_CHECK(blitz::all(r.data_index() == expect));
+	  check_map_info(r.map_info(), mi_expect);
+	}
+  }
+}
+
+BOOST_AUTO_TEST_CASE(raster_ctor_matches_magnify_bilinear)
+{
+  // The RasterImage constructor used to use MagnifyBilinear. We now
+  // do the interpolation ourselves, which should give exactly the
+  // same results.
+  int nl = 120, ns = 150;
+  auto ximg = boost::make_shared<MemoryRasterImageFloat>(nl, ns);
+  auto yimg = boost::make_shared<MemoryRasterImageFloat>(nl, ns);
+  double th = 20 * M_PI / 180.0;
+  for(int i = 0; i < nl; ++i)
+    for(int j = 0; j < ns; ++j) {
+      ximg->data()(i, j) = (10.05 + (std::cos(th) * j - std::sin(th) * i) * 0.0062);
+      yimg->data()(i, j) = (10.95 - (std::sin(th) * j + std::cos(th) * i) * 0.0062);
+    }
+  // A fill area
+  for(int i = 10; i < 20; ++i)
+    for(int j = 30; j < 50; ++j) {
+      ximg->data()(i, j) = -1e20;
+      yimg->data()(i, j) = -1e20;
+    }
+  for(int ns_sub : {1, 2, 3}) {
+    MagnifyBilinear xmag(ximg, ns_sub);
+    MagnifyBilinear ymag(yimg, ns_sub);
+    blitz::Array<double, 2> xm = xmag.read_double(0,0, xmag.number_line(),
+						  xmag.number_sample());
+    blitz::Array<double, 2> ym = ymag.read_double(0,0, ymag.number_line(),
+						  ymag.number_sample());
+    for(bool exact : {false, true})
+      for(int ntask : {1, 7}) {
+	MapInfo mi_expect;
+	blitz::Array<int, 3> expect =
+	  reference_init(xm, ym, mi, exact, -1000.0, mi_expect);
+	Resampler r(ximg, yimg, mi, ns_sub, exact, -1000.0, ntask);
+	BOOST_CHECK_EQUAL(r.data_index().rows(), (nl - 1) * ns_sub);
+	BOOST_CHECK_EQUAL(r.data_index().cols(), (ns - 1) * ns_sub);
+	BOOST_CHECK(blitz::all(r.data_index() == expect));
+	check_map_info(r.map_info(), mi_expect);
+      }
+  }
+}
+
+BOOST_AUTO_TEST_CASE(determine_range_matches_reference)
+{
+  // determine_range does small data in one thread, so use data large
+  // enough to use the threads.
+  int nl = 1200, ns = 1000;
+  blitz::Array<double, 2> xl(nl, ns), yl(nl, ns);
+  double th = 20 * M_PI / 180.0;
+  for(int i = 0; i < nl; ++i)
+    for(int j = 0; j < ns; ++j) {
+      double ii = i / 2.0, jj = j / 2.0;
+      xl(i,j) = 9.8 + (std::cos(th) * jj - std::sin(th) * ii) * 0.0062;
+      yl(i,j) = 11.2 - (std::sin(th) * jj + std::cos(th) * ii) * 0.0062;
+    }
+  // Partial overlap, full overlap (MapInfo covers everything), and no
+  // overlap.
+  MapInfo mi_big(boost::make_shared<GeodeticConverter>(), 0.0, 20.0,
+		 20.0, 0.0, 4000, 4000);
+  MapInfo mi_far(boost::make_shared<GeodeticConverter>(), 30.0, 31.0,
+		 31.0, 30.0, 200, 200);
+  for(int nthread : {1, 10}) {
+    ThreadPool::thread_pool().number_thread(nthread);
+    for(const MapInfo& m : {mi, mi_big, mi_far})
+      for(int ns_sub : {1, 2, 3}) {
+	int ls, le, ss, se, ls2, le2, ss2, se2;
+	Resampler::determine_range(xl, yl, m, ns_sub, ls, le, ss, se);
+	reference_determine_range(xl, yl, m, ns_sub, ls2, le2, ss2, se2);
+	BOOST_CHECK_EQUAL(ls, ls2);
+	BOOST_CHECK_EQUAL(le, le2);
+	BOOST_CHECK_EQUAL(ss, ss2);
+	BOOST_CHECK_EQUAL(se, se2);
+      }
+  }
+  // Check the cases are what we think they are
+  int ls, le, ss, se;
+  Resampler::determine_range(xl, yl, mi, 2, ls, le, ss, se);
+  BOOST_CHECK(le > ls && se > ss && (le < nl || ss > 0 || se < ns));
+  Resampler::determine_range(xl, yl, mi_big, 2, ls, le, ss, se);
+  BOOST_CHECK_EQUAL(ls, 0);
+  BOOST_CHECK_EQUAL(le, nl);
+  BOOST_CHECK_EQUAL(ss, 0);
+  BOOST_CHECK_EQUAL(se, ns);
+  Resampler::determine_range(xl, yl, mi_far, 2, ls, le, ss, se);
+  BOOST_CHECK(le < ls);
+}
+
 BOOST_AUTO_TEST_CASE(timing)
 {
   // Timing test, normally skipped. Turn on if you want to check the
@@ -330,6 +532,22 @@ BOOST_AUTO_TEST_CASE(timing)
     }
   MapInfo mil(boost::make_shared<GeodeticConverter>(), 0.0, 10.0, 10.0, 0.0,
 	      2 * n, 2 * n);
+  for(int ntask : {1, -1}) {
+    auto t = std::chrono::steady_clock::now();
+    Resampler r2(xl, yl, mil, nsub, false, -1000.0, ntask);
+    std::cerr << "Resampler constructor Number_task " << ntask << ": "
+	      << std::chrono::duration<double>(std::chrono::steady_clock::now() - t).count()
+	      << " s\n";
+  }
+  for(int nthread : {1, ThreadPool::default_number_thread}) {
+    ThreadPool::thread_pool().number_thread(nthread);
+    int ls, le, ss, se;
+    auto t = std::chrono::steady_clock::now();
+    Resampler::determine_range(xl, yl, mil, nsub, ls, le, ss, se);
+    std::cerr << "determine_range number_thread " << nthread << ": "
+	      << std::chrono::duration<double>(std::chrono::steady_clock::now() - t).count()
+	      << " s\n";
+  }
   Resampler r(xl, yl, mil, nsub);
   blitz::Array<double, 2> d(n, n);
   for(int i = 0; i < n; ++i)

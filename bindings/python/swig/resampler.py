@@ -160,8 +160,8 @@ class Resampler(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
-        __init__(Resampler self, boost::shared_ptr< GeoCal::RasterImage > const & X_coor, boost::shared_ptr< GeoCal::RasterImage > const & Y_coor, MapInfo Mi, int Num_sub_pixel=2, bool Exactly_match_mi=False, double Mark_missing=-1000.0) -> Resampler
-        __init__(Resampler self, BlitzArray_double_2 X_coor_interpolated, BlitzArray_double_2 Y_coor_interpolated, MapInfo Mi, int Num_sub_pixel=2, bool Exactly_match_mi=False, double Mark_missing=-1000.0) -> Resampler
+        __init__(Resampler self, boost::shared_ptr< GeoCal::RasterImage > const & X_coor, boost::shared_ptr< GeoCal::RasterImage > const & Y_coor, MapInfo Mi, int Num_sub_pixel=2, bool Exactly_match_mi=False, double Mark_missing=-1000.0, int Number_task=-1) -> Resampler
+        __init__(Resampler self, BlitzArray_double_2 X_coor_interpolated, BlitzArray_double_2 Y_coor_interpolated, MapInfo Mi, int Num_sub_pixel=2, bool Exactly_match_mi=False, double Mark_missing=-1000.0, int Number_task=-1) -> Resampler
 
         GeoCal::Resampler::Resampler
         Constructor.  

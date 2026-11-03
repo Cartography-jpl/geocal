@@ -920,6 +920,40 @@ Related ECOSTRESS notes found while checking:
 * Note for later steps: `cp` is aliased to `cp -i` on rifle; use
   `/bin/cp -f` in scripts.
 
+* **Step 3a done (2026-11-03), staged:** speed part of step 3, no
+  behavior change.
+  * `init` is a template taking a coordinate function, used by both
+    constructors. Two parallel passes: (1) index + rint + per task
+    min/max, marking both-fill points with INT_MIN in data_index; (2)
+    subtract the offset, fill points -> -9999. The fill marking in pass 1
+    means pass 2 doesn't recompute the coordinates (this was 1.46 s ->
+    1.02 s single threaded for the array constructor).
+  * RasterImage constructor interpolates on the fly, exactly matching
+    MagnifyBilinear (same formula and order of operations; the test checks
+    the data_index is identical for nsub 1, 2, 3). No 2 x 800 MB
+    interpolated arrays.
+  * determine_range: one parallel pass, per task ranges reduced at the
+    end.
+  * `default_number_task` shared by resample_field, init and
+    determine_range. determine_range has no Number_task argument (as
+    decided).
+  * Constructors have a `Number_task = -1` last argument (C++ and SWIG).
+  * Tests: `ctor_matches_reference` (1/4/10 threads, exact/coverage,
+    with/without fill, 4 task counts: data_index and MapInfo identical
+    to a copy of the old init), `raster_ctor_matches_magnify_bilinear`,
+    `determine_range_matches_reference` (partial, full, no overlap;
+    nsub 1, 2, 3). 14 resampler tests, full C++ suite, Python tests (250
+    passed, 77 skipped) and mypy pass.
+  * Timing (5000x5000 raw, nsub 2, 10 threads): array constructor 1.02 s
+    -> 0.12 s, determine_range 1.11 s -> 0.13 s, RasterImage constructor
+    (python, 5000x5000 coordinates) 2.39 s -> 0.36 s.
+  * One small side effect: a NaN coordinate (both x and y) with a coverage
+    MapInfo now gets -9999 instead of an overflowed INT_MIN - miny. It was
+    never used either way.
+* **Step 3b next:** the decided init behavior fixes, as a separate change
+  (|| fill test, -9999 marking with Exactly_match_mi, throw on no valid
+  points), plus NaN treated as missing.
+
 ## Implementation order
 
 Each step builds and passes `make check` (and installcheck where python

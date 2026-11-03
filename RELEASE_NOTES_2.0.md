@@ -172,6 +172,15 @@ fixtures and `require_*` skip markers now live in `python/tests/fixtures/`.
     threads (0.97 s -> 0.19 s), and no longer creates a magnified copy of
     the data. Results are the same apart from floating point round off in
     the averages (about 1e-15 relative).
+  - The constructors and `determine_range` are also multithreaded, and the
+    constructors have a new last argument `Number_task`, the same as
+    `resample_field`. For 10000 x 10000 subpixels with 10 threads: the
+    constructor from arrays 1.4 s -> 0.12 s, `determine_range`
+    1.1 s -> 0.13 s. The `RasterImage` constructor interpolates the
+    coordinates as it goes rather than creating the full size
+    interpolated arrays with `MagnifyBilinear`, so it uses much less
+    memory (2.6 s -> 0.36 s for 5000 x 5000 coordinates, nsub 2). The
+    results are identical to before.
   - Bug fix: `resample_field(Fname, Data, ...)`, which writes a VICAR file,
     passed `Fill_value_threshold` as the `Use_smallest_ic` argument, so the
     threshold was ignored, and any nonzero threshold turned on

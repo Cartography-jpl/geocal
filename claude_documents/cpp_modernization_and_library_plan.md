@@ -782,6 +782,61 @@ Unchanged: **not a prerequisite** for anything above. clang-tidy gets its
 Revisit CMake if the binding tool changes, or if the sibling AFIDS repos
 migrate together.
 
+### 6.1 `make check` runs against the installed library (open, 2026-11-03)
+
+Found during the Resampler work (`resampler_threading_plan.md`). In the pixi
+build, `geocal_test_all` (and the other uninstalled programs) load the
+**installed** `libgeocal` from the env, not the one just built in `.libs`:
+
+* conda's compiler activation puts
+  `-Wl,-rpath,$CONDA_PREFIX/lib -Wl,--disable-new-dtags` in `LDFLAGS`, so
+  the env lib directory is in the RPATH before libtool's `.libs`
+  (`readelf -d geocal_test_all`: RPATH
+  `.../envs/default/lib:.../build-pixi/.libs`).
+* `--disable-new-dtags` gives RPATH rather than RUNPATH, so
+  `LD_LIBRARY_PATH` doesn't override it either.
+* The prefix is the env itself (`--prefix=$CONDA_PREFIX`), so the env lib
+  directory has an older `libgeocal.so.0` after the first `make install`.
+
+Effect: `make check` silently tests the last installed library. With a
+new symbol it fails (`undefined symbol: _ZN6GeoCal10ThreadPool7in_taskE`).
+With a change to existing code it passes while testing the old code,
+which is worse. Before the first install it works, because then there is no
+`libgeocal` in the env.
+
+Current workaround (used for the Resampler work):
+
+    LD_PRELOAD=$PWD/.libs/libgeocal.so.0 ./geocal_test_all ...
+
+(run in the build directory, under `pixi run` or `pixi shell`). It prints
+harmless `sh: /lib64/libtinfo.so.6: no version information available`
+lines, because the preload leaks into subshells the tests start.
+
+Options to look at, none tried yet:
+1. Install to a prefix separate from the env (e.g. `$CONDA_PREFIX/../geocal`
+   or a directory in the build tree). The env lib directory then never has
+   a libgeocal. Simple, but changes the editable install setup and
+   `PATH`/`PYTHONPATH` for using the install.
+2. Have `lib/test_all.sh` (the `TESTS` driver) run the test through
+   `./libtool --mode=execute`, or set `LD_PRELOAD` itself. Libtool's
+   wrapper sets `LD_LIBRARY_PATH`, which doesn't beat RPATH, so this
+   probably needs the `LD_PRELOAD` (or option 3) anyway. Limited to the
+   C++ tests; any other uninstalled program has the same problem.
+3. Strip the env rpath from `LDFLAGS` for the build (conda allows
+   overriding `LDFLAGS` in the env activation, or configure could filter
+   `-Wl,-rpath,$prefix/lib`), so libtool's `.libs` rpath comes first.
+   Installed programs then rely on libtool's install-time relink to get the
+   prefix rpath, which libtool already does.
+4. Link with `-Wl,--enable-new-dtags` (RUNPATH) so `LD_LIBRARY_PATH` from
+   the libtool wrapper takes precedence. Smaller change than 3, but
+   overrides a conda default for every program.
+
+This affects every project built with `--prefix=$CONDA_PREFIX` in a conda
+or pixi env (the downstream ones too), so the fix probably belongs in the
+shared `config/m4` / skeleton, and should be tried in `swig-rules-skeleton`
+first (§5 Phase 0 step 4a). Add to Phase 0 as a baseline item: `make check`
+has to test the library that was just built.
+
 ---
 
 ## 7. C++20 for GeoCal 2.0
@@ -1156,3 +1211,5 @@ Measured on `lib/` (652 files, 106k lines, generated wrappers and
 3. **clang-format** adoption (§8.5), after the skeleton trial (S1.6).
 4. **Final Python module name** after nanobind (skeleton: keep the current
    name for now).
+5. **`make check` tests the installed library** in conda/pixi builds
+   installed into the env (§6.1). Pick a fix, try it in the skeleton.

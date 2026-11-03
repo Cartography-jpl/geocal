@@ -1,9 +1,11 @@
 #include "geocal_thread_pool.h"
+#include "geocal_exception.h"
 #include <boost/make_shared.hpp>
 
 using namespace GeoCal;
 
 ThreadPool ThreadPool::the_thread_pool{};
+thread_local bool ThreadPool::in_task = false;
 
 //-----------------------------------------------------------------------
 /// Return the ThreadPool we are using.
@@ -30,16 +32,50 @@ ThreadPool::ThreadPool(int Number_thread)
 }
 
 //-----------------------------------------------------------------------
-/// Set the number of workers in the thread pool.
+/// Set the number of workers in the thread pool. This can't be done
+/// while there are tasks we haven't waited for.
 //-----------------------------------------------------------------------
 
 void ThreadPool::number_thread(int V)
 {
+  if(in_task)
+    throw Exception("ThreadPool::number_thread can't be changed from inside a ThreadPool task");
+  range_min_check(V, 1);
   std::lock_guard<std::mutex> lock(tpool_mutex);
+  if(owner != std::thread::id())
+    throw Exception("ThreadPool::number_thread can't be changed while the ThreadPool has tasks that haven't been waited for");
   number_thread_ = V;
   // Any existing pool is replaced with one of the new size when it is
   // next needed.
   tpool.reset();
+}
+
+//-----------------------------------------------------------------------
+/// Check that we aren't being called from inside a task, or from a
+/// different thread than the one that added the current tasks. If the
+/// pool isn't being used, this thread becomes the owner.
+//-----------------------------------------------------------------------
+
+void ThreadPool::check_caller()
+{
+  if(in_task)
+    throw Exception("ThreadPool used from inside a ThreadPool task, which isn't supported");
+  std::lock_guard<std::mutex> lock(tpool_mutex);
+  if(owner == std::thread::id())
+    owner = std::this_thread::get_id();
+  else if(owner != std::this_thread::get_id())
+    throw Exception("ThreadPool is already being used by another thread, which isn't supported");
+}
+
+//-----------------------------------------------------------------------
+/// Save the first exception thrown by a task.
+//-----------------------------------------------------------------------
+
+void ThreadPool::save_exception(const std::exception_ptr& E)
+{
+  std::lock_guard<std::mutex> lock(tpool_mutex);
+  if(!task_exception)
+    task_exception = E;
 }
 
 //-----------------------------------------------------------------------
@@ -55,11 +91,13 @@ boost::asio::thread_pool& ThreadPool::pool()
 }
 
 //-----------------------------------------------------------------------
-/// Wait for all the tasks to finish.
+/// Wait for all the tasks to finish. If any of the tasks threw an
+/// exception, we rethrow the first one here.
 //-----------------------------------------------------------------------
 
 void ThreadPool::wait_tasks_finish()
 {
+  check_caller();
   boost::shared_ptr<boost::asio::thread_pool> t;
   {
     std::lock_guard<std::mutex> lock(tpool_mutex);
@@ -67,6 +105,15 @@ void ThreadPool::wait_tasks_finish()
   }
   if(t)
     t->join();
+  std::exception_ptr e;
+  {
+    std::lock_guard<std::mutex> lock(tpool_mutex);
+    e = task_exception;
+    task_exception = nullptr;
+    owner = std::thread::id();
+  }
+  if(e)
+    std::rethrow_exception(e);
 }
 
 void ThreadPool::print(std::ostream& Os) const

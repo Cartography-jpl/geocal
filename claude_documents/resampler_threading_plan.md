@@ -858,6 +858,35 @@ Related ECOSTRESS notes found while checking:
   the checks skip them.
 * L2CT uses UTM tiles, so only check B applies there.
 
+## Working notes for the implementation
+
+* **Running the C++ tests before `make install`.** In the pixi build,
+  `geocal_test_all` loads the installed `libgeocal` from the env, not the
+  one in `.libs` (the env lib directory comes first in its RPATH, see
+  `cpp_modernization_and_library_plan.md` §6.1). So `make check` and
+  `./geocal_test_all` test the old library, or fail with
+  `undefined symbol` for anything new. Run the tests from the build
+  directory (`/ldata/smyth/geocal-build/build-pixi`) as
+
+      make -j 20 geocal_test_all
+      pixi run env LD_PRELOAD=$PWD/.libs/libgeocal.so.0 ./geocal_test_all --run_test=resampler
+
+  and ignore the `sh: /lib64/libtinfo.so.6: no version information
+  available` lines (the preload leaks into subshells). After `make install`
+  the plain command works again, until the next change.
+* The build directory uses this source tree (`../../geocal-repo` resolves to
+  `/ssdata/smyth/geocal-repo`), configured with
+  `--enable-maintainer-mode --enable-python-editable-mode`.
+
+## Progress
+
+* **Step 1 done (2026-11-03), staged:** ThreadPool guards,
+  `parallel_row_blocks`, `array_local_median` switched to it, 5 new
+  ThreadPool tests, release note. Full C++ suite passes (583 tests, with the
+  `LD_PRELOAD` workaround); the ThreadPool suite passed 200 repeated runs.
+  Python tests not run yet (need `make install`), do that after step 2.
+  Small addition to the plan: `number_thread(V)` also requires V >= 1.
+
 ## Implementation order
 
 Each step builds and passes `make check` (and installcheck where python

@@ -109,6 +109,16 @@ fixtures and `require_*` skip markers now live in `python/tests/fixtures/`.
     never used. This made every python process using geocal
     multi-threaded, which matters when multiprocessing forks. Threads are
     now only started when the pool is used.
+  - An exception thrown by a task crashed the process (`std::terminate`).
+    It is now caught and rethrown by `wait_tasks_finish`.
+  - Using the pool from inside one of its own tasks, or from a second
+    thread while the first still has tasks it hasn't waited for, could
+    hang or give wrong results. Neither is supported, and both now throw
+    an exception. Changing `number_thread` while tasks are pending also
+    throws, and `number_thread` must be at least 1.
+  - New C++ helper `parallel_row_blocks`, which divides rows into blocks
+    for the pool and always waits for the tasks, even if one throws.
+    `array_local_median` now uses it.
 - Development environment pins SWIG to 4.4, matching the committed
   wrappers (it was pinned to `<4.4.0`, so regenerated wrappers used an
   older SWIG than the rest).

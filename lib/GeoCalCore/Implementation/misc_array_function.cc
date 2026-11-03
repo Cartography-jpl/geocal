@@ -90,7 +90,7 @@ blitz::Array<double, 2> GeoCal::array_local_median
   // our self.
   //std::for_each(std::execution::par,
   //boost::counting_iterator<int>(0), boost::counting_iterator<int>(res.size()),
-  auto func = [Edge_handle, hnr, hnc, &In, &res] (int istart, int iend)
+  auto func = [Edge_handle, hnr, hnc, &In, &res] (int, int istart, int iend)
   {
     std::vector<double> scratch;
     scratch.reserve((2*hnr+1)*(2*hnc+1));
@@ -116,27 +116,7 @@ blitz::Array<double, 2> GeoCal::array_local_median
 	res(i,j) = median_calc(scratch);
       }
   };
-  if(Number_task == 1 || ThreadPool::thread_pool().number_thread() == 1)
-    func(0,res.rows());
-  else {
-    // Divide the data into Number_task nearly equal blocks, and
-    // start a thread for each block.
-    int tsize = In.rows() / Number_task;
-    int overflow_num = In.rows() % Number_task;
-    int istart = 0;
-    for(int i = 0; i < Number_task; ++i) {
-      int iend = istart + tsize;
-      // Add a overflow of 1 if needed.
-      if(overflow_num > 0) {
-	++iend;
-	--overflow_num;
-      }
-      ThreadPool::thread_pool().add_task(func, istart, iend);
-      istart = iend;
-    }
-    // Wait for everything to finish
-    ThreadPool::thread_pool().wait_tasks_finish();
-  }
+  parallel_row_blocks(res.rows(), Number_task, func);
   if(Edge_handle == ARRAY_LOCAL_MEDIAN_REPEAT) {
     for(int i = 0; i < res.rows(); ++i)
       for(int j = 0; j < res.cols();++j) {

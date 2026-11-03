@@ -1381,6 +1381,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/quick_mosaic_test.cc \
 	@srcimplementation@/sensrb_camera_test.cc \
 	@srcimplementation@/glas_gfm_camera_test.cc \
+	@srcimplementation@/resampler_test.cc \
 	@srccartlab@/vicar_ogr_test.cc \
 	@srccartlab@/argus_camera_test.cc \
 	@srccartlab@/argus_orbit_test.cc \
@@ -1558,6 +1559,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcimplementation@/geocal_test_all-quick_mosaic_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-sensrb_camera_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-glas_gfm_camera_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-resampler_test.$(OBJEXT) \
 	$(am__objects_17) \
 	@srccartlab@/geocal_test_all-argus_camera_test.$(OBJEXT) \
 	@srccartlab@/geocal_test_all-argus_orbit_test.$(OBJEXT) \
@@ -1754,6 +1756,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-ray_intersect_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_msp_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Po \
+	@srcimplementation@/$(DEPDIR)/geocal_test_all-resampler_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-rpc_image_ground_connection_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_a_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_b_test.Po \
@@ -4288,7 +4291,8 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/context_sqrt_decode_image_test.cc \
 	@srcimplementation@/quick_mosaic_test.cc \
 	@srcimplementation@/sensrb_camera_test.cc \
-	@srcimplementation@/glas_gfm_camera_test.cc $(am__append_27) \
+	@srcimplementation@/glas_gfm_camera_test.cc \
+	@srcimplementation@/resampler_test.cc $(am__append_27) \
 	@srccartlab@/argus_camera_test.cc \
 	@srccartlab@/argus_orbit_test.cc \
 	@srccartlab@/quickbird_camera_test.cc \
@@ -6321,6 +6325,9 @@ libgeocal.la: $(libgeocal_la_OBJECTS) $(libgeocal_la_DEPENDENCIES) $(EXTRA_libge
 @srcimplementation@/geocal_test_all-glas_gfm_camera_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-resampler_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srccartlab@/geocal_test_all-vicar_ogr_test.$(OBJEXT):  \
 	@srccartlab@/$(am__dirstamp) \
 	@srccartlab@/$(DEPDIR)/$(am__dirstamp)
@@ -6687,6 +6694,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-ray_intersect_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_msp_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-resampler_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-rpc_image_ground_connection_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_a_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_b_test.Po@am__quote@ # am--include-marker
@@ -12314,6 +12322,20 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-glas_gfm_camera_test.obj `if test -f '@srcimplementation@/glas_gfm_camera_test.cc'; then $(CYGPATH_W) '@srcimplementation@/glas_gfm_camera_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/glas_gfm_camera_test.cc'; fi`
 
+@srcimplementation@/geocal_test_all-resampler_test.o: @srcimplementation@/resampler_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-resampler_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-resampler_test.Tpo -c -o @srcimplementation@/geocal_test_all-resampler_test.o `test -f '@srcimplementation@/resampler_test.cc' || echo '$(srcdir)/'`@srcimplementation@/resampler_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-resampler_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-resampler_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/resampler_test.cc' object='@srcimplementation@/geocal_test_all-resampler_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-resampler_test.o `test -f '@srcimplementation@/resampler_test.cc' || echo '$(srcdir)/'`@srcimplementation@/resampler_test.cc
+
+@srcimplementation@/geocal_test_all-resampler_test.obj: @srcimplementation@/resampler_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-resampler_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-resampler_test.Tpo -c -o @srcimplementation@/geocal_test_all-resampler_test.obj `if test -f '@srcimplementation@/resampler_test.cc'; then $(CYGPATH_W) '@srcimplementation@/resampler_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/resampler_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-resampler_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-resampler_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/resampler_test.cc' object='@srcimplementation@/geocal_test_all-resampler_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-resampler_test.obj `if test -f '@srcimplementation@/resampler_test.cc'; then $(CYGPATH_W) '@srcimplementation@/resampler_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/resampler_test.cc'; fi`
+
 @srccartlab@/geocal_test_all-vicar_ogr_test.o: @srccartlab@/vicar_ogr_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srccartlab@/geocal_test_all-vicar_ogr_test.o -MD -MP -MF @srccartlab@/$(DEPDIR)/geocal_test_all-vicar_ogr_test.Tpo -c -o @srccartlab@/geocal_test_all-vicar_ogr_test.o `test -f '@srccartlab@/vicar_ogr_test.cc' || echo '$(srcdir)/'`@srccartlab@/vicar_ogr_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srccartlab@/$(DEPDIR)/geocal_test_all-vicar_ogr_test.Tpo @srccartlab@/$(DEPDIR)/geocal_test_all-vicar_ogr_test.Po
@@ -13942,6 +13964,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-ray_intersect_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_msp_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-resampler_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rpc_image_ground_connection_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_a_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_b_test.Po
@@ -14630,6 +14653,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-ray_intersect_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_msp_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-resampler_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rpc_image_ground_connection_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_a_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_b_test.Po

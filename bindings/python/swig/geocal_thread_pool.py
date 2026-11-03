@@ -151,6 +151,16 @@ class ThreadPool(geocal_swig.generic_object.GenericObject):
     For now, we use the boost threadpool class and handle the threading ourselves.
     We can possibly remove this class at some point as the compiler move on.  
 
+    There is one global pool, and wait_tasks_finish waits for all the tasks in it.
+    So the pool can only be used by one thread at a time, and a task can't use the
+    pool itself (no nested use). We don't support either of these, but we do detect
+    them and throw an Exception rather than hanging or crashing. An exception thrown
+    by a task is caught, and rethrown by wait_tasks_finish.  
+
+    Most code should use parallel_row_blocks rather than calling add_task and
+    wait_tasks_finish directly. This makes sure we always wait for the tasks, even
+    if an exception is thrown.  
+
     C++ includes: geocal_thread_pool.h
 
     """

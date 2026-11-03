@@ -556,6 +556,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/context_sqrt_decode_image_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/quick_mosaic_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/sensrb_camera_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/glas_gfm_camera_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/resampler_test.cc
 
 EXTRA_DIST += @srcimplementation@/rsm_fixture.h
 

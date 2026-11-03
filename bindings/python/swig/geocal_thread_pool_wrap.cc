@@ -6901,12 +6901,16 @@ static PyMethodDef SwigMethods[] = {
 		"GeoCal::ThreadPool::number_thread\n"
 		"Set the number of workers in the thread pool.  \n"
 		"\n"
+		"This can't be done while there are tasks we haven't waited for.  \n"
+		"\n"
 		""},
 	 { "ThreadPool_wait_tasks_finish", _wrap_ThreadPool_wait_tasks_finish, METH_O, "\n"
 		"ThreadPool_wait_tasks_finish(ThreadPool self)\n"
 		"\n"
 		"GeoCal::ThreadPool::wait_tasks_finish\n"
 		"Wait for all the tasks to finish.  \n"
+		"\n"
+		"If any of the tasks threw an exception, we rethrow the first one here.  \n"
 		"\n"
 		""},
 	 { "ThreadPool___str__", _wrap_ThreadPool___str__, METH_O, "ThreadPool___str__(ThreadPool self) -> std::string"},
@@ -6963,12 +6967,16 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"GeoCal::ThreadPool::number_thread\n"
 		"Set the number of workers in the thread pool.  \n"
 		"\n"
+		"This can't be done while there are tasks we haven't waited for.  \n"
+		"\n"
 		""},
 	 { "ThreadPool_wait_tasks_finish", _wrap_ThreadPool_wait_tasks_finish, METH_O, "\n"
 		"wait_tasks_finish(ThreadPool self)\n"
 		"\n"
 		"GeoCal::ThreadPool::wait_tasks_finish\n"
 		"Wait for all the tasks to finish.  \n"
+		"\n"
+		"If any of the tasks threw an exception, we rethrow the first one here.  \n"
 		"\n"
 		""},
 	 { "ThreadPool___str__", _wrap_ThreadPool___str__, METH_O, "__str__(ThreadPool self) -> std::string"},

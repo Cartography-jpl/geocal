@@ -32,12 +32,22 @@ public:
   bool empty_resample() const;
   bool empty_resample(const boost::shared_ptr<RasterImage>& Data,
 		      double Fill_value_threshold = std::numeric_limits<double>::lowest()) const;
+  bool empty_resample(const blitz::Array<double, 2>& Data,
+		      double Fill_value_threshold = std::numeric_limits<double>::lowest()) const;
   blitz::Array<double, 2> resample_field
   (const boost::shared_ptr<RasterImage>& Data,
    double Scale_data=1.0,
    bool Negative_to_zero=false, double Fill_value = 0.0,
    bool Use_smallest_ic = false,
-   double Fill_value_threshold = std::numeric_limits<double>::lowest()) const;
+   double Fill_value_threshold = std::numeric_limits<double>::lowest(),
+   int Number_task = -1) const;
+  blitz::Array<double, 2> resample_field
+  (const blitz::Array<double, 2>& Data,
+   double Scale_data=1.0,
+   bool Negative_to_zero=false, double Fill_value = 0.0,
+   bool Use_smallest_ic = false,
+   double Fill_value_threshold = std::numeric_limits<double>::lowest(),
+   int Number_task = -1) const;
   void resample_field(const std::string& Fname,
 		      const boost::shared_ptr<RasterImage>& Data,
 		      double Scale_data=1.0,

@@ -887,6 +887,39 @@ Related ECOSTRESS notes found while checking:
   Python tests not run yet (need `make install`), do that after step 2.
   Small addition to the plan: `number_thread(V)` also requires V >= 1.
 
+* **Step 2 done (2026-11-03), staged:** `resample_field` and
+  `empty_resample` blitz overloads, parallel tiled scatter + merge,
+  `Number_task` argument, `min_parallel_size` (1e6 subpixels), Fname
+  argument fix, SWIG updated and wrappers regenerated. Test results:
+  * 10 new resampler tests, all against a reference copy of the old
+    algorithm in the test file. Checked that they catch bugs: two
+    deliberate errors in the merge gave 21 failures.
+  * Full C++ suite, `make install`, Python tests (250 passed, 77
+    skipped), and `make mypy` all pass.
+  * Timing test (5000x5000 raw, nsub 2, 10 threads): 0.97 s single
+    task, 0.19 s default (5.2x). Run it with
+    `GEOCAL_RESAMPLER_TIMING=1 ./geocal_test_all --run_test=resampler/timing`.
+  Found and fixed along the way:
+  * resampler_test.cc was never in implementation.am, so the existing
+    (disabled) test was never even compiled. Added.
+    `orbit_array_test.cc` and `rsm_rational_polynomial_test.cc` are also not
+    in the build; not looked at, left alone.
+  * An anonymous namespace in resampler.cc makes doxy2swig produce a
+    `%feature` line that SWIG can't parse. Helper types go in the class
+    (private) instead.
+  * `data_index` renamed `data_index_` (serialized name unchanged, using
+    GEOCAL_NVP_), with a const `data_index()` accessor (C++ only), used
+    by the test reference implementation.
+  * The `else` fill branch was dropped as planned. The reference
+    implementation in the test keeps it, and the results match, which
+    confirms it had no effect.
+* Python dispatch checked by hand (`/tmp/rsproto/pycheck.py`): numpy
+  float64, numpy float32, MemoryRasterImage and MemoryRasterImageFloat all
+  go to the right overload and give the same result. The proper python
+  test file comes in step 6.
+* Note for later steps: `cp` is aliased to `cp -i` on rifle; use
+  `/bin/cp -f` in scripts.
+
 ## Implementation order
 
 Each step builds and passes `make check` (and installcheck where python

@@ -159,6 +159,26 @@ fixtures and `require_*` skip markers now live in `python/tests/fixtures/`.
     family, rather than storing `None`.
   - Uses the non-deprecated `cv2.SIFT.create` instead of
     `cv2.xfeatures2d.SIFT_create`.
+- `Resampler` changes:
+  - `resample_field` and `empty_resample` can take the data as a numpy
+    array (at the original resolution, not magnified by the number of
+    subpixels), so you no longer need to copy it into a
+    `MemoryRasterImageFloat`. The `RasterImage` versions still work.
+  - `resample_field` is multithreaded, using the `ThreadPool`
+    (`ThreadPool.thread_pool().number_thread` sets the number of
+    threads). It has a new last argument `Number_task` (default -1 uses
+    4 x the number of threads, and does small data in a single thread). It
+    is about 5x faster for a 10000 x 10000 subpixel resample with 10
+    threads (0.97 s -> 0.19 s), and no longer creates a magnified copy of
+    the data. Results are the same apart from floating point round off in
+    the averages (about 1e-15 relative).
+  - Bug fix: `resample_field(Fname, Data, ...)`, which writes a VICAR file,
+    passed `Fill_value_threshold` as the `Use_smallest_ic` argument, so the
+    threshold was ignored, and any nonzero threshold turned on
+    `Use_smallest_ic`.
+  - The C++ unit tests for `Resampler` were never built (the test file
+    wasn't in `implementation.am`). They are now, with tests comparing
+    against the old algorithm.
 - `safe_matplotlib_import` works again. An earlier cleanup had removed its
   test import of `matplotlib.pyplot`, so it never fell back to the `agg`
   backend. The fallback also used `matplotlib.use(warn=...)`, which

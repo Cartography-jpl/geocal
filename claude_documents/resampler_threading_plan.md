@@ -1071,6 +1071,18 @@ Related ECOSTRESS notes found while checking:
   * The SWIG part of step 6 (factory, attributes, line_range/
     sample_range) is done here; step 6 still needs the python test file.
 
+* **Step 6 done (2026-11-03), staged:** `python/tests/unit/resampler_test.py`,
+  9 tests: numpy float64/float32 and RasterImage overloads agree,
+  Number_task, NaN and threshold missing points, determine_range with a
+  threshold, date line (Geodetic throws, Geodetic360 works),
+  max_step_ratio (unmarked fill throws, 0 turns it off, a threshold fixes
+  it), create_from_lat_lon (slices, size check message, no bias in the
+  resampled latitude, no data error), comparison with the scipy
+  build_resampler approach (range fixed), full swath slices without a
+  range, pickle. Added `data_index` as a python attribute (needed by the
+  tests). ruff clean; full Python suite 259 passed, 77 skipped; mypy
+  clean. The SWIG part was done in step 5.
+
 ## Implementation order
 
 Each step builds and passes `make check` (and installcheck where python

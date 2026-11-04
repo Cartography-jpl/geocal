@@ -268,6 +268,12 @@ class Resampler(geocal_swig.generic_object.GenericObject):
     def number_sub_pixel(self):
         return self._v_number_sub_pixel()
 
+    _v_data_index = _swig_new_instance_method(_resampler.Resampler__v_data_index)
+
+    @property
+    def data_index(self):
+        return self._v_data_index()
+
     _v_swath_line_start = _swig_new_instance_method(_resampler.Resampler__v_swath_line_start)
 
     @property

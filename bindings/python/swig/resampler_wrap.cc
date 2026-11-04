@@ -12701,6 +12701,81 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Resampler__v_data_index(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Resampler *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Resampler const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Resampler const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< blitz::Array< int,3 > > result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Resampler_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Resampler__v_data_index" "', argument " "1"" of type '" "GeoCal::Resampler const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      arg1 = const_cast< GeoCal::Resampler * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      arg1 = const_cast< GeoCal::Resampler * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::Resampler const *)arg1)->data_index();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail;
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (...) {
+      // Anything not derived from std::exception (a raw type, a
+      // third-party exception hierarchy that doesn't inherit
+      // std::exception, etc.) would otherwise propagate across the
+      // extern "C" boundary into CPython -- undefined behavior, in
+      // practice a process abort rather than a clean Python exception.
+      SWIG_exception(SWIG_RuntimeError, "unknown C++ exception");
+    }
+  }
+  {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,203,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[3], stride[3];
+    for(int i = 0; i < 3; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(int);
+    }
+    
+    // Create new numpy object using Numpy C API
+    resultobj = PyArray_New(&PyArray_Type, 3, dims, type_to_npy<int >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<int, 3>* t = new blitz::Array<int, 3>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_int_3_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Resampler__v_swath_line_start(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Resampler *arg1 = 0 ;
@@ -13312,6 +13387,17 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"GeoCal::Resampler::number_sub_pixel\n"
 		""},
+	 { "Resampler__v_data_index", _wrap_Resampler__v_data_index, METH_O, "\n"
+		"Resampler__v_data_index(Resampler self) -> BlitzArray_int_3\n"
+		"\n"
+		"GeoCal::Resampler::data_index\n"
+		"The output line and sample for each subpixel, as a number line x number sample x\n"
+		"2 array.  \n"
+		"\n"
+		"Values outside of map_info() (e.g., -9999 for fill coordinates) aren't used.\n"
+		"This is mostly useful for testing.  \n"
+		"\n"
+		""},
 	 { "Resampler__v_swath_line_start", _wrap_Resampler__v_swath_line_start, METH_O, "\n"
 		"Resampler__v_swath_line_start(Resampler self) -> int\n"
 		"\n"
@@ -13594,6 +13680,17 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"_v_number_sub_pixel(Resampler self) -> int\n"
 		"\n"
 		"GeoCal::Resampler::number_sub_pixel\n"
+		""},
+	 { "Resampler__v_data_index", _wrap_Resampler__v_data_index, METH_O, "\n"
+		"_v_data_index(Resampler self) -> BlitzArray_int_3\n"
+		"\n"
+		"GeoCal::Resampler::data_index\n"
+		"The output line and sample for each subpixel, as a number line x number sample x\n"
+		"2 array.  \n"
+		"\n"
+		"Values outside of map_info() (e.g., -9999 for fill coordinates) aren't used.\n"
+		"This is mostly useful for testing.  \n"
+		"\n"
 		""},
 	 { "Resampler__v_swath_line_start", _wrap_Resampler__v_swath_line_start, METH_O, "\n"
 		"_v_swath_line_start(Resampler self) -> int\n"

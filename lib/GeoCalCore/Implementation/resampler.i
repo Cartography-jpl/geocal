@@ -71,6 +71,7 @@ public:
 		  blitz::Array<double, 2>& OUTPUT) const;
   %python_attribute(map_info, const MapInfo&);
   %python_attribute(number_sub_pixel, int);
+  %python_attribute(data_index, blitz::Array<int, 3>);
   %python_attribute(swath_line_start, int);
   %python_attribute(swath_number_line, int);
   %python_attribute(swath_sample_start, int);

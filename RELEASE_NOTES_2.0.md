@@ -283,6 +283,10 @@ fixtures and `require_*` skip markers now live in `python/tests/fixtures/`.
     select all the data, so you can always subset with them.
   - Serialization (and pickling) includes the swath range. Older
     serialized `Resampler` objects still load, with the full swath.
+  - `Resampler.data_index` (the output line and sample of each subpixel,
+    -9999 for missing coordinates) is now available in python, mostly
+    for testing.
+  - New python unit tests in `tests/unit/resampler_test.py`.
 - `safe_matplotlib_import` works again. An earlier cleanup had removed its
   test import of `matplotlib.pyplot`, so it never fell back to the `agg`
   backend. The fallback also used `matplotlib.use(warn=...)`, which

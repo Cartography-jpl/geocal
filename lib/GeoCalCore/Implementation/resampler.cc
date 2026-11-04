@@ -47,6 +47,20 @@ GEOCAL_IMPLEMENT(Resampler);
 /// in Mi, regardless of the actually coverage of the lat/lon. This is
 /// useful if we are producing output files to compare against some
 /// existing file.
+///
+/// A point is missing if either X or Y is <= Mark_missing, or is
+/// NaN. Missing points aren't used. We throw an exception if all the
+/// points are missing. Note that it is fine for none of the points to
+/// fall in Mi with Exactly_match_mi, you can check for that with
+/// empty_resample().
+///
+/// Note that we interpolate the coordinates with bilinear
+/// interpolation, as MagnifyBilinear does. A subpixel next to a
+/// missing point is interpolated with the fill value, so it is
+/// probably missing as well, as long as the fill value is very negative
+/// (e.g., -1e20).
+///
+/// See resample_field for a description of Number_task.
 //-------------------------------------------------------------------------
 
 Resampler::Resampler
@@ -93,7 +107,8 @@ Resampler::Resampler
 /// other than a file. The data should already be interpolated (e.g.,
 /// in python do scipy.ndimage.interpolation.zoom(t,Num_sub_pixel,order=2)
 ///
-/// See resample_field for a description of Number_task.
+/// Missing points are handled as in the other constructor, see that
+/// for details. See resample_field for a description of Number_task.
 //-------------------------------------------------------------------------
 
 Resampler::Resampler
@@ -159,12 +174,13 @@ template<class F> void Resampler::init
     int minx = 0, miny = 0, maxx = 0, maxy = 0;
   };
   std::vector<Range> trange(std::max(std::min(ntask, Number_row), 1));
-  // Points where both coordinates are fill are marked with this in
-  // the first pass, so we don't need to calculate the coordinates
-  // again (which can be expensive if Coor interpolates). A real index
-  // can't be this value (lrint gives this for values out of range of
-  // int, e.g., NaN, and those points were never used anyway).
+  // With a coverage MapInfo, missing points are marked with this in
+  // the first pass, and changed to -9999 in the second pass. We can't
+  // use -9999 in the first pass, since a real index could happen to be
+  // -9999 and we then shift the indexes in the second pass. A real
+  // index can't be INT_MIN, we don't get anywhere close to that.
   const int fill_flag = std::numeric_limits<int>::min();
+  const int missing_value = (Exactly_match_mi ? -9999 : fill_flag);
   parallel_row_blocks(Number_row, ntask,
     [&](int k, int istart, int iend)
     {
@@ -173,6 +189,12 @@ template<class F> void Resampler::init
 	for(int j = 0; j < Number_col; ++j) {
 	  double x, y, xindex, yindex;
 	  Coor(i, j, x, y);
+	  // Missing if either coordinate is fill (or NaN).
+	  if(!(x > Mark_missing && y > Mark_missing)) {
+	    data_index_(i,j,0) = missing_value;
+	    data_index_(i,j,1) = missing_value;
+	    continue;
+	  }
 	  Mi.coordinate_to_index(x, y, xindex, yindex);
 	  // This is the same as blitz::cast<int>(blitz::rint(..)) that
 	  // we used to use.
@@ -180,28 +202,20 @@ template<class F> void Resampler::init
 	  int smp = (int) std::rint(xindex);
 	  data_index_(i,j,0) = ln;
 	  data_index_(i,j,1) = smp;
-	  if(!Exactly_match_mi && y <= Mark_missing && x <= Mark_missing)
-	    data_index_(i,j,0) = fill_flag;
-	  if(!Exactly_match_mi && y > Mark_missing && x > Mark_missing) {
-	    if(!r.found) {
-	      r.found = true;
-	      r.minx = r.maxx = smp;
-	      r.miny = r.maxy = ln;
-	    }
-	    r.minx = std::min(smp, r.minx);
-	    r.maxx = std::max(smp, r.maxx);
-	    r.miny = std::min(ln, r.miny);
-	    r.maxy = std::max(ln, r.maxy);
+	  if(!r.found) {
+	    r.found = true;
+	    r.minx = r.maxx = smp;
+	    r.miny = r.maxy = ln;
 	  }
+	  r.minx = std::min(smp, r.minx);
+	  r.maxx = std::max(smp, r.maxx);
+	  r.miny = std::min(ln, r.miny);
+	  r.maxy = std::max(ln, r.maxy);
 	}
       trange[k] = r;
     });
-  if(Exactly_match_mi) {
-    mi = Mi;
-    return;
-  }
-  // Determine min and max xindex and yindex, but exclude all points
-  // with lat/lon that are fill values.
+  // Determine min and max xindex and yindex of the points that aren't
+  // fill.
   Range r;
   for(const auto& t : trange)
     if(t.found) {
@@ -212,10 +226,21 @@ template<class F> void Resampler::init
       r.miny = std::min(t.miny, r.miny);
       r.maxy = std::max(t.maxy, r.maxy);
     }
+  if(!r.found) {
+    Exception e;
+    e << "Resampler: there are no valid coordinates. All "
+      << Number_row << " x " << Number_col
+      << " points are fill (<= Mark_missing = " << Mark_missing
+      << ") or NaN.";
+    throw e;
+  }
+  if(Exactly_match_mi) {
+    mi = Mi;
+    return;
+  }
   mi = Mi.subset(r.minx, r.miny, r.maxx - r.minx + 1, r.maxy - r.miny + 1);
-  // Shift to the subsetted MapInfo, and make sure all the lat/lon
-  // fill values have data_index out of range so we don't use the
-  // data.
+  // Shift to the subsetted MapInfo, and set all the fill points to
+  // -9999 so we don't use the data.
   parallel_row_blocks(Number_row, ntask,
     [&](int, int istart, int iend)
     {

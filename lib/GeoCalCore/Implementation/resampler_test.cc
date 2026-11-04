@@ -93,8 +93,10 @@ public:
       res = blitz::where(res < 0, 0, res);
     return res;
   }
-  // Reference implementation of the old init. Returns data_index, and
-  // fills in Mi_out.
+  // Reference implementation of init. This is the old serial code, with
+  // the fixes for GeoCal 2.0: a point is missing if either X or Y is
+  // fill (or NaN), and missing points are marked -9999 with
+  // Exactly_match_mi as well. Returns data_index, and fills in Mi_out.
   blitz::Array<int, 3> reference_init
   (const blitz::Array<double, 2>& X_coor, const blitz::Array<double, 2>& Y_coor,
    const MapInfo& Mi, bool Exactly_match_mi, double Mark_missing,
@@ -106,15 +108,21 @@ public:
     Mi.coordinate_to_index(X_coor, Y_coor, xindex, yindex);
     data_index(ra,ra,0) = blitz::cast<int>(blitz::rint(yindex));
     data_index(ra,ra,1) = blitz::cast<int>(blitz::rint(xindex));
+    auto missing = [&](int i, int j)
+      { return !(Y_coor(i, j) > Mark_missing && X_coor(i, j) > Mark_missing); };
     if(Exactly_match_mi) {
       Mi_out = Mi;
+      for(int i = 0; i < X_coor.rows(); ++i)
+	for(int j = 0; j < X_coor.cols(); ++j)
+	  if(missing(i, j))
+	    data_index(i,j,ra) = -9999;
       return data_index;
     }
     bool first = true;
     int minx = 0, miny = 0, maxx = 0, maxy = 0;
     for(int i = 0; i < X_coor.rows(); ++i)
       for(int j = 0; j < X_coor.cols(); ++j)
-	if(Y_coor(i, j) > Mark_missing && X_coor(i, j) > Mark_missing) {
+	if(!missing(i, j)) {
 	  if(first) {
 	    minx = data_index(i,j,1);
 	    miny = data_index(i,j,0);
@@ -132,7 +140,7 @@ public:
     data_index(ra,ra,1) -= minx;
     for(int i = 0; i < X_coor.rows(); ++i)
       for(int j = 0; j < X_coor.cols(); ++j)
-	if(Y_coor(i, j) <= Mark_missing && X_coor(i, j) <= Mark_missing)
+	if(missing(i, j))
 	  data_index(i,j,ra) = -9999;
     return data_index;
   }
@@ -175,8 +183,8 @@ public:
     BOOST_CHECK_MATRIX_CLOSE_TOL(M1.transform(), M2.transform(), 1e-12);
   }
   // Coordinates with some fill values. Includes points where only one
-  // of x and y is fill, which the old code treats differently in the
-  // range calculation and the marking.
+  // of x and y is fill, which the old code treated differently in the
+  // range calculation and the marking, and NaN.
   void coor_with_fill(blitz::Array<double, 2>& Xf, blitz::Array<double, 2>& Yf)
   {
     Xf.reference(x.copy());
@@ -185,6 +193,9 @@ public:
     Yf(Range(10, 30), Range(0, 40)) = -9999;
     Xf(Range(100, 110), Range(200, 220)) = -9999;
     Yf(Range(150, 160), Range(100, 120)) = -9999;
+    Xf(Range(200, 205), Range(10, 20)) = std::numeric_limits<double>::quiet_NaN();
+    Yf(Range(200, 205), Range(10, 20)) = std::numeric_limits<double>::quiet_NaN();
+    Xf(Range(210, 215), Range(10, 20)) = std::numeric_limits<double>::quiet_NaN();
   }
   // Number of output pixels that have data
   int number_with_data(const blitz::Array<double, 2>& Res, double Fill_value)
@@ -427,6 +438,81 @@ BOOST_AUTO_TEST_CASE(ctor_matches_reference)
 	  check_map_info(r.map_info(), mi_expect);
 	}
   }
+}
+
+BOOST_AUTO_TEST_CASE(missing_points)
+{
+  // A point is missing if either X or Y is fill or NaN, for both
+  // coverage and exact MapInfo.
+  blitz::Array<double, 2> xf, yf;
+  coor_with_fill(xf, yf);
+  for(bool exact : {false, true})
+    for(int ntask : {1, 7}) {
+      Resampler r(xf, yf, mi, nsub, exact, -1000.0, ntask);
+      const blitz::Array<int, 3>& di = r.data_index();
+      int nmissing = 0;
+      for(int i = 0; i < xf.rows(); ++i)
+	for(int j = 0; j < xf.cols(); ++j) {
+	  bool miss = !(xf(i,j) > -1000.0 && yf(i,j) > -1000.0);
+	  if(miss) {
+	    ++nmissing;
+	    BOOST_CHECK_EQUAL(di(i,j,0), -9999);
+	    BOOST_CHECK_EQUAL(di(i,j,1), -9999);
+	  } else {
+	    BOOST_CHECK(di(i,j,0) != -9999 || di(i,j,1) != -9999);
+	  }
+	}
+      // Points where only one coordinate is fill, both fill, and NaN.
+      BOOST_CHECK_EQUAL(nmissing, 21 * 41 + 11 * 21 + 11 * 21 + 6 * 11 + 6 * 11);
+      // Missing points never contribute data. Put a huge value in the
+      // raw pixels where all the subpixels are missing, and check it
+      // never shows up.
+      blitz::Array<double, 2> d(data.copy());
+      int nall_missing = 0;
+      for(int i = 0; i < d.rows(); ++i)
+	for(int j = 0; j < d.cols(); ++j) {
+	  bool all_missing = true;
+	  for(int ii = i * nsub; ii < (i + 1) * nsub; ++ii)
+	    for(int jj = j * nsub; jj < (j + 1) * nsub; ++jj)
+	      if(xf(ii,jj) > -1000.0 && yf(ii,jj) > -1000.0)
+		all_missing = false;
+	  if(all_missing) {
+	    d(i,j) = 1e10;
+	    ++nall_missing;
+	  }
+	}
+      BOOST_CHECK(nall_missing > 100);
+      blitz::Array<double, 2> res = r.resample_field(d, 1.0, false, 0.0, false,
+			      std::numeric_limits<double>::lowest(), ntask);
+      BOOST_CHECK(blitz::max(res) < 1e9);
+    }
+}
+
+BOOST_AUTO_TEST_CASE(no_valid_points)
+{
+  // All points missing throws, with both coverage and exact MapInfo.
+  blitz::Array<double, 2> xf(x.shape()), yf(y.shape());
+  xf = -9999;
+  yf = y;
+  for(bool exact : {false, true}) {
+    BOOST_CHECK_THROW(Resampler(xf, yf, mi, nsub, exact), Exception);
+    blitz::Array<double, 2> xn(x.shape());
+    xn = std::numeric_limits<double>::quiet_NaN();
+    BOOST_CHECK_THROW(Resampler(xn, xn, mi, nsub, exact), Exception);
+  }
+  try {
+    Resampler r(xf, yf, mi, nsub);
+    BOOST_FAIL("Should have thrown an exception");
+  } catch(const Exception& e) {
+    BOOST_CHECK(std::string(e.what()).find("no valid coordinates") !=
+		std::string::npos);
+  }
+  // Valid points that don't fall in the MapInfo are fine with
+  // Exactly_match_mi, empty_resample handles that.
+  MapInfo mi_far(boost::make_shared<GeodeticConverter>(), 20.0, 21.0,
+		 21.0, 20.0, 200, 200);
+  Resampler r(x, y, mi_far, nsub, true);
+  BOOST_CHECK(r.empty_resample());
 }
 
 BOOST_AUTO_TEST_CASE(raster_ctor_matches_magnify_bilinear)

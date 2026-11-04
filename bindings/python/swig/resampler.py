@@ -187,6 +187,18 @@ class Resampler(geocal_swig.generic_object.GenericObject):
         the lat/lon. This is useful if we are producing output files to compare against
         some existing file.  
 
+        A point is missing if either X or Y is <= Mark_missing, or is NaN. Missing
+        points aren't used. We throw an exception if all the points are missing. Note
+        that it is fine for none of the points to fall in Mi with Exactly_match_mi, you
+        can check for that with empty_resample().  
+
+        Note that we interpolate the coordinates with bilinear interpolation, as
+        MagnifyBilinear does. A subpixel next to a missing point is interpolated with
+        the fill value, so it is probably missing as well, as long as the fill value is
+        very negative (e.g., -1e20).  
+
+        See resample_field for a description of Number_task.  
+
         """
         _resampler.Resampler_swiginit(self, _resampler.new_Resampler(*args))
     clear = _swig_new_instance_method(_resampler.Resampler_clear)

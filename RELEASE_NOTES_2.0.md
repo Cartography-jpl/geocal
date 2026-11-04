@@ -51,6 +51,22 @@ The defaults are now `None`, meaning "create a new empty one".
 `VicarInterface.build_command(extra_text=...)` also now defaults to
 `None` rather than `[]`, with the same behavior.
 
+### `Resampler` handling of missing coordinates
+
+- A coordinate point is now missing if *either* X or Y is <=
+  `Mark_missing` or is NaN. Before, the range of the coverage MapInfo
+  left out points where either was fill, but the points were only marked
+  as unused if both were fill. A point with only one fill coordinate could
+  put data in the wrong place.
+- With `Exactly_match_mi`, missing points are now marked as unused. Before,
+  they weren't marked at all, and were only dropped if their (garbage)
+  index happened to fall outside the MapInfo.
+- The constructors now throw an exception if all the points are missing.
+  Before, they silently created a 1 x 1 MapInfo (or, with
+  `Exactly_match_mi`, a resampler with no data). Valid points that just
+  don't fall in the MapInfo are still fine, use `empty_resample()` to
+  check for that.
+
 ### `test_support` removed
 
 The old `python/test_support/test_support.py` module was removed. Test

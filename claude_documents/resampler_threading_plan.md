@@ -950,9 +950,22 @@ Related ECOSTRESS notes found while checking:
   * One small side effect: a NaN coordinate (both x and y) with a coverage
     MapInfo now gets -9999 instead of an overflowed INT_MIN - miny. It was
     never used either way.
-* **Step 3b next:** the decided init behavior fixes, as a separate change
-  (|| fill test, -9999 marking with Exactly_match_mi, throw on no valid
-  points), plus NaN treated as missing.
+* **Step 3b done (2026-11-03), staged:** the decided init behavior
+  fixes. A point is missing if either X or Y is <= Mark_missing or NaN
+  (`!(x > Mark_missing && y > Mark_missing)`, which is false for NaN);
+  missing points are -9999 with Exactly_match_mi too, and don't get
+  coordinate_to_index at all; all points missing throws "no valid
+  coordinates". Release note under API breaking changes.
+  * The test reference init has the same fixes (commented as the 2.0
+    fixes); `coor_with_fill` adds NaN points and an only-X NaN block.
+  * New tests `missing_points` (every missing point is -9999, missing raw
+    pixels set to 1e10 never show up in the result) and `no_valid_points`
+    (fill and NaN, both MapInfo modes; valid but outside Mi with
+    Exactly_match_mi is fine).
+  * Checked the tests catch the old behavior: putting back `&&`-style
+    marking and no throw gave 990 failures in 3 tests.
+  * 16 resampler tests, full C++ suite, Python (250 passed, 77 skipped),
+    mypy pass.
 
 ## Implementation order
 

@@ -4,10 +4,12 @@
 #include "memory_raster_image.h"
 #include "memory_raster_image_float.h"
 #include "magnify_bilinear.h"
+#include "ogr_coordinate.h"
 #include "gdal_raster_image.h"
 #include "landsat7_global.h"
 #include <boost/make_shared.hpp>
 #include <chrono>
+#include <sstream>
 #include <cmath>
 using namespace GeoCal;
 using namespace blitz;
@@ -198,6 +200,13 @@ public:
     Xf(Range(200, 205), Range(10, 20)) = std::numeric_limits<double>::quiet_NaN();
     Yf(Range(200, 205), Range(10, 20)) = std::numeric_limits<double>::quiet_NaN();
     Xf(Range(210, 215), Range(10, 20)) = std::numeric_limits<double>::quiet_NaN();
+  }
+  // A projected CoordinateConverter. We only need the MapInfo
+  // parameters for most tests, but the coordinate checks look at the
+  // kind of converter.
+  boost::shared_ptr<CoordinateConverter> projected_converter()
+  {
+    return OgrCoordinateConverter::utm_converter(11);
   }
   // Number of output pixels that have data
   int number_with_data(const blitz::Array<double, 2>& Res, double Fill_value)
@@ -611,20 +620,23 @@ BOOST_AUTO_TEST_CASE(raster_ctor_fill)
     BOOST_CHECK_EQUAL(nmissing, 3 * naffect);
   }
   // Without a threshold, the -1e20 points are treated as real
-  // coordinates. Only the subpixels around the NaN point are missing.
-  Resampler r(ximg, yimg, mi, ns_sub, true);
-  BOOST_CHECK_EQUAL((int) blitz::count(r.data_index()(Range::all(), Range::all(), 0) == -9999),
-		    naffect);
+  // coordinates. That looks like a jump in the coordinates, which we
+  // report as an error.
+  try {
+    Resampler r(ximg, yimg, mi, ns_sub, true);
+    BOOST_FAIL("Should have thrown an exception");
+  } catch(const Exception& e) {
+    BOOST_CHECK(std::string(e.what()).find("Fill_value_threshold") !=
+		std::string::npos);
+  }
 }
 
 BOOST_AUTO_TEST_CASE(projected_negative_coordinates)
 {
   // Large negative coordinates are fine for a projected MapInfo, so
   // they shouldn't be treated as fill by default. We use a meter sized
-  // grid centered on 0, like an Albers grid. Only the MapInfo
-  // parameters matter here, so a GeodeticConverter is fine as a stand
-  // in for a projected one.
-  MapInfo mi_proj(boost::make_shared<GeodeticConverter>(), -500000.0, 500000.0,
+  // grid centered on 0, like an Albers grid.
+  MapInfo mi_proj(projected_converter(), -500000.0, 500000.0,
 		  500000.0, -500000.0, 4000, 4000);
   blitz::Array<double, 2> xp(100, 100), yp(100, 100);
   for(int i = 0; i < 100; ++i)
@@ -686,6 +698,341 @@ BOOST_AUTO_TEST_CASE(determine_range_matches_reference)
   BOOST_CHECK(le < ls);
 }
 
+// Swath of n x n points with the given spacing in meters, centered
+// on Lat0, Lon0, returning latitude and longitude in degrees. We
+// build this in a local azimuthal equidistant projection, so it is a
+// sensible swath even over a pole.
+static void local_swath(double Lat0, double Lon0, int N, double Spacing,
+			blitz::Array<double, 2>& Lat, blitz::Array<double, 2>& Lon)
+{
+  std::ostringstream s;
+  s << "+proj=aeqd +lat_0=" << Lat0 << " +lon_0=" << Lon0
+    << " +datum=WGS84 +units=m";
+  auto ogr = OgrWrapper::from_proj4(s.str());
+  Lat.resize(N, N);
+  Lon.resize(N, N);
+  for(int i = 0; i < N; ++i)
+    for(int j = 0; j < N; ++j) {
+      OgrCoordinate c(ogr, (j - N / 2.0 + 0.37) * Spacing,
+		      -(i - N / 2.0 + 0.37) * Spacing, 0);
+      Lat(i,j) = c.latitude();
+      Lon(i,j) = c.longitude();
+    }
+}
+
+// Convert lat/lon to the X/Y coordinates of a MapInfo.
+static void to_map(const MapInfo& Mi, const blitz::Array<double, 2>& Lat,
+		   const blitz::Array<double, 2>& Lon,
+		   blitz::Array<double, 2>& X, blitz::Array<double, 2>& Y)
+{
+  X.resize(Lat.shape());
+  Y.resize(Lat.shape());
+  for(int i = 0; i < Lat.rows(); ++i)
+    for(int j = 0; j < Lat.cols(); ++j) {
+      double z;
+      Mi.coordinate_converter().convert_to_coordinate(Geodetic(Lat(i,j), Lon(i,j)),
+						      X(i,j), Y(i,j), z);
+    }
+}
+
+// Bilinear interpolation to nsub subpixels, like
+// scipy.ndimage.zoom(order=1) does.
+static blitz::Array<double, 2> zoom_bilinear(const blitz::Array<double, 2>& A,
+					     int Nsub)
+{
+  blitz::Array<double, 2> res(A.rows() * Nsub, A.cols() * Nsub);
+  for(int i = 0; i < res.rows(); ++i)
+    for(int j = 0; j < res.cols(); ++j) {
+      double fi = i * (A.rows() - 1) / double(res.rows() - 1);
+      double fj = j * (A.cols() - 1) / double(res.cols() - 1);
+      int i0 = std::min((int) fi, A.rows() - 2);
+      int j0 = std::min((int) fj, A.cols() - 2);
+      double ti = fi - i0, tj = fj - j0;
+      res(i,j) = (A(i0, j0) * (1 - tj) + A(i0, j0 + 1) * tj) * (1 - ti) +
+	(A(i0 + 1, j0) * (1 - tj) + A(i0 + 1, j0 + 1) * tj) * ti;
+    }
+  return res;
+}
+
+// Check that F throws an Exception with Msg in the message.
+template<class F> static void check_throw_msg(F f, const std::string& Msg)
+{
+  try {
+    f();
+    BOOST_ERROR("Expected an exception with \"" + Msg + "\"");
+  } catch(const Exception& e) {
+    if(std::string(e.what()).find(Msg) == std::string::npos)
+      BOOST_ERROR("Exception didn't have \"" + Msg + "\":\n" + e.what());
+  }
+}
+
+// 200 x 200 swath at 0.01 degrees, crossing the date line at column 100.
+static void date_line_swath(blitz::Array<double, 2>& Lon,
+			    blitz::Array<double, 2>& Lat, bool Lon360 = false)
+{
+  Lon.resize(200, 200);
+  Lat.resize(200, 200);
+  for(int i = 0; i < 200; ++i)
+    for(int j = 0; j < 200; ++j) {
+      double l = 179.005 + j * 0.01;
+      Lon(i,j) = (Lon360 ? l : (l >= 180 ? l - 360 : l));
+      Lat(i,j) = 10.005 + i * 0.01;
+    }
+}
+
+BOOST_AUTO_TEST_CASE(date_line_geodetic_throws)
+{
+  blitz::Array<double, 2> lon, lat;
+  date_line_swath(lon, lat);
+  MapInfo mi_g(boost::make_shared<GeodeticConverter>(), 178.0, 13.0,
+	       180.0, 9.0, 200, 400);
+  std::string msg = "Use a Geodetic360 MapInfo";
+  check_throw_msg([&]() { Resampler r(lon, lat, mi_g, 1); }, msg);
+  check_throw_msg([&]() { Resampler r(lon, lat, mi_g, 1, true); }, msg);
+  int ls, le, ss, se;
+  check_throw_msg([&]()
+     { Resampler::determine_range(lon, lat, mi_g, 1, ls, le, ss, se); }, msg);
+  // Same through the RasterImage constructor
+  auto ximg = boost::make_shared<MemoryRasterImageFloat>(200, 200);
+  auto yimg = boost::make_shared<MemoryRasterImageFloat>(200, 200);
+  ximg->data() = lon;
+  yimg->data() = lat;
+  check_throw_msg([&]() { Resampler r(ximg, yimg, mi_g, 2); }, msg);
+}
+
+BOOST_AUTO_TEST_CASE(date_line_interpolated_throws)
+{
+  // The realistic case, where the coordinates are interpolated
+  // before we get them. The subpixels across the date line get made
+  // up longitudes.
+  blitz::Array<double, 2> lon, lat;
+  date_line_swath(lon, lat);
+  MapInfo mi_g(boost::make_shared<GeodeticConverter>(), 178.0, 13.0,
+	       180.0, 9.0, 200, 400);
+  for(int ns_sub : {2, 15}) {
+    blitz::Array<double, 2> lonz = zoom_bilinear(lon, ns_sub);
+    blitz::Array<double, 2> latz = zoom_bilinear(lat, ns_sub);
+    check_throw_msg([&]() { Resampler r(lonz, latz, mi_g, ns_sub); },
+		    "Use a Geodetic360 MapInfo");
+    int ls, le, ss, se;
+    check_throw_msg([&]()
+       { Resampler::determine_range(lonz, latz, mi_g, ns_sub, ls, le, ss, se); },
+		    "Use a Geodetic360 MapInfo");
+  }
+}
+
+BOOST_AUTO_TEST_CASE(date_line_geodetic360_works)
+{
+  blitz::Array<double, 2> lon, lat;
+  date_line_swath(lon, lat, true);
+  // Pixel centers at the data points
+  MapInfo mi_360(boost::make_shared<Geodetic360Converter>(), 179.0, 12.0,
+		 181.0, 10.0, 200, 200);
+  Resampler r(lon, lat, mi_360, 1);
+  // The coverage MapInfo is about the size of the data, not 360 degrees
+  BOOST_CHECK(r.map_info().number_x_pixel() <= 201);
+  Resampler r2(lon, lat, mi_360, 1, true);
+  blitz::Array<double, 2> ones(200, 200);
+  ones = 1;
+  blitz::Array<double, 2> res = r2.resample_field(ones, 1.0, false, -1.0);
+  BOOST_CHECK_EQUAL((int) blitz::count(res == 1.0), 200 * 200);
+}
+
+BOOST_AUTO_TEST_CASE(near_date_line_no_throw)
+{
+  // Data up to, but not crossing, the date line is fine
+  blitz::Array<double, 2> lon(200, 200), lat(200, 200);
+  for(int i = 0; i < 200; ++i)
+    for(int j = 0; j < 200; ++j) {
+      lon(i,j) = 178.0 + j * 0.00995;
+      lat(i,j) = 10.005 + i * 0.01;
+    }
+  MapInfo mi_g(boost::make_shared<GeodeticConverter>(), 178.0, 13.0,
+	       180.0, 9.0, 200, 400);
+  BOOST_CHECK_NO_THROW(Resampler(lon, lat, mi_g, 1));
+  for(int ns_sub : {2, 15})
+    BOOST_CHECK_NO_THROW(Resampler(zoom_bilinear(lon, ns_sub),
+				   zoom_bilinear(lat, ns_sub), mi_g, ns_sub));
+}
+
+BOOST_AUTO_TEST_CASE(prime_meridian_geodetic360_throws)
+{
+  blitz::Array<double, 2> lon(200, 200), lat(200, 200);
+  for(int i = 0; i < 200; ++i)
+    for(int j = 0; j < 200; ++j) {
+      double l = -0.995 + j * 0.01;
+      lon(i,j) = (l < 0 ? l + 360 : l);
+      lat(i,j) = 10.005 + i * 0.01;
+    }
+  MapInfo mi_360(boost::make_shared<Geodetic360Converter>(), 0.0, 13.0,
+		 2.0, 9.0, 200, 400);
+  check_throw_msg([&]() { Resampler r(lon, lat, mi_360, 1); },
+		  "Use a Geodetic MapInfo");
+  // Fine with Geodetic, where the longitudes are -1 to 1.
+  lon = blitz::where(lon > 180, lon - 360, lon);
+  MapInfo mi_g(boost::make_shared<GeodeticConverter>(), -1.0, 13.0,
+	       1.0, 9.0, 200, 400);
+  BOOST_CHECK_NO_THROW(Resampler(lon, lat, mi_g, 1));
+}
+
+BOOST_AUTO_TEST_CASE(date_line_ogr_geographic_throws)
+{
+  blitz::Array<double, 2> lon, lat;
+  date_line_swath(lon, lat);
+  // EPSG:4326 is geographic, so this is the same as Geodetic
+  auto conv = boost::make_shared<OgrCoordinateConverter>(OgrWrapper::from_epsg(4326));
+  MapInfo mi_ogr(conv, 178.0, 13.0, 180.0, 9.0, 200, 400);
+  check_throw_msg([&]() { Resampler r(lon, lat, mi_ogr, 1); },
+		  "Use a Geodetic360 MapInfo");
+  // A projected system with the same data is fine.
+  blitz::Array<double, 2> xu, yu;
+  auto utm60 = OgrCoordinateConverter::utm_converter(60);
+  MapInfo mi_utm60(utm60, 600000, 1300000, 900000, 1000000, 1200, 1200);
+  to_map(mi_utm60, lat, lon, xu, yu);
+  BOOST_CHECK_NO_THROW(Resampler(xu, yu, mi_utm60, 1));
+}
+
+BOOST_AUTO_TEST_CASE(date_line_missing_points)
+{
+  // Fill values next to good data aren't a crossing, as long as they
+  // are marked as missing.
+  blitz::Array<double, 2> lon(200, 200), lat(200, 200);
+  for(int i = 0; i < 200; ++i)
+    for(int j = 0; j < 200; ++j) {
+      lon(i,j) = 178.0 + j * 0.00995;
+      lat(i,j) = 10.005 + i * 0.01;
+    }
+  lon(Range(50, 60), Range(50, 60)) = -9999;
+  lat(Range(50, 60), Range(50, 60)) = -9999;
+  lon(Range(100, 110), Range(10, 20)) = std::numeric_limits<double>::quiet_NaN();
+  MapInfo mi_g(boost::make_shared<GeodeticConverter>(), 178.0, 13.0,
+	       180.0, 9.0, 200, 400);
+  BOOST_CHECK_NO_THROW(Resampler(lon, lat, mi_g, 1, false, -1000.0));
+  // Without the threshold, the -9999 isn't marked, and looks like a
+  // jump.
+  check_throw_msg([&]() { Resampler r(lon, lat, mi_g, 1); },
+		  "fill values in the coordinates");
+}
+
+BOOST_AUTO_TEST_CASE(pole_geodetic_throws)
+{
+  blitz::Array<double, 2> lat, lon;
+  for(double lat0 : {90.0, -90.0}) {
+    local_swath(lat0, 0, 100, 1000, lat, lon);
+    MapInfo mi_g(boost::make_shared<GeodeticConverter>(), -180, 90, 180, -90,
+		 3600, 1800);
+    check_throw_msg([&]() { Resampler r(lon, lat, mi_g, 1); }, "covers a pole");
+    blitz::Array<double, 2> lon360(lon.copy());
+    lon360 = blitz::where(lon360 < 0, lon360 + 360, lon360);
+    MapInfo mi_360(boost::make_shared<Geodetic360Converter>(), 0, 90, 360, -90,
+		   3600, 1800);
+    check_throw_msg([&]() { Resampler r(lon360, lat, mi_360, 1); },
+		    "covers a pole");
+  }
+  // A swath at 88N, near but not covering the pole, is fine
+  local_swath(88, 0, 100, 1000, lat, lon);
+  MapInfo mi_g(boost::make_shared<GeodeticConverter>(), -180, 90, 180, -90,
+	       3600, 1800);
+  BOOST_CHECK_NO_THROW(Resampler(lon, lat, mi_g, 1));
+}
+
+BOOST_AUTO_TEST_CASE(pole_projected_throws)
+{
+  // A swath over the north pole in projections that can't handle the
+  // pole.
+  blitz::Array<double, 2> lat, lon, x, y;
+  local_swath(90, 0, 100, 1000, lat, lon);
+  // Albers equal area centered on Los Angeles, as used by MAIA
+  std::string albers_wkt = "PROJCS[\"unknown\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Albers_Conic_Equal_Area\"],PARAMETER[\"standard_parallel_1\",33.3],PARAMETER[\"standard_parallel_2\",37.3],PARAMETER[\"latitude_of_center\",35.3],PARAMETER[\"longitude_of_center\",-118.6],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1]]";
+  auto albers = boost::make_shared<OgrCoordinateConverter>
+    (boost::make_shared<OgrWrapper>(albers_wkt));
+  auto merc = boost::make_shared<OgrCoordinateConverter>(OgrWrapper::from_epsg(3857));
+  for(auto conv : std::vector<boost::shared_ptr<CoordinateConverter> >{albers, merc}) {
+    MapInfo m(conv, -1e7, 1e7, 1e7, -1e7, 1000, 1000);
+    to_map(m, lat, lon, x, y);
+    check_throw_msg([&]() { Resampler r(x, y, m, 1); }, "polar projection");
+    // Turning the check off works
+    double sv = Resampler::max_step_ratio();
+    Resampler::set_max_step_ratio(0);
+    BOOST_CHECK_NO_THROW(Resampler(x, y, m, 1));
+    Resampler::set_max_step_ratio(sv);
+  }
+}
+
+BOOST_AUTO_TEST_CASE(pole_polar_stereographic_works)
+{
+  blitz::Array<double, 2> lat, lon, x, y;
+  local_swath(90, 0, 100, 1000, lat, lon);
+  auto ps = boost::make_shared<OgrCoordinateConverter>(OgrWrapper::from_epsg(3413));
+  // 2 km grid, so each output pixel sees several data points.
+  MapInfo m(ps, -120000, 120000, 120000, -120000, 120, 120);
+  to_map(m, lat, lon, x, y);
+  Resampler r(x, y, m, 1, true);
+  blitz::Array<double, 2> ones(100, 100);
+  ones = 1;
+  blitz::Array<double, 2> res = r.resample_field(ones, 1.0, false, -1.0);
+  // 100 x 100 km of data on a 2 km grid is about 2500 output pixels,
+  // with holes where 1 km data doesn't hit every 2 km pixel.
+  int ncov = blitz::count(res == 1.0);
+  BOOST_CHECK(ncov > 2200 && ncov < 2800);
+}
+
+BOOST_AUTO_TEST_CASE(projection_cut_throws)
+{
+  // Swath at 35N straddling the Albers cut (180 degrees from the
+  // central meridian of -118.6, so 61.4E). In UTM it is fine.
+  blitz::Array<double, 2> lat, lon, x, y;
+  local_swath(35, 61.4, 100, 1000, lat, lon);
+  std::string albers_wkt = "PROJCS[\"unknown\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Albers_Conic_Equal_Area\"],PARAMETER[\"standard_parallel_1\",33.3],PARAMETER[\"standard_parallel_2\",37.3],PARAMETER[\"latitude_of_center\",35.3],PARAMETER[\"longitude_of_center\",-118.6],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1]]";
+  auto albers = boost::make_shared<OgrCoordinateConverter>
+    (boost::make_shared<OgrWrapper>(albers_wkt));
+  MapInfo m(albers, -2e7, 2e7, 2e7, -2e7, 1000, 1000);
+  to_map(m, lat, lon, x, y);
+  check_throw_msg([&]() { Resampler r(x, y, m, 1); }, "discontinuity");
+  int ls, le, ss, se;
+  check_throw_msg([&]()
+     { Resampler::determine_range(x, y, m, 1, ls, le, ss, se); },
+		  "discontinuity");
+  MapInfo mu(OgrCoordinateConverter::utm_converter(41), 0, 4e6, 1e6, 3e6,
+	     1000, 1000);
+  to_map(mu, lat, lon, x, y);
+  BOOST_CHECK_NO_THROW(Resampler(x, y, mu, 1));
+}
+
+BOOST_AUTO_TEST_CASE(wrong_pole_throws)
+{
+  // South pole swath with north polar stereographic doesn't work, but
+  // is fine with south polar stereographic.
+  blitz::Array<double, 2> lat, lon, x, y;
+  local_swath(-90, 0, 100, 1000, lat, lon);
+  auto psn = boost::make_shared<OgrCoordinateConverter>(OgrWrapper::from_epsg(3413));
+  MapInfo mn(psn, -2e7, 2e7, 2e7, -2e7, 1000, 1000);
+  to_map(mn, lat, lon, x, y);
+  check_throw_msg([&]() { Resampler r(x, y, mn, 1); }, "polar projection");
+  auto pss = boost::make_shared<OgrCoordinateConverter>(OgrWrapper::from_epsg(3031));
+  MapInfo ms(pss, -60000, 60000, 60000, -60000, 120, 120);
+  to_map(ms, lat, lon, x, y);
+  BOOST_CHECK_NO_THROW(Resampler(x, y, ms, 1));
+}
+
+BOOST_AUTO_TEST_CASE(no_false_positive_wide_scan)
+{
+  // A swath whose pixel size grows 10x across the scan, like the edge
+  // of a wide scan. This shouldn't trigger the step check.
+  int n = 200;
+  blitz::Array<double, 2> x(n, n), y(n, n);
+  for(int i = 0; i < n; ++i) {
+    double xs = 0;
+    for(int j = 0; j < n; ++j) {
+      x(i,j) = 400000 + xs;
+      xs += 250.0 * (1 + 9.0 * std::abs(j - n / 2.0) / (n / 2.0));
+      y(i,j) = 3500000 - i * 250.0;
+    }
+  }
+  MapInfo mu(projected_converter(), 0, 4e6, 1e6, 3e6, 1000, 1000);
+  BOOST_CHECK_NO_THROW(Resampler(x, y, mu, 1));
+}
+
 BOOST_AUTO_TEST_CASE(timing)
 {
   // Timing test, normally skipped. Turn on if you want to check the
@@ -705,10 +1052,36 @@ BOOST_AUTO_TEST_CASE(timing)
 	      2 * n, 2 * n);
   for(int ntask : {1, -1}) {
     auto t = std::chrono::steady_clock::now();
-    Resampler r2(xl, yl, mil, nsub, false, -1000.0, ntask);
+    Resampler r2(xl, yl, mil, nsub, false,
+		 std::numeric_limits<double>::lowest(), ntask);
     std::cerr << "Resampler constructor Number_task " << ntask << ": "
 	      << std::chrono::duration<double>(std::chrono::steady_clock::now() - t).count()
 	      << " s\n";
+  }
+  // Projected MapInfo, which uses the step check rather than the
+  // longitude check.
+  {
+    MapInfo milp(projected_converter(), 0.0, 10.0, 10.0, 0.0, 2 * n, 2 * n);
+    for(int ntask : {1, -1}) {
+      auto t = std::chrono::steady_clock::now();
+      Resampler r2(xl, yl, milp, nsub, false,
+		   std::numeric_limits<double>::lowest(), ntask);
+      std::cerr << "Resampler constructor projected Number_task " << ntask << ": "
+		<< std::chrono::duration<double>(std::chrono::steady_clock::now() - t).count()
+		<< " s\n";
+    }
+    double sv = Resampler::max_step_ratio();
+    Resampler::set_max_step_ratio(0);
+    for(int ntask : {1, -1}) {
+      auto t = std::chrono::steady_clock::now();
+      Resampler r2(xl, yl, milp, nsub, false,
+		   std::numeric_limits<double>::lowest(), ntask);
+      std::cerr << "Resampler constructor projected, no step check, Number_task "
+		<< ntask << ": "
+		<< std::chrono::duration<double>(std::chrono::steady_clock::now() - t).count()
+		<< " s\n";
+    }
+    Resampler::set_max_step_ratio(sv);
   }
   for(int nthread : {1, ThreadPool::default_number_thread}) {
     ThreadPool::thread_pool().number_thread(nthread);

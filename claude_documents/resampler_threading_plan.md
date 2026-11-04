@@ -854,7 +854,7 @@ Related ECOSTRESS notes found while checking:
 * Both callers mark fill coordinates as -1e20 before interpolating
   (scipy zoom order 1, or utm_coor). Bilinear interpolation between -1e20
   and a valid value gives at least ~1e20/nsub in magnitude (still huge and
-  negative, far below Mark_missing), so those subpixels stay missing, and
+  negative; with Fill_value_threshold set, e.g. -1e19, they are missing), and
   the checks skip them.
 * L2CT uses UTM tiles, so only check B applies there.
 
@@ -966,6 +966,69 @@ Related ECOSTRESS notes found while checking:
     marking and no throw gave 990 failures in 3 tests.
   * 16 resampler tests, full C++ suite, Python (250 passed, 77 skipped),
     mypy pass.
+* **Step 3b revised (2026-11-03, committed as "Fix for fill value data,
+  now treat as nan"):** `Mark_missing` (default -1000) replaced by
+  `Fill_value_threshold`, default `numeric_limits<double>::lowest()` (no
+  threshold). The -1000 default broke projected coordinates below -1000
+  (the SW quadrant of an Albers grid). NaN is always missing; with a
+  threshold, a point is missing if `!(x > T && y > T)`. The RasterImage
+  constructor turns threshold points into NaN *before* interpolating
+  (zero weight terms skipped, so a NaN only contaminates its neighbors).
+  The array constructor's callers should put NaN in before their own
+  bilinear zoom. Supersedes decision 1's `Mark_missing` wording; the `||`
+  logic is unchanged. Checked usage: ECOSTRESS uses -1e20 (its own copy of
+  Resampler), `l1b_proj.py` zooms with -9999 still in place (an existing
+  bug NaN fixes), maia passes only valid coordinates, oco3 doesn't use
+  Resampler. Test `raster_ctor_fill` covers fill with and without the
+  threshold; skipping the zero weight terms is checked (removing it gave 69
+  failures).
+* **Step 4 done (2026-11-03), staged:** date line, pole and projection
+  cut checks (A and B), as a `ResamplerCoordinateCheck` class in
+  resampler.cc (named, not an anonymous namespace, because of doxy2swig).
+  * Type from the MapInfo's converter: GeodeticConverter,
+    Geodetic360Converter, or an OGR geographic system with traditional
+    GIS axis order are geographic; everything else is projected. An OGR
+    geographic system with authority (lat first) order is skipped.
+  * Geographic: throw on a longitude jump > 180 deg between raw points
+    (`nsub` apart in the subpixel grid), with a Geodetic360 / Geodetic
+    message. Pole: winding sum of longitude steps around each raw cell,
+    or |lat| > 90 - 1e-6; message suggests polar stereographic.
+  * Projected: median raw step from a ~32768 point sample
+    (nth_element), throw on a step > `max_step_ratio()` (default 50) x
+    the median. `set_max_step_ratio(0)` turns it off.
+  * Missing points are skipped. Each task checks its own rows
+    (`check_rows`: branchless scan, then rescan only if something was found
+    to locate it), and the exception is thrown after the parallel pass
+    from the first task with a problem, so the result doesn't depend on
+    the number of tasks. Every message also mentions unmarked fill values.
+  * Used in init (both constructors) and determine_range.
+    determine_range got a trailing `Fill_value_threshold` argument (C++
+    and SWIG), and skips the threshold test when there isn't one, and does
+    the MapInfo range check in double (same result as the std::round
+    check, and NaN fails it).
+  * Tests that used GeodeticConverter as a stand in for a projected
+    MapInfo now use `OgrCoordinateConverter::utm_converter(11)`; with
+    Geodetic they cross the date line. `raster_ctor_fill` without a
+    threshold now expects the exception.
+  * 13 new tests (date_line_geodetic_throws,
+    date_line_interpolated_throws, date_line_geodetic360_works,
+    near_date_line_no_throw, prime_meridian_geodetic360_throws,
+    date_line_ogr_geographic_throws, date_line_missing_points,
+    pole_geodetic_throws, pole_projected_throws (Albers and EPSG:3857),
+    pole_polar_stereographic_works (EPSG:3413), projection_cut_throws,
+    wrong_pole_throws (EPSG:3031 data on a 3413 grid),
+    no_false_positive_wide_scan). Disabling the checks gave 21 failures.
+    31 resampler tests, full C++ suite, Python (250 passed, 77 skipped),
+    mypy pass.
+  * Cost (array constructor, 10000x10000 subpixels, 10 threads): nsub 1
+    0.128 -> 0.197 s (+54%, more than the ~8% estimated, since every point
+    is a raw point and the check is a second read of the coordinates),
+    nsub 2 0.128 -> 0.147 s, nsub 15 0.127 -> 0.133 s. Folding the check
+    into the main pass (row cache, per task state) was tried and was
+    slower. A raw row cache could cut the nsub 1 cost if it matters.
+    determine_range: 1.11 s -> 0.76 s single threaded and 0.088 s with 10
+    threads, including the check (the has_threshold and double range check
+    changes more than pay for it).
 
 ## Implementation order
 

@@ -53,11 +53,25 @@ The defaults are now `None`, meaning "create a new empty one".
 
 ### `Resampler` handling of missing coordinates
 
-- A coordinate point is now missing if *either* X or Y is <=
-  `Mark_missing` or is NaN. Before, the range of the coverage MapInfo
-  left out points where either was fill, but the points were only marked
-  as unused if both were fill. A point with only one fill coordinate could
-  put data in the wrong place.
+- The `Mark_missing` argument of the constructors (default -1000) is
+  replaced by `Fill_value_threshold` (default: no threshold). A NaN X or Y
+  coordinate is always missing. If you pass `Fill_value_threshold`, a point
+  is also missing if *either* X or Y is <= the threshold. The old default
+  of -1000 meant projected coordinates (e.g., meters) below -1000 were
+  treated as fill, which silently dropped part of the data. Code that
+  relied on the default to remove fill values like -9999 needs to either
+  replace the fill with NaN or pass `Fill_value_threshold`.
+- Before, the range of the coverage MapInfo left out points where either
+  coordinate was fill, but the points were only marked as unused if both
+  were fill. A point with only one fill coordinate could put data in the
+  wrong place.
+- The `RasterImage` constructor applies the threshold to the coordinates
+  *before* interpolating them to the subpixels, so fill values only affect
+  the subpixels next to them (the result is NaN, so those subpixels are
+  missing). Before, the fill values were interpolated with the good values,
+  which gave garbage coordinates near the edge of the fill. The array
+  constructor takes coordinates that are already interpolated, so if you
+  interpolate them yourself, replace the fill with NaN first.
 - With `Exactly_match_mi`, missing points are now marked as unused. Before,
   they weren't marked at all, and were only dropped if their (garbage)
   index happened to fall outside the MapInfo.
@@ -66,6 +80,26 @@ The defaults are now `None`, meaning "create a new empty one".
   `Exactly_match_mi`, a resampler with no data). Valid points that just
   don't fall in the MapInfo are still fine, use `empty_resample()` to
   check for that.
+- The constructors and `determine_range` now throw an exception if the
+  coordinates cross a discontinuity of the MapInfo's projection, rather than
+  silently giving wrong results (e.g., data smeared across the whole map):
+  - For a `Geodetic` (or OGR geographic, e.g., EPSG:4326) MapInfo, data
+    crossing the date line. The message says to use a `Geodetic360`
+    MapInfo instead. For a `Geodetic360` MapInfo, data crossing the prime
+    meridian (use `Geodetic`).
+  - For a geographic MapInfo, data covering a pole. The message says to
+    use a polar projection, such as polar stereographic.
+  - For a projected MapInfo, a step between neighboring coordinates more
+    than `Resampler.max_step_ratio()` (default 50) times the median step.
+    This catches a projection cut or a pole (e.g., the Albers cut opposite
+    the central meridian, or Mercator near a pole). The ratio can be
+    changed with `Resampler.set_max_step_ratio`; 0 turns the check off.
+
+  Unmarked fill values in the coordinates (e.g., -1e20) also trigger these
+  checks, and the message mentions this. Code that worked before may now
+  throw; in those cases the results were wrong.
+- `determine_range` has a new last argument `Fill_value_threshold`, the
+  same as the constructors.
 
 ### `test_support` removed
 
@@ -191,12 +225,14 @@ fixtures and `require_*` skip markers now live in `python/tests/fixtures/`.
   - The constructors and `determine_range` are also multithreaded, and the
     constructors have a new last argument `Number_task`, the same as
     `resample_field`. For 10000 x 10000 subpixels with 10 threads: the
-    constructor from arrays 1.4 s -> 0.12 s, `determine_range`
-    1.1 s -> 0.13 s. The `RasterImage` constructor interpolates the
+    constructor from arrays 1.4 s -> 0.17 s, `determine_range`
+    1.1 s -> 0.09 s (these include the new projection checks described
+    above). The `RasterImage` constructor interpolates the
     coordinates as it goes rather than creating the full size
     interpolated arrays with `MagnifyBilinear`, so it uses much less
-    memory (2.6 s -> 0.36 s for 5000 x 5000 coordinates, nsub 2). The
-    results are identical to before.
+    memory (2.6 s -> 0.36 s for 5000 x 5000 coordinates, nsub 2). Apart
+    from the missing coordinate changes above, the results are identical
+    to before.
   - Bug fix: `resample_field(Fname, Data, ...)`, which writes a VICAR file,
     passed `Fill_value_threshold` as the `Use_smallest_ic` argument, so the
     threshold was ignored, and any nonzero threshold turned on

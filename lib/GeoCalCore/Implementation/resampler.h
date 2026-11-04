@@ -85,7 +85,20 @@ public:
   static void determine_range(const blitz::Array<double, 2>& X_coor_interpolated,
 			      const blitz::Array<double, 2>& Y_coor_interpolated,
 			      const MapInfo& Mi, int Num_sub_pixel,
-			      int& lstart, int& lend, int& sstart, int& send);
+			      int& lstart, int& lend, int& sstart, int& send,
+			      double Fill_value_threshold = std::numeric_limits<double>::lowest());
+
+//-------------------------------------------------------------------------
+/// For a projected MapInfo (e.g., UTM, Albers), we check that the
+/// coordinates don't jump across a discontinuity of the projection
+/// (e.g., the cut at 180 degrees from the central meridian, or a
+/// pole). We throw an exception if a step between neighboring
+/// points is more than max_step_ratio() times the median step. Set
+/// this to 0 to turn the check off.
+//-------------------------------------------------------------------------
+
+  static double max_step_ratio() { return max_step_ratio_; }
+  static void set_max_step_ratio(double V) { max_step_ratio_ = V; }
 private:
   // The sum and count of the data landing in each output pixel, for
   // one tile of the data_index. To keep the memory small, we only cover
@@ -100,6 +113,7 @@ private:
     std::vector<long> first;
   };
   void check_data_size(int Number_line, int Number_sample) const;
+  inline static double max_step_ratio_ = 50;
   static int default_number_task(long Size, int Number_task);
   template<class F> void init(int Number_row, int Number_col, F Coor,
 			      const MapInfo& Mi, bool Exactly_match_mi,

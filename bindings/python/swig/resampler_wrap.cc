@@ -5894,6 +5894,9 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
+  #define SWIG_From_double   PyFloat_FromDouble 
+
+
 SWIGINTERN swig_type_info*
 SWIG_pchar_descriptor(void)
 {
@@ -8236,7 +8239,163 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Resampler_determine_range(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Resampler_determine_range__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,2 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  GeoCal::MapInfo *arg3 = 0 ;
+  int arg4 ;
+  int *arg5 = 0 ;
+  int *arg6 = 0 ;
+  int *arg7 = 0 ;
+  int *arg8 = 0 ;
+  double arg9 ;
+  blitz::Array< double,2 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared3 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int temp5 ;
+  int res5 = SWIG_TMPOBJ ;
+  int temp6 ;
+  int res6 = SWIG_TMPOBJ ;
+  int temp7 ;
+  int res7 = SWIG_TMPOBJ ;
+  int temp8 ;
+  int res8 = SWIG_TMPOBJ ;
+  double val9 ;
+  int ecode9 = 0 ;
+  
+  arg5 = &temp5;
+  arg6 = &temp6;
+  arg7 = &temp7;
+  arg8 = &temp8;
+  (void)self;
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_determine_range', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_determine_range', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 2>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_determine_range', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_determine_range', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Resampler_determine_range" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Resampler_determine_range" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp3);
+        arg3 = const_cast< GeoCal::MapInfo * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp3)->get());
+      }
+    }
+  }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Resampler_determine_range" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode9 = SWIG_AsVal_double(swig_obj[4], &val9);
+  if (!SWIG_IsOK(ecode9)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "Resampler_determine_range" "', argument " "9"" of type '" "double""'");
+  } 
+  arg9 = static_cast< double >(val9);
+  {
+    try {
+      GeoCal::Resampler::determine_range((blitz::Array< double,2 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(GeoCal::MapInfo const &)*arg3,arg4,*arg5,*arg6,*arg7,*arg8,arg9);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail;
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (...) {
+      // Anything not derived from std::exception (a raw type, a
+      // third-party exception hierarchy that doesn't inherit
+      // std::exception, etc.) would otherwise propagate across the
+      // extern "C" boundary into CPython -- undefined behavior, in
+      // practice a process abort rather than a clean Python exception.
+      SWIG_exception(SWIG_RuntimeError, "unknown C++ exception");
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsTmpObj(res5)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_int((*arg5)), 1);
+  } else {
+    int new_flags = SWIG_IsNewObj(res5) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg5), SWIGTYPE_p_int, new_flags), 1);
+  }
+  if (SWIG_IsTmpObj(res6)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_int((*arg6)), 1);
+  } else {
+    int new_flags = SWIG_IsNewObj(res6) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg6), SWIGTYPE_p_int, new_flags), 1);
+  }
+  if (SWIG_IsTmpObj(res7)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_int((*arg7)), 1);
+  } else {
+    int new_flags = SWIG_IsNewObj(res7) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg7), SWIGTYPE_p_int, new_flags), 1);
+  }
+  if (SWIG_IsTmpObj(res8)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_int((*arg8)), 1);
+  } else {
+    int new_flags = SWIG_IsNewObj(res8) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg8), SWIGTYPE_p_int, new_flags), 1);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Resampler_determine_range__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   blitz::Array< double,2 > *arg1 = 0 ;
   blitz::Array< double,2 > *arg2 = 0 ;
@@ -8263,14 +8422,13 @@ SWIGINTERN PyObject *_wrap_Resampler_determine_range(PyObject *self, PyObject *a
   int res7 = SWIG_TMPOBJ ;
   int temp8 ;
   int res8 = SWIG_TMPOBJ ;
-  PyObject *swig_obj[4] ;
   
   arg5 = &temp5;
   arg6 = &temp6;
   arg7 = &temp7;
   arg8 = &temp8;
   (void)self;
-  if (!SWIG_Python_UnpackTuple(args, "Resampler_determine_range", 4, 4, swig_obj)) SWIG_fail;
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
   {
     int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
       0 );
@@ -8379,6 +8537,107 @@ SWIGINTERN PyObject *_wrap_Resampler_determine_range(PyObject *self, PyObject *a
     int new_flags = SWIG_IsNewObj(res8) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
     resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg8), SWIGTYPE_p_int, new_flags), 1);
   }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Resampler_determine_range(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[6] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args, "Resampler_determine_range", 0, 5, argv))) SWIG_fail;
+  --argc;
+  if (argc == 4) {
+    PyObject *retobj = _wrap_Resampler_determine_range__SWIG_1(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+  if (argc == 5) {
+    PyObject *retobj = _wrap_Resampler_determine_range__SWIG_0(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+  
+fail:
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'Resampler_determine_range'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::Resampler::determine_range(blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,GeoCal::MapInfo const &,int,int &,int &,int &,int &,double)\n"
+    "    GeoCal::Resampler::determine_range(blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,GeoCal::MapInfo const &,int,int &,int &,int &,int &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Resampler_max_step_ratio(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  double result;
+  
+  (void)self;
+  if (!SWIG_Python_UnpackTuple(args, "Resampler_max_step_ratio", 0, 0, 0)) SWIG_fail;
+  {
+    try {
+      result = (double)GeoCal::Resampler::max_step_ratio();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail;
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (...) {
+      // Anything not derived from std::exception (a raw type, a
+      // third-party exception hierarchy that doesn't inherit
+      // std::exception, etc.) would otherwise propagate across the
+      // extern "C" boundary into CPython -- undefined behavior, in
+      // practice a process abort rather than a clean Python exception.
+      SWIG_exception(SWIG_RuntimeError, "unknown C++ exception");
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Resampler_set_max_step_ratio(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  double arg1 ;
+  double val1 ;
+  int ecode1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "Resampler_set_max_step_ratio" "', argument " "1"" of type '" "double""'");
+  } 
+  arg1 = static_cast< double >(val1);
+  {
+    try {
+      GeoCal::Resampler::set_max_step_ratio(arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail;
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (...) {
+      // Anything not derived from std::exception (a raw type, a
+      // third-party exception hierarchy that doesn't inherit
+      // std::exception, etc.) would otherwise propagate across the
+      // extern "C" boundary into CPython -- undefined behavior, in
+      // practice a process abort rather than a clean Python exception.
+      SWIG_exception(SWIG_RuntimeError, "unknown C++ exception");
+    }
+  }
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
@@ -12093,6 +12352,13 @@ static PyMethodDef SwigMethods[] = {
 		"any subpixel that depends on a missing point is missing. A subpixel that falls\n"
 		"exactly on a good point is good, even if its neighbors are missing.  \n"
 		"\n"
+		"We check that the coordinates don't cross a discontinuity of the map projection,\n"
+		"and throw an exception if they do. For a Geodetic MapInfo, this means data\n"
+		"crossing the date line, which needs a Geodetic360 MapInfo instead (and data\n"
+		"crossing the prime meridian with a Geodetic360 MapInfo needs Geodetic). Data\n"
+		"covering a pole needs a polar projection, such as polar stereographic. For other\n"
+		"projections, see max_step_ratio().  \n"
+		"\n"
 		"See resample_field for a description of Number_task.  \n"
 		"\n"
 		""},
@@ -12112,7 +12378,7 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		""},
 	 { "Resampler_determine_range", _wrap_Resampler_determine_range, METH_VARARGS, "\n"
-		"Resampler_determine_range(BlitzArray_double_2 X_coor_interpolated, BlitzArray_double_2 Y_coor_interpolated, MapInfo Mi, int Num_sub_pixel)\n"
+		"Resampler_determine_range(BlitzArray_double_2 X_coor_interpolated, BlitzArray_double_2 Y_coor_interpolated, MapInfo Mi, int Num_sub_pixel, double Fill_value_threshold=std::numeric_limits< double >::lowest())\n"
 		"\n"
 		"GeoCal::Resampler::determine_range\n"
 		"Determine range of X and Y coordinate arrays that actually touch the given\n"
@@ -12121,6 +12387,28 @@ static PyMethodDef SwigMethods[] = {
 		"Used when we are producing the tiled product where lots of the data isn't even\n"
 		"used and can be skipped before we even start.  \n"
 		"\n"
+		"Points where X or Y is NaN (or <= Fill_value_threshold, if given) are ignored.\n"
+		"As with the constructors, we throw an exception if the coordinates cross the\n"
+		"date line with a Geodetic MapInfo (or another discontinuity of the map\n"
+		"projection).  \n"
+		"\n"
+		""},
+	 { "Resampler_max_step_ratio", _wrap_Resampler_max_step_ratio, METH_NOARGS, "\n"
+		"Resampler_max_step_ratio() -> double\n"
+		"\n"
+		"GeoCal::Resampler::max_step_ratio\n"
+		"For a projected MapInfo (e.g., UTM, Albers), we check that the coordinates don't\n"
+		"jump across a discontinuity of the projection (e.g., the cut at 180 degrees from\n"
+		"the central meridian, or a pole).  \n"
+		"\n"
+		"We throw an exception if a step between neighboring points is more than\n"
+		"max_step_ratio() times the median step. Set this to 0 to turn the check off.  \n"
+		"\n"
+		""},
+	 { "Resampler_set_max_step_ratio", _wrap_Resampler_set_max_step_ratio, METH_O, "\n"
+		"Resampler_set_max_step_ratio(double V)\n"
+		"\n"
+		"GeoCal::Resampler::set_max_step_ratio\n"
 		""},
 	 { "Resampler_empty_resample", _wrap_Resampler_empty_resample, METH_VARARGS, "\n"
 		"Resampler_empty_resample(Resampler self) -> bool\n"
@@ -12251,6 +12539,13 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"any subpixel that depends on a missing point is missing. A subpixel that falls\n"
 		"exactly on a good point is good, even if its neighbors are missing.  \n"
 		"\n"
+		"We check that the coordinates don't cross a discontinuity of the map projection,\n"
+		"and throw an exception if they do. For a Geodetic MapInfo, this means data\n"
+		"crossing the date line, which needs a Geodetic360 MapInfo instead (and data\n"
+		"crossing the prime meridian with a Geodetic360 MapInfo needs Geodetic). Data\n"
+		"covering a pole needs a polar projection, such as polar stereographic. For other\n"
+		"projections, see max_step_ratio().  \n"
+		"\n"
 		"See resample_field for a description of Number_task.  \n"
 		"\n"
 		""},
@@ -12270,7 +12565,7 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"\n"
 		""},
 	 { "Resampler_determine_range", _wrap_Resampler_determine_range, METH_VARARGS, "\n"
-		"determine_range(BlitzArray_double_2 X_coor_interpolated, BlitzArray_double_2 Y_coor_interpolated, MapInfo Mi, int Num_sub_pixel)\n"
+		"determine_range(BlitzArray_double_2 X_coor_interpolated, BlitzArray_double_2 Y_coor_interpolated, MapInfo Mi, int Num_sub_pixel, double Fill_value_threshold=std::numeric_limits< double >::lowest())\n"
 		"\n"
 		"GeoCal::Resampler::determine_range\n"
 		"Determine range of X and Y coordinate arrays that actually touch the given\n"
@@ -12279,6 +12574,28 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"Used when we are producing the tiled product where lots of the data isn't even\n"
 		"used and can be skipped before we even start.  \n"
 		"\n"
+		"Points where X or Y is NaN (or <= Fill_value_threshold, if given) are ignored.\n"
+		"As with the constructors, we throw an exception if the coordinates cross the\n"
+		"date line with a Geodetic MapInfo (or another discontinuity of the map\n"
+		"projection).  \n"
+		"\n"
+		""},
+	 { "Resampler_max_step_ratio", _wrap_Resampler_max_step_ratio, METH_NOARGS, "\n"
+		"max_step_ratio() -> double\n"
+		"\n"
+		"GeoCal::Resampler::max_step_ratio\n"
+		"For a projected MapInfo (e.g., UTM, Albers), we check that the coordinates don't\n"
+		"jump across a discontinuity of the projection (e.g., the cut at 180 degrees from\n"
+		"the central meridian, or a pole).  \n"
+		"\n"
+		"We throw an exception if a step between neighboring points is more than\n"
+		"max_step_ratio() times the median step. Set this to 0 to turn the check off.  \n"
+		"\n"
+		""},
+	 { "Resampler_set_max_step_ratio", _wrap_Resampler_set_max_step_ratio, METH_O, "\n"
+		"set_max_step_ratio(double V)\n"
+		"\n"
+		"GeoCal::Resampler::set_max_step_ratio\n"
 		""},
 	 { "Resampler_empty_resample", _wrap_Resampler_empty_resample, METH_VARARGS, "\n"
 		"empty_resample(Resampler self) -> bool\n"

@@ -3,6 +3,12 @@
 #include "geodetic.h"
 #include "vicar_raster_image.h"
 #include "geocal_thread_pool.h"
+#include "geocal_config.h"
+#include "coordinate_converter.h"
+#ifdef HAVE_GDAL
+#include "ogr_coordinate.h"
+#endif
+#include <algorithm>
 #include <boost/make_shared.hpp>
 #include <cmath>
 #include <limits>
@@ -62,6 +68,14 @@ GEOCAL_IMPLEMENT(Resampler);
 /// before interpolating, so any subpixel that depends on a missing
 /// point is missing. A subpixel that falls exactly on a good point is
 /// good, even if its neighbors are missing.
+///
+/// We check that the coordinates don't cross a discontinuity of the
+/// map projection, and throw an exception if they do. For a Geodetic
+/// MapInfo, this means data crossing the date line, which needs a
+/// Geodetic360 MapInfo instead (and data crossing the prime meridian
+/// with a Geodetic360 MapInfo needs Geodetic). Data covering a pole
+/// needs a polar projection, such as polar stereographic. For other
+/// projections, see max_step_ratio().
 ///
 /// See resample_field for a description of Number_task.
 //-------------------------------------------------------------------------
@@ -185,6 +199,308 @@ int Resampler::default_number_task(long Size, int Number_task)
   return 4 * ThreadPool::thread_pool().number_thread();
 }
 
+namespace GeoCal {
+//-------------------------------------------------------------------------
+/// Check that the coordinates don't cross a discontinuity of the map
+/// projection. This is used by Resampler, see the Resampler
+/// constructor for a description.
+///
+/// We compare raw points, Step points apart (so for interpolated
+/// coordinates, Step is the number of subpixels). This matters: subpixels
+/// interpolated across a jump change by only 1/Step of the jump from
+/// one subpixel to the next, but points a raw pixel apart see the full
+/// jump.
+///
+/// For a geographic MapInfo (GeodeticConverter, Geodetic360Converter or
+/// an OGR geographic coordinate system), X is longitude, and we check
+/// for a longitude jump of more than 180 degrees. For a projected
+/// MapInfo, we check for a step more than Resampler::max_step_ratio()
+/// times the median step.
+///
+/// Each task of the main loops of Resampler calls check_rows for its
+/// block of rows. Missing points (NaN or <= Fill_value_threshold) are
+/// skipped.
+//-------------------------------------------------------------------------
+
+class ResamplerCoordinateCheck {
+public:
+  enum ProjectionType { GEODETIC, GEODETIC360, PROJECTED };
+  // First problem found by a task.
+  struct Problem {
+    bool found = false;
+    int i1 = 0, j1 = 0, i2 = 0, j2 = 0;
+    double step = 0;
+  };
+  template<class F> ResamplerCoordinateCheck
+  (int Number_row, int Number_col, int Step, F Coor, const MapInfo& Mi,
+   double Fill_value_threshold);
+  bool good(double X, double Y) const
+  { return X > fill_value_threshold && Y > fill_value_threshold; }
+
+//-------------------------------------------------------------------------
+/// Check the raw points in rows [Istart, Iend) (in the full grid, so
+/// only every step rows are raw rows), comparing each raw point with
+/// the next raw point in its row and the one in the next raw row. The
+/// main loop just accumulates whether a row has a problem, without
+/// branching on each point, which is noticeably faster. If a row has
+/// a problem we go back and find exactly where. Fills in P with the
+/// first problem found.
+//-------------------------------------------------------------------------
+
+  template<class F> void check_rows(int Istart, int Iend, F Coor,
+				    Problem& P) const
+  {
+    if(!enabled)
+      return;
+    int nraw_col = (ncol - 1) / step + 1;
+    int ifirst = ((Istart + step - 1) / step) * step;
+    bool geo = (ptype != PROJECTED);
+    double thresh = fill_value_threshold;
+    double lim = (geo ? 180.0 : max_step2);
+    for(int i = ifirst; i < Iend; i += step) {
+      bool have_next = (i + step < nrow);
+      bool bad = false;
+      double x, y;
+      Coor(i, 0, x, y);
+      for(int jr = 0; jr < nraw_col; ++jr) {
+	int j = jr * step;
+	bool g = (x > thresh) & (y > thresh);
+	double xr = x, yr = y;
+	bool gr = false;
+	if(jr + 1 < nraw_col) {
+	  Coor(i, j + step, xr, yr);
+	  gr = (xr > thresh) & (yr > thresh);
+	}
+	double xd = x, yd = y;
+	bool gd = false;
+	if(have_next) {
+	  Coor(i + step, j, xd, yd);
+	  gd = (xd > thresh) & (yd > thresh);
+	}
+	double sr, sd;
+	if(geo) {
+	  sr = std::abs(xr - x);
+	  sd = std::abs(xd - x);
+	} else {
+	  sr = (xr - x) * (xr - x) + (yr - y) * (yr - y);
+	  sd = (xd - x) * (xd - x) + (yd - y) * (yd - y);
+	}
+	bad |= (g & gr & (sr > lim)) | (g & gd & (sd > lim));
+	x = xr;
+	y = yr;
+      }
+      if(bad) {
+	// Find the first bad pair in this row.
+	for(int jr = 0; jr < nraw_col && !P.found; ++jr) {
+	  int j = jr * step;
+	  double x1, y1;
+	  Coor(i, j, x1, y1);
+	  if(!good(x1, y1))
+	    continue;
+	  if(jr + 1 < nraw_col) {
+	    double x2, y2;
+	    Coor(i, j + step, x2, y2);
+	    if(good(x2, y2))
+	      test(i, j, x1, y1, i, j + step, x2, y2, P);
+	  }
+	  if(!P.found && have_next) {
+	    double x2, y2;
+	    Coor(i + step, j, x2, y2);
+	    if(good(x2, y2))
+	      test(i, j, x1, y1, i + step, j, x2, y2, P);
+	  }
+	}
+	return;
+      }
+    }
+  }
+  template<class F> void throw_if_problem
+  (const std::vector<Problem>& Tproblem, F Coor) const;
+private:
+  void test(int I1, int J1, double X1, double Y1, int I2, int J2,
+	    double X2, double Y2, Problem& P) const
+  {
+    double s;
+    bool bad;
+    if(ptype != PROJECTED) {
+      s = std::abs(X2 - X1);
+      bad = (s > 180);
+    } else {
+      s = (X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1);
+      bad = (s > max_step2);
+    }
+    if(bad) {
+      P.found = true;
+      P.i1 = I1; P.j1 = J1; P.i2 = I2; P.j2 = J2;
+      P.step = (ptype != PROJECTED ? s : std::sqrt(s));
+    }
+  }
+  ProjectionType ptype;
+  bool enabled;
+  int nrow, ncol, step;
+  double fill_value_threshold, max_step2;
+};
+
+//-------------------------------------------------------------------------
+/// Constructor. For a projected MapInfo, this determines the median
+/// step from a sample of the points.
+//-------------------------------------------------------------------------
+
+template<class F> ResamplerCoordinateCheck::ResamplerCoordinateCheck
+(int Number_row, int Number_col, int Step, F Coor, const MapInfo& Mi,
+ double Fill_value_threshold)
+  : ptype(PROJECTED), enabled(true), nrow(Number_row), ncol(Number_col),
+    step(std::max(Step, 1)), fill_value_threshold(Fill_value_threshold),
+    max_step2(0)
+{
+  const CoordinateConverter& c = Mi.coordinate_converter();
+  if(dynamic_cast<const GeodeticConverter*>(&c))
+    ptype = GEODETIC;
+  else if(dynamic_cast<const Geodetic360Converter*>(&c))
+    ptype = GEODETIC360;
+#ifdef HAVE_GDAL
+  else {
+    const OgrCoordinateConverter* oc =
+      dynamic_cast<const OgrCoordinateConverter*>(&c);
+    // We only handle traditional GIS order (longitude, latitude),
+    // which is what we use. For authority compliant order X is
+    // latitude, so we skip the check rather than giving a wrong
+    // answer.
+    if(oc && oc->ogr().ogr().IsGeographic()) {
+      if(oc->ogr().use_traditional_gis_order())
+	ptype = GEODETIC;
+      else
+	enabled = false;
+    }
+  }
+#endif
+  if(Number_row <= 0 || Number_col <= 0)
+    enabled = false;
+  if(!enabled || ptype != PROJECTED)
+    return;
+  if(Resampler::max_step_ratio() <= 0) {
+    enabled = false;
+    return;
+  }
+  // Median of a sample of the squared steps between raw points.
+  int nraw_row = (nrow - 1) / step + 1;
+  int nraw_col = (ncol - 1) / step + 1;
+  int stride = std::max(1, (int) std::sqrt((double) nraw_row * nraw_col / 32768.0));
+  std::vector<double> sstep;
+  for(int i = 0; i < nraw_row; i += stride)
+    for(int j = 0; j < nraw_col; j += stride) {
+      double x, y, x2, y2;
+      Coor(i * step, j * step, x, y);
+      if(!good(x, y))
+	continue;
+      if(j + 1 < nraw_col) {
+	Coor(i * step, (j + 1) * step, x2, y2);
+	if(good(x2, y2))
+	  sstep.push_back((x2 - x) * (x2 - x) + (y2 - y) * (y2 - y));
+      }
+      if(i + 1 < nraw_row) {
+	Coor((i + 1) * step, j * step, x2, y2);
+	if(good(x2, y2))
+	  sstep.push_back((x2 - x) * (x2 - x) + (y2 - y) * (y2 - y));
+      }
+    }
+  // Not enough data to say anything
+  if(sstep.size() < 10) {
+    enabled = false;
+    return;
+  }
+  std::nth_element(sstep.begin(), sstep.begin() + sstep.size() / 2,
+		   sstep.end());
+  max_step2 = sstep[sstep.size() / 2] * Resampler::max_step_ratio() *
+    Resampler::max_step_ratio();
+  // All the points the same (e.g., duplicated data). Nothing to
+  // compare against.
+  if(max_step2 <= 0)
+    enabled = false;
+}
+
+//-------------------------------------------------------------------------
+/// Throw an exception for the first problem found (tasks are given in
+/// row order). For a geographic MapInfo, we check if the data covers a
+/// pole, to give a better error message. This is only done when we
+/// have a problem, so the speed isn't important.
+//-------------------------------------------------------------------------
+
+template<class F> void ResamplerCoordinateCheck::throw_if_problem
+(const std::vector<Problem>& Tproblem, F Coor) const
+{
+  const Problem* p = 0;
+  for(const auto& t : Tproblem)
+    if(t.found) {
+      p = &t;
+      break;
+    }
+  if(!p)
+    return;
+  bool pole = false;
+  if(ptype != PROJECTED) {
+    // A cell around a pole has longitude changes around the cell that
+    // sum to +-360 rather than 0. A point right at the pole has an
+    // arbitrary longitude, so count that as well.
+    for(int i = 0; i < nrow && !pole; i += step)
+      for(int j = 0; j < ncol && !pole; j += step) {
+	double x, y;
+	Coor(i, j, x, y);
+	if(good(x, y) && std::abs(y) > 90 - 1e-6)
+	  pole = true;
+	if(i + step >= nrow || j + step >= ncol)
+	  continue;
+	double cx[4], cy[4];
+	int ci[4] = {i, i, i + step, i + step};
+	int cj[4] = {j, j + step, j + step, j};
+	bool ok = true;
+	for(int c = 0; c < 4; ++c) {
+	  Coor(ci[c], cj[c], cx[c], cy[c]);
+	  ok = ok && good(cx[c], cy[c]);
+	}
+	if(!ok)
+	  continue;
+	double w = 0;
+	for(int c = 0; c < 4; ++c)
+	  w += std::fmod(cx[(c + 1) % 4] - cx[c] + 540.0, 360.0) - 180.0;
+	if(std::abs(w) > 180)
+	  pole = true;
+      }
+  }
+  Exception e;
+  e << "Resampler: the coordinates jump between line " << p->i1
+    << ", sample " << p->j1 << " and line " << p->i2 << ", sample "
+    << p->j2 << ".\n";
+  if(pole)
+    e << "The data covers a pole (a jump of " << p->step
+      << " degrees in longitude). Neither a Geodetic nor a Geodetic360 "
+      << "MapInfo can handle this. Use a polar projection, such as polar "
+      << "stereographic.";
+  else if(ptype == GEODETIC)
+    e << "The data crosses the -180/180 longitude line (a jump of "
+      << p->step << " degrees), and the MapInfo is Geodetic. Use a "
+      << "Geodetic360 MapInfo for data that crosses the date line.";
+  else if(ptype == GEODETIC360)
+    e << "The data crosses the 0/360 longitude line (a jump of "
+      << p->step << " degrees), and the MapInfo is Geodetic360. Use a "
+      << "Geodetic MapInfo for data that crosses the prime meridian.";
+  else
+    e << "The step is " << p->step << ", which is more than "
+      << Resampler::max_step_ratio() << " times the typical step of "
+      << std::sqrt(max_step2) / Resampler::max_step_ratio()
+      << ". The data crosses a discontinuity of the map projection "
+      << "(e.g., the cut at 180 degrees from the central meridian, or a "
+      << "pole). Data near the poles needs a polar projection, such as "
+      << "polar stereographic. If the data really has steps this large, "
+      << "you can change Resampler::set_max_step_ratio (0 turns this "
+      << "check off).";
+  e << "\nThis can also be caused by fill values in the coordinates "
+    << "that aren't marked as missing (use NaN, or pass "
+    << "Fill_value_threshold).";
+  throw e;
+}
+}
+
 //-------------------------------------------------------------------------
 /// Fill in data_index_ and mi. Coor(i, j, X, Y) returns the X and Y
 /// coordinate of subpixel i, j, for i in [0, Number_row) and j in
@@ -202,6 +518,8 @@ template<class F> void Resampler::init
  const MapInfo& Mi, bool Exactly_match_mi, double Fill_value_threshold,
  int Number_task)
 {
+  ResamplerCoordinateCheck check(Number_row, Number_col, nsub, Coor, Mi,
+				 Fill_value_threshold);
   data_index_.resize(Number_row, Number_col, 2);
   int ntask = default_number_task((long) Number_row * Number_col, Number_task);
   // Min and max index of the points that aren't fill, for each task.
@@ -210,6 +528,7 @@ template<class F> void Resampler::init
     int minx = 0, miny = 0, maxx = 0, maxy = 0;
   };
   std::vector<Range> trange(std::max(std::min(ntask, Number_row), 1));
+  std::vector<ResamplerCoordinateCheck::Problem> tproblem(trange.size());
   // With a coverage MapInfo, missing points are marked with this in
   // the first pass, and changed to -9999 in the second pass. We can't
   // use -9999 in the first pass, since a real index could happen to be
@@ -221,7 +540,8 @@ template<class F> void Resampler::init
     [&](int k, int istart, int iend)
     {
       Range r;
-      for(int i = istart; i < iend; ++i)
+      check.check_rows(istart, iend, Coor, tproblem[k]);
+      for(int i = istart; i < iend; ++i) {
 	for(int j = 0; j < Number_col; ++j) {
 	  double x, y, xindex, yindex;
 	  Coor(i, j, x, y);
@@ -249,8 +569,10 @@ template<class F> void Resampler::init
 	  r.miny = std::min(ln, r.miny);
 	  r.maxy = std::max(ln, r.maxy);
 	}
+      }
       trange[k] = r;
     });
+  check.throw_if_problem(tproblem, Coor);
   // Determine min and max xindex and yindex of the points that aren't
   // fill.
   Range r;
@@ -318,45 +640,74 @@ void Resampler::clear()
 /// the given MapInfo. Used when we are producing the tiled product
 /// where lots of the data isn't even used and can be skipped before
 /// we even start.
+///
+/// Points where X or Y is NaN (or <= Fill_value_threshold, if given)
+/// are ignored. As with the constructors, we throw an exception if
+/// the coordinates cross the date line with a Geodetic MapInfo (or
+/// another discontinuity of the map projection).
 //-------------------------------------------------------------------------
 
 void Resampler::determine_range(const blitz::Array<double, 2>& X_coor_interpolated,
 				const blitz::Array<double, 2>& Y_coor_interpolated,
 				const MapInfo& Mi, int Num_sub_pixel,
-				int& lstart, int& lend, int& sstart, int& send)
+				int& lstart, int& lend, int& sstart, int& send,
+				double Fill_value_threshold)
 {
   if(X_coor_interpolated.rows() != Y_coor_interpolated.rows() ||
      X_coor_interpolated.cols() != Y_coor_interpolated.cols())
     throw Exception("X_coor_interpolated and Y_coor_interpolated need to be the same size");
   int nrow = X_coor_interpolated.rows();
   int ncol = X_coor_interpolated.cols();
+  auto coor = [&X_coor_interpolated, &Y_coor_interpolated]
+    (int i, int j, double& X, double& Y)
+  {
+    X = X_coor_interpolated(i, j);
+    Y = Y_coor_interpolated(i, j);
+  };
+  ResamplerCoordinateCheck check(nrow, ncol, Num_sub_pixel, coor, Mi,
+				 Fill_value_threshold);
   int ntask = default_number_task((long) nrow * ncol, -1);
+  // NaN fails the range check below, so we only need to check for
+  // fill if we have a threshold.
+  bool has_threshold =
+    (Fill_value_threshold > std::numeric_limits<double>::lowest());
+  double nline_mi = Mi.number_y_pixel();
+  double nsamp_mi = Mi.number_x_pixel();
   struct Range {
     int lstart, lend, sstart, send;
   };
   std::vector<Range> trange(std::max(std::min(ntask, nrow), 1),
 			    Range{nrow, -1, ncol, -1});
+  std::vector<ResamplerCoordinateCheck::Problem> tproblem(trange.size());
   parallel_row_blocks(nrow, ntask,
     [&](int k, int istart, int iend)
     {
       Range r{nrow, -1, ncol, -1};
-      for(int i = istart; i < iend; ++i)
+      check.check_rows(istart, iend, coor, tproblem[k]);
+      for(int i = istart; i < iend; ++i) {
 	for(int j = 0; j < ncol; ++j) {
+	  double x = X_coor_interpolated(i,j);
+	  double y = Y_coor_interpolated(i,j);
+	  if(has_threshold &&
+	     !(x > Fill_value_threshold && y > Fill_value_threshold))
+	    continue;
 	  double xindex, yindex;
-	  Mi.coordinate_to_index(X_coor_interpolated(i,j),
-				 Y_coor_interpolated(i,j), xindex, yindex);
-	  int ln = (int) std::round(yindex);
-	  int smp = (int) std::round(xindex);
-	  if(ln >= 0 && ln < Mi.number_y_pixel() &&
-	     smp >=0 && smp < Mi.number_x_pixel()) {
+	  Mi.coordinate_to_index(x, y, xindex, yindex);
+	  // Range check in double, so NaN (missing) fails it. This is
+	  // the same as 0 <= std::round(index) < n, since std::round
+	  // rounds half way cases away from zero.
+	  if(yindex > -0.5 && yindex < nline_mi - 0.5 &&
+	     xindex > -0.5 && xindex < nsamp_mi - 0.5) {
 	    r.lstart = std::min(r.lstart, i);
 	    r.lend = std::max(r.lend, i);
 	    r.sstart = std::min(r.sstart, j);
 	    r.send = std::max(r.send, j);
 	  }
 	}
+      }
       trange[k] = r;
     });
+  check.throw_if_problem(tproblem, coor);
   lstart = nrow;
   lend = -1;
   sstart = ncol;

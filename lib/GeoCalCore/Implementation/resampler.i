@@ -30,7 +30,10 @@ public:
   static void determine_range(const blitz::Array<double, 2>& X_coor_interpolated,
 			      const blitz::Array<double, 2>& Y_coor_interpolated,
 			      const MapInfo& Mi, int Num_sub_pixel,
-			      int& OUTPUT, int& OUTPUT, int& OUTPUT, int& OUTPUT);
+			      int& OUTPUT, int& OUTPUT, int& OUTPUT, int& OUTPUT,
+			      double Fill_value_threshold = std::numeric_limits<double>::lowest());
+  static double max_step_ratio();
+  static void set_max_step_ratio(double V);
   bool empty_resample() const;
   bool empty_resample(const boost::shared_ptr<RasterImage>& Data,
 		      double Fill_value_threshold = std::numeric_limits<double>::lowest()) const;

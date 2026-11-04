@@ -200,12 +200,21 @@ class Resampler(geocal_swig.generic_object.GenericObject):
         any subpixel that depends on a missing point is missing. A subpixel that falls
         exactly on a good point is good, even if its neighbors are missing.  
 
+        We check that the coordinates don't cross a discontinuity of the map projection,
+        and throw an exception if they do. For a Geodetic MapInfo, this means data
+        crossing the date line, which needs a Geodetic360 MapInfo instead (and data
+        crossing the prime meridian with a Geodetic360 MapInfo needs Geodetic). Data
+        covering a pole needs a polar projection, such as polar stereographic. For other
+        projections, see max_step_ratio().  
+
         See resample_field for a description of Number_task.  
 
         """
         _resampler.Resampler_swiginit(self, _resampler.new_Resampler(*args))
     clear = _swig_new_instance_method(_resampler.Resampler_clear)
     determine_range = _swig_new_static_method(_resampler.Resampler_determine_range)
+    max_step_ratio = _swig_new_static_method(_resampler.Resampler_max_step_ratio)
+    set_max_step_ratio = _swig_new_static_method(_resampler.Resampler_set_max_step_ratio)
     empty_resample = _swig_new_instance_method(_resampler.Resampler_empty_resample)
     resample_field = _swig_new_instance_method(_resampler.Resampler_resample_field)
     map_values = _swig_new_instance_method(_resampler.Resampler_map_values)

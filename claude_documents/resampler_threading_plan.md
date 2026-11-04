@@ -1030,6 +1030,47 @@ Related ECOSTRESS notes found while checking:
     threads, including the check (the has_threshold and double range check
     changes more than pay for it).
 
+* **Step 5 done (2026-11-03), staged:** `create_from_lat_lon`, swath
+  range attributes, size check, `GEOCAL_CLASS_VERSION(Resampler, 1)`.
+  * Center aligned interpolation is a shared `ResamplerInterpolate` class
+    (zero weight terms skipped, as before). Step 2 of the factory uses
+    `range_in_mi` (the determine_range body) with the projection check
+    off, so a discontinuity in the part of the swath we don't use (e.g.,
+    the date line far from a Geodetic MapInfo) is fine; init still checks
+    the part we use. Lat/lon -> x/y uses the bulk OGR Transform for
+    OgrCoordinateConverter (failed points become NaN), otherwise the
+    CoordinateConverter per point.
+  * Swath range: the trim keeps exactly the raw pixels that have a
+    subpixel in Mi. The maia version (determine_range rounding up) can keep
+    one extra raw pixel at the end, which adds nothing.
+  * **User decision (2026-11-03): fix the RasterImage constructor's
+    corner alignment too**, even though it changes output (correctness over
+    preserving output). It now uses `ResamplerInterpolate`, so its grid is
+    nl*nsub x ns*nsub. The `raster_ctor_matches_magnify_bilinear` test was
+    replaced by `raster_ctor_center_aligned` and `raster_ctor_location`;
+    `raster_ctor_fill` updated to center aligned positions. ECOSTRESS's
+    scipy zoom (stretch error, up to (nsub-1)/(2 nsub) pixels at the
+    swath edges) is out of scope for now; documented in the array
+    constructor and the release notes.
+  * 9 new tests (40 resampler tests): create_from_lat_lon_matches_reference
+    (against a fixed build_resampler in C++, nsub 1/2/3/15, boundary
+    0/1/3, three task counts), create_from_lat_lon_location,
+    raster_ctor_center_aligned, raster_ctor_location, swath_range_default,
+    swath_range_size_check, create_from_lat_lon_geodetic,
+    create_from_lat_lon_missing, create_from_lat_lon_no_data,
+    serialization (including a hand made version 0 archive). Mutation
+    checks: corner aligned interpolation 179 failures in 5 tests; the
+    maia range bug 57 in 3 tests; no size check 4. Full C++ suite, Python
+    (250 passed, 77 skipped) and mypy pass.
+  * Real OCI granule (PACE_OCI.20240306T201910, nsub 15, the maia Albers
+    MapInfo): create_from_lat_lon 0.66 s vs 20.7 s for build_resampler
+    (31x); resample_field output identical to build_resampler with the
+    range fixed (0 of 16e6 pixels differ); resampled latitude vs grid
+    latitude mean 0.001 km, rms 0.29 km. Script /tmp/rsproto/py5.py
+    (reads with h5py, xarray isn't in the pixi env).
+  * The SWIG part of step 6 (factory, attributes, line_range/
+    sample_range) is done here; step 6 still needs the python test file.
+
 ## Implementation order
 
 Each step builds and passes `make check` (and installcheck where python

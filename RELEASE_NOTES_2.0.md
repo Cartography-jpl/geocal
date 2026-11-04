@@ -101,6 +101,27 @@ The defaults are now `None`, meaning "create a new empty one".
 - `determine_range` has a new last argument `Fill_value_threshold`, the
   same as the constructors.
 
+### `Resampler` RasterImage constructor coordinates are centered on the pixels
+
+`resample_field` copies each raw data pixel to all `Num_sub_pixel` x
+`Num_sub_pixel` of its subpixels, so the coordinates of those subpixels
+should be centered on that raw pixel. The `Resampler` constructor taking
+`RasterImage` used `MagnifyBilinear`, which is corner aligned (subpixel k
+at raw position k / nsub). That put the data (nsub - 1) / (2 nsub) raw
+pixels from where it belongs (1/4 pixel for nsub 2, 1/3 for nsub 3), and
+the last raw line and sample were never used. The constructor now
+interpolates centered on the raw pixels (subpixel k at raw position
+(k + 0.5) / nsub - 0.5), extrapolating linearly at the edges. The
+subpixel grid is now `number_line * nsub` x `number_sample * nsub`,
+rather than `(number_line - 1) * nsub` x `(number_sample - 1) * nsub`.
+This changes the output, which is now correct.
+
+The array constructor uses whatever interpolation the caller did. Note
+that `scipy.ndimage.zoom(order=1)`, which ECOSTRESS uses, has the same kind
+of problem (it stretches rather than shifts: up to (nsub - 1) / (2 nsub)
+raw pixels off at the edges of the swath, and correct in the middle). That
+is unchanged, and the constructor documentation describes it.
+
 ### `test_support` removed
 
 The old `python/test_support/test_support.py` module was removed. Test
@@ -231,8 +252,8 @@ fixtures and `require_*` skip markers now live in `python/tests/fixtures/`.
     coordinates as it goes rather than creating the full size
     interpolated arrays with `MagnifyBilinear`, so it uses much less
     memory (2.6 s -> 0.36 s for 5000 x 5000 coordinates, nsub 2). Apart
-    from the missing coordinate changes above, the results are identical
-    to before.
+    from the missing coordinate changes and the `RasterImage` constructor
+    interpolation fix above, the results are identical to before.
   - Bug fix: `resample_field(Fname, Data, ...)`, which writes a VICAR file,
     passed `Fill_value_threshold` as the `Use_smallest_ic` argument, so the
     threshold was ignored, and any nonzero threshold turned on
@@ -240,6 +261,28 @@ fixtures and `require_*` skip markers now live in `python/tests/fixtures/`.
   - The C++ unit tests for `Resampler` were never built (the test file
     wasn't in `implementation.am`). They are now, with tests comparing
     against the old algorithm.
+- New `Resampler.create_from_lat_lon(Latitude, Longitude, Mi,
+  Num_sub_pixel, Boundary=1, Fill_value_threshold, Number_task)`. This
+  builds a resampler directly from swath latitude and longitude, all in
+  C++: it converts to the coordinates of Mi, finds the part of the swath
+  that falls in Mi (padded by `Boundary` raw pixels), interpolates
+  centered on the raw pixels (the same as
+  `scipy.interpolate.RegularGridInterpolator`, linear with extrapolation)
+  and trims to the part that is used. It always matches Mi exactly. This
+  replaces `build_resampler` in maia-misc-tools: for the PACE OCI granule
+  used there it gives identical output, and takes 0.66 s rather than
+  20.7 s.
+  - The part of the swath used is given by the new attributes
+    `swath_line_start`, `swath_number_line`, `swath_sample_start`,
+    `swath_number_sample` and `has_swath_range` (and in python
+    `line_range` and `sample_range` slices). Data passed to
+    `resample_field` and `empty_resample` must be subset to this range,
+    e.g., `r.resample_field(d[r.line_range, r.sample_range])`, and a
+    different size throws an exception. Resamplers from the other
+    constructors cover the whole swath, and `line_range`/`sample_range`
+    select all the data, so you can always subset with them.
+  - Serialization (and pickling) includes the swath range. Older
+    serialized `Resampler` objects still load, with the full swath.
 - `safe_matplotlib_import` works again. An earlier cleanup had removed its
   test import of `matplotlib.pyplot`, so it never fell back to the `agg`
   backend. The fallback also used `matplotlib.use(warn=...)`, which

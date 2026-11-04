@@ -3,7 +3,6 @@
 #include "geocal_thread_pool.h"
 #include "memory_raster_image.h"
 #include "memory_raster_image_float.h"
-#include "magnify_bilinear.h"
 #include "ogr_coordinate.h"
 #include "gdal_raster_image.h"
 #include "landsat7_global.h"
@@ -539,11 +538,36 @@ BOOST_AUTO_TEST_CASE(no_valid_points)
   BOOST_CHECK(r.empty_resample());
 }
 
-BOOST_AUTO_TEST_CASE(raster_ctor_matches_magnify_bilinear)
+// Center aligned bilinear interpolation to Nsub subpixels, with linear
+// extrapolation at the edges: subpixel k is at raw position
+// (k + 0.5) / Nsub - 0.5. Written out directly as a reference.
+static blitz::Array<double, 2> zoom_center(const blitz::Array<double, 2>& A,
+					   int Nsub)
 {
-  // The RasterImage constructor used to use MagnifyBilinear. We now
-  // do the interpolation ourselves, which should give exactly the
-  // same results.
+  int nl = A.rows(), ns = A.cols();
+  blitz::Array<double, 2> res(nl * Nsub, ns * Nsub);
+  for(int i = 0; i < res.rows(); ++i)
+    for(int j = 0; j < res.cols(); ++j) {
+      double pi = (i + 0.5) / Nsub - 0.5, pj = (j + 0.5) / Nsub - 0.5;
+      int ci = std::min(std::max((int) std::floor(pi), 0), nl - 2);
+      int cj = std::min(std::max((int) std::floor(pj), 0), ns - 2);
+      double ti = pi - ci, tj = pj - cj;
+      double v = 0;
+      v = v + A(ci, cj) * ((1 - ti) * (1 - tj));
+      v = v + A(ci, cj + 1) * ((1 - ti) * tj);
+      v = v + A(ci + 1, cj) * (ti * (1 - tj));
+      v = v + A(ci + 1, cj + 1) * (ti * tj);
+      res(i,j) = v;
+    }
+  return res;
+}
+
+BOOST_AUTO_TEST_CASE(raster_ctor_center_aligned)
+{
+  // The RasterImage constructor interpolates the coordinates center
+  // aligned, without creating the full size arrays. This should give
+  // exactly the same result as interpolating ourselves and using the
+  // array constructor.
   int nl = 120, ns = 150;
   auto ximg = boost::make_shared<MemoryRasterImageFloat>(nl, ns);
   auto yimg = boost::make_shared<MemoryRasterImageFloat>(nl, ns);
@@ -554,12 +578,8 @@ BOOST_AUTO_TEST_CASE(raster_ctor_matches_magnify_bilinear)
       yimg->data()(i, j) = (10.95 - (std::sin(th) * j + std::cos(th) * i) * 0.0062);
     }
   for(int ns_sub : {1, 2, 3}) {
-    MagnifyBilinear xmag(ximg, ns_sub);
-    MagnifyBilinear ymag(yimg, ns_sub);
-    blitz::Array<double, 2> xm = xmag.read_double(0,0, xmag.number_line(),
-						  xmag.number_sample());
-    blitz::Array<double, 2> ym = ymag.read_double(0,0, ymag.number_line(),
-						  ymag.number_sample());
+    blitz::Array<double, 2> xm = zoom_center(ximg->data(), ns_sub);
+    blitz::Array<double, 2> ym = zoom_center(yimg->data(), ns_sub);
     for(bool exact : {false, true})
       for(int ntask : {1, 7}) {
 	MapInfo mi_expect;
@@ -568,11 +588,52 @@ BOOST_AUTO_TEST_CASE(raster_ctor_matches_magnify_bilinear)
 			 std::numeric_limits<double>::lowest(), mi_expect);
 	Resampler r(ximg, yimg, mi, ns_sub, exact,
 		    std::numeric_limits<double>::lowest(), ntask);
-	BOOST_CHECK_EQUAL(r.data_index().rows(), (nl - 1) * ns_sub);
-	BOOST_CHECK_EQUAL(r.data_index().cols(), (ns - 1) * ns_sub);
+	BOOST_CHECK_EQUAL(r.data_index().rows(), nl * ns_sub);
+	BOOST_CHECK_EQUAL(r.data_index().cols(), ns * ns_sub);
 	BOOST_CHECK(blitz::all(r.data_index() == expect));
 	check_map_info(r.map_info(), mi_expect);
       }
+  }
+}
+
+BOOST_AUTO_TEST_CASE(raster_ctor_location)
+{
+  // Resample the latitude itself. The result should match the latitude
+  // of each MapInfo pixel, with no shift. The old corner aligned
+  // interpolation was off by (nsub - 1) / (2 nsub) raw pixels.
+  int nl = 100, ns = 100;
+  double spacing = 0.005;
+  auto ximg = boost::make_shared<MemoryRasterImageFloat>(nl, ns);
+  auto yimg = boost::make_shared<MemoryRasterImageFloat>(nl, ns);
+  for(int i = 0; i < nl; ++i)
+    for(int j = 0; j < ns; ++j) {
+      ximg->data()(i, j) = 10.0 + (j + 0.5) * spacing;
+      yimg->data()(i, j) = 11.0 - (i + 0.5) * spacing;
+    }
+  blitz::Array<double, 2> lat(yimg->data().shape());
+  lat = yimg->data();
+  // 0.003 degree pixels, so nsub 2 (0.0025 degree subpixels) fills
+  // every pixel.
+  MapInfo mfine(boost::make_shared<GeodeticConverter>(), 10.1, 10.9,
+		10.4, 10.6, 100, 100);
+  for(int ns_sub : {2, 3, 5}) {
+    BOOST_TEST_CONTEXT("nsub " << ns_sub) {
+      Resampler r(ximg, yimg, mfine, ns_sub, true);
+      blitz::Array<double, 2> res = r.resample_field(lat, 1.0, false, -9999.0);
+      double sum = 0;
+      int cnt = 0;
+      for(int i = 0; i < res.rows(); ++i)
+	for(int j = 0; j < res.cols(); ++j)
+	  if(res(i,j) > -9999) {
+	    sum += res(i,j) - mfine.ground_coordinate(j, i)->latitude();
+	    ++cnt;
+	  }
+      BOOST_CHECK_EQUAL(cnt, res.size());
+      // Mean error, in raw pixels. Within a raw pixel the result is
+      // constant, so individual pixels are off by up to half a raw
+      // pixel, but there shouldn't be any bias.
+      BOOST_CHECK_SMALL(sum / cnt / spacing, 0.02);
+    }
   }
 }
 
@@ -597,7 +658,8 @@ BOOST_AUTO_TEST_CASE(raster_ctor_fill)
   yimg->data()(20, 30) = -1e20;
   int ns_sub = 3;
   // Each fill point affects (2 * ns_sub - 1)^2 subpixels, the ones
-  // with a nonzero bilinear weight for that point.
+  // with a nonzero bilinear weight for that point. For an odd ns_sub,
+  // one subpixel falls exactly on each raw point.
   int naffect = (2 * ns_sub - 1) * (2 * ns_sub - 1);
   for(bool exact : {false, true}) {
     Resampler r(ximg, yimg, mi, ns_sub, exact, -1e10);
@@ -607,8 +669,9 @@ BOOST_AUTO_TEST_CASE(raster_ctor_fill)
       for(int j = 0; j < di.cols(); ++j) {
 	bool expect_missing = false;
 	for(auto& p : fill_pt) {
-	  double dl = std::abs(i / (double) ns_sub - p.first);
-	  double ds = std::abs(j / (double) ns_sub - p.second);
+	  // Subpixel position in raw pixels, center aligned.
+	  double dl = std::abs((i + 0.5) / ns_sub - 0.5 - p.first);
+	  double ds = std::abs((j + 0.5) / ns_sub - 0.5 - p.second);
 	  if(dl < 1 && ds < 1)
 	    expect_missing = true;
 	}
@@ -1033,6 +1096,392 @@ BOOST_AUTO_TEST_CASE(no_false_positive_wide_scan)
   BOOST_CHECK_NO_THROW(Resampler(x, y, mu, 1));
 }
 
+// Reference version of create_from_lat_lon, done the way
+// maia-misc-tools build_resampler does it, but with the swath range
+// fixed to match the trimmed coordinates. Returns the resampler built
+// with the array constructor, and the swath range it needs.
+static boost::shared_ptr<Resampler> reference_create
+(const blitz::Array<double, 2>& Lat, const blitz::Array<double, 2>& Lon,
+ const MapInfo& Mi, int Nsub, int Boundary, int& Lstart, int& Nline,
+ int& Sstart, int& Nsamp)
+{
+  blitz::Array<double, 2> x, y;
+  to_map(Mi, Lat, Lon, x, y);
+  int ls, le, ss, se;
+  Resampler::determine_range(x, y, Mi, 1, ls, le, ss, se);
+  int l0 = std::max(ls - Boundary, 0);
+  int l1 = std::min(le + Boundary, Lat.rows() - 1);
+  int s0 = std::max(ss - Boundary, 0);
+  int s1 = std::min(se + Boundary, Lat.cols() - 1);
+  int nl = l1 - l0 + 1, ns = s1 - s0 + 1;
+  // Center aligned bilinear interpolation, linearly extrapolated at
+  // the edges (like scipy RegularGridInterpolator, fill_value=None).
+  blitz::Array<double, 2> xe(nl * Nsub, ns * Nsub), ye(xe.shape());
+  for(int i = 0; i < xe.rows(); ++i)
+    for(int j = 0; j < xe.cols(); ++j) {
+      double pi = (i + 0.5) / Nsub - 0.5, pj = (j + 0.5) / Nsub - 0.5;
+      int ci = std::min(std::max((int) std::floor(pi), 0), nl - 2);
+      int cj = std::min(std::max((int) std::floor(pj), 0), ns - 2);
+      double ti = pi - ci, tj = pj - cj;
+      auto f = [&](const blitz::Array<double, 2>& A)
+      {
+	return A(l0 + ci, s0 + cj) * (1 - ti) * (1 - tj) +
+	  A(l0 + ci, s0 + cj + 1) * (1 - ti) * tj +
+	  A(l0 + ci + 1, s0 + cj) * ti * (1 - tj) +
+	  A(l0 + ci + 1, s0 + cj + 1) * ti * tj;
+      };
+      xe(i,j) = f(x);
+      ye(i,j) = f(y);
+    }
+  Resampler::determine_range(xe, ye, Mi, Nsub, ls, le, ss, se);
+  // This is the trim build_resampler uses. determine_range rounds le
+  // up to a multiple of Nsub, so this can include one more raw pixel
+  // than create_from_lat_lon does. That pixel has no subpixels in Mi,
+  // so it doesn't change the result.
+  Range rr(ls, std::min(le + Nsub, xe.rows()) - 1);
+  Range rs(ss, std::min(se + Nsub, xe.cols()) - 1);
+  blitz::Array<double, 2> xt(xe(rr, rs)), yt(ye(rr, rs));
+  boost::shared_ptr<Resampler> r =
+    boost::make_shared<Resampler>(xt, yt, Mi, Nsub, true);
+  Lstart = l0 + ls / Nsub;
+  Nline = xt.rows() / Nsub;
+  Sstart = s0 + ss / Nsub;
+  Nsamp = xt.cols() / Nsub;
+  return r;
+}
+
+// A UTM MapInfo of 200 x 200 pixels of 100 m, and a 300 x 300 swath at
+// 250 m that is rotated, extends well past it on every side, and
+// isn't aligned with it.
+static void utm_swath(MapInfo& Mi, blitz::Array<double, 2>& Lat,
+		      blitz::Array<double, 2>& Lon, int N = 300)
+{
+  auto conv = OgrCoordinateConverter::utm_converter(11);
+  Mi = MapInfo(conv, 380000.0, 3800000.0, 400000.0, 3780000.0, 200, 200);
+  Lat.resize(N, N);
+  Lon.resize(N, N);
+  double th = 20 * M_PI / 180.0;
+  for(int i = 0; i < N; ++i)
+    for(int j = 0; j < N; ++j) {
+      double u = (j - N / 2.0 + 0.3) * 250, v = (i - N / 2.0 + 0.1) * 250;
+      double xm = 390000 + u * cos(th) - v * sin(th);
+      double ym = 3790000 - u * sin(th) - v * cos(th);
+      boost::shared_ptr<GroundCoordinate> gc = conv->convert_from_coordinate(xm, ym);
+      Lat(i,j) = gc->latitude();
+      Lon(i,j) = gc->longitude();
+    }
+}
+
+// Subset of the full swath Data that R needs.
+static blitz::Array<double, 2> swath_subset(const Resampler& R,
+					    const blitz::Array<double, 2>& Data)
+{
+  return Data(Range(R.swath_line_start(),
+		    R.swath_line_start() + R.swath_number_line() - 1),
+	      Range(R.swath_sample_start(),
+		    R.swath_sample_start() + R.swath_number_sample() - 1));
+}
+
+static blitz::Array<double, 2> swath_data(int Nl, int Ns)
+{
+  blitz::Array<double, 2> d(Nl, Ns);
+  for(int i = 0; i < Nl; ++i)
+    for(int j = 0; j < Ns; ++j)
+      d(i,j) = (i * 37 + j * 101) % 997 + 0.25;
+  return d;
+}
+
+BOOST_AUTO_TEST_CASE(create_from_lat_lon_matches_reference)
+{
+  MapInfo mu;
+  blitz::Array<double, 2> lat, lon;
+  utm_swath(mu, lat, lon);
+  blitz::Array<double, 2> d = swath_data(lat.rows(), lat.cols());
+  for(int ns : {1, 2, 3, 15})
+    for(int boundary : {0, 1, 3})
+      for(int ntask : {1, -1, 7}) {
+	BOOST_TEST_CONTEXT("nsub " << ns << " boundary " << boundary
+			   << " Number_task " << ntask) {
+	  boost::shared_ptr<Resampler> r =
+	    Resampler::create_from_lat_lon(lat, lon, mu, ns, boundary,
+			   std::numeric_limits<double>::lowest(), ntask);
+	  int ls, nl, ss, nsm;
+	  boost::shared_ptr<Resampler> rref =
+	    reference_create(lat, lon, mu, ns, boundary, ls, nl, ss, nsm);
+	  BOOST_CHECK(r->has_swath_range());
+	  BOOST_CHECK_EQUAL(r->number_sub_pixel(), ns);
+	  check_map_info(r->map_info(), mu);
+	  BOOST_CHECK_EQUAL(r->swath_line_start(), ls);
+	  BOOST_CHECK_EQUAL(r->swath_sample_start(), ss);
+	  // The reference can have one extra raw pixel at the end (see
+	  // reference_create), which doesn't contribute anything.
+	  BOOST_CHECK(nl - r->swath_number_line() == 0 ||
+		      nl - r->swath_number_line() == 1);
+	  BOOST_CHECK(nsm - r->swath_number_sample() == 0 ||
+		      nsm - r->swath_number_sample() == 1);
+	  // The swath is much bigger than the MapInfo, so we should
+	  // only use part of it.
+	  BOOST_CHECK(r->swath_number_line() < lat.rows() / 2);
+	  BOOST_CHECK(r->swath_number_sample() < lat.cols() / 2);
+	  BOOST_CHECK_EQUAL(r->data_index().rows(), r->swath_number_line() * ns);
+	  BOOST_CHECK_EQUAL(r->data_index().cols(), r->swath_number_sample() * ns);
+	  blitz::Array<double, 2> dsub(d(Range(r->swath_line_start(),
+		       r->swath_line_start() + r->swath_number_line() - 1),
+		       Range(r->swath_sample_start(),
+		       r->swath_sample_start() + r->swath_number_sample() - 1)));
+	  blitz::Array<double, 2> dref(d(Range(ls, ls + nl - 1),
+					 Range(ss, ss + nsm - 1)));
+	  blitz::Array<double, 2> res = r->resample_field(dsub, 1.0, false,
+							  -9999.0);
+	  blitz::Array<double, 2> resref = rref->resample_field(dref, 1.0,
+							  false, -9999.0);
+	  // Same subpixels, so the same output. The interpolation can
+	  // differ by floating point round off, which can very
+	  // occasionally move a subpixel to a neighboring output pixel.
+	  int ndiff = count(abs(res - resref) > 1e-8);
+	  BOOST_CHECK(ndiff <= res.size() / 2000);
+	  // The swath pixels are 250 m and the MapInfo 100 m, so with
+	  // enough subpixels every output pixel gets data.
+	  if(ns >= 3)
+	    BOOST_CHECK(number_with_data(res, -9999.0) > 0.9 * res.size());
+	}
+      }
+}
+
+BOOST_AUTO_TEST_CASE(create_from_lat_lon_location)
+{
+  // Resample the swath latitude itself. With center aligned
+  // interpolation, this should match the latitude of the MapInfo
+  // pixels. This is what found the build_resampler range bug in
+  // maia-misc-tools.
+  MapInfo mu;
+  blitz::Array<double, 2> lat, lon;
+  utm_swath(mu, lat, lon);
+  for(int ns : {1, 3, 15}) {
+    BOOST_TEST_CONTEXT("nsub " << ns) {
+      boost::shared_ptr<Resampler> r =
+	Resampler::create_from_lat_lon(lat, lon, mu, ns);
+      blitz::Array<double, 2> latsub(swath_subset(*r, lat));
+      blitz::Array<double, 2> res = r->resample_field(latsub, 1.0, false,
+						      -9999.0);
+      double sum = 0, sum2 = 0;
+      int cnt = 0;
+      for(int i = 0; i < res.rows(); ++i)
+	for(int j = 0; j < res.cols(); ++j)
+	  if(res(i,j) > -9999) {
+	    double d = (res(i,j) - mu.ground_coordinate(j, i)->latitude())
+	      * 111e3;
+	    sum += d;
+	    sum2 += d * d;
+	    ++cnt;
+	  }
+      double mean = sum / cnt;
+      double rms = std::sqrt(sum2 / cnt);
+      // The swath pixels are 250 m, a half pixel shift would be a mean
+      // of about 125 m * cos(20 deg). Averaging within a swath pixel
+      // gives an rms of about 250 / sqrt(12) = 72 m.
+      BOOST_CHECK(std::abs(mean) < 5);
+      BOOST_CHECK(rms < 100);
+    }
+  }
+}
+
+BOOST_AUTO_TEST_CASE(swath_range_default)
+{
+  Resampler r(x, y, mi, nsub);
+  BOOST_CHECK(!r.has_swath_range());
+  BOOST_CHECK_EQUAL(r.swath_line_start(), 0);
+  BOOST_CHECK_EQUAL(r.swath_sample_start(), 0);
+  BOOST_CHECK_EQUAL(r.swath_number_line(), std::numeric_limits<int>::max());
+  BOOST_CHECK_EQUAL(r.swath_number_sample(), std::numeric_limits<int>::max());
+  // Larger data is still fine without a swath range.
+  blitz::Array<double, 2> big(data.rows() + 5, data.cols() + 5);
+  big = 1;
+  BOOST_CHECK_NO_THROW(r.resample_field(big));
+}
+
+BOOST_AUTO_TEST_CASE(swath_range_size_check)
+{
+  MapInfo mu;
+  blitz::Array<double, 2> lat, lon;
+  utm_swath(mu, lat, lon);
+  boost::shared_ptr<Resampler> r =
+    Resampler::create_from_lat_lon(lat, lon, mu, 2);
+  blitz::Array<double, 2> d = swath_data(lat.rows(), lat.cols());
+  std::string msg = "subset the data with line_range and sample_range";
+  // Full swath passed by mistake
+  check_throw_msg([&]() { r->resample_field(d); }, msg);
+  check_throw_msg([&]() { r->empty_resample(d); }, msg);
+  // Off by one in either direction
+  int ls = r->swath_line_start(), nl = r->swath_number_line();
+  int ss = r->swath_sample_start(), nsm = r->swath_number_sample();
+  blitz::Array<double, 2> d1(d(Range(ls, ls + nl), Range(ss, ss + nsm - 1)));
+  check_throw_msg([&]() { r->resample_field(d1); }, msg);
+  blitz::Array<double, 2> d2(d(Range(ls, ls + nl - 1), Range(ss, ss + nsm - 2)));
+  check_throw_msg([&]() { r->resample_field(d2); }, msg);
+  blitz::Array<double, 2> dgood(d(Range(ls, ls + nl - 1),
+				  Range(ss, ss + nsm - 1)));
+  BOOST_CHECK_NO_THROW(r->resample_field(dgood));
+  BOOST_CHECK(!r->empty_resample(dgood));
+}
+
+BOOST_AUTO_TEST_CASE(create_from_lat_lon_geodetic)
+{
+  // Geodetic MapInfo, which goes through the CoordinateConverter rather
+  // than the bulk OGR transform. The swath crosses the date line, but
+  // far from the part we use, so this is fine.
+  blitz::Array<double, 2> lon, lat;
+  date_line_swath(lon, lat);
+  MapInfo mg(boost::make_shared<GeodeticConverter>(), 179.2, 11.5,
+	     179.6, 11.0, 80, 100);
+  boost::shared_ptr<Resampler> r =
+    Resampler::create_from_lat_lon(lat, lon, mg, 3);
+  BOOST_CHECK(r->swath_sample_start() + r->swath_number_sample() < 100);
+  BOOST_CHECK(r->swath_line_start() > 0);
+  blitz::Array<double, 2> d = swath_data(lat.rows(), lat.cols());
+  blitz::Array<double, 2> dsub(swath_subset(*r, d));
+  blitz::Array<double, 2> res = r->resample_field(dsub, 1.0, false, -9999.0);
+  BOOST_CHECK_EQUAL(number_with_data(res, -9999.0), res.size());
+  // A MapInfo that ends at 180 is also fine. The data past the date
+  // line is at -180, far outside the MapInfo, so it gets trimmed
+  // off and we never use the jump.
+  MapInfo mg1(boost::make_shared<GeodeticConverter>(), 179.5, 11.5,
+	      180.0, 11.0, 100, 100);
+  BOOST_CHECK_NO_THROW(Resampler::create_from_lat_lon(lat, lon, mg1, 3));
+  // A global MapInfo has data on both sides of the date line, which
+  // throws.
+  MapInfo mg2(boost::make_shared<GeodeticConverter>(), -180.0, 12.0,
+	      180.0, 10.0, 36000, 200);
+  check_throw_msg([&]() { Resampler::create_from_lat_lon(lat, lon, mg2, 3); },
+		  "Use a Geodetic360 MapInfo");
+  // Geodetic360 works for that, with longitudes in either -180 to
+  // 180 or 0 to 360.
+  MapInfo mg360(boost::make_shared<Geodetic360Converter>(), 179.8, 11.5,
+		180.3, 11.0, 100, 100);
+  blitz::Array<double, 2> lon360, lat360;
+  date_line_swath(lon360, lat360, true);
+  boost::shared_ptr<Resampler> r1 =
+    Resampler::create_from_lat_lon(lat, lon, mg360, 3);
+  boost::shared_ptr<Resampler> r2 =
+    Resampler::create_from_lat_lon(lat360, lon360, mg360, 3);
+  BOOST_CHECK(all(r1->data_index() == r2->data_index()));
+  blitz::Array<double, 2> dsub1(swath_subset(*r1, d));
+  res.reference(r1->resample_field(dsub1, 1.0, false, -9999.0));
+  BOOST_CHECK_EQUAL(number_with_data(res, -9999.0), res.size());
+}
+
+BOOST_AUTO_TEST_CASE(create_from_lat_lon_missing)
+{
+  MapInfo mu;
+  blitz::Array<double, 2> lat, lon;
+  utm_swath(mu, lat, lon);
+  boost::shared_ptr<Resampler> r0 =
+    Resampler::create_from_lat_lon(lat, lon, mu, 3);
+  // Mark a raw pixel in the middle of the used area as missing, and set
+  // its data to a value that shouldn't show up.
+  int il = r0->swath_line_start() + r0->swath_number_line() / 2;
+  int is = r0->swath_sample_start() + r0->swath_number_sample() / 2;
+  blitz::Array<double, 2> d = swath_data(lat.rows(), lat.cols());
+  d(il, is) = 1e10;
+  for(int method = 0; method < 3; ++method) {
+    BOOST_TEST_CONTEXT("method " << method) {
+      blitz::Array<double, 2> latm(lat.copy()), lonm(lon.copy());
+      double thresh = std::numeric_limits<double>::lowest();
+      if(method == 0)
+	latm(il, is) = std::numeric_limits<double>::quiet_NaN();
+      else if(method == 1)
+	lonm(il, is) = std::numeric_limits<double>::quiet_NaN();
+      else {
+	latm(il, is) = -9999;
+	thresh = -999;
+      }
+      boost::shared_ptr<Resampler> r =
+	Resampler::create_from_lat_lon(latm, lonm, mu, 3, 1, thresh);
+      BOOST_CHECK_EQUAL(r->swath_line_start(), r0->swath_line_start());
+      BOOST_CHECK_EQUAL(r->swath_sample_start(), r0->swath_sample_start());
+      blitz::Array<double, 2> dsub(swath_subset(*r, d));
+      blitz::Array<double, 2> res = r->resample_field(dsub, 1.0, false,
+						      -9999.0);
+      BOOST_CHECK(max(res) < 1e9);
+      // Every subpixel within a raw pixel of the missing point depends
+      // on it, so is missing.
+      int nmissing = 0;
+      const blitz::Array<int, 3>& di = r->data_index();
+      for(int i = 0; i < di.rows(); ++i)
+	for(int j = 0; j < di.cols(); ++j)
+	  if(di(i,j,0) == -9999)
+	    ++nmissing;
+      // The subpixels within a raw pixel of the missing point (so 5 x
+      // 5 for nsub 3, at -2/3 to 2/3 raw pixels) depend on it. The
+      // subpixels exactly one raw pixel away have a zero weight for
+      // it, so they are fine.
+      BOOST_CHECK_EQUAL(nmissing, 5 * 5);
+    }
+  }
+}
+
+BOOST_AUTO_TEST_CASE(create_from_lat_lon_no_data)
+{
+  MapInfo mu;
+  blitz::Array<double, 2> lat, lon;
+  utm_swath(mu, lat, lon);
+  MapInfo mfar(OgrCoordinateConverter::utm_converter(11), 480000.0,
+	       3800000.0, 500000.0, 3780000.0, 200, 200);
+  check_throw_msg([&]() { Resampler::create_from_lat_lon(lat, lon, mfar, 2); },
+		  "none of the swath falls in the MapInfo");
+  blitz::Array<double, 2> latn(lat.shape());
+  latn = std::numeric_limits<double>::quiet_NaN();
+  check_throw_msg([&]() { Resampler::create_from_lat_lon(latn, lon, mu, 2); },
+		  "none of the swath falls in the MapInfo");
+  check_throw_msg([&]() { Resampler::create_from_lat_lon(lat(Range(0, 10),
+				  Range::all()), lon, mu, 2); },
+		  "same size");
+}
+
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  MapInfo mu;
+  blitz::Array<double, 2> lat, lon;
+  utm_swath(mu, lat, lon, 100);
+  MapInfo msmall(OgrCoordinateConverter::utm_converter(11), 388000.0,
+		 3792000.0, 392000.0, 3788000.0, 40, 40);
+  boost::shared_ptr<Resampler> r =
+    Resampler::create_from_lat_lon(lat, lon, msmall, 2);
+  std::string d = serialize_write_string(r);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<Resampler> rr = serialize_read_string<Resampler>(d);
+  BOOST_CHECK(rr->has_swath_range());
+  BOOST_CHECK_EQUAL(rr->swath_line_start(), r->swath_line_start());
+  BOOST_CHECK_EQUAL(rr->swath_number_line(), r->swath_number_line());
+  BOOST_CHECK_EQUAL(rr->swath_sample_start(), r->swath_sample_start());
+  BOOST_CHECK_EQUAL(rr->swath_number_sample(), r->swath_number_sample());
+  BOOST_CHECK_EQUAL(rr->number_sub_pixel(), 2);
+  BOOST_CHECK(all(rr->data_index() == r->data_index()));
+
+  // A version 0 archive (before we had the swath range) should load
+  // with the default of the full swath.
+  std::string v1 = "class_name=\"GeoCal::Resampler\" tracking_level=\"1\" version=\"1\"";
+  size_t p = d.find(v1);
+  BOOST_REQUIRE(p != std::string::npos);
+  std::string d0 = d;
+  d0.replace(p, v1.size(), "class_name=\"GeoCal::Resampler\" tracking_level=\"1\" version=\"0\"");
+  for(std::string tag : {"swath_line_start", "swath_number_line",
+	"swath_sample_start", "swath_number_sample"}) {
+    size_t p1 = d0.find("<" + tag + ">");
+    size_t p2 = d0.find("</" + tag + ">");
+    BOOST_REQUIRE(p1 != std::string::npos && p2 != std::string::npos);
+    d0.erase(p1, p2 + tag.size() + 3 - p1);
+  }
+  boost::shared_ptr<Resampler> r0 = serialize_read_string<Resampler>(d0);
+  BOOST_CHECK(!r0->has_swath_range());
+  BOOST_CHECK_EQUAL(r0->swath_line_start(), 0);
+  BOOST_CHECK_EQUAL(r0->swath_number_line(), std::numeric_limits<int>::max());
+  BOOST_CHECK(all(r0->data_index() == r->data_index()));
+}
+
 BOOST_AUTO_TEST_CASE(timing)
 {
   // Timing test, normally skipped. Turn on if you want to check the
@@ -1107,11 +1556,4 @@ BOOST_AUTO_TEST_CASE(timing)
   }
 }
 
-// Don't actually test for serialization. The data is really pretty
-// big, larger than we want to write out as XML. We could possibly
-// write out binary data for some special case thing, but for now just
-// assume serialization is working if we every need it.
-// BOOST_AUTO_TEST_CASE(serialization)
-//{
-//}
 BOOST_AUTO_TEST_SUITE_END()

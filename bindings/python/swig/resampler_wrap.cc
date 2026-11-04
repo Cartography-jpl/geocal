@@ -8186,6 +8186,538 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Resampler_create_from_lat_lon__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,2 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  GeoCal::MapInfo *arg3 = 0 ;
+  int arg4 ;
+  int arg5 ;
+  double arg6 ;
+  int arg7 ;
+  blitz::Array< double,2 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared3 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  double val6 ;
+  int ecode6 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
+  boost::shared_ptr< GeoCal::Resampler > result;
+  
+  (void)self;
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_create_from_lat_lon', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_create_from_lat_lon', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 2>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_create_from_lat_lon', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_create_from_lat_lon', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Resampler_create_from_lat_lon" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Resampler_create_from_lat_lon" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp3);
+        arg3 = const_cast< GeoCal::MapInfo * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp3)->get());
+      }
+    }
+  }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Resampler_create_from_lat_lon" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Resampler_create_from_lat_lon" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "Resampler_create_from_lat_lon" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "Resampler_create_from_lat_lon" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
+  {
+    try {
+      result = GeoCal::Resampler::create_from_lat_lon((blitz::Array< double,2 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(GeoCal::MapInfo const &)*arg3,arg4,arg5,arg6,arg7);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail;
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (...) {
+      // Anything not derived from std::exception (a raw type, a
+      // third-party exception hierarchy that doesn't inherit
+      // std::exception, etc.) would otherwise propagate across the
+      // extern "C" boundary into CPython -- undefined behavior, in
+      // practice a process abort rather than a clean Python exception.
+      SWIG_exception(SWIG_RuntimeError, "unknown C++ exception");
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Resampler_create_from_lat_lon__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,2 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  GeoCal::MapInfo *arg3 = 0 ;
+  int arg4 ;
+  int arg5 ;
+  double arg6 ;
+  blitz::Array< double,2 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared3 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  double val6 ;
+  int ecode6 = 0 ;
+  boost::shared_ptr< GeoCal::Resampler > result;
+  
+  (void)self;
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_create_from_lat_lon', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_create_from_lat_lon', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 2>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_create_from_lat_lon', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_create_from_lat_lon', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Resampler_create_from_lat_lon" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Resampler_create_from_lat_lon" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp3);
+        arg3 = const_cast< GeoCal::MapInfo * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp3)->get());
+      }
+    }
+  }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Resampler_create_from_lat_lon" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Resampler_create_from_lat_lon" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "Resampler_create_from_lat_lon" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  {
+    try {
+      result = GeoCal::Resampler::create_from_lat_lon((blitz::Array< double,2 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(GeoCal::MapInfo const &)*arg3,arg4,arg5,arg6);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail;
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (...) {
+      // Anything not derived from std::exception (a raw type, a
+      // third-party exception hierarchy that doesn't inherit
+      // std::exception, etc.) would otherwise propagate across the
+      // extern "C" boundary into CPython -- undefined behavior, in
+      // practice a process abort rather than a clean Python exception.
+      SWIG_exception(SWIG_RuntimeError, "unknown C++ exception");
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Resampler_create_from_lat_lon__SWIG_2(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,2 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  GeoCal::MapInfo *arg3 = 0 ;
+  int arg4 ;
+  int arg5 ;
+  blitz::Array< double,2 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared3 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  boost::shared_ptr< GeoCal::Resampler > result;
+  
+  (void)self;
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_create_from_lat_lon', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_create_from_lat_lon', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 2>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_create_from_lat_lon', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_create_from_lat_lon', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Resampler_create_from_lat_lon" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Resampler_create_from_lat_lon" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp3);
+        arg3 = const_cast< GeoCal::MapInfo * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp3)->get());
+      }
+    }
+  }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Resampler_create_from_lat_lon" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Resampler_create_from_lat_lon" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  {
+    try {
+      result = GeoCal::Resampler::create_from_lat_lon((blitz::Array< double,2 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(GeoCal::MapInfo const &)*arg3,arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail;
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (...) {
+      // Anything not derived from std::exception (a raw type, a
+      // third-party exception hierarchy that doesn't inherit
+      // std::exception, etc.) would otherwise propagate across the
+      // extern "C" boundary into CPython -- undefined behavior, in
+      // practice a process abort rather than a clean Python exception.
+      SWIG_exception(SWIG_RuntimeError, "unknown C++ exception");
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Resampler_create_from_lat_lon__SWIG_3(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,2 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  GeoCal::MapInfo *arg3 = 0 ;
+  int arg4 ;
+  blitz::Array< double,2 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared3 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  boost::shared_ptr< GeoCal::Resampler > result;
+  
+  (void)self;
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_create_from_lat_lon', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_create_from_lat_lon', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 2>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_create_from_lat_lon', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'Resampler_create_from_lat_lon', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::MapInfo *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__MapInfo,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Resampler_create_from_lat_lon" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Resampler_create_from_lat_lon" "', argument " "3"" of type '" "GeoCal::MapInfo const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp3);
+        arg3 = const_cast< GeoCal::MapInfo * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::MapInfo * >(reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp3)->get());
+      }
+    }
+  }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Resampler_create_from_lat_lon" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    try {
+      result = GeoCal::Resampler::create_from_lat_lon((blitz::Array< double,2 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(GeoCal::MapInfo const &)*arg3,arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail;
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (...) {
+      // Anything not derived from std::exception (a raw type, a
+      // third-party exception hierarchy that doesn't inherit
+      // std::exception, etc.) would otherwise propagate across the
+      // extern "C" boundary into CPython -- undefined behavior, in
+      // practice a process abort rather than a clean Python exception.
+      SWIG_exception(SWIG_RuntimeError, "unknown C++ exception");
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Resampler_create_from_lat_lon(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[8] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args, "Resampler_create_from_lat_lon", 0, 7, argv))) SWIG_fail;
+  --argc;
+  if (argc == 4) {
+    PyObject *retobj = _wrap_Resampler_create_from_lat_lon__SWIG_3(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+  if (argc == 5) {
+    PyObject *retobj = _wrap_Resampler_create_from_lat_lon__SWIG_2(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+  if (argc == 6) {
+    PyObject *retobj = _wrap_Resampler_create_from_lat_lon__SWIG_1(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+  if (argc == 7) {
+    PyObject *retobj = _wrap_Resampler_create_from_lat_lon__SWIG_0(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+  
+fail:
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'Resampler_create_from_lat_lon'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::Resampler::create_from_lat_lon(blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,GeoCal::MapInfo const &,int,int,double,int)\n"
+    "    GeoCal::Resampler::create_from_lat_lon(blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,GeoCal::MapInfo const &,int,int,double)\n"
+    "    GeoCal::Resampler::create_from_lat_lon(blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,GeoCal::MapInfo const &,int,int)\n"
+    "    GeoCal::Resampler::create_from_lat_lon(blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,GeoCal::MapInfo const &,int)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_Resampler_clear(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Resampler *arg1 = 0 ;
@@ -12169,6 +12701,276 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Resampler__v_swath_line_start(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Resampler *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Resampler const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Resampler const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Resampler_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Resampler__v_swath_line_start" "', argument " "1"" of type '" "GeoCal::Resampler const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      arg1 = const_cast< GeoCal::Resampler * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      arg1 = const_cast< GeoCal::Resampler * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::Resampler const *)arg1)->swath_line_start();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail;
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (...) {
+      // Anything not derived from std::exception (a raw type, a
+      // third-party exception hierarchy that doesn't inherit
+      // std::exception, etc.) would otherwise propagate across the
+      // extern "C" boundary into CPython -- undefined behavior, in
+      // practice a process abort rather than a clean Python exception.
+      SWIG_exception(SWIG_RuntimeError, "unknown C++ exception");
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Resampler__v_swath_number_line(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Resampler *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Resampler const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Resampler const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Resampler_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Resampler__v_swath_number_line" "', argument " "1"" of type '" "GeoCal::Resampler const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      arg1 = const_cast< GeoCal::Resampler * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      arg1 = const_cast< GeoCal::Resampler * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::Resampler const *)arg1)->swath_number_line();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail;
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (...) {
+      // Anything not derived from std::exception (a raw type, a
+      // third-party exception hierarchy that doesn't inherit
+      // std::exception, etc.) would otherwise propagate across the
+      // extern "C" boundary into CPython -- undefined behavior, in
+      // practice a process abort rather than a clean Python exception.
+      SWIG_exception(SWIG_RuntimeError, "unknown C++ exception");
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Resampler__v_swath_sample_start(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Resampler *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Resampler const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Resampler const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Resampler_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Resampler__v_swath_sample_start" "', argument " "1"" of type '" "GeoCal::Resampler const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      arg1 = const_cast< GeoCal::Resampler * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      arg1 = const_cast< GeoCal::Resampler * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::Resampler const *)arg1)->swath_sample_start();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail;
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (...) {
+      // Anything not derived from std::exception (a raw type, a
+      // third-party exception hierarchy that doesn't inherit
+      // std::exception, etc.) would otherwise propagate across the
+      // extern "C" boundary into CPython -- undefined behavior, in
+      // practice a process abort rather than a clean Python exception.
+      SWIG_exception(SWIG_RuntimeError, "unknown C++ exception");
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Resampler__v_swath_number_sample(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Resampler *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Resampler const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Resampler const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Resampler_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Resampler__v_swath_number_sample" "', argument " "1"" of type '" "GeoCal::Resampler const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      arg1 = const_cast< GeoCal::Resampler * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      arg1 = const_cast< GeoCal::Resampler * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::Resampler const *)arg1)->swath_number_sample();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail;
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (...) {
+      // Anything not derived from std::exception (a raw type, a
+      // third-party exception hierarchy that doesn't inherit
+      // std::exception, etc.) would otherwise propagate across the
+      // extern "C" boundary into CPython -- undefined behavior, in
+      // practice a process abort rather than a clean Python exception.
+      SWIG_exception(SWIG_RuntimeError, "unknown C++ exception");
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Resampler__v_has_swath_range(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::Resampler *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Resampler const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Resampler const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Resampler_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Resampler__v_has_swath_range" "', argument " "1"" of type '" "GeoCal::Resampler const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      arg1 = const_cast< GeoCal::Resampler * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Resampler > * >(argp1);
+      arg1 = const_cast< GeoCal::Resampler * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::Resampler const *)arg1)->has_swath_range();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail;
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (...) {
+      // Anything not derived from std::exception (a raw type, a
+      // third-party exception hierarchy that doesn't inherit
+      // std::exception, etc.) would otherwise propagate across the
+      // extern "C" boundary into CPython -- undefined behavior, in
+      // practice a process abort rather than a clean Python exception.
+      SWIG_exception(SWIG_RuntimeError, "unknown C++ exception");
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Resampler___str__(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Resampler *arg1 = 0 ;
@@ -12347,10 +13149,20 @@ static PyMethodDef SwigMethods[] = {
 		"points to fall in Mi with Exactly_match_mi, you can check for that with\n"
 		"empty_resample().  \n"
 		"\n"
-		"We interpolate the coordinates with bilinear interpolation, the same as\n"
-		"MagnifyBilinear. The Fill_value_threshold is applied before interpolating, so\n"
-		"any subpixel that depends on a missing point is missing. A subpixel that falls\n"
-		"exactly on a good point is good, even if its neighbors are missing.  \n"
+		"We interpolate the coordinates to the subpixels with bilinear interpolation,\n"
+		"centered on each raw pixel (subpixel k is at raw position (k + 0.5) /\n"
+		"Num_sub_pixel - 0.5), extrapolating linearly past the outer raw pixel centers.\n"
+		"This lines up the coordinates with the data, which resample_field replicates to\n"
+		"the subpixels. The subpixel grid is number_line * Num_sub_pixel x number_sample\n"
+		"* Num_sub_pixel, the same size as the replicated data. Note that this changed in\n"
+		"GeoCal 2.0, before we used MagnifyBilinear, which is corner aligned (subpixel k\n"
+		"at raw position k / Num_sub_pixel). That put the coordinates (Num_sub_pixel - 1)\n"
+		"/ (2 Num_sub_pixel) raw pixels off from the data, and didn't use the last raw\n"
+		"line and sample.  \n"
+		"\n"
+		"The Fill_value_threshold is applied before interpolating, so any subpixel that\n"
+		"depends on a missing point is missing. A subpixel that falls exactly on a good\n"
+		"point is good, even if its neighbors are missing.  \n"
 		"\n"
 		"We check that the coordinates don't cross a discontinuity of the map projection,\n"
 		"and throw an exception if they do. For a Geodetic MapInfo, this means data\n"
@@ -12358,6 +13170,43 @@ static PyMethodDef SwigMethods[] = {
 		"crossing the prime meridian with a Geodetic360 MapInfo needs Geodetic). Data\n"
 		"covering a pole needs a polar projection, such as polar stereographic. For other\n"
 		"projections, see max_step_ratio().  \n"
+		"\n"
+		"See resample_field for a description of Number_task.  \n"
+		"\n"
+		""},
+	 { "Resampler_create_from_lat_lon", _wrap_Resampler_create_from_lat_lon, METH_VARARGS, "\n"
+		"Resampler_create_from_lat_lon(BlitzArray_double_2 Latitude, BlitzArray_double_2 Longitude, MapInfo Mi, int Num_sub_pixel, int Boundary=1, double Fill_value_threshold=std::numeric_limits< double >::lowest(), int Number_task=-1) -> boost::shared_ptr< GeoCal::Resampler >\n"
+		"\n"
+		"GeoCal::Resampler::create_from_lat_lon\n"
+		"Create a Resampler directly from the latitude and longitude (in degrees) of a\n"
+		"swath, for the given MapInfo.  \n"
+		"\n"
+		"This always matches Mi exactly (like Exactly_match_mi in the constructors).  \n"
+		"\n"
+		"Often only a small part of the swath falls in Mi (e.g., a small tile). So rather\n"
+		"than working with the full swath, we find the lines and samples that can\n"
+		"contribute to Mi, padded by Boundary raw pixels, and only use those. This range\n"
+		"is available as swath_line_start(), swath_number_line(), swath_sample_start()\n"
+		"and swath_number_sample(). The data passed to resample_field and empty_resample\n"
+		"must be subset to this range, see the class description.  \n"
+		"\n"
+		"The steps are:  \n"
+		"\n"
+		"1.  Convert the latitude and longitude to the X and Y coordinates of Mi.  \n"
+		"2.  Find the range of the swath that falls in Mi, and pad by Boundary.  \n"
+		"3.  Interpolate X and Y to Num_sub_pixel subpixels, the same way as the\n"
+		"    RasterImage constructor (centered on each raw pixel, extrapolating linearly\n"
+		"    at the edges). This matches scipy.interpolate.RegularGridInterpolator with\n"
+		"    method \"linear\" and fill_value=None.  \n"
+		"4.  Trim this to the raw pixels that have subpixels that fall in Mi.  \n"
+		"\n"
+		"A point is missing if the latitude or longitude is NaN (or <=\n"
+		"Fill_value_threshold, if given). Any subpixel that depends on a missing point is\n"
+		"missing. We throw an exception if none of the data falls in Mi.  \n"
+		"\n"
+		"As with the constructors, we check that the data doesn't cross a discontinuity\n"
+		"of the map projection (e.g., the date line for a Geodetic MapInfo). We only\n"
+		"check the part of the swath we use.  \n"
 		"\n"
 		"See resample_field for a description of Number_task.  \n"
 		"\n"
@@ -12463,6 +13312,55 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"GeoCal::Resampler::number_sub_pixel\n"
 		""},
+	 { "Resampler__v_swath_line_start", _wrap_Resampler__v_swath_line_start, METH_O, "\n"
+		"Resampler__v_swath_line_start(Resampler self) -> int\n"
+		"\n"
+		"GeoCal::Resampler::swath_line_start\n"
+		"The first line of the swath that the data passed to resample_field should start\n"
+		"at.  \n"
+		"\n"
+		"See the class description, this is 0 unless we were created with\n"
+		"create_from_lat_lon.  \n"
+		"\n"
+		""},
+	 { "Resampler__v_swath_number_line", _wrap_Resampler__v_swath_number_line, METH_O, "\n"
+		"Resampler__v_swath_number_line(Resampler self) -> int\n"
+		"\n"
+		"GeoCal::Resampler::swath_number_line\n"
+		"The number of lines of the swath that the data passed to resample_field should\n"
+		"have.  \n"
+		"\n"
+		"See the class description, this is std::numeric_limits<int>::max() (i.e., all\n"
+		"the data) unless we were created with create_from_lat_lon.  \n"
+		"\n"
+		""},
+	 { "Resampler__v_swath_sample_start", _wrap_Resampler__v_swath_sample_start, METH_O, "\n"
+		"Resampler__v_swath_sample_start(Resampler self) -> int\n"
+		"\n"
+		"GeoCal::Resampler::swath_sample_start\n"
+		"The first sample of the swath that the data passed to resample_field should\n"
+		"start at.  \n"
+		"\n"
+		"See swath_line_start.  \n"
+		"\n"
+		""},
+	 { "Resampler__v_swath_number_sample", _wrap_Resampler__v_swath_number_sample, METH_O, "\n"
+		"Resampler__v_swath_number_sample(Resampler self) -> int\n"
+		"\n"
+		"GeoCal::Resampler::swath_number_sample\n"
+		"The number of samples of the swath that the data passed to resample_field should\n"
+		"have.  \n"
+		"\n"
+		"See swath_number_line.  \n"
+		"\n"
+		""},
+	 { "Resampler__v_has_swath_range", _wrap_Resampler__v_has_swath_range, METH_O, "\n"
+		"Resampler__v_has_swath_range(Resampler self) -> bool\n"
+		"\n"
+		"GeoCal::Resampler::has_swath_range\n"
+		"True if we only cover part of the swath, see the class description.  \n"
+		"\n"
+		""},
 	 { "Resampler___str__", _wrap_Resampler___str__, METH_O, "Resampler___str__(Resampler self) -> std::string"},
 	 { "delete_Resampler", _wrap_delete_Resampler, METH_O, "\n"
 		"delete_Resampler(Resampler self)\n"
@@ -12534,10 +13432,20 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"points to fall in Mi with Exactly_match_mi, you can check for that with\n"
 		"empty_resample().  \n"
 		"\n"
-		"We interpolate the coordinates with bilinear interpolation, the same as\n"
-		"MagnifyBilinear. The Fill_value_threshold is applied before interpolating, so\n"
-		"any subpixel that depends on a missing point is missing. A subpixel that falls\n"
-		"exactly on a good point is good, even if its neighbors are missing.  \n"
+		"We interpolate the coordinates to the subpixels with bilinear interpolation,\n"
+		"centered on each raw pixel (subpixel k is at raw position (k + 0.5) /\n"
+		"Num_sub_pixel - 0.5), extrapolating linearly past the outer raw pixel centers.\n"
+		"This lines up the coordinates with the data, which resample_field replicates to\n"
+		"the subpixels. The subpixel grid is number_line * Num_sub_pixel x number_sample\n"
+		"* Num_sub_pixel, the same size as the replicated data. Note that this changed in\n"
+		"GeoCal 2.0, before we used MagnifyBilinear, which is corner aligned (subpixel k\n"
+		"at raw position k / Num_sub_pixel). That put the coordinates (Num_sub_pixel - 1)\n"
+		"/ (2 Num_sub_pixel) raw pixels off from the data, and didn't use the last raw\n"
+		"line and sample.  \n"
+		"\n"
+		"The Fill_value_threshold is applied before interpolating, so any subpixel that\n"
+		"depends on a missing point is missing. A subpixel that falls exactly on a good\n"
+		"point is good, even if its neighbors are missing.  \n"
 		"\n"
 		"We check that the coordinates don't cross a discontinuity of the map projection,\n"
 		"and throw an exception if they do. For a Geodetic MapInfo, this means data\n"
@@ -12545,6 +13453,43 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"crossing the prime meridian with a Geodetic360 MapInfo needs Geodetic). Data\n"
 		"covering a pole needs a polar projection, such as polar stereographic. For other\n"
 		"projections, see max_step_ratio().  \n"
+		"\n"
+		"See resample_field for a description of Number_task.  \n"
+		"\n"
+		""},
+	 { "Resampler_create_from_lat_lon", _wrap_Resampler_create_from_lat_lon, METH_VARARGS, "\n"
+		"create_from_lat_lon(BlitzArray_double_2 Latitude, BlitzArray_double_2 Longitude, MapInfo Mi, int Num_sub_pixel, int Boundary=1, double Fill_value_threshold=std::numeric_limits< double >::lowest(), int Number_task=-1) -> boost::shared_ptr< GeoCal::Resampler >\n"
+		"\n"
+		"GeoCal::Resampler::create_from_lat_lon\n"
+		"Create a Resampler directly from the latitude and longitude (in degrees) of a\n"
+		"swath, for the given MapInfo.  \n"
+		"\n"
+		"This always matches Mi exactly (like Exactly_match_mi in the constructors).  \n"
+		"\n"
+		"Often only a small part of the swath falls in Mi (e.g., a small tile). So rather\n"
+		"than working with the full swath, we find the lines and samples that can\n"
+		"contribute to Mi, padded by Boundary raw pixels, and only use those. This range\n"
+		"is available as swath_line_start(), swath_number_line(), swath_sample_start()\n"
+		"and swath_number_sample(). The data passed to resample_field and empty_resample\n"
+		"must be subset to this range, see the class description.  \n"
+		"\n"
+		"The steps are:  \n"
+		"\n"
+		"1.  Convert the latitude and longitude to the X and Y coordinates of Mi.  \n"
+		"2.  Find the range of the swath that falls in Mi, and pad by Boundary.  \n"
+		"3.  Interpolate X and Y to Num_sub_pixel subpixels, the same way as the\n"
+		"    RasterImage constructor (centered on each raw pixel, extrapolating linearly\n"
+		"    at the edges). This matches scipy.interpolate.RegularGridInterpolator with\n"
+		"    method \"linear\" and fill_value=None.  \n"
+		"4.  Trim this to the raw pixels that have subpixels that fall in Mi.  \n"
+		"\n"
+		"A point is missing if the latitude or longitude is NaN (or <=\n"
+		"Fill_value_threshold, if given). Any subpixel that depends on a missing point is\n"
+		"missing. We throw an exception if none of the data falls in Mi.  \n"
+		"\n"
+		"As with the constructors, we check that the data doesn't cross a discontinuity\n"
+		"of the map projection (e.g., the date line for a Geodetic MapInfo). We only\n"
+		"check the part of the swath we use.  \n"
 		"\n"
 		"See resample_field for a description of Number_task.  \n"
 		"\n"
@@ -12649,6 +13594,55 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"_v_number_sub_pixel(Resampler self) -> int\n"
 		"\n"
 		"GeoCal::Resampler::number_sub_pixel\n"
+		""},
+	 { "Resampler__v_swath_line_start", _wrap_Resampler__v_swath_line_start, METH_O, "\n"
+		"_v_swath_line_start(Resampler self) -> int\n"
+		"\n"
+		"GeoCal::Resampler::swath_line_start\n"
+		"The first line of the swath that the data passed to resample_field should start\n"
+		"at.  \n"
+		"\n"
+		"See the class description, this is 0 unless we were created with\n"
+		"create_from_lat_lon.  \n"
+		"\n"
+		""},
+	 { "Resampler__v_swath_number_line", _wrap_Resampler__v_swath_number_line, METH_O, "\n"
+		"_v_swath_number_line(Resampler self) -> int\n"
+		"\n"
+		"GeoCal::Resampler::swath_number_line\n"
+		"The number of lines of the swath that the data passed to resample_field should\n"
+		"have.  \n"
+		"\n"
+		"See the class description, this is std::numeric_limits<int>::max() (i.e., all\n"
+		"the data) unless we were created with create_from_lat_lon.  \n"
+		"\n"
+		""},
+	 { "Resampler__v_swath_sample_start", _wrap_Resampler__v_swath_sample_start, METH_O, "\n"
+		"_v_swath_sample_start(Resampler self) -> int\n"
+		"\n"
+		"GeoCal::Resampler::swath_sample_start\n"
+		"The first sample of the swath that the data passed to resample_field should\n"
+		"start at.  \n"
+		"\n"
+		"See swath_line_start.  \n"
+		"\n"
+		""},
+	 { "Resampler__v_swath_number_sample", _wrap_Resampler__v_swath_number_sample, METH_O, "\n"
+		"_v_swath_number_sample(Resampler self) -> int\n"
+		"\n"
+		"GeoCal::Resampler::swath_number_sample\n"
+		"The number of samples of the swath that the data passed to resample_field should\n"
+		"have.  \n"
+		"\n"
+		"See swath_number_line.  \n"
+		"\n"
+		""},
+	 { "Resampler__v_has_swath_range", _wrap_Resampler__v_has_swath_range, METH_O, "\n"
+		"_v_has_swath_range(Resampler self) -> bool\n"
+		"\n"
+		"GeoCal::Resampler::has_swath_range\n"
+		"True if we only cover part of the swath, see the class description.  \n"
+		"\n"
 		""},
 	 { "Resampler___str__", _wrap_Resampler___str__, METH_O, "__str__(Resampler self) -> std::string"},
 	 { "delete_Resampler", _wrap_delete_Resampler, METH_O, "\n"

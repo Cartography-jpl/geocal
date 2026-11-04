@@ -151,6 +151,33 @@ class Resampler(geocal_swig.generic_object.GenericObject):
     But if this becomes an issue, we can revisit this and make this code more
     efficient - but for now this doesn't seem to be worth the effort.  
 
+    A Resampler created with create_from_lat_lon only covers part of the swath, the
+    lines and samples that can contribute to the MapInfo (has_swath_range() is
+    true). The data passed to resample_field and empty_resample must then already be
+    subset to swath_line_start() to swath_line_start() + swath_number_line() - 1,
+    and swath_sample_start() to swath_sample_start() + swath_number_sample() - 1 of
+    the full swath. We do this rather than passing the full swath so that only the
+    part of each field we use needs to be read from the file (e.g., for a PACE OCI
+    granule going to a small tile, this is often a small part of the swath). In
+    python, line_range and sample_range give this as a slice:  
+
+        r = Resampler.create_from_lat_lon(lat, lon, mi, 15)
+        d = geo["solar_zenith"].isel(scans=r.line_range,
+                                     pixels=r.sample_range)
+        res = r.resample_field(d.values)  
+
+    For the other constructors, the range is the full swath (start 0, number
+    std::numeric_limits<int>::max()), so the line_range and sample_range in python
+    select all the data, and you can always cut with them.  
+
+    Note that resample_field replicates the data, so the Nsub subpixels k = i *
+    Nsub, ..., i * Nsub + Nsub - 1 all get raw pixel i. For the result to be in the
+    right place, the coordinates of those subpixels should be centered on raw pixel
+    i, i.e., subpixel k at raw position (k + 0.5) / Nsub - 0.5. The RasterImage
+    constructor and create_from_lat_lon do this. With the array constructor, this is
+    up to the caller. See that constructor for a warning about scipy.ndimage.zoom,
+    which doesn't do this.  
+
     C++ includes: resampler.h
 
     """
@@ -195,10 +222,20 @@ class Resampler(geocal_swig.generic_object.GenericObject):
         points to fall in Mi with Exactly_match_mi, you can check for that with
         empty_resample().  
 
-        We interpolate the coordinates with bilinear interpolation, the same as
-        MagnifyBilinear. The Fill_value_threshold is applied before interpolating, so
-        any subpixel that depends on a missing point is missing. A subpixel that falls
-        exactly on a good point is good, even if its neighbors are missing.  
+        We interpolate the coordinates to the subpixels with bilinear interpolation,
+        centered on each raw pixel (subpixel k is at raw position (k + 0.5) /
+        Num_sub_pixel - 0.5), extrapolating linearly past the outer raw pixel centers.
+        This lines up the coordinates with the data, which resample_field replicates to
+        the subpixels. The subpixel grid is number_line * Num_sub_pixel x number_sample
+        * Num_sub_pixel, the same size as the replicated data. Note that this changed in
+        GeoCal 2.0, before we used MagnifyBilinear, which is corner aligned (subpixel k
+        at raw position k / Num_sub_pixel). That put the coordinates (Num_sub_pixel - 1)
+        / (2 Num_sub_pixel) raw pixels off from the data, and didn't use the last raw
+        line and sample.  
+
+        The Fill_value_threshold is applied before interpolating, so any subpixel that
+        depends on a missing point is missing. A subpixel that falls exactly on a good
+        point is good, even if its neighbors are missing.  
 
         We check that the coordinates don't cross a discontinuity of the map projection,
         and throw an exception if they do. For a Geodetic MapInfo, this means data
@@ -211,6 +248,7 @@ class Resampler(geocal_swig.generic_object.GenericObject):
 
         """
         _resampler.Resampler_swiginit(self, _resampler.new_Resampler(*args))
+    create_from_lat_lon = _swig_new_static_method(_resampler.Resampler_create_from_lat_lon)
     clear = _swig_new_instance_method(_resampler.Resampler_clear)
     determine_range = _swig_new_static_method(_resampler.Resampler_determine_range)
     max_step_ratio = _swig_new_static_method(_resampler.Resampler_max_step_ratio)
@@ -229,6 +267,57 @@ class Resampler(geocal_swig.generic_object.GenericObject):
     @property
     def number_sub_pixel(self):
         return self._v_number_sub_pixel()
+
+    _v_swath_line_start = _swig_new_instance_method(_resampler.Resampler__v_swath_line_start)
+
+    @property
+    def swath_line_start(self):
+        return self._v_swath_line_start()
+
+    _v_swath_number_line = _swig_new_instance_method(_resampler.Resampler__v_swath_number_line)
+
+    @property
+    def swath_number_line(self):
+        return self._v_swath_number_line()
+
+    _v_swath_sample_start = _swig_new_instance_method(_resampler.Resampler__v_swath_sample_start)
+
+    @property
+    def swath_sample_start(self):
+        return self._v_swath_sample_start()
+
+    _v_swath_number_sample = _swig_new_instance_method(_resampler.Resampler__v_swath_number_sample)
+
+    @property
+    def swath_number_sample(self):
+        return self._v_swath_number_sample()
+
+    _v_has_swath_range = _swig_new_instance_method(_resampler.Resampler__v_has_swath_range)
+
+    @property
+    def has_swath_range(self):
+        return self._v_has_swath_range()
+
+
+    @property
+    def line_range(self) -> slice:
+        '''Slice of the swath lines that the data passed to resample_field
+        should be subset to. This is all the lines if we don't have a
+        swath range.'''
+        if not self.has_swath_range:
+            return slice(0, None)
+        return slice(self.swath_line_start,
+                     self.swath_line_start + self.swath_number_line)
+
+    @property
+    def sample_range(self) -> slice:
+        '''Slice of the swath samples that the data passed to resample_field
+        should be subset to. This is all the samples if we don't have a
+        swath range.'''
+        if not self.has_swath_range:
+            return slice(0, None)
+        return slice(self.swath_sample_start,
+                     self.swath_sample_start + self.swath_number_sample)
 
     __str__ = _swig_new_instance_method(_resampler.Resampler___str__)
 

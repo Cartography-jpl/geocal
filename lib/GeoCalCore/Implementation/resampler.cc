@@ -23,10 +23,95 @@ void Resampler::serialize(Archive & ar, const unsigned int version)
   ar & GEOCAL_NVP(mi)
     & GEOCAL_NVP(nsub)
     & GEOCAL_NVP_(data_index);
+  // Version 0 didn't have a swath range, which is the same as the
+  // default of the full swath set by the default constructor.
+  if(version > 0)
+    ar & GEOCAL_NVP_(swath_line_start)
+      & GEOCAL_NVP_(swath_number_line)
+      & GEOCAL_NVP_(swath_sample_start)
+      & GEOCAL_NVP_(swath_number_sample);
 }
 
 GEOCAL_IMPLEMENT(Resampler);
 #endif
+
+namespace GeoCal {
+//-------------------------------------------------------------------------
+/// Bilinear interpolation of raw X and Y coordinates to Nsub
+/// subpixels, used by Resampler. resample_field replicates each raw
+/// pixel of the data to Nsub x Nsub subpixels, so the coordinates of
+/// subpixel k should be centered on raw pixel k / Nsub: subpixel k is at
+/// raw position (k + 0.5) / Nsub - 0.5. We linearly extrapolate past
+/// the outer raw pixel centers (the cell index is clamped to the
+/// edges). This matches scipy.interpolate.RegularGridInterpolator with
+/// method "linear" and fill_value=None.
+///
+/// A missing (NaN) raw point makes the subpixels that depend on it
+/// NaN. Terms with a zero weight are skipped, so a subpixel that falls
+/// exactly on a good point (or the line between good points) is good,
+/// even if a neighbor is missing.
+///
+/// This just does arithmetic, so it can be called from several
+/// threads at once.
+//-------------------------------------------------------------------------
+
+class ResamplerInterpolate {
+public:
+  ResamplerInterpolate(const blitz::Array<double, 2>& X,
+		       const blitz::Array<double, 2>& Y, int Nsub)
+    : x(X), y(Y), nl(X.rows()), ns(X.cols())
+  {
+    setup(nl, Nsub, lcell, lfrac);
+    setup(ns, Nsub, scell, sfrac);
+  }
+  int number_row() const { return (int) lcell.size(); }
+  int number_col() const { return (int) scell.size(); }
+  void operator()(int I, int J, double& X, double& Y) const
+  {
+    X = interp(x, lcell[I], scell[J], lfrac[I], sfrac[J]);
+    Y = interp(y, lcell[I], scell[J], lfrac[I], sfrac[J]);
+  }
+private:
+  static void setup(int N, int Nsub, std::vector<int>& Cell,
+		    std::vector<double>& Frac)
+  {
+    Cell.resize(N * Nsub);
+    Frac.resize(N * Nsub);
+    for(int k = 0; k < N * Nsub; ++k) {
+      double p = (k + 0.5) / Nsub - 0.5;
+      // With a single line or sample, we can't interpolate, so we just
+      // use the raw values in that direction.
+      int c = (N < 2 ? 0 : std::min(std::max((int) std::floor(p), 0), N - 2));
+      Cell[k] = c;
+      Frac[k] = (N < 2 ? 0.0 : p - c);
+    }
+  }
+  double interp(const blitz::Array<double, 2>& A, int iy, int ix,
+		double ty, double tx) const
+  {
+    int iy1 = (nl < 2 ? iy : iy + 1);
+    int ix1 = (ns < 2 ? ix : ix + 1);
+    double v = 0;
+    double w = (1 - ty) * (1 - tx);
+    if(w != 0)
+      v = v + A(iy, ix) * w;
+    w = (1 - ty) * tx;
+    if(w != 0)
+      v = v + A(iy, ix1) * w;
+    w = ty * (1 - tx);
+    if(w != 0)
+      v = v + A(iy1, ix) * w;
+    w = ty * tx;
+    if(w != 0)
+      v = v + A(iy1, ix1) * w;
+    return v;
+  }
+  blitz::Array<double, 2> x, y;
+  int nl, ns;
+  std::vector<int> lcell, scell;
+  std::vector<double> lfrac, sfrac;
+};
+}
 
 //-------------------------------------------------------------------------
 /// Constructor. This takes the latitude (Y) and longitude (X) fields as
@@ -63,11 +148,23 @@ GEOCAL_IMPLEMENT(Resampler);
 /// none of the points to fall in Mi with Exactly_match_mi, you can
 /// check for that with empty_resample().
 ///
-/// We interpolate the coordinates with bilinear interpolation, the
-/// same as MagnifyBilinear. The Fill_value_threshold is applied
-/// before interpolating, so any subpixel that depends on a missing
-/// point is missing. A subpixel that falls exactly on a good point is
-/// good, even if its neighbors are missing.
+/// We interpolate the coordinates to the subpixels with bilinear
+/// interpolation, centered on each raw pixel (subpixel k is at raw
+/// position (k + 0.5) / Num_sub_pixel - 0.5), extrapolating linearly
+/// past the outer raw pixel centers. This lines up the coordinates with
+/// the data, which resample_field replicates to the subpixels. The
+/// subpixel grid is number_line * Num_sub_pixel x number_sample *
+/// Num_sub_pixel, the same size as the replicated data. Note that this
+/// changed in GeoCal 2.0, before we used MagnifyBilinear, which is
+/// corner aligned (subpixel k at raw position k / Num_sub_pixel). That
+/// put the coordinates (Num_sub_pixel - 1) / (2 Num_sub_pixel) raw
+/// pixels off from the data, and didn't use the last raw line and
+/// sample.
+///
+/// The Fill_value_threshold is applied before interpolating, so any
+/// subpixel that depends on a missing point is missing. A subpixel that
+/// falls exactly on a good point is good, even if its neighbors are
+/// missing.
 ///
 /// We check that the coordinates don't cross a discontinuity of the
 /// map projection, and throw an exception if they do. For a Geodetic
@@ -88,23 +185,12 @@ Resampler::Resampler
   : nsub(Num_sub_pixel)
 {
   range_min_check(Num_sub_pixel, 1);
-  // We interpolate the coordinates as we go, rather than creating
-  // the full size interpolated arrays. This gives exactly the same
-  // values as MagnifyBilinear (which we used to use): subpixel i is
-  // at raw position i / nsub, so the interpolated arrays are
-  // (number_line - 1) * nsub x (number_sample - 1) * nsub, and we
-  // never need to extrapolate.
   blitz::Array<double, 2> x = X_coor->read_double(0, 0, X_coor->number_line(),
 						  X_coor->number_sample());
   blitz::Array<double, 2> y = Y_coor->read_double(0, 0, Y_coor->number_line(),
 						  Y_coor->number_sample());
   if(x.rows() != y.rows() || x.cols() != y.cols())
     throw Exception("X_coor and Y_coor need to be the same size");
-  int nrow = std::max(x.rows() - 1, 0) * nsub;
-  int ncol = std::max(x.cols() - 1, 0) * nsub;
-  std::vector<double> frac(nsub);
-  for(int k = 0; k < nsub; ++k)
-    frac[k] = 1.0 / nsub * k;
   // Mark fill as NaN before interpolating, so it carries through to
   // every subpixel that depends on it.
   const double nan = std::numeric_limits<double>::quiet_NaN();
@@ -114,37 +200,29 @@ Resampler::Resampler
 	x(i,j) = nan;
 	y(i,j) = nan;
       }
-  // Bilinear interpolation of A at raw position (iy + ln, ix + smp).
-  // This uses the same order of operations as MagnifyBilinear, so we
-  // get identical results. Terms with a zero weight are skipped, so a
-  // NaN neighbor doesn't make the subpixel NaN (0 * NaN is NaN).
-  auto interp = [](const blitz::Array<double, 2>& A, int iy, int ix,
-		   double ln, double smp) -> double
-  {
-    double res = A(iy,ix) * (1 - ln) * (1 - smp);
-    if(smp != 0)
-      res += A(iy, ix + 1) * (1 - ln) * smp;
-    if(ln != 0)
-      res += A(iy + 1, ix) * ln * (1 - smp);
-    if(ln != 0 && smp != 0)
-      res += A(iy + 1, ix + 1) * ln * smp;
-    return res;
-  };
-  auto coor = [&x, &y, &frac, &interp, this](int i, int j, double& X, double& Y)
-  {
-    int iy = i / nsub, ix = j / nsub;
-    double ln = frac[i % nsub], smp = frac[j % nsub];
-    X = interp(x, iy, ix, ln, smp);
-    Y = interp(y, iy, ix, ln, smp);
-  };
-  init(nrow, ncol, coor, Mi, Exactly_match_mi, Fill_value_threshold,
-       Number_task);
+  // We interpolate the coordinates as we go, rather than creating
+  // the full size interpolated arrays.
+  ResamplerInterpolate coor(x, y, nsub);
+  init(coor.number_row(), coor.number_col(), coor, Mi, Exactly_match_mi,
+       Fill_value_threshold, Number_task);
 }
 
 //-------------------------------------------------------------------------
 /// Alternative constructor where we get the lat/lon from something
-/// other than a file. The data should already be interpolated (e.g.,
-/// in python do scipy.ndimage.zoom(t, Num_sub_pixel, order=1)).
+/// other than a file. The data should already be interpolated to the
+/// subpixels.
+///
+/// resample_field replicates each raw pixel of the data to
+/// Num_sub_pixel x Num_sub_pixel subpixels, so for the data to end up
+/// in the right place, subpixel k should be at raw position
+/// (k + 0.5) / Num_sub_pixel - 0.5 (centered on the raw pixel),
+/// as the RasterImage constructor and create_from_lat_lon do. Note
+/// that scipy.ndimage.zoom(t, Num_sub_pixel, order=1) does *not* do
+/// this, it puts the first and last subpixel on the first and last raw
+/// pixel. That gives an error of up to (Num_sub_pixel - 1) / (2
+/// Num_sub_pixel) raw pixels at the edges of the swath (0 in the
+/// middle). scipy.ndimage.zoom with grid_mode=True, mode="nearest"
+/// is centered, but doesn't extrapolate at the edges.
 ///
 /// A point is missing if either X or Y is NaN, or <=
 /// Fill_value_threshold if that is given. Since the data is already
@@ -180,6 +258,203 @@ Resampler::Resampler
   };
   init(X_coor_interpolated.rows(), X_coor_interpolated.cols(), coor, Mi,
        Exactly_match_mi, Fill_value_threshold, Number_task);
+}
+
+//-------------------------------------------------------------------------
+/// Create a Resampler directly from the latitude and longitude (in
+/// degrees) of a swath, for the given MapInfo. This always matches Mi
+/// exactly (like Exactly_match_mi in the constructors).
+///
+/// Often only a small part of the swath falls in Mi (e.g., a small
+/// tile). So rather than working with the full swath, we find the
+/// lines and samples that can contribute to Mi, padded by Boundary raw
+/// pixels, and only use those. This range is available as
+/// swath_line_start(), swath_number_line(), swath_sample_start()
+/// and swath_number_sample(). The data passed to resample_field and
+/// empty_resample must be subset to this range, see the class
+/// description.
+///
+/// The steps are:
+/// 1. Convert the latitude and longitude to the X and Y coordinates of
+///    Mi.
+/// 2. Find the range of the swath that falls in Mi, and pad by
+///    Boundary.
+/// 3. Interpolate X and Y to Num_sub_pixel subpixels, the same way
+///    as the RasterImage constructor (centered on each raw pixel,
+///    extrapolating linearly at the edges). This matches
+///    scipy.interpolate.RegularGridInterpolator with method "linear"
+///    and fill_value=None.
+/// 4. Trim this to the raw pixels that have subpixels that fall in Mi.
+///
+/// A point is missing if the latitude or longitude is NaN (or <=
+/// Fill_value_threshold, if given). Any subpixel that depends on a
+/// missing point is missing. We throw an exception if none of the data
+/// falls in Mi.
+///
+/// As with the constructors, we check that the data doesn't cross a
+/// discontinuity of the map projection (e.g., the date line for a
+/// Geodetic MapInfo). We only check the part of the swath we use.
+///
+/// See resample_field for a description of Number_task.
+//-------------------------------------------------------------------------
+
+boost::shared_ptr<Resampler> Resampler::create_from_lat_lon
+(const blitz::Array<double, 2>& Latitude,
+ const blitz::Array<double, 2>& Longitude,
+ const MapInfo& Mi, int Num_sub_pixel, int Boundary,
+ double Fill_value_threshold, int Number_task)
+{
+  range_min_check(Num_sub_pixel, 1);
+  range_min_check(Boundary, 0);
+  if(Latitude.rows() != Longitude.rows() ||
+     Latitude.cols() != Longitude.cols())
+    throw Exception("Latitude and Longitude need to be the same size");
+  int nline = Latitude.rows();
+  int nsamp = Latitude.cols();
+  const double nan = std::numeric_limits<double>::quiet_NaN();
+
+  // Step 1, convert to X and Y. The CoordinateConverter isn't thread
+  // safe in general, so we do this in one thread. This is only the
+  // raw pixels, so it is fast enough.
+  blitz::Array<double, 2> x(nline, nsamp), y(nline, nsamp);
+  for(int i = 0; i < nline; ++i)
+    for(int j = 0; j < nsamp; ++j) {
+      x(i,j) = Longitude(i,j);
+      y(i,j) = Latitude(i,j);
+      if(!(x(i,j) > Fill_value_threshold && y(i,j) > Fill_value_threshold)) {
+	x(i,j) = nan;
+	y(i,j) = nan;
+      }
+    }
+  bool done = false;
+#ifdef HAVE_GDAL
+  const OgrCoordinateConverter* oc =
+    dynamic_cast<const OgrCoordinateConverter*>(&Mi.coordinate_converter());
+  if(oc && oc->ogr().inverse_transform() && x.size() > 0) {
+    // Bulk transform, which is much faster than doing each point. This
+    // is the same as OgrWrapper::lat_lon_coordinate_convert.
+    blitz::Array<double, 2> xc(x.copy()), yc(y.copy());
+    std::vector<int> success(x.size(), 0);
+    // Note that operation Transform really is const, this just doesn't
+    // have the right signature in GDAL.
+    const_cast<OGRCoordinateTransformation*>(oc->ogr().inverse_transform())->
+      Transform(x.size(), xc.dataFirst(), yc.dataFirst(), nullptr,
+		success.data());
+    int k = 0;
+    for(int i = 0; i < nline; ++i)
+      for(int j = 0; j < nsamp; ++j, ++k) {
+	bool ok = success[k] && !std::isnan(x(i,j));
+	x(i,j) = (ok ? xc(i,j) : nan);
+	y(i,j) = (ok ? yc(i,j) : nan);
+      }
+    done = true;
+  }
+#endif
+  if(!done) {
+    for(int i = 0; i < nline; ++i)
+      for(int j = 0; j < nsamp; ++j) {
+	if(std::isnan(x(i,j)))
+	  continue;
+	double lon = x(i,j);
+	if(lon > 180)
+	  lon -= 360;
+	double z;
+	Mi.coordinate_converter().convert_to_coordinate
+	  (Geodetic(y(i,j), lon), x(i,j), y(i,j), z);
+      }
+  }
+
+  // Step 2, range of the swath that falls in Mi. We don't check for a
+  // discontinuity here, since we don't care about the part of the swath
+  // we don't use (e.g., a swath crossing the date line far from a
+  // Geodetic MapInfo is fine). We check the part we use in init.
+  int ls, le, ss, se;
+  range_in_mi(x, y, Mi, 1, ls, le, ss, se,
+	      std::numeric_limits<double>::lowest(), false);
+  if(le < ls || se < ss) {
+    Exception e;
+    e << "Resampler::create_from_lat_lon: none of the swath falls in the "
+      << "MapInfo.";
+    throw e;
+  }
+  int l0 = std::max(ls - Boundary, 0);
+  int l1 = std::min(le + Boundary, nline - 1);
+  int s0 = std::max(ss - Boundary, 0);
+  int s1 = std::min(se + Boundary, nsamp - 1);
+
+  blitz::Array<double, 2> xs(x(blitz::Range(l0, l1), blitz::Range(s0, s1)));
+  blitz::Array<double, 2> ys(y(blitz::Range(l0, l1), blitz::Range(s0, s1)));
+  int nsub = Num_sub_pixel;
+  ResamplerInterpolate interp(xs, ys, nsub);
+  // Coordinates of subpixel (I, J), relative to subpixel (Ioff, Joff)
+  // of the subset.
+  int ioff = 0, joff = 0;
+  auto coor = [&](int i, int j, double& X, double& Y)
+  {
+    interp(i + ioff, j + joff, X, Y);
+  };
+
+  // Step 3, bounding box of the subpixels that fall in Mi. We don't
+  // store anything else, init recalculates the coordinates.
+  int nrow = interp.number_row();
+  int ncol = interp.number_col();
+  int ntask = default_number_task((long) nrow * ncol, Number_task);
+  double nline_mi = Mi.number_y_pixel();
+  double nsamp_mi = Mi.number_x_pixel();
+  struct Range {
+    int lstart, lend, sstart, send;
+  };
+  std::vector<Range> trange(std::max(std::min(ntask, nrow), 1),
+			    Range{nrow, -1, ncol, -1});
+  parallel_row_blocks(nrow, ntask,
+    [&](int k, int istart, int iend)
+    {
+      Range r{nrow, -1, ncol, -1};
+      for(int i = istart; i < iend; ++i)
+	for(int j = 0; j < ncol; ++j) {
+	  double xv, yv, xindex, yindex;
+	  coor(i, j, xv, yv);
+	  Mi.coordinate_to_index(xv, yv, xindex, yindex);
+	  // Same as the range check in determine_range, NaN fails it.
+	  if(yindex > -0.5 && yindex < nline_mi - 0.5 &&
+	     xindex > -0.5 && xindex < nsamp_mi - 0.5) {
+	    r.lstart = std::min(r.lstart, i);
+	    r.lend = std::max(r.lend, i);
+	    r.sstart = std::min(r.sstart, j);
+	    r.send = std::max(r.send, j);
+	  }
+	}
+      trange[k] = r;
+    });
+  Range rt{nrow, -1, ncol, -1};
+  for(const auto& r : trange) {
+    rt.lstart = std::min(rt.lstart, r.lstart);
+    rt.lend = std::max(rt.lend, r.lend);
+    rt.sstart = std::min(rt.sstart, r.sstart);
+    rt.send = std::max(rt.send, r.send);
+  }
+  if(rt.lend < rt.lstart || rt.send < rt.sstart) {
+    Exception e;
+    e << "Resampler::create_from_lat_lon: none of the swath falls in the "
+      << "MapInfo.";
+    throw e;
+  }
+
+  // Step 4, trim to the raw pixels that contain these subpixels, and
+  // fill in data_index.
+  int r0 = rt.lstart / nsub, r1 = rt.lend / nsub;
+  int c0 = rt.sstart / nsub, c1 = rt.send / nsub;
+  ioff = r0 * nsub;
+  joff = c0 * nsub;
+  boost::shared_ptr<Resampler> res(new Resampler());
+  res->nsub = nsub;
+  res->init((r1 - r0 + 1) * nsub, (c1 - c0 + 1) * nsub, coor, Mi, true,
+	    std::numeric_limits<double>::lowest(), Number_task);
+  res->swath_line_start_ = l0 + r0;
+  res->swath_number_line_ = r1 - r0 + 1;
+  res->swath_sample_start_ = s0 + c0;
+  res->swath_number_sample_ = c1 - c0 + 1;
+  return res;
 }
 
 //-------------------------------------------------------------------------
@@ -653,6 +928,21 @@ void Resampler::determine_range(const blitz::Array<double, 2>& X_coor_interpolat
 				int& lstart, int& lend, int& sstart, int& send,
 				double Fill_value_threshold)
 {
+  range_in_mi(X_coor_interpolated, Y_coor_interpolated, Mi, Num_sub_pixel,
+	      lstart, lend, sstart, send, Fill_value_threshold, true);
+}
+
+//-------------------------------------------------------------------------
+/// Implementation of determine_range. Check says if we check for
+/// crossing a discontinuity of the map projection.
+//-------------------------------------------------------------------------
+
+void Resampler::range_in_mi(const blitz::Array<double, 2>& X_coor_interpolated,
+			    const blitz::Array<double, 2>& Y_coor_interpolated,
+			    const MapInfo& Mi, int Num_sub_pixel,
+			    int& lstart, int& lend, int& sstart, int& send,
+			    double Fill_value_threshold, bool Check)
+{
   if(X_coor_interpolated.rows() != Y_coor_interpolated.rows() ||
      X_coor_interpolated.cols() != Y_coor_interpolated.cols())
     throw Exception("X_coor_interpolated and Y_coor_interpolated need to be the same size");
@@ -664,6 +954,7 @@ void Resampler::determine_range(const blitz::Array<double, 2>& X_coor_interpolat
     X = X_coor_interpolated(i, j);
     Y = Y_coor_interpolated(i, j);
   };
+  // Only used if Check is true, but cheap to create.
   ResamplerCoordinateCheck check(nrow, ncol, Num_sub_pixel, coor, Mi,
 				 Fill_value_threshold);
   int ntask = default_number_task((long) nrow * ncol, -1);
@@ -683,7 +974,8 @@ void Resampler::determine_range(const blitz::Array<double, 2>& X_coor_interpolat
     [&](int k, int istart, int iend)
     {
       Range r{nrow, -1, ncol, -1};
-      check.check_rows(istart, iend, coor, tproblem[k]);
+      if(Check)
+	check.check_rows(istart, iend, coor, tproblem[k]);
       for(int i = istart; i < iend; ++i) {
 	for(int j = 0; j < ncol; ++j) {
 	  double x = X_coor_interpolated(i,j);
@@ -707,7 +999,8 @@ void Resampler::determine_range(const blitz::Array<double, 2>& X_coor_interpolat
       }
       trange[k] = r;
     });
-  check.throw_if_problem(tproblem, coor);
+  if(Check)
+    check.throw_if_problem(tproblem, coor);
   lstart = nrow;
   lend = -1;
   sstart = ncol;
@@ -790,11 +1083,29 @@ bool Resampler::empty_resample(const blitz::Array<double, 2>& Data,
 //-------------------------------------------------------------------------
 /// Check that data passed to resample_field or empty_resample is large
 /// enough. The data is at the original resolution, so magnified by
-/// nsub it should cover data_index.
+/// nsub it should cover data_index. If we have a swath range, the data
+/// should be exactly the size of the range.
 //-------------------------------------------------------------------------
 
 void Resampler::check_data_size(int Number_line, int Number_sample) const
 {
+  // With a swath range, the data needs to be exactly the subset. A
+  // larger array (e.g., the full swath passed by mistake) would
+  // otherwise silently give a shifted result.
+  if(has_swath_range() &&
+     (Number_line != swath_number_line_ ||
+      Number_sample != swath_number_sample_)) {
+    Exception e;
+    e << "Resampler: the data should be the subset of the swath given by "
+      << "the swath range of the Resampler, lines " << swath_line_start_
+      << " to " << swath_line_start_ + swath_number_line_ - 1
+      << " and samples " << swath_sample_start_ << " to "
+      << swath_sample_start_ + swath_number_sample_ - 1 << " ("
+      << swath_number_line_ << " x " << swath_number_sample_
+      << "). The data is " << Number_line << " x " << Number_sample
+      << ". In python, subset the data with line_range and sample_range.";
+    throw e;
+  }
   if((long) Number_line * nsub < data_index_.rows() ||
      (long) Number_sample * nsub < data_index_.cols()) {
     Exception e;

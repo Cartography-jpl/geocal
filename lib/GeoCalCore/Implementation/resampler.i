@@ -26,6 +26,12 @@ public:
 	    bool Exactly_match_mi = false,
 	    double Fill_value_threshold = std::numeric_limits<double>::lowest(),
 	    int Number_task = -1);
+  static boost::shared_ptr<Resampler> create_from_lat_lon
+  (const blitz::Array<double, 2>& Latitude,
+   const blitz::Array<double, 2>& Longitude,
+   const MapInfo& Mi, int Num_sub_pixel, int Boundary = 1,
+   double Fill_value_threshold = std::numeric_limits<double>::lowest(),
+   int Number_task = -1);
   void clear();
   static void determine_range(const blitz::Array<double, 2>& X_coor_interpolated,
 			      const blitz::Array<double, 2>& Y_coor_interpolated,
@@ -65,6 +71,32 @@ public:
 		  blitz::Array<double, 2>& OUTPUT) const;
   %python_attribute(map_info, const MapInfo&);
   %python_attribute(number_sub_pixel, int);
+  %python_attribute(swath_line_start, int);
+  %python_attribute(swath_number_line, int);
+  %python_attribute(swath_sample_start, int);
+  %python_attribute(swath_number_sample, int);
+  %python_attribute(has_swath_range, bool);
+%pythoncode {
+@property
+def line_range(self) -> slice:
+    '''Slice of the swath lines that the data passed to resample_field
+    should be subset to. This is all the lines if we don't have a
+    swath range.'''
+    if not self.has_swath_range:
+        return slice(0, None)
+    return slice(self.swath_line_start,
+                 self.swath_line_start + self.swath_number_line)
+
+@property
+def sample_range(self) -> slice:
+    '''Slice of the swath samples that the data passed to resample_field
+    should be subset to. This is all the samples if we don't have a
+    swath range.'''
+    if not self.has_swath_range:
+        return slice(0, None)
+    return slice(self.swath_sample_start,
+                 self.swath_sample_start + self.swath_number_sample)
+}
   std::string print_to_string() const;
   %pickle_serialization();
 };

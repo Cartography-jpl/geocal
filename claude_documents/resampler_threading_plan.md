@@ -1,8 +1,10 @@
 # Speeding up Resampler (resampler.cc)
 
-Status: plan approved pending go ahead, nothing implemented yet
-(2026-11-03). Open questions resolved; see "Decisions" and
-"Implementation order" at the end.
+Status: all 7 steps implemented (2026-11-03). See "Progress" and
+"Final timings" near the end. The sections in between are the original
+plan, kept for reference; where the implementation differs (Fill_value_threshold
+instead of Mark_missing, the RasterImage constructor now center aligned),
+the Progress notes describe what was done.
 
 ## Baseline timings (rifle, 40 cores)
 
@@ -1082,6 +1084,48 @@ Related ECOSTRESS notes found while checking:
   range, pickle. Added `data_index` as a python attribute (needed by the
   tests). ruff clean; full Python suite 259 passed, 77 skipped; mypy
   clean. The SWIG part was done in step 5.
+
+* **Step 7 done (2026-11-03):** final benchmarks, below.
+
+## Final timings (rifle, 40 cores, final code)
+
+Same synthetic case as the baseline (5000x5000 raw, nsub 2, 10000x10000
+subpixels, rotated geodetic swath). Default is 10 threads, 4 x 10 tasks.
+C++ numbers from `GEOCAL_RESAMPLER_TIMING=1 ./geocal_test_all
+--run_test=resampler/timing`; RasterImage numbers from python
+(`/tmp/rsproto/bench7.py`), OCI from `/tmp/rsproto/py5.py`.
+
+| Operation                         | Baseline | 1 thread | 10 threads | Speedup |
+|-----------------------------------|----------|----------|------------|---------|
+| Resampler(blitz), geodetic        | 1.39 s   | 1.35 s   | 0.16 s     | 8.6x    |
+| Resampler(blitz), projected (UTM) | -        | 1.46 s   | 0.18 s     | -       |
+|   same, step check off            | -        | 1.23 s   | 0.15 s     | -       |
+| Resampler(RasterImage)            | 2.57 s   | 3.06 s   | 0.45 s     | 5.7x    |
+| determine_range                   | 1.18 s   | 0.75 s   | 0.086 s    | 13.7x   |
+| resample_field(blitz)             | 0.97 s*  | 0.98 s   | 0.20 s     | 4.8x    |
+| resample_field(RasterImage)       | 1.17 s   | 1.36 s   | 0.30 s     | 3.9x    |
+| OCI resampler (maia build_resampler -> create_from_lat_lon) | 20.7 s | - | 0.66 s | 31x |
+| OCI one field (maia resample_swath with a MemoryRasterImageFloat copy -> resample_field with numpy) | 1.63 s | - | 0.14 s | 12x |
+
+\* resample_field(blitz) baseline is the single task time of the new code
+(the old code only had the RasterImage version).
+
+Notes:
+* All times include the projection checks (step 4). The check costs about
+  15% at nsub 2 (geodetic and projected); see the step 4 note for nsub 1
+  (+54%) and nsub 15 (+4%).
+* The RasterImage constructor single threaded is slower than the old code
+  (3.06 s vs 2.57 s). It now does the checks, has a slightly larger
+  subpixel grid (nl*nsub rather than (nl-1)*nsub, from the center alignment
+  fix), and computes the interpolation for each subpixel twice (once per
+  pass of init) instead of storing 2 x 800 MB arrays. With threads it is
+  5.7x faster and uses much less memory.
+* resample_field is limited by the scatter to the output and the merge of
+  the per tile buffers, so it scales less well than the other steps.
+* The memory saving is the bigger win for large swaths: no MagnifyReplicate,
+  MagnifyBilinear or xindex/yindex temporaries (about 2.4 GB for this case),
+  and create_from_lat_lon only stores data_index for the part of the swath
+  used.
 
 ## Implementation order
 

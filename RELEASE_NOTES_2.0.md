@@ -251,7 +251,8 @@ fixtures and `require_*` skip markers now live in `python/tests/fixtures/`.
     above). The `RasterImage` constructor interpolates the
     coordinates as it goes rather than creating the full size
     interpolated arrays with `MagnifyBilinear`, so it uses much less
-    memory (2.6 s -> 0.36 s for 5000 x 5000 coordinates, nsub 2). Apart
+    memory (2.6 s -> 0.45 s for 5000 x 5000 coordinates, nsub 2,
+    including the projection checks). Apart
     from the missing coordinate changes and the `RasterImage` constructor
     interpolation fix above, the results are identical to before.
   - Bug fix: `resample_field(Fname, Data, ...)`, which writes a VICAR file,

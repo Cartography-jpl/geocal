@@ -22,12 +22,14 @@ public:
   Resampler(const boost::shared_ptr<RasterImage>& X_coor,
 	    const boost::shared_ptr<RasterImage>& Y_coor,
 	    const MapInfo& Mi, int Num_sub_pixel = 2,
-	    bool Exactly_match_mi = false, double Mark_missing=-1000.0,
+	    bool Exactly_match_mi = false,
+	    double Fill_value_threshold = std::numeric_limits<double>::lowest(),
 	    int Number_task = -1);
   Resampler(const blitz::Array<double, 2>& X_coor_interpolated,
 	    const blitz::Array<double, 2>& Y_coor_interpolated,
 	    const MapInfo& Mi, int Num_sub_pixel = 2,
-	    bool Exactly_match_mi = false, double Mark_missing=-1000.0,
+	    bool Exactly_match_mi = false,
+	    double Fill_value_threshold = std::numeric_limits<double>::lowest(),
 	    int Number_task = -1);
   virtual ~Resampler() {}
   void clear();
@@ -101,7 +103,7 @@ private:
   static int default_number_task(long Size, int Number_task);
   template<class F> void init(int Number_row, int Number_col, F Coor,
 			      const MapInfo& Mi, bool Exactly_match_mi,
-			      double Mark_missing, int Number_task);
+			      double Fill_value_threshold, int Number_task);
   MapInfo mi;
   int nsub;
   blitz::Array<int, 3> data_index_;

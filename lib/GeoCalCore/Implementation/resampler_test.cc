@@ -95,11 +95,12 @@ public:
   }
   // Reference implementation of init. This is the old serial code, with
   // the fixes for GeoCal 2.0: a point is missing if either X or Y is
-  // fill (or NaN), and missing points are marked -9999 with
+  // NaN or <= Fill_value_threshold (instead of the old Mark_missing,
+  // with both X and Y fill), and missing points are marked -9999 with
   // Exactly_match_mi as well. Returns data_index, and fills in Mi_out.
   blitz::Array<int, 3> reference_init
   (const blitz::Array<double, 2>& X_coor, const blitz::Array<double, 2>& Y_coor,
-   const MapInfo& Mi, bool Exactly_match_mi, double Mark_missing,
+   const MapInfo& Mi, bool Exactly_match_mi, double Fill_value_threshold,
    MapInfo& Mi_out)
   {
     Range ra = Range::all();
@@ -109,7 +110,8 @@ public:
     data_index(ra,ra,0) = blitz::cast<int>(blitz::rint(yindex));
     data_index(ra,ra,1) = blitz::cast<int>(blitz::rint(xindex));
     auto missing = [&](int i, int j)
-      { return !(Y_coor(i, j) > Mark_missing && X_coor(i, j) > Mark_missing); };
+      { return !(Y_coor(i, j) > Fill_value_threshold &&
+		 X_coor(i, j) > Fill_value_threshold); };
     if(Exactly_match_mi) {
       Mi_out = Mi;
       for(int i = 0; i < X_coor.rows(); ++i)
@@ -436,6 +438,14 @@ BOOST_AUTO_TEST_CASE(ctor_matches_reference)
 	  Resampler r(xc, yc, mi, nsub, exact, -1000.0, ntask);
 	  BOOST_CHECK(blitz::all(r.data_index() == expect));
 	  check_map_info(r.map_info(), mi_expect);
+	  // Same thing using NaN rather than a threshold.
+	  blitz::Array<double, 2> xn(xc.copy()), yn(yc.copy());
+	  xn = blitz::where(xn <= -1000.0, std::numeric_limits<double>::quiet_NaN(), xn);
+	  yn = blitz::where(yn <= -1000.0, std::numeric_limits<double>::quiet_NaN(), yn);
+	  Resampler rn(xn, yn, mi, nsub, exact,
+		       std::numeric_limits<double>::lowest(), ntask);
+	  BOOST_CHECK(blitz::all(rn.data_index() == expect));
+	  check_map_info(rn.map_info(), mi_expect);
 	}
   }
 }
@@ -495,13 +505,18 @@ BOOST_AUTO_TEST_CASE(no_valid_points)
   xf = -9999;
   yf = y;
   for(bool exact : {false, true}) {
-    BOOST_CHECK_THROW(Resampler(xf, yf, mi, nsub, exact), Exception);
+    BOOST_CHECK_THROW(Resampler(xf, yf, mi, nsub, exact, -1000.0), Exception);
+    // Without a threshold, -9999 is a valid coordinate. It just
+    // doesn't fall in the MapInfo.
+    Resampler r(xf, yf, mi, nsub, exact);
+    if(exact)
+      BOOST_CHECK(r.empty_resample());
     blitz::Array<double, 2> xn(x.shape());
     xn = std::numeric_limits<double>::quiet_NaN();
     BOOST_CHECK_THROW(Resampler(xn, xn, mi, nsub, exact), Exception);
   }
   try {
-    Resampler r(xf, yf, mi, nsub);
+    Resampler r(xf, yf, mi, nsub, false, -1000.0);
     BOOST_FAIL("Should have thrown an exception");
   } catch(const Exception& e) {
     BOOST_CHECK(std::string(e.what()).find("no valid coordinates") !=
@@ -529,12 +544,6 @@ BOOST_AUTO_TEST_CASE(raster_ctor_matches_magnify_bilinear)
       ximg->data()(i, j) = (10.05 + (std::cos(th) * j - std::sin(th) * i) * 0.0062);
       yimg->data()(i, j) = (10.95 - (std::sin(th) * j + std::cos(th) * i) * 0.0062);
     }
-  // A fill area
-  for(int i = 10; i < 20; ++i)
-    for(int j = 30; j < 50; ++j) {
-      ximg->data()(i, j) = -1e20;
-      yimg->data()(i, j) = -1e20;
-    }
   for(int ns_sub : {1, 2, 3}) {
     MagnifyBilinear xmag(ximg, ns_sub);
     MagnifyBilinear ymag(yimg, ns_sub);
@@ -546,13 +555,89 @@ BOOST_AUTO_TEST_CASE(raster_ctor_matches_magnify_bilinear)
       for(int ntask : {1, 7}) {
 	MapInfo mi_expect;
 	blitz::Array<int, 3> expect =
-	  reference_init(xm, ym, mi, exact, -1000.0, mi_expect);
-	Resampler r(ximg, yimg, mi, ns_sub, exact, -1000.0, ntask);
+	  reference_init(xm, ym, mi, exact,
+			 std::numeric_limits<double>::lowest(), mi_expect);
+	Resampler r(ximg, yimg, mi, ns_sub, exact,
+		    std::numeric_limits<double>::lowest(), ntask);
 	BOOST_CHECK_EQUAL(r.data_index().rows(), (nl - 1) * ns_sub);
 	BOOST_CHECK_EQUAL(r.data_index().cols(), (ns - 1) * ns_sub);
 	BOOST_CHECK(blitz::all(r.data_index() == expect));
 	check_map_info(r.map_info(), mi_expect);
       }
+  }
+}
+
+BOOST_AUTO_TEST_CASE(raster_ctor_fill)
+{
+  // The RasterImage constructor applies Fill_value_threshold before
+  // interpolating, so exactly the subpixels that depend on a fill
+  // point are missing. Uses -1e20 fill for one point, NaN for
+  // another, and one point where only Y is fill.
+  int nl = 30, ns = 40;
+  auto ximg = boost::make_shared<MemoryRasterImageFloat>(nl, ns);
+  auto yimg = boost::make_shared<MemoryRasterImageFloat>(nl, ns);
+  for(int i = 0; i < nl; ++i)
+    for(int j = 0; j < ns; ++j) {
+      ximg->data()(i, j) = 10.05 + j * 0.0062;
+      yimg->data()(i, j) = 10.95 - i * 0.0062;
+    }
+  std::vector<std::pair<int, int>> fill_pt = {{5, 5}, {10, 20}, {20, 30}};
+  ximg->data()(5, 5) = -1e20;
+  yimg->data()(5, 5) = -1e20;
+  ximg->data()(10, 20) = std::numeric_limits<double>::quiet_NaN();
+  yimg->data()(20, 30) = -1e20;
+  int ns_sub = 3;
+  // Each fill point affects (2 * ns_sub - 1)^2 subpixels, the ones
+  // with a nonzero bilinear weight for that point.
+  int naffect = (2 * ns_sub - 1) * (2 * ns_sub - 1);
+  for(bool exact : {false, true}) {
+    Resampler r(ximg, yimg, mi, ns_sub, exact, -1e10);
+    const blitz::Array<int, 3>& di = r.data_index();
+    int nmissing = 0;
+    for(int i = 0; i < di.rows(); ++i)
+      for(int j = 0; j < di.cols(); ++j) {
+	bool expect_missing = false;
+	for(auto& p : fill_pt) {
+	  double dl = std::abs(i / (double) ns_sub - p.first);
+	  double ds = std::abs(j / (double) ns_sub - p.second);
+	  if(dl < 1 && ds < 1)
+	    expect_missing = true;
+	}
+	bool missing = (di(i,j,0) == -9999 && di(i,j,1) == -9999);
+	BOOST_CHECK_EQUAL(missing, expect_missing);
+	if(missing)
+	  ++nmissing;
+      }
+    BOOST_CHECK_EQUAL(nmissing, 3 * naffect);
+  }
+  // Without a threshold, the -1e20 points are treated as real
+  // coordinates. Only the subpixels around the NaN point are missing.
+  Resampler r(ximg, yimg, mi, ns_sub, true);
+  BOOST_CHECK_EQUAL((int) blitz::count(r.data_index()(Range::all(), Range::all(), 0) == -9999),
+		    naffect);
+}
+
+BOOST_AUTO_TEST_CASE(projected_negative_coordinates)
+{
+  // Large negative coordinates are fine for a projected MapInfo, so
+  // they shouldn't be treated as fill by default. We use a meter sized
+  // grid centered on 0, like an Albers grid. Only the MapInfo
+  // parameters matter here, so a GeodeticConverter is fine as a stand
+  // in for a projected one.
+  MapInfo mi_proj(boost::make_shared<GeodeticConverter>(), -500000.0, 500000.0,
+		  500000.0, -500000.0, 4000, 4000);
+  blitz::Array<double, 2> xp(100, 100), yp(100, 100);
+  for(int i = 0; i < 100; ++i)
+    for(int j = 0; j < 100; ++j) {
+      xp(i,j) = -300000.0 + 125.0 + j * 250.0;
+      yp(i,j) = -200000.0 - 125.0 - i * 250.0;
+    }
+  blitz::Array<double, 2> ones(100, 100);
+  ones = 1;
+  for(bool exact : {false, true}) {
+    Resampler r(xp, yp, mi_proj, 1, exact);
+    blitz::Array<double, 2> res = r.resample_field(ones, 1.0, false, -1.0);
+    BOOST_CHECK_EQUAL((int) blitz::count(res == 1.0), 100 * 100);
   }
 }
 

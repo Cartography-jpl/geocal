@@ -160,8 +160,8 @@ class Resampler(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
-        __init__(Resampler self, boost::shared_ptr< GeoCal::RasterImage > const & X_coor, boost::shared_ptr< GeoCal::RasterImage > const & Y_coor, MapInfo Mi, int Num_sub_pixel=2, bool Exactly_match_mi=False, double Mark_missing=-1000.0, int Number_task=-1) -> Resampler
-        __init__(Resampler self, BlitzArray_double_2 X_coor_interpolated, BlitzArray_double_2 Y_coor_interpolated, MapInfo Mi, int Num_sub_pixel=2, bool Exactly_match_mi=False, double Mark_missing=-1000.0, int Number_task=-1) -> Resampler
+        __init__(Resampler self, boost::shared_ptr< GeoCal::RasterImage > const & X_coor, boost::shared_ptr< GeoCal::RasterImage > const & Y_coor, MapInfo Mi, int Num_sub_pixel=2, bool Exactly_match_mi=False, double Fill_value_threshold=std::numeric_limits< double >::lowest(), int Number_task=-1) -> Resampler
+        __init__(Resampler self, BlitzArray_double_2 X_coor_interpolated, BlitzArray_double_2 Y_coor_interpolated, MapInfo Mi, int Num_sub_pixel=2, bool Exactly_match_mi=False, double Fill_value_threshold=std::numeric_limits< double >::lowest(), int Number_task=-1) -> Resampler
 
         GeoCal::Resampler::Resampler
         Constructor.  
@@ -187,15 +187,18 @@ class Resampler(geocal_swig.generic_object.GenericObject):
         the lat/lon. This is useful if we are producing output files to compare against
         some existing file.  
 
-        A point is missing if either X or Y is <= Mark_missing, or is NaN. Missing
-        points aren't used. We throw an exception if all the points are missing. Note
-        that it is fine for none of the points to fall in Mi with Exactly_match_mi, you
-        can check for that with empty_resample().  
+        A point is missing if either X or Y is NaN. Missing points aren't used. You can
+        optionally give a Fill_value_threshold, and any X or Y <= Fill_value_threshold
+        is treated as NaN. The default is no threshold, since for a projected MapInfo
+        (e.g., UTM or Albers) large negative coordinates are perfectly valid. We throw
+        an exception if all the points are missing. Note that it is fine for none of the
+        points to fall in Mi with Exactly_match_mi, you can check for that with
+        empty_resample().  
 
-        Note that we interpolate the coordinates with bilinear interpolation, as
-        MagnifyBilinear does. A subpixel next to a missing point is interpolated with
-        the fill value, so it is probably missing as well, as long as the fill value is
-        very negative (e.g., -1e20).  
+        We interpolate the coordinates with bilinear interpolation, the same as
+        MagnifyBilinear. The Fill_value_threshold is applied before interpolating, so
+        any subpixel that depends on a missing point is missing. A subpixel that falls
+        exactly on a good point is good, even if its neighbors are missing.  
 
         See resample_field for a description of Number_task.  
 

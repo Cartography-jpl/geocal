@@ -48,17 +48,20 @@ GEOCAL_IMPLEMENT(Resampler);
 /// useful if we are producing output files to compare against some
 /// existing file.
 ///
-/// A point is missing if either X or Y is <= Mark_missing, or is
-/// NaN. Missing points aren't used. We throw an exception if all the
-/// points are missing. Note that it is fine for none of the points to
-/// fall in Mi with Exactly_match_mi, you can check for that with
-/// empty_resample().
+/// A point is missing if either X or Y is NaN. Missing points aren't
+/// used. You can optionally give a Fill_value_threshold, and any X or
+/// Y <= Fill_value_threshold is treated as NaN. The default is no
+/// threshold, since for a projected MapInfo (e.g., UTM or Albers)
+/// large negative coordinates are perfectly valid. We throw an
+/// exception if all the points are missing. Note that it is fine for
+/// none of the points to fall in Mi with Exactly_match_mi, you can
+/// check for that with empty_resample().
 ///
-/// Note that we interpolate the coordinates with bilinear
-/// interpolation, as MagnifyBilinear does. A subpixel next to a
-/// missing point is interpolated with the fill value, so it is
-/// probably missing as well, as long as the fill value is very negative
-/// (e.g., -1e20).
+/// We interpolate the coordinates with bilinear interpolation, the
+/// same as MagnifyBilinear. The Fill_value_threshold is applied
+/// before interpolating, so any subpixel that depends on a missing
+/// point is missing. A subpixel that falls exactly on a good point is
+/// good, even if its neighbors are missing.
 ///
 /// See resample_field for a description of Number_task.
 //-------------------------------------------------------------------------
@@ -67,7 +70,7 @@ Resampler::Resampler
 (const boost::shared_ptr<RasterImage>& X_coor,
  const boost::shared_ptr<RasterImage>& Y_coor,
  const MapInfo& Mi, int Num_sub_pixel, bool Exactly_match_mi,
- double Mark_missing, int Number_task)
+ double Fill_value_threshold, int Number_task)
   : nsub(Num_sub_pixel)
 {
   range_min_check(Num_sub_pixel, 1);
@@ -88,34 +91,67 @@ Resampler::Resampler
   std::vector<double> frac(nsub);
   for(int k = 0; k < nsub; ++k)
     frac[k] = 1.0 / nsub * k;
-  auto coor = [&x, &y, &frac, this](int i, int j, double& X, double& Y)
+  // Mark fill as NaN before interpolating, so it carries through to
+  // every subpixel that depends on it.
+  const double nan = std::numeric_limits<double>::quiet_NaN();
+  for(int i = 0; i < x.rows(); ++i)
+    for(int j = 0; j < x.cols(); ++j)
+      if(!(x(i,j) > Fill_value_threshold && y(i,j) > Fill_value_threshold)) {
+	x(i,j) = nan;
+	y(i,j) = nan;
+      }
+  // Bilinear interpolation of A at raw position (iy + ln, ix + smp).
+  // This uses the same order of operations as MagnifyBilinear, so we
+  // get identical results. Terms with a zero weight are skipped, so a
+  // NaN neighbor doesn't make the subpixel NaN (0 * NaN is NaN).
+  auto interp = [](const blitz::Array<double, 2>& A, int iy, int ix,
+		   double ln, double smp) -> double
+  {
+    double res = A(iy,ix) * (1 - ln) * (1 - smp);
+    if(smp != 0)
+      res += A(iy, ix + 1) * (1 - ln) * smp;
+    if(ln != 0)
+      res += A(iy + 1, ix) * ln * (1 - smp);
+    if(ln != 0 && smp != 0)
+      res += A(iy + 1, ix + 1) * ln * smp;
+    return res;
+  };
+  auto coor = [&x, &y, &frac, &interp, this](int i, int j, double& X, double& Y)
   {
     int iy = i / nsub, ix = j / nsub;
     double ln = frac[i % nsub], smp = frac[j % nsub];
-    // Same order of operations as MagnifyBilinear, so we get
-    // identical results.
-    X = x(iy,ix) * (1 - ln) * (1 - smp) + x(iy, ix + 1) * (1 - ln) * smp
-      + x(iy + 1, ix) * ln * (1 - smp) + x(iy + 1, ix + 1) * ln * smp;
-    Y = y(iy,ix) * (1 - ln) * (1 - smp) + y(iy, ix + 1) * (1 - ln) * smp
-      + y(iy + 1, ix) * ln * (1 - smp) + y(iy + 1, ix + 1) * ln * smp;
+    X = interp(x, iy, ix, ln, smp);
+    Y = interp(y, iy, ix, ln, smp);
   };
-  init(nrow, ncol, coor, Mi, Exactly_match_mi, Mark_missing, Number_task);
+  init(nrow, ncol, coor, Mi, Exactly_match_mi, Fill_value_threshold,
+       Number_task);
 }
 
 //-------------------------------------------------------------------------
 /// Alternative constructor where we get the lat/lon from something
 /// other than a file. The data should already be interpolated (e.g.,
-/// in python do scipy.ndimage.interpolation.zoom(t,Num_sub_pixel,order=2)
+/// in python do scipy.ndimage.zoom(t, Num_sub_pixel, order=1)).
 ///
-/// Missing points are handled as in the other constructor, see that
-/// for details. See resample_field for a description of Number_task.
+/// A point is missing if either X or Y is NaN, or <=
+/// Fill_value_threshold if that is given. Since the data is already
+/// interpolated, it is best to change fill values to NaN *before*
+/// interpolating, and use bilinear interpolation (order=1). Every
+/// subpixel that depends on a fill value is then NaN. A threshold applied
+/// after interpolation can't detect subpixels that mix fill and good
+/// values (e.g., interpolating between -9999 and 300000 m gives a
+/// reasonable looking coordinate). Higher order interpolation spreads
+/// NaN (and fill values) much further, so avoid it if there is fill
+/// data.
+///
+/// See the other constructor for the rest of the details, and
+/// resample_field for a description of Number_task.
 //-------------------------------------------------------------------------
 
 Resampler::Resampler
 (const blitz::Array<double, 2>& X_coor_interpolated,
  const blitz::Array<double, 2>& Y_coor_interpolated,
  const MapInfo& Mi, int Num_sub_pixel, bool Exactly_match_mi,
- double Mark_missing, int Number_task)
+ double Fill_value_threshold, int Number_task)
   : nsub(Num_sub_pixel)
 {
   range_min_check(Num_sub_pixel, 1);
@@ -129,7 +165,7 @@ Resampler::Resampler
     Y = Y_coor_interpolated(i, j);
   };
   init(X_coor_interpolated.rows(), X_coor_interpolated.cols(), coor, Mi,
-       Exactly_match_mi, Mark_missing, Number_task);
+       Exactly_match_mi, Fill_value_threshold, Number_task);
 }
 
 //-------------------------------------------------------------------------
@@ -163,7 +199,7 @@ int Resampler::default_number_task(long Size, int Number_task)
 
 template<class F> void Resampler::init
 (int Number_row, int Number_col, F Coor,
- const MapInfo& Mi, bool Exactly_match_mi, double Mark_missing,
+ const MapInfo& Mi, bool Exactly_match_mi, double Fill_value_threshold,
  int Number_task)
 {
   data_index_.resize(Number_row, Number_col, 2);
@@ -189,8 +225,9 @@ template<class F> void Resampler::init
 	for(int j = 0; j < Number_col; ++j) {
 	  double x, y, xindex, yindex;
 	  Coor(i, j, x, y);
-	  // Missing if either coordinate is fill (or NaN).
-	  if(!(x > Mark_missing && y > Mark_missing)) {
+	  // Missing if either coordinate is NaN or fill. Note that
+	  // comparisons with NaN are false.
+	  if(!(x > Fill_value_threshold && y > Fill_value_threshold)) {
 	    data_index_(i,j,0) = missing_value;
 	    data_index_(i,j,1) = missing_value;
 	    continue;
@@ -230,8 +267,8 @@ template<class F> void Resampler::init
     Exception e;
     e << "Resampler: there are no valid coordinates. All "
       << Number_row << " x " << Number_col
-      << " points are fill (<= Mark_missing = " << Mark_missing
-      << ") or NaN.";
+      << " points are NaN or fill (<= Fill_value_threshold = "
+      << Fill_value_threshold << ").";
     throw e;
   }
   if(Exactly_match_mi) {

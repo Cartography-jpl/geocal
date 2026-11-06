@@ -14,9 +14,9 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void Ecr::serialize(Archive & ar, const unsigned int UNUSED(version))
+void Ecr::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianFixed);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianFixed);
 }
 
 GEOCAL_IMPLEMENT(Ecr);
@@ -26,7 +26,7 @@ GEOCAL_IMPLEMENT(Ecr);
 /// This code is from the paper D. K. Olson "Converting Earth-Centered,
 /// Earth-Fixed Coordinates to Geodetic Coordinates.", IEEE
 /// Transactions on Aerospace and Electronic Systems, 32 (1996)
-/// 473-476. 
+/// 473-476.
 ///
 /// The claim of the paper is that this runs faster than all the other
 /// methods he compared to. We have cut and pasted the code from that
@@ -99,17 +99,20 @@ Ecr::Ecr(const GroundCoordinate& Gc)
   position = ecr->position;
 }
 
-inline double sqr(double x) {return x * x;}
+inline double sqr(double x)
+{
+  return x * x;
+}
 
 //-----------------------------------------------------------------------
 /// Convert to CartesianInertial.
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<CartesianInertial> Ecr::convert_to_ci(const Time& T) const
-{ 
+{
   boost::shared_ptr<CartesianInertial> res(new Eci);
-  CartesianFixed::toolkit_coordinate_interface->
-    to_inertial((int) EARTH_NAIF_CODE, T, *this, *res);
+  CartesianFixed::toolkit_coordinate_interface->to_inertial(
+      (int)EARTH_NAIF_CODE, T, *this, *res);
   return res;
 }
 
@@ -117,11 +120,11 @@ boost::shared_ptr<CartesianInertial> Ecr::convert_to_ci(const Time& T) const
 /// Convert to latitude, longitude, and height.
 //-----------------------------------------------------------------------
 
-void Ecr::lat_lon_height(double& Latitude, double& Longitude, 
-			      double& Height_reference_surface) const
+void Ecr::lat_lon_height(double& Latitude, double& Longitude,
+                         double& Height_reference_surface) const
 {
   latlon(position[0], position[1], position[2], Latitude, Longitude,
-	 Height_reference_surface);
+         Height_reference_surface);
   Latitude *= Constant::rad_to_deg;
   Longitude *= Constant::rad_to_deg;
 }
@@ -139,7 +142,7 @@ Geodetic Ecr::convert_to_geodetic() const
 
 //-----------------------------------------------------------------------
 /// Return height above/below the reference surface (e.g., WGS-84
-/// for the earth). Positive means above, negative below. This is 
+/// for the earth). Positive means above, negative below. This is
 /// in meters.
 //-----------------------------------------------------------------------
 
@@ -158,9 +161,9 @@ double Ecr::min_radius_reference_surface() const
 {
   return Constant::wgs84_a;
 }
-  
+
 //-----------------------------------------------------------------------
-/// Return latitude in degrees. By default we just convert to 
+/// Return latitude in degrees. By default we just convert to
 /// CartesianFixed and then to latitude, but derived classes can supply
 /// more efficient versions of these if needed. Latitude is -90 to 90.
 //-----------------------------------------------------------------------
@@ -171,7 +174,7 @@ double Ecr::latitude() const
 }
 
 //-----------------------------------------------------------------------
-/// Return longitude in degrees. By default we just convert to 
+/// Return longitude in degrees. By default we just convert to
 /// CartesianFixed and then to longitude, but derived classes can supply
 /// more efficient versions of these if needed. Longitude is -180 to 180.
 //-----------------------------------------------------------------------
@@ -202,17 +205,15 @@ void Ecr::print(std::ostream& Os) const
 /// isn't an ellipsoid), but for many purposes this is close enough.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<CartesianFixed>
-Ecr::reference_surface_intersect_approximate(
-  const CartesianFixedLookVector& Cl, double Height_reference_surface) 
-  const
+boost::shared_ptr<CartesianFixed> Ecr::reference_surface_intersect_approximate(
+    const CartesianFixedLookVector& Cl, double Height_reference_surface) const
 {
   double aph = Constant::wgs84_a + Height_reference_surface;
   double bph = Constant::wgs84_b + Height_reference_surface;
   boost::array<double, 3> dirci;
-  dirci[0] = Cl.look_vector[0]/ aph;
-  dirci[1] = Cl.look_vector[1]/ aph;
-  dirci[2] = Cl.look_vector[2]/ bph;
+  dirci[0] = Cl.look_vector[0] / aph;
+  dirci[1] = Cl.look_vector[1] / aph;
+  dirci[2] = Cl.look_vector[2] / bph;
   double t = norm(dirci);
   dirci[0] /= t;
   dirci[1] /= t;
@@ -224,7 +225,10 @@ Ecr::reference_surface_intersect_approximate(
   double ddotp = dot(dirci, pci);
   t = ddotp * ddotp + (1 - dot(pci, pci));
   if(t < 0)
-    throw ConvergenceFailure("Ecr::reference_surface_intersect_approximate failed to find a solution, often this is cause from a look vector that doesn't intersect the surface");
+    throw ConvergenceFailure(
+        "Ecr::reference_surface_intersect_approximate failed to find a "
+        "solution, often this is cause from a look vector that doesn't "
+        "intersect the surface");
   double dl = -ddotp - sqrt(t);
   boost::array<double, 3> res;
   res[0] = (pci[0] + dirci[0] * dl) * aph;
@@ -242,8 +246,8 @@ Ecr::reference_surface_intersect_approximate(
 Ecr Ecr::sub_solar_point(const Time& T)
 {
   Ecr res;
-  CartesianFixed::toolkit_coordinate_interface->
-    sub_solar_point((int) EARTH_NAIF_CODE, T, res);
+  CartesianFixed::toolkit_coordinate_interface->sub_solar_point(
+      (int)EARTH_NAIF_CODE, T, res);
   return res;
 }
 
@@ -256,8 +260,8 @@ Ecr Ecr::sub_solar_point(const Time& T)
 Ecr Ecr::sub_body_point(int Body_id, const Time& T)
 {
   Ecr res;
-  CartesianFixed::toolkit_coordinate_interface->
-    sub_body_point((int) EARTH_NAIF_CODE, Body_id, T, res);
+  CartesianFixed::toolkit_coordinate_interface->sub_body_point(
+      (int)EARTH_NAIF_CODE, Body_id, T, res);
   return res;
 }
 
@@ -269,8 +273,9 @@ Ecr Ecr::sub_body_point(int Body_id, const Time& T)
 double Ecr::solar_distance(const Time& T)
 {
   const double one_au = 149597870700;
-  return CartesianFixed::toolkit_coordinate_interface->
-    solar_distance((int) EARTH_NAIF_CODE, T) / one_au;
+  return CartesianFixed::toolkit_coordinate_interface->solar_distance(
+             (int)EARTH_NAIF_CODE, T) /
+         one_au;
 }
 
 //-----------------------------------------------------------------------
@@ -283,6 +288,7 @@ double Ecr::body_distance(int Body_id, const Time& T)
   // Not really clear if we actually want this in AU, but for now do
   // that to match the solar_distance.
   const double one_au = 149597870700;
-  return CartesianFixed::toolkit_coordinate_interface->
-    body_distance((int) EARTH_NAIF_CODE, Body_id, T) / one_au;
+  return CartesianFixed::toolkit_coordinate_interface->body_distance(
+             (int)EARTH_NAIF_CODE, Body_id, T) /
+         one_au;
 }

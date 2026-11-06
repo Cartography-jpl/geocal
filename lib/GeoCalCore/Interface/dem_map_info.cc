@@ -7,16 +7,16 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void DemMapInfo::serialize(Archive & ar, const unsigned int version)
+void DemMapInfo::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(Dem);
   GEOCAL_BASE(DemMapInfo, Dem);
-  ar & GEOCAL_NVP_(datum) & GEOCAL_NVP_(map_info) 
-    & GEOCAL_NVP_(outside_dem_is_error);
+  ar& GEOCAL_NVP_(datum) & GEOCAL_NVP_(map_info) &
+      GEOCAL_NVP_(outside_dem_is_error);
   // Older version didn't have naif_code_. The default was to always
   // assume EARTH_NAIF_CODE.
   if(version > 0)
-    ar & GEOCAL_NVP_(naif_code);
+    ar& GEOCAL_NVP_(naif_code);
 }
 
 GEOCAL_IMPLEMENT(DemMapInfo);
@@ -24,7 +24,7 @@ GEOCAL_IMPLEMENT(DemMapInfo);
 
 //-----------------------------------------------------------------------
 /// Return distance to surface directly above/below the given point.
-/// Distance is in meters. Positive means Gp is above the surface, 
+/// Distance is in meters. Positive means Gp is above the surface,
 /// negative means below.
 //-----------------------------------------------------------------------
 
@@ -43,23 +43,23 @@ double DemMapInfo::distance_to_surface(const GroundCoordinate& Gp) const
 /// This is also the method used by richdem (a python package), which
 /// references Horn, B.K.P., 1981. Hill shading and the reflectance
 /// map. Proceedings of the IEEE 69,
-/// 14–47. doi:10.1109/PROC.1981.11918 as the original source of this 
+/// 14–47. doi:10.1109/PROC.1981.11918 as the original source of this
 /// algorithm
 //-----------------------------------------------------------------------
 
-void DemMapInfo::gradient(int Y_index, int X_index,
-		    double& dz_dx, double& dz_dy) const
+void DemMapInfo::gradient(int Y_index, int X_index, double& dz_dx,
+                          double& dz_dy) const
 {
   // Note that this isn't really too efficient. We can try to generate
   // a more optimized version of this in a derived class if needed.
-  if(X_index < 0 || X_index + 1 >= map_info_.number_x_pixel() ||
-     Y_index < 0 || Y_index + 1 >= map_info_.number_y_pixel()) {
+  if(X_index < 0 || X_index + 1 >= map_info_.number_x_pixel() || Y_index < 0 ||
+     Y_index + 1 >= map_info_.number_y_pixel()) {
     if(outside_dem_is_error_) {
       Exception e;
       e << "gradient requested outside of the range of the Dem data "
-	<< "xindex: " << X_index << " (max " << map_info_.number_x_pixel() - 1
-	<< ") yindex: " << Y_index << " (max " << map_info_.number_y_pixel() - 1
-	<< ")";
+        << "xindex: " << X_index << " (max " << map_info_.number_x_pixel() - 1
+        << ") yindex: " << Y_index << " (max " << map_info_.number_y_pixel() - 1
+        << ")";
       throw e;
     } else {
       dz_dx = 0;
@@ -72,11 +72,11 @@ void DemMapInfo::gradient(int Y_index, int X_index,
     for(int j = -1; j < 2; ++j) {
       int yi = Y_index + i;
       int xi = X_index + j;
-      if(xi < 0 || xi + 1 >= map_info_.number_x_pixel() ||
-	 yi < 0 || yi + 1 >= map_info_.number_y_pixel()) {
-	v[i+1][j+1] = elevation(Y_index, X_index);
+      if(xi < 0 || xi + 1 >= map_info_.number_x_pixel() || yi < 0 ||
+         yi + 1 >= map_info_.number_y_pixel()) {
+        v[i + 1][j + 1] = elevation(Y_index, X_index);
       } else {
-	v[i+1][j+1] = elevation(yi, xi);
+        v[i + 1][j + 1] = elevation(yi, xi);
       }
     }
   double a = v[0][0];
@@ -89,8 +89,8 @@ void DemMapInfo::gradient(int Y_index, int X_index,
   double g = v[2][0];
   double h = v[2][1];
   double k = v[2][2];
-  dz_dx = ((c + 2*f + k) - (a + 2*d + g)) / 8 / map_info_.resolution_x();
-  dz_dy = ((g + 2*h + k) - (a + 2*b + c)) / 8 / map_info_.resolution_y();
+  dz_dx = ((c + 2 * f + k) - (a + 2 * d + g)) / 8 / map_info_.resolution_x();
+  dz_dy = ((g + 2 * h + k) - (a + 2 * b + c)) / 8 / map_info_.resolution_y();
 }
 
 //-----------------------------------------------------------------------
@@ -138,14 +138,14 @@ double DemMapInfo::aspect(int Y_index, int X_index) const
 /// pixel size.
 //-----------------------------------------------------------------------
 
-void DemMapInfo::slope_and_aspect_nearest_neighbor
-(const GroundCoordinate& Gc, double& Slope_deg,
- double& Aspect_deg) const
+void DemMapInfo::slope_and_aspect_nearest_neighbor(const GroundCoordinate& Gc,
+                                                   double& Slope_deg,
+                                                   double& Aspect_deg) const
 {
   double x, y;
   map_info_.coordinate(Gc, x, y);
-  int xi = (int) round(x);
-  int yi = (int) round(y);
+  int xi = (int)round(x);
+  int yi = (int)round(y);
   double dz_dx, dz_dy;
   gradient(yi, xi, dz_dx, dz_dy);
   Slope_deg = atan(hypot(dz_dx, dz_dy)) * Constant::rad_to_deg;
@@ -163,25 +163,21 @@ void DemMapInfo::slope_and_aspect_nearest_neighbor
 /// calculated an average of slopes/aspect that fell in to the
 /// footprint. Another approach is to do a bilinear interpolation.
 ///
-/// This particular function just uses bilinear interpolation. 
+/// This particular function just uses bilinear interpolation.
 //-----------------------------------------------------------------------
 
-void DemMapInfo::slope_and_aspect
-(const GroundCoordinate& Gc, double& Slope_deg,
- double& Aspect_deg) const
+void DemMapInfo::slope_and_aspect(const GroundCoordinate& Gc, double& Slope_deg,
+                                  double& Aspect_deg) const
 {
   double x, y;
   map_info_.coordinate(Gc, x, y);
-  int xi = (int) x;
-  int yi = (int) y;
-  double dz_dx1, dz_dy1,
-    dz_dx2, dz_dy2,
-    dz_dx3, dz_dy3,
-    dz_dx4, dz_dy4;
+  int xi = (int)x;
+  int yi = (int)y;
+  double dz_dx1, dz_dy1, dz_dx2, dz_dy2, dz_dx3, dz_dy3, dz_dx4, dz_dy4;
   gradient(yi, xi, dz_dx1, dz_dy1);
-  gradient(yi, xi+1, dz_dx2, dz_dy2);
-  gradient(yi+1, xi, dz_dx3, dz_dy3);
-  gradient(yi+1, xi+1, dz_dx4, dz_dy4);
+  gradient(yi, xi + 1, dz_dx2, dz_dy2);
+  gradient(yi + 1, xi, dz_dx3, dz_dy3);
+  gradient(yi + 1, xi + 1, dz_dx4, dz_dy4);
   double t1 = atan(hypot(dz_dx1, dz_dy1)) * Constant::rad_to_deg;
   double t2 = atan(hypot(dz_dx2, dz_dy2)) * Constant::rad_to_deg;
   double t3 = atan(hypot(dz_dx3, dz_dy3)) * Constant::rad_to_deg;
@@ -232,16 +228,16 @@ double DemMapInfo::height_datum(const GroundCoordinate& Gp) const
 {
   double x, y;
   map_info_.coordinate(Gp, x, y);
-  int xi = (int) floor(x);
-  int yi = (int) floor(y);
-  if(xi < 0 || xi + 1 >= map_info_.number_x_pixel() ||
-     yi < 0 || yi + 1 >= map_info_.number_y_pixel()) {
+  int xi = (int)floor(x);
+  int yi = (int)floor(y);
+  if(xi < 0 || xi + 1 >= map_info_.number_x_pixel() || yi < 0 ||
+     yi + 1 >= map_info_.number_y_pixel()) {
     if(outside_dem_is_error_) {
       Exception e;
       e << "Height requested outside of the range of the Dem data "
-	<< "xindex: " << xi << " (max " << map_info_.number_x_pixel() - 1
-	<< ") yindex: " << yi << " (max " << map_info_.number_y_pixel() - 1
-	<< ")";
+        << "xindex: " << xi << " (max " << map_info_.number_x_pixel() - 1
+        << ") yindex: " << yi << " (max " << map_info_.number_y_pixel() - 1
+        << ")";
       throw e;
     } else
       return -datum().undulation(Gp);
@@ -259,16 +255,16 @@ double DemMapInfo::height_datum(const Geodetic& Gp) const
 {
   double x, y;
   map_info_.coordinate(Gp, x, y);
-  int xi = (int) floor(x);
-  int yi = (int) floor(y);
-  if(xi < 0 || xi + 1 >= map_info_.number_x_pixel() ||
-     yi < 0 || yi + 1 >= map_info_.number_y_pixel()) {
+  int xi = (int)floor(x);
+  int yi = (int)floor(y);
+  if(xi < 0 || xi + 1 >= map_info_.number_x_pixel() || yi < 0 ||
+     yi + 1 >= map_info_.number_y_pixel()) {
     if(outside_dem_is_error_) {
       Exception e;
       e << "Height requested outside of the range of the Dem data "
-	<< "xindex: " << xi << " (max " << map_info_.number_x_pixel() - 1
-	<< ") yindex: " << yi << " (max " << map_info_.number_y_pixel() - 1
-	<< ")";
+        << "xindex: " << xi << " (max " << map_info_.number_x_pixel() - 1
+        << ") yindex: " << yi << " (max " << map_info_.number_y_pixel() - 1
+        << ")";
       throw e;
     } else
       return -datum().undulation(Gp);
@@ -284,7 +280,7 @@ double DemMapInfo::height_datum(const Geodetic& Gp) const
 
 //-----------------------------------------------------------------------
 /// Return height of surface above/below the reference surface (e.g.,
-/// WGS-84 for the earth). Positive means above, negative below. This is 
+/// WGS-84 for the earth). Positive means above, negative below. This is
 /// in meters.
 //-----------------------------------------------------------------------
 
@@ -294,7 +290,7 @@ double DemMapInfo::height_reference_surface(const GroundCoordinate& Gp) const
 }
 
 //-----------------------------------------------------------------------
-/// Specialization of height_reference_surface if GroundCoordinate is 
+/// Specialization of height_reference_surface if GroundCoordinate is
 /// already a Geodetic. Since many of our DEMS are in geodetic
 /// coordinate, this means that this can often be faster.
 //-----------------------------------------------------------------------
@@ -304,12 +300,11 @@ double DemMapInfo::height_reference_surface(const Geodetic& Gp) const
   return height_datum(Gp) + datum().undulation(Gp);
 }
 
-
 // See base class for description
-boost::shared_ptr<CartesianFixed> DemMapInfo::intersect
-(const CartesianFixed& Cf,
- const CartesianFixedLookVector& Lv, double Resolution,
- double Max_height) const
+boost::shared_ptr<CartesianFixed>
+DemMapInfo::intersect(const CartesianFixed& Cf,
+                      const CartesianFixedLookVector& Lv, double Resolution,
+                      double Max_height) const
 {
   // Regardless of outside_dem_is_error_ value, we allow intersect to
   // explore areas outside of the DEM bounding box. However, the
@@ -328,7 +323,7 @@ boost::shared_ptr<CartesianFixed> DemMapInfo::intersect
   // Side effect of this is to check outside_dem_is_error_ is
   // satisfied.
   height_reference_surface(*res);
-  return res;			// Make it here, then things are ok.
+  return res; // Make it here, then things are ok.
 }
 
 //-----------------------------------------------------------------------
@@ -336,44 +331,42 @@ boost::shared_ptr<CartesianFixed> DemMapInfo::intersect
 /// the given point.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<GroundCoordinate> 
+boost::shared_ptr<GroundCoordinate>
 DemMapInfo::surface_point(const GroundCoordinate& Gp) const
 {
   if(naif_code_ == Geodetic::EARTH_NAIF_CODE) {
     Geodetic g(Gp);
-    return boost::shared_ptr<GroundCoordinate>(new 
-     Geodetic(g.latitude(), g.longitude(), height_reference_surface(g)));
+    return boost::shared_ptr<GroundCoordinate>(
+        new Geodetic(g.latitude(), g.longitude(), height_reference_surface(g)));
   }
   Planetocentric g(Gp);
-  return boost::shared_ptr<GroundCoordinate>
-    (new Planetocentric(g.latitude(), g.longitude(),
-			height_reference_surface(g),
-			g.naif_code()));
+  return boost::shared_ptr<GroundCoordinate>(new Planetocentric(
+      g.latitude(), g.longitude(), height_reference_surface(g), g.naif_code()));
 }
 
 //-----------------------------------------------------------------------
 /// Finish initialization of class. The flag Outside_dem_is_error is
 /// used to indicate if we should treat requests outside of the Dem as
 /// an error (throwing an exception), or just use a default value of a
-/// height of 0.  
+/// height of 0.
 //-----------------------------------------------------------------------
 
-void DemMapInfo::initialize(const boost::shared_ptr<Datum>& D, 
-			    const MapInfo& M, 
-			    bool Outside_dem_is_error)
+void DemMapInfo::initialize(const boost::shared_ptr<Datum>& D, const MapInfo& M,
+                            bool Outside_dem_is_error)
 {
   datum_ = D;
   map_info_ = M;
   outside_dem_is_error_ = Outside_dem_is_error;
   try {
-    naif_code_ = M.ground_coordinate(0,0)->naif_code();
+    naif_code_ = M.ground_coordinate(0, 0)->naif_code();
   } catch(const Exception& E) {
     // We have DEMs where 0,0 is actually invalid point. For example
     // etop02nobath.hlf cover the whole earth including the north pole.
     // 0,0 is actually an invalid value. So if 0,0 fails, try the center
     // as backup.
-    naif_code_ = M.ground_coordinate(M.number_x_pixel() / 2,
-				     M.number_y_pixel() / 2)->naif_code();
+    naif_code_ =
+        M.ground_coordinate(M.number_x_pixel() / 2, M.number_y_pixel() / 2)
+            ->naif_code();
   }
 }
 
@@ -396,11 +389,9 @@ void DemMapInfo::initialize(const boost::shared_ptr<Datum>& D,
 ///    desired is the range actually in the DEM.
 //-----------------------------------------------------------------------
 
-void DemMapInfo::height_range
-(const GroundCoordinate& Ulc,
- const GroundCoordinate& Lrc,
- double& Min_h, double& Max_h,
- double H_pad) const
+void DemMapInfo::height_range(const GroundCoordinate& Ulc,
+                              const GroundCoordinate& Lrc, double& Min_h,
+                              double& Max_h, double H_pad) const
 {
   double x1, y1, x2, y2;
   map_info_.coordinate(Ulc, x1, y1);
@@ -414,18 +405,19 @@ void DemMapInfo::height_range
   bool had_point = false;
   for(int i = imin; i <= imax; ++i)
     for(int j = jmin; j <= jmax; ++j)
-      if(i < 0 || i >= map_info_.number_y_pixel() ||
-	 j < 0 || j >= map_info_.number_x_pixel()) {
-	if(!outside_dem_is_error_) {
-	  Min_h = std::min(0.0, Min_h);
-	  Max_h = std::max(0.0, Max_h);
-	  had_point = true;
-	}
+      if(i < 0 || i >= map_info_.number_y_pixel() || j < 0 ||
+         j >= map_info_.number_x_pixel()) {
+        if(!outside_dem_is_error_) {
+          Min_h = std::min(0.0, Min_h);
+          Max_h = std::max(0.0, Max_h);
+          had_point = true;
+        }
       } else {
-	double h = elevation(i,j) + datum().undulation(*map_info_.ground_coordinate(i,j));
-	Min_h = std::min(h, Min_h);
-	Max_h = std::max(h, Max_h);
-	had_point = true;
+        double h = elevation(i, j) +
+                   datum().undulation(*map_info_.ground_coordinate(i, j));
+        Min_h = std::min(h, Min_h);
+        Max_h = std::max(h, Max_h);
+        had_point = true;
       }
   if(!had_point) {
     Min_h = 0;

@@ -8,13 +8,11 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void YprOrbitData::serialize(Archive & ar, const unsigned int version)
+void YprOrbitData::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionOrbitData)
-     & GEOCAL_NVP_(yaw)
-     & GEOCAL_NVP_(pitch)
-     & GEOCAL_NVP_(roll)
-     & GEOCAL_NVP_(euler_order);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionOrbitData) &
+      GEOCAL_NVP_(yaw) & GEOCAL_NVP_(pitch) & GEOCAL_NVP_(roll) &
+      GEOCAL_NVP_(euler_order);
 }
 
 GEOCAL_IMPLEMENT(YprOrbitData);
@@ -30,36 +28,40 @@ GEOCAL_IMPLEMENT(YprOrbitData);
 
 boost::math::quaternion<double>
 YprOrbitData::calc_orbital_to_ci(const boost::array<double, 3>& pos_ci,
-                                  const boost::array<double, 3>& vel_ci)
+                                 const boost::array<double, 3>& vel_ci)
 {
   // Calculate z-axis (nadir)
-  double pos_norm = std::sqrt(pos_ci[0]*pos_ci[0] +
-                              pos_ci[1]*pos_ci[1] +
-                              pos_ci[2]*pos_ci[2]);
-  boost::array<double, 3> z = {{-pos_ci[0]/pos_norm,
-                                -pos_ci[1]/pos_norm,
-                                -pos_ci[2]/pos_norm}};
+  double pos_norm = std::sqrt(pos_ci[0] * pos_ci[0] + pos_ci[1] * pos_ci[1] +
+                              pos_ci[2] * pos_ci[2]);
+  boost::array<double, 3> z = {
+      {-pos_ci[0] / pos_norm, -pos_ci[1] / pos_norm, -pos_ci[2] / pos_norm}};
 
   // Calculate x-axis (velocity direction, orthogonalized to z)
-  double v_dot_z = vel_ci[0]*z[0] + vel_ci[1]*z[1] + vel_ci[2]*z[2];
-  boost::array<double, 3> x = {{vel_ci[0] - z[0]*v_dot_z,
-                                vel_ci[1] - z[1]*v_dot_z,
-                                vel_ci[2] - z[2]*v_dot_z}};
-  double x_norm = std::sqrt(x[0]*x[0] + x[1]*x[1] + x[2]*x[2]);
+  double v_dot_z = vel_ci[0] * z[0] + vel_ci[1] * z[1] + vel_ci[2] * z[2];
+  boost::array<double, 3> x = {{vel_ci[0] - z[0] * v_dot_z,
+                                vel_ci[1] - z[1] * v_dot_z,
+                                vel_ci[2] - z[2] * v_dot_z}};
+  double x_norm = std::sqrt(x[0] * x[0] + x[1] * x[1] + x[2] * x[2]);
   x[0] /= x_norm;
   x[1] /= x_norm;
   x[2] /= x_norm;
 
   // Calculate y-axis (cross product: y = cross(z, x))
-  boost::array<double, 3> y = {{z[1]*x[2] - z[2]*x[1],
-                                z[2]*x[0] - z[0]*x[2],
-                                z[0]*x[1] - z[1]*x[0]}};
+  boost::array<double, 3> y = {{z[1] * x[2] - z[2] * x[1],
+                                z[2] * x[0] - z[0] * x[2],
+                                z[0] * x[1] - z[1] * x[0]}};
 
   // Create rotation matrix with orbital frame axes as columns
   double m[3][3];
-  m[0][0] = x[0]; m[0][1] = y[0]; m[0][2] = z[0];
-  m[1][0] = x[1]; m[1][1] = y[1]; m[1][2] = z[1];
-  m[2][0] = x[2]; m[2][1] = y[2]; m[2][2] = z[2];
+  m[0][0] = x[0];
+  m[0][1] = y[0];
+  m[0][2] = z[0];
+  m[1][0] = x[1];
+  m[1][1] = y[1];
+  m[1][2] = z[1];
+  m[2][0] = x[2];
+  m[2][1] = y[2];
+  m[2][2] = z[2];
 
   return matrix_to_quaternion(m);
 }
@@ -80,7 +82,8 @@ YprOrbitData::YprOrbitData(const QuaternionOrbitData& Od,
   boost::array<double, 3> vel_ci = Od.velocity_ci();
 
   // Calculate orbital-to-ci transformation
-  boost::math::quaternion<double> orbital_to_ci = calc_orbital_to_ci(pos_ci, vel_ci);
+  boost::math::quaternion<double> orbital_to_ci =
+      calc_orbital_to_ci(pos_ci, vel_ci);
 
   // Get spacecraft-to-ci quaternion
   boost::math::quaternion<double> sc_to_ci = Od.sc_to_ci();
@@ -88,7 +91,8 @@ YprOrbitData::YprOrbitData(const QuaternionOrbitData& Od,
   // Extract spacecraft-to-orbital quaternion
   // sc_to_ci = orbital_to_ci * sc_to_orbital
   // => sc_to_orbital = conj(orbital_to_ci) * sc_to_ci
-  boost::math::quaternion<double> sc_to_orbital = conj(orbital_to_ci) * sc_to_ci;
+  boost::math::quaternion<double> sc_to_orbital =
+      conj(orbital_to_ci) * sc_to_ci;
 
   // Convert quaternion to Euler angles
   double e1, e2, e3;
@@ -98,7 +102,8 @@ YprOrbitData::YprOrbitData(const QuaternionOrbitData& Od,
   // For "ZYX": e1=yaw(Z), e2=pitch(Y), e3=roll(X)
   // For "XYZ": e1=roll(X), e2=pitch(Y), e3=yaw(Z)
   for(int i = 0; i < 3; ++i) {
-    double angle_deg = (i == 0 ? e1 : (i == 1 ? e2 : e3)) * Constant::rad_to_deg;
+    double angle_deg =
+        (i == 0 ? e1 : (i == 1 ? e2 : e3)) * Constant::rad_to_deg;
     char axis = Euler_order[i];
     if(axis == 'Z' || axis == 'z' || axis == '3') {
       yaw_ = angle_deg;
@@ -126,8 +131,8 @@ YprOrbitData::YprOrbitData(const QuaternionOrbitData& Od,
 
 YprOrbitData::YprOrbitData(const Time& Tm,
                            const boost::shared_ptr<CartesianFixed>& pos_cf,
-                           const boost::array<double, 3>& vel_fixed,
-                           double Yaw, double Pitch, double Roll,
+                           const boost::array<double, 3>& vel_fixed, double Yaw,
+                           double Pitch, double Roll,
                            const std::string& Euler_order)
 {
   initialize_from_ypr(Tm, pos_cf, vel_fixed, Yaw, Pitch, Roll, Euler_order);
@@ -151,11 +156,9 @@ YprOrbitData::YprOrbitData(const Time& Tm,
 //-----------------------------------------------------------------------
 
 void YprOrbitData::initialize_from_ypr(
-    const Time& Tm,
-    const boost::shared_ptr<CartesianFixed>& pos_cf,
-    const boost::array<double, 3>& vel_fixed,
-    double Yaw, double Pitch, double Roll,
-    const std::string& Euler_order)
+    const Time& Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
+    const boost::array<double, 3>& vel_fixed, double Yaw, double Pitch,
+    double Roll, const std::string& Euler_order)
 {
   yaw_ = Yaw;
   pitch_ = Pitch;
@@ -167,12 +170,12 @@ void YprOrbitData::initialize_from_ypr(
   boost::array<double, 3> vel_ci;
   convert_position_and_velocity(Tm, *pos_cf, vel_fixed, pos_ci, vel_ci);
 
-  boost::array<double, 3> pos_ci_arr = {{pos_ci->position[0],
-                                         pos_ci->position[1],
-                                         pos_ci->position[2]}};
+  boost::array<double, 3> pos_ci_arr = {
+      {pos_ci->position[0], pos_ci->position[1], pos_ci->position[2]}};
 
   // Calculate orbital-to-ci transformation
-  boost::math::quaternion<double> orbital_to_ci = calc_orbital_to_ci(pos_ci_arr, vel_ci);
+  boost::math::quaternion<double> orbital_to_ci =
+      calc_orbital_to_ci(pos_ci_arr, vel_ci);
 
   // Map yaw/pitch/roll to euler angles based on order
   double e1, e2, e3;
@@ -190,13 +193,17 @@ void YprOrbitData::initialize_from_ypr(
       e << "Invalid euler order character: " << axis;
       throw e;
     }
-    if(i == 0) e1 = angle_deg * Constant::deg_to_rad;
-    else if(i == 1) e2 = angle_deg * Constant::deg_to_rad;
-    else e3 = angle_deg * Constant::deg_to_rad;
+    if(i == 0)
+      e1 = angle_deg * Constant::deg_to_rad;
+    else if(i == 1)
+      e2 = angle_deg * Constant::deg_to_rad;
+    else
+      e3 = angle_deg * Constant::deg_to_rad;
   }
 
   // Create sc_to_orbital quaternion
-  boost::math::quaternion<double> sc_to_orbital = quat_rot(Euler_order, e1, e2, e3);
+  boost::math::quaternion<double> sc_to_orbital =
+      quat_rot(Euler_order, e1, e2, e3);
 
   // Combine to get sc_to_ci quaternion
   // sc_to_ci = orbital_to_ci * sc_to_orbital
@@ -206,7 +213,8 @@ void YprOrbitData::initialize_from_ypr(
   boost::shared_ptr<CartesianFixed> pos_cf_result;
   boost::array<double, 3> vel_cf_result;
   boost::math::quaternion<double> ci_to_cf_q;
-  convert_position_and_velocity(Tm, *pos_ci, vel_ci, pos_cf_result, vel_cf_result, ci_to_cf_q);
+  convert_position_and_velocity(Tm, *pos_ci, vel_ci, pos_cf_result,
+                                vel_cf_result, ci_to_cf_q);
 
   // Transform quaternion to CF frame: sc_to_cf = ci_to_cf_q * sc_to_ci
   boost::math::quaternion<double> sc_to_cf = ci_to_cf_q * sc_to_ci;
@@ -220,11 +228,9 @@ void YprOrbitData::initialize_from_ypr(
 //-----------------------------------------------------------------------
 
 void YprOrbitData::initialize_from_ypr(
-    const Time& Tm,
-    const boost::shared_ptr<CartesianInertial>& pos_ci,
-    const boost::array<double, 3>& vel_inertial,
-    double Yaw, double Pitch, double Roll,
-    const std::string& Euler_order)
+    const Time& Tm, const boost::shared_ptr<CartesianInertial>& pos_ci,
+    const boost::array<double, 3>& vel_inertial, double Yaw, double Pitch,
+    double Roll, const std::string& Euler_order)
 {
   yaw_ = Yaw;
   pitch_ = Pitch;
@@ -232,12 +238,12 @@ void YprOrbitData::initialize_from_ypr(
   euler_order_ = Euler_order;
 
   // Get position and velocity arrays
-  boost::array<double, 3> pos_ci_arr = {{pos_ci->position[0],
-                                         pos_ci->position[1],
-                                         pos_ci->position[2]}};
+  boost::array<double, 3> pos_ci_arr = {
+      {pos_ci->position[0], pos_ci->position[1], pos_ci->position[2]}};
 
   // Calculate orbital-to-ci transformation
-  boost::math::quaternion<double> orbital_to_ci = calc_orbital_to_ci(pos_ci_arr, vel_inertial);
+  boost::math::quaternion<double> orbital_to_ci =
+      calc_orbital_to_ci(pos_ci_arr, vel_inertial);
 
   // Map yaw/pitch/roll to euler angles based on order
   double e1, e2, e3;
@@ -255,13 +261,17 @@ void YprOrbitData::initialize_from_ypr(
       e << "Invalid euler order character: " << axis;
       throw e;
     }
-    if(i == 0) e1 = angle_deg * Constant::deg_to_rad;
-    else if(i == 1) e2 = angle_deg * Constant::deg_to_rad;
-    else e3 = angle_deg * Constant::deg_to_rad;
+    if(i == 0)
+      e1 = angle_deg * Constant::deg_to_rad;
+    else if(i == 1)
+      e2 = angle_deg * Constant::deg_to_rad;
+    else
+      e3 = angle_deg * Constant::deg_to_rad;
   }
 
   // Create sc_to_orbital quaternion
-  boost::math::quaternion<double> sc_to_orbital = quat_rot(Euler_order, e1, e2, e3);
+  boost::math::quaternion<double> sc_to_orbital =
+      quat_rot(Euler_order, e1, e2, e3);
 
   // Combine to get sc_to_ci quaternion
   // sc_to_ci = orbital_to_ci * sc_to_orbital
@@ -291,9 +301,12 @@ boost::math::quaternion<double> YprOrbitData::orbital_to_ci() const
 double YprOrbitData::euler_angle1() const
 {
   char axis = euler_order_[0];
-  if(axis == 'Z' || axis == 'z' || axis == '3') return yaw_;
-  if(axis == 'Y' || axis == 'y' || axis == '2') return pitch_;
-  if(axis == 'X' || axis == 'x' || axis == '1') return roll_;
+  if(axis == 'Z' || axis == 'z' || axis == '3')
+    return yaw_;
+  if(axis == 'Y' || axis == 'y' || axis == '2')
+    return pitch_;
+  if(axis == 'X' || axis == 'x' || axis == '1')
+    return roll_;
   Exception e;
   e << "Invalid euler order character: " << axis;
   throw e;
@@ -302,9 +315,12 @@ double YprOrbitData::euler_angle1() const
 double YprOrbitData::euler_angle2() const
 {
   char axis = euler_order_[1];
-  if(axis == 'Z' || axis == 'z' || axis == '3') return yaw_;
-  if(axis == 'Y' || axis == 'y' || axis == '2') return pitch_;
-  if(axis == 'X' || axis == 'x' || axis == '1') return roll_;
+  if(axis == 'Z' || axis == 'z' || axis == '3')
+    return yaw_;
+  if(axis == 'Y' || axis == 'y' || axis == '2')
+    return pitch_;
+  if(axis == 'X' || axis == 'x' || axis == '1')
+    return roll_;
   Exception e;
   e << "Invalid euler order character: " << axis;
   throw e;
@@ -313,9 +329,12 @@ double YprOrbitData::euler_angle2() const
 double YprOrbitData::euler_angle3() const
 {
   char axis = euler_order_[2];
-  if(axis == 'Z' || axis == 'z' || axis == '3') return yaw_;
-  if(axis == 'Y' || axis == 'y' || axis == '2') return pitch_;
-  if(axis == 'X' || axis == 'x' || axis == '1') return roll_;
+  if(axis == 'Z' || axis == 'z' || axis == '3')
+    return yaw_;
+  if(axis == 'Y' || axis == 'y' || axis == '2')
+    return pitch_;
+  if(axis == 'X' || axis == 'x' || axis == '1')
+    return roll_;
   Exception e;
   e << "Invalid euler order character: " << axis;
   throw e;

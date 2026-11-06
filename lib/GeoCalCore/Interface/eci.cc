@@ -8,9 +8,9 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void Eci::serialize(Archive & ar, const unsigned int UNUSED(version))
+void Eci::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianInertial);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianInertial);
 }
 
 GEOCAL_IMPLEMENT(Eci);
@@ -23,8 +23,8 @@ GEOCAL_IMPLEMENT(Eci);
 boost::shared_ptr<CartesianFixed> Eci::convert_to_cf(const Time& T) const
 {
   boost::shared_ptr<CartesianFixed> res(new Ecr);
-  CartesianFixed::toolkit_coordinate_interface->
-    to_fixed(EARTH_NAIF_CODE, T, *this, *res);
+  CartesianFixed::toolkit_coordinate_interface->to_fixed(EARTH_NAIF_CODE, T,
+                                                         *this, *res);
   return res;
 }
 
@@ -51,15 +51,15 @@ void Eci::print(std::ostream& Os) const
 
 boost::shared_ptr<CartesianInertial>
 Eci::reference_surface_intersect_approximate(
-  const CartesianInertialLookVector& Cl, double Height_reference_surface) 
-  const
+    const CartesianInertialLookVector& Cl,
+    double Height_reference_surface) const
 {
   double aph = Constant::wgs84_a + Height_reference_surface;
   double bph = Constant::wgs84_b + Height_reference_surface;
   boost::array<double, 3> dirci;
-  dirci[0] = Cl.look_vector[0]/ aph;
-  dirci[1] = Cl.look_vector[1]/ aph;
-  dirci[2] = Cl.look_vector[2]/ bph;
+  dirci[0] = Cl.look_vector[0] / aph;
+  dirci[1] = Cl.look_vector[1] / aph;
+  dirci[2] = Cl.look_vector[2] / bph;
   double t = norm(dirci);
   dirci[0] /= t;
   dirci[1] /= t;

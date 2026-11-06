@@ -19,7 +19,7 @@
 
 namespace GeoCal {
 
-/****************************************************************//**
+/****************************************************************/ /**
   This handles opening and closing a Vicar file. This class doesn't
   actually read and write data, but is used by other classes which do.
 
@@ -34,150 +34,156 @@ namespace GeoCal {
 
 class VicarLiteFile : public Printable<VicarLiteFile> {
 public:
-//-----------------------------------------------------------------------
-/// Type of data in file.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Type of data in file.
+  //-----------------------------------------------------------------------
 
-  enum data_type {VICAR_BYTE, VICAR_HALF, VICAR_FULL, VICAR_FLOAT,
-		  VICAR_DOUBLE};
+  enum data_type {
+    VICAR_BYTE,
+    VICAR_HALF,
+    VICAR_FULL,
+    VICAR_FLOAT,
+    VICAR_DOUBLE
+  };
 
-//-----------------------------------------------------------------------
-/// Type of access.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Type of access.
+  //-----------------------------------------------------------------------
 
-  enum access_type {READ, WRITE, UPDATE};
+  enum access_type { READ, WRITE, UPDATE };
 
-//-----------------------------------------------------------------------
-/// Open an existing VICAR file for reading or update.
-///
-/// The Force_area_pixel forces the file to be treated as
-/// "pixel as area" rather than "pixel as point". This is really just
-/// meant as a work around for the SRTM data, which incorrectly labels
-/// the data as "point" rather than "area". Since this is a 15 meter
-/// difference, it matters for many applications. Most users should
-/// just ignore this value.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Open an existing VICAR file for reading or update.
+  ///
+  /// The Force_area_pixel forces the file to be treated as
+  /// "pixel as area" rather than "pixel as point". This is really just
+  /// meant as a work around for the SRTM data, which incorrectly labels
+  /// the data as "point" rather than "area". Since this is a 15 meter
+  /// difference, it matters for many applications. Most users should
+  /// just ignore this value.
+  //-----------------------------------------------------------------------
 
   VicarLiteFile(const std::string& Fname, access_type Access = READ,
-		bool Force_area_pixel = false)
+                bool Force_area_pixel = false)
   {
     initialize(Fname, Access, Force_area_pixel);
   }
   VicarLiteFile(const std::string& Fname, int Number_line, int Number_sample,
-	    const std::string& Type = "BYTE");
+                const std::string& Type = "BYTE");
   virtual ~VicarLiteFile() {}
 
-//-----------------------------------------------------------------------
-/// Access type of file.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Access type of file.
+  //-----------------------------------------------------------------------
 
-  access_type access() const {return access_;}
+  access_type access() const { return access_; }
 
-//-----------------------------------------------------------------------
-/// If true, then force the file to be treated as "pixel is area".
-/// This is really just meant as a work around for the SRTM data,
-/// which incorrectly labels the data as "point" rather than
-/// "area". Since this is a 15 meter difference, it matters for many
-/// applications. Most users should just ignore this value.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// If true, then force the file to be treated as "pixel is area".
+  /// This is really just meant as a work around for the SRTM data,
+  /// which incorrectly labels the data as "point" rather than
+  /// "area". Since this is a 15 meter difference, it matters for many
+  /// applications. Most users should just ignore this value.
+  //-----------------------------------------------------------------------
 
   bool force_area_pixel() const { return force_area_pixel_; }
 
-//-----------------------------------------------------------------------
-/// Offset to where the data starts.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Offset to where the data starts.
+  //-----------------------------------------------------------------------
 
-  int data_offset() const {return data_offset_;}
+  int data_offset() const { return data_offset_; }
 
-//-----------------------------------------------------------------------
-/// File name
-//-----------------------------------------------------------------------
-  
+  //-----------------------------------------------------------------------
+  /// File name
+  //-----------------------------------------------------------------------
+
   const std::string& file_name() const { return fname_; }
 
   static bool is_vicar_file(const std::string& Fname);
 
-//-----------------------------------------------------------------------
-/// List of properties.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// List of properties.
+  //-----------------------------------------------------------------------
 
-  const std::set<std::string>& property() const {return prop_set_;}
+  const std::set<std::string>& property() const { return prop_set_; }
 
-//-----------------------------------------------------------------------
-/// Return value for the given label. Optionally also supply a
-/// property for labels that are part of one (e.g., GEOTIFF)
-//-----------------------------------------------------------------------
-  
-  template<class T> T label(const std::string& F, 
-			    const std::string& Property = "") const;
+  //-----------------------------------------------------------------------
+  /// Return value for the given label. Optionally also supply a
+  /// property for labels that are part of one (e.g., GEOTIFF)
+  //-----------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
-/// Non template form of label, useful in some contexts.
-//-----------------------------------------------------------------------
+  template<class T>
+  T label(const std::string& F, const std::string& Property = "") const;
 
-  inline std::string label_string(const std::string& F, 
-				  const std::string& Property = "") const;
+  //-----------------------------------------------------------------------
+  /// Non template form of label, useful in some contexts.
+  //-----------------------------------------------------------------------
 
-//   void label_set(const std::string& F, 
-// 		 int Val,
-// 		 const std::string& Property = "");
-//   void label_set(const std::string& F, 
-// 		 double Val,
-// 		 const std::string& Property = "");
-//   void label_set(const std::string& F, 
-// 		 const std::string& Val,
-// 		 const std::string& Property = "");
+  inline std::string label_string(const std::string& F,
+                                  const std::string& Property = "") const;
 
-//-----------------------------------------------------------------------
-/// Sometimes it is more convenient to work directly with a map 
-//-----------------------------------------------------------------------
+  //   void label_set(const std::string& F,
+  // 		 int Val,
+  // 		 const std::string& Property = "");
+  //   void label_set(const std::string& F,
+  // 		 double Val,
+  // 		 const std::string& Property = "");
+  //   void label_set(const std::string& F,
+  // 		 const std::string& Val,
+  // 		 const std::string& Property = "");
 
-  const std::map<std::string, std::string>& label_map() const
-  {return label_;}
+  //-----------------------------------------------------------------------
+  /// Sometimes it is more convenient to work directly with a map
+  //-----------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
-/// Test if a label is found in a file, and if so return
-/// true. Otherwise return false.
-//-----------------------------------------------------------------------
+  const std::map<std::string, std::string>& label_map() const { return label_; }
+
+  //-----------------------------------------------------------------------
+  /// Test if a label is found in a file, and if so return
+  /// true. Otherwise return false.
+  //-----------------------------------------------------------------------
 
   bool has_label(const std::string& Lbl) const
-  { return label_.count(Lbl) != 0; }
+  {
+    return label_.count(Lbl) != 0;
+  }
 
-//-----------------------------------------------------------------------
-/// Number of bands in file.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of bands in file.
+  //-----------------------------------------------------------------------
 
-  int number_band() const {return number_band_;}
+  int number_band() const { return number_band_; }
 
-//-----------------------------------------------------------------------
-/// Number of lines in file.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of lines in file.
+  //-----------------------------------------------------------------------
 
-  int number_line() const {return number_line_;}
+  int number_line() const { return number_line_; }
 
-//-----------------------------------------------------------------------
-/// Number of samples in file.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of samples in file.
+  //-----------------------------------------------------------------------
 
-  int number_sample() const {return number_sample_;}
+  int number_sample() const { return number_sample_; }
 
-//-----------------------------------------------------------------------
-/// Number of lines of binary data before the start of the image
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of lines of binary data before the start of the image
+  //-----------------------------------------------------------------------
 
-  int number_line_binary() const {return number_line_binary_; }
+  int number_line_binary() const { return number_line_binary_; }
 
-//-----------------------------------------------------------------------
-/// Number of bytes of binary data before the start of each line
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of bytes of binary data before the start of each line
+  //-----------------------------------------------------------------------
 
-  int number_byte_binary() const {return number_byte_binary_; }
-  
-//-----------------------------------------------------------------------
-/// Type of data in file
-//-----------------------------------------------------------------------
+  int number_byte_binary() const { return number_byte_binary_; }
 
-  data_type type() const {return type_;}
+  //-----------------------------------------------------------------------
+  /// Type of data in file
+  //-----------------------------------------------------------------------
+
+  data_type type() const { return type_; }
 
   bool has_map_info() const;
   bool has_rpc() const;
@@ -188,59 +194,63 @@ public:
   Rpc rpc() const;
   void rpc(const Rpc& UNUSED(R)) { throw Exception("Not yet implemented"); }
   boost::shared_ptr<Rsm> rsm() const;
-  void rsm(const boost::shared_ptr<Rsm>& UNUSED(R)) { throw Exception("Not yet implemented"); }
+  void rsm(const boost::shared_ptr<Rsm>& UNUSED(R))
+  {
+    throw Exception("Not yet implemented");
+  }
   boost::shared_ptr<ImageGroundConnection> igc_glas_gfm() const;
   int read_int(int B, int L, int S) const;
   double read_double(int B, int L, int S) const;
   void read_int(int B, int L, int S, int Nb, int Nl, int Ns, int* Res) const;
-  void read_double(int B, int L, int S, int Nb, int Nl, int Ns, 
-		   double* Res) const;
+  void read_double(int B, int L, int S, int Nb, int Nl, int Ns,
+                   double* Res) const;
   void write_int(int B, int L, int S, int V) const;
   void write_double(int B, int L, int S, double V) const;
 
-//-----------------------------------------------------------------------
-/// Print to stream.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print to stream.
+  //-----------------------------------------------------------------------
 
-  virtual void print(std::ostream& Os) const 
-  { Os << "Vicar Lite File \n" 
+  virtual void print(std::ostream& Os) const
+  {
+    Os << "Vicar Lite File \n"
        << "  File:          " << file_name() << "\n"
        << "  Number line:   " << number_line() << "\n"
        << "  Number sample: " << number_sample() << "\n"
        << "  Number band:   " << number_band() << "\n";
   }
 
-//-----------------------------------------------------------------------
-/// Indicate if the file is compressed. If it is, we can't actually
-/// read the data but we can still read all of the labels.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Indicate if the file is compressed. If it is, we can't actually
+  /// read the data but we can still read all of the labels.
+  //-----------------------------------------------------------------------
 
   bool is_compressed() const { return is_compressed_; }
 
 protected:
-//-----------------------------------------------------------------------
-/// Data in vicar file, as a memory map. This is the raw data, so it
-/// has not been byte swapped if needed. Regardless of the type of
-/// file, this is always in the order band, line, number,
-/// byte_in_pixel (so we use boost:multi_array ability to rearrange
-/// the order).
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Data in vicar file, as a memory map. This is the raw data, so it
+  /// has not been byte swapped if needed. Regardless of the type of
+  /// file, this is always in the order band, line, number,
+  /// byte_in_pixel (so we use boost:multi_array ability to rearrange
+  /// the order).
+  //-----------------------------------------------------------------------
 
-  boost::shared_ptr<MemoryMapArray<char, 4> > 
-       data_raw;
+  boost::shared_ptr<MemoryMapArray<char, 4>> data_raw;
 
   template<class C, bool Swap_needed> int to_int(const char* c) const;
-  template<class C, bool Swap_needed> void from_int(const int&, 
-						    char* c) const;
+  template<class C, bool Swap_needed> void from_int(const int&, char* c) const;
 
-//-----------------------------------------------------------------------
-/// Convert raw bytes to a double, swapping if needed.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Convert raw bytes to a double, swapping if needed.
+  //-----------------------------------------------------------------------
 
   template<class C, bool Swap_needed> double to_double(const char* c) const
-  { return to_int<C, Swap_needed>(c);}
-  template<class C, bool Swap_needed> void from_double(const double&, 
-						       char* c) const;
+  {
+    return to_int<C, Swap_needed>(c);
+  }
+  template<class C, bool Swap_needed>
+  void from_double(const double&, char* c) const;
 protected:
   VicarLiteFile() {}
 private:
@@ -263,25 +273,25 @@ private:
   std::string read_label(int& lblsize);
   void process_label(const std::string& label);
   void initialize(const std::string& Fname, access_type Access = READ,
-	    bool Force_area_pixel = false);
+                  bool Force_area_pixel = false);
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive& Ar, const unsigned int version);
+  template<class Archive> void load(Archive& Ar, const unsigned int version);
   GEOCAL_SPLIT_MEMBER();
 };
 
 //-----------------------------------------------------------------------
 /// Return value for the given label.
 //-----------------------------------------------------------------------
-  
-template<> inline int VicarLiteFile::label<int>(const std::string& K, 
-					 const std::string& Property) const
+
+template<>
+inline int VicarLiteFile::label<int>(const std::string& K,
+                                     const std::string& Property) const
 {
   std::string t = (Property == "" ? K : Property + " " + K);
   std::map<std::string, std::string>::const_iterator i = label_.find(t);
-  if(i ==label_.end())
+  if(i == label_.end())
     throw Exception("Label " + K + " is not found in file " + fname_);
   return atoi((*i).second.c_str());
 }
@@ -289,14 +299,15 @@ template<> inline int VicarLiteFile::label<int>(const std::string& K,
 //-----------------------------------------------------------------------
 /// Return value for the given label.
 //-----------------------------------------------------------------------
-  
-template<> inline std::string 
-VicarLiteFile::label<std::string>(const std::string& K, 
-				  const std::string& Property) const
+
+template<>
+inline std::string
+VicarLiteFile::label<std::string>(const std::string& K,
+                                  const std::string& Property) const
 {
   std::string t = (Property == "" ? K : Property + " " + K);
   std::map<std::string, std::string>::const_iterator i = label_.find(t);
-  if(i ==label_.end())
+  if(i == label_.end())
     throw Exception("Label " + K + " is not found in file " + fname_);
   return (*i).second;
 }
@@ -304,14 +315,14 @@ VicarLiteFile::label<std::string>(const std::string& K,
 //-----------------------------------------------------------------------
 /// Return value for the given label.
 //-----------------------------------------------------------------------
-  
-template<> inline double 
-VicarLiteFile::label<double>(const std::string& K, 
-			     const std::string& Property) const
+
+template<>
+inline double VicarLiteFile::label<double>(const std::string& K,
+                                           const std::string& Property) const
 {
   std::string t = (Property == "" ? K : Property + " " + K);
   std::map<std::string, std::string>::const_iterator i = label_.find(t);
-  if(i ==label_.end())
+  if(i == label_.end())
     throw Exception("Label " + K + " is not found in file " + fname_);
   return atof((*i).second.c_str());
 }
@@ -321,198 +332,284 @@ VicarLiteFile::label<double>(const std::string& K,
 //-----------------------------------------------------------------------
 
 template<> inline int VicarLiteFile::to_int<uint8_t, true>(const char* c) const
-{ return *reinterpret_cast<const uint8_t*>(c); }
+{
+  return *reinterpret_cast<const uint8_t*>(c);
+}
 template<> inline int VicarLiteFile::to_int<uint8_t, false>(const char* c) const
-{ return *reinterpret_cast<const uint8_t*>(c); }
-template<> inline int 
-VicarLiteFile::to_int<int16_t, true>(const char* c) const
-{ int16_t res = 0;
+{
+  return *reinterpret_cast<const uint8_t*>(c);
+}
+template<> inline int VicarLiteFile::to_int<int16_t, true>(const char* c) const
+{
+  int16_t res = 0;
   char* cr = reinterpret_cast<char*>(&res);
   cr[0] = c[1];
   cr[1] = c[0];
-  return res; }
-template<> inline int 
-VicarLiteFile::to_int<int16_t, false>(const char* c) const
-{ return *(reinterpret_cast<const int16_t*>(c)); }
-template<> inline int 
-VicarLiteFile::to_int<int32_t, false>(const char* c) const
-{ return *(reinterpret_cast<const int*>(c)); }
-template<> inline int 
-VicarLiteFile::to_int<int32_t, true>(const char* c) const
-{ int32_t res = 0;
+  return res;
+}
+template<> inline int VicarLiteFile::to_int<int16_t, false>(const char* c) const
+{
+  return *(reinterpret_cast<const int16_t*>(c));
+}
+template<> inline int VicarLiteFile::to_int<int32_t, false>(const char* c) const
+{
+  return *(reinterpret_cast<const int*>(c));
+}
+template<> inline int VicarLiteFile::to_int<int32_t, true>(const char* c) const
+{
+  int32_t res = 0;
   char* cr = reinterpret_cast<char*>(&res);
   cr[0] = c[3];
   cr[1] = c[2];
   cr[2] = c[1];
   cr[3] = c[0];
-  return res; 
+  return res;
 }
 
 template<> inline int VicarLiteFile::to_int<float, false>(const char* c) const
-{ return (int) *reinterpret_cast<const float*>(c); }
+{
+  return (int)*reinterpret_cast<const float*>(c);
+}
 
 template<> inline int VicarLiteFile::to_int<double, false>(const char* c) const
-{ return (int) *reinterpret_cast<const double*>(c); }
+{
+  return (int)*reinterpret_cast<const double*>(c);
+}
 
-template<> inline double VicarLiteFile::to_double<uint8_t, true>(const char* c) const
-{ return to_int<uint8_t, true>(c); }
-template<> inline double VicarLiteFile::to_double<uint8_t, false>(const char* c) const
-{ return to_int<uint8_t, false>(c); }
-template<> inline double VicarLiteFile::to_double<int16_t, true>(const char* c) const
-{ return to_int<int16_t, true>(c); }
-template<> inline double VicarLiteFile::to_double<int16_t, false>(const char* c) const
-{ return to_int<int16_t, false>(c); }
-template<> inline double VicarLiteFile::to_double<int32_t, true>(const char* c) const
-{ return to_int<int32_t, true>(c); }
-template<> inline double VicarLiteFile::to_double<int32_t, false>(const char* c) const
-{ return to_int<int32_t, false>(c); }
+template<>
+inline double VicarLiteFile::to_double<uint8_t, true>(const char* c) const
+{
+  return to_int<uint8_t, true>(c);
+}
+template<>
+inline double VicarLiteFile::to_double<uint8_t, false>(const char* c) const
+{
+  return to_int<uint8_t, false>(c);
+}
+template<>
+inline double VicarLiteFile::to_double<int16_t, true>(const char* c) const
+{
+  return to_int<int16_t, true>(c);
+}
+template<>
+inline double VicarLiteFile::to_double<int16_t, false>(const char* c) const
+{
+  return to_int<int16_t, false>(c);
+}
+template<>
+inline double VicarLiteFile::to_double<int32_t, true>(const char* c) const
+{
+  return to_int<int32_t, true>(c);
+}
+template<>
+inline double VicarLiteFile::to_double<int32_t, false>(const char* c) const
+{
+  return to_int<int32_t, false>(c);
+}
 
-template<> inline double VicarLiteFile::to_double<float, false>(const char* c) const
-{ return *reinterpret_cast<const float*>(c); }
+template<>
+inline double VicarLiteFile::to_double<float, false>(const char* c) const
+{
+  return *reinterpret_cast<const float*>(c);
+}
 
-template<> inline double VicarLiteFile::to_double<double, false>(const char* c) const
-{ return *reinterpret_cast<const double*>(c); }
+template<>
+inline double VicarLiteFile::to_double<double, false>(const char* c) const
+{
+  return *reinterpret_cast<const double*>(c);
+}
 
 //-----------------------------------------------------------------------
 /// Convert from int.
 //-----------------------------------------------------------------------
 
-template<> inline void 
-VicarLiteFile::from_int<uint8_t, true>(const int& I, char* c) const
-{ *c = static_cast<uint8_t>(I); }
-template<> inline void 
-VicarLiteFile::from_int<uint8_t, false>(const int& I, char* c) const
-{ *c = static_cast<uint8_t>(I); }
-template<> inline void 
-VicarLiteFile::from_int<int16_t, true>(const int& I, char* c) const
-{ 
+template<>
+inline void VicarLiteFile::from_int<uint8_t, true>(const int& I, char* c) const
+{
+  *c = static_cast<uint8_t>(I);
+}
+template<>
+inline void VicarLiteFile::from_int<uint8_t, false>(const int& I, char* c) const
+{
+  *c = static_cast<uint8_t>(I);
+}
+template<>
+inline void VicarLiteFile::from_int<int16_t, true>(const int& I, char* c) const
+{
   const char* cr = reinterpret_cast<const char*>(&I);
   c[0] = cr[1];
   c[1] = cr[0];
 }
-template<> inline void 
-VicarLiteFile::from_int<int16_t, false>(const int& I, char* c) const
-{ *(reinterpret_cast<int16_t *>(c)) = static_cast<int16_t>(I); }
-template<> inline void 
-VicarLiteFile::from_int<int32_t, true>(const int& I, char* c) const
-{ 
+template<>
+inline void VicarLiteFile::from_int<int16_t, false>(const int& I, char* c) const
+{
+  *(reinterpret_cast<int16_t*>(c)) = static_cast<int16_t>(I);
+}
+template<>
+inline void VicarLiteFile::from_int<int32_t, true>(const int& I, char* c) const
+{
   const char* cr = reinterpret_cast<const char*>(&I);
   c[0] = cr[3];
   c[1] = cr[2];
   c[2] = cr[1];
   c[3] = cr[0];
 }
-template<> inline void 
-VicarLiteFile::from_int<int32_t, false>(const int& I, char* c) const
-{ *(reinterpret_cast<int32_t *>(c)) = static_cast<int>(I); }
-template<> inline void 
-VicarLiteFile::from_int<float, false>(const int& I, char* c) const
-{ *(reinterpret_cast<float *>(c)) = static_cast<float>(I); }
-template<> inline void 
-VicarLiteFile::from_int<double, false>(const int& I, char* c) const
-{ *(reinterpret_cast<double *>(c)) = static_cast<double>(I); }
+template<>
+inline void VicarLiteFile::from_int<int32_t, false>(const int& I, char* c) const
+{
+  *(reinterpret_cast<int32_t*>(c)) = static_cast<int>(I);
+}
+template<>
+inline void VicarLiteFile::from_int<float, false>(const int& I, char* c) const
+{
+  *(reinterpret_cast<float*>(c)) = static_cast<float>(I);
+}
+template<>
+inline void VicarLiteFile::from_int<double, false>(const int& I, char* c) const
+{
+  *(reinterpret_cast<double*>(c)) = static_cast<double>(I);
+}
 
-template<> inline void 
-VicarLiteFile::from_double<uint8_t, true>(const double& I, char* c) const
-{ from_int<uint8_t, true>(static_cast<int>(I), c); }
-template<> inline void 
-VicarLiteFile::from_double<uint8_t, false>(const double& I, char* c) const
-{ from_int<uint8_t, false>(static_cast<int>(I), c); }
-template<> inline void 
-VicarLiteFile::from_double<int16_t, true>(const double& I, char* c) const
-{ from_int<int16_t, true>(static_cast<int>(I), c); }
-template<> inline void 
-VicarLiteFile::from_double<int16_t, false>(const double& I, char* c) const
-{ from_int<int16_t, false>(static_cast<int>(I), c); }
-template<> inline void 
-VicarLiteFile::from_double<int32_t, true>(const double& I, char* c) const
-{ from_int<int32_t, true>(static_cast<int>(I), c); }
-template<> inline void 
-VicarLiteFile::from_double<int32_t, false>(const double& I, char* c) const
-{ from_int<int32_t, false>(static_cast<int>(I), c); }
-template<> inline void 
-VicarLiteFile::from_double<float, false>(const double& I, char* c) const
-{ *(reinterpret_cast<float *>(c)) = static_cast<float>(I); }
-template<> inline void 
-VicarLiteFile::from_double<double, false>(const double& I, char* c) const
-{ *(reinterpret_cast<double *>(c)) = static_cast<double>(I); }
+template<>
+inline void VicarLiteFile::from_double<uint8_t, true>(const double& I,
+                                                      char* c) const
+{
+  from_int<uint8_t, true>(static_cast<int>(I), c);
+}
+template<>
+inline void VicarLiteFile::from_double<uint8_t, false>(const double& I,
+                                                       char* c) const
+{
+  from_int<uint8_t, false>(static_cast<int>(I), c);
+}
+template<>
+inline void VicarLiteFile::from_double<int16_t, true>(const double& I,
+                                                      char* c) const
+{
+  from_int<int16_t, true>(static_cast<int>(I), c);
+}
+template<>
+inline void VicarLiteFile::from_double<int16_t, false>(const double& I,
+                                                       char* c) const
+{
+  from_int<int16_t, false>(static_cast<int>(I), c);
+}
+template<>
+inline void VicarLiteFile::from_double<int32_t, true>(const double& I,
+                                                      char* c) const
+{
+  from_int<int32_t, true>(static_cast<int>(I), c);
+}
+template<>
+inline void VicarLiteFile::from_double<int32_t, false>(const double& I,
+                                                       char* c) const
+{
+  from_int<int32_t, false>(static_cast<int>(I), c);
+}
+template<>
+inline void VicarLiteFile::from_double<float, false>(const double& I,
+                                                     char* c) const
+{
+  *(reinterpret_cast<float*>(c)) = static_cast<float>(I);
+}
+template<>
+inline void VicarLiteFile::from_double<double, false>(const double& I,
+                                                      char* c) const
+{
+  *(reinterpret_cast<double*>(c)) = static_cast<double>(I);
+}
 
 //-----------------------------------------------------------------------
 /// Read data as an int.
 //-----------------------------------------------------------------------
 
-inline int VicarLiteFile::read_int(int B, int L, int S) const 
+inline int VicarLiteFile::read_int(int B, int L, int S) const
 {
   if(is_compressed_)
     throw Exception("Can't use VicarLiteFile to read a compressed file");
   if(swap_needed_)
     switch(type_) {
     case VICAR_BYTE:
-      return to_int<uint8_t, true>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      return to_int<uint8_t, true>(
+          &(data_raw->data()[B][L][S + number_sample_binary_][0]));
     case VICAR_HALF:
-      return to_int<int16_t, true>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
-    default:
-      throw Exception("Unrecognized type");
-      }
-  else
-    switch(type_) {
-    case VICAR_BYTE:
-      return to_int<uint8_t, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
-    case VICAR_HALF:
-      return to_int<int16_t, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
-    case VICAR_FULL:
-      return to_int<int32_t, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
-    case VICAR_FLOAT:
-      return to_int<float, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
-    case VICAR_DOUBLE:
-      return to_int<double, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      return to_int<int16_t, true>(
+          &(data_raw->data()[B][L][S + number_sample_binary_][0]));
     default:
       throw Exception("Unrecognized type");
     }
-}	  
+  else
+    switch(type_) {
+    case VICAR_BYTE:
+      return to_int<uint8_t, false>(
+          &(data_raw->data()[B][L][S + number_sample_binary_][0]));
+    case VICAR_HALF:
+      return to_int<int16_t, false>(
+          &(data_raw->data()[B][L][S + number_sample_binary_][0]));
+    case VICAR_FULL:
+      return to_int<int32_t, false>(
+          &(data_raw->data()[B][L][S + number_sample_binary_][0]));
+    case VICAR_FLOAT:
+      return to_int<float, false>(
+          &(data_raw->data()[B][L][S + number_sample_binary_][0]));
+    case VICAR_DOUBLE:
+      return to_int<double, false>(
+          &(data_raw->data()[B][L][S + number_sample_binary_][0]));
+    default:
+      throw Exception("Unrecognized type");
+    }
+}
 
 //-----------------------------------------------------------------------
 /// Read data as an double.
 //-----------------------------------------------------------------------
 
-inline double VicarLiteFile::read_double(int B, int L, int S) const 
+inline double VicarLiteFile::read_double(int B, int L, int S) const
 {
   if(is_compressed_)
     throw Exception("Can't use VicarLiteFile to read a compressed file");
   if(swap_needed_)
     switch(type_) {
     case VICAR_BYTE:
-      return to_double<uint8_t, true>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      return to_double<uint8_t, true>(
+          &(data_raw->data()[B][L][S + number_sample_binary_][0]));
     case VICAR_HALF:
-      return to_double<int16_t, true>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      return to_double<int16_t, true>(
+          &(data_raw->data()[B][L][S + number_sample_binary_][0]));
     case VICAR_FULL:
-      return to_double<int32_t, true>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
-    default:
-      throw Exception("Unrecognized type");
-      }
-  else
-    switch(type_) {
-    case VICAR_BYTE:
-      return to_double<uint8_t, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
-    case VICAR_HALF:
-      return to_double<int16_t, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
-    case VICAR_FULL:
-      return to_double<int32_t, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
-    case VICAR_FLOAT:
-      return to_double<float, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
-    case VICAR_DOUBLE:
-      return to_double<double, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      return to_double<int32_t, true>(
+          &(data_raw->data()[B][L][S + number_sample_binary_][0]));
     default:
       throw Exception("Unrecognized type");
     }
-}	  
+  else
+    switch(type_) {
+    case VICAR_BYTE:
+      return to_double<uint8_t, false>(
+          &(data_raw->data()[B][L][S + number_sample_binary_][0]));
+    case VICAR_HALF:
+      return to_double<int16_t, false>(
+          &(data_raw->data()[B][L][S + number_sample_binary_][0]));
+    case VICAR_FULL:
+      return to_double<int32_t, false>(
+          &(data_raw->data()[B][L][S + number_sample_binary_][0]));
+    case VICAR_FLOAT:
+      return to_double<float, false>(
+          &(data_raw->data()[B][L][S + number_sample_binary_][0]));
+    case VICAR_DOUBLE:
+      return to_double<double, false>(
+          &(data_raw->data()[B][L][S + number_sample_binary_][0]));
+    default:
+      throw Exception("Unrecognized type");
+    }
+}
 
 //-----------------------------------------------------------------------
 /// Read data as an int.
 //-----------------------------------------------------------------------
 
-inline void VicarLiteFile::read_int(int B, int L, int S, int Nb, int Nl, 
-			     int Ns, int* Res) const
+inline void VicarLiteFile::read_int(int B, int L, int S, int Nb, int Nl, int Ns,
+                                    int* Res) const
 {
   if(is_compressed_)
     throw Exception("Can't use VicarLiteFile to read a compressed file");
@@ -520,64 +617,64 @@ inline void VicarLiteFile::read_int(int B, int L, int S, int Nb, int Nl,
     switch(type_) {
     case VICAR_BYTE:
       for(int i = B; i < B + Nb; ++i)
-	for(int j = L; j < L + Nl; ++j)
-	  for(int k = S+number_sample_binary_;
-	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_int<uint8_t, true>(&(data_raw->data()[i][j][k][0]));
+        for(int j = L; j < L + Nl; ++j)
+          for(int k = S + number_sample_binary_;
+              k < S + Ns + number_sample_binary_; ++k, ++Res)
+            *Res = to_int<uint8_t, true>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_HALF:
       for(int i = B; i < B + Nb; ++i)
-	for(int j = L; j < L + Nl; ++j)
-	  for(int k = S+number_sample_binary_;
-	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_int<int16_t, true>(&(data_raw->data()[i][j][k][0]));
+        for(int j = L; j < L + Nl; ++j)
+          for(int k = S + number_sample_binary_;
+              k < S + Ns + number_sample_binary_; ++k, ++Res)
+            *Res = to_int<int16_t, true>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_FULL:
       for(int i = B; i < B + Nb; ++i)
-	for(int j = L; j < L + Nl; ++j)
-	  for(int k = S+number_sample_binary_;
-	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_int<int32_t, true>(&(data_raw->data()[i][j][k][0]));
+        for(int j = L; j < L + Nl; ++j)
+          for(int k = S + number_sample_binary_;
+              k < S + Ns + number_sample_binary_; ++k, ++Res)
+            *Res = to_int<int32_t, true>(&(data_raw->data()[i][j][k][0]));
       break;
     default:
       throw Exception("Unrecognized type");
-      }
+    }
   else
     switch(type_) {
     case VICAR_BYTE:
       for(int i = B; i < B + Nb; ++i)
-	for(int j = L; j < L + Nl; ++j)
-	  for(int k = S+number_sample_binary_;
-	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_int<uint8_t, false>(&(data_raw->data()[i][j][k][0]));
+        for(int j = L; j < L + Nl; ++j)
+          for(int k = S + number_sample_binary_;
+              k < S + Ns + number_sample_binary_; ++k, ++Res)
+            *Res = to_int<uint8_t, false>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_HALF:
       for(int i = B; i < B + Nb; ++i)
-	for(int j = L; j < L + Nl; ++j)
-	  for(int k = S+number_sample_binary_;
-	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_int<int16_t, false>(&(data_raw->data()[i][j][k][0]));
+        for(int j = L; j < L + Nl; ++j)
+          for(int k = S + number_sample_binary_;
+              k < S + Ns + number_sample_binary_; ++k, ++Res)
+            *Res = to_int<int16_t, false>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_FULL:
       for(int i = B; i < B + Nb; ++i)
-	for(int j = L; j < L + Nl; ++j)
-	  for(int k = S+number_sample_binary_;
-	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_int<int32_t, false>(&(data_raw->data()[i][j][k][0]));
+        for(int j = L; j < L + Nl; ++j)
+          for(int k = S + number_sample_binary_;
+              k < S + Ns + number_sample_binary_; ++k, ++Res)
+            *Res = to_int<int32_t, false>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_FLOAT:
       for(int i = B; i < B + Nb; ++i)
-	for(int j = L; j < L + Nl; ++j)
-	  for(int k = S+number_sample_binary_;
-	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_int<float, false>(&(data_raw->data()[i][j][k][0]));
+        for(int j = L; j < L + Nl; ++j)
+          for(int k = S + number_sample_binary_;
+              k < S + Ns + number_sample_binary_; ++k, ++Res)
+            *Res = to_int<float, false>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_DOUBLE:
       for(int i = B; i < B + Nb; ++i)
-	for(int j = L; j < L + Nl; ++j)
-	  for(int k = S+number_sample_binary_;
-	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_int<double, false>(&(data_raw->data()[i][j][k][0]));
+        for(int j = L; j < L + Nl; ++j)
+          for(int k = S + number_sample_binary_;
+              k < S + Ns + number_sample_binary_; ++k, ++Res)
+            *Res = to_int<double, false>(&(data_raw->data()[i][j][k][0]));
       break;
     default:
       throw Exception("Unrecognized type");
@@ -588,8 +685,8 @@ inline void VicarLiteFile::read_int(int B, int L, int S, int Nb, int Nl,
 /// Read data as a double.
 //-----------------------------------------------------------------------
 
-inline void VicarLiteFile::read_double(int B, int L, int S, int Nb, int Nl, 
-				       int Ns, double* Res) const
+inline void VicarLiteFile::read_double(int B, int L, int S, int Nb, int Nl,
+                                       int Ns, double* Res) const
 {
   if(is_compressed_)
     throw Exception("Can't use VicarLiteFile to read a compressed file");
@@ -597,92 +694,98 @@ inline void VicarLiteFile::read_double(int B, int L, int S, int Nb, int Nl,
     switch(type_) {
     case VICAR_BYTE:
       for(int i = B; i < B + Nb; ++i)
-	for(int j = L; j < L + Nl; ++j)
-	  for(int k = S+number_sample_binary_;
-	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_double<uint8_t, true>(&(data_raw->data()[i][j][k][0]));
+        for(int j = L; j < L + Nl; ++j)
+          for(int k = S + number_sample_binary_;
+              k < S + Ns + number_sample_binary_; ++k, ++Res)
+            *Res = to_double<uint8_t, true>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_HALF:
       for(int i = B; i < B + Nb; ++i)
-	for(int j = L; j < L + Nl; ++j)
-	  for(int k = S+number_sample_binary_;
-	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_double<int16_t, true>(&(data_raw->data()[i][j][k][0]));
+        for(int j = L; j < L + Nl; ++j)
+          for(int k = S + number_sample_binary_;
+              k < S + Ns + number_sample_binary_; ++k, ++Res)
+            *Res = to_double<int16_t, true>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_FULL:
       for(int i = B; i < B + Nb; ++i)
-	for(int j = L; j < L + Nl; ++j)
-	  for(int k = S+number_sample_binary_;
-	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_double<int32_t, true>(&(data_raw->data()[i][j][k][0]));
+        for(int j = L; j < L + Nl; ++j)
+          for(int k = S + number_sample_binary_;
+              k < S + Ns + number_sample_binary_; ++k, ++Res)
+            *Res = to_double<int32_t, true>(&(data_raw->data()[i][j][k][0]));
       break;
     default:
       throw Exception("Unrecognized type");
-      }
+    }
   else
     switch(type_) {
     case VICAR_BYTE:
       for(int i = B; i < B + Nb; ++i)
-	for(int j = L; j < L + Nl; ++j)
-	  for(int k = S+number_sample_binary_;
-	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_double<uint8_t, false>(&(data_raw->data()[i][j][k][0]));
+        for(int j = L; j < L + Nl; ++j)
+          for(int k = S + number_sample_binary_;
+              k < S + Ns + number_sample_binary_; ++k, ++Res)
+            *Res = to_double<uint8_t, false>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_HALF:
       for(int i = B; i < B + Nb; ++i)
-	for(int j = L; j < L + Nl; ++j)
-	  for(int k = S+number_sample_binary_;
-	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_double<int16_t, false>(&(data_raw->data()[i][j][k][0]));
+        for(int j = L; j < L + Nl; ++j)
+          for(int k = S + number_sample_binary_;
+              k < S + Ns + number_sample_binary_; ++k, ++Res)
+            *Res = to_double<int16_t, false>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_FULL:
       for(int i = B; i < B + Nb; ++i)
-	for(int j = L; j < L + Nl; ++j)
-	  for(int k = S+number_sample_binary_;
-	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_double<int32_t, false>(&(data_raw->data()[i][j][k][0]));
+        for(int j = L; j < L + Nl; ++j)
+          for(int k = S + number_sample_binary_;
+              k < S + Ns + number_sample_binary_; ++k, ++Res)
+            *Res = to_double<int32_t, false>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_FLOAT:
       for(int i = B; i < B + Nb; ++i)
-	for(int j = L; j < L + Nl; ++j)
-	  for(int k = S+number_sample_binary_;
-	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_double<float, false>(&(data_raw->data()[i][j][k][0]));
+        for(int j = L; j < L + Nl; ++j)
+          for(int k = S + number_sample_binary_;
+              k < S + Ns + number_sample_binary_; ++k, ++Res)
+            *Res = to_double<float, false>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_DOUBLE:
       for(int i = B; i < B + Nb; ++i)
-	for(int j = L; j < L + Nl; ++j)
-	  for(int k = S+number_sample_binary_;
-	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_double<double, false>(&(data_raw->data()[i][j][k][0]));
+        for(int j = L; j < L + Nl; ++j)
+          for(int k = S + number_sample_binary_;
+              k < S + Ns + number_sample_binary_; ++k, ++Res)
+            *Res = to_double<double, false>(&(data_raw->data()[i][j][k][0]));
       break;
     default:
       throw Exception("Unrecognized type");
     }
 }
 
-inline std::string VicarLiteFile::label_string(const std::string& F, 
-				  const std::string& Property) const
-{ return label<std::string>(F, Property); }
+inline std::string
+VicarLiteFile::label_string(const std::string& F,
+                            const std::string& Property) const
+{
+  return label<std::string>(F, Property);
+}
 
 //-----------------------------------------------------------------------
 /// Write data as an int.
 //-----------------------------------------------------------------------
 
-inline void VicarLiteFile::write_int(int B, int L, int S, int V) const 
+inline void VicarLiteFile::write_int(int B, int L, int S, int V) const
 {
   if(is_compressed_)
     throw Exception("Can't use VicarLiteFile to write a compressed file");
   if(swap_needed_)
     switch(type_) {
     case VICAR_BYTE:
-      from_int<uint8_t, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_int<uint8_t, true>(
+          V, &(data_raw->data()[B][L][S + number_sample_binary_][0]));
       break;
     case VICAR_HALF:
-      from_int<int16_t, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_int<int16_t, true>(
+          V, &(data_raw->data()[B][L][S + number_sample_binary_][0]));
       break;
     case VICAR_FULL:
-      from_int<int32_t, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_int<int32_t, true>(
+          V, &(data_raw->data()[B][L][S + number_sample_binary_][0]));
       break;
     default:
       throw Exception("Unrecognized type");
@@ -690,39 +793,47 @@ inline void VicarLiteFile::write_int(int B, int L, int S, int V) const
   else
     switch(type_) {
     case VICAR_BYTE:
-      from_int<uint8_t, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_int<uint8_t, false>(
+          V, &(data_raw->data()[B][L][S + number_sample_binary_][0]));
       break;
     case VICAR_HALF:
-      from_int<int16_t, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_int<int16_t, false>(
+          V, &(data_raw->data()[B][L][S + number_sample_binary_][0]));
       break;
     case VICAR_FULL:
-      from_int<int32_t, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_int<int32_t, false>(
+          V, &(data_raw->data()[B][L][S + number_sample_binary_][0]));
       break;
     case VICAR_FLOAT:
-      from_int<float, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_int<float, false>(
+          V, &(data_raw->data()[B][L][S + number_sample_binary_][0]));
       break;
     case VICAR_DOUBLE:
-      from_int<double, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_int<double, false>(
+          V, &(data_raw->data()[B][L][S + number_sample_binary_][0]));
       break;
     default:
       throw Exception("Unrecognized type");
     }
 }
 
-inline void VicarLiteFile::write_double(int B, int L, int S, double V) const 
+inline void VicarLiteFile::write_double(int B, int L, int S, double V) const
 {
   if(is_compressed_)
     throw Exception("Can't use VicarLiteFile to write a compressed file");
   if(swap_needed_)
     switch(type_) {
     case VICAR_BYTE:
-      from_double<uint8_t, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_double<uint8_t, true>(
+          V, &(data_raw->data()[B][L][S + number_sample_binary_][0]));
       break;
     case VICAR_HALF:
-      from_double<int16_t, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_double<int16_t, true>(
+          V, &(data_raw->data()[B][L][S + number_sample_binary_][0]));
       break;
     case VICAR_FULL:
-      from_double<int32_t, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_double<int32_t, true>(
+          V, &(data_raw->data()[B][L][S + number_sample_binary_][0]));
       break;
     default:
       throw Exception("Unrecognized type");
@@ -730,26 +841,31 @@ inline void VicarLiteFile::write_double(int B, int L, int S, double V) const
   else
     switch(type_) {
     case VICAR_BYTE:
-      from_double<uint8_t, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_double<uint8_t, false>(
+          V, &(data_raw->data()[B][L][S + number_sample_binary_][0]));
       break;
     case VICAR_HALF:
-      from_double<int16_t, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_double<int16_t, false>(
+          V, &(data_raw->data()[B][L][S + number_sample_binary_][0]));
       break;
     case VICAR_FULL:
-      from_double<int32_t, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_double<int32_t, false>(
+          V, &(data_raw->data()[B][L][S + number_sample_binary_][0]));
       break;
     case VICAR_FLOAT:
-      from_double<float, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_double<float, false>(
+          V, &(data_raw->data()[B][L][S + number_sample_binary_][0]));
       break;
     case VICAR_DOUBLE:
-      from_double<double, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_double<double, false>(
+          V, &(data_raw->data()[B][L][S + number_sample_binary_][0]));
       break;
     default:
       throw Exception("Unrecognized type");
     }
 }
 
-/****************************************************************//**
+/****************************************************************/ /**
   This uses VicarLiteFile to implement a RasterImage.
 
   We use a VicarLiteFile to implement a RasterImage.
@@ -759,23 +875,22 @@ class VicarLiteRasterImage : public RasterImageVariable {
 public:
   typedef VicarLiteFile::access_type access_type;
 
-//-----------------------------------------------------------------------
-/// Constructor.
-///
-/// The Force_area_pixel forces the file to be treated as
-/// "pixel as area" rather than "pixel as point". This is really just
-/// meant as a work around for the SRTM data, which incorrectly labels
-/// the data as "point" rather than "area". Since this is a 15 meter
-/// difference, it matters for many applications. Most users should
-/// just ignore this value.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor.
+  ///
+  /// The Force_area_pixel forces the file to be treated as
+  /// "pixel as area" rather than "pixel as point". This is really just
+  /// meant as a work around for the SRTM data, which incorrectly labels
+  /// the data as "point" rather than "area". Since this is a 15 meter
+  /// difference, it matters for many applications. Most users should
+  /// just ignore this value.
+  //-----------------------------------------------------------------------
 
   VicarLiteRasterImage(const std::string& Fname, int Band_id = 1,
-		       access_type Access = VicarLiteFile::READ,
-		       int Number_tile_line = -1,
-		       int Number_tile_sample = -1,
-		       bool Force_area_pixel = false)
-    : band_(Band_id - 1), 
+                       access_type Access = VicarLiteFile::READ,
+                       int Number_tile_line = -1, int Number_tile_sample = -1,
+                       bool Force_area_pixel = false)
+    : band_(Band_id - 1),
       f_(new VicarLiteFile(Fname, Access, Force_area_pixel)),
       force_map_info_(false)
   {
@@ -784,20 +899,18 @@ public:
     initialize();
   }
 
-//-----------------------------------------------------------------------
-/// Constructor. We force the given map info to apply to the image.
-/// This is a workaround for pickling mapinfo that VICAR doesn't
-/// support yet.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor. We force the given map info to apply to the image.
+  /// This is a workaround for pickling mapinfo that VICAR doesn't
+  /// support yet.
+  //-----------------------------------------------------------------------
 
-  VicarLiteRasterImage(const std::string& Fname, 
-		       const MapInfo& Mi,
-		       int Band_id = 1,
-		       access_type Access = VicarLiteFile::READ,
-		       int Number_tile_line = -1,
-		       int Number_tile_sample = -1,
-		       bool Force_area_pixel = false)
-    : band_(Band_id - 1), 
+  VicarLiteRasterImage(const std::string& Fname, const MapInfo& Mi,
+                       int Band_id = 1,
+                       access_type Access = VicarLiteFile::READ,
+                       int Number_tile_line = -1, int Number_tile_sample = -1,
+                       bool Force_area_pixel = false)
+    : band_(Band_id - 1),
       f_(new VicarLiteFile(Fname, Access, Force_area_pixel)),
       force_map_info_(true)
   {
@@ -820,83 +933,95 @@ public:
 
   bool has_igc_glas_gfm() const { return f_->has_igc_glas_gfm(); }
   boost::shared_ptr<ImageGroundConnection> igc_glas_gfm() const
-  { return f_->igc_glas_gfm(); }
-  
+  {
+    return f_->igc_glas_gfm();
+  }
+
   virtual bool copy_needs_double() const
-  { return (file().type() == VicarLiteFile::VICAR_FLOAT ||
-	    file().type() == VicarLiteFile::VICAR_DOUBLE); }
+  {
+    return (file().type() == VicarLiteFile::VICAR_FLOAT ||
+            file().type() == VicarLiteFile::VICAR_DOUBLE);
+  }
 
   //-----------------------------------------------------------------------
-/// Underlying file.
-//-----------------------------------------------------------------------
+  /// Underlying file.
+  //-----------------------------------------------------------------------
 
   const VicarLiteFile& file() const { return *f_; }
 
-//-----------------------------------------------------------------------
-/// Underlying file.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Underlying file.
+  //-----------------------------------------------------------------------
 
   VicarLiteFile& file() { return *f_; }
 
-  boost::shared_ptr<VicarLiteFile> file_ptr() const { return f_;}
+  boost::shared_ptr<VicarLiteFile> file_ptr() const { return f_; }
 
-//-----------------------------------------------------------------------
-/// Marker to force a map_info in python pickle. This is a work around
-/// for map info that VICAR doesn't support writing.
-//-----------------------------------------------------------------------
-  
-  bool force_map_info() const { return force_map_info_;}
+  //-----------------------------------------------------------------------
+  /// Marker to force a map_info in python pickle. This is a work around
+  /// for map info that VICAR doesn't support writing.
+  //-----------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
-/// Return pixel value at given line and sample.
-//-----------------------------------------------------------------------
+  bool force_map_info() const { return force_map_info_; }
+
+  //-----------------------------------------------------------------------
+  /// Return pixel value at given line and sample.
+  //-----------------------------------------------------------------------
 
   virtual int unchecked_read(int Line, int Sample) const
-  { return f_->read_int(band_, Line, Sample); }
+  {
+    return f_->read_int(band_, Line, Sample);
+  }
   virtual double unchecked_read_double(int Line, int Sample) const
-  { return f_->read_double(band_, Line, Sample); }
-  
-//-----------------------------------------------------------------------
-/// Return a subset of the image.
-//-----------------------------------------------------------------------
+  {
+    return f_->read_double(band_, Line, Sample);
+  }
 
-  virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
-			int Number_sample, int* Res) const
-  { f_->read_int(band_, Lstart, Sstart, 1, Number_line, Number_sample, Res); }
+  //-----------------------------------------------------------------------
+  /// Return a subset of the image.
+  //-----------------------------------------------------------------------
 
+  virtual void read_ptr(int Lstart, int Sstart, int Number_line,
+                        int Number_sample, int* Res) const
+  {
+    f_->read_int(band_, Lstart, Sstart, 1, Number_line, Number_sample, Res);
+  }
 
-  virtual blitz::Array<double, 2> 
-  read_double(int Lstart, int Sstart, int Number_line, 
-	      int Number_sample) const
-  { 
+  virtual blitz::Array<double, 2>
+  read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const
+  {
     blitz::Array<double, 2> res(Number_line, Number_sample);
-    f_->read_double(band_, Lstart, Sstart, 1, Number_line, Number_sample, 
-		       res.data());
+    f_->read_double(band_, Lstart, Sstart, 1, Number_line, Number_sample,
+                    res.data());
     return res;
   }
 
-//-----------------------------------------------------------------------
-/// Write the pixel value to the given location.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Write the pixel value to the given location.
+  //-----------------------------------------------------------------------
 
   virtual void unchecked_write(int Line, int Sample, int Val)
-  { f_->write_int(band_, Line, Sample, Val); }
+  {
+    f_->write_int(band_, Line, Sample, Val);
+  }
   virtual void unchecked_write(int Line, int Sample, double Val)
-  { f_->write_double(band_, Line, Sample, Val); }
+  {
+    f_->write_double(band_, Line, Sample, Val);
+  }
 
-//-----------------------------------------------------------------------
-/// Indicate if the file is compressed. If it is, we can't actually
-/// read the data but we can still read all of the labels.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Indicate if the file is compressed. If it is, we can't actually
+  /// read the data but we can still read all of the labels.
+  //-----------------------------------------------------------------------
 
   bool is_compressed() const { return f_->is_compressed(); }
 
-//-----------------------------------------------------------------------
-/// Return band number. This is 1 based (like GDAL).
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return band number. This is 1 based (like GDAL).
+  //-----------------------------------------------------------------------
   int band_id() const { return band_ + 1; }
 
-  virtual void print(std::ostream& Os) const 
+  virtual void print(std::ostream& Os) const
   {
     OstreamPad opad(Os, "    ");
     Os << "VicarLiteRasterImage:\n"
@@ -936,7 +1061,7 @@ public:
 protected:
   VicarLiteRasterImage() {}
 private:
-  void initialize() 
+  void initialize()
   {
     range_check(band_, 0, f_->number_band());
     number_line_ = f_->number_line();
@@ -959,12 +1084,11 @@ private:
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive& Ar, const unsigned int version);
+  template<class Archive> void load(Archive& Ar, const unsigned int version);
   GEOCAL_SPLIT_MEMBER();
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   This uses VicarLiteFile to implement a Dem
 
   We use VicarLiteFile to implement a Dem
@@ -972,20 +1096,19 @@ private:
 
 class VicarLiteDem : public DemMapInfo {
 public:
-//-----------------------------------------------------------------------
-/// Constructor. If Outside_dem_is_error is true, then calls for Dem
-/// data outside of the range of the Dem cause an exception to be
-/// thrown, otherwise we just return a height of 0.
-///
-/// Probably should have the Naif_code stored as metadata in the file,
-/// but for now we just explicitly pass this in.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor. If Outside_dem_is_error is true, then calls for Dem
+  /// data outside of the range of the Dem cause an exception to be
+  /// thrown, otherwise we just return a height of 0.
+  ///
+  /// Probably should have the Naif_code stored as metadata in the file,
+  /// but for now we just explicitly pass this in.
+  //-----------------------------------------------------------------------
 
-  VicarLiteDem(const std::string& Fname, 
-	       bool Outside_dem_is_error = false,
-	       const boost::shared_ptr<Datum>& D = 
-	       boost::shared_ptr<Datum>(new NoDatum()),
-	       int Band_id = 1)
+  VicarLiteDem(const std::string& Fname, bool Outside_dem_is_error = false,
+               const boost::shared_ptr<Datum>& D =
+                   boost::shared_ptr<Datum>(new NoDatum()),
+               int Band_id = 1)
     : band_(Band_id - 1), f_(new VicarLiteFile(Fname))
   {
     initialize(D, f_->map_info(), Outside_dem_is_error);
@@ -993,33 +1116,35 @@ public:
   }
   virtual ~VicarLiteDem() {}
 
-//-----------------------------------------------------------------------
-/// Underlying file.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Underlying file.
+  //-----------------------------------------------------------------------
 
   const VicarLiteFile& file() const { return *f_; }
 
-//-----------------------------------------------------------------------
-/// Underlying file.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Underlying file.
+  //-----------------------------------------------------------------------
 
   VicarLiteFile& file() { return *f_; }
 
-  boost::shared_ptr<VicarLiteFile> file_ptr() const { return f_;}
+  boost::shared_ptr<VicarLiteFile> file_ptr() const { return f_; }
 
-//-----------------------------------------------------------------------
-/// Return height in meters relative to datum().
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return height in meters relative to datum().
+  //-----------------------------------------------------------------------
 
   virtual double elevation(int Y_index, int X_index) const
-  { return f_->read_double(band_, Y_index, X_index);}
+  {
+    return f_->read_double(band_, Y_index, X_index);
+  }
 
-//-----------------------------------------------------------------------
-/// Print to stream.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print to stream.
+  //-----------------------------------------------------------------------
 
-  virtual void print(std::ostream& Os) const 
-  { 
+  virtual void print(std::ostream& Os) const
+  {
     OstreamPad opad(Os, "    ");
     Os << "Vicar Lite Dem:\n"
        << "  File: " << f_->file_name() << "\n"
@@ -1033,10 +1158,10 @@ public:
     Os << "  Outside Dem is error: " << outside_dem_is_error() << "\n";
   }
 
-//-----------------------------------------------------------------------
-/// Return band number
-//-----------------------------------------------------------------------
-  int band() const { return band_  + 1; }
+  //-----------------------------------------------------------------------
+  /// Return band number
+  //-----------------------------------------------------------------------
+  int band() const { return band_ + 1; }
 protected:
   VicarLiteDem() {}
 private:
@@ -1047,7 +1172,7 @@ private:
   void serialize(Archive& Ar, const unsigned int version);
 };
 
-}  
+}
 
 GEOCAL_EXPORT_KEY(VicarLiteFile)
 GEOCAL_EXPORT_KEY(VicarLiteDem)

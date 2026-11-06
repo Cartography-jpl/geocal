@@ -5,7 +5,7 @@
 #include <map>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This is an implementation of an Orbit that is directly given an
   arrays with time, position, velocity:
 
@@ -38,81 +38,73 @@ namespace GeoCal {
    file).
 *******************************************************************/
 
-template<class PositionType, class TimeCreatorType> class OrbitArray : 
-    public OrbitQuaternionList {
+template<class PositionType, class TimeCreatorType>
+class OrbitArray : public OrbitQuaternionList {
 public:
   OrbitArray(const blitz::Array<double, 1>& Eph_time,
-	     const blitz::Array<double, 2>& Eph_pos,
-	     const blitz::Array<double, 2>& Eph_vel,
-	     const blitz::Array<double, 1>& Att_time,
-	     const blitz::Array<double, 2>& Att_quat,
-	     bool Att_from_sc_to_ref_frame = true,
-	     bool Serialize_data = true)
-  { init(Eph_time, Eph_pos, Eph_vel, Att_time, Att_quat,
-	 Att_from_sc_to_ref_frame, Serialize_data);
+             const blitz::Array<double, 2>& Eph_pos,
+             const blitz::Array<double, 2>& Eph_vel,
+             const blitz::Array<double, 1>& Att_time,
+             const blitz::Array<double, 2>& Att_quat,
+             bool Att_from_sc_to_ref_frame = true, bool Serialize_data = true)
+  {
+    init(Eph_time, Eph_pos, Eph_vel, Att_time, Att_quat,
+         Att_from_sc_to_ref_frame, Serialize_data);
   }
   virtual ~OrbitArray() {}
 
-//-----------------------------------------------------------------------
-/// Print to stream
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print to stream
+  //-----------------------------------------------------------------------
 
-  virtual void print(std::ostream& Os) const
-  {
-    Os << "OrbitArray\n";
-  }
+  virtual void print(std::ostream& Os) const { Os << "OrbitArray\n"; }
 protected:
-  virtual boost::shared_ptr<QuaternionOrbitData> 
+  virtual boost::shared_ptr<QuaternionOrbitData>
   orbit_data_create(Time T) const;
   OrbitArray() {}
   void init(const blitz::Array<double, 1>& Eph_time,
-	    const blitz::Array<double, 2>& Eph_pos,
-	    const blitz::Array<double, 2>& Eph_vel,
-	    const blitz::Array<double, 1>& Att_time,
-	    const blitz::Array<double, 2>& Att_quat,
-	    bool Att_from_sc_to_ref_frame = true,
-	    bool Serialize_data = true);
-         
+            const blitz::Array<double, 2>& Eph_pos,
+            const blitz::Array<double, 2>& Eph_vel,
+            const blitz::Array<double, 1>& Att_time,
+            const blitz::Array<double, 2>& Att_quat,
+            bool Att_from_sc_to_ref_frame = true, bool Serialize_data = true);
+
   bool att_from_sc_to_ref_frame, serialize_data;
 private:
-  typedef std::map<Time, boost::math::quaternion<double> > 
-  time_attmap;
+  typedef std::map<Time, boost::math::quaternion<double>> time_attmap;
   time_attmap att_map;
-  typedef typename std::pair<PositionType, boost::array<double, 3> > posvel;
-  typedef std::map<Time,  posvel> time_posmap;
+  typedef typename std::pair<PositionType, boost::array<double, 3>> posvel;
+  typedef std::map<Time, posvel> time_posmap;
   time_posmap pos_map;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
   template<class Archive>
-  void save(Archive & ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive & ar, const unsigned int version);
+  void save(Archive& ar, const unsigned int version) const;
+  template<class Archive> void load(Archive& ar, const unsigned int version);
 };
 
-  //-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 /// Separate out initialization to make serialization a little easier
 //-----------------------------------------------------------------------
 
-template<class PositionType, class TimeCreatorType> inline 
-void OrbitArray<PositionType, TimeCreatorType>::init
-(const blitz::Array<double, 1>& Eph_time,
- const blitz::Array<double, 2>& Eph_pos,
- const blitz::Array<double, 2>& Eph_vel,
- const blitz::Array<double, 1>& Att_time,
- const blitz::Array<double, 2>& Att_quat,
- bool Att_from_sc_to_ref_frame,
- bool Serialize_data)
+template<class PositionType, class TimeCreatorType>
+inline void OrbitArray<PositionType, TimeCreatorType>::init(
+    const blitz::Array<double, 1>& Eph_time,
+    const blitz::Array<double, 2>& Eph_pos,
+    const blitz::Array<double, 2>& Eph_vel,
+    const blitz::Array<double, 1>& Att_time,
+    const blitz::Array<double, 2>& Att_quat, bool Att_from_sc_to_ref_frame,
+    bool Serialize_data)
 {
   using namespace blitz;
   TimeCreatorType tc;
   att_from_sc_to_ref_frame = Att_from_sc_to_ref_frame;
   serialize_data = Serialize_data;
-  if(Eph_time.rows() != Eph_pos.rows() || 
-     Eph_time.rows() != Eph_vel.rows())
-    throw Exception("Need to have the same size data for time, position and velocity");
-  if(Eph_pos.cols() != 3 ||
-     Eph_vel.cols() != 3)
+  if(Eph_time.rows() != Eph_pos.rows() || Eph_time.rows() != Eph_vel.rows())
+    throw Exception(
+        "Need to have the same size data for time, position and velocity");
+  if(Eph_pos.cols() != 3 || Eph_vel.cols() != 3)
     throw Exception("Position and velocity need to have 3 columns");
   for(int i = 0; i < Eph_time.rows(); ++i) {
     Time t = tc(Eph_time(i));
@@ -132,13 +124,13 @@ void OrbitArray<PositionType, TimeCreatorType>::init
     // att_map always goes from sc_to_refframe (e.g. sc_to_ci). If the
     // underlying data goes the other way, take the conjugate as we
     // read it in
-    
+
     if(att_from_sc_to_ref_frame)
-      att_map[t] = boost::math::quaternion<double>(Att_quat(i, 0), Att_quat(i, 1),
-						   Att_quat(i, 2), Att_quat(i, 3));
+      att_map[t] = boost::math::quaternion<double>(
+          Att_quat(i, 0), Att_quat(i, 1), Att_quat(i, 2), Att_quat(i, 3));
     else
-      att_map[t] = boost::math::quaternion<double>(Att_quat(i, 0), -Att_quat(i, 1),
-						   -Att_quat(i, 2), -Att_quat(i, 3));
+      att_map[t] = boost::math::quaternion<double>(
+          Att_quat(i, 0), -Att_quat(i, 1), -Att_quat(i, 2), -Att_quat(i, 3));
   }
   min_tm = std::max(att_map.begin()->first, pos_map.begin()->first);
   max_tm = std::min(att_map.rbegin()->first, pos_map.rbegin()->first);
@@ -157,7 +149,8 @@ void OrbitArray<PositionType, TimeCreatorType>::init
 //-----------------------------------------------------------------------
 
 template<class PositionType, class TimeCreatorType>
-inline boost::shared_ptr<QuaternionOrbitData> OrbitArray<PositionType, TimeCreatorType>::orbit_data_create(Time T) const
+inline boost::shared_ptr<QuaternionOrbitData>
+OrbitArray<PositionType, TimeCreatorType>::orbit_data_create(Time T) const
 {
   range_check_inclusive(T, min_time(), max_time());
   time_attmap::const_iterator i = att_map.lower_bound(T);
@@ -189,14 +182,15 @@ inline boost::shared_ptr<QuaternionOrbitData> OrbitArray<PositionType, TimeCreat
     interpolate(p1, v1, p2, v2, T - t1, t2 - t1, pos, vel);
   }
   boost::shared_ptr<PositionType> pv(new PositionType(pos[0], pos[1], pos[2]));
-  return boost::shared_ptr<QuaternionOrbitData>(new QuaternionOrbitData(T, pv, vel, att));
+  return boost::shared_ptr<QuaternionOrbitData>(
+      new QuaternionOrbitData(T, pv, vel, att));
 }
 
 typedef OrbitArray<EciTod, TimeAcsCreator> OrbitArray_EciTod_TimeAcs;
 typedef OrbitArray<Eci, TimePgsCreator> OrbitArray_Eci_TimePgs;
 typedef OrbitArray<Eci, TimeJ2000Creator> OrbitArray_Eci_TimeJ2000;
 typedef OrbitArray<EciTod, TimeJ2000Creator> OrbitArray_EciTod_TimeJ2000;
-}  
+}
 GEOCAL_EXPORT_KEY(OrbitArray_EciTod_TimeAcs);
 GEOCAL_EXPORT_KEY(OrbitArray_Eci_TimePgs);
 GEOCAL_EXPORT_KEY(OrbitArray_Eci_TimeJ2000);

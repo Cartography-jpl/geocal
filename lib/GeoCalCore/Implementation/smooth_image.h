@@ -2,7 +2,7 @@
 #define SMOOTH_IMAGE_H
 #include "calc_raster.h"
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This creates a smoothed version of a RasterImage. We do this by
   averaging a given region of the image, average 
   (2 * nhs + 1) x (2 * nhs + 1) pixels centered on the resulting
@@ -13,17 +13,21 @@ namespace GeoCal {
 *******************************************************************/
 class SmoothImage : public CalcRaster {
 public:
-  SmoothImage(const boost::shared_ptr<RasterImage>& Data,
-	      int Nhs = 3, int Number_tile = 4);
+  SmoothImage(const boost::shared_ptr<RasterImage>& Data, int Nhs = 3,
+              int Number_tile = 4);
   virtual ~SmoothImage() {}
   virtual void print(std::ostream& Os) const
   {
     Os << "Smooth Image\n"
        << "  Number half size: " << nhs << "\n"
-       << "  underlying raster: \n" << *raw_data << "\n";
+       << "  underlying raster: \n"
+       << *raw_data << "\n";
   }
-  const boost::shared_ptr<RasterImage>& raw_data_ptr() const {return raw_data;}
-  int number_half_size() const {return nhs;}
+  const boost::shared_ptr<RasterImage>& raw_data_ptr() const
+  {
+    return raw_data;
+  }
+  int number_half_size() const { return nhs; }
 protected:
   virtual void calc(int Lstart, int Sstart) const;
 private:

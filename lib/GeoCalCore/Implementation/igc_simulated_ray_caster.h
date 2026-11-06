@@ -3,7 +3,7 @@
 #include "image_ground_connection.h"
 #include "calc_raster.h"
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This is a RasterImage that is a simulated based on an underlying 
   map projected image. For each point in the image of an
   ImageGroundConnection, we calculate where that point appears on the
@@ -25,25 +25,23 @@ namespace GeoCal {
 
 class IgcSimulatedRayCaster : public CalcRaster {
 public:
-  IgcSimulatedRayCaster(const boost::shared_ptr<ImageGroundConnection>& Igc,
-	      const boost::shared_ptr<RasterImage>& Map_projected_image, 
-              int Number_integration_step = 1,
-              double Raycast_resolution = -1,
-              double Max_height = 10e3,
-              int Number_tile_line = -1,
-	      int Number_tile_sample = -1,
-	      double Fill_value = 0.0
-	      );
+  IgcSimulatedRayCaster(
+      const boost::shared_ptr<ImageGroundConnection>& Igc,
+      const boost::shared_ptr<RasterImage>& Map_projected_image,
+      int Number_integration_step = 1, double Raycast_resolution = -1,
+      double Max_height = 10e3, int Number_tile_line = -1,
+      int Number_tile_sample = -1, double Fill_value = 0.0);
   virtual ~IgcSimulatedRayCaster() {}
   virtual void print(std::ostream& Os) const;
-  const boost::shared_ptr<ImageGroundConnection>& igc() const
-  { return igc_; }
+  const boost::shared_ptr<ImageGroundConnection>& igc() const { return igc_; }
   int number_integration_step() const { return number_integration_step_; }
-  double fill_value() const {return fill_value_;}
-  double max_height() const {return max_height_;}
-  double raycast_resolution() const {return raycast_resolution_;}
+  double fill_value() const { return fill_value_; }
+  double max_height() const { return max_height_; }
+  double raycast_resolution() const { return raycast_resolution_; }
   const boost::shared_ptr<RasterImage>& map_projected_image() const
-  { return img_; }
+  {
+    return img_;
+  }
 protected:
   virtual void calc(int Lstart, int Sstart) const;
   IgcSimulatedRayCaster() {}
@@ -54,7 +52,7 @@ private:
   boost::shared_ptr<RasterImage> img_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 

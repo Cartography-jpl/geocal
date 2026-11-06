@@ -3,74 +3,74 @@
 #include "map_info.h"
 #include "image_ground_connection.h"
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This class creates an ImageGroundConnection that simply maps 
   map registered image to the ground.
 *******************************************************************/
 
 class MapInfoImageGroundConnection : public ImageGroundConnection {
 public:
-//-----------------------------------------------------------------------
-/// Constructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor.
+  //-----------------------------------------------------------------------
   MapInfoImageGroundConnection(const boost::shared_ptr<RasterImage>& Img,
-			       const boost::shared_ptr<Dem>& D,
-			       const std::string& Title = "Image")
-    : ImageGroundConnection(D, Img, 
-			    boost::shared_ptr<RasterImageMultiBand>(),
-			    Title)
-  { }
-  
-//-----------------------------------------------------------------------
-/// Constructor.
-//-----------------------------------------------------------------------
-  MapInfoImageGroundConnection(const boost::shared_ptr<RasterImageMultiBand>& 
-			       Img_mb,
-			       const boost::shared_ptr<Dem>& D,
-			       const std::string& Title = "Image")
-    : ImageGroundConnection(D, boost::shared_ptr<RasterImage>(),
-			    Img_mb, Title)
-  { }
-  
-//-----------------------------------------------------------------------
-/// Constructor.
-//-----------------------------------------------------------------------
-  MapInfoImageGroundConnection(const boost::shared_ptr<RasterImage>& Img,
-			       const boost::shared_ptr<RasterImageMultiBand>& 
-			       Img_mb,
-			       const boost::shared_ptr<Dem>& D,
-			       const std::string& Title = "Image")
+                               const boost::shared_ptr<Dem>& D,
+                               const std::string& Title = "Image")
+    : ImageGroundConnection(D, Img, boost::shared_ptr<RasterImageMultiBand>(),
+                            Title)
+  {
+  }
+
+  //-----------------------------------------------------------------------
+  /// Constructor.
+  //-----------------------------------------------------------------------
+  MapInfoImageGroundConnection(
+      const boost::shared_ptr<RasterImageMultiBand>& Img_mb,
+      const boost::shared_ptr<Dem>& D, const std::string& Title = "Image")
+    : ImageGroundConnection(D, boost::shared_ptr<RasterImage>(), Img_mb, Title)
+  {
+  }
+
+  //-----------------------------------------------------------------------
+  /// Constructor.
+  //-----------------------------------------------------------------------
+  MapInfoImageGroundConnection(
+      const boost::shared_ptr<RasterImage>& Img,
+      const boost::shared_ptr<RasterImageMultiBand>& Img_mb,
+      const boost::shared_ptr<Dem>& D, const std::string& Title = "Image")
     : ImageGroundConnection(D, Img, Img_mb, Title)
-  { }
-  
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  {
+  }
+
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~MapInfoImageGroundConnection() {}
 
-  virtual void
-  cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& Lv,
-		 boost::shared_ptr<CartesianFixed>& P) const
+  virtual void cf_look_vector(const ImageCoordinate& Ic,
+                              CartesianFixedLookVector& Lv,
+                              boost::shared_ptr<CartesianFixed>& P) const
   {
-    throw Exception("Look vector isn't defined for a MapInfoImageGroundConnection");
+    throw Exception(
+        "Look vector isn't defined for a MapInfoImageGroundConnection");
   }
-  
-//-----------------------------------------------------------------------
-/// Return ground coordinate that goes with a particular image coordinate.
-//-----------------------------------------------------------------------
 
-  virtual boost::shared_ptr<GroundCoordinate> 
+  //-----------------------------------------------------------------------
+  /// Return ground coordinate that goes with a particular image coordinate.
+  //-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<GroundCoordinate>
   ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const
-  { 
+  {
     if(image())
       return image()->ground_coordinate(Ic, D);
     return image_multi_band()->raster_image(0).ground_coordinate(Ic, D);
   }
 
-//-----------------------------------------------------------------------
-/// Return image coordinate that goes with a particular GroundCoordinate.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return image coordinate that goes with a particular GroundCoordinate.
+  //-----------------------------------------------------------------------
 
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) const
   {
@@ -79,7 +79,8 @@ public:
     return image_multi_band()->raster_image(0).coordinate(Gc);
   }
 
-  virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) const
+  virtual blitz::Array<double, 2>
+  image_coordinate_jac_cf(const CartesianFixed& Gc) const
   {
     ImageCoordinate ic0 = image_coordinate(Gc);
     boost::shared_ptr<CartesianFixed> gc2 = Gc.convert_to_cf();
@@ -95,19 +96,17 @@ public:
     return res;
   }
 
-//-----------------------------------------------------------------------
-/// Print to stream.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print to stream.
+  //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const
-  { 
+  {
     Os << "MapInfoImageGroundConnection\n";
     if(image())
-      Os << "  RasterImage:\n"
-	 << *image() << "\n";
+      Os << "  RasterImage:\n" << *image() << "\n";
     else
-      Os << "  RasterImageMultiBand:\n"
-	 << *image_multi_band() << "\n";
+      Os << "  RasterImageMultiBand:\n" << *image_multi_band() << "\n";
   }
 };
 }

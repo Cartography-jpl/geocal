@@ -11,7 +11,7 @@
 #include <iostream>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This performs an image point intersection (IPI), finding the time or
   image coordinates that a given ground point is seen by a camera.
 
@@ -71,209 +71,210 @@ namespace GeoCal {
 
 class Ipi : public Printable<Ipi> {
 public:
-  Ipi(const boost::shared_ptr<Orbit>& Orb, const 
-      boost::shared_ptr<Camera>& Cam,
-      int Band,
-      Time Tmin, Time Tmax, 
+  Ipi(const boost::shared_ptr<Orbit>& Orb, const boost::shared_ptr<Camera>& Cam,
+      int Band, Time Tmin, Time Tmax,
       const boost::shared_ptr<TimeTable>& Tt = boost::shared_ptr<TimeTable>(),
-      const boost::shared_ptr<Refraction>&
-      Ref = boost::shared_ptr<Refraction>(),
-      const boost::shared_ptr<VelocityAberration>&
-      Vabb = boost::shared_ptr<VelocityAberration>(),
-      double Local_time_window_size = 5.0,
-      double Root_min_separation = 30.0, 
-      double Time_tolerance = 1e-6, double Max_frame_extend=1000);
+      const boost::shared_ptr<Refraction>& Ref =
+          boost::shared_ptr<Refraction>(),
+      const boost::shared_ptr<VelocityAberration>& Vabb =
+          boost::shared_ptr<VelocityAberration>(),
+      double Local_time_window_size = 5.0, double Root_min_separation = 30.0,
+      double Time_tolerance = 1e-6, double Max_frame_extend = 1000);
   virtual ~Ipi() {}
   void image_coordinate(const GroundCoordinate& Gp, ImageCoordinate& Ic,
-			bool& Success) const;
-  void image_coordinate_with_derivative(const GroundCoordinate& Gp, ImageCoordinateWithDerivative& Ic,
-			bool& Success) const;
-  void image_coordinate_with_derivative(const GroundCoordinate& Gp, 
-				const boost::array<AutoDerivative<double>, 3>&
-				Gp_with_der,
-				ImageCoordinateWithDerivative& Ic,
-				bool& Success) const;
-  void image_coordinate_extended(const GroundCoordinate& Gp, 
-				 ImageCoordinate& Ic,
-				 bool& Success) const;
-  void image_coordinate_with_derivative_extended(const GroundCoordinate& Gp, 
-				 ImageCoordinateWithDerivative& Ic,
-				 bool& Success) const;
-  void image_coordinate_with_derivative_extended(const GroundCoordinate& Gp, 
-				 const boost::array<AutoDerivative<double>, 3>&
-				 Gp_with_der,
-				 ImageCoordinateWithDerivative& Ic,
-				 bool& Success) const;
+                        bool& Success) const;
+  void image_coordinate_with_derivative(const GroundCoordinate& Gp,
+                                        ImageCoordinateWithDerivative& Ic,
+                                        bool& Success) const;
+  void image_coordinate_with_derivative(
+      const GroundCoordinate& Gp,
+      const boost::array<AutoDerivative<double>, 3>& Gp_with_der,
+      ImageCoordinateWithDerivative& Ic, bool& Success) const;
+  void image_coordinate_extended(const GroundCoordinate& Gp,
+                                 ImageCoordinate& Ic, bool& Success) const;
+  void
+  image_coordinate_with_derivative_extended(const GroundCoordinate& Gp,
+                                            ImageCoordinateWithDerivative& Ic,
+                                            bool& Success) const;
+  void image_coordinate_with_derivative_extended(
+      const GroundCoordinate& Gp,
+      const boost::array<AutoDerivative<double>, 3>& Gp_with_der,
+      ImageCoordinateWithDerivative& Ic, bool& Success) const;
   double resolution_meter() const;
   void time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
-	    bool& Success) const;
-  void time_with_derivative(const GroundCoordinate& Gp, 
-			    TimeWithDerivative& Tres, 
-			    FrameCoordinateWithDerivative& Fres,
-			    bool& Success) const;
-  void time_with_derivative(const GroundCoordinate& Gp, 
-		    const boost::array<AutoDerivative<double>, 3>& Gp_with_der,
-		    TimeWithDerivative& Tres, 
-		    FrameCoordinateWithDerivative& Fres,
-		    bool& Success) const;
+            bool& Success) const;
+  void time_with_derivative(const GroundCoordinate& Gp,
+                            TimeWithDerivative& Tres,
+                            FrameCoordinateWithDerivative& Fres,
+                            bool& Success) const;
+  void time_with_derivative(
+      const GroundCoordinate& Gp,
+      const boost::array<AutoDerivative<double>, 3>& Gp_with_der,
+      TimeWithDerivative& Tres, FrameCoordinateWithDerivative& Fres,
+      bool& Success) const;
   void print(std::ostream& Os) const;
-  std::vector<boost::shared_ptr<GroundCoordinate> > footprint(const Dem& D) 
-    const;
+  std::vector<boost::shared_ptr<GroundCoordinate>>
+  footprint(const Dem& D) const;
 
-//-----------------------------------------------------------------------
-/// Indicates if we adjust the times to match when we actually have
-/// acquisition (see time_acquisition in TimeTable). This is important
-/// for handling Pushframe cameras correctly.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Indicates if we adjust the times to match when we actually have
+  /// acquisition (see time_acquisition in TimeTable). This is important
+  /// for handling Pushframe cameras correctly.
+  //-----------------------------------------------------------------------
   bool time_acquisition_adjustment() const
-  { return time_acquisition_adjustment_; }
-  void time_acquisition_adjustment(bool V)
-  { time_acquisition_adjustment_ = V; }
-  
-//-----------------------------------------------------------------------
-/// Orbit that we are using.
-//-----------------------------------------------------------------------
-  
-  const boost::shared_ptr<Orbit>& orbit() const {return orb;}
-  void orbit(const boost::shared_ptr<Orbit>& Orb) {orb = Orb;}
+  {
+    return time_acquisition_adjustment_;
+  }
+  void time_acquisition_adjustment(bool V) { time_acquisition_adjustment_ = V; }
 
-//-----------------------------------------------------------------------
-/// Camera that we are using.
-//-----------------------------------------------------------------------
-  
-  const boost::shared_ptr<Camera>& camera() const {return cam;}
-  void camera(const boost::shared_ptr<Camera>& Cam) {cam = Cam;}
+  //-----------------------------------------------------------------------
+  /// Orbit that we are using.
+  //-----------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
-/// TimeTable that we are using.
-//-----------------------------------------------------------------------
-  
-  const boost::shared_ptr<TimeTable>& time_table() const {return tt;}
-  void time_table(const boost::shared_ptr<TimeTable>& Tt) {tt = Tt;}
+  const boost::shared_ptr<Orbit>& orbit() const { return orb; }
+  void orbit(const boost::shared_ptr<Orbit>& Orb) { orb = Orb; }
 
-//-----------------------------------------------------------------------
-/// Synonym of orbit, for backwards compatibility. This is deprecated,
-/// you should use the new orbit() name.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Camera that we are using.
+  //-----------------------------------------------------------------------
 
-  const boost::shared_ptr<Orbit>& orbit_ptr() const {return orb;}
-  const boost::shared_ptr<TimeTable>& time_table_ptr() const {return tt;}
-  const boost::shared_ptr<Camera>& camera_ptr() const {return cam;}
-  
-//-----------------------------------------------------------------------
-/// Refraction that we are using.
-//-----------------------------------------------------------------------
-  
-  const boost::shared_ptr<Refraction>& refraction() const {return ref;}
-  void refraction(const boost::shared_ptr<Refraction>& Ref) {ref = Ref;}
+  const boost::shared_ptr<Camera>& camera() const { return cam; }
+  void camera(const boost::shared_ptr<Camera>& Cam) { cam = Cam; }
 
-//-----------------------------------------------------------------------
-/// VelocityAberration object we are using. May be null if we are using
-/// the default first order approximation.
-//-----------------------------------------------------------------------
-  
+  //-----------------------------------------------------------------------
+  /// TimeTable that we are using.
+  //-----------------------------------------------------------------------
+
+  const boost::shared_ptr<TimeTable>& time_table() const { return tt; }
+  void time_table(const boost::shared_ptr<TimeTable>& Tt) { tt = Tt; }
+
+  //-----------------------------------------------------------------------
+  /// Synonym of orbit, for backwards compatibility. This is deprecated,
+  /// you should use the new orbit() name.
+  //-----------------------------------------------------------------------
+
+  const boost::shared_ptr<Orbit>& orbit_ptr() const { return orb; }
+  const boost::shared_ptr<TimeTable>& time_table_ptr() const { return tt; }
+  const boost::shared_ptr<Camera>& camera_ptr() const { return cam; }
+
+  //-----------------------------------------------------------------------
+  /// Refraction that we are using.
+  //-----------------------------------------------------------------------
+
+  const boost::shared_ptr<Refraction>& refraction() const { return ref; }
+  void refraction(const boost::shared_ptr<Refraction>& Ref) { ref = Ref; }
+
+  //-----------------------------------------------------------------------
+  /// VelocityAberration object we are using. May be null if we are using
+  /// the default first order approximation.
+  //-----------------------------------------------------------------------
+
   const boost::shared_ptr<VelocityAberration>& velocity_aberration() const
-  {return velocity_aberration_;}
+  {
+    return velocity_aberration_;
+  }
   void velocity_aberration(const boost::shared_ptr<VelocityAberration>& V)
-  {velocity_aberration_ = V;}
-  
-//-----------------------------------------------------------------------
-/// Band that we are using.
-//-----------------------------------------------------------------------
+  {
+    velocity_aberration_ = V;
+  }
 
-  int band() const {return band_; }
+  //-----------------------------------------------------------------------
+  /// Band that we are using.
+  //-----------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
-/// Set band that we are using.
-//-----------------------------------------------------------------------
+  int band() const { return band_; }
+
+  //-----------------------------------------------------------------------
+  /// Set band that we are using.
+  //-----------------------------------------------------------------------
 
   void band(int B) { band_ = B; }
 
-//-----------------------------------------------------------------------
-/// Minimum time that we are using.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Minimum time that we are using.
+  //-----------------------------------------------------------------------
 
-  Time min_time() const {return min_time_; }
+  Time min_time() const { return min_time_; }
 
-//-----------------------------------------------------------------------
-/// Maximum time that we are using.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Maximum time that we are using.
+  //-----------------------------------------------------------------------
 
-  Time max_time() const {return max_time_; }
+  Time max_time() const { return max_time_; }
 
-//-----------------------------------------------------------------------
-/// How large of a window to search around last solution, in seconds.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// How large of a window to search around last solution, in seconds.
+  //-----------------------------------------------------------------------
 
-  double local_time_window_size() const {return local_time_window_size_;}
+  double local_time_window_size() const { return local_time_window_size_; }
 
-//-----------------------------------------------------------------------
-/// How far apart in seconds we look for solutions to the collinearity
-/// equation.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// How far apart in seconds we look for solutions to the collinearity
+  /// equation.
+  //-----------------------------------------------------------------------
 
-  double root_min_separation() const {return root_min_separation_;}
+  double root_min_separation() const { return root_min_separation_; }
 
-//-----------------------------------------------------------------------
-/// How accurate we find the time.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// How accurate we find the time.
+  //-----------------------------------------------------------------------
 
-  double time_tolerance() const {return time_tolerance_;}
+  double time_tolerance() const { return time_tolerance_; }
 
-//-----------------------------------------------------------------------
-/// Maximum amount we allow a Ipi solution to be outside the edged of
-/// the camera. See class description for discussion of this.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Maximum amount we allow a Ipi solution to be outside the edged of
+  /// the camera. See class description for discussion of this.
+  //-----------------------------------------------------------------------
 
   double max_frame_extend() const { return max_frame_extend_; }
 private:
   boost::shared_ptr<Orbit> orb;
   boost::shared_ptr<Camera> cam;
-  int band_;			 ///< Camera band to use.
+  int band_; ///< Camera band to use.
   boost::shared_ptr<TimeTable> tt;
   boost::shared_ptr<Refraction> ref;
   boost::shared_ptr<VelocityAberration> velocity_aberration_;
-  Time min_time_;		 ///< Minimum time we search around
-  Time max_time_;		 ///< Maximum time we search around
-  mutable Time last_time;	 ///< Time from last point we did IPI
-				 ///for.
+  Time min_time_;                 ///< Minimum time we search around
+  Time max_time_;                 ///< Maximum time we search around
+  mutable Time last_time;         ///< Time from last point we did IPI
+                                  ///for.
   double local_time_window_size_; ///< How large of a window to search
-				 ///around last solution, in seconds
-  double root_min_separation_;	 ///< How far apart in seconds we look
-				 ///for solutions to the collinearity
-				 ///equation.
-  double time_tolerance_;	 ///< How accurate we find the time.
-  double max_frame_extend_;	 // Maximum FrameCoordinate outside of
-				 // the camera that we consider 'ok'.
+                                  ///around last solution, in seconds
+  double root_min_separation_;    ///< How far apart in seconds we look
+                                  ///for solutions to the collinearity
+                                  ///equation.
+  double time_tolerance_;         ///< How accurate we find the time.
+  double max_frame_extend_;       // Maximum FrameCoordinate outside of
+                                  // the camera that we consider 'ok'.
   bool time_acquisition_adjustment_;
 
-//-----------------------------------------------------------------------
-/// Initial guess at minimum time, based on last_time.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Initial guess at minimum time, based on last_time.
+  //-----------------------------------------------------------------------
 
-  Time min_time_guess() const 
+  Time min_time_guess() const
   {
     return std::max(min_time_, last_time - local_time_window_size_ / 2);
   }
-      
-//-----------------------------------------------------------------------
-/// Initial guess at maximum time, based on last_time.
-//-----------------------------------------------------------------------
 
-  Time max_time_guess() const 
+  //-----------------------------------------------------------------------
+  /// Initial guess at maximum time, based on last_time.
+  //-----------------------------------------------------------------------
+
+  Time max_time_guess() const
   {
-    // The time_tolerance / 2 is because we usually use a range 
+    // The time_tolerance / 2 is because we usually use a range
     // min <= x < max, but root_list uses min <= x <= max. We move off
     // a small amount from the end point so we don't run into any
     // problems with it.
-    return std::min(max_time_ - time_tolerance_ / 2, 
-		    last_time + local_time_window_size_ / 2);
+    return std::min(max_time_ - time_tolerance_ / 2,
+                    last_time + local_time_window_size_ / 2);
   }
 
   Ipi() : max_frame_extend_(1e19), time_acquisition_adjustment_(false) {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
 }
@@ -281,4 +282,3 @@ private:
 GEOCAL_EXPORT_KEY(Ipi);
 GEOCAL_CLASS_VERSION(Ipi, 4);
 #endif
-

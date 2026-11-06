@@ -5,10 +5,9 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void DemToRaster::serialize(Archive & ar, const unsigned int version)
+void DemToRaster::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRaster)
-    & GEOCAL_NVP(dem);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRaster) & GEOCAL_NVP(dem);
 }
 
 GEOCAL_IMPLEMENT(DemToRaster);

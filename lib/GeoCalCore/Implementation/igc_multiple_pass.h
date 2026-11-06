@@ -3,7 +3,7 @@
 #include "igc_collection.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This is a IgcCollection that stitches a collection of IgcCollection
   together. The use case is multiple passes , e.g., AirMSPI having
   multiple collections in a day. Typically you will have a shared set
@@ -31,47 +31,58 @@ namespace GeoCal {
 *******************************************************************/
 
 class IgcMultiplePass : public virtual IgcCollection,
-		 public virtual WithParameterNested {
+                        public virtual WithParameterNested {
 public:
-//-----------------------------------------------------------------------
-/// Constructor that create an empty object.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor that create an empty object.
+  //-----------------------------------------------------------------------
 
   IgcMultiplePass() {};
 
-//-----------------------------------------------------------------------
-/// Constructor that takes a list of IgcCollection to initialize with.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor that takes a list of IgcCollection to initialize with.
+  //-----------------------------------------------------------------------
 
-  IgcMultiplePass(const std::vector<boost::shared_ptr<IgcCollection> >& Igc_list)
-    : igc_list(Igc_list) {}
+  IgcMultiplePass(const std::vector<boost::shared_ptr<IgcCollection>>& Igc_list)
+    : igc_list(Igc_list)
+  {
+  }
 
   virtual ~IgcMultiplePass() {}
   void add_igc(const boost::shared_ptr<IgcCollection> Igccol)
-  { igc_list.push_back(Igccol); }
+  {
+    igc_list.push_back(Igccol);
+  }
   virtual int number_image() const;
-  virtual boost::shared_ptr<ImageGroundConnection> 
+  virtual boost::shared_ptr<ImageGroundConnection>
   image_ground_connection(int Image_index) const;
   virtual void print(std::ostream& Os) const;
-  virtual boost::shared_ptr<IgcCollection> 
+  virtual boost::shared_ptr<IgcCollection>
   subset(const std::vector<int>& Index_set) const;
 
   virtual blitz::Array<double, 1> parameter() const
-  { return WithParameterNested::parameter(); }
+  {
+    return WithParameterNested::parameter();
+  }
   virtual void parameter(const blitz::Array<double, 1>& Parm)
-  { WithParameterNested::parameter(Parm); }
+  {
+    WithParameterNested::parameter(Parm);
+  }
   virtual ArrayAd<double, 1> parameter_with_derivative() const
-  { return WithParameterNested::parameter_with_derivative(); }
+  {
+    return WithParameterNested::parameter_with_derivative();
+  }
   virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
-  { WithParameterNested::parameter_with_derivative(Parm);}
+  {
+    WithParameterNested::parameter_with_derivative(Parm);
+  }
 private:
-  std::vector<boost::shared_ptr<IgcCollection> > igc_list;
+  std::vector<boost::shared_ptr<IgcCollection>> igc_list;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 
 GEOCAL_EXPORT_KEY(IgcMultiplePass);
 #endif
-

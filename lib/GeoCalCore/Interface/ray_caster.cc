@@ -7,10 +7,10 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RayCaster::serialize(Archive & ar, const unsigned int UNUSED(version))
+void RayCaster::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(RayCaster);
-  ar & GEOCAL_NVP(cf);
+  ar& GEOCAL_NVP(cf);
 }
 
 GEOCAL_IMPLEMENT(RayCaster);
@@ -30,7 +30,7 @@ GEOCAL_IMPLEMENT(RayCaster);
 //-----------------------------------------------------------------------
 
 blitz::Array<double, 2> RayCaster::next_radiance(const RasterImage& Surface_rad,
-						 double Fill_value)
+                                                 double Fill_value)
 {
   blitz::Array<double, 6> np = next_position();
   rad.resize(np.rows(), np.cols());
@@ -39,20 +39,21 @@ blitz::Array<double, 2> RayCaster::next_radiance(const RasterImage& Surface_rad,
       int count = 0;
       double sum = 0.0;
       for(int i1 = 0; i1 < np.shape()[2]; ++i1)
-	for(int i2 = 0; i2 < np.shape()[3]; ++i2)
-	  for(int i3 = 0; i3 < np.shape()[4]; ++i3) {
-	    Ecr e(np(i,j,i1,i2,i3,0),np(i,j,i1,i2,i3,1),np(i,j,i1,i2,i3,2));
-	    ImageCoordinate ic = Surface_rad.coordinate(e);
-	    if(ic.line >= 0 && ic.line < Surface_rad.number_line() - 1 &&
-	       ic.sample >= 0 && ic.sample < Surface_rad.number_sample() - 1) {
-	      ++count;
-	      sum += Surface_rad.unchecked_interpolate(ic.line, ic.sample);
-	    }
-	  }
+        for(int i2 = 0; i2 < np.shape()[3]; ++i2)
+          for(int i3 = 0; i3 < np.shape()[4]; ++i3) {
+            Ecr e(np(i, j, i1, i2, i3, 0), np(i, j, i1, i2, i3, 1),
+                  np(i, j, i1, i2, i3, 2));
+            ImageCoordinate ic = Surface_rad.coordinate(e);
+            if(ic.line >= 0 && ic.line < Surface_rad.number_line() - 1 &&
+               ic.sample >= 0 && ic.sample < Surface_rad.number_sample() - 1) {
+              ++count;
+              sum += Surface_rad.unchecked_interpolate(ic.line, ic.sample);
+            }
+          }
       if(count > 0)
-	rad(i,j) = sum / count;
+        rad(i, j) = sum / count;
       else
-	rad(i, j) = Fill_value;
+        rad(i, j) = Fill_value;
     }
   return rad;
 }

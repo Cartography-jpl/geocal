@@ -30,7 +30,7 @@ struct VicarFixture : public GlobalFixture {
     fname6 = "test_out/vicar_write3.img";
     fname7 = "test_out/vicar_write4.img";
     fname8 = "test_out/vicar_write5.img";
-    
+
     if(va)
       return;
     std::string t = "INP=" + fname + "," + fname;
@@ -54,52 +54,48 @@ boost::shared_ptr<VicarArgument> VicarFixture::va;
 
 BOOST_FIXTURE_TEST_SUITE(vicar, VicarFixture)
 
-
 BOOST_AUTO_TEST_CASE(vicar_argument)
 {
   if(!VicarFile::vicar_available()) {
-    BOOST_WARN_MESSAGE(false, "Not configured to use VICAR library, so skipping Vicar tests.");
+    BOOST_WARN_MESSAGE(
+        false, "Not configured to use VICAR library, so skipping Vicar tests.");
     return;
   }
   std::string tp;
   int count;
   va->type("STR", tp, count);
   BOOST_CHECK_EQUAL(tp, std::string("STRING"));
-  BOOST_CHECK_EQUAL(count,1);
+  BOOST_CHECK_EQUAL(count, 1);
   va->type("STRV", tp, count);
   BOOST_CHECK_EQUAL(tp, std::string("STRING"));
-  BOOST_CHECK_EQUAL(count,3);
+  BOOST_CHECK_EQUAL(count, 3);
   va->type("RL", tp, count);
   BOOST_CHECK_EQUAL(tp, std::string("REAL"));
-  BOOST_CHECK_EQUAL(count,1);
+  BOOST_CHECK_EQUAL(count, 1);
   va->type("RLV", tp, count);
   BOOST_CHECK_EQUAL(tp, std::string("REAL"));
-  BOOST_CHECK_EQUAL(count,3);
+  BOOST_CHECK_EQUAL(count, 3);
   va->type("IN", tp, count);
   BOOST_CHECK_EQUAL(tp, std::string("INT"));
-  BOOST_CHECK_EQUAL(count,1);
+  BOOST_CHECK_EQUAL(count, 1);
   va->type("INV", tp, count);
   BOOST_CHECK_EQUAL(tp, std::string("INT"));
-  BOOST_CHECK_EQUAL(count,3);
-  BOOST_CHECK_EQUAL(va->arg<std::string>("STR"), 
-		    std::string("test1"));
-  BOOST_CHECK_EQUAL(va->arg<std::vector<std::string> >("STRV")[0], 
-		    std::string("test2"));
-  BOOST_CHECK_EQUAL(va->arg<std::vector<std::string> >("STRV")[1], 
-		    std::string("test3"));
-  BOOST_CHECK_EQUAL(va->arg<std::vector<std::string> >("STRV")[2], 
-		    std::string("test4"));
+  BOOST_CHECK_EQUAL(count, 3);
+  BOOST_CHECK_EQUAL(va->arg<std::string>("STR"), std::string("test1"));
+  BOOST_CHECK_EQUAL(va->arg<std::vector<std::string>>("STRV")[0],
+                    std::string("test2"));
+  BOOST_CHECK_EQUAL(va->arg<std::vector<std::string>>("STRV")[1],
+                    std::string("test3"));
+  BOOST_CHECK_EQUAL(va->arg<std::vector<std::string>>("STRV")[2],
+                    std::string("test4"));
   BOOST_CHECK_CLOSE(va->arg<double>("RL"), 1.23456789011, 1e-12);
-  BOOST_CHECK_CLOSE(va->arg<std::vector<double> >("RLV")[0], 
-		    1.1, 1e-4);
-  BOOST_CHECK_CLOSE(va->arg<std::vector<double> >("RLV")[1], 
-		    2.2, 1e-4);
-  BOOST_CHECK_CLOSE(va->arg<std::vector<double> >("RLV")[2], 
-		    3.3, 1e-4);
+  BOOST_CHECK_CLOSE(va->arg<std::vector<double>>("RLV")[0], 1.1, 1e-4);
+  BOOST_CHECK_CLOSE(va->arg<std::vector<double>>("RLV")[1], 2.2, 1e-4);
+  BOOST_CHECK_CLOSE(va->arg<std::vector<double>>("RLV")[2], 3.3, 1e-4);
   BOOST_CHECK_EQUAL(va->arg<int>("IN"), 10);
-  BOOST_CHECK_EQUAL(va->arg<std::vector<int> >("INV")[0], 11);
-  BOOST_CHECK_EQUAL(va->arg<std::vector<int> >("INV")[1], 12);
-  BOOST_CHECK_EQUAL(va->arg<std::vector<int> >("INV")[2], 13);
+  BOOST_CHECK_EQUAL(va->arg<std::vector<int>>("INV")[0], 11);
+  BOOST_CHECK_EQUAL(va->arg<std::vector<int>>("INV")[1], 12);
+  BOOST_CHECK_EQUAL(va->arg<std::vector<int>>("INV")[2], 13);
 }
 
 BOOST_AUTO_TEST_CASE(vicar_file)
@@ -116,25 +112,23 @@ BOOST_AUTO_TEST_CASE(vicar_file)
   BOOST_CHECK_EQUAL(f2.label<int>("NL"), 10);
   std::vector<int> nl_expect;
   nl_expect.push_back(10);
-  BOOST_CHECK(f.label<std::vector<int> >("NL") == nl_expect);
-  BOOST_CHECK_CLOSE((double) f.label<float>("BINC"), 1.0, 1e-4);
-  BOOST_CHECK_CLOSE((double) f.label<std::vector<float> >("BINC").front(), 
-		    1.0, 1e-4);
+  BOOST_CHECK(f.label<std::vector<int>>("NL") == nl_expect);
+  BOOST_CHECK_CLOSE((double)f.label<float>("BINC"), 1.0, 1e-4);
+  BOOST_CHECK_CLOSE((double)f.label<std::vector<float>>("BINC").front(), 1.0,
+                    1e-4);
   BOOST_CHECK_EQUAL(f.label<std::string>("USER"), "pkim");
-  BOOST_CHECK_EQUAL(f.label<std::vector<std::string> >("USER").front(), 
-		    "pkim");
-  BOOST_CHECK(f2.label<std::vector<int> >("NL") == nl_expect);
-  BOOST_CHECK_CLOSE((double) f2.label<float>("BINC"), 1.0, 1e-4);
-  BOOST_CHECK_CLOSE((double) f2.label<std::vector<float> >("BINC").front(), 
-		    1.0, 1e-4);
+  BOOST_CHECK_EQUAL(f.label<std::vector<std::string>>("USER").front(), "pkim");
+  BOOST_CHECK(f2.label<std::vector<int>>("NL") == nl_expect);
+  BOOST_CHECK_CLOSE((double)f2.label<float>("BINC"), 1.0, 1e-4);
+  BOOST_CHECK_CLOSE((double)f2.label<std::vector<float>>("BINC").front(), 1.0,
+                    1e-4);
   BOOST_CHECK_EQUAL(f2.label<std::string>("USER"), "pkim");
-  BOOST_CHECK_EQUAL(f2.label<std::vector<std::string> >("USER").front(), 
-		    "pkim");
+  BOOST_CHECK_EQUAL(f2.label<std::vector<std::string>>("USER").front(), "pkim");
   BOOST_CHECK(VicarFile::is_vicar_file(fname));
   BOOST_CHECK(!VicarFile::is_vicar_file(fname2));
 
-  {				// This will close the file by calling
-				// the destructor
+  { // This will close the file by calling
+    // the destructor
     VicarFile f3(1, 10, 20);
     VicarFile f4(fname4, 4, 5, "HALF");
     VicarFile f6(fname6, 4, 5, 3, "HALF");
@@ -200,9 +194,9 @@ BOOST_AUTO_TEST_CASE(ibis_file_create)
   BOOST_CHECK_EQUAL(f.column_data_type(3), IbisFile::VICAR_FLOAT);
   BOOST_CHECK_EQUAL(f.column_data_type(4), IbisFile::VICAR_DOUBLE);
   f.column<VicarByte>(0).data[0] = '\1';
-  f.column<VicarHalf>(1).data[2] = (VicarHalf) 2;
-  f.column<VicarFull>(2).data[4] = (VicarFull) 3;
-  f.column<VicarFloat>(3).data[6] = (VicarFloat) 4.0;
+  f.column<VicarHalf>(1).data[2] = (VicarHalf)2;
+  f.column<VicarFull>(2).data[4] = (VicarFull)3;
+  f.column<VicarFloat>(3).data[6] = (VicarFloat)4.0;
   f.column<VicarDouble>(4).data[8] = 5.0;
   f.flush();
   IbisFile f2("test_out/ibis.img");
@@ -214,10 +208,9 @@ BOOST_AUTO_TEST_CASE(ibis_file_create)
   BOOST_CHECK_EQUAL(f2.column_data_type(3), IbisFile::VICAR_FLOAT);
   BOOST_CHECK_EQUAL(f2.column_data_type(4), IbisFile::VICAR_DOUBLE);
   BOOST_CHECK_EQUAL(f2.column<VicarByte>(0).data[0], '\1');
-  BOOST_CHECK_EQUAL(f2.column<VicarHalf>(1).data[2], (VicarHalf) 2);
-  BOOST_CHECK_EQUAL(f2.column<VicarFull>(2).data[4], (VicarFull) 3);
-  BOOST_CHECK_CLOSE(f.column<VicarFloat>(3).data[6], (VicarFloat) 4.0,
-		    1e-4);
+  BOOST_CHECK_EQUAL(f2.column<VicarHalf>(1).data[2], (VicarHalf)2);
+  BOOST_CHECK_EQUAL(f2.column<VicarFull>(2).data[4], (VicarFull)3);
+  BOOST_CHECK_CLOSE(f.column<VicarFloat>(3).data[6], (VicarFloat)4.0, 1e-4);
   BOOST_CHECK_CLOSE(f.column<VicarDouble>(4).data[8], 5.0, 1e-4);
 }
 
@@ -232,11 +225,8 @@ BOOST_AUTO_TEST_CASE(serialization_vicar_file)
   if(false)
     // Can dump to screen, if we want to see the text
     std::cerr << d;
-  boost::shared_ptr<VicarFile> fr = 
-    serialize_read_string<VicarFile>(d);
+  boost::shared_ptr<VicarFile> fr = serialize_read_string<VicarFile>(d);
   BOOST_CHECK_EQUAL(fr->file_name(), fname);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-
-

@@ -5,12 +5,11 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void OrbitPiecewiseCorrection::serialize(Archive & ar, const unsigned int version)
+void OrbitPiecewiseCorrection::serialize(Archive& ar,
+                                         const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(OrbitCorrection)
-    & GEOCAL_NVP_(e_corr)
-    & GEOCAL_NVP_(n_corr)
-    & GEOCAL_NVP_(u_corr);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(OrbitCorrection) &
+      GEOCAL_NVP_(e_corr) & GEOCAL_NVP_(n_corr) & GEOCAL_NVP_(u_corr);
 }
 
 GEOCAL_IMPLEMENT(OrbitPiecewiseCorrection);
@@ -20,18 +19,17 @@ GEOCAL_IMPLEMENT(OrbitPiecewiseCorrection);
 /// Position correction with derivative.
 //-----------------------------------------------------------------------
 
-boost::array<AutoDerivative<double>, 3 > 
+boost::array<AutoDerivative<double>, 3>
 OrbitPiecewiseCorrection::pcorr_with_derivative(
-const TimeWithDerivative& Tm,
-const CartesianFixed& Pos_uncorr
-) const
+    const TimeWithDerivative& Tm, const CartesianFixed& Pos_uncorr) const
 {
-  boost::array<AutoDerivative<double>, 3 > pcorr;
+  boost::array<AutoDerivative<double>, 3> pcorr;
   pcorr[0] = e_corr_->value_with_derivative(Tm);
   pcorr[1] = n_corr_->value_with_derivative(Tm);
   pcorr[2] = u_corr_->value_with_derivative(Tm);
   if(!pos_corr_is_cf())
-    throw Exception("Can't use local north coordinates if underlying orbit uses CartesianInertial");
+    throw Exception("Can't use local north coordinates if underlying orbit "
+                    "uses CartesianInertial");
   LnLookVectorWithDerivative lv(pcorr);
   CartesianFixedLookVectorWithDerivative clv = lv.to_cf(Pos_uncorr);
   pcorr = clv.look_vector;
@@ -42,18 +40,17 @@ const CartesianFixed& Pos_uncorr
 /// Position correction.
 //-----------------------------------------------------------------------
 
-boost::array<double, 3 > 
-OrbitPiecewiseCorrection::pcorr(
-const Time& Tm,
-const CartesianFixed& Pos_uncorr
-) const
+boost::array<double, 3>
+OrbitPiecewiseCorrection::pcorr(const Time& Tm,
+                                const CartesianFixed& Pos_uncorr) const
 {
-  boost::array<double, 3 > pcorr;
+  boost::array<double, 3> pcorr;
   pcorr[0] = e_corr_->value(Tm);
   pcorr[1] = n_corr_->value(Tm);
   pcorr[2] = u_corr_->value(Tm);
   if(!pos_corr_is_cf())
-    throw Exception("Can't use local north coordinates if underlying orbit uses CartesianInertial");
+    throw Exception("Can't use local north coordinates if underlying orbit "
+                    "uses CartesianInertial");
   LnLookVector lv(pcorr);
   CartesianFixedLookVector clv = lv.to_cf(Pos_uncorr);
   pcorr = clv.look_vector;
@@ -66,7 +63,8 @@ ArrayAd<double, 1> OrbitPiecewiseCorrection::parameter_with_derivative() const
   ArrayAd<double, 1> p1 = e_corr_->parameter_with_derivative();
   ArrayAd<double, 1> p2 = n_corr_->parameter_with_derivative();
   ArrayAd<double, 1> p3 = u_corr_->parameter_with_derivative();
-  blitz::Array<AutoDerivative<double>, 1> res(p1.rows() + p2.rows() + p3.rows());
+  blitz::Array<AutoDerivative<double>, 1> res(p1.rows() + p2.rows() +
+                                              p3.rows());
   int j = 0;
   for(int i = 0; i < p1.rows(); ++i, ++j)
     res(j) = p1(i);
@@ -78,20 +76,20 @@ ArrayAd<double, 1> OrbitPiecewiseCorrection::parameter_with_derivative() const
 }
 
 // See base class for description
-void OrbitPiecewiseCorrection::parameter_with_derivative
-(const ArrayAd<double, 1>& Parm)
+void OrbitPiecewiseCorrection::parameter_with_derivative(
+    const ArrayAd<double, 1>& Parm)
 {
   int s1 = e_corr_->parameter().rows();
   int s2 = n_corr_->parameter().rows();
   int s3 = u_corr_->parameter().rows();
-  if(Parm.rows() !=  s1 + s2 + s3)
+  if(Parm.rows() != s1 + s2 + s3)
     throw Exception("Parm is not expected size");
   int i = 0;
-  e_corr_->parameter_with_derivative(Parm(blitz::Range(i, i + s1-1)));
+  e_corr_->parameter_with_derivative(Parm(blitz::Range(i, i + s1 - 1)));
   i += s1;
-  n_corr_->parameter_with_derivative(Parm(blitz::Range(i, i + s2-1)));
+  n_corr_->parameter_with_derivative(Parm(blitz::Range(i, i + s2 - 1)));
   i += s2;
-  u_corr_->parameter_with_derivative(Parm(blitz::Range(i, i + s3-1)));
+  u_corr_->parameter_with_derivative(Parm(blitz::Range(i, i + s3 - 1)));
   notify_update();
 }
 
@@ -142,4 +140,3 @@ void OrbitPiecewiseCorrection::print(std::ostream& Os) const
   opad << *u_corr() << "\n";
   opad.strict_sync();
 }
-

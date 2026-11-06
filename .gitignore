@@ -11,3 +11,5 @@ create_delta.bundle
 .tramp_history
 python/geocal.egg-info
 claude_documents/*.html
+# clangd: a link to the build directory's file (script/make_compile_commands.py)
+compile_commands.json

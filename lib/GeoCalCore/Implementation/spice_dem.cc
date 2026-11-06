@@ -8,18 +8,16 @@ using namespace GeoCal;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 
 template<class Archive>
-void SpiceDem::serialize(Archive & ar, const unsigned int version) 
+void SpiceDem::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Dem)
-    & GEOCAL_NVP_(naif_code)
-    & GEOCAL_NVP_(time)
-    & GEOCAL_NVP_(kernel_list);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Dem) & GEOCAL_NVP_(naif_code) &
+      GEOCAL_NVP_(time) & GEOCAL_NVP_(kernel_list);
 }
 
 GEOCAL_IMPLEMENT(SpiceDem);
 #endif
 
-boost::shared_ptr<GroundCoordinate> 
+boost::shared_ptr<GroundCoordinate>
 SpiceDem::surface_point(const GroundCoordinate& Gp) const
 {
   kernel_list_.load_kernel();

@@ -11,33 +11,30 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void Geodetic::serialize(Archive & ar, const unsigned int UNUSED(version))
+void Geodetic::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GroundCoordinate);
   GEOCAL_BASE(Geodetic, GroundCoordinate);
-  ar & GEOCAL_NVP2("latitude", lat_)
-    & GEOCAL_NVP2("longitude", lon_)
-    & GEOCAL_NVP_(height_ellipsoid);
+  ar& GEOCAL_NVP2("latitude", lat_) & GEOCAL_NVP2("longitude", lon_) &
+      GEOCAL_NVP_(height_ellipsoid);
 }
 
 template<class Archive>
-void Geodetic360::serialize(Archive & ar, const unsigned int UNUSED(version))
+void Geodetic360::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GroundCoordinate);
   GEOCAL_BASE(Geodetic360, GroundCoordinate);
-  ar & GEOCAL_NVP2("latitude", lat_)
-    & GEOCAL_NVP2("longitude", lon_)
-    & GEOCAL_NVP_(height_ellipsoid);
+  ar& GEOCAL_NVP2("latitude", lat_) & GEOCAL_NVP2("longitude", lon_) &
+      GEOCAL_NVP_(height_ellipsoid);
 }
 
 template<class Archive>
-void Geocentric::serialize(Archive & ar, const unsigned int UNUSED(version))
+void Geocentric::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GroundCoordinate);
   GEOCAL_BASE(Geocentric, GroundCoordinate);
-  ar & GEOCAL_NVP2("latitude", lat_)
-    & GEOCAL_NVP2("longitude", lon_)
-    & GEOCAL_NVP_(height_ellipsoid);
+  ar& GEOCAL_NVP2("latitude", lat_) & GEOCAL_NVP2("longitude", lon_) &
+      GEOCAL_NVP_(height_ellipsoid);
 }
 
 GEOCAL_IMPLEMENT(Geodetic);
@@ -54,7 +51,9 @@ Geodetic::Geodetic(const GroundCoordinate& Gc)
   const OgrCoordinate* ogr = dynamic_cast<const OgrCoordinate*>(&Gc);
   if(ogr && ogr->ogr().naif_code() != Ecr::EARTH_NAIF_CODE) {
     Exception e;
-    e << "Can't convert coordinate to Geodetic. Naif_code for the coordinate is " << ogr->ogr().naif_code();
+    e << "Can't convert coordinate to Geodetic. Naif_code for the coordinate "
+         "is "
+      << ogr->ogr().naif_code();
     throw e;
   }
   Gc.lat_lon_height(lat_, lon_, height_ellipsoid_);
@@ -78,13 +77,14 @@ boost::shared_ptr<CartesianFixed> Geodetic::convert_to_cf() const
   double slon = sin(Constant::deg_to_rad * longitude());
   double clon = cos(Constant::deg_to_rad * longitude());
 #endif
-  double r1 = 1.0 / sqrt(1 - (2*f - f * f) * slat * slat);
+  double r1 = 1.0 / sqrt(1 - (2 * f - f * f) * slat * slat);
   double r2 = (Constant::wgs84_a * r1 + height_reference_surface()) * clat;
   boost::array<double, 3> pos;
   pos[0] = r2 * clon;
   pos[1] = r2 * slon;
-  pos[2] = (Constant::wgs84_a * (1 - f) * (1 - f) * r1 + 
-	    height_reference_surface()) * slat;
+  pos[2] = (Constant::wgs84_a * (1 - f) * (1 - f) * r1 +
+            height_reference_surface()) *
+           slat;
   return boost::shared_ptr<CartesianFixed>(new Ecr(pos));
 }
 
@@ -107,7 +107,9 @@ Geodetic360::Geodetic360(const GroundCoordinate& Gc)
   const OgrCoordinate* ogr = dynamic_cast<const OgrCoordinate*>(&Gc);
   if(ogr && ogr->ogr().naif_code() != Ecr::EARTH_NAIF_CODE) {
     Exception e;
-    e << "Can't convert coordinate to Geodetic360. Naif_code for the coordinate is " << ogr->ogr().naif_code();
+    e << "Can't convert coordinate to Geodetic360. Naif_code for the "
+         "coordinate is "
+      << ogr->ogr().naif_code();
     throw e;
   }
   Gc.lat_lon_height(lat_, lon_, height_ellipsoid_);
@@ -133,13 +135,14 @@ boost::shared_ptr<CartesianFixed> Geodetic360::convert_to_cf() const
   double slon = sin(Constant::deg_to_rad * longitude());
   double clon = cos(Constant::deg_to_rad * longitude());
 #endif
-  double r1 = 1.0 / sqrt(1 - (2*f - f * f) * slat * slat);
+  double r1 = 1.0 / sqrt(1 - (2 * f - f * f) * slat * slat);
   double r2 = (Constant::wgs84_a * r1 + height_reference_surface()) * clat;
   boost::array<double, 3> pos;
   pos[0] = r2 * clon;
   pos[1] = r2 * slon;
-  pos[2] = (Constant::wgs84_a * (1 - f) * (1 - f) * r1 + 
-	    height_reference_surface()) * slat;
+  pos[2] = (Constant::wgs84_a * (1 - f) * (1 - f) * r1 +
+            height_reference_surface()) *
+           slat;
   return boost::shared_ptr<CartesianFixed>(new Ecr(pos));
 }
 
@@ -153,7 +156,10 @@ void Geodetic360::print(std::ostream& Os) const
      << height_reference_surface() << " m)";
 }
 
-inline double sqr(double x) { return x * x; }
+inline double sqr(double x)
+{
+  return x * x;
+}
 
 //-----------------------------------------------------------------------
 /// Convert from GroundCoor.
@@ -166,28 +172,26 @@ Geocentric::Geocentric(const GroundCoordinate& Gc)
     return;
   }
   Ecr gc_ecr(Gc);
-  lon_ = atan2(gc_ecr.position[1], gc_ecr.position[0]) * 
-    Constant::rad_to_deg;
+  lon_ = atan2(gc_ecr.position[1], gc_ecr.position[0]) * Constant::rad_to_deg;
   lat_ = atan2(gc_ecr.position[2],
-	       sqrt(sqr(gc_ecr.position[0]) +
-		    sqr(gc_ecr.position[1]))) *
-    Constant::rad_to_deg;
-  height_ellipsoid_ =
-    sqrt(sqr(gc_ecr.position[0]) + sqr(gc_ecr.position[1]) +
-	 sqr(gc_ecr.position[2])) -
-    earth_radius(lat_);
+               sqrt(sqr(gc_ecr.position[0]) + sqr(gc_ecr.position[1]))) *
+         Constant::rad_to_deg;
+  height_ellipsoid_ = sqrt(sqr(gc_ecr.position[0]) + sqr(gc_ecr.position[1]) +
+                           sqr(gc_ecr.position[2])) -
+                      earth_radius(lat_);
 }
 
 //-----------------------------------------------------------------------
 /// Radius of Earth.
 //-----------------------------------------------------------------------
 
-double Geocentric::earth_radius(
-double             Latitude     // Geocentric latitude, in degrees.
+double
+Geocentric::earth_radius(double Latitude // Geocentric latitude, in degrees.
 ) const
 {
-  return Constant::wgs84_b / 
-    sqrt(1 - Constant::wgs84_esq * sqr(cos(Latitude * Constant::deg_to_rad)));
+  return Constant::wgs84_b /
+         sqrt(1 -
+              Constant::wgs84_esq * sqr(cos(Latitude * Constant::deg_to_rad)));
 }
 
 //-----------------------------------------------------------------------
@@ -200,9 +204,7 @@ boost::shared_ptr<CartesianFixed> Geocentric::convert_to_cf() const
   double lat = lat_ * Constant::deg_to_rad;
   double lon = lon_ * Constant::deg_to_rad;
   return boost::shared_ptr<CartesianFixed>(
-    new Ecr(r * cos(lat) * cos(lon),
-	    r * cos(lat) * sin(lon),
-	    r * sin(lat)));
+      new Ecr(r * cos(lat) * cos(lon), r * cos(lat) * sin(lon), r * sin(lat)));
 }
 
 //-----------------------------------------------------------------------
@@ -214,4 +216,3 @@ void Geocentric::print(std::ostream& Os) const
   Os << "Geocentric: (" << latitude() << " deg, " << longitude() << " deg, "
      << height_reference_surface() << " m)";
 }
-

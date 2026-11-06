@@ -7,7 +7,8 @@ using namespace blitz;
 
 class YprOrbitDataFixture : public GlobalFixture {
 public:
-  YprOrbitDataFixture() {
+  YprOrbitDataFixture()
+  {
     // Create test position and velocity using concrete Ecr/Eci classes
     t = Time::time_pgs(100.0);
 
@@ -20,7 +21,7 @@ public:
 
     // Typical orbital velocity
     vel_cf[0] = 0;
-    vel_cf[1] = 7500;  // ~7.5 km/s
+    vel_cf[1] = 7500; // ~7.5 km/s
     vel_cf[2] = 0;
 
     // Convert velocity to CI
@@ -163,9 +164,9 @@ BOOST_AUTO_TEST_CASE(different_euler_order)
 
   // Check generic accessors map based on order
   // For "XYZ": euler_angle1=roll(X), euler_angle2=pitch(Y), euler_angle3=yaw(Z)
-  BOOST_CHECK_CLOSE(ypr.euler_angle1(), roll, 1e-6);   // X rotation first
-  BOOST_CHECK_CLOSE(ypr.euler_angle2(), pitch, 1e-6);  // Y rotation second
-  BOOST_CHECK_CLOSE(ypr.euler_angle3(), yaw, 1e-6);    // Z rotation third
+  BOOST_CHECK_CLOSE(ypr.euler_angle1(), roll, 1e-6);  // X rotation first
+  BOOST_CHECK_CLOSE(ypr.euler_angle2(), pitch, 1e-6); // Y rotation second
+  BOOST_CHECK_CLOSE(ypr.euler_angle3(), yaw, 1e-6);   // Z rotation third
 }
 
 BOOST_AUTO_TEST_CASE(numeric_euler_order)
@@ -214,7 +215,7 @@ BOOST_AUTO_TEST_CASE(look_vector_conversion)
   YprOrbitData ypr(t, pos_cf, vel_cf, yaw, pitch, roll);
 
   // Create a test spacecraft look vector
-  ScLookVector sl(1.0, 0.0, 0.0);  // Looking along +X in spacecraft frame
+  ScLookVector sl(1.0, 0.0, 0.0); // Looking along +X in spacecraft frame
 
   // Convert to CartesianFixed look vector
   CartesianFixedLookVector cfl = ypr.cf_look_vector(sl);
@@ -233,14 +234,15 @@ BOOST_AUTO_TEST_CASE(serialization)
   if(!have_serialize_supported())
     return;
 
-  boost::shared_ptr<YprOrbitData> ypr(new YprOrbitData(t, pos_cf, vel_cf, yaw, pitch, roll));
+  boost::shared_ptr<YprOrbitData> ypr(
+      new YprOrbitData(t, pos_cf, vel_cf, yaw, pitch, roll));
 
   std::string d = serialize_write_string(ypr);
   if(false)
     std::cerr << d;
 
   boost::shared_ptr<YprOrbitData> ypr_restored =
-    serialize_read_string<YprOrbitData>(d);
+      serialize_read_string<YprOrbitData>(d);
 
   // Check all values are preserved
   BOOST_CHECK_CLOSE(ypr_restored->yaw(), yaw, 1e-6);

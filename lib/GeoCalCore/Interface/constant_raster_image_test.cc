@@ -25,11 +25,10 @@ BOOST_AUTO_TEST_CASE(serialization)
   double y_pixel_res = -0.50;
   int number_x_pixel = 10;
   int number_y_pixel = 5;
-  MapInfo mi(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter), 
-	     ulc_x, ulc_y, 
-	     ulc_x + x_pixel_res * number_x_pixel, 
-	     ulc_y + y_pixel_res * number_y_pixel, 
-	     number_x_pixel, number_y_pixel);
+  MapInfo mi(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter),
+             ulc_x, ulc_y, ulc_x + x_pixel_res * number_x_pixel,
+             ulc_y + y_pixel_res * number_y_pixel, number_x_pixel,
+             number_y_pixel);
   boost::shared_ptr<RasterImage> im(new ConstantRasterImage(mi, 20));
   std::string d = serialize_write_string(im);
   if(false)
@@ -50,11 +49,10 @@ BOOST_AUTO_TEST_CASE(map_projected_image)
   double y_pixel_res = -0.50;
   int number_x_pixel = 10;
   int number_y_pixel = 5;
-  MapInfo mi(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter), 
-	     ulc_x, ulc_y, 
-	     ulc_x + x_pixel_res * number_x_pixel, 
-	     ulc_y + y_pixel_res * number_y_pixel, 
-	     number_x_pixel, number_y_pixel);
+  MapInfo mi(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter),
+             ulc_x, ulc_y, ulc_x + x_pixel_res * number_x_pixel,
+             ulc_y + y_pixel_res * number_y_pixel, number_x_pixel,
+             number_y_pixel);
   ConstantRasterImage im(mi, 20);
   BOOST_CHECK_EQUAL(im.number_line(), 5);
   BOOST_CHECK_EQUAL(im.number_sample(), 10);
@@ -64,4 +62,3 @@ BOOST_AUTO_TEST_CASE(map_projected_image)
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-

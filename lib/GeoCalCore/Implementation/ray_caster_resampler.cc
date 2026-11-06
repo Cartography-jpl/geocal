@@ -4,26 +4,24 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RayCasterResampler::serialize(Archive & ar,
-				   const unsigned int UNUSED(version))
+void RayCasterResampler::serialize(Archive& ar,
+                                   const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(RayCasterResampler);
-  ar & GEOCAL_NVP_(ray_caster)
-    & GEOCAL_NVP_(mi);
+  ar& GEOCAL_NVP_(ray_caster) & GEOCAL_NVP_(mi);
 }
 
 GEOCAL_IMPLEMENT(RayCasterResampler);
 #endif
 
 //-----------------------------------------------------------------------
-/// Constructor. 
+/// Constructor.
 //-----------------------------------------------------------------------
 
-RayCasterResampler::RayCasterResampler
-(const boost::shared_ptr<RayCaster>& Ray_caster,
- const boost::shared_ptr<MapInfo>& Map_info)
-: ray_caster_(Ray_caster),
-  mi_(Map_info)
+RayCasterResampler::RayCasterResampler(
+    const boost::shared_ptr<RayCaster>& Ray_caster,
+    const boost::shared_ptr<MapInfo>& Map_info)
+  : ray_caster_(Ray_caster), mi_(Map_info)
 {
 }
 
@@ -50,34 +48,34 @@ RayCasterResampler::RayCasterResampler
 
 void RayCasterResampler::ray_cast_step(blitz::Array<int, 6> Res)
 {
-  if(ray_caster_->start_position() + ray_caster_->number_position() > Res.extent(0))
+  if(ray_caster_->start_position() + ray_caster_->number_position() >
+     Res.extent(0))
     throw Exception("Res isn't large enough to hold results");
   if(ray_caster_->shape(1) != Res.extent(1) ||
      ray_caster_->shape(2) != Res.extent(2) ||
      ray_caster_->shape(3) != Res.extent(3) ||
-     ray_caster_->shape(4) != Res.extent(4) ||
-     Res.extent(5) != 2)
+     ray_caster_->shape(4) != Res.extent(4) || Res.extent(5) != 2)
     throw Exception("Res isn't the size needed by ray_cast_step");
   while(!ray_caster_->last_position()) {
     blitz::Array<double, 6> t = ray_caster_->next_position();
     boost::array<double, 3> pv;
     for(int i = 0; i < t.shape()[0]; ++i)
       for(int j = 0; j < t.shape()[1]; ++j)
-	for(int k1 = 0; k1 < t.shape()[2]; ++k1)
-	  for(int k2 = 0; k2 < t.shape()[3]; ++k2)
-	    for(int k3 = 0; k3 < t.shape()[4]; ++k3) {
-	      pv[0] = t(i,j,k1,k2,k3,0);
-	      pv[1] = t(i,j,k1,k2,k3,1);
-	      pv[2] = t(i,j,k1,k2,k3,2);
-	      boost::shared_ptr<CartesianFixed> p =
-		ray_caster_->cartesian_fixed()->create(pv);
-	      ImageCoordinate ic;
-	      mi_->coordinate(*p, ic.sample, ic.line);
-	      Res(i + ray_caster_->current_position(), j, k1, k2, k3, 0) =
-	       	round(ic.line);
-	      Res(i + ray_caster_->current_position(), j, k1, k2, k3, 1) =
-	       	round(ic.sample);
-	    }
+        for(int k1 = 0; k1 < t.shape()[2]; ++k1)
+          for(int k2 = 0; k2 < t.shape()[3]; ++k2)
+            for(int k3 = 0; k3 < t.shape()[4]; ++k3) {
+              pv[0] = t(i, j, k1, k2, k3, 0);
+              pv[1] = t(i, j, k1, k2, k3, 1);
+              pv[2] = t(i, j, k1, k2, k3, 2);
+              boost::shared_ptr<CartesianFixed> p =
+                  ray_caster_->cartesian_fixed()->create(pv);
+              ImageCoordinate ic;
+              mi_->coordinate(*p, ic.sample, ic.line);
+              Res(i + ray_caster_->current_position(), j, k1, k2, k3, 0) =
+                  round(ic.line);
+              Res(i + ray_caster_->current_position(), j, k1, k2, k3, 1) =
+                  round(ic.sample);
+            }
   }
 }
 
@@ -95,11 +93,10 @@ void RayCasterResampler::ray_cast_step(blitz::Array<int, 6> Res)
 /// level step used by the python wrapper.
 //-----------------------------------------------------------------------
 
-void RayCasterResampler::final_rad_step
-(const RasterImage& Input_img,
- blitz::Array<int, 6> Ray_cast_res,
- blitz::Array<int, 2> Rad_res,
- blitz::Array<int, 2> Scratch_count)
+void RayCasterResampler::final_rad_step(const RasterImage& Input_img,
+                                        blitz::Array<int, 6> Ray_cast_res,
+                                        blitz::Array<int, 2> Rad_res,
+                                        blitz::Array<int, 2> Scratch_count)
 {
   if(Rad_res.rows() != mi_->number_y_pixel() ||
      Rad_res.cols() != mi_->number_x_pixel() ||
@@ -109,31 +106,29 @@ void RayCasterResampler::final_rad_step
   for(int i = 0; i < Ray_cast_res.extent(0); ++i)
     for(int j = 0; j < Ray_cast_res.extent(1); ++j)
       for(int k1 = 0; k1 < Ray_cast_res.extent(2); ++k1)
-	for(int k2 = 0; k2 < Ray_cast_res.extent(3); ++k2)
-	  for(int k3 = 0; k3 < Ray_cast_res.extent(4); ++k3) {
-	    int ln = Ray_cast_res(i,j,k1,k2,k3,0);
-	    int smp = Ray_cast_res(i,j,k1,k2,k3,1);
-	    if(ln >=0 && ln < Rad_res.rows() &&
-	       smp >= 0 && smp < Rad_res.cols()) {
-	      Rad_res(ln, smp) += Input_img(i, j);
-	      Scratch_count(ln, smp) += 1;
-	    }
-	  }
+        for(int k2 = 0; k2 < Ray_cast_res.extent(3); ++k2)
+          for(int k3 = 0; k3 < Ray_cast_res.extent(4); ++k3) {
+            int ln = Ray_cast_res(i, j, k1, k2, k3, 0);
+            int smp = Ray_cast_res(i, j, k1, k2, k3, 1);
+            if(ln >= 0 && ln < Rad_res.rows() && smp >= 0 &&
+               smp < Rad_res.cols()) {
+              Rad_res(ln, smp) += Input_img(i, j);
+              Scratch_count(ln, smp) += 1;
+            }
+          }
   for(int i = 0; i < Rad_res.rows(); ++i)
     for(int j = 0; j < Rad_res.cols(); ++j)
-      if(Scratch_count(i,j) >0)
-	Rad_res(i, j) /= Scratch_count(i, j);
+      if(Scratch_count(i, j) > 0)
+        Rad_res(i, j) /= Scratch_count(i, j);
 }
 
 //-----------------------------------------------------------------------
 /// Double version of final_rad_step.
 //-----------------------------------------------------------------------
 
-void RayCasterResampler::final_rad_step_double
-(const RasterImage& Input_img,
- blitz::Array<int, 6> Ray_cast_res,
- blitz::Array<double, 2> Rad_res,
- blitz::Array<int, 2> Scratch_count)
+void RayCasterResampler::final_rad_step_double(
+    const RasterImage& Input_img, blitz::Array<int, 6> Ray_cast_res,
+    blitz::Array<double, 2> Rad_res, blitz::Array<int, 2> Scratch_count)
 {
   if(Rad_res.rows() != mi_->number_y_pixel() ||
      Rad_res.cols() != mi_->number_x_pixel() ||
@@ -143,20 +138,20 @@ void RayCasterResampler::final_rad_step_double
   for(int i = 0; i < Ray_cast_res.extent(0); ++i)
     for(int j = 0; j < Ray_cast_res.extent(1); ++j)
       for(int k1 = 0; k1 < Ray_cast_res.extent(2); ++k1)
-	for(int k2 = 0; k2 < Ray_cast_res.extent(3); ++k2)
-	  for(int k3 = 0; k3 < Ray_cast_res.extent(4); ++k3) {
-	    int ln = Ray_cast_res(i,j,k1,k2,k3,0);
-	    int smp = Ray_cast_res(i,j,k1,k2,k3,1);
-	    if(ln >=0 && ln < Rad_res.rows() &&
-	       smp >= 0 && smp < Rad_res.cols()) {
-	      range_check(i, 0, Input_img.number_line());
-	      range_check(j, 0, Input_img.number_sample());
-	      Rad_res(ln, smp) += Input_img.unchecked_read_double(i, j);
-	      Scratch_count(ln, smp) += 1;
-	    }
-	  }
+        for(int k2 = 0; k2 < Ray_cast_res.extent(3); ++k2)
+          for(int k3 = 0; k3 < Ray_cast_res.extent(4); ++k3) {
+            int ln = Ray_cast_res(i, j, k1, k2, k3, 0);
+            int smp = Ray_cast_res(i, j, k1, k2, k3, 1);
+            if(ln >= 0 && ln < Rad_res.rows() && smp >= 0 &&
+               smp < Rad_res.cols()) {
+              range_check(i, 0, Input_img.number_line());
+              range_check(j, 0, Input_img.number_sample());
+              Rad_res(ln, smp) += Input_img.unchecked_read_double(i, j);
+              Scratch_count(ln, smp) += 1;
+            }
+          }
   for(int i = 0; i < Rad_res.rows(); ++i)
     for(int j = 0; j < Rad_res.cols(); ++j)
-      if(Scratch_count(i,j) >0)
-	Rad_res(i, j) /= Scratch_count(i, j);
+      if(Scratch_count(i, j) > 0)
+        Rad_res(i, j) /= Scratch_count(i, j);
 }

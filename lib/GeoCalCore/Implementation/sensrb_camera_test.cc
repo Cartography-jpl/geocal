@@ -8,18 +8,17 @@ BOOST_FIXTURE_TEST_SUITE(sensrb_camera, GlobalFixture)
 BOOST_AUTO_TEST_CASE(basic_test)
 {
   // Dummy Test
-  SensrbCamera cam(boost::math::quaternion<double>(1,0,0,0),
-		   1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 3000.0,
-		   2048, 1024, 18e-6, 21e-6,
-		   123.8e-3, FrameCoordinate(2048/2, 1024/2));
+  SensrbCamera cam(boost::math::quaternion<double>(1, 0, 0, 0), 1.0, 2.0, 3.0,
+                   4.0, 5.0, 6.0, 7.0, 3000.0, 2048, 1024, 18e-6, 21e-6,
+                   123.8e-3, FrameCoordinate(2048 / 2, 1024 / 2));
   //std::cerr << cam << "\n";
-  
+
   // blitz::Array<double, 2> kappa(3,3);
   // kappa = 1, 0, 0,
   //         0, 1, 0,
   //         0, 0, 1;
   // blitz::Array<double, 2> kappa_inv(kappa);
-  
+
   // CameraRationalPolyomial cam(2048,1024,2e-06,(2048-1)/2.0,(1024-1)/2.0,
   // 			      boost::math::quaternion<double>(1,0,0,0),
   // 			      kappa, kappa_inv);
@@ -46,15 +45,14 @@ BOOST_AUTO_TEST_CASE(simple_camera_test)
   // Comare with SimpleCamera. For SENSRB, line is +y direction and
   // for simple camera +x. Just change the default for SENSRB so we
   // can compare
-  SensrbCamera cam(boost::math::quaternion<double>(1,0,0,0),
-		   0,0,0,0,0,0,0, 3000,
-		   10, 1504, 18e-6, 21e-6,
-		   123.8e-3, FrameCoordinate(10.0/2, 1504.0/2),
-		   "VIS", "20000101", QuaternionCamera::LINE_IS_X,
-		   QuaternionCamera::INCREASE_IS_POSITIVE,
-		   QuaternionCamera::INCREASE_IS_POSITIVE);
-  cam.frame_to_sc(boost::math::quaternion<double>(1,0,0,0));
-  SimpleCamera cam2(0,0,0,123.8e-3, 18e-6, 21e-6, 10, 1504);
+  SensrbCamera cam(boost::math::quaternion<double>(1, 0, 0, 0), 0, 0, 0, 0, 0,
+                   0, 0, 3000, 10, 1504, 18e-6, 21e-6, 123.8e-3,
+                   FrameCoordinate(10.0 / 2, 1504.0 / 2), "VIS", "20000101",
+                   QuaternionCamera::LINE_IS_X,
+                   QuaternionCamera::INCREASE_IS_POSITIVE,
+                   QuaternionCamera::INCREASE_IS_POSITIVE);
+  cam.frame_to_sc(boost::math::quaternion<double>(1, 0, 0, 0));
+  SimpleCamera cam2(0, 0, 0, 123.8e-3, 18e-6, 21e-6, 10, 1504);
   BOOST_CHECK_EQUAL(cam.number_band(), 1);
   BOOST_CHECK_EQUAL(cam.number_line(0), 10);
   BOOST_CHECK_EQUAL(cam.number_sample(0), 1504);
@@ -64,18 +62,18 @@ BOOST_AUTO_TEST_CASE(simple_camera_test)
   BOOST_CHECK_CLOSE(f2.line, f1.line, 1e-4);
   BOOST_CHECK_CLOSE(f2.sample, f1.sample, 1e-4);
   BOOST_CHECK_CLOSE(cam.frame_line_coordinate(sl, 0), f1.line, 1e-4);
-  FrameCoordinateWithDerivative f1d(AutoDerivative<double>(1, 0, 2), 
-				    AutoDerivative<double>(2, 1, 2));
+  FrameCoordinateWithDerivative f1d(AutoDerivative<double>(1, 0, 2),
+                                    AutoDerivative<double>(2, 1, 2));
   ScLookVectorWithDerivative sld = cam.sc_look_vector_with_derivative(f1d, 0);
-  FrameCoordinateWithDerivative f2d = 
-    cam.frame_coordinate_with_derivative(sld, 0);
+  FrameCoordinateWithDerivative f2d =
+      cam.frame_coordinate_with_derivative(sld, 0);
   BOOST_CHECK_CLOSE(sld.look_vector[0].value(), sl.look_vector[0], 1e-4);
   BOOST_CHECK_CLOSE(sld.look_vector[1].value(), sl.look_vector[1], 1e-4);
   BOOST_CHECK_CLOSE(sld.look_vector[2].value(), sl.look_vector[2], 1e-4);
   double eps = 0.01;
   ScLookVector slv2 = cam.sc_look_vector(FrameCoordinate(1 + eps, 2), 0);
-  BOOST_CHECK_CLOSE(sld.look_vector[0].gradient()(0), 
-		    (slv2.look_vector[0] - sl.look_vector[0]) / eps, 1e-4);
+  BOOST_CHECK_CLOSE(sld.look_vector[0].gradient()(0),
+                    (slv2.look_vector[0] - sl.look_vector[0]) / eps, 1e-4);
 
   // Compare with simple camera
   for(int l = 0; l < 10; ++l)
@@ -95,11 +93,10 @@ BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported())
     return;
-  boost::shared_ptr<Camera> cam(new SensrbCamera
-		(boost::math::quaternion<double>(1,0,0,0),
-		 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 3000,
-		 2048, 1024, 18e-6, 21e-6,
-		 123.8e-3, FrameCoordinate(2048/2, 1024/2)));
+  boost::shared_ptr<Camera> cam(
+      new SensrbCamera(boost::math::quaternion<double>(1, 0, 0, 0), 1.0, 2.0,
+                       3.0, 4.0, 5.0, 6.0, 7.0, 3000, 2048, 1024, 18e-6, 21e-6,
+                       123.8e-3, FrameCoordinate(2048 / 2, 1024 / 2)));
   std::string d = serialize_write_string(cam);
   if(false)
     std::cerr << d;
@@ -110,11 +107,11 @@ BOOST_AUTO_TEST_CASE(serialization)
   //   for(double ln = 0; ln < cam->number_line(b); ln += 10) {
   //     for(int smp = 0; smp < cam->number_sample(b); smp += 10) {
   // 	FrameCoordinate fc(ln, smp);
-  // 	FrameCoordinate fc2 = 
+  // 	FrameCoordinate fc2 =
   // 	  camr->frame_coordinate(cam->sc_look_vector(fc, b), b);
   // 	BOOST_CHECK(fabs(fc.line - fc2.line) < 0.1);
   // 	BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.1);
-  // 	FrameCoordinate fc3 = 
+  // 	FrameCoordinate fc3 =
   // 	  cam->frame_coordinate(camr->sc_look_vector(fc, b), b);
   // 	BOOST_CHECK(fabs(fc.line - fc3.line) < 0.1);
   // 	BOOST_CHECK(fabs(fc.sample - fc3.sample) < 0.1);

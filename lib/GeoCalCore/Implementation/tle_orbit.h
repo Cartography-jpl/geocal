@@ -3,7 +3,7 @@
 #include "orbit.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
    This is an orbit that does the calculation based on a two-line
    element set (TLE, see
    https://en.wikipedia.org/wiki/Two-line_element_set).
@@ -13,36 +13,39 @@ namespace GeoCal {
 *******************************************************************/
 class TleOrbit : public Orbit {
 public:
-//-----------------------------------------------------------------------
-/// Constructor. The TLE should be in the standard two-line element
-/// set format (see
-/// https://en.wikipedia.org/wiki/Two-line_element_set).
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor. The TLE should be in the standard two-line element
+  /// set format (see
+  /// https://en.wikipedia.org/wiki/Two-line_element_set).
+  //-----------------------------------------------------------------------
 
-  TleOrbit(const std::string& Tle)
-    : tle_(Tle), elem_filled_in(false) {}
+  TleOrbit(const std::string& Tle) : tle_(Tle), elem_filled_in(false) {}
   virtual ~TleOrbit() {}
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
-  virtual boost::shared_ptr<OrbitData> 
+  virtual boost::shared_ptr<OrbitData>
   orbit_data(const TimeWithDerivative& T) const
-  { 
+  {
     // Right now don't handle derivatives. We can revisit this if
     // this becomes an issue.
     return orbit_data(T.value());
   }
   virtual void print(std::ostream& Os) const;
 
-//-----------------------------------------------------------------------
-/// The TLE that this orbit is using.  
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// The TLE that this orbit is using.
+  //-----------------------------------------------------------------------
 
-  const std::string& tle() const { return tle_;}
+  const std::string& tle() const { return tle_; }
 
-//-----------------------------------------------------------------------
-/// The epoch for the TLE
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// The epoch for the TLE
+  //-----------------------------------------------------------------------
 
-  const Time& epoch() const { fill_in_elems(); return epoch_; }
+  const Time& epoch() const
+  {
+    fill_in_elems();
+    return epoch_;
+  }
 
   int revolution_number_at_epoch() const;
 private:
@@ -55,7 +58,7 @@ private:
   TleOrbit() : elem_filled_in(false) {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 

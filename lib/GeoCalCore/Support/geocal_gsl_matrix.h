@@ -6,7 +6,7 @@
 
 namespace GeoCal {
 
-/****************************************************************//**
+/****************************************************************/ /**
   This provides thin wrapper around the GNU Scientific Library
   gsl_matrix.
 
@@ -19,77 +19,82 @@ namespace GeoCal {
 
 class GslMatrix : public boost::noncopyable {
 public:
-//-----------------------------------------------------------------------
-/// Default constructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Default constructor.
+  //-----------------------------------------------------------------------
 
   GslMatrix() : gsl_matrix_(0) {}
 
-//-----------------------------------------------------------------------
-/// Use data owned by gsl_matrix. This data can either have ownership
-/// passed to this class (in which case we delete it when done with
-/// it), or just a reference (in which case the lifetime is handled
-/// outside of this class).
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Use data owned by gsl_matrix. This data can either have ownership
+  /// passed to this class (in which case we delete it when done with
+  /// it), or just a reference (in which case the lifetime is handled
+  /// outside of this class).
+  //-----------------------------------------------------------------------
 
-  GslMatrix(gsl_matrix* M, bool Owned = true) : gsl_matrix_(0) 
-  {reset(M, Owned);}
+  GslMatrix(gsl_matrix* M, bool Owned = true) : gsl_matrix_(0)
+  {
+    reset(M, Owned);
+  }
 
-//-----------------------------------------------------------------------
-/// Use data owned by blitz::Array. Note that if this data
-/// isStorageContiguous(), then we use the data in place. If it isn't
-/// be make a contiguous copy of it. This means that in one case the
-/// original matrix will be modified if the gsl_matrix view of the
-/// data is modified, and the second case it won't. If you don't want
-/// this behaviour, you can form a copy before you pass it to this
-/// constructor. 
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Use data owned by blitz::Array. Note that if this data
+  /// isStorageContiguous(), then we use the data in place. If it isn't
+  /// be make a contiguous copy of it. This means that in one case the
+  /// original matrix will be modified if the gsl_matrix view of the
+  /// data is modified, and the second case it won't. If you don't want
+  /// this behaviour, you can form a copy before you pass it to this
+  /// constructor.
+  //-----------------------------------------------------------------------
 
-  GslMatrix(blitz::Array<double, 2>& M) : gsl_matrix_(0) {reset(M);}
+  GslMatrix(blitz::Array<double, 2>& M) : gsl_matrix_(0) { reset(M); }
 
-//-----------------------------------------------------------------------
-/// Variation that doesn't change the underlying data.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Variation that doesn't change the underlying data.
+  //-----------------------------------------------------------------------
 
-  GslMatrix(const blitz::Array<double, 2>& M) 
-    : gsl_matrix_(0) {blitz::Array<double, 2> m2(M.copy()); reset(m2);}
+  GslMatrix(const blitz::Array<double, 2>& M) : gsl_matrix_(0)
+  {
+    blitz::Array<double, 2> m2(M.copy());
+    reset(m2);
+  }
 
   ~GslMatrix();
   void reset(gsl_matrix* M, bool Owned = true);
   void reset(blitz::Array<double, 2>& M);
 
-//-----------------------------------------------------------------------
-/// Return gsl_matrix look at data.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return gsl_matrix look at data.
+  //-----------------------------------------------------------------------
 
   const gsl_matrix* gsl() const { return gsl_matrix_; }
 
-//-----------------------------------------------------------------------
-/// Return gsl_matrix look at data.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return gsl_matrix look at data.
+  //-----------------------------------------------------------------------
 
   gsl_matrix* gsl() { return gsl_matrix_; }
 
-//-----------------------------------------------------------------------
-/// Return blitz::Array look at data.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return blitz::Array look at data.
+  //-----------------------------------------------------------------------
 
-  const blitz::Array<double, 2>& blitz_array() const {return blitz_array_;}
+  const blitz::Array<double, 2>& blitz_array() const { return blitz_array_; }
 
-//-----------------------------------------------------------------------
-/// Return blitz::Array look at data.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return blitz::Array look at data.
+  //-----------------------------------------------------------------------
 
-  blitz::Array<double, 2>& blitz_array() {return blitz_array_;}
+  blitz::Array<double, 2>& blitz_array() { return blitz_array_; }
 public:
   blitz::Array<double, 2> blitz_array_;
   gsl_matrix* gsl_matrix_;
-  bool owned_;			// This only applies to gsl_matrix_,
-				// blitz_array manages itself.
+  bool owned_; // This only applies to gsl_matrix_,
+  // blitz_array manages itself.
   bool block_owned_;
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   This provides thin wrapper around the GNU Scientific Library
   gsl_vector.
 
@@ -102,74 +107,78 @@ public:
 
 class GslVector : public boost::noncopyable {
 public:
-//-----------------------------------------------------------------------
-/// Default constructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Default constructor.
+  //-----------------------------------------------------------------------
 
   GslVector() : gsl_vector_(0) {}
 
-//-----------------------------------------------------------------------
-/// Use data owned by gsl_vector. This data can either have ownership
-/// passed to this class (in which case we delete it when done with
-/// it), or just a reference (in which case the lifetime is handled
-/// outside of this class).
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Use data owned by gsl_vector. This data can either have ownership
+  /// passed to this class (in which case we delete it when done with
+  /// it), or just a reference (in which case the lifetime is handled
+  /// outside of this class).
+  //-----------------------------------------------------------------------
 
-  GslVector(gsl_vector* M, bool Owned = true) :gsl_vector_(0) 
-  { reset(M, Owned);}
+  GslVector(gsl_vector* M, bool Owned = true) : gsl_vector_(0)
+  {
+    reset(M, Owned);
+  }
 
-//-----------------------------------------------------------------------
-/// Use data owned by blitz::Array. Note that if this data
-/// isStorageContiguous(), then we use the data in place. If it isn't
-/// be make a contiguous copy of it. This means that in one case the
-/// original vector will be modified if the gsl_vector view of the
-/// data is modified, and the second case it won't. If you don't want
-/// this behaviour, you can form a copy before you pass it to this
-/// constructor. 
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Use data owned by blitz::Array. Note that if this data
+  /// isStorageContiguous(), then we use the data in place. If it isn't
+  /// be make a contiguous copy of it. This means that in one case the
+  /// original vector will be modified if the gsl_vector view of the
+  /// data is modified, and the second case it won't. If you don't want
+  /// this behaviour, you can form a copy before you pass it to this
+  /// constructor.
+  //-----------------------------------------------------------------------
 
-  GslVector(blitz::Array<double, 1>& M) 
-    :gsl_vector_(0) { reset(M);}
+  GslVector(blitz::Array<double, 1>& M) : gsl_vector_(0) { reset(M); }
 
-//-----------------------------------------------------------------------
-/// Variation that doesn't change the underlying data.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Variation that doesn't change the underlying data.
+  //-----------------------------------------------------------------------
 
-  GslVector(const blitz::Array<double, 1>& M) 
-    :gsl_vector_(0) {blitz::Array<double, 1> m2(M.copy()); reset(m2);}
+  GslVector(const blitz::Array<double, 1>& M) : gsl_vector_(0)
+  {
+    blitz::Array<double, 1> m2(M.copy());
+    reset(m2);
+  }
 
   ~GslVector();
   void reset(gsl_vector* M, bool Owned = true);
   void reset(blitz::Array<double, 1>& M);
 
-//-----------------------------------------------------------------------
-/// Return gsl_vector look at data.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return gsl_vector look at data.
+  //-----------------------------------------------------------------------
 
   const gsl_vector* gsl() const { return gsl_vector_; }
 
-//-----------------------------------------------------------------------
-/// Return gsl_vector look at data.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return gsl_vector look at data.
+  //-----------------------------------------------------------------------
 
   gsl_vector* gsl() { return gsl_vector_; }
 
-//-----------------------------------------------------------------------
-/// Return blitz::Array look at data.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return blitz::Array look at data.
+  //-----------------------------------------------------------------------
 
-  const blitz::Array<double, 1>& blitz_array() const {return blitz_array_;}
+  const blitz::Array<double, 1>& blitz_array() const { return blitz_array_; }
 
-//-----------------------------------------------------------------------
-/// Return blitz::Array look at data.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return blitz::Array look at data.
+  //-----------------------------------------------------------------------
 
-  blitz::Array<double, 1>& blitz_array() {return blitz_array_;}
+  blitz::Array<double, 1>& blitz_array() { return blitz_array_; }
 public:
   blitz::Array<double, 1> blitz_array_;
   gsl_vector* gsl_vector_;
-  bool owned_;			// This only applies to gsl_vector_,
-				// blitz_array manages itself.
+  bool owned_; // This only applies to gsl_vector_,
+  // blitz_array manages itself.
   bool block_owned_;
 };
 }

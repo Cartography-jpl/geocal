@@ -11,21 +11,20 @@ BOOST_AUTO_TEST_CASE(basic_test)
   // This is MRO CTX camera, just as a reasonable camera to use.
   blitz::Array<double, 1> k_radial(3);
   k_radial = -0.00734339259200545000000, 0.00002837587863624170000,
-    0.00000001284198912402710;
+  0.00000001284198912402710;
   // SPICE OD_K uses opposite sign convention
   k_radial *= -1;
   double focal_length = 352.9271664;
   double pitch = 7e-3;
   int left_masked = 38;
-  CameraRadialDistortion cam(boost::math::quaternion<double>(1,0,0,0),
-			     k_radial,
-			     1, 5000, pitch, pitch, focal_length,
-			     FrameCoordinate(0.430442527 - 0.5,
-					     2543.46099 - 0.5 +left_masked));
-  QuaternionCamera cam_no_distort(boost::math::quaternion<double>(1,0,0,0),
-				  1, 5000, pitch, pitch, focal_length,
-				  FrameCoordinate(0.430442527 - 0.5,
-					     2543.46099 - 0.5 +left_masked));
+  CameraRadialDistortion cam(
+      boost::math::quaternion<double>(1, 0, 0, 0), k_radial, 1, 5000, pitch,
+      pitch, focal_length,
+      FrameCoordinate(0.430442527 - 0.5, 2543.46099 - 0.5 + left_masked));
+  QuaternionCamera cam_no_distort(
+      boost::math::quaternion<double>(1, 0, 0, 0), 1, 5000, pitch, pitch,
+      focal_length,
+      FrameCoordinate(0.430442527 - 0.5, 2543.46099 - 0.5 + left_masked));
   // Location of undistorted pixel (0,0) in distorted camera
   //std::cerr << cam.frame_coordinate(cam_no_distort.sc_look_vector(FrameCoordinate(0,0),0),0) << "\n";
   // Location of undistorted pixel (0,5000) in distorted camera
@@ -46,17 +45,14 @@ BOOST_AUTO_TEST_CASE(serialization)
     return;
   blitz::Array<double, 1> k_radial(3);
   k_radial = -0.00734339259200545000000, 0.00002837587863624170000,
-    0.00000001284198912402710;
+  0.00000001284198912402710;
   double focal_length = 352.9271664;
   double pitch = 7e-3;
   int left_masked = 38;
-  boost::shared_ptr<Camera> cam =
-    boost::make_shared<CameraRadialDistortion>
-    (boost::math::quaternion<double>(1,0,0,0),
-     k_radial,
-     1, 5000, pitch, pitch, focal_length,
-     FrameCoordinate(0.430442527 - 0.5,
-		     2543.46099 - 0.5 +left_masked));
+  boost::shared_ptr<Camera> cam = boost::make_shared<CameraRadialDistortion>(
+      boost::math::quaternion<double>(1, 0, 0, 0), k_radial, 1, 5000, pitch,
+      pitch, focal_length,
+      FrameCoordinate(0.430442527 - 0.5, 2543.46099 - 0.5 + left_masked));
   std::string d = serialize_write_string(cam);
   if(false)
     std::cerr << d;
@@ -66,15 +62,15 @@ BOOST_AUTO_TEST_CASE(serialization)
     BOOST_CHECK_EQUAL(cam->number_sample(b), camr->number_sample(b));
     for(double ln = 0; ln < cam->number_line(b); ln += 10) {
       for(int smp = 0; smp < cam->number_sample(b); smp += 10) {
-	FrameCoordinate fc(ln, smp);
-	FrameCoordinate fc2 = 
-	  camr->frame_coordinate(cam->sc_look_vector(fc, b), b);
-	BOOST_CHECK(fabs(fc.line - fc2.line) < 0.1);
-	BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.1);
-	FrameCoordinate fc3 = 
-	  cam->frame_coordinate(camr->sc_look_vector(fc, b), b);
-	BOOST_CHECK(fabs(fc.line - fc3.line) < 0.1);
-	BOOST_CHECK(fabs(fc.sample - fc3.sample) < 0.1);
+        FrameCoordinate fc(ln, smp);
+        FrameCoordinate fc2 =
+            camr->frame_coordinate(cam->sc_look_vector(fc, b), b);
+        BOOST_CHECK(fabs(fc.line - fc2.line) < 0.1);
+        BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.1);
+        FrameCoordinate fc3 =
+            cam->frame_coordinate(camr->sc_look_vector(fc, b), b);
+        BOOST_CHECK(fabs(fc.line - fc3.line) < 0.1);
+        BOOST_CHECK(fabs(fc.sample - fc3.sample) < 0.1);
       }
     }
   }

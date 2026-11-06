@@ -46,13 +46,11 @@ BOOST_AUTO_TEST_CASE(serialize)
   if(false)
     // Can dump to screen, if we want to see the text
     std::cerr << d;
-  boost::shared_ptr<Covariance> cr =
-    serialize_read_string<Covariance>(d);
+  boost::shared_ptr<Covariance> cr = serialize_read_string<Covariance>(d);
   BOOST_CHECK_EQUAL(cr->count(), 5);
   BOOST_CHECK_CLOSE(cr->mean1(), 1.1, 1e-8);
   BOOST_CHECK_CLOSE(cr->mean2(), 2.01, 1e-8);
   BOOST_CHECK_CLOSE(cr->covariance(), -0.01875, 1e-8);
 }
-
 
 BOOST_AUTO_TEST_SUITE_END()

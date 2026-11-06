@@ -10,7 +10,7 @@ using namespace blitz;
 
 class OrbitOffsetCorrectionFixture : public GlobalFixture {
 public:
-  OrbitOffsetCorrectionFixture() 
+  OrbitOffsetCorrectionFixture()
   {
     std::string fname = test_data_dir() + "sample_orbit.h5";
 #ifdef HAVE_HDF5
@@ -21,27 +21,29 @@ public:
       orb.reset(new OrbitOffsetCorrection(orb_uncorr));
     }
   }
-  boost::math::quaternion<double>
-  sc_to_sc_corr(Time T) const 
+  boost::math::quaternion<double> sc_to_sc_corr(Time T) const
   {
-    boost::shared_ptr<QuaternionOrbitData> od = 
-      boost::dynamic_pointer_cast<QuaternionOrbitData>(orb->orbit_data(T));
-    boost::shared_ptr<QuaternionOrbitData> od_uncorr = 
-      boost::dynamic_pointer_cast<QuaternionOrbitData>(orb_uncorr->orbit_data(T));
+    boost::shared_ptr<QuaternionOrbitData> od =
+        boost::dynamic_pointer_cast<QuaternionOrbitData>(orb->orbit_data(T));
+    boost::shared_ptr<QuaternionOrbitData> od_uncorr =
+        boost::dynamic_pointer_cast<QuaternionOrbitData>(
+            orb_uncorr->orbit_data(T));
     // Od has sc in corrected frame, so if you work it this expression
     // below is sc_to_sc_corr.
     return conj(conj(od_uncorr->sc_to_cf()) * od->sc_to_cf());
   }
-  boost::math::quaternion<AutoDerivative<double> >
-  sc_to_sc_corr_with_derivative(TimeWithDerivative T) const 
+  boost::math::quaternion<AutoDerivative<double>>
+  sc_to_sc_corr_with_derivative(TimeWithDerivative T) const
   {
-    boost::shared_ptr<QuaternionOrbitData> od = 
-      boost::dynamic_pointer_cast<QuaternionOrbitData>(orb->orbit_data(T));
-    boost::shared_ptr<QuaternionOrbitData> od_uncorr = 
-      boost::dynamic_pointer_cast<QuaternionOrbitData>(orb_uncorr->orbit_data(T));
+    boost::shared_ptr<QuaternionOrbitData> od =
+        boost::dynamic_pointer_cast<QuaternionOrbitData>(orb->orbit_data(T));
+    boost::shared_ptr<QuaternionOrbitData> od_uncorr =
+        boost::dynamic_pointer_cast<QuaternionOrbitData>(
+            orb_uncorr->orbit_data(T));
     // Od has sc in corrected frame, so if you work it this expression
     // below is sc_to_sc_corr.
-    return conj(conj(od_uncorr->sc_to_cf_with_derivative()) * od->sc_to_cf_with_derivative());
+    return conj(conj(od_uncorr->sc_to_cf_with_derivative()) *
+                od->sc_to_cf_with_derivative());
   }
   boost::shared_ptr<Orbit> orb_uncorr;
   boost::shared_ptr<OrbitOffsetCorrection> orb;
@@ -91,19 +93,21 @@ BOOST_AUTO_TEST_CASE(basic)
   orb->fit_roll(true);
   for(int i = 0; i < 3; ++i)
     BOOST_CHECK_CLOSE(orb->position_ci(t + 5)->position[i] -
-		      orb_uncorr->position_ci(t + 5)->position[i], parm(i), 1e-4);
+                          orb_uncorr->position_ci(t + 5)->position[i],
+                      parm(i), 1e-4);
   TimeWithDerivative td(t + 5);
   for(int i = 0; i < 3; ++i) {
-    BOOST_CHECK_CLOSE(orb->position_ci_with_derivative(td)[i].value() -
-		      orb_uncorr->position_ci_with_derivative(td)[i].value(), parm(i), 
-		      1e-4);
+    BOOST_CHECK_CLOSE(
+        orb->position_ci_with_derivative(td)[i].value() -
+            orb_uncorr->position_ci_with_derivative(td)[i].value(),
+        parm(i), 1e-4);
     blitz::Array<double, 1> gexp(9);
     gexp = 0;
     gexp(i) = 1;
-    BOOST_CHECK_MATRIX_CLOSE_TOL(orb->position_ci_with_derivative(td)[i].gradient(), gexp, 1e-4);
+    BOOST_CHECK_MATRIX_CLOSE_TOL(
+        orb->position_ci_with_derivative(td)[i].gradient(), gexp, 1e-4);
   }
 }
-
 
 BOOST_AUTO_TEST_CASE(check_attitude)
 {
@@ -121,34 +125,33 @@ BOOST_AUTO_TEST_CASE(check_attitude)
   double yaw, pitch, roll;
   // Check past edge cases
   quat_to_ypr(sc_to_sc_corr(t - 5), yaw, pitch, roll);
-  yaw /= Constant::arcsecond_to_rad; 
-  pitch /= Constant::arcsecond_to_rad; 
-  roll /= Constant::arcsecond_to_rad; 
-  BOOST_CHECK_CLOSE(yaw, parm(3 + 0),1e-4);
-  BOOST_CHECK_CLOSE(pitch, parm(3 + 1),1e-4);
-  BOOST_CHECK_CLOSE(roll, parm(3 + 2),1e-4);
+  yaw /= Constant::arcsecond_to_rad;
+  pitch /= Constant::arcsecond_to_rad;
+  roll /= Constant::arcsecond_to_rad;
+  BOOST_CHECK_CLOSE(yaw, parm(3 + 0), 1e-4);
+  BOOST_CHECK_CLOSE(pitch, parm(3 + 1), 1e-4);
+  BOOST_CHECK_CLOSE(roll, parm(3 + 2), 1e-4);
   quat_to_ypr(sc_to_sc_corr(t + 15), yaw, pitch, roll);
-  yaw /= Constant::arcsecond_to_rad; 
-  pitch /= Constant::arcsecond_to_rad; 
-  roll /= Constant::arcsecond_to_rad; 
-  BOOST_CHECK_CLOSE(yaw, parm(6 + 0),1e-4);
-  BOOST_CHECK_CLOSE(pitch, parm(6 + 1),1e-4);
-  BOOST_CHECK_CLOSE(roll, parm(6 + 2),1e-4);
+  yaw /= Constant::arcsecond_to_rad;
+  pitch /= Constant::arcsecond_to_rad;
+  roll /= Constant::arcsecond_to_rad;
+  BOOST_CHECK_CLOSE(yaw, parm(6 + 0), 1e-4);
+  BOOST_CHECK_CLOSE(pitch, parm(6 + 1), 1e-4);
+  BOOST_CHECK_CLOSE(roll, parm(6 + 2), 1e-4);
   // Check in between time points case.
-  boost::math::quaternion<AutoDerivative<double> > qexpect =
-    interpolate_quaternion_rotation(sc_to_sc_corr_with_derivative(t - 5), 
-				    sc_to_sc_corr_with_derivative(t + 15), 
-				    AutoDerivative<double>(3.0), 
-				    10.0);
+  boost::math::quaternion<AutoDerivative<double>> qexpect =
+      interpolate_quaternion_rotation(sc_to_sc_corr_with_derivative(t - 5),
+                                      sc_to_sc_corr_with_derivative(t + 15),
+                                      AutoDerivative<double>(3.0), 10.0);
   AutoDerivative<double> yaw_expect, pitch_expect, roll_expect;
   quat_to_ypr(qexpect, yaw_expect, pitch_expect, roll_expect);
-  yaw_expect /= Constant::arcsecond_to_rad; 
-  pitch_expect /= Constant::arcsecond_to_rad; 
-  roll_expect /= Constant::arcsecond_to_rad; 
+  yaw_expect /= Constant::arcsecond_to_rad;
+  pitch_expect /= Constant::arcsecond_to_rad;
+  roll_expect /= Constant::arcsecond_to_rad;
   quat_to_ypr(sc_to_sc_corr(t + 3), yaw, pitch, roll);
-  yaw /= Constant::arcsecond_to_rad; 
-  pitch /= Constant::arcsecond_to_rad; 
-  roll /= Constant::arcsecond_to_rad; 
+  yaw /= Constant::arcsecond_to_rad;
+  pitch /= Constant::arcsecond_to_rad;
+  roll /= Constant::arcsecond_to_rad;
   BOOST_CHECK_CLOSE(yaw, yaw_expect.value(), 1e-4);
   BOOST_CHECK_CLOSE(pitch, pitch_expect.value(), 1e-4);
   BOOST_CHECK_CLOSE(roll, roll_expect.value(), 1e-4);
@@ -157,48 +160,49 @@ BOOST_AUTO_TEST_CASE(check_attitude)
   AutoDerivative<double> yawd, pitchd, rolld;
   blitz::Array<double, 1> gexp(9);
   quat_to_ypr(sc_to_sc_corr_with_derivative(t - 5), yawd, pitchd, rolld);
-  yawd /= Constant::arcsecond_to_rad; 
-  pitchd /= Constant::arcsecond_to_rad; 
-  rolld /= Constant::arcsecond_to_rad; 
-  BOOST_CHECK_CLOSE(yawd.value(), parm(3 + 0),1e-4);
-  BOOST_CHECK_CLOSE(pitchd.value(), parm(3 + 1),1e-4);
-  BOOST_CHECK_CLOSE(rolld.value(), parm(3 + 2),1e-4);
+  yawd /= Constant::arcsecond_to_rad;
+  pitchd /= Constant::arcsecond_to_rad;
+  rolld /= Constant::arcsecond_to_rad;
+  BOOST_CHECK_CLOSE(yawd.value(), parm(3 + 0), 1e-4);
+  BOOST_CHECK_CLOSE(pitchd.value(), parm(3 + 1), 1e-4);
+  BOOST_CHECK_CLOSE(rolld.value(), parm(3 + 2), 1e-4);
   gexp = 0;
-  gexp(3+0) = 1;
+  gexp(3 + 0) = 1;
   BOOST_CHECK_MATRIX_CLOSE_TOL(yawd.gradient(), gexp, 1e-4);
   gexp = 0;
-  gexp(3+1) = 1;
+  gexp(3 + 1) = 1;
   BOOST_CHECK_MATRIX_CLOSE_TOL(pitchd.gradient(), gexp, 1e-4);
   gexp = 0;
-  gexp(3+2) = 1;
+  gexp(3 + 2) = 1;
   BOOST_CHECK_MATRIX_CLOSE_TOL(rolld.gradient(), gexp, 1e-4);
-  
+
   quat_to_ypr(sc_to_sc_corr_with_derivative(t + 15), yawd, pitchd, rolld);
-  yawd /= Constant::arcsecond_to_rad; 
-  pitchd /= Constant::arcsecond_to_rad; 
-  rolld /= Constant::arcsecond_to_rad; 
-  BOOST_CHECK_CLOSE(yawd.value(), parm(6 + 0),1e-4);
-  BOOST_CHECK_CLOSE(pitchd.value(), parm(6 + 1),1e-4);
-  BOOST_CHECK_CLOSE(rolld.value(), parm(6 + 2),1e-4);
+  yawd /= Constant::arcsecond_to_rad;
+  pitchd /= Constant::arcsecond_to_rad;
+  rolld /= Constant::arcsecond_to_rad;
+  BOOST_CHECK_CLOSE(yawd.value(), parm(6 + 0), 1e-4);
+  BOOST_CHECK_CLOSE(pitchd.value(), parm(6 + 1), 1e-4);
+  BOOST_CHECK_CLOSE(rolld.value(), parm(6 + 2), 1e-4);
   gexp = 0;
-  gexp(6+0) = 1;
+  gexp(6 + 0) = 1;
   BOOST_CHECK_MATRIX_CLOSE_TOL(yawd.gradient(), gexp, 1e-4);
   gexp = 0;
-  gexp(6+1) = 1;
+  gexp(6 + 1) = 1;
   BOOST_CHECK_MATRIX_CLOSE_TOL(pitchd.gradient(), gexp, 1e-4);
   gexp = 0;
-  gexp(6+2) = 1;
+  gexp(6 + 2) = 1;
   BOOST_CHECK_MATRIX_CLOSE_TOL(rolld.gradient(), gexp, 1e-4);
 
   quat_to_ypr(sc_to_sc_corr_with_derivative(t + 3), yawd, pitchd, rolld);
-  yawd /= Constant::arcsecond_to_rad; 
-  pitchd /= Constant::arcsecond_to_rad; 
-  rolld /= Constant::arcsecond_to_rad; 
+  yawd /= Constant::arcsecond_to_rad;
+  pitchd /= Constant::arcsecond_to_rad;
+  rolld /= Constant::arcsecond_to_rad;
   BOOST_CHECK_CLOSE(yawd.value(), yaw_expect.value(), 1e-4);
   BOOST_CHECK_CLOSE(pitchd.value(), pitch_expect.value(), 1e-4);
   BOOST_CHECK_CLOSE(rolld.value(), roll_expect.value(), 1e-4);
   BOOST_CHECK_MATRIX_CLOSE_TOL(yawd.gradient(), yaw_expect.gradient(), 1e-4);
-  BOOST_CHECK_MATRIX_CLOSE_TOL(pitchd.gradient(), pitch_expect.gradient(), 1e-4);
+  BOOST_CHECK_MATRIX_CLOSE_TOL(pitchd.gradient(), pitch_expect.gradient(),
+                               1e-4);
   BOOST_CHECK_MATRIX_CLOSE_TOL(rolld.gradient(), roll_expect.gradient(), 1e-4);
 }
 
@@ -216,8 +220,8 @@ BOOST_AUTO_TEST_CASE(serialization)
   std::string d = serialize_write_string(orb);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<Orbit> orbr = 
-    serialize_read_string<OrbitOffsetCorrection>(d);
+  boost::shared_ptr<Orbit> orbr =
+      serialize_read_string<OrbitOffsetCorrection>(d);
   BOOST_CHECK(fabs(orb->min_time() - orbr->min_time()) < 1e-3);
   BOOST_CHECK(fabs(orb->max_time() - orbr->max_time()) < 1e-3);
   BOOST_CHECK_MATRIX_CLOSE_TOL(orb->parameter(), orbr->parameter(), 1e-4);
@@ -242,4 +246,3 @@ BOOST_AUTO_TEST_CASE(parameter_wrong_size)
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-

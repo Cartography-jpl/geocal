@@ -16,39 +16,36 @@ using namespace GeoCal;
 //-----------------------------------------------------------------------
 
 RpcImage::RpcImage(const boost::shared_ptr<RasterImage>& Raw_img, const Rpc& R,
-		   const boost::shared_ptr<Dem>& D,
-		   const MapInfo& Mi, int Avg_fact)
-: RasterImageVariable(Mi),
-  dem_(D), raw_img_(Raw_img), line_avg_fact_(9), sample_avg_fact_(9)
+                   const boost::shared_ptr<Dem>& D, const MapInfo& Mi,
+                   int Avg_fact)
+  : RasterImageVariable(Mi), dem_(D), raw_img_(Raw_img), line_avg_fact_(9),
+    sample_avg_fact_(9)
 {
   rpc_.reset(new Rpc(R));
   if(Avg_fact > 0) {
     line_avg_fact_ = Avg_fact;
     sample_avg_fact_ = Avg_fact;
   } else {
-    line_avg_fact_ = 
-      (int) round(Mi.resolution_meter() / R.resolution_meter(*D));
+    line_avg_fact_ = (int)round(Mi.resolution_meter() / R.resolution_meter(*D));
     sample_avg_fact_ = line_avg_fact_;
   }
 
-//-----------------------------------------------------------------------
-// Now, average the data.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Now, average the data.
+  //-----------------------------------------------------------------------
 
-  if(line_avg_fact_ ==1 &&
-     sample_avg_fact_ ==1) {
+  if(line_avg_fact_ == 1 && sample_avg_fact_ == 1) {
     img_avg_ = raw_img_;
     // The number of tile lines and sample is approximate. But this
     // should roughly constrain data to stay in a few tiles.
     number_tile_line_ = raw_img_->number_tile_line();
     number_tile_sample_ = raw_img_->number_tile_sample();
   } else {
-    img_avg_.reset(new MemoryRasterImage(RasterAveraged(raw_img_, 
-							line_avg_fact_,
-							sample_avg_fact_)));
-//     img_avg_.reset(new RasterAveraged(raw_img_, 
-// 				      line_avg_fact_,
-// 				      sample_avg_fact_));
+    img_avg_.reset(new MemoryRasterImage(
+        RasterAveraged(raw_img_, line_avg_fact_, sample_avg_fact_)));
+    //     img_avg_.reset(new RasterAveraged(raw_img_,
+    // 				      line_avg_fact_,
+    // 				      sample_avg_fact_));
     number_tile_line_ = number_line();
     number_tile_sample_ = number_sample();
   }
@@ -63,13 +60,13 @@ double RpcImage::value(int Line, int Sample) const
 {
   range_check(Line, 0, number_line());
   range_check(Sample, 0, number_sample());
-  boost::shared_ptr<GroundCoordinate> gc = 
-    ground_coordinate(ImageCoordinate(Line, Sample), dem());
+  boost::shared_ptr<GroundCoordinate> gc =
+      ground_coordinate(ImageCoordinate(Line, Sample), dem());
   ImageCoordinate ic(rpc().image_coordinate(*gc));
   ic.line /= line_avg_fact_;
   ic.sample /= sample_avg_fact_;
-  if(ic.line < 0 || ic.line > img_avg_->number_line() - 1 ||
-     ic.sample < 0 || ic.sample > img_avg_->number_sample() - 1)
+  if(ic.line < 0 || ic.line > img_avg_->number_line() - 1 || ic.sample < 0 ||
+     ic.sample > img_avg_->number_sample() - 1)
     return 0;
   return img_avg_->interpolate(ic.line, ic.sample);
 }
@@ -84,13 +81,13 @@ double RpcImage::value(int Line, int Sample, double Height) const
   range_check(Line, 0, number_line());
   range_check(Sample, 0, number_sample());
   SimpleDem dem_h(Height);
-  boost::shared_ptr<GroundCoordinate> gc = 
-    ground_coordinate(ImageCoordinate(Line, Sample), dem_h);
+  boost::shared_ptr<GroundCoordinate> gc =
+      ground_coordinate(ImageCoordinate(Line, Sample), dem_h);
   ImageCoordinate ic(rpc().image_coordinate(*gc));
   ic.line /= line_avg_fact_;
   ic.sample /= sample_avg_fact_;
-  if(ic.line < 0 || ic.line > img_avg_->number_line() - 1 ||
-     ic.sample < 0 || ic.sample > img_avg_->number_sample() - 1)
+  if(ic.line < 0 || ic.line > img_avg_->number_line() - 1 || ic.sample < 0 ||
+     ic.sample > img_avg_->number_sample() - 1)
     return 0;
   return img_avg_->interpolate(ic.line, ic.sample);
 }
@@ -99,8 +96,8 @@ double RpcImage::value(int Line, int Sample, double Height) const
 /// Return a subset of the image.
 //-----------------------------------------------------------------------
 
-void RpcImage::read_ptr(int Lstart, int Sstart, int Number_line, 
-			int Number_sample, int* Res) const
+void RpcImage::read_ptr(int Lstart, int Sstart, int Number_line,
+                        int Number_sample, int* Res) const
 {
   range_check(Lstart, 0, number_line() - Number_line + 1);
   range_check(Sstart, 0, number_sample() - Number_sample + 1);
@@ -109,8 +106,8 @@ void RpcImage::read_ptr(int Lstart, int Sstart, int Number_line,
   blitz::Array<double, 2> height(lat.shape());
   for(int i = 0; i < Number_line; ++i)
     for(int j = 0; j < Number_sample; ++j) {
-      boost::shared_ptr<GroundCoordinate> gc = 
-	ground_coordinate(ImageCoordinate(i + Lstart, j + Sstart), dem());
+      boost::shared_ptr<GroundCoordinate> gc =
+          ground_coordinate(ImageCoordinate(i + Lstart, j + Sstart), dem());
       lat(i, j) = gc->latitude();
       lon(i, j) = gc->longitude();
       height(i, j) = gc->height_reference_surface();
@@ -120,11 +117,11 @@ void RpcImage::read_ptr(int Lstart, int Sstart, int Number_line,
     for(int j = 0; j < Number_sample; ++j, ++Res) {
       double l = ic(0, i, j) / line_avg_fact_;
       double s = ic(1, i, j) / sample_avg_fact_;
-      if(l > 0 && l < img_avg_->number_line() - 1 &&
-	 s > 0 && s < img_avg_->number_sample() - 1)
-	*Res = (int) img_avg_->interpolate(l, s);
+      if(l > 0 && l < img_avg_->number_line() - 1 && s > 0 &&
+         s < img_avg_->number_sample() - 1)
+        *Res = (int)img_avg_->interpolate(l, s);
       else
-	*Res = 0;
+        *Res = 0;
     }
 }
 
@@ -132,11 +129,13 @@ void RpcImage::read_ptr(int Lstart, int Sstart, int Number_line,
 /// Write the pixel value to the given location.
 //-----------------------------------------------------------------------
 
-void RpcImage::unchecked_write(int UNUSED(Line), int UNUSED(Sample), int UNUSED(Val))
+void RpcImage::unchecked_write(int UNUSED(Line), int UNUSED(Sample),
+                               int UNUSED(Val))
 {
   throw Exception("write not implemented");
 }
-void RpcImage::unchecked_write(int UNUSED(Line), int UNUSED(Sample), double UNUSED(Val))
+void RpcImage::unchecked_write(int UNUSED(Line), int UNUSED(Sample),
+                               double UNUSED(Val))
 {
   throw Exception("write not implemented");
 }
@@ -146,22 +145,19 @@ void RpcImage::unchecked_write(int UNUSED(Line), int UNUSED(Sample), double UNUS
 /// same area and the New_img. Typically the Ref_img is a bit larger.
 //-----------------------------------------------------------------------
 
-void RpcImage::set_ref_img(const RasterImage& Ref_img, 
-			   const RasterImage& New_img)
+void RpcImage::set_ref_img(const RasterImage& Ref_img,
+                           const RasterImage& New_img)
 {
-  ImageCoordinate ref_ulc = Ref_img.coordinate(
-     *New_img.ground_coordinate(ImageCoordinate(0, 0)));
-  ImageCoordinate ref_lrc = Ref_img.coordinate(
-     *New_img.ground_coordinate(ImageCoordinate(New_img.number_line(), 
-					    New_img.number_sample())));
-  int sl = std::max((int) floor(ref_ulc.line), 0);
-  int ss = std::max((int) floor(ref_ulc.sample), 0);
-  int el = std::min((int) ceil(ref_lrc.line), Ref_img.number_line());
-  int es = std::min((int) ceil(ref_lrc.sample), 
-		    Ref_img.number_sample());
+  ImageCoordinate ref_ulc =
+      Ref_img.coordinate(*New_img.ground_coordinate(ImageCoordinate(0, 0)));
+  ImageCoordinate ref_lrc = Ref_img.coordinate(*New_img.ground_coordinate(
+      ImageCoordinate(New_img.number_line(), New_img.number_sample())));
+  int sl = std::max((int)floor(ref_ulc.line), 0);
+  int ss = std::max((int)floor(ref_ulc.sample), 0);
+  int el = std::min((int)ceil(ref_lrc.line), Ref_img.number_line());
+  int es = std::min((int)ceil(ref_lrc.sample), Ref_img.number_sample());
   ref_img.reset(new MemoryRasterImage(
-	      SubRasterImage(const_pointer(Ref_img),
-			     sl, ss, el - sl, es - ss)));
+      SubRasterImage(const_pointer(Ref_img), sl, ss, el - sl, es - ss)));
 }
 
 //-----------------------------------------------------------------------
@@ -176,16 +172,16 @@ void RpcImage::set_ref_img(const RasterImage& Ref_img,
 //-----------------------------------------------------------------------
 
 void RpcImage::interest_point(const FeatureDetector& Fd, const GroundMask& M,
-	            int Feature_grid_space)
+                              int Feature_grid_space)
 {
-  ip_grid = Fd.interest_point_grid(*ref_img, M,
-		(int) ceil(ref_img->number_line() / Feature_grid_space),
-		(int) ceil(ref_img->number_sample() / Feature_grid_space));
+  ip_grid = Fd.interest_point_grid(
+      *ref_img, M, (int)ceil(ref_img->number_line() / Feature_grid_space),
+      (int)ceil(ref_img->number_sample() / Feature_grid_space));
 }
 
 //-----------------------------------------------------------------------
 /// This does image matching between a reference and a new image. The
-/// images should be at near the same resolution. 
+/// images should be at near the same resolution.
 ///
 /// This fills in gref, gnew, ic, dist, lsigma, ssigma, failed_gp,
 /// and im_diagnostic. We return the
@@ -193,39 +189,42 @@ void RpcImage::interest_point(const FeatureDetector& Fd, const GroundMask& M,
 /// of how far New_img was from matching Ref_img).
 //-----------------------------------------------------------------------
 
-double RpcImage::match(const RasterImage& New_img,
-		       const ImageMatcher& Im)
+double RpcImage::match(const RasterImage& New_img, const ImageMatcher& Im)
 {
-//-----------------------------------------------------------------------
-/// Clear out old results.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Clear out old results.
+  //-----------------------------------------------------------------------
 
-  gref.clear(); gnew.clear(); ic.clear(); lsigma.clear(); ssigma.clear();
-  dist.clear(); failed_gp.clear(); im_diagnostic.clear(); 
+  gref.clear();
+  gnew.clear();
+  ic.clear();
+  lsigma.clear();
+  ssigma.clear();
+  dist.clear();
+  failed_gp.clear();
+  im_diagnostic.clear();
 
-//-----------------------------------------------------------------------
-/// Do matching.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Do matching.
+  //-----------------------------------------------------------------------
 
   std::cerr << "Starting Matching\n";
   double dist_ave = 0.0;
   BOOST_FOREACH(ImageCoordinate& ip, ip_grid) {
-    boost::shared_ptr<GroundCoordinate> gr = 
-      ref_img->ground_coordinate(ip, dem());
+    boost::shared_ptr<GroundCoordinate> gr =
+        ref_img->ground_coordinate(ip, dem());
     ImageCoordinate inew = New_img.coordinate(*gr);
     ImageCoordinate ires;
     double line_sigma, sample_sigma;
     bool success = false;
     int diagnostic = 0;
-    if(inew.line >= 0 &&
-       inew.line < New_img.number_line() &&
-       inew.sample >= 0 &&
-       inew.sample < New_img.number_sample())
-      Im.match(*ref_img, New_img, ip, inew, ires, line_sigma, 
-	       sample_sigma, success, &diagnostic);
+    if(inew.line >= 0 && inew.line < New_img.number_line() &&
+       inew.sample >= 0 && inew.sample < New_img.number_sample())
+      Im.match(*ref_img, New_img, ip, inew, ires, line_sigma, sample_sigma,
+               success, &diagnostic);
     if(success) {
       boost::shared_ptr<GroundCoordinate> gn =
-	New_img.ground_coordinate(ires, dem());
+          New_img.ground_coordinate(ires, dem());
       ImageCoordinate inew = rpc().image_coordinate(*gn);
       ic.push_back(inew);
       lsigma.push_back(line_avg_fact_ * line_sigma);
@@ -298,18 +297,12 @@ double RpcImage::match(const RasterImage& New_img,
 /// change).
 //-----------------------------------------------------------------------
 
-void RpcImage::fit(const RasterImage& Ref_img,
-		   double Max_diff,
-		   const GroundMask& M,
-		   const FeatureDetector& Fd, 
-		   const ImageMatcher& Coarse_im,
-		   const ImageMatcher& Fine_im,
-		   double Match_search,
-		   int Feature_grid_space,
-		   double Blunder_threshold,
-		   double Chisq_threshold,
-		   bool Blunder_detect
-		   )
+void RpcImage::fit(const RasterImage& Ref_img, double Max_diff,
+                   const GroundMask& M, const FeatureDetector& Fd,
+                   const ImageMatcher& Coarse_im, const ImageMatcher& Fine_im,
+                   double Match_search, int Feature_grid_space,
+                   double Blunder_threshold, double Chisq_threshold,
+                   bool Blunder_detect)
 {
   // Keep original MapInfo information. We'll update this as we go
   // along, and then put it back when done.
@@ -318,13 +311,13 @@ void RpcImage::fit(const RasterImage& Ref_img,
   // Do coarse fit
 
   double ref_img_res = std::min(Ref_img.grid_center_line_resolution(),
-				Ref_img.grid_center_sample_resolution());
+                                Ref_img.grid_center_sample_resolution());
   double dist = Max_diff;
   int max_iter = 10;
   for(int i = 0; i < max_iter && dist > Match_search * ref_img_res; ++i) {
     map_info_bounding_update();
-    dist = fit_coarse(Ref_img, Fd, M, Coarse_im, dist, Match_search, 
-		      Feature_grid_space);
+    dist = fit_coarse(Ref_img, Fd, M, Coarse_im, dist, Match_search,
+                      Feature_grid_space);
   }
 
   // Now, do a more full fit.
@@ -336,44 +329,45 @@ void RpcImage::fit(const RasterImage& Ref_img,
   for(int i = 0; i < max_iter && dist_last / dist > 1.05; ++i) {
     dist_last = dist;
     map_info_bounding_update();
-    dist = fit_fine(Fine_im, Blunder_threshold, Chisq_threshold, 
-		    Blunder_detect);
+    dist =
+        fit_fine(Fine_im, Blunder_threshold, Chisq_threshold, Blunder_detect);
   }
   ImagePointDisplay distimg("dist.img", "hfa", map_info(), GDT_UInt16);
   ImagePointDisplay lineimg("line.img", "hfa", map_info(), GDT_UInt16);
   ImagePointDisplay sampimg("samp.img", "hfa", map_info(), GDT_UInt16);
   std::ofstream ds("dump.txt");
-  ds << "# Reference line sample New line sample Diff line Diff Sample Distance(m) Diagnostic\n"
-     << "# ------------- ------- -------- ------ --------- ----------- ----------- ----------\n";
-  for(std::vector<boost::shared_ptr<GroundCoordinate> >::size_type i = 0; 
+  ds << "# Reference line sample New line sample Diff line Diff Sample "
+        "Distance(m) Diagnostic\n"
+     << "# ------------- ------- -------- ------ --------- ----------- "
+        "----------- ----------\n";
+  for(std::vector<boost::shared_ptr<GroundCoordinate>>::size_type i = 0;
       i < reference_image_ground_point().size(); ++i)
-    if(blunder().count(i) ==0) {
-      ImageCoordinate icref(Ref_img.coordinate(*reference_image_ground_point()[i]));
+    if(blunder().count(i) == 0) {
+      ImageCoordinate icref(
+          Ref_img.coordinate(*reference_image_ground_point()[i]));
       ImageCoordinate icnew(Ref_img.coordinate(*new_image_ground_point()[i]));
-      int cindex = (int) floor(distance_new_and_reference()[i] / 2.0) + 1;
+      int cindex = (int)floor(distance_new_and_reference()[i] / 2.0) + 1;
       if(cindex > 10)
-	cindex = 10;
+        cindex = 10;
       distimg.image_point(*new_image_ground_point()[i], cindex);
-      cindex = (int) floor((icnew.line - icref.line + 10) / 4.0) + 1;
+      cindex = (int)floor((icnew.line - icref.line + 10) / 4.0) + 1;
       if(cindex > 10)
-	cindex = 10;
+        cindex = 10;
       if(cindex < 0)
-	cindex = 0;
+        cindex = 0;
       lineimg.image_point(*new_image_ground_point()[i], cindex);
-      cindex = (int) floor((icnew.sample - icref.sample + 10) / 4.0) + 1;
+      cindex = (int)floor((icnew.sample - icref.sample + 10) / 4.0) + 1;
       if(cindex > 10)
-	cindex = 10;
+        cindex = 10;
       if(cindex < 0)
-	cindex = 0;
+        cindex = 0;
       sampimg.image_point(*new_image_ground_point()[i], cindex);
-      
-      ds << icref.line << " " << icref.sample << " " 
-	 << icnew.line << " " << icnew.sample << " "
-	 << icnew.line - icref.line << " "
-	 << icnew.sample - icref.sample << " "
-	 << distance_new_and_reference()[i] << " "
-	 << image_match_succesful_diagnostic()[i]
-	 << "\n";
+
+      ds << icref.line << " " << icref.sample << " " << icnew.line << " "
+         << icnew.sample << " " << icnew.line - icref.line << " "
+         << icnew.sample - icref.sample << " "
+         << distance_new_and_reference()[i] << " "
+         << image_match_succesful_diagnostic()[i] << "\n";
     }
   map_info_ = map_info_original;
   number_line_ = map_info_->number_y_pixel();
@@ -381,7 +375,7 @@ void RpcImage::fit(const RasterImage& Ref_img,
 }
 
 //-----------------------------------------------------------------------
-/// Since an Rpc is usually based on navigation data only, without and 
+/// Since an Rpc is usually based on navigation data only, without and
 /// ground control points, it can give relatively large errors. This
 /// function does a coarse shift to the Rpc to reduce the errors
 /// enough that we can do a finer fit against the Ref_img.
@@ -409,41 +403,38 @@ void RpcImage::fit(const RasterImage& Ref_img,
 //-----------------------------------------------------------------------
 
 double RpcImage::fit_coarse(const RasterImage& Ref_img,
-			    const FeatureDetector& Fd,
-			    const GroundMask& M,
-			    const ImageMatcher& Im,
-			    double Max_diff,
-			    double Match_search,
-			    int Feature_grid_space)
+                            const FeatureDetector& Fd, const GroundMask& M,
+                            const ImageMatcher& Im, double Max_diff,
+                            double Match_search, int Feature_grid_space)
 {
   double ref_img_res = std::min(Ref_img.grid_center_line_resolution(),
-				Ref_img.grid_center_sample_resolution());
-  int average_factor = (int) ceil(Max_diff / (ref_img_res * Match_search));
+                                Ref_img.grid_center_sample_resolution());
+  int average_factor = (int)ceil(Max_diff / (ref_img_res * Match_search));
   if(average_factor < 2)
-    average_factor = 2;		// No point in doing a coarse fit at
-				// full resolution.
+    average_factor = 2; // No point in doing a coarse fit at
+  // full resolution.
   std::cerr << "Average factor: " << average_factor << "\n";
-  RasterAveraged ref_img_avg(const_pointer(Ref_img), 
-			     average_factor, average_factor);
+  RasterAveraged ref_img_avg(const_pointer(Ref_img), average_factor,
+                             average_factor);
   RpcImage new_img(raw_img_, *rpc_, dem_, ref_img_avg.map_info());
   new_img.map_info_bounding_update();
 
-// Scale feature grid space to the size we are working with, but
-// don't let it get smaller than 10.
+  // Scale feature grid space to the size we are working with, but
+  // don't let it get smaller than 10.
   const int min_fgs = 10;
-  int fgs = (int) (Feature_grid_space / average_factor);
+  int fgs = (int)(Feature_grid_space / average_factor);
   if(fgs < min_fgs)
     fgs = min_fgs;
 
-// Don't bother having a fgs that gives us more than 100 points. We
-// are only fitting for the constant terms of the RPC, so we don't
-// need large number of points like we do for the fine_fit.
-  
+  // Don't bother having a fgs that gives us more than 100 points. We
+  // are only fitting for the constant terms of the RPC, so we don't
+  // need large number of points like we do for the fine_fit.
+
   const int max_point = 100;
-  int npoint = (int) (ceil(ref_img_avg.number_line() / fgs) *
-		      ceil(ref_img_avg.number_sample() / fgs));
+  int npoint = (int)(ceil(ref_img_avg.number_line() / fgs) *
+                     ceil(ref_img_avg.number_sample() / fgs));
   if(npoint > max_point)
-    fgs = (int) floor(fgs * sqrt(npoint / max_point));
+    fgs = (int)floor(fgs * sqrt(npoint / max_point));
 
   set_ref_img(ref_img_avg, new_img);
   interest_point(Fd, M, fgs);
@@ -475,20 +466,17 @@ double RpcImage::fit_coarse(const RasterImage& Ref_img,
 /// and Rpc projected image before doing the Rpc update.
 //-----------------------------------------------------------------------
 
-double RpcImage::fit_fine(const ImageMatcher& Im,
-			  double Blunder_threshold,
-			  double Chisq_threshold,
-			  bool Blunder_detect
-			  )
+double RpcImage::fit_fine(const ImageMatcher& Im, double Blunder_threshold,
+                          double Chisq_threshold, bool Blunder_detect)
 {
   match(*this, Im);
-  rpc().fit(gref, ic, lsigma, ssigma, blunder_, Blunder_threshold, 
-	    Chisq_threshold, Blunder_detect);
+  rpc().fit(gref, ic, lsigma, ssigma, blunder_, Blunder_threshold,
+            Chisq_threshold, Blunder_detect);
   std::cerr << "Removed " << blunder().size() << " blunders\n";
   std::vector<double> dist_no_blunder;
   double dist_ave = 0;
-  for(int i = 0; i < (int) dist.size(); ++i)
-    if(blunder().count(i) ==0) {
+  for(int i = 0; i < (int)dist.size(); ++i)
+    if(blunder().count(i) == 0) {
       dist_no_blunder.push_back(dist[i]);
       dist_ave += dist[i];
     }
@@ -496,10 +484,10 @@ double RpcImage::fit_fine(const ImageMatcher& Im,
   std::sort(dist_no_blunder.begin(), dist_no_blunder.end());
   std::cerr << "Have " << dist_no_blunder.size() << " good points\n";
   std::cerr << "Average diff: " << dist_ave << " m\n";
-  std::cerr << "Median diff:  " 
-	    << dist_no_blunder[dist_no_blunder.size() / 2] << " m\n";
-  std::cerr << "90% <= :      " 
-	    << dist_no_blunder[dist_no_blunder.size() * 9 / 10] << " m\n";
+  std::cerr << "Median diff:  " << dist_no_blunder[dist_no_blunder.size() / 2]
+            << " m\n";
+  std::cerr << "90% <= :      "
+            << dist_no_blunder[dist_no_blunder.size() * 9 / 10] << " m\n";
   std::cerr << "Minimum diff: " << dist_no_blunder.front() << " m\n";
   std::cerr << "Maximum diff: " << dist_no_blunder.back() << " m\n";
   std::cerr << "Rpc: " << rpc() << "\n";
@@ -518,10 +506,10 @@ double RpcImage::fit_fine(const ImageMatcher& Im,
 
 MapInfo RpcImage::map_info_bounding() const
 {
-//-----------------------------------------------------------------------
-// Go around the edge of the image to find the maximum and minimum
-// line and sample needed in the current MapInfo to contain the image.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Go around the edge of the image to find the maximum and minimum
+  // line and sample needed in the current MapInfo to contain the image.
+  //-----------------------------------------------------------------------
   double line_min = 1e20;
   double line_max = -1e20;
   double sample_min = 1e20;
@@ -530,8 +518,7 @@ MapInfo RpcImage::map_info_bounding() const
   for(int i = 0; i < img_avg_->number_sample(); ++i) {
     try {
       ImageCoordinate ic = coordinate(*rpc().ground_coordinate(
-      ImageCoordinate(0 * line_avg_fact_, i * sample_avg_fact_),
-      dem()));
+          ImageCoordinate(0 * line_avg_fact_, i * sample_avg_fact_), dem()));
       line_min = std::min(line_min, ic.line);
       line_max = std::max(line_max, ic.line);
       sample_min = std::min(sample_min, ic.sample);
@@ -541,8 +528,9 @@ MapInfo RpcImage::map_info_bounding() const
     }
     try {
       ImageCoordinate ic = coordinate(*rpc().ground_coordinate(
-       ImageCoordinate(img_avg_->number_line() * line_avg_fact_, 
-		       i * sample_avg_fact_), dem()));
+          ImageCoordinate(img_avg_->number_line() * line_avg_fact_,
+                          i * sample_avg_fact_),
+          dem()));
       line_min = std::min(line_min, ic.line);
       line_max = std::max(line_max, ic.line);
       sample_min = std::min(sample_min, ic.sample);
@@ -555,8 +543,7 @@ MapInfo RpcImage::map_info_bounding() const
   for(int i = 0; i < img_avg_->number_line(); ++i) {
     try {
       ImageCoordinate ic = coordinate(*rpc().ground_coordinate(
-      ImageCoordinate(i * line_avg_fact_, 0 * sample_avg_fact_),
-      dem()));
+          ImageCoordinate(i * line_avg_fact_, 0 * sample_avg_fact_), dem()));
       line_min = std::min(line_min, ic.line);
       line_max = std::max(line_max, ic.line);
       sample_min = std::min(sample_min, ic.sample);
@@ -566,9 +553,9 @@ MapInfo RpcImage::map_info_bounding() const
     }
     try {
       ImageCoordinate ic = coordinate(*rpc().ground_coordinate(
-       ImageCoordinate(i * line_avg_fact_,
-		       img_avg_->number_sample() * sample_avg_fact_),
-       dem()));
+          ImageCoordinate(i * line_avg_fact_,
+                          img_avg_->number_sample() * sample_avg_fact_),
+          dem()));
       line_min = std::min(line_min, ic.line);
       line_max = std::max(line_max, ic.line);
       sample_min = std::min(sample_min, ic.sample);
@@ -581,14 +568,14 @@ MapInfo RpcImage::map_info_bounding() const
   sample_min = floor(sample_min) - 0.5;
   line_max = ceil(line_max) + 0.5;
   sample_max = ceil(sample_max) + 0.5;
-  return map_info().subset((int) floor(sample_min), (int) floor(line_min),
-			   (int) (ceil(sample_max) - floor(sample_min)),
-			   (int) (ceil(line_max) - floor(line_min)));
+  return map_info().subset((int)floor(sample_min), (int)floor(line_min),
+                           (int)(ceil(sample_max) - floor(sample_min)),
+                           (int)(ceil(line_max) - floor(line_min)));
 }
 
 //-----------------------------------------------------------------------
 /// This calls map_info_bounding(), and then sets the map_info() for
-/// this object to the results of that call. 
+/// this object to the results of that call.
 //-----------------------------------------------------------------------
 
 void RpcImage::map_info_bounding_update()

@@ -22,3 +22,7 @@ swig = "4.4.*"
 scipy-stubs = "*"
 types-tabulate = "*"
 types-seaborn = "*"
+# clang-format/clang-tidy for "make format" and "make lint". Pinned: clang-format
+# output differs a little between versions, and "make format" should give the
+# same result for everyone.
+clang-tools = "22.*"

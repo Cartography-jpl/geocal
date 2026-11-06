@@ -27,8 +27,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   if(false)
     // Can dump to screen, if we want to see the text
     std::cerr << d;
-  boost::shared_ptr<VicarDem> fr =
-    serialize_read_string<VicarDem>(d);
+  boost::shared_ptr<VicarDem> fr = serialize_read_string<VicarDem>(d);
   Geodetic g1(35.9, 44.800, 100);
   BOOST_CHECK_CLOSE(fr->height_reference_surface(g1), 1.0, 1e-4);
 }

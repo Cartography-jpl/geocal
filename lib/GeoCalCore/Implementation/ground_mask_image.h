@@ -4,7 +4,7 @@
 #include "raster_image.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This provides a GroundMask where the underlying data is a
   RasterImage. 
 
@@ -23,61 +23,60 @@ namespace GeoCal {
 
 class GroundMaskImage : public GroundMask {
 public:
-//-----------------------------------------------------------------------
-/// Constructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor.
+  //-----------------------------------------------------------------------
 
   GroundMaskImage(boost::shared_ptr<RasterImage> Img, int Mask_value = 0,
-		  bool Outside_is_masked = false)
-    : img(Img), maskv(Mask_value), outside_is_masked_(Outside_is_masked) 
+                  bool Outside_is_masked = false)
+    : img(Img), maskv(Mask_value), outside_is_masked_(Outside_is_masked)
   {
   }
 
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~GroundMaskImage() {}
 
-//-----------------------------------------------------------------------
-/// Underlying RasterImage.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Underlying RasterImage.
+  //-----------------------------------------------------------------------
 
-  const RasterImage& raster_image() const {return *img;}
+  const RasterImage& raster_image() const { return *img; }
 
-//-----------------------------------------------------------------------
-/// Underlying RasterImage.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Underlying RasterImage.
+  //-----------------------------------------------------------------------
 
-  const boost::shared_ptr<RasterImage>& 
-  raster_image_ptr() const {return img;}
+  const boost::shared_ptr<RasterImage>& raster_image_ptr() const { return img; }
 
-//-----------------------------------------------------------------------
-/// Value indicating masked data.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Value indicating masked data.
+  //-----------------------------------------------------------------------
 
-  int masked_value() const {return maskv;}
+  int masked_value() const { return maskv; }
 
-//-----------------------------------------------------------------------
-/// Indicated if outside of the image is masked or not.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Indicated if outside of the image is masked or not.
+  //-----------------------------------------------------------------------
 
-  bool outside_is_masked() const {return outside_is_masked_; }
+  bool outside_is_masked() const { return outside_is_masked_; }
 
   virtual bool mask(const GroundCoordinate& Gc) const;
-  virtual bool region_masked(const GroundCoordinate& Ulc, 
-			     const GroundCoordinate& Lrc) const;
+  virtual bool region_masked(const GroundCoordinate& Ulc,
+                             const GroundCoordinate& Lrc) const;
   virtual void print(std::ostream& Os) const;
 protected:
   GroundMaskImage() {}
 private:
   boost::shared_ptr<RasterImage> img; ///< Underlying image.
-  int maskv;				    ///< Value that indicates
-					    ///a masked point.
+  int maskv;                          ///< Value that indicates
+                                      ///a masked point.
   bool outside_is_masked_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 GEOCAL_EXPORT_KEY(GroundMaskImage);

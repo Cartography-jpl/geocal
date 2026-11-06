@@ -19,17 +19,18 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void Time::serialize(Archive & ar, const unsigned int UNUSED(version))
+void Time::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(Time);
-  ar & GEOCAL_NVP_(time_pgs);
+  ar& GEOCAL_NVP_(time_pgs);
 }
 
 template<class Archive>
-void TimeWithDerivative::serialize(Archive & ar, const unsigned int UNUSED(version))
+void TimeWithDerivative::serialize(Archive& ar,
+                                   const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(TimeWithDerivative);
-  ar & GEOCAL_NVP_(time_pgs);
+  ar& GEOCAL_NVP_(time_pgs);
 }
 
 GEOCAL_IMPLEMENT(Time);
@@ -39,7 +40,7 @@ GEOCAL_IMPLEMENT(TimeWithDerivative);
 const Time Time::min_valid_time = Time::time_pgs(-1009843218.0);
 const Time Time::max_valid_time = Time::time_pgs(252676368006.0);
 
-/****************************************************************//**
+/****************************************************************/ /**
   Unix version
 *******************************************************************/
 class UnixToolkitTimeInterface : public ToolkitTimeInterface {
@@ -99,13 +100,18 @@ public:
     // Only handle CCSDS time format.
     boost::smatch m;
     if(!boost::regex_match(Time_string, m,
-     boost::regex("(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2}(\\.\\d+)?)Z"))) {
+                           boost::regex("(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):("
+                                        "\\d{2}):(\\d{2}(\\.\\d+)?)Z"))) {
       Exception e;
-      e << "The UnixToolkitTimeInterface is limited to only parsing CCSDS format time strings. The string \"" << Time_string << "\" does not match this format. If you need better parsing, use one of the other time toolkits (e.g, SPICE or SDP toolkit";
+      e << "The UnixToolkitTimeInterface is limited to only parsing CCSDS "
+           "format time strings. The string \""
+        << Time_string
+        << "\" does not match this format. If you need better parsing, use one "
+           "of the other time toolkits (e.g, SPICE or SDP toolkit";
       throw e;
     }
     double sec_d = boost::lexical_cast<double>(m[6]);
-    int sec_i = (int) floor(sec_d);
+    int sec_i = (int)floor(sec_d);
     double frac_sec = sec_d - sec_i;
     tm t;
     t.tm_sec = sec_i;
@@ -120,20 +126,22 @@ public:
     std::time_t r = mktime(&t);
     Time res = Time::time_unix(r - unix_ep + frac_sec);
     if(res.pgs() < 0)
-      throw Exception("We can't handle leapseconds before 1993. If you need earlier dates, install one of the other time toolkits");
+      throw Exception("We can't handle leapseconds before 1993. If you need "
+                      "earlier dates, install one of the other time toolkits");
     res += leapsecond_table.lower_bound(res.pgs())->second;
     return res;
   }
   virtual std::string to_string(const Time& T) const
   {
     if(T.pgs() < 0)
-      throw Exception("We can't handle leapseconds before 1993. If you need earlier dates, install one of the other time toolkits");
+      throw Exception("We can't handle leapseconds before 1993. If you need "
+                      "earlier dates, install one of the other time toolkits");
     using namespace boost::posix_time;
     Time tadjust = T;
     tadjust += unleapsecond_table.lower_bound(tadjust.pgs())->second;
     // Doesn't handle fractional seconds, so we add that in.
-    double frac_sec = tadjust.unix_time_double() - 
-      floor(tadjust.unix_time_double());
+    double frac_sec =
+        tadjust.unix_time_double() - floor(tadjust.unix_time_double());
     ptime t = from_time_t(tadjust.unix_time() - frac_sec);
     std::string res = to_iso_extended_string(t);
     std::ostringstream ss;
@@ -144,7 +152,7 @@ public:
       res += m[1];
     else
       res += ".000000";
-    return  res + "Z";
+    return res + "Z";
   }
 private:
   std::map<double, int> leapsecond_table;
@@ -158,13 +166,12 @@ private:
 //-----------------------------------------------------------------------
 
 Time Time::time_sclk(const std::string& Sclk,
-		     const std::string& Spacecraft_name)
+                     const std::string& Spacecraft_name)
 {
 #ifdef HAVE_SPICE
   SpiceHelper::spice_setup();
   double et;
-  scs2e_c(SpiceHelper::name_to_body(Spacecraft_name),
-	  Sclk.c_str(), &et);
+  scs2e_c(SpiceHelper::name_to_body(Spacecraft_name), Sclk.c_str(), &et);
   SpiceHelper::spice_error_check();
   return Time::time_et(et);
 #else
@@ -181,8 +188,7 @@ std::string Time::sclk(const std::string& Spacecraft_name)
 #ifdef HAVE_SPICE
   SpiceHelper::spice_setup();
   char buffer[1000];
-  sce2s_c(SpiceHelper::name_to_body(Spacecraft_name),
-	  et(), 1000, buffer);
+  sce2s_c(SpiceHelper::name_to_body(Spacecraft_name), et(), 1000, buffer);
   SpiceHelper::spice_error_check();
   return std::string(buffer);
 #else
@@ -194,7 +200,7 @@ std::string Time::sclk(const std::string& Spacecraft_name)
 /// Return time from given SPICE ET time.
 //-----------------------------------------------------------------------
 
-Time Time::time_et(double et) 
+Time Time::time_et(double et)
 {
 #ifdef HAVE_SPICE
   return SpiceHelper::et_to_geocal(et);
@@ -210,7 +216,7 @@ Time Time::time_et(double et)
 /// seconds from a particular epoch. The choice of UTC seconds means
 /// that this cannot correctly handle times that occur during a
 /// leapsecond, by definition the UTC time before and after a
-/// leapsecond is the same. The epoch is noon January, 1 2000 in UTC. 
+/// leapsecond is the same. The epoch is noon January, 1 2000 in UTC.
 /// Note that this is 64.184 seconds different from terrestrial time J2000.
 //-----------------------------------------------------------------------
 
@@ -228,12 +234,13 @@ Time Time::time_acs(double acs_time)
   // We need to add acs_time to January 1, 2000 but *without*
   // including leapseconds. We take advantage of the fact that boost
   // ptime does this.
-  
-  int acs_time_int = (int) floor(acs_time);
+
+  int acs_time_int = (int)floor(acs_time);
   double acs_time_frac = acs_time - acs_time_int;
   ptime epoch(date(2000, Jan, 1), hours(12));
-  return Time::parse_time(to_iso_extended_string(epoch + seconds(acs_time_int)))
-			  + acs_time_frac;
+  return Time::parse_time(
+             to_iso_extended_string(epoch + seconds(acs_time_int))) +
+         acs_time_frac;
 #endif
 }
 
@@ -256,10 +263,10 @@ double Time::acs() const
 
   // Take advantage of the fact that difference in ptime does not
   // include leapseconds.
-  std::string tstring = 
-    boost::regex_replace(to_string(), 
-     boost::regex("(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?)Z"), 
-			 "\\1 \\2");
+  std::string tstring = boost::regex_replace(
+      to_string(),
+      boost::regex("(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?)Z"),
+      "\\1 \\2");
   ptime t = time_from_string(tstring);
   ptime epoch(date(2000, Jan, 1), hours(12));
   time_duration td = t - epoch;
@@ -271,7 +278,7 @@ double Time::acs() const
 /// Give time as SPICE ET time.
 //-----------------------------------------------------------------------
 
-double Time::et() const 
+double Time::et() const
 {
 #ifdef HAVE_SPICE
   return SpiceHelper::geocal_to_et(*this);
@@ -281,18 +288,18 @@ double Time::et() const
 }
 
 #ifdef HAVE_SPICE
-ToolkitTimeInterface* Time::toolkit_time_interface = 
-  new SpiceToolkitTimeInterface();
+ToolkitTimeInterface* Time::toolkit_time_interface =
+    new SpiceToolkitTimeInterface();
 #else
-  #ifdef HAVE_SDP
-ToolkitTimeInterface* Time::toolkit_time_interface = 
-  new SdpToolkitTimeInterface();
-  #else
-ToolkitTimeInterface* Time::toolkit_time_interface = 
-  new UnixToolkitTimeInterface();
-  #endif
+#ifdef HAVE_SDP
+ToolkitTimeInterface* Time::toolkit_time_interface =
+    new SdpToolkitTimeInterface();
+#else
+ToolkitTimeInterface* Time::toolkit_time_interface =
+    new UnixToolkitTimeInterface();
 #endif
-// This is just used by the unit test, so we can always 
+#endif
+// This is just used by the unit test, so we can always
 // test the default unix case.
 ToolkitTimeInterface* Time::_unix_toolkit_time_interface =
-  new UnixToolkitTimeInterface();
+    new UnixToolkitTimeInterface();

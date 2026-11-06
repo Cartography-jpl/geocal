@@ -6,31 +6,30 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void WithParameter::serialize
-(Archive & UNUSED(ar), const unsigned int UNUSED(version))
+void WithParameter::serialize(Archive& UNUSED(ar),
+                              const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(WithParameter);
 }
 
 template<class Archive>
-void WithParameterNested::serialize
-(Archive & ar, const unsigned int UNUSED(version))
+void WithParameterNested::serialize(Archive& ar,
+                                    const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(WithParameter);
   GEOCAL_GENERIC_BASE(WithParameterNested);
   GEOCAL_BASE(WithParameterNested, WithParameter);
-  ar & GEOCAL_NVP(obj_list);
+  ar& GEOCAL_NVP(obj_list);
 }
 
 template<class Archive>
-void WithParameterShare::serialize
-(Archive & ar, const unsigned int UNUSED(version))
+void WithParameterShare::serialize(Archive& ar,
+                                   const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(WithParameter);
   GEOCAL_GENERIC_BASE(WithParameterShare);
   GEOCAL_BASE(WithParameterShare, WithParameter);
-  ar & GEOCAL_NVP(obj_list)
-    & GEOCAL_NVP_(parameter_mask);
+  ar& GEOCAL_NVP(obj_list) & GEOCAL_NVP_(parameter_mask);
 }
 
 GEOCAL_IMPLEMENT(WithParameter);
@@ -43,7 +42,7 @@ GEOCAL_IMPLEMENT(WithParameterShare);
 //-----------------------------------------------------------------------
 
 blitz::Array<double, 1> WithParameter::parameter_subset() const
-{ 
+{
   blitz::Array<bool, 1> pm(parameter_mask());
   blitz::Array<double, 1> p(blitz::count(pm));
   blitz::Array<double, 1> pfull = parameter();
@@ -61,7 +60,7 @@ blitz::Array<double, 1> WithParameter::parameter_subset() const
 //-----------------------------------------------------------------------
 
 void WithParameter::parameter_subset(const blitz::Array<double, 1>& P)
-{ 
+{
   blitz::Array<bool, 1> pm(parameter_mask());
   if(P.rows() != blitz::count(pm))
     throw Exception("P is not the size expected from the parameter_mask");
@@ -80,7 +79,7 @@ void WithParameter::parameter_subset(const blitz::Array<double, 1>& P)
 //-----------------------------------------------------------------------
 
 ArrayAd<double, 1> WithParameter::parameter_with_derivative_subset() const
-{ 
+{
   blitz::Array<bool, 1> pm(parameter_mask());
   ArrayAd<double, 1> pfull = parameter_with_derivative();
   ArrayAd<double, 1> p(blitz::count(pm), pfull.number_variable());
@@ -97,8 +96,8 @@ ArrayAd<double, 1> WithParameter::parameter_with_derivative_subset() const
 /// Set the part of the parameter set that passes the mask.
 //-----------------------------------------------------------------------
 
-void WithParameter::parameter_with_derivative_subset
-(const ArrayAd<double, 1>& P)
+void WithParameter::parameter_with_derivative_subset(
+    const ArrayAd<double, 1>& P)
 {
   blitz::Array<bool, 1> pm(parameter_mask());
   if(P.rows() != blitz::count(pm))
@@ -123,9 +122,9 @@ std::vector<std::string> WithParameter::parameter_name_subset() const
   blitz::Array<bool, 1> pm(parameter_mask());
   std::vector<std::string> res;
   std::vector<std::string> name_full = parameter_name();
-  if(pm.rows() != (int) name_full.size())
+  if(pm.rows() != (int)name_full.size())
     throw Exception("parameter_mask must be the same size as parameter_name");
-  for(int i = 0; i < (int) name_full.size(); ++i)
+  for(int i = 0; i < (int)name_full.size(); ++i)
     if(pm(i))
       res.push_back(name_full[i]);
   return res;
@@ -145,7 +144,7 @@ void WithParameter::add_identity_gradient()
   p.resize_number_variable(p.rows());
   p.jacobian() = 0;
   for(int i = 0; i < p.rows(); ++i)
-    p.jacobian()(i,i) = 1.0;
+    p.jacobian()(i, i) = 1.0;
   parameter_with_derivative_subset(p);
 }
 
@@ -172,7 +171,7 @@ blitz::Array<double, 1> WithParameterNested::parameter() const
   BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
     Array<double, 1> p = obj->parameter();
     if(p.rows() > 0) {
-      Range r(i, i + p.rows()-1);
+      Range r(i, i + p.rows() - 1);
       res(r) = p;
       i += p.rows();
     }
@@ -188,7 +187,7 @@ void WithParameterNested::parameter(const blitz::Array<double, 1>& Parm)
   BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
     Array<double, 1> p = obj->parameter();
     if(p.rows() > 0) {
-      Range r(i, i + p.rows()-1);
+      Range r(i, i + p.rows() - 1);
       obj->parameter(Parm(r));
       i += p.rows();
     }
@@ -202,7 +201,7 @@ ArrayAd<double, 1> WithParameterNested::parameter_with_derivative() const
   BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
     ArrayAd<double, 1> p = obj->parameter_with_derivative();
     if(p.rows() > 0) {
-      Range r(i, i + p.rows()-1);
+      Range r(i, i + p.rows() - 1);
       res(r) = p;
       i += p.rows();
     }
@@ -210,8 +209,8 @@ ArrayAd<double, 1> WithParameterNested::parameter_with_derivative() const
   return res;
 }
 
-void WithParameterNested::parameter_with_derivative
-(const ArrayAd<double, 1>& Parm)
+void WithParameterNested::parameter_with_derivative(
+    const ArrayAd<double, 1>& Parm)
 {
   if(Parm.rows() != total_size())
     throw Exception("Parm is not the right size");
@@ -219,7 +218,7 @@ void WithParameterNested::parameter_with_derivative
   BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
     ArrayAd<double, 1> p = obj->parameter_with_derivative();
     if(p.rows() > 0) {
-      Range r(i, i + p.rows()-1);
+      Range r(i, i + p.rows() - 1);
       obj->parameter_with_derivative(Parm(r));
       i += p.rows();
     }
@@ -243,7 +242,7 @@ blitz::Array<bool, 1> WithParameterNested::parameter_mask() const
   BOOST_FOREACH(boost::shared_ptr<WithParameter> obj, obj_list) {
     Array<bool, 1> p = obj->parameter_mask();
     if(p.rows() > 0) {
-      Range r(i, i + p.rows()-1);
+      Range r(i, i + p.rows() - 1);
       res(r) = p;
       i += p.rows();
     }
@@ -280,8 +279,8 @@ ArrayAd<double, 1> WithParameterShare::parameter_with_derivative() const
   return obj_list[0]->parameter_with_derivative();
 }
 
-void WithParameterShare::parameter_with_derivative
-(const ArrayAd<double, 1>& Parm)
+void WithParameterShare::parameter_with_derivative(
+    const ArrayAd<double, 1>& Parm)
 {
   if(obj_list.size() == 0)
     throw Exception("Need to have at least one object in WithParameterShare");

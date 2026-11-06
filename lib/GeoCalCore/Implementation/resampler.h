@@ -6,7 +6,7 @@
 #include <vector>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This is used to take the L1B_GEO latitude and longitude fields
   (or other coordinate X and Y) and project data to a given MapInfo.
 
@@ -51,126 +51,127 @@ namespace GeoCal {
 class Resampler : public Printable<Resampler> {
 public:
   Resampler(const boost::shared_ptr<RasterImage>& X_coor,
-	    const boost::shared_ptr<RasterImage>& Y_coor,
-	    const MapInfo& Mi, int Num_sub_pixel = 2,
-	    bool Exactly_match_mi = false,
-	    double Fill_value_threshold = std::numeric_limits<double>::lowest(),
-	    int Number_task = -1);
+            const boost::shared_ptr<RasterImage>& Y_coor, const MapInfo& Mi,
+            int Num_sub_pixel = 2, bool Exactly_match_mi = false,
+            double Fill_value_threshold = std::numeric_limits<double>::lowest(),
+            int Number_task = -1);
   Resampler(const blitz::Array<double, 2>& X_coor_interpolated,
-	    const blitz::Array<double, 2>& Y_coor_interpolated,
-	    const MapInfo& Mi, int Num_sub_pixel = 2,
-	    bool Exactly_match_mi = false,
-	    double Fill_value_threshold = std::numeric_limits<double>::lowest(),
-	    int Number_task = -1);
-  static boost::shared_ptr<Resampler> create_from_lat_lon
-  (const blitz::Array<double, 2>& Latitude,
-   const blitz::Array<double, 2>& Longitude,
-   const MapInfo& Mi, int Num_sub_pixel, int Boundary = 1,
-   double Fill_value_threshold = std::numeric_limits<double>::lowest(),
-   int Number_task = -1);
+            const blitz::Array<double, 2>& Y_coor_interpolated,
+            const MapInfo& Mi, int Num_sub_pixel = 2,
+            bool Exactly_match_mi = false,
+            double Fill_value_threshold = std::numeric_limits<double>::lowest(),
+            int Number_task = -1);
+  static boost::shared_ptr<Resampler> create_from_lat_lon(
+      const blitz::Array<double, 2>& Latitude,
+      const blitz::Array<double, 2>& Longitude, const MapInfo& Mi,
+      int Num_sub_pixel, int Boundary = 1,
+      double Fill_value_threshold = std::numeric_limits<double>::lowest(),
+      int Number_task = -1);
   virtual ~Resampler() {}
   void clear();
   bool empty_resample() const;
   bool empty_resample(const boost::shared_ptr<RasterImage>& Data,
-		      double Fill_value_threshold = std::numeric_limits<double>::lowest()) const;
+                      double Fill_value_threshold =
+                          std::numeric_limits<double>::lowest()) const;
   bool empty_resample(const blitz::Array<double, 2>& Data,
-		      double Fill_value_threshold = std::numeric_limits<double>::lowest()) const;
+                      double Fill_value_threshold =
+                          std::numeric_limits<double>::lowest()) const;
   const MapInfo& map_info() const { return mi; }
-  int number_sub_pixel() const {return nsub; }
+  int number_sub_pixel() const { return nsub; }
 
-//-------------------------------------------------------------------------
-/// The first line of the swath that the data passed to resample_field
-/// should start at. See the class description, this is 0 unless we
-/// were created with create_from_lat_lon.
-//-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
+  /// The first line of the swath that the data passed to resample_field
+  /// should start at. See the class description, this is 0 unless we
+  /// were created with create_from_lat_lon.
+  //-------------------------------------------------------------------------
 
   int swath_line_start() const { return swath_line_start_; }
 
-//-------------------------------------------------------------------------
-/// The number of lines of the swath that the data passed to
-/// resample_field should have. See the class description, this is
-/// std::numeric_limits<int>::max() (i.e., all the data) unless we were
-/// created with create_from_lat_lon.
-//-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
+  /// The number of lines of the swath that the data passed to
+  /// resample_field should have. See the class description, this is
+  /// std::numeric_limits<int>::max() (i.e., all the data) unless we were
+  /// created with create_from_lat_lon.
+  //-------------------------------------------------------------------------
 
   int swath_number_line() const { return swath_number_line_; }
 
-//-------------------------------------------------------------------------
-/// The first sample of the swath that the data passed to
-/// resample_field should start at. See swath_line_start.
-//-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
+  /// The first sample of the swath that the data passed to
+  /// resample_field should start at. See swath_line_start.
+  //-------------------------------------------------------------------------
 
   int swath_sample_start() const { return swath_sample_start_; }
 
-//-------------------------------------------------------------------------
-/// The number of samples of the swath that the data passed to
-/// resample_field should have. See swath_number_line.
-//-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
+  /// The number of samples of the swath that the data passed to
+  /// resample_field should have. See swath_number_line.
+  //-------------------------------------------------------------------------
 
   int swath_number_sample() const { return swath_number_sample_; }
 
-//-------------------------------------------------------------------------
-/// True if we only cover part of the swath, see the class description.
-//-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
+  /// True if we only cover part of the swath, see the class description.
+  //-------------------------------------------------------------------------
 
   bool has_swath_range() const
-  { return swath_number_line_ != std::numeric_limits<int>::max(); }
+  {
+    return swath_number_line_ != std::numeric_limits<int>::max();
+  }
 
-//-------------------------------------------------------------------------
-/// The output line and sample for each subpixel, as a
-/// number line x number sample x 2 array. Values outside of
-/// map_info() (e.g., -9999 for fill coordinates) aren't used. This is
-/// mostly useful for testing.
-//-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
+  /// The output line and sample for each subpixel, as a
+  /// number line x number sample x 2 array. Values outside of
+  /// map_info() (e.g., -9999 for fill coordinates) aren't used. This is
+  /// mostly useful for testing.
+  //-------------------------------------------------------------------------
 
   const blitz::Array<int, 3>& data_index() const { return data_index_; }
-  blitz::Array<double, 2> resample_field
-  (const boost::shared_ptr<RasterImage>& Data,
-   double Scale_data=1.0,
-   bool Negative_to_zero=false, double Fill_value = 0.0,
-   bool Use_smallest_ic = false,
-   double Fill_value_threshold = std::numeric_limits<double>::lowest(),
-   int Number_task = -1) const;
-  blitz::Array<double, 2> resample_field
-  (const blitz::Array<double, 2>& Data,
-   double Scale_data=1.0,
-   bool Negative_to_zero=false, double Fill_value = 0.0,
-   bool Use_smallest_ic = false,
-   double Fill_value_threshold = std::numeric_limits<double>::lowest(),
-   int Number_task = -1) const;
+  blitz::Array<double, 2> resample_field(
+      const boost::shared_ptr<RasterImage>& Data, double Scale_data = 1.0,
+      bool Negative_to_zero = false, double Fill_value = 0.0,
+      bool Use_smallest_ic = false,
+      double Fill_value_threshold = std::numeric_limits<double>::lowest(),
+      int Number_task = -1) const;
+  blitz::Array<double, 2> resample_field(
+      const blitz::Array<double, 2>& Data, double Scale_data = 1.0,
+      bool Negative_to_zero = false, double Fill_value = 0.0,
+      bool Use_smallest_ic = false,
+      double Fill_value_threshold = std::numeric_limits<double>::lowest(),
+      int Number_task = -1) const;
   void resample_field(const std::string& Fname,
-		      const boost::shared_ptr<RasterImage>& Data,
-		      double Scale_data=1.0,
-		      const std::string& File_type="REAL",
-		      bool Negative_to_zero=false, double Fill_value = 0.0,
-		      double Fill_value_threshold = std::numeric_limits<double>::lowest()) const;
-  void map_values(const Dem& d,
-		  blitz::Array<double, 2>& Lat, blitz::Array<double, 2>& Lon,
-		  blitz::Array<double, 2>& Height) const;
-  virtual void print(std::ostream& Os) const
-  { Os << "Resampler";}
+                      const boost::shared_ptr<RasterImage>& Data,
+                      double Scale_data = 1.0,
+                      const std::string& File_type = "REAL",
+                      bool Negative_to_zero = false, double Fill_value = 0.0,
+                      double Fill_value_threshold =
+                          std::numeric_limits<double>::lowest()) const;
+  void map_values(const Dem& d, blitz::Array<double, 2>& Lat,
+                  blitz::Array<double, 2>& Lon,
+                  blitz::Array<double, 2>& Height) const;
+  virtual void print(std::ostream& Os) const { Os << "Resampler"; }
 
-//-------------------------------------------------------------------------
-/// When we use the default number of tasks, data smaller than this
-/// number of subpixels is resampled in a single thread, since the
-/// threading overhead isn't worth it.
-//-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
+  /// When we use the default number of tasks, data smaller than this
+  /// number of subpixels is resampled in a single thread, since the
+  /// threading overhead isn't worth it.
+  //-------------------------------------------------------------------------
 
   inline static const int min_parallel_size = 1000000;
-  static void determine_range(const blitz::Array<double, 2>& X_coor_interpolated,
-			      const blitz::Array<double, 2>& Y_coor_interpolated,
-			      const MapInfo& Mi, int Num_sub_pixel,
-			      int& lstart, int& lend, int& sstart, int& send,
-			      double Fill_value_threshold = std::numeric_limits<double>::lowest());
+  static void determine_range(
+      const blitz::Array<double, 2>& X_coor_interpolated,
+      const blitz::Array<double, 2>& Y_coor_interpolated, const MapInfo& Mi,
+      int Num_sub_pixel, int& lstart, int& lend, int& sstart, int& send,
+      double Fill_value_threshold = std::numeric_limits<double>::lowest());
 
-//-------------------------------------------------------------------------
-/// For a projected MapInfo (e.g., UTM, Albers), we check that the
-/// coordinates don't jump across a discontinuity of the projection
-/// (e.g., the cut at 180 degrees from the central meridian, or a
-/// pole). We throw an exception if a step between neighboring
-/// points is more than max_step_ratio() times the median step. Set
-/// this to 0 to turn the check off.
-//-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
+  /// For a projected MapInfo (e.g., UTM, Albers), we check that the
+  /// coordinates don't jump across a discontinuity of the projection
+  /// (e.g., the cut at 180 degrees from the central meridian, or a
+  /// pole). We throw an exception if a step between neighboring
+  /// points is more than max_step_ratio() times the median step. Set
+  /// this to 0 to turn the check off.
+  //-------------------------------------------------------------------------
 
   static double max_step_ratio() { return max_step_ratio_; }
   static void set_max_step_ratio(double V) { max_step_ratio_ = V; }
@@ -181,7 +182,7 @@ private:
   // Use_smallest_ic, we also track the smallest data_index position
   // (i * number col + j) that sees each output pixel.
   struct ResampleTile {
-    int istart, iend, jstart, jend;		      // Range in data_index
+    int istart, iend, jstart, jend;                   // Range in data_index
     int lstart = 0, nline = 0, sstart = 0, nsamp = 0; // Bounding box in output
     std::vector<double> sum;
     std::vector<int> cnt;
@@ -191,13 +192,14 @@ private:
   inline static double max_step_ratio_ = 50;
   static int default_number_task(long Size, int Number_task);
   static void range_in_mi(const blitz::Array<double, 2>& X_coor_interpolated,
-			  const blitz::Array<double, 2>& Y_coor_interpolated,
-			  const MapInfo& Mi, int Num_sub_pixel,
-			  int& lstart, int& lend, int& sstart, int& send,
-			  double Fill_value_threshold, bool Check);
-  template<class F> void init(int Number_row, int Number_col, F Coor,
-			      const MapInfo& Mi, bool Exactly_match_mi,
-			      double Fill_value_threshold, int Number_task);
+                          const blitz::Array<double, 2>& Y_coor_interpolated,
+                          const MapInfo& Mi, int Num_sub_pixel, int& lstart,
+                          int& lend, int& sstart, int& send,
+                          double Fill_value_threshold, bool Check);
+  template<class F>
+  void init(int Number_row, int Number_col, F Coor, const MapInfo& Mi,
+            bool Exactly_match_mi, double Fill_value_threshold,
+            int Number_task);
   MapInfo mi;
   int nsub;
   blitz::Array<int, 3> data_index_;
@@ -208,7 +210,7 @@ private:
   Resampler() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
 }

@@ -7,10 +7,10 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void WorldView2CloudMask::serialize(Archive & ar, const unsigned int version)
+void WorldView2CloudMask::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRaster);
-  ar & GEOCAL_NVP(cloud_data);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRaster);
+  ar& GEOCAL_NVP(cloud_data);
 }
 
 GEOCAL_IMPLEMENT(WorldView2CloudMask);
@@ -22,23 +22,23 @@ GEOCAL_IMPLEMENT(WorldView2CloudMask);
 class WorldView2CloudMaskHelper : public CalcRaster {
 public:
   WorldView2CloudMaskHelper(const boost::shared_ptr<RasterImage>& Band_1,
-			    const boost::shared_ptr<RasterImage>& Band_8,
-			    double Cloud_threshold, double Shadow_threshold)
-    : CalcRaster(*Band_1), band_1(Band_1), 
-      band_8(Band_8), cloud_threshold(Cloud_threshold),
-      shadow_threshold(Shadow_threshold)
-  { }
+                            const boost::shared_ptr<RasterImage>& Band_8,
+                            double Cloud_threshold, double Shadow_threshold)
+    : CalcRaster(*Band_1), band_1(Band_1), band_8(Band_8),
+      cloud_threshold(Cloud_threshold), shadow_threshold(Shadow_threshold)
+  {
+  }
   virtual ~WorldView2CloudMaskHelper() {}
   virtual void calc(int Lstart, int Sstart) const
   {
-    Array<double, 2> b1(band_1->read_double(Lstart, Sstart, data.rows(),
-					    data.cols()));
-    Array<double, 2> b8(band_8->read_double(Lstart, Sstart, data.rows(),
-					    data.cols()));
-    data = where(b1 > cloud_threshold, (double) WorldView2CloudMask::CLOUDY,
-		 where(b1 > 0 && (b8 - b1) / b1 < shadow_threshold,
-		       (double) WorldView2CloudMask::SHADOW,
-		       (double) WorldView2CloudMask::CLEAR));
+    Array<double, 2> b1(
+        band_1->read_double(Lstart, Sstart, data.rows(), data.cols()));
+    Array<double, 2> b8(
+        band_8->read_double(Lstart, Sstart, data.rows(), data.cols()));
+    data = where(b1 > cloud_threshold, (double)WorldView2CloudMask::CLOUDY,
+                 where(b1 > 0 && (b8 - b1) / b1 < shadow_threshold,
+                       (double)WorldView2CloudMask::SHADOW,
+                       (double)WorldView2CloudMask::CLEAR));
   }
 private:
   boost::shared_ptr<RasterImage> band_1, band_8;
@@ -50,20 +50,16 @@ private:
 //-----------------------------------------------------------------------
 
 WorldView2CloudMask::WorldView2CloudMask(
-const RasterImageMultiBand&
-Mul_spec_data, int Min_cloud_size,
-double Cloud_threshold, double Shadow_threshold)
-: CalcRaster(Mul_spec_data.raster_image(0))
+    const RasterImageMultiBand& Mul_spec_data, int Min_cloud_size,
+    double Cloud_threshold, double Shadow_threshold)
+  : CalcRaster(Mul_spec_data.raster_image(0))
 {
-  boost::shared_ptr<RasterImage> b1avg
-    (new RasterAveraged(Mul_spec_data.raster_image_ptr(0), Min_cloud_size, 
-			Min_cloud_size, true));
-  boost::shared_ptr<RasterImage> b8avg
-    (new RasterAveraged(Mul_spec_data.raster_image_ptr(7), Min_cloud_size, 
-			Min_cloud_size, true));
-  boost::shared_ptr<RasterImage> h
-    (new WorldView2CloudMaskHelper(b1avg, b8avg, Cloud_threshold, 
-				   Shadow_threshold));
+  boost::shared_ptr<RasterImage> b1avg(new RasterAveraged(
+      Mul_spec_data.raster_image_ptr(0), Min_cloud_size, Min_cloud_size, true));
+  boost::shared_ptr<RasterImage> b8avg(new RasterAveraged(
+      Mul_spec_data.raster_image_ptr(7), Min_cloud_size, Min_cloud_size, true));
+  boost::shared_ptr<RasterImage> h(new WorldView2CloudMaskHelper(
+      b1avg, b8avg, Cloud_threshold, Shadow_threshold));
   cloud_data.reset(new MagnifyReplicate(h, Min_cloud_size));
 }
 
@@ -77,6 +73,6 @@ void WorldView2CloudMask::calc(int Lstart, int Sstart) const
     return;
   Range r1(0, std::min(data.rows(), cloud_data->number_line() - Lstart) - 1);
   Range r2(0, std::min(data.cols(), cloud_data->number_sample() - Sstart) - 1);
-  data(r1, r2) = 
-    cloud_data->read_double(Lstart, Sstart, r1.length(), r2.length());
+  data(r1, r2) =
+      cloud_data->read_double(Lstart, Sstart, r1.length(), r2.length());
 }

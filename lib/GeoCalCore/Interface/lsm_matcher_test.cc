@@ -31,25 +31,25 @@ BOOST_AUTO_TEST_CASE(basic_test)
   ImageCoordinate new_res;
   double line_sigma, sample_sigma;
   bool success;
-  m.match(ref_img, new_img, ref_ic, 
-	  ImageCoordinate(new_ic.line + 0.8, new_ic.sample - 0.5), new_res,
-	  line_sigma, sample_sigma, success);
+  m.match(ref_img, new_img, ref_ic,
+          ImageCoordinate(new_ic.line + 0.8, new_ic.sample - 0.5), new_res,
+          line_sigma, sample_sigma, success);
   BOOST_CHECK(fabs(new_res.line - new_ic.line) < m.precision_requirement());
   BOOST_CHECK(fabs(new_res.sample - new_ic.sample) < m.precision_requirement());
   BOOST_CHECK(success);
   BOOST_CHECK_CLOSE(line_sigma, m.precision_goal(), 1e-4);
   BOOST_CHECK_CLOSE(sample_sigma, m.precision_goal(), 1e-4);
-  m2.match(ref_img, new_img, ref_ic, 
-	  ImageCoordinate(new_ic.line + 0.8, new_ic.sample - 0.5), new_res,
-	  line_sigma, sample_sigma, success);
+  m2.match(ref_img, new_img, ref_ic,
+           ImageCoordinate(new_ic.line + 0.8, new_ic.sample - 0.5), new_res,
+           line_sigma, sample_sigma, success);
   BOOST_CHECK(fabs(new_res.line - new_ic.line) < m.precision_requirement());
   BOOST_CHECK(fabs(new_res.sample - new_ic.sample) < m.precision_requirement());
   BOOST_CHECK(success);
   BOOST_CHECK_CLOSE(line_sigma, m2.precision_goal(), 1e-4);
   BOOST_CHECK_CLOSE(sample_sigma, m2.precision_goal(), 1e-4);
-  m.match(ref_img, new_img, ref_ic, 
-	  ImageCoordinate(new_ic.line + 4, new_ic.sample - 5), new_res,
-	  line_sigma, sample_sigma, success);
+  m.match(ref_img, new_img, ref_ic,
+          ImageCoordinate(new_ic.line + 4, new_ic.sample - 5), new_res,
+          line_sigma, sample_sigma, success);
   BOOST_CHECK(!success);
 }
 
@@ -57,8 +57,8 @@ BOOST_AUTO_TEST_CASE(serialize)
 {
   if(!have_serialize_supported())
     return;
-  boost::shared_ptr<ImageMatcher> m
-    (new LsmMatcher(21, 19, 3, 0.06, 0.2, 0.5, 2.0, 0.125, 0.1));
+  boost::shared_ptr<ImageMatcher> m(
+      new LsmMatcher(21, 19, 3, 0.06, 0.2, 0.5, 2.0, 0.125, 0.1));
   std::string d = serialize_write_string(m);
   if(false)
     std::cerr << d;
@@ -75,14 +75,14 @@ BOOST_AUTO_TEST_CASE(serialize)
   ImageCoordinate new_res;
   double line_sigma, sample_sigma;
   bool success;
-  mr->match(ref_img, new_img, ref_ic, 
-	  ImageCoordinate(new_ic.line + 0.8, new_ic.sample - 0.5), new_res,
-	  line_sigma, sample_sigma, success);
+  mr->match(ref_img, new_img, ref_ic,
+            ImageCoordinate(new_ic.line + 0.8, new_ic.sample - 0.5), new_res,
+            line_sigma, sample_sigma, success);
   BOOST_CHECK(fabs(new_res.line - new_ic.line) < mr->precision_requirement());
-  BOOST_CHECK(fabs(new_res.sample - new_ic.sample) < mr->precision_requirement());
+  BOOST_CHECK(fabs(new_res.sample - new_ic.sample) <
+              mr->precision_requirement());
   BOOST_CHECK(success);
   BOOST_CHECK_CLOSE(line_sigma, mr->precision_goal(), 1e-4);
   BOOST_CHECK_CLOSE(sample_sigma, mr->precision_goal(), 1e-4);
 }
 BOOST_AUTO_TEST_SUITE_END()
-

@@ -7,30 +7,24 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void PyramidImageMatcher::serialize(Archive & ar, const unsigned int version)
+void PyramidImageMatcher::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(ImageMatcher);
   GEOCAL_BASE(PyramidImageMatcher, ImageMatcher);
-  ar & GEOCAL_NVP_(match)
-    & GEOCAL_NVP_(start_level)
-    & GEOCAL_NVP_(only_accept_finest_resolution);
+  ar& GEOCAL_NVP_(match) & GEOCAL_NVP_(start_level) &
+      GEOCAL_NVP_(only_accept_finest_resolution);
 }
-
 
 GEOCAL_IMPLEMENT(PyramidImageMatcher);
 #endif
 
 // See base class for description
-void PyramidImageMatcher::match_mask
-(const RasterImage& Ref, const ImageMask& Ref_mask,
- const RasterImage& New, 
- const ImageMask& New_mask,
- const ImageCoordinate& Ref_loc, const
- ImageCoordinate& New_guess, 
- ImageCoordinate& New_res,
- double& Line_sigma, double& Sample_sigma,
- bool& Success,
- int* Diagnostic) const
+void PyramidImageMatcher::match_mask(
+    const RasterImage& Ref, const ImageMask& Ref_mask, const RasterImage& New,
+    const ImageMask& New_mask, const ImageCoordinate& Ref_loc,
+    const ImageCoordinate& New_guess, ImageCoordinate& New_res,
+    double& Line_sigma, double& Sample_sigma, bool& Success,
+    int* Diagnostic) const
 {
   Success = false;
   ImageCoordinate guess = New_guess;
@@ -46,9 +40,8 @@ void PyramidImageMatcher::match_mask
     double lsigma, ssigma;
     bool suc;
     int diag;
-    match_->match_mask(refavg, refmaskavg, newavg, newmaskavg,
-		       ref_loc_avg, new_guess_avg, res_avg, lsigma, ssigma,
-		       suc, &diag);
+    match_->match_mask(refavg, refmaskavg, newavg, newmaskavg, ref_loc_avg,
+                       new_guess_avg, res_avg, lsigma, ssigma, suc, &diag);
     if(suc && (lv == 1 || !only_accept_finest_resolution_)) {
       New_res.line = res_avg.line * fac;
       New_res.sample = res_avg.sample * fac;
@@ -57,10 +50,10 @@ void PyramidImageMatcher::match_mask
       Sample_sigma = ssigma * fac;
       Success = true;
       if(Diagnostic)
-	*Diagnostic = diag;
+        *Diagnostic = diag;
     } else {
       if(!Success && Diagnostic)
-	*Diagnostic = diag;
+        *Diagnostic = diag;
       return;
     }
   }
@@ -71,10 +64,9 @@ void PyramidImageMatcher::print(std::ostream& Os) const
   OstreamPad opad(Os, "    ");
   Os << "PyramidImageMatcher:\n"
      << "  Start level: " << start_level_ << "\n"
-     << "  Only accept finest resolution matches: " 
+     << "  Only accept finest resolution matches: "
      << only_accept_finest_resolution_ << "\n"
      << "  Underlying matcher:\n";
   opad << *match_;
   opad.strict_sync();
 }
-

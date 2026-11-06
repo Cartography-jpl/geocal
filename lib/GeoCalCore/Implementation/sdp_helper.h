@@ -7,7 +7,7 @@
 namespace GeoCal {
 class CartesianFixed;
 class CartesianInertial;
-/****************************************************************//**
+/****************************************************************/ /**
   This class centralizes all of the SDP library calls. This is the
   toolkit used by the EOS missions. This class provides one place to
   modify if we ever need to replace the dependency on this library.
@@ -24,10 +24,10 @@ public:
   static Time parse_time(const std::string& Time_string);
   static std::string to_string(const Time& T);
   static void convert_to_eci(const Time& T, const CartesianFixed& From,
-			     CartesianInertial& To);
+                             CartesianInertial& To);
   static void convert_to_ecr(const Time& T, double Ci_to_cf[3][3]);
   static void convert_to_ecr(const Time& T, const CartesianInertial& From,
-			     CartesianFixed& To);
+                             CartesianFixed& To);
   static bool sdp_available();
 };
 
@@ -42,29 +42,34 @@ class SdpToolkitCoordinateInterface : public ToolkitCoordinateInterface {
 public:
   virtual ~SdpToolkitCoordinateInterface() {}
   virtual void to_inertial(int Body_id, const Time& T,
-    const CartesianFixed& From, CartesianInertial& To);
-  virtual void to_inertial(int Body_id, const Time& T, 
-   const CartesianFixed& From, const boost::array<double, 3>& Vel_cf,
-   CartesianInertial& To, boost::array<double, 3>& Vel_ci);
-  virtual void to_fixed(int Body_id, const Time& T,
-    double Ci_to_cf[3][3]);
+                           const CartesianFixed& From, CartesianInertial& To);
+  virtual void to_inertial(int Body_id, const Time& T,
+                           const CartesianFixed& From,
+                           const boost::array<double, 3>& Vel_cf,
+                           CartesianInertial& To,
+                           boost::array<double, 3>& Vel_ci);
+  virtual void to_fixed(int Body_id, const Time& T, double Ci_to_cf[3][3]);
   virtual void to_fixed_with_vel(int Body_id, const Time& T,
-    double Ci_to_cf[6][6]);
+                                 double Ci_to_cf[6][6]);
   virtual void to_inertial_with_vel(int Body_id, const Time& T,
-    double Cf_to_ci[6][6]);
+                                    double Cf_to_ci[6][6]);
   virtual void to_fixed(int Body_id, const Time& T,
-    const CartesianInertial& From, CartesianFixed& To);
-  virtual void to_fixed(int Body_id, const Time& T, 
-   const CartesianInertial& From, const boost::array<double, 3>& Vel_ci,
-   CartesianFixed& To, boost::array<double, 3>& Vel_cf);
-  virtual void 
-  sub_solar_point(int Body_id, const Time& T, CartesianFixed& P);
+                        const CartesianInertial& From, CartesianFixed& To);
+  virtual void to_fixed(int Body_id, const Time& T,
+                        const CartesianInertial& From,
+                        const boost::array<double, 3>& Vel_ci,
+                        CartesianFixed& To, boost::array<double, 3>& Vel_cf);
+  virtual void sub_solar_point(int Body_id, const Time& T, CartesianFixed& P);
   virtual double solar_distance(int Body_id, const Time& T);
-  virtual void 
-  sub_body_point(int Body_id, int Body2_id, const Time& T, CartesianFixed& P)
-  { throw Exception("Not implemented"); }
+  virtual void sub_body_point(int Body_id, int Body2_id, const Time& T,
+                              CartesianFixed& P)
+  {
+    throw Exception("Not implemented");
+  }
   virtual double body_distance(int Body_id, int Body2_id, const Time& T)
-  { throw Exception("Not implemented"); }
+  {
+    throw Exception("Not implemented");
+  }
 };
 
 }

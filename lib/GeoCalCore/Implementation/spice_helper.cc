@@ -39,15 +39,15 @@ SpiceException::SpiceException()
 #ifdef HAVE_SPICE
   static const int maxlen = 2000;
   char msg[maxlen];
-  getmsg_c ( "LONG", maxlen, msg);
+  getmsg_c("LONG", maxlen, msg);
   long_message = std::string(msg);
-  getmsg_c ( "SHORT", maxlen, msg);
+  getmsg_c("SHORT", maxlen, msg);
   short_message = std::string(msg);
-  getmsg_c ( "EXPLAIN", maxlen, msg);
+  getmsg_c("EXPLAIN", maxlen, msg);
   explain = std::string(msg);
   *this << "SPICE toolkit error:\n"
-	<< "  " << short_message << " -- " << explain << "\n\n"
-	<< "  " << long_message << "\n";
+        << "  " << short_message << " -- " << explain << "\n\n"
+        << "  " << long_message << "\n";
   reset_c();
 #else
   throw SpiceNotAvailableException();
@@ -72,12 +72,12 @@ bool SpiceHelper::kernel_loaded(const std::string& Kernel)
   char filetype[1000], source[1000];
   int handle;
   SpiceBoolean found;
-  kinfo_c(Kernel.c_str(), 1000,1000, filetype, source, &handle, &found);
+  kinfo_c(Kernel.c_str(), 1000, 1000, filetype, source, &handle, &found);
   spice_error_check();
   if(!found) {
     // Try using the full path
     std::string full_path = boost::filesystem::absolute(Kernel).string();
-    kinfo_c(full_path.c_str(), 1000,1000, filetype, source, &handle, &found);
+    kinfo_c(full_path.c_str(), 1000, 1000, filetype, source, &handle, &found);
     spice_error_check();
   }
   // if(found)
@@ -116,7 +116,7 @@ void SpiceHelper::add_kernel(const std::string& Kernel, bool Skip_save)
   DirChange d(dir);
   furnsh_c(full_path.c_str());
   spice_error_check();
-#else 
+#else
   throw SpiceNotAvailableException();
 #endif
 }
@@ -126,7 +126,7 @@ void SpiceHelper::add_kernel(const std::string& Kernel, bool Skip_save)
 /// If Force_kernel_pool_reset is true, then reset the kernel pool and
 /// start over.
 ///
-/// Note a special issue when using with python multiprocessor. In a 
+/// Note a special issue when using with python multiprocessor. In a
 /// way I've never been able to track down, the spice kernels are
 /// somehow mangled in the forked processes. I'm not sure what is not
 /// getting copied, we would regularly we get errors that looked like
@@ -154,8 +154,8 @@ void SpiceHelper::add_kernel(const std::string& Kernel, bool Skip_save)
 /// forking
 //-----------------------------------------------------------------------
 
-void SpiceHelper::spice_setup
-(const std::string& Kernel, bool Force_kernel_pool_reset)
+void SpiceHelper::spice_setup(const std::string& Kernel,
+                              bool Force_kernel_pool_reset)
 {
 #ifdef HAVE_SPICE
   if(Force_kernel_pool_reset) {
@@ -169,7 +169,8 @@ void SpiceHelper::spice_setup
     errprt_c(const_cast<char*>("SET"), 10, const_cast<char*>("NONE"));
     erract_c(const_cast<char*>("SET"), 10, const_cast<char*>("RETURN"));
     if(!getenv("SPICEDATA"))
-      throw Exception("Must have environment variable SPICEDATA set to use SPICE library");
+      throw Exception(
+          "Must have environment variable SPICEDATA set to use SPICE library");
     add_kernel(std::string(getenv("SPICEDATA")) + "/" + Kernel, true);
     BOOST_FOREACH(boost::filesystem::path& p, kernel_list)
       add_kernel(p.string(), true);
@@ -207,12 +208,13 @@ void SpiceHelper::spice_error_check()
 /// selected. If no match is found, the empty string "" is returned.
 //-----------------------------------------------------------------------
 
-std::string SpiceHelper::max_version_find(const std::string& D, 
-					  const boost::regex& F_reg)
+std::string SpiceHelper::max_version_find(const std::string& D,
+                                          const boost::regex& F_reg)
 {
 #ifdef HAVE_SPICE
   if(!getenv("SPICEDATA"))
-    throw Exception("Must have environment variable SPICEDATA set to use SPICE library");
+    throw Exception(
+        "Must have environment variable SPICEDATA set to use SPICE library");
 
   std::string path = std::string(getenv("SPICEDATA")) + "/" + D;
   DIR* dir = opendir(path.c_str());
@@ -226,8 +228,8 @@ std::string SpiceHelper::max_version_find(const std::string& D,
       std::string t = m[1];
       int i = atoi(t.c_str());
       if(i > maxi) {
-	maxi = i;
-	res = path + "/" + dp->d_name;
+        maxi = i;
+        res = path + "/" + dp->d_name;
       }
     }
   }
@@ -241,7 +243,7 @@ std::string SpiceHelper::max_version_find(const std::string& D,
 //-----------------------------------------------------------------------
 /// This is a wrapper around the SPICE call str2et_c that parses a
 /// string to produce a time. We convert the spice time to
-/// GeoCal::Time. See the spice documentation for detailed information 
+/// GeoCal::Time. See the spice documentation for detailed information
 /// on the parse strings (see
 /// http://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/cspice/str2et_c.html)
 ///
@@ -259,24 +261,23 @@ Time SpiceHelper::parse_time(const std::string& Time_string)
   spice_setup();
   double et;
 
-//-----------------------------------------------------------------------
-// Change CCSDS ASCII format to one that str2et_c can parse. This
-// changes something like "1996-07-03T04:13:57.987654Z" to
-// "1996-07-03 04:13:57 UTC"
-// We strip off the fractional part, and treat it separately. This is
-// to avoid minor roundoff problems that occur since we generate the
-// data as et, but store internally as pgs.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Change CCSDS ASCII format to one that str2et_c can parse. This
+  // changes something like "1996-07-03T04:13:57.987654Z" to
+  // "1996-07-03 04:13:57 UTC"
+  // We strip off the fractional part, and treat it separately. This is
+  // to avoid minor roundoff problems that occur since we generate the
+  // data as et, but store internally as pgs.
+  //-----------------------------------------------------------------------
 
-  std::string t = 
-    boost::regex_replace(Time_string, 
-     boost::regex("(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2})(\\.\\d+)?Z"), 
-			 "\\1 \\2 UTC");
+  std::string t = boost::regex_replace(
+      Time_string,
+      boost::regex("(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2})(\\.\\d+)?Z"),
+      "\\1 \\2 UTC");
   t = boost::regex_replace(t, boost::regex("\\.\\d+"), "");
   double frac = 0.0;
   boost::smatch m;
-  if(boost::regex_search(Time_string, m,
-      boost::regex("(\\.\\d+)")))
+  if(boost::regex_search(Time_string, m, boost::regex("(\\.\\d+)")))
     frac = boost::lexical_cast<double>(m[1]);
   str2et_c(t.c_str(), &et);
   spice_error_check();
@@ -290,10 +291,9 @@ Time SpiceHelper::parse_time(const std::string& Time_string)
 /// Convert from the given coordinate to the given coordinate.
 //-----------------------------------------------------------------------
 
-void SpiceHelper::conversion(const std::string& From,
-			     const std::string& To, const Time& T,
-			     const boost::array<double, 3>& pin, 
-			     boost::array<double, 3>& pout)
+void SpiceHelper::conversion(const std::string& From, const std::string& To,
+                             const Time& T, const boost::array<double, 3>& pin,
+                             boost::array<double, 3>& pout)
 {
   conversion_matrix(From, To, T);
   mul(m, pin, pout);
@@ -303,10 +303,9 @@ void SpiceHelper::conversion(const std::string& From,
 /// Convert from the given coordinate to the given coordinate.
 //-----------------------------------------------------------------------
 
-void SpiceHelper::conversion(const std::string& From,
-			     const std::string& To, const Time& T,
-			     const boost::array<double, 6>& pin, 
-			     boost::array<double, 6>& pout)
+void SpiceHelper::conversion(const std::string& From, const std::string& To,
+                             const Time& T, const boost::array<double, 6>& pin,
+                             boost::array<double, 6>& pout)
 {
   conversion_matrix2(From, To, T);
   mul(m2, pin, pout);
@@ -318,10 +317,10 @@ void SpiceHelper::conversion(const std::string& From,
 //-----------------------------------------------------------------------
 
 void SpiceHelper::sub_solar_point_calc(const std::string& Body,
-				       const std::string& Ref_frame,
-				       const Time& T,
-				       boost::array<double, 3>& pout,
-				       boost::array<double, 3>& pout2)
+                                       const std::string& Ref_frame,
+                                       const Time& T,
+                                       boost::array<double, 3>& pout,
+                                       boost::array<double, 3>& pout2)
 {
 #ifdef HAVE_SPICE
   spice_setup();
@@ -333,22 +332,22 @@ void SpiceHelper::sub_solar_point_calc(const std::string& Body,
   //
   // It is possible that if we were working with something in mid or
   // high orbit we might care, but in that case we would need the
-  // satellite available through a spice kernel, and we would need to 
+  // satellite available through a spice kernel, and we would need to
   // make a different call. We just ignore the light travel time
   // (which is small), and report the subsolar point at the instance
   // in time at the surface.
   //
   // Note that we use the Sun here as the observer because we are also
   // often interested in the sun distance. We can get that through pout
-  // (vector from center of earth to subsolar point) and pout2 (vector 
+  // (vector from center of earth to subsolar point) and pout2 (vector
   // from observer to subsolar point, or in this case sun to subsolar
   // point).
   subslr_c(const_cast<char*>("Intercept: ellipsoid"),
-	   const_cast<char*>(Body.c_str()), T.et(),
-	   const_cast<char*>(Ref_frame.c_str()),
-	   //const_cast<char*>("lt+s"),
-	   const_cast<char*>("NONE"),
-	   const_cast<char*>("SUN"), &pout[0], &trgepc, &pout2[0]);
+           const_cast<char*>(Body.c_str()), T.et(),
+           const_cast<char*>(Ref_frame.c_str()),
+           //const_cast<char*>("lt+s"),
+           const_cast<char*>("NONE"), const_cast<char*>("SUN"), &pout[0],
+           &trgepc, &pout2[0]);
   spice_error_check();
 #else
   throw SpiceNotAvailableException();
@@ -363,11 +362,11 @@ void SpiceHelper::sub_solar_point_calc(const std::string& Body,
 //-----------------------------------------------------------------------
 
 void SpiceHelper::sub_body_point_calc(const std::string& Body,
-				      const std::string& Body2,
-				      const std::string& Ref_frame,
-				      const Time& T,
-				      boost::array<double, 3>& pout,
-				      boost::array<double, 3>& pout2)
+                                      const std::string& Body2,
+                                      const std::string& Ref_frame,
+                                      const Time& T,
+                                      boost::array<double, 3>& pout,
+                                      boost::array<double, 3>& pout2)
 {
 #ifdef HAVE_SPICE
   spice_setup();
@@ -379,22 +378,22 @@ void SpiceHelper::sub_body_point_calc(const std::string& Body,
   //
   // It is possible that if we were working with something in mid or
   // high orbit we might care, but in that case we would need the
-  // satellite available through a spice kernel, and we would need to 
+  // satellite available through a spice kernel, and we would need to
   // make a different call. We just ignore the light travel time
   // (which is small), and report the subsolar point at the instance
   // in time at the surface.
   //
   // Note that we use the Sun here as the observer because we are also
   // often interested in the sun distance. We can get that through pout
-  // (vector from center of earth to subsolar point) and pout2 (vector 
+  // (vector from center of earth to subsolar point) and pout2 (vector
   // from observer to subsolar point, or in this case sun to subsolar
   // point).
   subpnt_c(const_cast<char*>("Intercept: ellipsoid"),
-	   const_cast<char*>(Body.c_str()), T.et(),
-	   const_cast<char*>(Ref_frame.c_str()),
-	   //const_cast<char*>("lt+s"),
-	   const_cast<char*>("NONE"),
-	   const_cast<char*>(Body2.c_str()), &pout[0], &trgepc, &pout2[0]);
+           const_cast<char*>(Body.c_str()), T.et(),
+           const_cast<char*>(Ref_frame.c_str()),
+           //const_cast<char*>("lt+s"),
+           const_cast<char*>("NONE"), const_cast<char*>(Body2.c_str()),
+           &pout[0], &trgepc, &pout2[0]);
   spice_error_check();
 #else
   throw SpiceNotAvailableException();
@@ -424,18 +423,16 @@ void SpiceHelper::sub_body_point_calc(const std::string& Body,
 /// the default "NONE".
 //-----------------------------------------------------------------------
 
-void SpiceHelper::state_vector
-(int Body_id, const std::string& Target_name,
- const Time& T, boost::array<double, 3>& Pos,
- boost::array<double, 3>& Vel,
- const std::string& Abcorr)
+void SpiceHelper::state_vector(int Body_id, const std::string& Target_name,
+                               const Time& T, boost::array<double, 3>& Pos,
+                               boost::array<double, 3>& Vel,
+                               const std::string& Abcorr)
 {
 #ifdef HAVE_SPICE
   spice_setup();
   double state[6], lt;
-  spkezr_c(Target_name.c_str(), T.et(), 
-	   fixed_frame_name(Body_id).c_str(), Abcorr.c_str(), 
-	   body_name(Body_id).c_str(), state, &lt);
+  spkezr_c(Target_name.c_str(), T.et(), fixed_frame_name(Body_id).c_str(),
+           Abcorr.c_str(), body_name(Body_id).c_str(), state, &lt);
   spice_error_check();
   for(int i = 0; i < 3; ++i) {
     Pos[i] = state[i] * 1000.0;
@@ -454,8 +451,8 @@ void SpiceHelper::state_vector
 /// can add something taking an array in the future if needed.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<GroundCoordinate> SpiceHelper::latsrf
-(int Body_id, const Time& T, double Lat_deg, double Lon_deg)
+boost::shared_ptr<GroundCoordinate>
+SpiceHelper::latsrf(int Body_id, const Time& T, double Lat_deg, double Lon_deg)
 {
 #ifdef HAVE_SPICE
   spice_setup();
@@ -466,25 +463,23 @@ boost::shared_ptr<GroundCoordinate> SpiceHelper::latsrf
   lonlat[1] = Lat_deg * Constant::deg_to_rad;
   double res[3];
   latsrf_c("DSK/UNPRIORITIZED", const_cast<char*>(body_name.c_str()), T.et(),
-	   const_cast<char*>(fixed_frame_name.c_str()),
-	   1, &lonlat, &res);
+           const_cast<char*>(fixed_frame_name.c_str()), 1, &lonlat, &res);
   spice_error_check();
-  return boost::make_shared<PlanetFixed>(res[0] * 1000.0,
-					 res[1] * 1000.0,
-					 res[2] * 1000.0, Body_id);
+  return boost::make_shared<PlanetFixed>(res[0] * 1000.0, res[1] * 1000.0,
+                                         res[2] * 1000.0, Body_id);
 #else
   throw SpiceNotAvailableException();
 #endif
 }
 
 //-----------------------------------------------------------------------
-/// Return quaternion that converts between the two named coordinate 
+/// Return quaternion that converts between the two named coordinate
 /// systems.
 //-----------------------------------------------------------------------
 
-boost::math::quaternion<double> 
+boost::math::quaternion<double>
 SpiceHelper::conversion_quaternion(const std::string& From,
-				   const std::string& To, const Time& T)
+                                   const std::string& To, const Time& T)
 {
   conversion_matrix(From, To, T);
   return matrix_to_quaternion(m);
@@ -493,16 +488,16 @@ SpiceHelper::conversion_quaternion(const std::string& From,
 //-----------------------------------------------------------------------
 /// Return matrix that converts between the two named coordinate
 /// system. To avoid making a second copy, we return the data in
-/// SpiceHelper::m. 
+/// SpiceHelper::m.
 //-----------------------------------------------------------------------
 
 void SpiceHelper::conversion_matrix(const std::string& From,
-				    const std::string& To, const Time& T)
+                                    const std::string& To, const Time& T)
 {
 #ifdef HAVE_SPICE
   spice_setup();
-  pxform_c(const_cast<char*>(From.c_str()), const_cast<char*>(To.c_str()), 
-	   T.et(), m);
+  pxform_c(const_cast<char*>(From.c_str()), const_cast<char*>(To.c_str()),
+           T.et(), m);
   spice_error_check();
 #else
   throw SpiceNotAvailableException();
@@ -512,22 +507,21 @@ void SpiceHelper::conversion_matrix(const std::string& From,
 //-----------------------------------------------------------------------
 /// Return matrix that converts between the two named coordinate
 /// system, including velocify. To avoid making a second copy, we
-/// return the data in SpiceHelper::m2. 
+/// return the data in SpiceHelper::m2.
 //-----------------------------------------------------------------------
 
 void SpiceHelper::conversion_matrix2(const std::string& From,
-				     const std::string& To, const Time& T)
+                                     const std::string& To, const Time& T)
 {
 #ifdef HAVE_SPICE
   spice_setup();
-  sxform_c(const_cast<char*>(From.c_str()), const_cast<char*>(To.c_str()), 
-	   T.et(), m2);
+  sxform_c(const_cast<char*>(From.c_str()), const_cast<char*>(To.c_str()),
+           T.et(), m2);
   spice_error_check();
 #else
   throw SpiceNotAvailableException();
 #endif
 }
-
 
 //-----------------------------------------------------------------------
 /// Get ID given a name.
@@ -557,7 +551,7 @@ int SpiceHelper::name_to_body(const std::string& Name)
     try {
       res = boost::lexical_cast<int>(Name);
       return res;
-    } catch (const boost::bad_lexical_cast& e) {
+    } catch(const boost::bad_lexical_cast& e) {
       // Ignore error, we'll drop through to the next error report
     }
   }
@@ -583,13 +577,13 @@ std::string SpiceHelper::body_name(int Body_id)
   case 399:
     return "EARTH";
     break;
-  case 499:			// Mars
+  case 499: // Mars
     return "MARS";
     break;
-  case 502:			// Europa
+  case 502: // Europa
     return "EUROPA";
     break;
-  case 301:			// Moon
+  case 301: // Moon
     return "MOON";
     break;
   }
@@ -623,20 +617,20 @@ std::string SpiceHelper::fixed_frame_name(int Body_id)
   case 399:
     return "ITRF93";
     break;
-  case 499:			// Mars
+  case 499: // Mars
     return "IAU_MARS";
     break;
-  case 502:			// Europa
+  case 502: // Europa
     return "IAU_EUROPA";
     break;
-  case 301:			// Moon
+  case 301: // Moon
     return "IAU_MOON";
     break;
-  case 2000001:			// Ceres
+  case 2000001: // Ceres
     return "CERES_FIXED";
     break;
   }
-  // Default to IAU_ + the name of the body 
+  // Default to IAU_ + the name of the body
   return "IAU_" + body_name(Body_id);
 }
 
@@ -648,8 +642,8 @@ std::string SpiceHelper::fixed_frame_name(int Body_id)
 /// is worth the small performance advantage.
 //-----------------------------------------------------------------------
 
-void SpiceHelper::cartesian_inertial_to_cartesian_fixed(int Body_id, 
-							const Time& T)
+void SpiceHelper::cartesian_inertial_to_cartesian_fixed(int Body_id,
+                                                        const Time& T)
 {
   conversion_matrix("J2000", fixed_frame_name(Body_id), T);
 }
@@ -657,20 +651,20 @@ void SpiceHelper::cartesian_inertial_to_cartesian_fixed(int Body_id,
 //-----------------------------------------------------------------------
 /// Return matrix that converts from CartesianInertial to
 /// CartesianFixed including velocity. To avoid making a second copy,
-/// we return the data 
+/// we return the data
 /// in SpiceHelper::m2. Since this is only called by
 /// SpiceToolkitCoordinateInterface, this slightly awkward interface
 /// is worth the small performance advantage.
 //-----------------------------------------------------------------------
 
-void SpiceHelper::cartesian_inertial_to_cartesian_fixed2(int Body_id, 
-							const Time& T)
+void SpiceHelper::cartesian_inertial_to_cartesian_fixed2(int Body_id,
+                                                         const Time& T)
 {
   conversion_matrix2("J2000", fixed_frame_name(Body_id), T);
 }
 
-void SpiceHelper::cartesian_fixed_to_cartesian_inertial2(int Body_id, 
-							const Time& T)
+void SpiceHelper::cartesian_fixed_to_cartesian_inertial2(int Body_id,
+                                                         const Time& T)
 {
   conversion_matrix2(fixed_frame_name(Body_id), "J2000", T);
 }
@@ -688,7 +682,7 @@ double SpiceHelper::geocal_to_et(const Time& T)
   // more commonly used TT J2000. unitim_c takes care of the
   // difference to TT used by et.
 
-  return unitim_c(T.pgs() - 220881573.0, "TAI", "TDB"); 
+  return unitim_c(T.pgs() - 220881573.0, "TAI", "TDB");
   spice_error_check();
 #else
   throw SpiceNotAvailableException();
@@ -699,7 +693,7 @@ double SpiceHelper::geocal_to_et(const Time& T)
 /// Convert from Spice ET time to GeoCal::Time.
 //-----------------------------------------------------------------------
 
-Time SpiceHelper::et_to_geocal(double Et) 
+Time SpiceHelper::et_to_geocal(double Et)
 {
 #ifdef HAVE_SPICE
   spice_setup();
@@ -734,7 +728,7 @@ std::string SpiceHelper::to_string(const Time& T)
 }
 
 Time SpiceToolkitTimeInterface::parse_time(const std::string Time_string) const
-{ 
+{
   return SpiceHelper::parse_time(Time_string);
 }
 
@@ -743,33 +737,32 @@ std::string SpiceToolkitTimeInterface::to_string(const Time& T) const
   return SpiceHelper::to_string(T);
 }
 
-
 //-----------------------------------------------------------------------
 /// This converts from CartesianFixed to CartesianInertial for the
 /// given body. We use the NAIF coding for the bodies (see the SPICE
-/// documentation for details). 
+/// documentation for details).
 //-----------------------------------------------------------------------
 
-void SpiceToolkitCoordinateInterface::to_inertial(int Body_id, 
-  const Time& T, const CartesianFixed& From, CartesianInertial& To)
+void SpiceToolkitCoordinateInterface::to_inertial(int Body_id, const Time& T,
+                                                  const CartesianFixed& From,
+                                                  CartesianInertial& To)
 {
   SpiceHelper::cartesian_inertial_to_cartesian_fixed(Body_id, T);
   mul_t(SpiceHelper::m, From.position, To.position);
 }
-
 
 //-----------------------------------------------------------------------
 /// This converts from CartesianFixed to CartesianInertial for the
 /// given body, including velocity. We use the NAIF coding for the
 /// bodies (see the SPICE documentation for details). We use this
 /// because it is a unique  coding, the underlying toolkit doesn't
-/// need to be SPICE. 
+/// need to be SPICE.
 //-----------------------------------------------------------------------
 
-void SpiceToolkitCoordinateInterface::to_inertial
-(int Body_id, const Time& T, 
- const CartesianFixed& From, const boost::array<double, 3>& Vel_cf,
- CartesianInertial& To, boost::array<double, 3>& Vel_ci)
+void SpiceToolkitCoordinateInterface::to_inertial(
+    int Body_id, const Time& T, const CartesianFixed& From,
+    const boost::array<double, 3>& Vel_cf, CartesianInertial& To,
+    boost::array<double, 3>& Vel_ci)
 {
   SpiceHelper::cartesian_inertial_to_cartesian_fixed(Body_id, T);
   boost::array<double, 6> from, to;
@@ -791,11 +784,11 @@ void SpiceToolkitCoordinateInterface::to_inertial
 //-----------------------------------------------------------------------
 /// This calculates a matrix from converting from CartesianInertial to
 /// CartesianFixed for the  given body. We use the NAIF coding for
-/// the bodies (see the SPICE documentation for details). 
+/// the bodies (see the SPICE documentation for details).
 //-----------------------------------------------------------------------
 
-void SpiceToolkitCoordinateInterface::to_fixed(int Body_id, 
-  const Time& T, double Ci_to_cf[3][3])
+void SpiceToolkitCoordinateInterface::to_fixed(int Body_id, const Time& T,
+                                               double Ci_to_cf[3][3])
 {
   SpiceHelper::cartesian_inertial_to_cartesian_fixed(Body_id, T);
   mat_copy(SpiceHelper::m, Ci_to_cf);
@@ -804,11 +797,12 @@ void SpiceToolkitCoordinateInterface::to_fixed(int Body_id,
 //-----------------------------------------------------------------------
 /// This calculates a matrix from converting from CartesianInertial to
 /// CartesianFixed with velocity for the  given body. We use the NAIF
-/// coding for the bodies (see the SPICE documentation for details). 
+/// coding for the bodies (see the SPICE documentation for details).
 //-----------------------------------------------------------------------
 
-void SpiceToolkitCoordinateInterface::to_fixed_with_vel(int Body_id, 
-  const Time& T, double Ci_to_cf[6][6])
+void SpiceToolkitCoordinateInterface::to_fixed_with_vel(int Body_id,
+                                                        const Time& T,
+                                                        double Ci_to_cf[6][6])
 {
   SpiceHelper::cartesian_inertial_to_cartesian_fixed2(Body_id, T);
   mat_copy(SpiceHelper::m2, Ci_to_cf);
@@ -817,24 +811,24 @@ void SpiceToolkitCoordinateInterface::to_fixed_with_vel(int Body_id,
 //-----------------------------------------------------------------------
 /// This calculates a matrix from converting from CartesianFixed to
 /// CartesianInertial with velocity for the  given body. We use the NAIF
-/// coding for the bodies (see the SPICE documentation for details). 
+/// coding for the bodies (see the SPICE documentation for details).
 //-----------------------------------------------------------------------
 
-void SpiceToolkitCoordinateInterface::to_inertial_with_vel(int Body_id, 
-  const Time& T, double Cf_to_ci[6][6])
+void SpiceToolkitCoordinateInterface::to_inertial_with_vel(
+    int Body_id, const Time& T, double Cf_to_ci[6][6])
 {
   SpiceHelper::cartesian_fixed_to_cartesian_inertial2(Body_id, T);
   mat_copy(SpiceHelper::m2, Cf_to_ci);
 }
 
-void
-SpiceToolkitCoordinateInterface::sub_solar_point(int Body_id, const Time& T, 
-						 CartesianFixed& P)
+void SpiceToolkitCoordinateInterface::sub_solar_point(int Body_id,
+                                                      const Time& T,
+                                                      CartesianFixed& P)
 {
   boost::array<double, 3> ign;
-  SpiceHelper::sub_solar_point_calc(SpiceHelper::body_name(Body_id).c_str(), 
-			    SpiceHelper::fixed_frame_name(Body_id).c_str(), 
-			    T, P.position, ign);
+  SpiceHelper::sub_solar_point_calc(
+      SpiceHelper::body_name(Body_id).c_str(),
+      SpiceHelper::fixed_frame_name(Body_id).c_str(), T, P.position, ign);
   // sub_solar_point_calc returns km, *not* meter. Since
   // CartesianFixed expected meter convert this.
   P.position[0] *= 1000.0;
@@ -842,16 +836,15 @@ SpiceToolkitCoordinateInterface::sub_solar_point(int Body_id, const Time& T,
   P.position[2] *= 1000.0;
 }
 
-void
-SpiceToolkitCoordinateInterface::sub_body_point(int Body_id, int Body2_id,
-						const Time& T, 
-						CartesianFixed& P)
+void SpiceToolkitCoordinateInterface::sub_body_point(int Body_id, int Body2_id,
+                                                     const Time& T,
+                                                     CartesianFixed& P)
 {
   boost::array<double, 3> ign;
-  SpiceHelper::sub_body_point_calc(SpiceHelper::body_name(Body_id).c_str(),
-				   SpiceHelper::body_name(Body2_id).c_str(),
-				   SpiceHelper::fixed_frame_name(Body_id).c_str(), 
-				   T, P.position, ign);
+  SpiceHelper::sub_body_point_calc(
+      SpiceHelper::body_name(Body_id).c_str(),
+      SpiceHelper::body_name(Body2_id).c_str(),
+      SpiceHelper::fixed_frame_name(Body_id).c_str(), T, P.position, ign);
   // sub_solar_point_calc returns km, *not* meter. Since
   // CartesianFixed expected meter convert this.
   P.position[0] *= 1000.0;
@@ -859,13 +852,13 @@ SpiceToolkitCoordinateInterface::sub_body_point(int Body_id, int Body2_id,
   P.position[2] *= 1000.0;
 }
 
-double
-SpiceToolkitCoordinateInterface::solar_distance(int Body_id, const Time& T)
+double SpiceToolkitCoordinateInterface::solar_distance(int Body_id,
+                                                       const Time& T)
 {
   boost::array<double, 3> pout1, pout2;
-  SpiceHelper::sub_solar_point_calc(SpiceHelper::body_name(Body_id).c_str(), 
-			    SpiceHelper::fixed_frame_name(Body_id).c_str(), 
-			    T, pout1, pout2);
+  SpiceHelper::sub_solar_point_calc(
+      SpiceHelper::body_name(Body_id).c_str(),
+      SpiceHelper::fixed_frame_name(Body_id).c_str(), T, pout1, pout2);
   // pout1 takes us from the center of the body to the subsolar
   // point, and then pout2 takes us to the sun. So together they are
   // the distance from the center of body to the sun. This is in km,
@@ -873,15 +866,14 @@ SpiceToolkitCoordinateInterface::solar_distance(int Body_id, const Time& T)
   return (norm(pout1) + norm(pout2)) * 1000.0;
 }
 
-double
-SpiceToolkitCoordinateInterface::body_distance(int Body_id, int Body2_id,
-					       const Time& T)
+double SpiceToolkitCoordinateInterface::body_distance(int Body_id, int Body2_id,
+                                                      const Time& T)
 {
   boost::array<double, 3> pout1, pout2;
-  SpiceHelper::sub_body_point_calc(SpiceHelper::body_name(Body_id).c_str(),
-				   SpiceHelper::body_name(Body2_id).c_str(),
-				   SpiceHelper::fixed_frame_name(Body_id).c_str(), 
-				   T, pout1, pout2);
+  SpiceHelper::sub_body_point_calc(
+      SpiceHelper::body_name(Body_id).c_str(),
+      SpiceHelper::body_name(Body2_id).c_str(),
+      SpiceHelper::fixed_frame_name(Body_id).c_str(), T, pout1, pout2);
   // pout1 takes us from the center of the body to the subsolar
   // point, and then pout2 takes us to the sun. So together they are
   // the distance from the center of body to the sun. This is in km,
@@ -892,11 +884,12 @@ SpiceToolkitCoordinateInterface::body_distance(int Body_id, int Body2_id,
 //-----------------------------------------------------------------------
 /// This converts from CartesianInertial to CartesianFixed for the
 /// given body. We use the NAIF coding for the bodies (see the SPICE
-/// documentation for details). 
+/// documentation for details).
 //-----------------------------------------------------------------------
 
-void SpiceToolkitCoordinateInterface::to_fixed(int Body_id, 
-  const Time& T, const CartesianInertial& From, CartesianFixed& To)
+void SpiceToolkitCoordinateInterface::to_fixed(int Body_id, const Time& T,
+                                               const CartesianInertial& From,
+                                               CartesianFixed& To)
 {
   SpiceHelper::cartesian_inertial_to_cartesian_fixed(Body_id, T);
   mul(SpiceHelper::m, From.position, To.position);
@@ -907,13 +900,13 @@ void SpiceToolkitCoordinateInterface::to_fixed(int Body_id,
 /// given body, including velocity. We use the NAIF coding for the
 /// bodies (see the SPICE documentation for details). We use this
 /// because it is a unique  coding, the underlying toolkit doesn't
-/// need to be SPICE. 
+/// need to be SPICE.
 //-----------------------------------------------------------------------
 
-void SpiceToolkitCoordinateInterface::to_fixed
-(int Body_id, const Time& T, 
- const CartesianInertial& From, const boost::array<double, 3>& Vel_ci,
- CartesianFixed& To, boost::array<double, 3>& Vel_cf)
+void SpiceToolkitCoordinateInterface::to_fixed(
+    int Body_id, const Time& T, const CartesianInertial& From,
+    const boost::array<double, 3>& Vel_ci, CartesianFixed& To,
+    boost::array<double, 3>& Vel_cf)
 {
   SpiceHelper::cartesian_inertial_to_cartesian_fixed(Body_id, T);
   boost::array<double, 6> from, to;
@@ -972,7 +965,7 @@ void SpicePlanetConstant::calc_data() const
   a = (values[0] + values[1]) / 2.0 * 1000.0;
   b = values[2] * 1000.0;
   esq = (a * a - b * b) / (a * a);
-				// Eccentricity squared. From CRC.
+  // Eccentricity squared. From CRC.
 #endif
 }
 
@@ -996,46 +989,43 @@ void SpicePlanetConstant::calc_data() const
 /// than spice returns them.
 //-----------------------------------------------------------------------
 
-std::vector<boost::shared_ptr<GroundCoordinate> >
-SpiceHelper::boresight_and_footprint
-(const Time& T, int Body_id,
- const std::string& Satellite_name,
- const std::string& Camera_name,
- const std::string& Corr_type)
+std::vector<boost::shared_ptr<GroundCoordinate>>
+SpiceHelper::boresight_and_footprint(const Time& T, int Body_id,
+                                     const std::string& Satellite_name,
+                                     const std::string& Camera_name,
+                                     const std::string& Corr_type)
 {
 #ifdef HAVE_SPICE
   spice_setup();
   char shape[1000], frame[1000];
   int n;
   double bsight[3], bounds[10][3];
-  
-  getfov_c(SpiceHelper::name_to_body(Camera_name),
-	   10, 1000, 1000, shape, frame, bsight, &n, bounds);
+
+  getfov_c(SpiceHelper::name_to_body(Camera_name), 10, 1000, 1000, shape, frame,
+           bsight, &n, bounds);
   spice_error_check();
   double spoint[3], trgepc, srfvec[3];
   SpiceBoolean found;
-  sincpt_c ("Ellipsoid", body_name(Body_id).c_str(), T.et(),
-	    fixed_frame_name(Body_id).c_str(),  
-	    Corr_type.c_str(), Satellite_name.c_str(), frame, bsight, 
-	    spoint, &trgepc, srfvec, &found);  
+  sincpt_c("Ellipsoid", body_name(Body_id).c_str(), T.et(),
+           fixed_frame_name(Body_id).c_str(), Corr_type.c_str(),
+           Satellite_name.c_str(), frame, bsight, spoint, &trgepc, srfvec,
+           &found);
   SpiceHelper::spice_error_check();
   if(!found)
     throw Exception("Spice did not find a solution");
-  std::vector<boost::shared_ptr<GroundCoordinate> > res;
-  res.push_back(boost::make_shared<PlanetFixed>
-	     (spoint[0] * 1000.0,spoint[1] * 1000.0,spoint[2] * 1000.0,
-	      Body_id));
+  std::vector<boost::shared_ptr<GroundCoordinate>> res;
+  res.push_back(boost::make_shared<PlanetFixed>(
+      spoint[0] * 1000.0, spoint[1] * 1000.0, spoint[2] * 1000.0, Body_id));
   for(int i = 0; i < n; ++i) {
-    sincpt_c ("Ellipsoid", body_name(Body_id).c_str(), T.et(),
-	      fixed_frame_name(Body_id).c_str(),  
-	      Corr_type.c_str(), Satellite_name.c_str(), frame, bounds[i], 
-	      spoint, &trgepc, srfvec, &found);  
+    sincpt_c("Ellipsoid", body_name(Body_id).c_str(), T.et(),
+             fixed_frame_name(Body_id).c_str(), Corr_type.c_str(),
+             Satellite_name.c_str(), frame, bounds[i], spoint, &trgepc, srfvec,
+             &found);
     SpiceHelper::spice_error_check();
     if(!found)
       throw Exception("Spice did not find a solution");
-    res.push_back(boost::make_shared<PlanetFixed>
-	       (spoint[0] * 1000.0,spoint[1] * 1000.0,spoint[2] * 1000.0,
-		Body_id));
+    res.push_back(boost::make_shared<PlanetFixed>(
+        spoint[0] * 1000.0, spoint[1] * 1000.0, spoint[2] * 1000.0, Body_id));
   }
   return res;
 #else
@@ -1048,7 +1038,7 @@ SpiceHelper::boresight_and_footprint
 /// ScLookVector.
 ///
 /// The Corr_type is what is used by sincpt_c, check the SPICE
-/// documentation for this. 
+/// documentation for this.
 ///
 /// Satellite_name is something like "MEX" (for mars express), and
 /// Camera_name is something like "MEX_HRSC_NADIR".
@@ -1057,16 +1047,11 @@ SpiceHelper::boresight_and_footprint
 /// light time calculated (if applicable).
 //-----------------------------------------------------------------------
 
-void
-SpiceHelper::surface_intersect
-(const Time& T, int Body_id,
- const std::string& Satellite_name,
- const std::string& Camera_name,
- const ScLookVector& Slv,
- boost::shared_ptr<GroundCoordinate>& Gc,
- double &Light_time,
- const std::string& Corr_type,
- const std::string& Method)
+void SpiceHelper::surface_intersect(
+    const Time& T, int Body_id, const std::string& Satellite_name,
+    const std::string& Camera_name, const ScLookVector& Slv,
+    boost::shared_ptr<GroundCoordinate>& Gc, double& Light_time,
+    const std::string& Corr_type, const std::string& Method)
 {
 #ifdef HAVE_SPICE
   spice_setup();
@@ -1076,16 +1061,15 @@ SpiceHelper::surface_intersect
   dvec[0] = Slv.direction()[0];
   dvec[1] = Slv.direction()[1];
   dvec[2] = Slv.direction()[2];
-  sincpt_c (Method.c_str(), body_name(Body_id).c_str(), T.et(),
-	    fixed_frame_name(Body_id).c_str(),  
-	    Corr_type.c_str(), Satellite_name.c_str(), Camera_name.c_str(),
-	    dvec, spoint, &trgepc, srfvec, &found);  
+  sincpt_c(Method.c_str(), body_name(Body_id).c_str(), T.et(),
+           fixed_frame_name(Body_id).c_str(), Corr_type.c_str(),
+           Satellite_name.c_str(), Camera_name.c_str(), dvec, spoint, &trgepc,
+           srfvec, &found);
   SpiceHelper::spice_error_check();
   if(!found)
     throw Exception("Spice did not find a solution");
-  Gc = boost::make_shared<PlanetFixed>(spoint[0] * 1000.0,
-				       spoint[1] * 1000.0,spoint[2] * 1000.0,
-				       Body_id);
+  Gc = boost::make_shared<PlanetFixed>(spoint[0] * 1000.0, spoint[1] * 1000.0,
+                                       spoint[2] * 1000.0, Body_id);
   Light_time = T.et() - trgepc;
 #else
   throw SpiceNotAvailableException();
@@ -1144,7 +1128,8 @@ int SpiceHelper::kernel_data_int(const std::string& Dname)
 /// Return a specific kernel value. This returns a array value.
 //-----------------------------------------------------------------------
 
-blitz::Array<double,1> SpiceHelper::kernel_data_array_double(const std::string& Dname)
+blitz::Array<double, 1>
+SpiceHelper::kernel_data_array_double(const std::string& Dname)
 {
 #ifdef HAVE_SPICE
   spice_setup();

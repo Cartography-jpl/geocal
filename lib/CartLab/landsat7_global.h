@@ -2,7 +2,7 @@
 #define LANDSAT7_GLOBAL
 #include "cart_lab_multifile.h"
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This is used to read the global Landsat 7 data. The resolution
   varies by band. The The geolocation accuracy was estimated
   by Tom Logan at 1/3 pixel or so. Not sure how accurate this
@@ -29,20 +29,20 @@ namespace GeoCal {
 Band 6 has both a low and a high gain (Bands 61 and 62).
 
 *******************************************************************/
-class Landsat7Global: public VicarCartLabMultifile {
+class Landsat7Global : public VicarCartLabMultifile {
 public:
-  enum Band {BAND1, BAND2, BAND3, BAND4, BAND5, BAND61, BAND62, BAND7, BAND8};
+  enum Band { BAND1, BAND2, BAND3, BAND4, BAND5, BAND61, BAND62, BAND7, BAND8 };
   Landsat7Global(const std::string& Dir, Band B);
   virtual ~Landsat7Global() {}
   virtual void print(std::ostream& Os) const;
-  Band band() const { return band_;}
+  Band band() const { return band_; }
 protected:
   Landsat7Global() {}
 private:
   Band band_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 

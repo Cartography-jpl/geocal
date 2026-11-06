@@ -5,52 +5,49 @@
 #include "cart_lab_multifile.h"
 #include "ostream_pad.h"
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This is used the read the TREx data. This gets used by TrexDem. 
   Although you can use this class directly, generally uou'll use this
   through TrexDem class.
 *******************************************************************/
 
-class TrexDemData: public VicarCartLabMultifile {
+class TrexDemData : public VicarCartLabMultifile {
 public:
-  TrexDemData(const std::string& Dir,
-	      bool No_coverage_is_error = true,
-	      int Number_line_per_tile = -1,
-	      int Number_sample_per_tile = -1, 
-	      int Number_tile_each_file = 4, int Number_file = 4,
-	      bool Favor_memory_mapped = true);
-  virtual ~TrexDemData() { }
+  TrexDemData(const std::string& Dir, bool No_coverage_is_error = true,
+              int Number_line_per_tile = -1, int Number_sample_per_tile = -1,
+              int Number_tile_each_file = 4, int Number_file = 4,
+              bool Favor_memory_mapped = true);
+  virtual ~TrexDemData() {}
 protected:
   TrexDemData() {}
 private:
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   This is used the read the TREx data. This gets used by TrexDem. 
   Although you can use this class directly, generally uou'll use this
   through TrexDem class.
 *******************************************************************/
 
-class GdalTrexDemData: public GdalCartLabMultifile {
+class GdalTrexDemData : public GdalCartLabMultifile {
 public:
-  GdalTrexDemData(const std::string& Dir,
-	      bool No_coverage_is_error = true,
-	      int Number_line_per_tile = -1,
-	      int Number_sample_per_tile = -1, 
-	      int Number_tile_each_file = 4, int Number_file = 4);
-  virtual ~GdalTrexDemData() { }
+  GdalTrexDemData(const std::string& Dir, bool No_coverage_is_error = true,
+                  int Number_line_per_tile = -1,
+                  int Number_sample_per_tile = -1,
+                  int Number_tile_each_file = 4, int Number_file = 4);
+  virtual ~GdalTrexDemData() {}
 protected:
   GdalTrexDemData() {}
 private:
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
-  
-/****************************************************************//**
+
+/****************************************************************/ /**
   This is used the read the TREx LWM data.
 
   The values are:
@@ -64,34 +61,37 @@ private:
   6=Ephemeral In-land Water
 *******************************************************************/
 
-class TrexLwmData: public VicarCartLabMultifile {
+class TrexLwmData : public VicarCartLabMultifile {
 public:
-  enum {OCEAN=0, COSTLINE=1, LAND=2, PERMANENT_INLAND_WATER=3,
-	TRANSITIONAL_INLAND_WATER=4, SEASONAL_INLAND_WATER=5,
-	EPHEMERAL_INLAND_WATER=6};
-  TrexLwmData(const std::string& Dir="",
-	      bool No_coverage_is_error = true,
-	      int Number_line_per_tile = -1,
-	      int Number_sample_per_tile = -1, 
-	      int Number_tile_each_file = 4, int Number_file = 4,
-	      bool Favor_memory_mapped = true);
-  virtual ~TrexLwmData() { }
+  enum {
+    OCEAN = 0,
+    COSTLINE = 1,
+    LAND = 2,
+    PERMANENT_INLAND_WATER = 3,
+    TRANSITIONAL_INLAND_WATER = 4,
+    SEASONAL_INLAND_WATER = 5,
+    EPHEMERAL_INLAND_WATER = 6
+  };
+  TrexLwmData(const std::string& Dir = "", bool No_coverage_is_error = true,
+              int Number_line_per_tile = -1, int Number_sample_per_tile = -1,
+              int Number_tile_each_file = 4, int Number_file = 4,
+              bool Favor_memory_mapped = true);
+  virtual ~TrexLwmData() {}
 private:
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
-  
-/****************************************************************//**
+
+/****************************************************************/ /**
   This class provides access to the TREx.
 *******************************************************************/
 
 class TrexDem : public DemMapInfo {
 public:
-  TrexDem(const std::string& Dirbase ="",
-	  bool Outside_dem_is_error = true,
-	  const boost::shared_ptr<Datum>& D = 
-	  boost::shared_ptr<Datum>(new DatumGeoid96()));
+  TrexDem(const std::string& Dirbase = "", bool Outside_dem_is_error = true,
+          const boost::shared_ptr<Datum>& D =
+              boost::shared_ptr<Datum>(new DatumGeoid96()));
   virtual ~TrexDem() {}
 
   virtual void change_to_geodetic360()
@@ -99,34 +99,34 @@ public:
     f->change_to_geodetic360();
     map_info_ = f->map_info();
   }
-  
+
   virtual void change_to_geodetic()
   {
     f->change_to_geodetic();
     map_info_ = f->map_info();
   }
-  
-//-----------------------------------------------------------------------
-/// Directory base that we read TREX data from.
-//-----------------------------------------------------------------------
+
+  //-----------------------------------------------------------------------
+  /// Directory base that we read TREX data from.
+  //-----------------------------------------------------------------------
 
   const std::string& directory_base() const { return f->directory_base(); }
 
-//-----------------------------------------------------------------------
-/// Return height in meters relative to datum().
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return height in meters relative to datum().
+  //-----------------------------------------------------------------------
 
   virtual double elevation(int Y_index, int X_index) const
-  { 
+  {
     return (*f)(Y_index, X_index);
   }
 
-//-----------------------------------------------------------------------
-/// Write to a stream.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Write to a stream.
+  //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const
-  {     
+  {
     OstreamPad opad(Os, "    ");
     Os << "TREx DEM:\n"
        << "  Datum:\n";
@@ -142,55 +142,53 @@ private:
   std::string dbname, dirbase;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   This class provides access to the TREx.
 *******************************************************************/
 
 class GdalTrexDem : public DemMapInfo {
 public:
-  GdalTrexDem(const std::string& Dirbase ="",
-	  bool Outside_dem_is_error = true,
-	  const boost::shared_ptr<Datum>& D = 
-	  boost::shared_ptr<Datum>(new DatumGeoid96()));
+  GdalTrexDem(const std::string& Dirbase = "", bool Outside_dem_is_error = true,
+              const boost::shared_ptr<Datum>& D =
+                  boost::shared_ptr<Datum>(new DatumGeoid96()));
   virtual ~GdalTrexDem() {}
-
 
   virtual void change_to_geodetic360()
   {
     f->change_to_geodetic360();
     map_info_ = f->map_info();
   }
-  
+
   virtual void change_to_geodetic()
   {
     f->change_to_geodetic();
     map_info_ = f->map_info();
   }
-  
-//-----------------------------------------------------------------------
-/// Directory base that we read TREX data from.
-//-----------------------------------------------------------------------
+
+  //-----------------------------------------------------------------------
+  /// Directory base that we read TREX data from.
+  //-----------------------------------------------------------------------
 
   const std::string& directory_base() const { return f->directory_base(); }
 
-//-----------------------------------------------------------------------
-/// Return height in meters relative to datum().
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return height in meters relative to datum().
+  //-----------------------------------------------------------------------
 
   virtual double elevation(int Y_index, int X_index) const
-  { 
+  {
     return (*f)(Y_index, X_index);
   }
 
-//-----------------------------------------------------------------------
-/// Write to a stream.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Write to a stream.
+  //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const
-  {     
+  {
     OstreamPad opad(Os, "    ");
     Os << "GDAL TREx DEM:\n"
        << "  Datum:\n";
@@ -206,7 +204,7 @@ private:
   std::string dbname, dirbase;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 GEOCAL_EXPORT_KEY(TrexDemData);

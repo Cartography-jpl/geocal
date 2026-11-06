@@ -7,34 +7,30 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void ImageGroundConnection::serialize(Archive & ar, const unsigned int UNUSED(version))
+void ImageGroundConnection::serialize(Archive& ar,
+                                      const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(WithParameter);
   GEOCAL_BASE(ImageGroundConnection, WithParameter);
-  ar & GEOCAL_NVP_(dem)
-    & GEOCAL_NVP_(image)
-    & GEOCAL_NVP_(image_mb)
-    & GEOCAL_NVP_(title)
-    & GEOCAL_NVP_(image_mask)
-    & GEOCAL_NVP_(ground_mask);
+  ar& GEOCAL_NVP_(dem) & GEOCAL_NVP_(image) & GEOCAL_NVP_(image_mb) &
+      GEOCAL_NVP_(title) & GEOCAL_NVP_(image_mask) & GEOCAL_NVP_(ground_mask);
 }
 
 template<class Archive>
-void OffsetImageGroundConnection::serialize
-(Archive & ar, const unsigned int UNUSED(version))
+void OffsetImageGroundConnection::serialize(Archive& ar,
+                                            const unsigned int UNUSED(version))
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
-  ar & GEOCAL_NVP2("original_image_ground_connection", ig_)
-    & GEOCAL_NVP_(line_offset)
-    & GEOCAL_NVP_(sample_offset);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
+  ar& GEOCAL_NVP2("original_image_ground_connection", ig_) &
+      GEOCAL_NVP_(line_offset) & GEOCAL_NVP_(sample_offset);
 }
 
 template<class Archive>
-void ImageGroundConnectionCopy::serialize
-(Archive & ar, const unsigned int UNUSED(version))
+void ImageGroundConnectionCopy::serialize(Archive& ar,
+                                          const unsigned int UNUSED(version))
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
-  ar & GEOCAL_NVP2("original_image_ground_connection", igc);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
+  ar& GEOCAL_NVP2("original_image_ground_connection", igc);
 }
 
 GEOCAL_IMPLEMENT(ImageGroundConnection);
@@ -48,13 +44,11 @@ GEOCAL_IMPLEMENT(ImageGroundConnectionCopy);
 /// CombinedGroundMask.
 //-----------------------------------------------------------------------
 
-void ImageGroundConnection::initialize
-(const boost::shared_ptr<Dem>& d, 
- const boost::shared_ptr<RasterImage>& Img, 
- const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
- const std::string& Title,
- const boost::shared_ptr<ImageMask>& Img_mask,
- const boost::shared_ptr<GroundMask>& Ground_mask)
+void ImageGroundConnection::initialize(
+    const boost::shared_ptr<Dem>& d, const boost::shared_ptr<RasterImage>& Img,
+    const boost::shared_ptr<RasterImageMultiBand>& Img_mb,
+    const std::string& Title, const boost::shared_ptr<ImageMask>& Img_mask,
+    const boost::shared_ptr<GroundMask>& Ground_mask)
 {
   dem_ = d;
   image_ = Img;
@@ -74,32 +68,31 @@ void ImageGroundConnection::initialize
 /// size, where we give the position first followed by the look vector.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 7> ImageGroundConnection::cf_look_vector_arr
-(int ln_start, int smp_start, 
- int nline, int nsamp, int nsubpixel_line, int nsubpixel_sample, 
- int nintegration_step) const
+blitz::Array<double, 7> ImageGroundConnection::cf_look_vector_arr(
+    int ln_start, int smp_start, int nline, int nsamp, int nsubpixel_line,
+    int nsubpixel_sample, int nintegration_step) const
 {
   CartesianFixedLookVector lv;
   boost::shared_ptr<CartesianFixed> pos;
-  blitz::Array<double, 7>  res(nline, nsamp, nsubpixel_line, 
-			       nsubpixel_sample, nintegration_step, 2, 3);
+  blitz::Array<double, 7> res(nline, nsamp, nsubpixel_line, nsubpixel_sample,
+                              nintegration_step, 2, 3);
   double fline_space = 1.0 / nsubpixel_line;
   double fsamp_space = 1.0 / nsubpixel_sample;
   double fline_start = fline_space / 2.0 - 0.5;
   double fsamp_start = fsamp_space / 2.0 - 0.5;
   for(int i = 0; i < nline; ++i)
-    for(int j = 0; j < nsamp; ++j) 
+    for(int j = 0; j < nsamp; ++j)
       for(int i2 = 0; i2 < nsubpixel_line; ++i2)
-	for(int j2 = 0; j2 < nsubpixel_sample; ++j2) {
-	  ImageCoordinate ic(i + ln_start + fline_start + i2 * fline_space,
-			     j + smp_start + fsamp_start + j2 * fsamp_space);
-	  cf_look_vector(ic, lv, pos);
-	  for(int k = 0; k < nintegration_step; ++k)
-	    for(int k2 = 0; k2 < 3; ++k2) {
-	      res(i, j, i2, j2, k, 0, k2) = pos->position[k2];
-	      res(i, j, i2, j2, k, 1, k2) = lv.look_vector[k2];
-	    }
-	}
+        for(int j2 = 0; j2 < nsubpixel_sample; ++j2) {
+          ImageCoordinate ic(i + ln_start + fline_start + i2 * fline_space,
+                             j + smp_start + fsamp_start + j2 * fsamp_space);
+          cf_look_vector(ic, lv, pos);
+          for(int k = 0; k < nintegration_step; ++k)
+            for(int k2 = 0; k2 < 3; ++k2) {
+              res(i, j, i2, j2, k, 0, k2) = pos->position[k2];
+              res(i, j, i2, j2, k, 1, k2) = lv.look_vector[k2];
+            }
+        }
   return res;
 }
 
@@ -122,10 +115,8 @@ blitz::Array<double, 7> ImageGroundConnection::cf_look_vector_arr
 /// coordinates.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 1> 
-ImageGroundConnection::collinearity_residual
-(const GroundCoordinate& Gc,
- const ImageCoordinate& Ic_actual) const
+blitz::Array<double, 1> ImageGroundConnection::collinearity_residual(
+    const GroundCoordinate& Gc, const ImageCoordinate& Ic_actual) const
 {
   ImageCoordinate ic_pred = image_coordinate(Gc);
   Array<double, 1> res(2);
@@ -134,27 +125,23 @@ ImageGroundConnection::collinearity_residual
   return res;
 }
 
-
 //-----------------------------------------------------------------------
 /// Return jacobian of collinearity_residual. The parameters for this
 /// class should already have AutoDerivative extended for the jacobian
 /// (e.g., call add_identity_gradient()).
-/// 
+///
 /// We add the derivative wrt the CartesianFixed coordinates of the
 /// Ground_coor (X, Y, Z in that order), at the end of the
 /// Jacobian. So the total Jacobian is 2 x (number parameter + 3).
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> 
-ImageGroundConnection::collinearity_residual_jacobian
-(const GroundCoordinate& Gc,
- const ImageCoordinate& UNUSED(Ic_actual)) const
+blitz::Array<double, 2> ImageGroundConnection::collinearity_residual_jacobian(
+    const GroundCoordinate& Gc, const ImageCoordinate& UNUSED(Ic_actual)) const
 {
-  Array<double, 2> res =
-    image_coordinate_jac_parm(Gc);
+  Array<double, 2> res = image_coordinate_jac_parm(Gc);
   res.resizeAndPreserve(2, res.cols() + 3);
-  res(Range::all(), Range(res.cols() - 3, toEnd)) = 
-    image_coordinate_jac_cf(*Gc.convert_to_cf());
+  res(Range::all(), Range(res.cols() - 3, toEnd)) =
+      image_coordinate_jac_cf(*Gc.convert_to_cf());
   return res;
 }
 
@@ -178,15 +165,12 @@ ImageGroundConnection::collinearity_residual_jacobian
 /// a better feel for how to characterize a Rsm. But this is our
 /// initial version of this.
 //-----------------------------------------------------------------------
-void ImageGroundConnection::compare_igc
-(const ImageGroundConnection& Igc_true, int Number_line_spacing,
- int Number_sample_spacing, double Height,
- blitz::Array<double, 2>& True_line,
- blitz::Array<double, 2>& True_sample,
- blitz::Array<double, 2>& Calc_line,
- blitz::Array<double, 2>& Calc_sample,
- blitz::Array<double, 2>& Distance_true_vs_calc)
-  const
+void ImageGroundConnection::compare_igc(
+    const ImageGroundConnection& Igc_true, int Number_line_spacing,
+    int Number_sample_spacing, double Height,
+    blitz::Array<double, 2>& True_line, blitz::Array<double, 2>& True_sample,
+    blitz::Array<double, 2>& Calc_line, blitz::Array<double, 2>& Calc_sample,
+    blitz::Array<double, 2>& Distance_true_vs_calc) const
 {
   True_line.resize(Number_line_spacing, Number_sample_spacing);
   True_sample.resize(Number_line_spacing, Number_sample_spacing);
@@ -194,44 +178,45 @@ void ImageGroundConnection::compare_igc
   Calc_sample.resize(Number_line_spacing, Number_sample_spacing);
   Distance_true_vs_calc.resize(Number_line_spacing, Number_sample_spacing);
   for(int i = 0; i < Number_line_spacing; ++i) {
-    int ln = (int) floor(number_line() / double(Number_line_spacing) * i);
+    int ln = (int)floor(number_line() / double(Number_line_spacing) * i);
     for(int j = 0; j < Number_sample_spacing; ++j) {
-      int smp = (int) floor(number_sample() / double(Number_sample_spacing)
-			    * j);
-      True_line(i,j) = ln;
-      True_sample(i,j) = smp;
+      int smp = (int)floor(number_sample() / double(Number_sample_spacing) * j);
+      True_line(i, j) = ln;
+      True_sample(i, j) = smp;
       try {
-	ImageCoordinate iccalc;
-	bool success;
-	auto gp_true = Igc_true.ground_coordinate_approx_height(ImageCoordinate(ln,smp), Height);
-	image_coordinate_with_status(*gp_true, iccalc, success);
-	Distance_true_vs_calc(i,j) = std::numeric_limits<double>::quiet_NaN();
-	if(success) {
-	  Calc_line(i,j) = iccalc.line;
-	  Calc_sample(i, j) = iccalc.sample;
-	  if(iccalc.line >= 0 && iccalc.line < number_line() &&
-	     iccalc.sample >= 0 && iccalc.sample < number_sample()) {
-	    try {
-	      auto gp_calc = Igc_true.ground_coordinate_approx_height(iccalc, Height);
-	      Distance_true_vs_calc(i,j) = distance(*gp_true, *gp_calc);
-	    } catch(const ImageGroundConnectionFailed&) {
-	      // Ignore failure, we just don't update Distance_true_vs_calc.
-	    }
-	  }
-	} else {
-	  Calc_line(i,j) = std::numeric_limits<double>::quiet_NaN();
-	  Calc_sample(i, j) = std::numeric_limits<double>::quiet_NaN();
-	}
+        ImageCoordinate iccalc;
+        bool success;
+        auto gp_true = Igc_true.ground_coordinate_approx_height(
+            ImageCoordinate(ln, smp), Height);
+        image_coordinate_with_status(*gp_true, iccalc, success);
+        Distance_true_vs_calc(i, j) = std::numeric_limits<double>::quiet_NaN();
+        if(success) {
+          Calc_line(i, j) = iccalc.line;
+          Calc_sample(i, j) = iccalc.sample;
+          if(iccalc.line >= 0 && iccalc.line < number_line() &&
+             iccalc.sample >= 0 && iccalc.sample < number_sample()) {
+            try {
+              auto gp_calc =
+                  Igc_true.ground_coordinate_approx_height(iccalc, Height);
+              Distance_true_vs_calc(i, j) = distance(*gp_true, *gp_calc);
+            } catch(const ImageGroundConnectionFailed&) {
+              // Ignore failure, we just don't update Distance_true_vs_calc.
+            }
+          }
+        } else {
+          Calc_line(i, j) = std::numeric_limits<double>::quiet_NaN();
+          Calc_sample(i, j) = std::numeric_limits<double>::quiet_NaN();
+        }
       } catch(const ImageGroundConnectionFailed&) {
-	Calc_line(i,j) = std::numeric_limits<double>::quiet_NaN();
-	Calc_sample(i, j) = std::numeric_limits<double>::quiet_NaN();
+        Calc_line(i, j) = std::numeric_limits<double>::quiet_NaN();
+        Calc_sample(i, j) = std::numeric_limits<double>::quiet_NaN();
       }
     }
   }
 }
 
 //-----------------------------------------------------------------------
-/// Find a MapInfo that covers the ground coordinate of this 
+/// Find a MapInfo that covers the ground coordinate of this
 /// ImageGroundConnection. We calculate the ground coordinate of the
 /// four corners, then find the MapInfo that covers those corners,
 /// optionally adding a boundary in map pixels.  Depending on the
@@ -239,24 +224,24 @@ void ImageGroundConnection::compare_igc
 /// of the image.
 //-----------------------------------------------------------------------
 
-MapInfo ImageGroundConnection::cover(const MapInfo& Mi,
-				     int Boundary) const {
-  std::vector<boost::shared_ptr<GroundCoordinate> > pt;
+MapInfo ImageGroundConnection::cover(const MapInfo& Mi, int Boundary) const
+{
+  std::vector<boost::shared_ptr<GroundCoordinate>> pt;
   pt.push_back(ground_coordinate(ImageCoordinate(0, 0)));
   pt.push_back(ground_coordinate(ImageCoordinate(0, number_sample() - 1)));
-  pt.push_back(ground_coordinate(ImageCoordinate(number_line() - 1, 
-						 number_sample() - 1)));
+  pt.push_back(ground_coordinate(
+      ImageCoordinate(number_line() - 1, number_sample() - 1)));
   pt.push_back(ground_coordinate(ImageCoordinate(number_line() - 1, 0)));
   return Mi.cover(pt, Boundary);
 }
 
 //-----------------------------------------------------------------------
 /// Return the Jacobian of the image coordinates with respect to the
-/// X, Y, and Z components of the CartesianFixed ground location. 
+/// X, Y, and Z components of the CartesianFixed ground location.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_cf
-(const CartesianFixed& Gc) const
+blitz::Array<double, 2>
+ImageGroundConnection::image_coordinate_jac_cf(const CartesianFixed& Gc) const
 {
   // Default is just to do a numerical derivative.
   double eps = 0.1;
@@ -275,12 +260,13 @@ blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_cf
 
 //-----------------------------------------------------------------------
 /// Return the Jacobian of the image coordinates with respect to the
-/// X, Y, and Z components of the CartesianFixed ground location. This 
+/// X, Y, and Z components of the CartesianFixed ground location. This
 /// is calculated by a finite difference of the given size.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_cf_fd
-(const CartesianFixed& Gc, double Step_size) const
+blitz::Array<double, 2>
+ImageGroundConnection::image_coordinate_jac_cf_fd(const CartesianFixed& Gc,
+                                                  double Step_size) const
 {
   blitz::Array<double, 2> res(2, 3);
   ImageCoordinate ic0 = image_coordinate(Gc);
@@ -301,19 +287,17 @@ blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_cf_fd
 /// size given by Eps.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2>
-ImageGroundConnection::image_coordinate_jac_parm_fd
-(const GroundCoordinate& Gc,
- const blitz::Array<double, 1>& Eps) const
+blitz::Array<double, 2> ImageGroundConnection::image_coordinate_jac_parm_fd(
+    const GroundCoordinate& Gc, const blitz::Array<double, 1>& Eps) const
 {
   Array<double, 1> p0(parameter_subset());
   Array<double, 2> jac_fd(2, p0.rows());
   if(Eps.rows() != p0.rows()) {
     Exception e;
-    e << "Eps is not the expected size. parameter_subset size is "
-      << p0.rows() << " but Eps size is " << Eps.rows();
+    e << "Eps is not the expected size. parameter_subset size is " << p0.rows()
+      << " but Eps size is " << Eps.rows();
     throw e;
-  }					    
+  }
   ImageCoordinate ic0 = image_coordinate(Gc);
   for(int i = 0; i < Eps.rows(); ++i) {
     Array<double, 1> p = p0.copy();
@@ -324,8 +308,8 @@ ImageGroundConnection::image_coordinate_jac_parm_fd
     image_coordinate_extended(Gc, ic, success);
     if(!success)
       throw ImageGroundConnectionFailed();
-    jac_fd(0,i) = (ic.line - ic0.line) / Eps(i);
-    jac_fd(1,i) = (ic.sample - ic0.sample) / Eps(i);
+    jac_fd(0, i) = (ic.line - ic0.line) / Eps(i);
+    jac_fd(1, i) = (ic.sample - ic0.sample) / Eps(i);
   }
   const_cast<ImageGroundConnection&>(*this).parameter_subset(p0);
   return jac_fd;
@@ -334,7 +318,7 @@ ImageGroundConnection::image_coordinate_jac_parm_fd
 //-----------------------------------------------------------------------
 /// Return ground coordinate that is nearly the given height above
 /// the reference surface. This is exact in the sense that the
-/// returned point matches the image coordinate (to 
+/// returned point matches the image coordinate (to
 /// igc.image_coordinate(res) = Ic up to roundoff errors), but it is
 /// approximate in the sense that the height might not be exactly
 /// the supplied height. This is similar to
@@ -343,10 +327,9 @@ ImageGroundConnection::image_coordinate_jac_parm_fd
 /// since it doesn't need to do ray tracing.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<GroundCoordinate> 
-ImageGroundConnection::ground_coordinate_approx_height
-(const ImageCoordinate& Ic, 
- double H) const
+boost::shared_ptr<GroundCoordinate>
+ImageGroundConnection::ground_coordinate_approx_height(
+    const ImageCoordinate& Ic, double H) const
 {
   // Default implementation just uses ground_coordinate_dem
   return ground_coordinate_dem(Ic, SimpleDem(H));
@@ -360,14 +343,13 @@ ImageGroundConnection::ground_coordinate_approx_height
 /// between these points, and select the maximum value.
 //-----------------------------------------------------------------------
 
-double ImageGroundConnection::resolution_meter
-(const ImageCoordinate& Ic) const
+double ImageGroundConnection::resolution_meter(const ImageCoordinate& Ic) const
 {
   boost::shared_ptr<GroundCoordinate> gc1 = ground_coordinate(Ic);
-  boost::shared_ptr<GroundCoordinate> gc2 = 
-    ground_coordinate(ImageCoordinate(Ic.line + 1, Ic.sample));
-  boost::shared_ptr<GroundCoordinate> gc3 = 
-    ground_coordinate(ImageCoordinate(Ic.line, Ic.sample + 1));
+  boost::shared_ptr<GroundCoordinate> gc2 =
+      ground_coordinate(ImageCoordinate(Ic.line + 1, Ic.sample));
+  boost::shared_ptr<GroundCoordinate> gc3 =
+      ground_coordinate(ImageCoordinate(Ic.line, Ic.sample + 1));
   double d1 = distance(*gc1, *gc2);
   double d2 = distance(*gc1, *gc3);
   return std::max(d1, d2);
@@ -387,17 +369,16 @@ double ImageGroundConnection::resolution_meter
 /// for what they are modeling.
 //-----------------------------------------------------------------------
 
-void ImageGroundConnection::footprint_resolution
-(int Line, int Sample, 
- double &Line_resolution_meter, 
- double &Sample_resolution_meter) const
+void ImageGroundConnection::footprint_resolution(
+    int Line, int Sample, double& Line_resolution_meter,
+    double& Sample_resolution_meter) const
 {
   ImageCoordinate ic(Line, Sample);
   boost::shared_ptr<GroundCoordinate> gc1 = ground_coordinate(ic);
-  boost::shared_ptr<GroundCoordinate> gc2 = 
-    ground_coordinate(ImageCoordinate(ic.line + 1, ic.sample));
-  boost::shared_ptr<GroundCoordinate> gc3 = 
-    ground_coordinate(ImageCoordinate(ic.line, ic.sample + 1));
+  boost::shared_ptr<GroundCoordinate> gc2 =
+      ground_coordinate(ImageCoordinate(ic.line + 1, ic.sample));
+  boost::shared_ptr<GroundCoordinate> gc3 =
+      ground_coordinate(ImageCoordinate(ic.line, ic.sample + 1));
   Line_resolution_meter = distance(*gc1, *gc2);
   Sample_resolution_meter = distance(*gc1, *gc3);
 }
@@ -409,30 +390,29 @@ void ImageGroundConnection::footprint_resolution
 
 double ImageGroundConnection::resolution_meter() const
 {
-  return resolution_meter(ImageCoordinate(number_line() / 2.0, 
-					  number_sample() / 2.0));
+  return resolution_meter(
+      ImageCoordinate(number_line() / 2.0, number_sample() / 2.0));
 }
 
 // See base class for description
-blitz::Array<double, 2> 
-OffsetImageGroundConnection::image_coordinate_jac_parm
-(const GroundCoordinate& Gc) const
-{ 
+blitz::Array<double, 2> OffsetImageGroundConnection::image_coordinate_jac_parm(
+    const GroundCoordinate& Gc) const
+{
   Array<double, 2> rest = ig_->image_coordinate_jac_parm(Gc);
   Array<double, 2> res(2, 2 + rest.cols());
-  res(0,0) = 1;
-  res(1,1) = 1;
-  res(1,0) = 0;
-  res(0,1) = 0;
+  res(0, 0) = 1;
+  res(1, 1) = 1;
+  res(1, 0) = 0;
+  res(0, 1) = 0;
   if(rest.cols() > 0)
     res(Range::all(), Range(2, toEnd)) = rest;
   return res;
 }
 
 // See base class for description
-blitz::Array<double, 1> OffsetImageGroundConnection::parameter() const 
-{ 
-  Array<double, 1> rest = ig_->parameter(); 
+blitz::Array<double, 1> OffsetImageGroundConnection::parameter() const
+{
+  Array<double, 1> rest = ig_->parameter();
   Array<double, 1> res(2 + rest.rows());
   res(0) = line_offset_.value();
   res(1) = sample_offset_.value();
@@ -442,10 +422,10 @@ blitz::Array<double, 1> OffsetImageGroundConnection::parameter() const
 }
 
 // See base class for description
-ArrayAd<double, 1> 
-OffsetImageGroundConnection::parameter_with_derivative() const 
-{ 
-  ArrayAd<double, 1> rest = ig_->parameter_with_derivative(); 
+ArrayAd<double, 1>
+OffsetImageGroundConnection::parameter_with_derivative() const
+{
+  ArrayAd<double, 1> rest = ig_->parameter_with_derivative();
   ArrayAd<double, 1> res(2 + rest.rows(), rest.number_variable());
   res(0) = line_offset_;
   res(1) = sample_offset_;
@@ -455,39 +435,38 @@ OffsetImageGroundConnection::parameter_with_derivative() const
 }
 
 // See base class for description
-void OffsetImageGroundConnection::parameter
-(const blitz::Array<double, 1>& Parm)
-{ 
+void OffsetImageGroundConnection::parameter(const blitz::Array<double, 1>& Parm)
+{
   if(Parm.rows() != parameter().rows()) {
     Exception e;
-    e << "Expected parameter to have " << parameter().rows() 
+    e << "Expected parameter to have " << parameter().rows()
       << " rows, but got " << Parm.rows();
     throw e;
   }
   line_offset_ = Parm(0);
   sample_offset_ = Parm(1);
   if(Parm.rows() > 2)
-    ig_->parameter(Parm(Range(2,toEnd)));
+    ig_->parameter(Parm(Range(2, toEnd)));
 }
 
-void OffsetImageGroundConnection::parameter_with_derivative
-(const ArrayAd<double, 1>& Parm)
-{ 
+void OffsetImageGroundConnection::parameter_with_derivative(
+    const ArrayAd<double, 1>& Parm)
+{
   if(Parm.rows() != parameter().rows()) {
     Exception e;
-    e << "Expected parameter to have " << parameter().rows() 
+    e << "Expected parameter to have " << parameter().rows()
       << " rows, but got " << Parm.rows();
     throw e;
   }
   line_offset_ = Parm(0);
   sample_offset_ = Parm(1);
   if(Parm.rows() > 2)
-    ig_->parameter_with_derivative(Parm(Range(2,toEnd)));
+    ig_->parameter_with_derivative(Parm(Range(2, toEnd)));
 }
 
 blitz::Array<bool, 1> OffsetImageGroundConnection::parameter_mask() const
 {
-  Array<bool, 1> rest = ig_->parameter_mask(); 
+  Array<bool, 1> rest = ig_->parameter_mask();
   Array<bool, 1> res(2 + rest.rows());
   res(0) = true;
   res(1) = true;
@@ -498,7 +477,7 @@ blitz::Array<bool, 1> OffsetImageGroundConnection::parameter_mask() const
 
 // See base class for description
 std::vector<std::string> OffsetImageGroundConnection::parameter_name() const
-{ 
+{
   std::vector<std::string> res;
   res.push_back("Line offset");
   res.push_back("Sample offset");
@@ -506,7 +485,6 @@ std::vector<std::string> OffsetImageGroundConnection::parameter_name() const
   res.insert(res.end(), rest.begin(), rest.end());
   return res;
 }
-
 
 void ImageGroundConnectionCopy::print(std::ostream& Os) const
 {

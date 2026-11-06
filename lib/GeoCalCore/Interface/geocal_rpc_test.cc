@@ -23,34 +23,34 @@ BOOST_AUTO_TEST_CASE(generate_rpc_test)
   //   KeplerOrbit orb(t, t + 100.0);
   //   boost::shared_ptr<OrbitData> od = orb.orbit_data(t + 50.0);
   const boost::shared_ptr<CartesianFixed> pos(
-	      new Ecr(6340038.96377099, -3153209.32145001, -371293.463374568));
+      new Ecr(6340038.96377099, -3153209.32145001, -371293.463374568));
   boost::array<double, 3> vel = {{-7414.2, 1101.67, -7485.97}};
-  boost::math::quaternion<double> qt(0.167454,0.528917,-0.440527,-0.705791);
-  boost::shared_ptr<OrbitData> od(new QuaternionOrbitData(t + 50.0, pos, 
-							  vel, qt));
-  boost::shared_ptr<CartesianFixed> t1 = 
-    od->reference_surface_intersect_approximate(*c, FrameCoordinate(0,0));
-  boost::shared_ptr<CartesianFixed> t2 = 
-    od->reference_surface_intersect_approximate(*c, 
-	FrameCoordinate(c->number_line(0),c->number_sample(0)));
+  boost::math::quaternion<double> qt(0.167454, 0.528917, -0.440527, -0.705791);
+  boost::shared_ptr<OrbitData> od(
+      new QuaternionOrbitData(t + 50.0, pos, vel, qt));
+  boost::shared_ptr<CartesianFixed> t1 =
+      od->reference_surface_intersect_approximate(*c, FrameCoordinate(0, 0));
+  boost::shared_ptr<CartesianFixed> t2 =
+      od->reference_surface_intersect_approximate(
+          *c, FrameCoordinate(c->number_line(0), c->number_sample(0)));
   boost::shared_ptr<Dem> d(new SimpleDem());
-  boost::shared_ptr<RasterImage> img(new MemoryRasterImage(c->number_line(0),
-						   c->number_sample(0)));
+  boost::shared_ptr<RasterImage> img(
+      new MemoryRasterImage(c->number_line(0), c->number_sample(0)));
   OrbitDataImageGroundConnection igc(od, c, d, img);
   Rpc rpc = Rpc::generate_rpc(igc, -100, 100);
   double maxln_diff = 0.0, maxsmp_diff = 0.0;
-  for(double lat = std::min(t1->latitude(), t2->latitude()); 
+  for(double lat = std::min(t1->latitude(), t2->latitude());
       lat < std::max(t1->latitude(), t2->latitude()); lat += 0.01)
-    for(double lon = std::min(t1->longitude(), t2->longitude()); 
-	lon < std::max(t1->longitude(), t2->longitude()); lon += 0.01)
+    for(double lon = std::min(t1->longitude(), t2->longitude());
+        lon < std::max(t1->longitude(), t2->longitude()); lon += 0.01)
       for(double height = -100; height < 100; height += 10) {
-	ImageCoordinate ic1 = rpc.image_coordinate(Geodetic(lat, lon, height));
-	FrameCoordinate ic2 = od->frame_coordinate(Geodetic(lat, lon, height), 
-						   *c);
-	double ln_diff = fabs(ic1.line - ic2.line);
-	double smp_diff = fabs(ic1.sample - ic2.sample);
-	maxln_diff = std::max(ln_diff, maxln_diff);
-	maxsmp_diff = std::max(smp_diff, maxsmp_diff);
+        ImageCoordinate ic1 = rpc.image_coordinate(Geodetic(lat, lon, height));
+        FrameCoordinate ic2 =
+            od->frame_coordinate(Geodetic(lat, lon, height), *c);
+        double ln_diff = fabs(ic1.line - ic2.line);
+        double smp_diff = fabs(ic1.sample - ic2.sample);
+        maxln_diff = std::max(ln_diff, maxln_diff);
+        maxsmp_diff = std::max(smp_diff, maxsmp_diff);
       }
   BOOST_CHECK(maxln_diff < 1e-3);
   BOOST_CHECK(maxsmp_diff < 1e-3);
@@ -59,58 +59,58 @@ BOOST_AUTO_TEST_CASE(generate_rpc_test)
 BOOST_AUTO_TEST_CASE(basic_test)
 {
   BOOST_CHECK(rpc.print_to_string() != "");
-				// String too long to check, so
-				// just make sure call returns
-				// something.
+  // String too long to check, so
+  // just make sure call returns
+  // something.
 
   ImageCoordinate ic_expect(1000, 1000);
   BOOST_CHECK_EQUAL(rpc.image_coordinate(gp), ic_expect);
-  blitz::Array<double, 2> ic_jac = 
-    rpc.image_coordinate_jac(gp.latitude(),
-			     gp.longitude(),
-			     gp.height_reference_surface());
+  blitz::Array<double, 2> ic_jac = rpc.image_coordinate_jac(
+      gp.latitude(), gp.longitude(), gp.height_reference_surface());
   ImageCoordinate ic2;
   double eps = 1e-3;
   ic2 = rpc.image_coordinate(gp.latitude() + eps, gp.longitude(),
-			     gp.height_reference_surface());
+                             gp.height_reference_surface());
   BOOST_CHECK_CLOSE(ic_jac(0, 0), (ic2.line - ic_expect.line) / eps, 1.0);
   BOOST_CHECK_CLOSE(ic_jac(1, 0), (ic2.sample - ic_expect.sample) / eps, 4.0);
   ic2 = rpc.image_coordinate(gp.latitude(), gp.longitude() + eps,
-			     gp.height_reference_surface());
+                             gp.height_reference_surface());
   BOOST_CHECK_CLOSE(ic_jac(0, 1), (ic2.line - ic_expect.line) / eps, 1.5);
   BOOST_CHECK_CLOSE(ic_jac(1, 1), (ic2.sample - ic_expect.sample) / eps, 1.0);
   ic2 = rpc.image_coordinate(gp.latitude(), gp.longitude(),
-			     gp.height_reference_surface() + 10);
+                             gp.height_reference_surface() + 10);
   BOOST_CHECK_CLOSE(ic_jac(0, 2), (ic2.line - ic_expect.line) / 10, 1.0);
   BOOST_CHECK_CLOSE(ic_jac(1, 2), (ic2.sample - ic_expect.sample) / 10, 1.0);
   blitz::Array<double, 1> lat(1), lon(1), height(1);
-  lat = 35.8750924856; lon = 44.8388258608; height = 1017;
+  lat = 35.8750924856;
+  lon = 44.8388258608;
+  height = 1017;
   blitz::Array<double, 2> r = rpc.image_coordinate(lat, lon, height);
   BOOST_CHECK_CLOSE(r(0, 0), ic_expect.line, 1e-4);
   BOOST_CHECK_CLOSE(r(1, 0), ic_expect.sample, 2e-3);
   boost::shared_ptr<GroundCoordinate> gcalc =
-    rpc.ground_coordinate(ic_expect, 1017);
+      rpc.ground_coordinate(ic_expect, 1017);
   BOOST_CHECK(distance(*gcalc, gp) < 0.1);
   SimpleDem dem(1017);
   boost::shared_ptr<GroundCoordinate> gcalc2 =
-    rpc.ground_coordinate(ic_expect, dem);
+      rpc.ground_coordinate(ic_expect, dem);
   BOOST_CHECK(distance(*gcalc2, gp) < 0.1);
 
-//-----------------------------------------------------------------------
-// Test fit function.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Test fit function.
+  //-----------------------------------------------------------------------
 
-  std::vector<boost::shared_ptr<GroundCoordinate> > gc;
+  std::vector<boost::shared_ptr<GroundCoordinate>> gc;
   std::vector<ImageCoordinate> ic;
   std::vector<double> line_sigma;
   std::vector<double> sample_sigma;
-  for(double lat = 35.8399968; lat < 35.8819; 
+  for(double lat = 35.8399968; lat < 35.8819;
       lat += (35.8819 - 35.8399968) / 20)
     for(double lon = 44.8264539; lon < 45.0770183;
-	lon += (45.0770183 - 44.8264539) / 20) {
+        lon += (45.0770183 - 44.8264539) / 20) {
       double height = 1017 + (lon - 45.0770183) * 1000;
-      gc.push_back(boost::shared_ptr<GroundCoordinate>
-		   (new Geodetic(lat, lon, height)));
+      gc.push_back(
+          boost::shared_ptr<GroundCoordinate>(new Geodetic(lat, lon, height)));
       ic.push_back(rpc.image_coordinate(*gc.back()));
       line_sigma.push_back(0.1);
       sample_sigma.push_back(0.1);
@@ -141,22 +141,22 @@ BOOST_AUTO_TEST_CASE(basic_test)
     rpc2.sample_numerator[i] -= eps;
   }
 
-//-----------------------------------------------------------------------
-// Test fit_all function.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Test fit_all function.
+  //-----------------------------------------------------------------------
 
   std::vector<double> line, sample, latitude, longitude, h2;
-  for(double lat = 35.8399968; lat < 35.8819; 
+  for(double lat = 35.8399968; lat < 35.8819;
       lat += (35.8819 - 35.8399968) / 20)
     for(double lon = 44.8264539; lon < 45.0770183;
-	lon += (45.0770183 - 44.8264539) / 20) {
+        lon += (45.0770183 - 44.8264539) / 20) {
       for(double h = 0; h < 2000; h += 100) {
-	latitude.push_back(lat);
-	longitude.push_back(lon);
-	h2.push_back(h);
-	ImageCoordinate ic = rpc.image_coordinate(Geodetic(lat, lon, h));
-	line.push_back(ic.line);
-	sample.push_back(ic.sample);
+        latitude.push_back(lat);
+        longitude.push_back(lon);
+        h2.push_back(h);
+        ImageCoordinate ic = rpc.image_coordinate(Geodetic(lat, lon, h));
+        line.push_back(ic.line);
+        sample.push_back(ic.sample);
       }
     }
   Rpc rpc3(rpc);
@@ -173,12 +173,13 @@ BOOST_AUTO_TEST_CASE(basic_test)
     BOOST_CHECK_CLOSE(rpc3.line_numerator[i], rpc.line_numerator[i], 0.20);
     BOOST_CHECK_CLOSE(rpc3.sample_numerator[i], rpc.sample_numerator[i], 0.20);
     BOOST_CHECK_CLOSE(rpc3.line_denominator[i], rpc.line_denominator[i], 0.20);
-    BOOST_CHECK_CLOSE(rpc3.sample_denominator[i], rpc.sample_denominator[i], 0.20);
+    BOOST_CHECK_CLOSE(rpc3.sample_denominator[i], rpc.sample_denominator[i],
+                      0.20);
   }
 
-//-----------------------------------------------------------------------
-/// Test A type.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Test A type.
+  //-----------------------------------------------------------------------
 
   Rpc rpc4 = rpc.rpc_type_a();
   r = rpc4.image_coordinate(lat, lon, height);
@@ -189,14 +190,15 @@ BOOST_AUTO_TEST_CASE(basic_test)
     BOOST_CHECK_CLOSE(rpc5.line_numerator[i], rpc.line_numerator[i], 1e-4);
     BOOST_CHECK_CLOSE(rpc5.sample_numerator[i], rpc.sample_numerator[i], 1e-4);
     BOOST_CHECK_CLOSE(rpc5.line_denominator[i], rpc.line_denominator[i], 1e-4);
-    BOOST_CHECK_CLOSE(rpc5.sample_denominator[i], rpc.sample_denominator[i], 1e-4);
+    BOOST_CHECK_CLOSE(rpc5.sample_denominator[i], rpc.sample_denominator[i],
+                      1e-4);
   }
 }
 
 BOOST_AUTO_TEST_CASE(inverse_fails)
 {
-  return;    // Don't normally run this, it depends on data we don't
-	     // normally have
+  return; // Don't normally run this, it depends on data we don't
+          // normally have
 
   // This was an inverse test case that failed to calculate
   // ground_coordinate. Extract this out so we can look at this in
@@ -210,39 +212,66 @@ BOOST_AUTO_TEST_CASE(inverse_fails)
   rpc.line_scale = 23670;
   rpc.sample_offset = 17589;
   rpc.sample_scale = 17590;
-  rpc.longitude_offset = -117.887;; 
+  rpc.longitude_offset = -117.887;
+  ;
   rpc.longitude_scale = 0.1149;
   rpc.latitude_offset = 34.1027;
   rpc.latitude_scale = 0.1458;
   rpc.height_offset = 705;
   rpc.height_scale = 656;
-  boost::array<double, 20> t1 = 
-    {{ -0.00838895, 0.0922011, -1.11169, -0.0195271, 0.000288563,
-       4.28151e-05, -0.000172025, -0.000233032, 0.00767244,
-       -3.24008e-06, -2.31889e-07, -1.52355e-06, -2.10979e-05,
-       -2.0696e-06, 2.20435e-05, 4.27367e-05, 2.49598e-05, 2.81582e-07,
-       2.75618e-06, 4.41884e-07}};
+  boost::array<double, 20> t1 = {
+      {-0.00838895,  0.0922011,    -1.11169,     -0.0195271,  0.000288563,
+       4.28151e-05,  -0.000172025, -0.000233032, 0.00767244,  -3.24008e-06,
+       -2.31889e-07, -1.52355e-06, -2.10979e-05, -2.0696e-06, 2.20435e-05,
+       4.27367e-05,  2.49598e-05,  2.81582e-07,  2.75618e-06, 4.41884e-07}};
   rpc.line_numerator = t1;
-  boost::array<double, 20> t2 = 
-    {{ 1, 0.00111794, -0.000852869, -0.000359327, -2.47099e-05,
-       8.88349e-07, 4.48492e-06, -9.51672e-06, 7.1117e-05,
-       -2.2577e-05, -6.84602e-07, -9.23611e-08, -1.9514e-05,
-       -4.87803e-08, 1.52217e-06, 7.75716e-05, -6.56811e-08,
-       3.98379e-08, 4.15723e-06, 1.45924e-08}};
+  boost::array<double, 20> t2 = {{1,
+                                  0.00111794,
+                                  -0.000852869,
+                                  -0.000359327,
+                                  -2.47099e-05,
+                                  8.88349e-07,
+                                  4.48492e-06,
+                                  -9.51672e-06,
+                                  7.1117e-05,
+                                  -2.2577e-05,
+                                  -6.84602e-07,
+                                  -9.23611e-08,
+                                  -1.9514e-05,
+                                  -4.87803e-08,
+                                  1.52217e-06,
+                                  7.75716e-05,
+                                  -6.56811e-08,
+                                  3.98379e-08,
+                                  4.15723e-06,
+                                  1.45924e-08}};
   rpc.line_denominator = t2;
-  boost::array<double, 20> t3 = 
-    {{ 0.00983618, 1.02525, -0.0031443, 0.0187995, -0.00309236,
-       0.000475726, -0.000251547, -0.00792802, 2.17018e-05,
-       4.9027e-06, 1.53072e-06, 2.79616e-05, -8.35535e-05,
-       -1.97936e-05, 8.50012e-05, -2.63949e-05, -2.02596e-07,
-       -7.59024e-06, -1.04969e-06, -3.69081e-07}};
+  boost::array<double, 20> t3 = {
+      {0.00983618,   1.02525,      -0.0031443,   0.0187995,    -0.00309236,
+       0.000475726,  -0.000251547, -0.00792802,  2.17018e-05,  4.9027e-06,
+       1.53072e-06,  2.79616e-05,  -8.35535e-05, -1.97936e-05, 8.50012e-05,
+       -2.63949e-05, -2.02596e-07, -7.59024e-06, -1.04969e-06, -3.69081e-07}};
   rpc.sample_numerator = t3;
-  boost::array<double, 20> t4 = 
-    {{1, -0.00195409, 0.00320623, -0.000673322, -5.13971e-05,
-      4.2353e-06, 3.27826e-06, 6.80956e-06, 6.86083e-05,
-      -1.99026e-05, -2.03299e-07, -4.49819e-08, -9.30909e-07,
-      -1.02235e-07, 1.24731e-06, 2.11734e-07, -1.23425e-07,
-      -5.28526e-08, 3.22005e-07, 2.41005e-08}};
+  boost::array<double, 20> t4 = {{1,
+                                  -0.00195409,
+                                  0.00320623,
+                                  -0.000673322,
+                                  -5.13971e-05,
+                                  4.2353e-06,
+                                  3.27826e-06,
+                                  6.80956e-06,
+                                  6.86083e-05,
+                                  -1.99026e-05,
+                                  -2.03299e-07,
+                                  -4.49819e-08,
+                                  -9.30909e-07,
+                                  -1.02235e-07,
+                                  1.24731e-06,
+                                  2.11734e-07,
+                                  -1.23425e-07,
+                                  -5.28526e-08,
+                                  3.22005e-07,
+                                  2.41005e-08}};
   rpc.sample_denominator = t4;
   SrtmDem dem;
   SimpleDem dem2;
@@ -253,8 +282,8 @@ BOOST_AUTO_TEST_CASE(inverse_fails)
 
 BOOST_AUTO_TEST_CASE(inverse_fails2)
 {
-  return;    // Don't normally run this, since it depends on data that
-             // we normally don't have.
+  return; // Don't normally run this, since it depends on data that
+          // we normally don't have.
 
   // Another inverse that fails. This depends on test data that we
   // don't normally have available, so this will not normally be run.
@@ -263,7 +292,8 @@ BOOST_AUTO_TEST_CASE(inverse_fails2)
 
   VicarLiteRasterImage f("/home/smyth/Local/ShivaEndToEnd/syria1/pre_pan.img");
   Rpc rpc = f.rpc();
-  boost::shared_ptr<DemMapInfo> dem1(new VicarLiteDem("/raid10/sba_gold/syria1/syria1_dem.hlf"));
+  boost::shared_ptr<DemMapInfo> dem1(
+      new VicarLiteDem("/raid10/sba_gold/syria1/syria1_dem.hlf"));
   DemMapInfoOffset dem(dem1, 20.5801);
   ImageCoordinate ic(8862, 14383);
   boost::shared_ptr<GroundCoordinate> g = rpc.ground_coordinate(ic, dem);
@@ -280,7 +310,6 @@ BOOST_AUTO_TEST_CASE(serialize)
   std::string d = serialize_write_string(rpc2);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<Rpc> rpcr = 
-    serialize_read_string<Rpc>(d);
+  boost::shared_ptr<Rpc> rpcr = serialize_read_string<Rpc>(d);
 }
 BOOST_AUTO_TEST_SUITE_END()

@@ -28,7 +28,7 @@ using namespace GeoCal;
 //-----------------------------------------------------------------------
 
 void GeoCal::rsm_write_nitf(const std::string& Fname,
-		    const boost::shared_ptr<Rsm>& R)
+                            const boost::shared_ptr<Rsm>& R)
 {
   boost_pcall_noret("boost_nitf_rsm to_nitf " + Fname, R);
 }
@@ -37,8 +37,9 @@ void GeoCal::rsm_write_nitf(const std::string& Fname,
 /// Like rsm_write_nitf, but for GLAS/GFM ImageGroundConnection
 //-----------------------------------------------------------------------
 
-void GeoCal::glas_gfm_write_nitf(const std::string& Fname,
-		 const boost::shared_ptr<ImageGroundConnection>& Igc)
+void GeoCal::glas_gfm_write_nitf(
+    const std::string& Fname,
+    const boost::shared_ptr<ImageGroundConnection>& Igc)
 {
   boost_pcall_noret("boost_nitf_glas_gfm to_nitf " + Fname, Igc);
 }
@@ -68,11 +69,10 @@ void GeoCal::glas_gfm_write_nitf(const std::string& Fname,
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<Rsm> GeoCal::rsm_read_nitf(const std::string& Fname,
-					     int Naif_code)
+                                             int Naif_code)
 {
-  return boost_pcall<Rsm>("boost_nitf_rsm from_nitf " +
-			  Fname  + " " +
-			  boost::lexical_cast<std::string>(Naif_code));
+  return boost_pcall<Rsm>("boost_nitf_rsm from_nitf " + Fname + " " +
+                          boost::lexical_cast<std::string>(Naif_code));
 }
 
 //-----------------------------------------------------------------------
@@ -82,7 +82,7 @@ boost::shared_ptr<Rsm> GeoCal::rsm_read_nitf(const std::string& Fname,
 boost::shared_ptr<ImageGroundConnection>
 GeoCal::glas_gfm_read_nitf(const std::string& Fname, int Naif_code)
 {
-  return boost_pcall<ImageGroundConnection>("boost_nitf_glas_gfm from_nitf " +
-			    Fname  + " " +
-			    boost::lexical_cast<std::string>(Naif_code));
+  return boost_pcall<ImageGroundConnection>(
+      "boost_nitf_glas_gfm from_nitf " + Fname + " " +
+      boost::lexical_cast<std::string>(Naif_code));
 }

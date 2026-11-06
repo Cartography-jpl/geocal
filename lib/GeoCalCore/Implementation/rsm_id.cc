@@ -16,35 +16,27 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RsmIdTiming::serialize(Archive & ar, const unsigned int version)
+void RsmIdTiming::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(RsmIdTiming);
-  ar & GEOCAL_NVP_(number_row_acquired_simultaneously)
-    & GEOCAL_NVP_(number_col_acquired_simultaneously)
-    & GEOCAL_NVP_(time_between_adjacent_row_group)
-    & GEOCAL_NVP_(time_between_adjacent_col_group);
+  ar& GEOCAL_NVP_(number_row_acquired_simultaneously) &
+      GEOCAL_NVP_(number_col_acquired_simultaneously) &
+      GEOCAL_NVP_(time_between_adjacent_row_group) &
+      GEOCAL_NVP_(time_between_adjacent_col_group);
 }
 
 template<class Archive>
-void RsmId::serialize(Archive & ar, const unsigned int version)
+void RsmId::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(RsmId);
-  ar & GEOCAL_NVP(cconv)
-    & GEOCAL_NVP_(image_identifier)
-    & GEOCAL_NVP_(rsm_support_data_edition)
-    & GEOCAL_NVP_(image_sequence_identifier)
-    & GEOCAL_NVP_(sensor_identifier)
-    & GEOCAL_NVP_(sensor_type)
-    & GEOCAL_NVP_(image_acquistion_time)
-    & GEOCAL_NVP_(timing)
-    & GEOCAL_NVP_(ground_domain_vertex)
-    & GEOCAL_NVP_(ground_reference_point)
-    & GEOCAL_NVP_(full_number_line)
-    & GEOCAL_NVP_(full_number_sample)
-    & GEOCAL_NVP_(min_line)
-    & GEOCAL_NVP_(min_sample)
-    & GEOCAL_NVP_(max_line)
-    & GEOCAL_NVP_(max_sample);
+  ar& GEOCAL_NVP(cconv) & GEOCAL_NVP_(image_identifier) &
+      GEOCAL_NVP_(rsm_support_data_edition) &
+      GEOCAL_NVP_(image_sequence_identifier) & GEOCAL_NVP_(sensor_identifier) &
+      GEOCAL_NVP_(sensor_type) & GEOCAL_NVP_(image_acquistion_time) &
+      GEOCAL_NVP_(timing) & GEOCAL_NVP_(ground_domain_vertex) &
+      GEOCAL_NVP_(ground_reference_point) & GEOCAL_NVP_(full_number_line) &
+      GEOCAL_NVP_(full_number_sample) & GEOCAL_NVP_(min_line) &
+      GEOCAL_NVP_(min_sample) & GEOCAL_NVP_(max_line) & GEOCAL_NVP_(max_sample);
 }
 
 GEOCAL_IMPLEMENT(RsmIdTiming);
@@ -60,7 +52,6 @@ static boost::format numint("%|1$08d|");
 static boost::format timingf("%|1$08d|%|2$08d|%|3$+21.14E|%|4$+21.14E|");
 static boost::format timingf_missing("%|1$-58s|");
 
-
 //-----------------------------------------------------------------------
 /// Write to TRE string.
 ///
@@ -73,31 +64,34 @@ std::string RsmId::tre_string() const
 {
   std::string res = "";
   res += str_check_size(f % image_identifier_ % rsm_support_data_edition_ %
-			image_sequence_identifier_ % sensor_identifier_ %
-			sensor_type_, 240);
+                            image_sequence_identifier_ % sensor_identifier_ %
+                            sensor_type_,
+                        240);
   if(image_acquistion_time_) {
     std::string t(image_acquistion_time_->to_string());
-    res += str_check_size(tac % t.substr(0, 4) % t.substr(5,2) %
-			  t.substr(8,2) % t.substr(11,2) % t.substr(14,2) %
-			  t.substr(17, 9), 21);
+    res +=
+        str_check_size(tac % t.substr(0, 4) % t.substr(5, 2) % t.substr(8, 2) %
+                           t.substr(11, 2) % t.substr(14, 2) % t.substr(17, 9),
+                       21);
   } else
     res += str_check_size(tac % "" % "" % "" % "" % "" % "", 21);
   if(timing_)
-    res += str_check_size(timingf
-			  % timing_->number_row_acquired_simultaneously()
-			  % timing_->number_col_acquired_simultaneously()
-			  % timing_->time_between_adjacent_row_group()
-			  % timing_->time_between_adjacent_col_group(), 
-			  8 + 8 + 21 + 21);
+    res +=
+        str_check_size(timingf % timing_->number_row_acquired_simultaneously() %
+                           timing_->number_col_acquired_simultaneously() %
+                           timing_->time_between_adjacent_row_group() %
+                           timing_->time_between_adjacent_col_group(),
+                       8 + 8 + 21 + 21);
   else
     res += str_check_size(timingf_missing % "", 8 + 8 + 21 + 21);
   const GeodeticRadianConverter* gconv =
-    dynamic_cast<const GeodeticRadianConverter*>(coordinate_converter().get());
+      dynamic_cast<const GeodeticRadianConverter*>(
+          coordinate_converter().get());
   const GeodeticRadian2piConverter* gconv2 =
-    dynamic_cast<const GeodeticRadian2piConverter*>
-    (coordinate_converter().get());
-  const LocalRcConverter* gconv3 = 
-    dynamic_cast<const LocalRcConverter*>(coordinate_converter().get());
+      dynamic_cast<const GeodeticRadian2piConverter*>(
+          coordinate_converter().get());
+  const LocalRcConverter* gconv3 =
+      dynamic_cast<const LocalRcConverter*>(coordinate_converter().get());
   if(gconv) {
     res += "G";
     for(int i = 0; i < 12; ++i)
@@ -113,11 +107,15 @@ std::string RsmId::tre_string() const
     // This is column major order
     for(int j = 0; j < 3; ++j)
       for(int i = 0; i < 3; ++i)
-	res += str_check_size(num % gconv3->parameter()->cf_to_rc[i][j], 21);
+        res += str_check_size(num % gconv3->parameter()->cf_to_rc[i][j], 21);
   } else
-    throw Exception("Writing a RSMIDA TRE only supports GeodeticRadianConverter, GeodeticRadian2piConverter and LocalRcConverter. This is a limitation of the NITF TRE format. Note boost serialization works fine with any CoordinateConverter, just not the NITF TRE");
+    throw Exception(
+        "Writing a RSMIDA TRE only supports GeodeticRadianConverter, "
+        "GeodeticRadian2piConverter and LocalRcConverter. This is a limitation "
+        "of the NITF TRE format. Note boost serialization works fine with any "
+        "CoordinateConverter, just not the NITF TRE");
   if(ground_domain_vertex_.size() != 8)
-      throw Exception("Ground domain vertex needs to be exactly 8 points");
+    throw Exception("Ground domain vertex needs to be exactly 8 points");
   double x[8], y[8], z[8];
   for(int i = 0; i < 8; ++i) {
     if(!ground_domain_vertex_[i])
@@ -126,7 +124,9 @@ std::string RsmId::tre_string() const
   }
   // Check the vertex constraint
   if(!(x[0] < x[1] && y[0] < y[2] && z[0] < z[4]))
-    throw Exception("ground_domain_vertex needs to obey the vertex order constraint V1X<V2X, V1Y<V3Y, and V1Z<V5Z (using 1 based numbering)");
+    throw Exception(
+        "ground_domain_vertex needs to obey the vertex order constraint "
+        "V1X<V2X, V1Y<V3Y, and V1Z<V5Z (using 1 based numbering)");
   for(int i = 0; i < 8; ++i) {
     res += str_check_size(num % x[i], 21);
     res += str_check_size(num % y[i], 21);
@@ -154,17 +154,15 @@ std::string RsmId::tre_string() const
   return res;
 }
 
-
 //-----------------------------------------------------------------------
-/// Read a TRE string. 
+/// Read a TRE string.
 ///
 /// This should have all the TRE *except* for the front CETAG and CEL.
 /// It is convenient to treat these fields as special. (We can
 /// revisit this in the future if we need to).
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<RsmId>
-RsmId::read_tre_string(const std::string& Tre_in)
+boost::shared_ptr<RsmId> RsmId::read_tre_string(const std::string& Tre_in)
 {
   std::stringstream in(Tre_in);
   boost::shared_ptr<RsmId> res(new RsmId);
@@ -182,7 +180,7 @@ RsmId::read_tre_string(const std::string& Tre_in)
   if(t != "    ") {
     t += "-" + read_size<std::string>(in, 2);
     t += "-" + read_size<std::string>(in, 2);
-    t += "T" + read_size<std::string>(in, 2); 
+    t += "T" + read_size<std::string>(in, 2);
     t += ":" + read_size<std::string>(in, 2);
     t += ":" + read_size<std::string>(in, 9) + "Z";
     res->image_acquistion_time_ = boost::make_shared<Time>(Time::parse_time(t));
@@ -191,35 +189,36 @@ RsmId::read_tre_string(const std::string& Tre_in)
   // We have input data (the sample SNIP file) where there is trailing
   // space for the double. Not clear if this is actually valid or not,
   // but we do want to be able to read this.
-  boost::optional<int> t1 = read_size<boost::optional<int> >(in, 8, true);
-  boost::optional<int> t2 = read_size<boost::optional<int> >(in, 8, true);
-  boost::optional<double> t3 = read_size<boost::optional<double> >(in, 21, true);
-  boost::optional<double> t4 = read_size<boost::optional<double> >(in, 21, true);
+  boost::optional<int> t1 = read_size<boost::optional<int>>(in, 8, true);
+  boost::optional<int> t2 = read_size<boost::optional<int>>(in, 8, true);
+  boost::optional<double> t3 = read_size<boost::optional<double>>(in, 21, true);
+  boost::optional<double> t4 = read_size<boost::optional<double>>(in, 21, true);
   if(t1)
     res->timing_ = boost::make_shared<RsmIdTiming>(*t1, *t2, *t3, *t4);
   std::string conv_type = read_size<std::string>(in, 1);
   if(conv_type == "G") {
     res->cconv = boost::make_shared<GeodeticRadianConverter>();
     for(int i = 0; i < 12; ++i)
-      read_size<boost::optional<double> >(in, 21, true);
-  } else if (conv_type == "H") {
+      read_size<boost::optional<double>>(in, 21, true);
+  } else if(conv_type == "H") {
     res->cconv = boost::make_shared<GeodeticRadian2piConverter>();
     for(int i = 0; i < 12; ++i)
-      read_size<boost::optional<double> >(in, 21, true);
-  } else if (conv_type == "R") {
+      read_size<boost::optional<double>>(in, 21, true);
+  } else if(conv_type == "R") {
     boost::shared_ptr<LocalRcParameter> lp =
-      boost::make_shared<LocalRcParameter>();
-    lp->cf_prototype = boost::make_shared<Ecr>(0,0,0);
+        boost::make_shared<LocalRcParameter>();
+    lp->cf_prototype = boost::make_shared<Ecr>(0, 0, 0);
     for(int i = 0; i < 3; ++i)
       lp->cf_offset[i] = read_size<double>(in, 21, true);
     // Column major order
     for(int j = 0; j < 3; ++j)
       for(int i = 0; i < 3; ++i)
-	lp->cf_to_rc[i][j] = read_size<double>(in, 21, true);
+        lp->cf_to_rc[i][j] = read_size<double>(in, 21, true);
     res->cconv = boost::make_shared<LocalRcConverter>(lp);
   } else {
     Exception e;
-    e << "Unrecognized ground domain form. We got " << conv_type << "but only recognize G, H and R";
+    e << "Unrecognized ground domain form. We got " << conv_type
+      << "but only recognize G, H and R";
     throw e;
   }
   res->ground_domain_vertex_.resize(8);
@@ -228,15 +227,16 @@ RsmId::read_tre_string(const std::string& Tre_in)
     double y = read_size<double>(in, 21, true);
     double z = read_size<double>(in, 21, true);
     res->ground_domain_vertex_[i] =
-      res->cconv->convert_from_coordinate(x, y, z);
+        res->cconv->convert_from_coordinate(x, y, z);
   }
-  boost::optional<double> x = read_size<boost::optional<double> >(in, 21, true);
-  boost::optional<double> y = read_size<boost::optional<double> >(in, 21, true);
-  boost::optional<double> z = read_size<boost::optional<double> >(in, 21, true);
+  boost::optional<double> x = read_size<boost::optional<double>>(in, 21, true);
+  boost::optional<double> y = read_size<boost::optional<double>>(in, 21, true);
+  boost::optional<double> z = read_size<boost::optional<double>>(in, 21, true);
   if(x)
-    res->ground_reference_point_ = res->cconv->convert_from_coordinate(*x, *y, *z);
-  res->full_number_line_ = read_size<boost::optional<int> >(in, 8, true);
-  res->full_number_sample_ = read_size<boost::optional<int> >(in, 8, true);
+    res->ground_reference_point_ =
+        res->cconv->convert_from_coordinate(*x, *y, *z);
+  res->full_number_line_ = read_size<boost::optional<int>>(in, 8, true);
+  res->full_number_sample_ = read_size<boost::optional<int>>(in, 8, true);
   res->min_line_ = read_size<int>(in, 8, true);
   res->max_line_ = read_size<int>(in, 8, true);
   res->min_sample_ = read_size<int>(in, 8, true);
@@ -245,8 +245,9 @@ RsmId::read_tre_string(const std::string& Tre_in)
   // This is the illumination and sensor position. We don't currently
   // have this in place, we'll need to add this in.
   for(int i = 0; i < 21; ++i) {
-    boost::optional<double> x = read_size<boost::optional<double> >(in, 21, true);
-    (void) x;			// Suppress unused variable warning
+    boost::optional<double> x =
+        read_size<boost::optional<double>>(in, 21, true);
+    (void)x; // Suppress unused variable warning
   }
   check_end_of_stream(in);
   return res;
@@ -312,20 +313,23 @@ void RsmId::print(std::ostream& Os) const
 void RsmId::naif_code(int Naif_code)
 {
   const GeodeticRadianConverter* gconv =
-    dynamic_cast<const GeodeticRadianConverter*>(coordinate_converter().get());
+      dynamic_cast<const GeodeticRadianConverter*>(
+          coordinate_converter().get());
   const GeodeticRadian2piConverter* gconv2 =
-    dynamic_cast<const GeodeticRadian2piConverter*>
-    (coordinate_converter().get());
-  const LocalRcConverter* gconv3 = 
-    dynamic_cast<const LocalRcConverter*>(coordinate_converter().get());
+      dynamic_cast<const GeodeticRadian2piConverter*>(
+          coordinate_converter().get());
+  const LocalRcConverter* gconv3 =
+      dynamic_cast<const LocalRcConverter*>(coordinate_converter().get());
   if(gconv) {
     if(Naif_code != Ecr::EARTH_NAIF_CODE)
-      throw Exception("Right now, GeodeticRadianConverter is not supported for anything other than Earth");
+      throw Exception("Right now, GeodeticRadianConverter is not supported for "
+                      "anything other than Earth");
     return;
   }
   if(gconv2) {
     if(Naif_code != Ecr::EARTH_NAIF_CODE)
-      throw Exception("Right now, GeodeticRadian2piConverter is not supported for anything other than Earth");
+      throw Exception("Right now, GeodeticRadian2piConverter is not supported "
+                      "for anything other than Earth");
     return;
   }
   if(gconv3) {
@@ -340,21 +344,21 @@ void RsmId::naif_code(int Naif_code)
 }
 
 inline bool ground_domain_test(const boost::array<double, 3>& x,
-			       const boost::array<double, 3>& t1,
-			       const boost::array<double, 3>& t2,
-			       const boost::array<double, 3>& t3)
+                               const boost::array<double, 3>& t1,
+                               const boost::array<double, 3>& t2,
+                               const boost::array<double, 3>& t3)
 {
   // This is (x-t1)^T((t2-t1) x (t3-t1)) >=0
   boost::array<double, 3> t4, t5, t6, t7;
   for(int i = 0; i < 3; ++i) {
-    t4[i] = x[i]-t1[i];
+    t4[i] = x[i] - t1[i];
     t5[i] = t2[i] - t1[i];
     t6[i] = t3[i] - t1[i];
   }
   cross(t5, t6, t7);
-  return dot(t4,t7) >= 0;
+  return dot(t4, t7) >= 0;
 }
-			       
+
 //-----------------------------------------------------------------------
 /// Check that point is in the ground domain. You don't normally need
 /// to check this, but this is the equations found in section 5.6
@@ -365,11 +369,11 @@ bool RsmId::in_ground_domain(const GroundCoordinate& Gc) const
 {
   boost::array<double, 3> x;
   coordinate_converter()->convert_to_coordinate(Gc, x[0], x[1], x[2]);
-  std::vector<boost::array<double, 3> > v;
+  std::vector<boost::array<double, 3>> v;
   for(int i = 0; i < 8; ++i) {
     boost::array<double, 3> t;
     coordinate_converter()->convert_to_coordinate(*ground_domain_vertex_[i],
-						  t[0], t[1], t[2]);
+                                                  t[0], t[1], t[2]);
     v.push_back(t);
   }
   boost::array<double, 3> v1 = v[0];
@@ -379,48 +383,48 @@ bool RsmId::in_ground_domain(const GroundCoordinate& Gc) const
   boost::array<double, 3> v5 = v[4];
   boost::array<double, 3> v6 = v[5];
   // Not actually used below, comment out so we don't get a warning
-  // boost::array<double, 3> v7 = v[6]; 
+  // boost::array<double, 3> v7 = v[6];
   boost::array<double, 3> v8 = v[7];
   // Equation 1
-  if(!ground_domain_test(x,v2,v4,v1)) {
+  if(!ground_domain_test(x, v2, v4, v1)) {
     if(false)
       std::cerr << "Equation 1\n"
-		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
+                << "point: (" << x[0] << ", " << x[1] << ", " << x[2] << ")\n";
     return false;
   }
   // Equation 2
-  if(!ground_domain_test(x,v6,v5,v8)) {
+  if(!ground_domain_test(x, v6, v5, v8)) {
     if(false)
       std::cerr << "Equation 2\n"
-		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
+                << "point: (" << x[0] << ", " << x[1] << ", " << x[2] << ")\n";
     return false;
   }
   // Equation 3
-  if(!ground_domain_test(x,v1,v3,v5)) {
+  if(!ground_domain_test(x, v1, v3, v5)) {
     if(false)
       std::cerr << "Equation 3\n"
-		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
+                << "point: (" << x[0] << ", " << x[1] << ", " << x[2] << ")\n";
     return false;
   }
   // Equation 4
-  if(!ground_domain_test(x,v2,v6,v4)) {
+  if(!ground_domain_test(x, v2, v6, v4)) {
     if(false)
       std::cerr << "Equation 4\n"
-		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
+                << "point: (" << x[0] << ", " << x[1] << ", " << x[2] << ")\n";
     return false;
   }
   // Equation 5
-  if(!ground_domain_test(x,v2,v1,v6)) {
+  if(!ground_domain_test(x, v2, v1, v6)) {
     if(false)
       std::cerr << "Equation 5\n"
-		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
+                << "point: (" << x[0] << ", " << x[1] << ", " << x[2] << ")\n";
     return false;
   }
   // Equation 6
-  if(!ground_domain_test(x,v4,v8,v3)) {
+  if(!ground_domain_test(x, v4, v8, v3)) {
     if(false)
       std::cerr << "Equation 6\n"
-		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
+                << "point: (" << x[0] << ", " << x[1] << ", " << x[2] << ")\n";
     return false;
   }
   return true;

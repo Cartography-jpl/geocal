@@ -5,17 +5,12 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void Statistic::serialize(Archive & ar, const unsigned int UNUSED(version))
+void Statistic::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(Statistic);
-  ar & GEOCAL_NVP_(sum)
-    & GEOCAL_NVP_(sum_squares)
-    & GEOCAL_NVP_(min)
-    & GEOCAL_NVP_(max)
-    & GEOCAL_NVP_(sum_abs)
-    & GEOCAL_NVP_(count)
-    & GEOCAL_NVP_(min_index)
-    & GEOCAL_NVP_(max_index);
+  ar& GEOCAL_NVP_(sum) & GEOCAL_NVP_(sum_squares) & GEOCAL_NVP_(min) &
+      GEOCAL_NVP_(max) & GEOCAL_NVP_(sum_abs) & GEOCAL_NVP_(count) &
+      GEOCAL_NVP_(min_index) & GEOCAL_NVP_(max_index);
 }
 
 GEOCAL_IMPLEMENT(Statistic);
@@ -27,15 +22,15 @@ GEOCAL_IMPLEMENT(Statistic);
 
 void Statistic::add(double x)
 {
-  if (count_ == 0) {
+  if(count_ == 0) {
     min_ = x;
     max_ = x;
   } else {
-    if (min_ > x) {
+    if(min_ > x) {
       min_ = x;
       min_index_ = count_;
-    } 
-    if (max_ < x) {
+    }
+    if(max_ < x) {
       max_ = x;
       max_index_ = count_;
     }

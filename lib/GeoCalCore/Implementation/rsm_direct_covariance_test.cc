@@ -4,7 +4,6 @@
 using namespace GeoCal;
 using namespace blitz;
 
-  
 BOOST_FIXTURE_TEST_SUITE(rsm_direct_covariance, RsmFixture)
 BOOST_AUTO_TEST_CASE(basic_test)
 {
@@ -24,7 +23,7 @@ BOOST_AUTO_TEST_CASE(serialize)
   // std::string d = serialize_write_string(r);
   // if(false)
   //   std::cerr << d;
-  // boost::shared_ptr<RsmRationalPolynomial> rr = 
+  // boost::shared_ptr<RsmRationalPolynomial> rr =
   //   serialize_read_string<RsmRationalPolynomial>(d);
   // ImageCoordinate ic_expect = rpc.image_coordinate(gp);
   // ImageCoordinate ic = rr->image_coordinate(gp.longitude(), gp.latitude(),

@@ -7,7 +7,8 @@ using namespace blitz;
 
 class CombineOrbitFixture : public GlobalFixture {
 public:
-  CombineOrbitFixture() {
+  CombineOrbitFixture()
+  {
     // Create simple KeplerOrbit instances with different time ranges
     t0 = Time::time_pgs(100.0);
     t1 = Time::time_pgs(200.0);
@@ -17,17 +18,20 @@ public:
     t5 = Time::time_pgs(600.0);
 
     // Non-overlapping orbits
-    orb1.reset(new KeplerOrbit(t0, t1));  // [100, 200)
-    orb2.reset(new KeplerOrbit(t2, t3));  // [300, 400)
-    orb3.reset(new KeplerOrbit(t4, t5));  // [500, 600)
+    orb1.reset(new KeplerOrbit(t0, t1)); // [100, 200)
+    orb2.reset(new KeplerOrbit(t2, t3)); // [300, 400)
+    orb3.reset(new KeplerOrbit(t4, t5)); // [500, 600)
 
     // Overlapping orbits
-    orb_overlap1.reset(new KeplerOrbit(t0, t1));  // [100, 200)
-    orb_overlap2.reset(new KeplerOrbit(Time::time_pgs(150.0), Time::time_pgs(250.0)));  // [150, 250)
-    orb_overlap3.reset(new KeplerOrbit(t1, t2));  // [200, 300)
+    orb_overlap1.reset(new KeplerOrbit(t0, t1)); // [100, 200)
+    orb_overlap2.reset(new KeplerOrbit(Time::time_pgs(150.0),
+                                       Time::time_pgs(250.0))); // [150, 250)
+    orb_overlap3.reset(new KeplerOrbit(t1, t2));                // [200, 300)
 
     // For constraint violation tests
-    orb_bad1.reset(new KeplerOrbit(Time::time_pgs(160.0), Time::time_pgs(280.0)));  // Would cause 2 overlaps
+    orb_bad1.reset(
+        new KeplerOrbit(Time::time_pgs(160.0),
+                        Time::time_pgs(280.0))); // Would cause 2 overlaps
   }
 
   Time t0, t1, t2, t3, t4, t5;
@@ -53,7 +57,8 @@ BOOST_AUTO_TEST_CASE(basic)
 
   // Verify position matches underlying orbit
   boost::shared_ptr<CartesianInertial> pos_combined = od->position_ci();
-  boost::shared_ptr<CartesianInertial> pos_original = orb1->position_ci(t_query);
+  boost::shared_ptr<CartesianInertial> pos_original =
+      orb1->position_ci(t_query);
   BOOST_CHECK_CLOSE(pos_combined->position[0], pos_original->position[0], 1e-6);
   BOOST_CHECK_CLOSE(pos_combined->position[1], pos_original->position[1], 1e-6);
   BOOST_CHECK_CLOSE(pos_combined->position[2], pos_original->position[2], 1e-6);
@@ -62,9 +67,9 @@ BOOST_AUTO_TEST_CASE(basic)
 BOOST_AUTO_TEST_CASE(disjoint_orbits)
 {
   boost::shared_ptr<CombineOrbit> corb(new CombineOrbit());
-  corb->add_orbit(orb1);  // [100, 200)
-  corb->add_orbit(orb2);  // [300, 400)
-  corb->add_orbit(orb3);  // [500, 600)
+  corb->add_orbit(orb1); // [100, 200)
+  corb->add_orbit(orb2); // [300, 400)
+  corb->add_orbit(orb3); // [500, 600)
 
   BOOST_CHECK_CLOSE(corb->min_time().pgs(), 100.0, 1e-6);
   BOOST_CHECK_CLOSE(corb->max_time().pgs(), 600.0, 1e-6);
@@ -109,9 +114,9 @@ BOOST_AUTO_TEST_CASE(disjoint_orbits)
 BOOST_AUTO_TEST_CASE(overlapping_orbits)
 {
   boost::shared_ptr<CombineOrbit> corb(new CombineOrbit());
-  corb->add_orbit(orb_overlap1);  // [100, 200)
-  corb->add_orbit(orb_overlap2);  // [150, 250)
-  corb->add_orbit(orb_overlap3);  // [200, 300)
+  corb->add_orbit(orb_overlap1); // [100, 200)
+  corb->add_orbit(orb_overlap2); // [150, 250)
+  corb->add_orbit(orb_overlap3); // [200, 300)
 
   BOOST_CHECK_CLOSE(corb->min_time().pgs(), 100.0, 1e-6);
   BOOST_CHECK_CLOSE(corb->max_time().pgs(), 300.0, 1e-6);
@@ -120,7 +125,8 @@ BOOST_AUTO_TEST_CASE(overlapping_orbits)
   Time t_overlap = Time::time_pgs(175.0);
   boost::shared_ptr<OrbitData> od_overlap = corb->orbit_data(t_overlap);
   boost::shared_ptr<CartesianInertial> pos_overlap = od_overlap->position_ci();
-  boost::shared_ptr<CartesianInertial> pos_orb1 = orb_overlap1->position_ci(t_overlap);
+  boost::shared_ptr<CartesianInertial> pos_orb1 =
+      orb_overlap1->position_ci(t_overlap);
   BOOST_CHECK_CLOSE(pos_overlap->position[0], pos_orb1->position[0], 1e-6);
   BOOST_CHECK_CLOSE(pos_overlap->position[1], pos_orb1->position[1], 1e-6);
   BOOST_CHECK_CLOSE(pos_overlap->position[2], pos_orb1->position[2], 1e-6);
@@ -128,8 +134,10 @@ BOOST_AUTO_TEST_CASE(overlapping_orbits)
   // Query at exact boundary (200) - should use orb_overlap3
   Time t_boundary = Time::time_pgs(200.0);
   boost::shared_ptr<OrbitData> od_boundary = corb->orbit_data(t_boundary);
-  boost::shared_ptr<CartesianInertial> pos_boundary = od_boundary->position_ci();
-  boost::shared_ptr<CartesianInertial> pos_orb3 = orb_overlap3->position_ci(t_boundary);
+  boost::shared_ptr<CartesianInertial> pos_boundary =
+      od_boundary->position_ci();
+  boost::shared_ptr<CartesianInertial> pos_orb3 =
+      orb_overlap3->position_ci(t_boundary);
   BOOST_CHECK_CLOSE(pos_boundary->position[0], pos_orb3->position[0], 1e-6);
   BOOST_CHECK_CLOSE(pos_boundary->position[1], pos_orb3->position[1], 1e-6);
   BOOST_CHECK_CLOSE(pos_boundary->position[2], pos_orb3->position[2], 1e-6);
@@ -138,7 +146,8 @@ BOOST_AUTO_TEST_CASE(overlapping_orbits)
   Time t_middle = Time::time_pgs(225.0);
   boost::shared_ptr<OrbitData> od_middle = corb->orbit_data(t_middle);
   boost::shared_ptr<CartesianInertial> pos_middle = od_middle->position_ci();
-  boost::shared_ptr<CartesianInertial> pos_orb2 = orb_overlap2->position_ci(t_middle);
+  boost::shared_ptr<CartesianInertial> pos_orb2 =
+      orb_overlap2->position_ci(t_middle);
   BOOST_CHECK_CLOSE(pos_middle->position[0], pos_orb2->position[0], 1e-6);
   BOOST_CHECK_CLOSE(pos_middle->position[1], pos_orb2->position[1], 1e-6);
   BOOST_CHECK_CLOSE(pos_middle->position[2], pos_orb2->position[2], 1e-6);
@@ -148,9 +157,9 @@ BOOST_AUTO_TEST_CASE(add_order_independence)
 {
   // Add orbits in non-sorted order
   boost::shared_ptr<CombineOrbit> corb(new CombineOrbit());
-  corb->add_orbit(orb2);  // [300, 400) - added first
-  corb->add_orbit(orb1);  // [100, 200) - added second (earlier)
-  corb->add_orbit(orb3);  // [500, 600) - added third
+  corb->add_orbit(orb2); // [300, 400) - added first
+  corb->add_orbit(orb1); // [100, 200) - added second (earlier)
+  corb->add_orbit(orb3); // [500, 600) - added third
 
   // Should still work correctly due to lazy sorting
   BOOST_CHECK_CLOSE(corb->min_time().pgs(), 100.0, 1e-6);
@@ -197,16 +206,20 @@ BOOST_AUTO_TEST_CASE(overlap_constraints)
   //    This should fail because orb1 already has 1 max_time overlap (with orb2)
 
   boost::shared_ptr<CombineOrbit> corb(new CombineOrbit());
-  corb->add_orbit(orb_overlap1);  // [100, 200)
+  corb->add_orbit(orb_overlap1); // [100, 200)
 
-  boost::shared_ptr<KeplerOrbit> orb_first_overlap(new KeplerOrbit(Time::time_pgs(180.0), Time::time_pgs(280.0)));
-  corb->add_orbit(orb_first_overlap);  // [180, 280) - overlaps orb_overlap1 at max_time
+  boost::shared_ptr<KeplerOrbit> orb_first_overlap(
+      new KeplerOrbit(Time::time_pgs(180.0), Time::time_pgs(280.0)));
+  corb->add_orbit(
+      orb_first_overlap); // [180, 280) - overlaps orb_overlap1 at max_time
 
   // Now try to add another orbit that would create a second overlap at orb_overlap1's max_time
-  boost::shared_ptr<KeplerOrbit> orb_bad(new KeplerOrbit(Time::time_pgs(150.0), Time::time_pgs(250.0)));
+  boost::shared_ptr<KeplerOrbit> orb_bad(
+      new KeplerOrbit(Time::time_pgs(150.0), Time::time_pgs(250.0)));
 
   try {
-    corb->add_orbit(orb_bad);  // [150, 250) - would be second max_time overlap for orb_overlap1
+    corb->add_orbit(
+        orb_bad); // [150, 250) - would be second max_time overlap for orb_overlap1
     BOOST_FAIL("Should have thrown exception for constraint violation");
   } catch(const Exception& e) {
     BOOST_CHECK(true);
@@ -219,7 +232,8 @@ BOOST_AUTO_TEST_CASE(time_with_derivative)
   corb->add_orbit(orb1);
 
   Time t = Time::time_pgs(150.0);
-  TimeWithDerivative td = TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 1));
+  TimeWithDerivative td =
+      TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 1));
 
   boost::shared_ptr<OrbitData> od = corb->orbit_data(td);
   BOOST_CHECK(od);
@@ -240,7 +254,8 @@ BOOST_AUTO_TEST_CASE(time_with_derivative)
   jac_fd(1, 0) = (p1->position[1] - p0->position[1]) / eps;
   jac_fd(2, 0) = (p1->position[2] - p0->position[2]) / eps;
   Array<double, 2> jac_calc(3, 1);
-  boost::array<AutoDerivative<double>, 3> p2 = corb->position_ci_with_derivative(td);
+  boost::array<AutoDerivative<double>, 3> p2 =
+      corb->position_ci_with_derivative(td);
   jac_calc(0, Range::all()) = p2[0].gradient();
   jac_calc(1, Range::all()) = p2[1].gradient();
   jac_calc(2, Range::all()) = p2[2].gradient();
@@ -273,7 +288,8 @@ BOOST_AUTO_TEST_CASE(serialization)
   std::string d = serialize_write_string(corb);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<CombineOrbit> corb_restored = serialize_read_string<CombineOrbit>(d);
+  boost::shared_ptr<CombineOrbit> corb_restored =
+      serialize_read_string<CombineOrbit>(d);
 
   // Check min/max time
   BOOST_CHECK_CLOSE(corb_restored->min_time().pgs(), 100.0, 1e-6);
@@ -283,7 +299,8 @@ BOOST_AUTO_TEST_CASE(serialization)
   Time t1_query = Time::time_pgs(150.0);
   boost::shared_ptr<OrbitData> od1 = corb_restored->orbit_data(t1_query);
   boost::shared_ptr<CartesianInertial> pos1 = od1->position_ci();
-  boost::shared_ptr<CartesianInertial> pos1_expected = orb1->position_ci(t1_query);
+  boost::shared_ptr<CartesianInertial> pos1_expected =
+      orb1->position_ci(t1_query);
   BOOST_CHECK_CLOSE(pos1->position[0], pos1_expected->position[0], 1e-6);
   BOOST_CHECK_CLOSE(pos1->position[1], pos1_expected->position[1], 1e-6);
   BOOST_CHECK_CLOSE(pos1->position[2], pos1_expected->position[2], 1e-6);
@@ -291,7 +308,8 @@ BOOST_AUTO_TEST_CASE(serialization)
   Time t2_query = Time::time_pgs(350.0);
   boost::shared_ptr<OrbitData> od2 = corb_restored->orbit_data(t2_query);
   boost::shared_ptr<CartesianInertial> pos2 = od2->position_ci();
-  boost::shared_ptr<CartesianInertial> pos2_expected = orb2->position_ci(t2_query);
+  boost::shared_ptr<CartesianInertial> pos2_expected =
+      orb2->position_ci(t2_query);
   BOOST_CHECK_CLOSE(pos2->position[0], pos2_expected->position[0], 1e-6);
   BOOST_CHECK_CLOSE(pos2->position[1], pos2_expected->position[1], 1e-6);
   BOOST_CHECK_CLOSE(pos2->position[2], pos2_expected->position[2], 1e-6);

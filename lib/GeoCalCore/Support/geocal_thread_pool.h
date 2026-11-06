@@ -10,7 +10,7 @@
 #include <tuple>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   The newer C++ 17 has versions of std library functions that
   automatically handle threading. However there isn't support of this
   until a much newer version of gcc then we want to depend on (9 or
@@ -32,45 +32,45 @@ namespace GeoCal {
   wait for the tasks, even if an exception is thrown.
 *******************************************************************/
 
-
 class ThreadPool : public Printable<ThreadPool> {
 public:
   virtual ~ThreadPool() {}
   inline static const int default_number_thread = 10;
   static ThreadPool& thread_pool();
 
-//-----------------------------------------------------------------------
-/// Return the number of workers in the thread pool.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return the number of workers in the thread pool.
+  //-----------------------------------------------------------------------
 
   int number_thread() const { return number_thread_; }
   void number_thread(int V);
   virtual void print(std::ostream& Os) const;
 
-//-----------------------------------------------------------------------
-/// Add a task to the pools of jobs for the workers to work through.
-/// Note you can add as many as you like, there is no requirement that
-/// you keep to the number_thread() tasks - more or less is
-/// fine. number_thread() is the maximum number of tasks that will be
-/// processed at one time, but the list of tasks to be done can be
-/// larger than that.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Add a task to the pools of jobs for the workers to work through.
+  /// Note you can add as many as you like, there is no requirement that
+  /// you keep to the number_thread() tasks - more or less is
+  /// fine. number_thread() is the maximum number of tasks that will be
+  /// processed at one time, but the list of tasks to be done can be
+  /// larger than that.
+  //-----------------------------------------------------------------------
 
-  template<typename ExecutionContext, class... Types> void add_task(ExecutionContext & ctx, Types... args)
+  template<typename ExecutionContext, class... Types>
+  void add_task(ExecutionContext& ctx, Types... args)
   {
     check_caller();
     // The task runs after add_task returns, so we need to copy the
     // arguments into the task rather than refer to them.
-    boost::asio::post(pool(), [this, &ctx, targs = std::make_tuple(args...)]() mutable
-		      {
-			in_task = true;
-			try {
-			  std::apply(ctx, targs);
-			} catch(...) {
-			  save_exception(std::current_exception());
-			}
-			in_task = false;
-		      });
+    boost::asio::post(pool(),
+                      [this, &ctx, targs = std::make_tuple(args...)]() mutable {
+                        in_task = true;
+                        try {
+                          std::apply(ctx, targs);
+                        } catch(...) {
+                          save_exception(std::current_exception());
+                        }
+                        in_task = false;
+                      });
   }
 
   void wait_tasks_finish();
@@ -134,12 +134,12 @@ template<class F> void parallel_row_blocks(int Number_row, int Number_task, F f)
     ~WaitGuard()
     {
       if(active) {
-	try {
-	  tpool.wait_tasks_finish();
-	} catch(...) {
-	  // Already have an exception propagating, so we can't throw
-	  // a second one.
-	}
+        try {
+          tpool.wait_tasks_finish();
+        } catch(...) {
+          // Already have an exception propagating, so we can't throw
+          // a second one.
+        }
       }
     }
   } guard{tpool};

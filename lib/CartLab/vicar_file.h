@@ -16,21 +16,36 @@ namespace GeoCal {
 // Note that when you port to a different machine, these types may
 // need to be changed.
 //********************************************************************
-  typedef unsigned char VicarByte;
-  typedef short int VicarHalf;
-  typedef int VicarFull;
-  typedef float VicarFloat;
-  typedef double VicarDouble;
-  namespace VicarType {
-    template<class T> std::string vicar_type();
-    template<> inline std::string vicar_type<VicarByte>() { return "BYTE";}
-    template<> inline std::string vicar_type<VicarHalf>() { return "HALF";}
-    template<> inline std::string vicar_type<VicarFull>() { return "FULL";}
-    template<> inline std::string vicar_type<VicarFloat>() { return "REAL";}
-    template<> inline std::string vicar_type<VicarDouble>() { return "DOUB";}
-  }
+typedef unsigned char VicarByte;
+typedef short int VicarHalf;
+typedef int VicarFull;
+typedef float VicarFloat;
+typedef double VicarDouble;
+namespace VicarType {
+template<class T> std::string vicar_type();
+template<> inline std::string vicar_type<VicarByte>()
+{
+  return "BYTE";
+}
+template<> inline std::string vicar_type<VicarHalf>()
+{
+  return "HALF";
+}
+template<> inline std::string vicar_type<VicarFull>()
+{
+  return "FULL";
+}
+template<> inline std::string vicar_type<VicarFloat>()
+{
+  return "REAL";
+}
+template<> inline std::string vicar_type<VicarDouble>()
+{
+  return "DOUB";
+}
+}
 
-/****************************************************************//**
+/****************************************************************/ /**
   This handles opening and closing a Vicar file. This class doesn't
   actually read and write data, but is used by other classes which do.
 
@@ -71,190 +86,185 @@ namespace GeoCal {
 
 class VicarFile : public boost::noncopyable, public Printable<VicarFile> {
 public:
-//-----------------------------------------------------------------------
-/// Type of each label found in the file
-//-----------------------------------------------------------------------
-  enum label_type {VICAR_INT, VICAR_REAL, VICAR_STRING};
+  //-----------------------------------------------------------------------
+  /// Type of each label found in the file
+  //-----------------------------------------------------------------------
+  enum label_type { VICAR_INT, VICAR_REAL, VICAR_STRING };
 
-//-----------------------------------------------------------------------
-/// Type of data in file.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Type of data in file.
+  //-----------------------------------------------------------------------
 
-  enum data_type {VICAR_BYTE, VICAR_HALF, VICAR_FULL, VICAR_FLOAT,
-		  VICAR_DOUBLE};
+  enum data_type {
+    VICAR_BYTE,
+    VICAR_HALF,
+    VICAR_FULL,
+    VICAR_FLOAT,
+    VICAR_DOUBLE
+  };
 
-//-----------------------------------------------------------------------
-/// Type of access.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Type of access.
+  //-----------------------------------------------------------------------
 
-  enum access_type {READ, WRITE, UPDATE};
-  enum compression {NONE, BASIC, BASIC2};
+  enum access_type { READ, WRITE, UPDATE };
+  enum compression { NONE, BASIC, BASIC2 };
 
-//-----------------------------------------------------------------------
-/// Type of RSM file we generate if we are writing it.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Type of RSM file we generate if we are writing it.
+  //-----------------------------------------------------------------------
 
-  enum rsm_file_type {RSM_XML_FILE, RSM_NITF_FILE};
+  enum rsm_file_type { RSM_XML_FILE, RSM_NITF_FILE };
 
-//-----------------------------------------------------------------------
-/// Type of GLAS/GFM file we generate if we are writing it.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Type of GLAS/GFM file we generate if we are writing it.
+  //-----------------------------------------------------------------------
 
-  enum glas_gfm_file_type {GLAS_GFM_XML_FILE, GLAS_GFM_NITF_FILE};
-  
+  enum glas_gfm_file_type { GLAS_GFM_XML_FILE, GLAS_GFM_NITF_FILE };
+
   VicarFile(const std::string& Fname, access_type Access = READ,
-	    bool Force_area_pixel = false);
+            bool Force_area_pixel = false);
   VicarFile(const std::string& Fname, int Number_line, int Number_sample,
-	    const std::string& Type = "BYTE",
-	    compression C = NONE);
+            const std::string& Type = "BYTE", compression C = NONE);
   VicarFile(const std::string& Fname, int Number_line, int Number_sample,
-	    int Number_band,
-	    const std::string& Type = "BYTE",
-	    const std::string& Org = "BSQ",
-	    compression C = NONE);
-  VicarFile(int Instance, access_type Access = READ, 
-	    const std::string& Name = "INP");
+            int Number_band, const std::string& Type = "BYTE",
+            const std::string& Org = "BSQ", compression C = NONE);
+  VicarFile(int Instance, access_type Access = READ,
+            const std::string& Name = "INP");
   VicarFile(int Instance, int Number_line, int Number_sample,
-	    int Number_band = 1,
-	    const std::string& Type = "BYTE",
-	    const std::string& Name = "OUT",
-	    const std::string& Org = "BSQ",
-	    compression C = NONE);
+            int Number_band = 1, const std::string& Type = "BYTE",
+            const std::string& Name = "OUT", const std::string& Org = "BSQ",
+            compression C = NONE);
   virtual ~VicarFile();
 
-//-----------------------------------------------------------------------
-/// Access type of file.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Access type of file.
+  //-----------------------------------------------------------------------
 
-  access_type access() const {return access_;}
+  access_type access() const { return access_; }
 
-//-----------------------------------------------------------------------
-/// If true, then force the file to be treated as "pixel is area".
-/// This is really just meant as a work around for the SRTM data,
-/// which incorrectly labels the data as "point" rather than
-/// "area". Since this is a 15 meter difference, it matters for many
-/// applications. Most users should just ignore this value.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// If true, then force the file to be treated as "pixel is area".
+  /// This is really just meant as a work around for the SRTM data,
+  /// which incorrectly labels the data as "point" rather than
+  /// "area". Since this is a 15 meter difference, it matters for many
+  /// applications. Most users should just ignore this value.
+  //-----------------------------------------------------------------------
 
   bool force_area_pixel() const { return force_area_pixel_; }
 
-//-----------------------------------------------------------------------
-/// File name
-//-----------------------------------------------------------------------
-  
+  //-----------------------------------------------------------------------
+  /// File name
+  //-----------------------------------------------------------------------
+
   const std::string& file_name() const { return fname_; }
 
   static bool is_vicar_file(const std::string& Fname);
 
-//-----------------------------------------------------------------------
-/// Map between Label names and the type of the label.
-/// As a convention, we store a label that is part of a property as
-/// the string "property label". We can break this out in the future
-/// if needed, but for now this seems sufficient.
-//-----------------------------------------------------------------------
-  
-  const std::map<std::string, int>& label_type() const 
-  {return label_type_;}
+  //-----------------------------------------------------------------------
+  /// Map between Label names and the type of the label.
+  /// As a convention, we store a label that is part of a property as
+  /// the string "property label". We can break this out in the future
+  /// if needed, but for now this seems sufficient.
+  //-----------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
-/// Test if a label is found in a file, and if so return
-/// true. Otherwise return false.
-//-----------------------------------------------------------------------
+  const std::map<std::string, int>& label_type() const { return label_type_; }
+
+  //-----------------------------------------------------------------------
+  /// Test if a label is found in a file, and if so return
+  /// true. Otherwise return false.
+  //-----------------------------------------------------------------------
   bool has_label(const std::string& Lbl, const std::string& Property = "") const
   {
     std::string t = (Property == "" ? Lbl : Property + " " + Lbl);
     return label_type_.count(t) != 0;
   }
 
-//-----------------------------------------------------------------------
-/// Map between Label names and the number of elements.
-/// As a convention, we store a label that is part of a property as
-/// the string "property label". We can break this out in the future
-/// if needed, but for now this seems sufficient.
-//-----------------------------------------------------------------------
-  
-  const std::map<std::string, int>& label_nelement() const 
-  {return label_nelement_;}
+  //-----------------------------------------------------------------------
+  /// Map between Label names and the number of elements.
+  /// As a convention, we store a label that is part of a property as
+  /// the string "property label". We can break this out in the future
+  /// if needed, but for now this seems sufficient.
+  //-----------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
-/// List of properties.
-//-----------------------------------------------------------------------
+  const std::map<std::string, int>& label_nelement() const
+  {
+    return label_nelement_;
+  }
 
-  const std::set<std::string>& property() const {return prop_set_;}
+  //-----------------------------------------------------------------------
+  /// List of properties.
+  //-----------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
-/// Return value for the given label. Optionally also supply a
-/// property for labels that are part of one (e.g., GEOTIFF)
-//-----------------------------------------------------------------------
-  
-  template<class T> T label(const std::string& F, 
-			    const std::string& Property = "") const;
+  const std::set<std::string>& property() const { return prop_set_; }
 
+  //-----------------------------------------------------------------------
+  /// Return value for the given label. Optionally also supply a
+  /// property for labels that are part of one (e.g., GEOTIFF)
+  //-----------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
-/// Non template form of label, useful in some contexts.
-//-----------------------------------------------------------------------
+  template<class T>
+  T label(const std::string& F, const std::string& Property = "") const;
 
-  inline std::string label_string(const std::string& F, 
-				  const std::string& Property = "") const;
+  //-----------------------------------------------------------------------
+  /// Non template form of label, useful in some contexts.
+  //-----------------------------------------------------------------------
+
+  inline std::string label_string(const std::string& F,
+                                  const std::string& Property = "") const;
 
   void label_delete(const std::string& F, const std::string& Property = "");
-  void label_set(const std::string& F, 
-		 int Val,
-		 const std::string& Property = "");
-  void label_set(const std::string& F, 
-		 float Val,
-		 const std::string& Property = "");
-  void label_set(const std::string& F, 
-		 double Val,
-		 const std::string& Property = "");
-  void label_set(const std::string& F, 
-		 const std::string& Val,
-		 const std::string& Property = "");
+  void label_set(const std::string& F, int Val,
+                 const std::string& Property = "");
+  void label_set(const std::string& F, float Val,
+                 const std::string& Property = "");
+  void label_set(const std::string& F, double Val,
+                 const std::string& Property = "");
+  void label_set(const std::string& F, const std::string& Val,
+                 const std::string& Property = "");
 
-//-----------------------------------------------------------------------
-/// Number of lines in file.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of lines in file.
+  //-----------------------------------------------------------------------
 
-  int number_line() const {return number_line_;}
+  int number_line() const { return number_line_; }
 
+  //-----------------------------------------------------------------------
+  /// Number of bands in file.
+  //-----------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
-/// Number of bands in file.
-//-----------------------------------------------------------------------
+  int number_band() const { return number_band_; }
 
-  int number_band() const {return number_band_;}
+  //-----------------------------------------------------------------------
+  /// Number of samples in file.
+  //-----------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
-/// Number of samples in file.
-//-----------------------------------------------------------------------
+  int number_sample() const { return number_sample_; }
 
-  int number_sample() const {return number_sample_;}
-
-//-----------------------------------------------------------------------
-/// Close file
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Close file
+  //-----------------------------------------------------------------------
 
   void close();
 
-//-----------------------------------------------------------------------
-/// Flush data to disk.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Flush data to disk.
+  //-----------------------------------------------------------------------
 
   void flush() const { reopen_file(); }
   void reopen_file() const;
 
-//-----------------------------------------------------------------------
-/// Type of data in file
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Type of data in file
+  //-----------------------------------------------------------------------
 
-  data_type type() const {return type_;}
+  data_type type() const { return type_; }
 
-//-----------------------------------------------------------------------
-/// Unit number for VicarFile
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Unit number for VicarFile
+  //-----------------------------------------------------------------------
 
-  int unit() const {return unit_;}
+  int unit() const { return unit_; }
 
   bool has_map_info() const;
   bool has_rpc() const;
@@ -266,19 +276,20 @@ public:
   void rpc(const Rpc& R);
   boost::shared_ptr<Rsm> rsm() const;
   void rsm(const boost::shared_ptr<Rsm>& R,
-	   rsm_file_type File_type = RSM_NITF_FILE);
+           rsm_file_type File_type = RSM_NITF_FILE);
   boost::shared_ptr<ImageGroundConnection> igc_glas_gfm() const;
   void igc_glas_gfm(const boost::shared_ptr<ImageGroundConnection>& Igc,
-		    glas_gfm_file_type File_type = GLAS_GFM_NITF_FILE);
+                    glas_gfm_file_type File_type = GLAS_GFM_NITF_FILE);
 
   static int file_name_to_unit(const std::string& Fname);
 
-//-----------------------------------------------------------------------
-/// Print to stream.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print to stream.
+  //-----------------------------------------------------------------------
 
-  virtual void print(std::ostream& Os) const 
-  { Os << "Vicar File \n" 
+  virtual void print(std::ostream& Os) const
+  {
+    Os << "Vicar File \n"
        << "  File:          " << file_name() << "\n"
        << "  Number line:   " << number_line() << "\n"
        << "  Number sample: " << number_sample() << "\n";
@@ -291,20 +302,20 @@ public:
   static int zlgetw(int unit, const char* type, const char* key, char* value);
   static int zlgetsh(int unit, const char* key, char* value);
   static int zlgetsh(int unit, const char* key, char* value, int ulen);
-  static int zlgetw(int unit, const char* type, const char* key, char* value, 
-		    const char* prop);
   static int zlgetw(int unit, const char* type, const char* key, char* value,
-		    int ulen);
-  static int zlgetw(int unit, const char* type, const char* key, char* value, 
-		    int ulen, const char* prop);
-  static int zvzinitw(int argc, char *argv[]);
+                    const char* prop);
+  static int zlgetw(int unit, const char* type, const char* key, char* value,
+                    int ulen);
+  static int zlgetw(int unit, const char* type, const char* key, char* value,
+                    int ulen, const char* prop);
+  static int zvzinitw(int argc, char* argv[]);
 
   static bool vicar_available();
 protected:
   VicarFile() {}
 private:
-  mutable boost::shared_ptr<MapInfo> map_info_; 
-				///< Cache of MapInfo information.
+  mutable boost::shared_ptr<MapInfo> map_info_;
+  ///< Cache of MapInfo information.
   std::set<std::string> prop_set_; ///<List of properties.
   std::string fname_;
   bool force_area_pixel_;
@@ -317,29 +328,29 @@ private:
   std::map<std::string, int> label_type_;
   std::map<std::string, int> label_nelement_;
   std::map<std::string, int> label_maxlength_;
-				///< Maximum length of a string. We
-				/// only have entries here for labels
-				/// that are type string.
-  
-  static int instance;		///< Instance number, which must be
-				/// unique for each file.
+  ///< Maximum length of a string. We
+  /// only have entries here for labels
+  /// that are type string.
+
+  static int instance; ///< Instance number, which must be
+  /// unique for each file.
   void open_unit();
   void set_type(const std::string& Type);
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
   template<class Archive>
-  void save(Archive & ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive & ar, const unsigned int version);
+  void save(Archive& ar, const unsigned int version) const;
+  template<class Archive> void load(Archive& ar, const unsigned int version);
 };
 
 //-----------------------------------------------------------------------
 /// Return value for the given label.
 //-----------------------------------------------------------------------
-  
-template<> inline int VicarFile::label<int>(const std::string& K, 
-					    const std::string& P) const
+
+template<>
+inline int VicarFile::label<int>(const std::string& K,
+                                 const std::string& P) const
 {
   std::string t = K;
   if(P != "")
@@ -353,15 +364,15 @@ template<> inline int VicarFile::label<int>(const std::string& K,
   int res;
   int status;
   if(P != "") {
-    status = VicarFile::zlgetw(unit(), "PROPERTY", 
-			       K.c_str(), 
-			       reinterpret_cast<char*>(&res), P.c_str());
+    status = VicarFile::zlgetw(unit(), "PROPERTY", K.c_str(),
+                               reinterpret_cast<char*>(&res), P.c_str());
   } else {
-    status = VicarFile::zlgetsh(unit(), K.c_str(),
-			       reinterpret_cast<char*>(&res));
+    status =
+        VicarFile::zlgetsh(unit(), K.c_str(), reinterpret_cast<char*>(&res));
   }
   if(status != 1)
-    throw VicarException(status, "zlget failed for label " + K + " of file " + fname_);
+    throw VicarException(status,
+                         "zlget failed for label " + K + " of file " + fname_);
   return res;
 }
 
@@ -369,9 +380,10 @@ template<> inline int VicarFile::label<int>(const std::string& K,
 /// Return value for the given label.
 //-----------------------------------------------------------------------
 
-template<> inline std::vector<int> 
-VicarFile::label<std::vector<int> >(const std::string& K, 
-				    const std::string& P) const
+template<>
+inline std::vector<int>
+VicarFile::label<std::vector<int>>(const std::string& K,
+                                   const std::string& P) const
 {
   std::string t = K;
   if(P != "")
@@ -383,16 +395,16 @@ VicarFile::label<std::vector<int> >(const std::string& K,
   std::vector<int> res((*label_nelement().find(t)).second);
   int status;
   if(P != "") {
-    status = VicarFile::zlgetw(unit(), "PROPERTY", 
-			       K.c_str(), 
-			       reinterpret_cast<char*>(&(*res.begin())), 
-			       P.c_str());
+    status =
+        VicarFile::zlgetw(unit(), "PROPERTY", K.c_str(),
+                          reinterpret_cast<char*>(&(*res.begin())), P.c_str());
   } else {
-    status = VicarFile::zlgetsh(unit(), K.c_str(), 
-			       reinterpret_cast<char*>(&(*res.begin())));
+    status = VicarFile::zlgetsh(unit(), K.c_str(),
+                                reinterpret_cast<char*>(&(*res.begin())));
   }
   if(status != 1)
-    throw VicarException(status,"zlget failed for label " + K + " of file " + fname_);
+    throw VicarException(status,
+                         "zlget failed for label " + K + " of file " + fname_);
   return res;
 }
 
@@ -400,8 +412,9 @@ VicarFile::label<std::vector<int> >(const std::string& K,
 /// Return value for the given label.
 //-----------------------------------------------------------------------
 
-template<> inline float VicarFile::label<float>(const std::string& K,
-						const std::string& P) const
+template<>
+inline float VicarFile::label<float>(const std::string& K,
+                                     const std::string& P) const
 {
   std::string t = K;
   if(P != "")
@@ -415,16 +428,15 @@ template<> inline float VicarFile::label<float>(const std::string& K,
   float res;
   int status;
   if(P != "") {
-    status = VicarFile::zlgetw(unit(), "PROPERTY", 
-			       K.c_str(), 
-			       reinterpret_cast<char*>(&res), 
-			       P.c_str());
+    status = VicarFile::zlgetw(unit(), "PROPERTY", K.c_str(),
+                               reinterpret_cast<char*>(&res), P.c_str());
   } else {
-    status = VicarFile::zlgetsh(unit(), K.c_str(), 
-				reinterpret_cast<char*>(&res));
+    status =
+        VicarFile::zlgetsh(unit(), K.c_str(), reinterpret_cast<char*>(&res));
   }
   if(status != 1)
-    throw VicarException(status,"zlget failed for label " + K + " of file " + fname_);
+    throw VicarException(status,
+                         "zlget failed for label " + K + " of file " + fname_);
   return res;
 }
 
@@ -432,9 +444,10 @@ template<> inline float VicarFile::label<float>(const std::string& K,
 /// Return value for the given label.
 //-----------------------------------------------------------------------
 
-template<> inline std::vector<float> 
-VicarFile::label<std::vector<float> >(const std::string& K,
-				      const std::string& P) const
+template<>
+inline std::vector<float>
+VicarFile::label<std::vector<float>>(const std::string& K,
+                                     const std::string& P) const
 {
   std::string t = K;
   if(P != "")
@@ -446,16 +459,16 @@ VicarFile::label<std::vector<float> >(const std::string& K,
   std::vector<float> res((*label_nelement().find(t)).second);
   int status;
   if(P != "") {
-    status = VicarFile::zlgetw(unit(), "PROPERTY", 
-			       K.c_str(), 
-			       reinterpret_cast<char*>(&(*res.begin())), 
-			       P.c_str());
+    status =
+        VicarFile::zlgetw(unit(), "PROPERTY", K.c_str(),
+                          reinterpret_cast<char*>(&(*res.begin())), P.c_str());
   } else {
-    status = VicarFile::zlgetsh(unit(), K.c_str(), 
-				reinterpret_cast<char*>(&(*res.begin())));
+    status = VicarFile::zlgetsh(unit(), K.c_str(),
+                                reinterpret_cast<char*>(&(*res.begin())));
   }
   if(status != 1)
-    throw VicarException(status,"zlget failed for label " + K + " of file " + fname_);
+    throw VicarException(status,
+                         "zlget failed for label " + K + " of file " + fname_);
   return res;
 }
 
@@ -463,8 +476,9 @@ VicarFile::label<std::vector<float> >(const std::string& K,
 /// Return value for the given label.
 //-----------------------------------------------------------------------
 
-template<> inline double VicarFile::label<double>(const std::string& K,
-						const std::string& P) const
+template<>
+inline double VicarFile::label<double>(const std::string& K,
+                                       const std::string& P) const
 {
   std::string t = K;
   if(P != "")
@@ -478,16 +492,15 @@ template<> inline double VicarFile::label<double>(const std::string& K,
   double res;
   int status;
   if(P != "") {
-    status = VicarFile::zlgetw(unit(), "PROPERTY", 
-			       K.c_str(), 
-			       reinterpret_cast<char*>(&res), 
-			       P.c_str());
+    status = VicarFile::zlgetw(unit(), "PROPERTY", K.c_str(),
+                               reinterpret_cast<char*>(&res), P.c_str());
   } else {
-    status = VicarFile::zlgetsh(unit(), K.c_str(), 
-				reinterpret_cast<char*>(&res));
+    status =
+        VicarFile::zlgetsh(unit(), K.c_str(), reinterpret_cast<char*>(&res));
   }
   if(status != 1)
-    throw VicarException(status,"zlget failed for label " + K + " of file " + fname_);
+    throw VicarException(status,
+                         "zlget failed for label " + K + " of file " + fname_);
   return res;
 }
 
@@ -495,9 +508,10 @@ template<> inline double VicarFile::label<double>(const std::string& K,
 /// Return value for the given label.
 //-----------------------------------------------------------------------
 
-template<> inline std::vector<double> 
-VicarFile::label<std::vector<double> >(const std::string& K,
-				      const std::string& P) const
+template<>
+inline std::vector<double>
+VicarFile::label<std::vector<double>>(const std::string& K,
+                                      const std::string& P) const
 {
   std::string t = K;
   if(P != "")
@@ -509,26 +523,26 @@ VicarFile::label<std::vector<double> >(const std::string& K,
   std::vector<double> res((*label_nelement().find(t)).second);
   int status;
   if(P != "") {
-    status = VicarFile::zlgetw(unit(), "PROPERTY", 
-			       K.c_str(), 
-			       reinterpret_cast<char*>(&(*res.begin())), 
-			       P.c_str());
+    status =
+        VicarFile::zlgetw(unit(), "PROPERTY", K.c_str(),
+                          reinterpret_cast<char*>(&(*res.begin())), P.c_str());
   } else {
-    status = VicarFile::zlgetsh(unit(), K.c_str(), 
-				reinterpret_cast<char*>(&(*res.begin())));
+    status = VicarFile::zlgetsh(unit(), K.c_str(),
+                                reinterpret_cast<char*>(&(*res.begin())));
   }
   if(status != 1)
-    throw VicarException(status,"zlget failed for label " + K + " of file " + fname_);
+    throw VicarException(status,
+                         "zlget failed for label " + K + " of file " + fname_);
   return res;
 }
 
 //-----------------------------------------------------------------------
 /// Return value for the given label.
 //-----------------------------------------------------------------------
-  
-template<> inline std::string 
-VicarFile::label<std::string>(const std::string& K,
-			      const std::string& P) const
+
+template<>
+inline std::string VicarFile::label<std::string>(const std::string& K,
+                                                 const std::string& P) const
 {
   std::string t = K;
   if(P != "")
@@ -542,22 +556,23 @@ VicarFile::label<std::string>(const std::string& K,
   std::vector<char> buf((*label_maxlength_.find(t)).second + 1);
   int status;
   if(P != "") {
-    status = VicarFile::zlgetw(unit(), "PROPERTY", 
-			       K.c_str(), 
-			       reinterpret_cast<char*>(&(*buf.begin())), 
-			       P.c_str());
+    status =
+        VicarFile::zlgetw(unit(), "PROPERTY", K.c_str(),
+                          reinterpret_cast<char*>(&(*buf.begin())), P.c_str());
   } else {
-    status = VicarFile::zlgetsh(unit(), K.c_str(), 
-				reinterpret_cast<char*>(&(*buf.begin())));
+    status = VicarFile::zlgetsh(unit(), K.c_str(),
+                                reinterpret_cast<char*>(&(*buf.begin())));
   }
   if(status != 1)
-    throw VicarException(status,"zlget failed for label " + K + " of file " + fname_);
+    throw VicarException(status,
+                         "zlget failed for label " + K + " of file " + fname_);
   return std::string(&(*buf.begin()));
 }
 
-template<> inline std::vector<std::string>
-VicarFile::label<std::vector<std::string> >(const std::string& K,
-					    const std::string& P) const
+template<>
+inline std::vector<std::string>
+VicarFile::label<std::vector<std::string>>(const std::string& K,
+                                           const std::string& P) const
 {
   std::string t = K;
   if(P != "")
@@ -571,27 +586,27 @@ VicarFile::label<std::vector<std::string> >(const std::string& K,
   std::vector<char> buf(nelem * ulen);
   int status;
   if(P != "") {
-    status = VicarFile::zlgetw(unit(), "PROPERTY", 
-			       K.c_str(), 
-			      reinterpret_cast<char*>(&(*buf.begin())), 
-			      ulen, P.c_str());
+    status = VicarFile::zlgetw(unit(), "PROPERTY", K.c_str(),
+                               reinterpret_cast<char*>(&(*buf.begin())), ulen,
+                               P.c_str());
   } else {
-    status = VicarFile::zlgetsh(unit(), K.c_str(), 
-				reinterpret_cast<char*>(&(*buf.begin())), 
-				ulen);
+    status = VicarFile::zlgetsh(unit(), K.c_str(),
+                                reinterpret_cast<char*>(&(*buf.begin())), ulen);
   }
   if(status != 1)
-    throw VicarException(status,"zlget failed for label " + K + " of file " + fname_);
+    throw VicarException(status,
+                         "zlget failed for label " + K + " of file " + fname_);
   std::vector<std::string> res(nelem);
   for(int i = 0; i < nelem; ++i)
     res[i] = std::string(&(buf[i * ulen]));
   return res;
 }
 
-
-inline std::string VicarFile::label_string(const std::string& F, 
-				  const std::string& Property) const
-{ return label<std::string>(F, Property); }
+inline std::string VicarFile::label_string(const std::string& F,
+                                           const std::string& Property) const
+{
+  return label<std::string>(F, Property);
+}
 }
 
 GEOCAL_EXPORT_KEY(VicarFile);

@@ -668,11 +668,13 @@ unchanged, apart from the C++20 requirement; Phases 5–6 are the API break.
    * a format-string `Exception` constructor (§7.1 item 1);
    * a generic `std::formatter` for `Printable<T>`;
    * `static_cast` instead of the C-style casts in `Printable`.
-7. **Formatting cleanup by AI, no clang-format** (decided 2026-11-05, §8.5):
-   one commit that makes the formatting consistent (majority form of each
-   construct), after the clang-tidy passes and before the `std::shared_ptr`
-   mass edit, and the regenerated wrappers in a second commit. How: skeleton
-   plan §5a and its `claude_notes/style_cleanup.py`.
+7. **clang-format, adopted** (decided 2026-11-05, §8.5): `.clang-format`
+   (the same file as swig-rules-skeleton's), `.clang-format-ignore`,
+   `make format` / `make format-check`, and `make lint` (clang-tidy with
+   `.clang-tidy`). The one-time reformat of `lib/` was done 2026-11-05; commit
+   it on its own (and the one regenerated wrapper) and add it to
+   `.git-blame-ignore-revs`. New and changed C++ is formatted with
+   `make format`.
 
 ### Phase 2: Small library swaps that are not in the API
 1. **libsdbx → Boost.Geometry R-tree** (§3.6).
@@ -1094,8 +1096,8 @@ Unnamed parameters in virtual overrides are normal.
 * No signature-changing checks (`modernize-pass-by-value`,
   `use-trailing-return-type`, `use-nodiscard`). They change what SWIG and
   downstream code see, causing churn for little gain.
-* No codebase-wide reformat by a tool. The formatting cleanup is done by AI
-  (§5 Phase 1 item 7, §8.5).
+* The codebase-wide reformat is done with clang-format (§5 Phase 1 item 7,
+  §8.5), as its own commit.
 
 ### 8.5 clang-format: measured impact (2026-10-23, clang-format 21.1.8)
 
@@ -1144,24 +1146,22 @@ Measured on `lib/` (652 files, 106k lines, generated wrappers and
   clang-tidy passes, before the `std::shared_ptr` mass edit. Try the config on
   the skeleton first (S1) and review a few geocal files formatted with it
   before deciding. `.i` files are not formatted by clang-format.
-* **Decided (maintainer, 2026-11-05): no clang-format**, in geocal, framework
-  or the skeleton. The skeleton trial (S1.6) confirmed the problems above and
-  found another: the config's `Standard: c++03` misparses C++20 (`requires`,
-  `consteval`), so it would need `c++20`, which also rewrites every `> >`.
-  The diff wasn't judged worth it. Instead an AI session makes the formatting
-  consistent once, when geocal is modernized, and keeps to it afterwards:
-  * majority rule per construct (measure the counts first; no new style
-    decisions), done as a reviewable script adapted from the skeleton's
-    `claude_notes/style_cleanup.py`;
-  * tabs → spaces with 8-column stops (keeps the alignment), trailing
-    whitespace removed;
-  * not touched: `thirdparty/`, vendored and upstream-copied code,
-    generated wrappers (regenerate them), the `ar & X & Y` serialization
-    chains, function-signature layout and `{ body }` placement;
-  * decide `Archive & ar` (geocal's majority, 583 : 33) vs the skeleton's
-    `Archive& ar`;
-  * review with `git diff -b` / `-w`, then the full build and tests.
-  Full notes: skeleton plan §5a.
+* *Earlier decision (2026-11-05), superseded the same day:* no clang-format,
+  formatting cleanup by AI instead (skeleton plan §5a).
+* **Decided (maintainer, 2026-11-05, final): clang-format**, for geocal and
+  the skeleton, with the **same `.clang-format`** in both. The configuration
+  was found with `clang-format-auto-infer`, which searches for the options
+  that change the existing code least (procedure: skeleton plan §5b). On
+  geocal's `lib/` it changes 36,539 of 109k lines (13,925 ignoring
+  whitespace, and 14,044 lines are tab/trailing-space cleanup alone). What no
+  option keeps: `//---` doxygen blocks inside classes are indented, `/****//**`
+  banners become `/****/ /**` (doxygen output unchanged), aligned parameter
+  lists are repacked, `ar & X` becomes `ar& X`. Checked 2026-11-05 on
+  frenchpeas: full rebuild with no new warnings, all wrappers regenerated
+  (one docstring changed, for the better: `TimeTable`), C++ 623/623, Python
+  218 passed, 118 skipped. The maintainer's reasoning: like `ruff format`,
+  there are things one would do differently, but a standard tool plus all
+  code conforming to it counts for a lot.
 * Each check is its own commit, and so is each wrapper regeneration. Add the
   commits to `.git-blame-ignore-revs`.
 
@@ -1229,8 +1229,8 @@ Measured on `lib/` (652 files, 106k lines, generated wrappers and
    producer of persisted archives, and they are embedded in HDF5 files.
    Revisit when the serialization work starts (before Phases 4–5).
 2. **When to cut `maintain_1.28`.**
-3. ~~**clang-format** adoption (§8.5)~~ Decided 2026-11-05: no
-   clang-format; formatting cleanup by AI instead (§8.5, skeleton plan §5a).
+3. ~~**clang-format** adoption (§8.5)~~ Decided 2026-11-05: clang-format
+   adopted, same configuration as the skeleton (§8.5, skeleton plan §5b).
 4. **Final Python module name** after nanobind (skeleton: keep the current
    name for now).
 5. **`make check` tests the installed library** in conda/pixi builds

@@ -10,10 +10,10 @@ using namespace GeoCal;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 
 template<class Archive>
-void SpiceKernelList::serialize(Archive & ar, const unsigned int version) 
+void SpiceKernelList::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(SpiceKernelList);
-  ar & GEOCAL_NVP_(kernel_list);
+  ar& GEOCAL_NVP_(kernel_list);
 }
 
 GEOCAL_IMPLEMENT(SpiceKernelList);
@@ -34,15 +34,17 @@ void SpiceKernelList::load_kernel(bool Download_from_isis_web_if_needed) const
     }
   if(need_kernel) {
     if(!Download_from_isis_web_if_needed) {
-      Exception e("We have kernels not found on the system, but aren't downloading from isis web.");
+      Exception e("We have kernels not found on the system, but aren't "
+                  "downloading from isis web.");
       e << "Need the kernel(s):\n";
       for(auto f : missing_kernel)
-	e << "   " << f << "\n";
+        e << "   " << f << "\n";
       throw e;
     }
     boost::shared_ptr<SpiceKernelList> klist2 =
-      boost_pcall<SpiceKernelList, SpiceKernelList>("boost_spice_kernel_list",
-			    boost::make_shared<SpiceKernelList>(*this));
+        boost_pcall<SpiceKernelList, SpiceKernelList>(
+            "boost_spice_kernel_list",
+            boost::make_shared<SpiceKernelList>(*this));
     klist2->load_kernel(false);
     loaded_ = true;
     return;
@@ -59,4 +61,3 @@ void SpiceKernelList::print(std::ostream& Os) const
   for(auto f : kernel_list_)
     Os << "   " << f << "\n";
 }
-  

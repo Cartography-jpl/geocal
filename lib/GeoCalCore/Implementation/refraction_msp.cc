@@ -13,12 +13,11 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RefractionMsp::serialize
-(Archive & ar, const unsigned int version)
+void RefractionMsp::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Refraction)
-    & GEOCAL_NVP_(wavelength) & GEOCAL_NVP_(temperature)
-    & GEOCAL_NVP_(pressure);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Refraction) &
+      GEOCAL_NVP_(wavelength) & GEOCAL_NVP_(temperature) &
+      GEOCAL_NVP_(pressure);
 }
 
 GEOCAL_IMPLEMENT(RefractionMsp);
@@ -45,7 +44,7 @@ const double p_default_ellipsoid = 1006;
 
 // Default density at ellipsoid, in 100kg / m^3
 const double d_default_ellipsoid =
-  p_default_ellipsoid / (rho * t_default_ellipsoid);
+    p_default_ellipsoid / (rho * t_default_ellipsoid);
 
 // Gravitational constant, in m^2 / s^2. This is mass of the earth
 // without atmosphere (see
@@ -54,32 +53,32 @@ const double d_default_ellipsoid =
 
 const double gm_prime = 3.986000982e14;
 
-inline double sqr(double x) { return x * x; }
+inline double sqr(double x)
+{
+  return x * x;
+}
 
 namespace GeoCal {
-  
-double refraction_adapter(double x, void* params) 
+
+double refraction_adapter(double x, void* params)
 {
   RefractionMsp* rmsp = static_cast<RefractionMsp*>(params);
   return rmsp->f_r(x);
 }
-  
+
 }
 
 //-----------------------------------------------------------------------
 /// Constructor. You can supply the wavelength, temperature, and
 /// pressure of the ground point if you have that information. Otherwise
-/// the algorithm will use defaults.  
+/// the algorithm will use defaults.
 //-----------------------------------------------------------------------
-  
-RefractionMsp::RefractionMsp
-(double Wavelength_micrometer,
- double Temperature_kelvin,
- double Pressure_millibar)
-  : wavelength_(Wavelength_micrometer),
-    temperature_(Temperature_kelvin),
-    pressure_(Pressure_millibar),
-    quad_table(0)
+
+RefractionMsp::RefractionMsp(double Wavelength_micrometer,
+                             double Temperature_kelvin,
+                             double Pressure_millibar)
+  : wavelength_(Wavelength_micrometer), temperature_(Temperature_kelvin),
+    pressure_(Pressure_millibar), quad_table(0)
 {
   // The MSP library uses a fixed 10 point gaussian quadrature for
   // its integrals. Not sure how important it is to use the fixed
@@ -102,15 +101,15 @@ RefractionMsp::~RefractionMsp()
 /// pass in a flag to indicate which direction we should go
 //-----------------------------------------------------------------------
 
-CartesianFixedLookVector RefractionMsp::refraction_calc
-(const GroundCoordinate& Spacecraft_pos,
- const GroundCoordinate& Gc_before_correction,
- bool Forward_calc) const
+CartesianFixedLookVector
+RefractionMsp::refraction_calc(const GroundCoordinate& Spacecraft_pos,
+                               const GroundCoordinate& Gc_before_correction,
+                               bool Forward_calc) const
 {
   // We use these in a few places, so as an optimization calculate
   // once and save
-  Gc_before_correction.lat_lon_height(lat, lon ,hrefsurf);
-  
+  Gc_before_correction.lat_lon_height(lat, lon, hrefsurf);
+
   // The integration is split into target to tropopause, tropopause to
   // stratopause, stratopause to sensor. The documentation refers to
   // this as rp, r1, r2, ro (where r is radius from earth center in
@@ -135,7 +134,6 @@ CartesianFixedLookVector RefractionMsp::refraction_calc
   // Angle between light direction and ro_v.
   double a_o = acos(-dot(lv.direction(), ro_v->position) / ro);
 
-
   // Calculate temperature and pressure at the target point,
   // if not given. Use to calculate the density at the target point
   if(temperature_ > 0)
@@ -148,7 +146,7 @@ CartesianFixedLookVector RefractionMsp::refraction_calc
     d_rp = pressure_ / (rho * t_rp);
   else
     d_rp = d_default_ellipsoid *
-      d_scale_factor_tropopause(rp, re, t_default_ellipsoid);
+           d_scale_factor_tropopause(rp, re, t_default_ellipsoid);
 
   // Density function changes as we go from transition from
   // troposphere to stratosphere. Save the value at r1
@@ -163,10 +161,10 @@ CartesianFixedLookVector RefractionMsp::refraction_calc
   // Integration is divided up into 3 pieces
   double w1 = s * gsl_integration_glfixed(&gf, rp, r1, quad_table);
   double w2 = s * gsl_integration_glfixed(&gf, r1, r2, quad_table);
-  double w3 = asin(s/r2) - asin(s/ro);
+  double w3 = asin(s / r2) - asin(s / ro);
   double w = w1 + w2 + w3;
   // Geometric zenith of the primary mirror vertex at the ground point P
-  double alpha_g = atan(ro * sin(w)/(ro*cos(w) - rp));
+  double alpha_g = atan(ro * sin(w) / (ro * cos(w) - rp));
 
   // Geometric zenith of the ground point p at the primary mirror vertex
   double beta_g = alpha_g - w;
@@ -180,24 +178,24 @@ CartesianFixedLookVector RefractionMsp::refraction_calc
   if(!Forward_calc)
     a_r *= -1;
 
-  double c1 = sin(a_r)/tan(a_o)-cos(a_r);
+  double c1 = sin(a_r) / tan(a_o) - cos(a_r);
   double c2 = sin(a_r) / sin(a_o);
-  CartesianFixedLookVector
-    lv2(-lv.direction()[0] * c1 - ro_v->position[0] / ro * c2,
-	-lv.direction()[1] * c1 - ro_v->position[1] / ro * c2,
-	-lv.direction()[2] * c1 - ro_v->position[2] / ro * c2);
-  if(false) 
+  CartesianFixedLookVector lv2(
+      -lv.direction()[0] * c1 - ro_v->position[0] / ro * c2,
+      -lv.direction()[1] * c1 - ro_v->position[1] / ro * c2,
+      -lv.direction()[2] * c1 - ro_v->position[2] / ro * c2);
+  if(false)
     std::cerr << std::setprecision(20) << "rp: " << rp << "\n"
-	      << "r1: " << r1 << "\n"
-	      << "r2: " << r2 << "\n"
-	      << "ro: " << ro << "\n"
-	      << "re: " << re << "\n"
-	      << "alpha_g: " << alpha_g * Constant::rad_to_deg << "\n"
-	      << "beta_g: " << beta_g * Constant::rad_to_deg << "\n"
-	      << "a_o: " << a_o * Constant::rad_to_deg << "\n"
-	      << "a_r: " << a_r * Constant::rad_to_deg << "\n"
-	      << lv << "\n"
-	      << lv2 << "\n";
+              << "r1: " << r1 << "\n"
+              << "r2: " << r2 << "\n"
+              << "ro: " << ro << "\n"
+              << "re: " << re << "\n"
+              << "alpha_g: " << alpha_g * Constant::rad_to_deg << "\n"
+              << "beta_g: " << beta_g * Constant::rad_to_deg << "\n"
+              << "a_o: " << a_o * Constant::rad_to_deg << "\n"
+              << "a_r: " << a_r * Constant::rad_to_deg << "\n"
+              << lv << "\n"
+              << lv2 << "\n";
   return lv2;
 }
 
@@ -218,8 +216,9 @@ double RefractionMsp::r_calc(double Lat, double H) const
   double clat = cos(Lat * Constant::deg_to_rad);
   double slat = sin(Lat * Constant::deg_to_rad);
   return sqrt((sqr(sqr(Constant::wgs84_a) * clat) +
-	       sqr(sqr(Constant::wgs84_b) * slat)) /
-	      (sqr(Constant::wgs84_a * clat) + sqr(Constant::wgs84_b * slat))) + H;
+               sqr(sqr(Constant::wgs84_b) * slat)) /
+              (sqr(Constant::wgs84_a * clat) + sqr(Constant::wgs84_b * slat))) +
+         H;
 }
 
 //-----------------------------------------------------------------------
@@ -232,7 +231,7 @@ double RefractionMsp::r_tropopause(const GroundCoordinate& Gc_target) const
   // once and save
   // double lat, lon, hrefsurf;
   // Gc_target.lat_lon_height(lat, lon ,hrefsurf);
-  
+
   // Different height depending on if we are between -60 to 60 or not.
   // This height is in meters, and above WGS-84
   double h1 = (fabs(lat) < 60 ? 11019 : 8000);
@@ -249,7 +248,7 @@ double RefractionMsp::r_stratopause(const GroundCoordinate& Gc_target) const
   // once and save
   // double lat, lon, hrefsurf;
   // Gc_target.lat_lon_height(lat, lon ,hrefsurf);
-  
+
   double h2 = 50000;
   return r_calc(lat, h2);
 }
@@ -264,7 +263,7 @@ double RefractionMsp::r_ellipsoid(const GroundCoordinate& Gc_target) const
   // once and save
   // double lat, lon, hrefsurf;
   // Gc_target.lat_lon_height(lat, lon ,hrefsurf);
-  
+
   return r_calc(lat, 0);
 }
 
@@ -285,8 +284,8 @@ double RefractionMsp::delta_temperature(double r_a, double r_b) const
 /// up to the tropopause.
 //-----------------------------------------------------------------------
 
-double RefractionMsp::d_scale_factor_tropopause
-(double r_a, double r_b, double t_b) const
+double RefractionMsp::d_scale_factor_tropopause(double r_a, double r_b,
+                                                double t_b) const
 {
   return std::pow(1 + delta_temperature(r_a, r_b) / t_b, n);
 }
@@ -297,17 +296,17 @@ double RefractionMsp::d_scale_factor_tropopause
 /// for above the tropopause to the stratopause.
 //-----------------------------------------------------------------------
 
-double RefractionMsp::d_scale_factor_stratopause
-(double r_a, double r_b, double t_b) const
+double RefractionMsp::d_scale_factor_stratopause(double r_a, double r_b,
+                                                 double t_b) const
 {
-  return std::exp(gm_prime / (rho * t_b) * (1/r_a - 1/r_b));
+  return std::exp(gm_prime / (rho * t_b) * (1 / r_a - 1 / r_b));
 }
 
 //-----------------------------------------------------------------------
 /// Temperature at radius r. We use delta_temperature up to the
 /// tropopause, and then hold the temperature constant.
 //-----------------------------------------------------------------------
-  
+
 double RefractionMsp::temperature_r(double r) const
 {
   return t_rp + delta_temperature((r <= r1 ? r : r1), rp);
@@ -323,15 +322,15 @@ double RefractionMsp::d_r(double r) const
     return d_rp * d_scale_factor_tropopause(r, rp, t_rp);
   return d_r1 * d_scale_factor_stratopause(r, r1, t_r1);
 }
-      
+
 //-----------------------------------------------------------------------
 /// Gladstone-Dale equation.
 //-----------------------------------------------------------------------
 
 double RefractionMsp::k_r(double r) const
 {
-  const double a0 = 2.2125e-02;  // m^3/100kg
-  const double a1 = 1.6764e-04;  // um^2 m^3/100kg
+  const double a0 = 2.2125e-02; // m^3/100kg
+  const double a1 = 1.6764e-04; // um^2 m^3/100kg
   return 1 + (a0 + a1 / sqr(wavelength_)) * d_r(r);
 }
 
@@ -343,4 +342,3 @@ double RefractionMsp::f_r(double r) const
 {
   return 1 / (r * sqrt(sqr(r) * sqr(k_r(r)) - sqr(s)));
 }
-

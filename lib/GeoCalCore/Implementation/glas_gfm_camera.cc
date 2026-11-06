@@ -27,32 +27,26 @@ void GlasGfmCamera::load(Archive& Ar, const unsigned int version)
 }
 
 template<class Archive>
-void GlasGfmCamera::serialize(Archive & ar, const unsigned int version)
+void GlasGfmCamera::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(Camera);
   GEOCAL_GENERIC_BASE(WithParameter);
   GEOCAL_BASE(Camera, WithParameter);
   GEOCAL_BASE(GlasGfmCamera, Camera);
-  ar & GEOCAL_NVP_(focal_length)
-    & GEOCAL_NVP2("number_line", nline_)
-    & GEOCAL_NVP2("number_sample", nsamp_)
-    & GEOCAL_NVP_(frame_to_sc)
-    & GEOCAL_NVP_(band_type) & GEOCAL_NVP_(band_wavelength)
-    & GEOCAL_NVP_(band_index) & GEOCAL_NVP_(irepband)
-    & GEOCAL_NVP_(isubcat) & GEOCAL_NVP_(sample_number_first)
-    & GEOCAL_NVP_(delta_sample_pair) & GEOCAL_NVP_(field_alignment)
-    & GEOCAL_NVP_(field_angle_type)
-    & GEOCAL_NVP_(field_angle_interpolation_type)
-    & GEOCAL_NVP_(first_line_block)
-    & GEOCAL_NVP_(first_sample_block)
-    & GEOCAL_NVP_(delta_line_block)
-    & GEOCAL_NVP_(delta_sample_block)
-    & GEOCAL_NVP_(field_alignment_block);
+  ar& GEOCAL_NVP_(focal_length) & GEOCAL_NVP2("number_line", nline_) &
+      GEOCAL_NVP2("number_sample", nsamp_) & GEOCAL_NVP_(frame_to_sc) &
+      GEOCAL_NVP_(band_type) & GEOCAL_NVP_(band_wavelength) &
+      GEOCAL_NVP_(band_index) & GEOCAL_NVP_(irepband) & GEOCAL_NVP_(isubcat) &
+      GEOCAL_NVP_(sample_number_first) & GEOCAL_NVP_(delta_sample_pair) &
+      GEOCAL_NVP_(field_alignment) & GEOCAL_NVP_(field_angle_type) &
+      GEOCAL_NVP_(field_angle_interpolation_type) &
+      GEOCAL_NVP_(first_line_block) & GEOCAL_NVP_(first_sample_block) &
+      GEOCAL_NVP_(delta_line_block) & GEOCAL_NVP_(delta_sample_block) &
+      GEOCAL_NVP_(field_alignment_block);
   if(version > 1)
-    ar & GEOCAL_NVP_(ppoff)
-      & GEOCAL_NVP_(parameter_mask);
+    ar& GEOCAL_NVP_(ppoff) & GEOCAL_NVP_(parameter_mask);
   if(version > 2)
-    ar & GEOCAL_NVP_(focal_length_time);
+    ar& GEOCAL_NVP_(focal_length_time);
   boost::serialization::split_member(ar, *this, version);
 }
 
@@ -67,21 +61,24 @@ namespace GeoCal {
 
 class GlasGfmCameraModelImp : public Observer<Camera> {
 public:
-  GlasGfmCameraModelImp(GlasGfmCamera& Cam)
-    : cam(Cam), cache_stale(true)
-  { Cam.add_observer(*this); }
+  GlasGfmCameraModelImp(GlasGfmCamera& Cam) : cam(Cam), cache_stale(true)
+  {
+    Cam.add_observer(*this);
+  }
   virtual ~GlasGfmCameraModelImp() {}
-  virtual void fc_to_xy(const FrameCoordinate& F, double &X, double& Y)
-    const = 0;
+  virtual void fc_to_xy(const FrameCoordinate& F, double& X,
+                        double& Y) const = 0;
   virtual void fc_to_xy(const FrameCoordinateWithDerivative& F,
- 			AutoDerivative<double> &X,
- 			AutoDerivative<double>& Y) const = 0;
+                        AutoDerivative<double>& X,
+                        AutoDerivative<double>& Y) const = 0;
   virtual void xy_to_fc(double X, double Y, FrameCoordinate& F) const = 0;
   virtual void xy_to_fc(const AutoDerivative<double>& X,
- 			const AutoDerivative<double>& Y,
- 			FrameCoordinateWithDerivative& F) const = 0;
+                        const AutoDerivative<double>& Y,
+                        FrameCoordinateWithDerivative& F) const = 0;
   virtual void notify_update(const Camera& Observed_object)
-  { cache_stale = true; }
+  {
+    cache_stale = true;
+  }
   const GlasGfmCamera& cam;
   mutable bool cache_stale;
 };
@@ -91,8 +88,7 @@ class GlasFa : public GlasGfmCameraModelImp {
 public:
   GlasFa(GlasGfmCamera& Cam) : GlasGfmCameraModelImp(Cam) {}
   virtual ~GlasFa() {}
-  virtual void fc_to_xy(const FrameCoordinate& F, double &X, double& Y)
-    const
+  virtual void fc_to_xy(const FrameCoordinate& F, double& X, double& Y) const
   {
     fill_cache();
     int i = F.sample / dsamp;
@@ -102,22 +98,22 @@ public:
       i = fa.rows() - 1;
     int ibase = i * dsamp;
     if(line_is_y) {
-      X = (F.sample - ibase) * (fa(i, 2) - fa(i,0)) / dsamp + fa(i,0);
+      X = (F.sample - ibase) * (fa(i, 2) - fa(i, 0)) / dsamp + fa(i, 0);
       // GLAS doesn't actually support line numbers being anything other
       // than 0. But it is very useful to be able to have a "extended"
       // camera, so we just give it a pitch of the average of all the
       // sample data as a "reasonable" thing.
-      Y = (F.sample - ibase) * (fa(i, 3) - fa(i,1)) / dsamp + fa(i,1) -
-	(F.line - 0) * p_space;
+      Y = (F.sample - ibase) * (fa(i, 3) - fa(i, 1)) / dsamp + fa(i, 1) -
+          (F.line - 0) * p_space;
     } else {
-      X = (F.sample - ibase) * (fa(i, 2) - fa(i,0)) / dsamp + fa(i,0) -
-	(F.line - 0) * p_space;
-      Y = (F.sample - ibase) * (fa(i, 3) - fa(i,1)) / dsamp + fa(i, 1);
+      X = (F.sample - ibase) * (fa(i, 2) - fa(i, 0)) / dsamp + fa(i, 0) -
+          (F.line - 0) * p_space;
+      Y = (F.sample - ibase) * (fa(i, 3) - fa(i, 1)) / dsamp + fa(i, 1);
     }
   }
   virtual void fc_to_xy(const FrameCoordinateWithDerivative& F,
-			AutoDerivative<double>& X,
-			AutoDerivative<double>& Y) const
+                        AutoDerivative<double>& X,
+                        AutoDerivative<double>& Y) const
   {
     fill_cache();
     int i = F.sample.value() / dsamp;
@@ -127,17 +123,17 @@ public:
       i = fa.rows() - 1;
     int ibase = i * dsamp;
     if(line_is_y) {
-      X = (F.sample - ibase) * (fa(i, 2) - fa(i,0)) / dsamp + fa(i,0);
+      X = (F.sample - ibase) * (fa(i, 2) - fa(i, 0)) / dsamp + fa(i, 0);
       // GLAS doesn't actually support line numbers being anything other
       // than 0. But it is very useful to be able to have a "extended"
       // camera, so we just give it a pitch of the average of all the
       // sample data as a "reasonable" thing.
-      Y = (F.sample - ibase) * (fa(i, 3) - fa(i,1)) / dsamp + fa(i,1) -
-	(F.line - 0) * p_space;
+      Y = (F.sample - ibase) * (fa(i, 3) - fa(i, 1)) / dsamp + fa(i, 1) -
+          (F.line - 0) * p_space;
     } else {
-      X = (F.sample - ibase) * (fa(i, 2) - fa(i,0)) / dsamp + fa(i,0) -
-	(F.line - 0) * p_space;
-      Y = (F.sample - ibase) * (fa(i, 3) - fa(i,1)) / dsamp + fa(i, 1);
+      X = (F.sample - ibase) * (fa(i, 2) - fa(i, 0)) / dsamp + fa(i, 0) -
+          (F.line - 0) * p_space;
+      Y = (F.sample - ibase) * (fa(i, 3) - fa(i, 1)) / dsamp + fa(i, 1);
     }
   }
   virtual void xy_to_fc(double X, double Y, FrameCoordinate& F) const
@@ -146,56 +142,64 @@ public:
     if(line_is_y) {
       int i = index_from_x(X);
       int ibase = i * dsamp;
-      F.sample = (X - fa(i,0)) / ((fa(i, 2) - fa(i,0)) / dsamp) + ibase;
-      F.line = ((F.sample - ibase) * (fa(i, 3) - fa(i,1)) / dsamp  + fa(i,1)  - Y )/ p_space;
+      F.sample = (X - fa(i, 0)) / ((fa(i, 2) - fa(i, 0)) / dsamp) + ibase;
+      F.line =
+          ((F.sample - ibase) * (fa(i, 3) - fa(i, 1)) / dsamp + fa(i, 1) - Y) /
+          p_space;
     } else {
       int i = index_from_y(Y);
       int ibase = i * dsamp;
-      F.sample = (Y - fa(i,1)) / ((fa(i, 3) - fa(i,1)) / dsamp) + ibase;
-      F.line = ((F.sample - ibase) * (fa(i, 2) - fa(i,0)) / dsamp  + fa(i,0)  - X)/ p_space;
+      F.sample = (Y - fa(i, 1)) / ((fa(i, 3) - fa(i, 1)) / dsamp) + ibase;
+      F.line =
+          ((F.sample - ibase) * (fa(i, 2) - fa(i, 0)) / dsamp + fa(i, 0) - X) /
+          p_space;
     }
   }
   virtual void xy_to_fc(const AutoDerivative<double>& X,
-			const AutoDerivative<double>& Y,
-			FrameCoordinateWithDerivative& F) const
+                        const AutoDerivative<double>& Y,
+                        FrameCoordinateWithDerivative& F) const
   {
     fill_cache();
     if(line_is_y) {
       int i = index_from_x(X.value());
       int ibase = i * dsamp;
-      F.sample = (X - fa(i,0)) / ((fa(i, 2) - fa(i,0)) / dsamp) + ibase;
-      F.line = ((F.sample - ibase) * (fa(i, 3) - fa(i,1)) / dsamp  + fa(i,1)  - Y )/ p_space;
+      F.sample = (X - fa(i, 0)) / ((fa(i, 2) - fa(i, 0)) / dsamp) + ibase;
+      F.line =
+          ((F.sample - ibase) * (fa(i, 3) - fa(i, 1)) / dsamp + fa(i, 1) - Y) /
+          p_space;
     } else {
       int i = index_from_y(Y.value());
       int ibase = i * dsamp;
-      F.sample = (Y - fa(i,1)) / ((fa(i, 3) - fa(i,1)) / dsamp) + ibase;
-      F.line = ((F.sample - ibase) * (fa(i, 2) - fa(i,0)) / dsamp  + fa(i,0)  - X)/ p_space;
+      F.sample = (Y - fa(i, 1)) / ((fa(i, 3) - fa(i, 1)) / dsamp) + ibase;
+      F.line =
+          ((F.sample - ibase) * (fa(i, 2) - fa(i, 0)) / dsamp + fa(i, 0) - X) /
+          p_space;
     }
   }
   int index_from_x(double X) const
   {
     if(p_space > 0) {
       for(int i = 0; i < fa.rows(); ++i)
-	if(X < fa(i,2))
-	  return i;
+        if(X < fa(i, 2))
+          return i;
       return fa.rows() - 1;
     }
     for(int i = 0; i < fa.rows(); ++i)
-      if(X > fa(i,2))
-	return i;
+      if(X > fa(i, 2))
+        return i;
     return fa.rows() - 1;
   }
   int index_from_y(double Y) const
   {
     if(p_space > 0) {
       for(int i = 0; i < fa.rows(); ++i)
-	if(Y < fa(i,3))
-	  return i;
+        if(Y < fa(i, 3))
+          return i;
       return fa.rows() - 1;
     }
     for(int i = 0; i < fa.rows(); ++i)
-      if(Y > fa(i,3))
-	return i;
+      if(Y > fa(i, 3))
+        return i;
     return fa.rows() - 1;
   }
   void fill_cache() const
@@ -205,13 +209,13 @@ public:
     nsamp = cam.number_sample(0);
     dsamp = cam.delta_sample_pair();
     fa.reference(cam.field_alignment());
-    x_0 = fa(0,0);
-    y_0 = fa(0,1);
+    x_0 = fa(0, 0);
+    y_0 = fa(0, 1);
     x_end = fa(fa.rows() - 1, 2);
     y_end = fa(fa.rows() - 1, 3);
     // We assume sample direction is mostly in x or y direction. .
-    double x_space = (x_end - x_0)/nsamp;
-    double y_space = (y_end - y_0)/nsamp;
+    double x_space = (x_end - x_0) / nsamp;
+    double y_space = (y_end - y_0) / nsamp;
     if(fabs(x_space) > fabs(y_space)) {
       p_space = x_space;
       line_is_y = true;
@@ -225,24 +229,24 @@ public:
     // sample space for xy_to_fc, so make sure we don't have zeros there.
     for(int i = 0; i < fa.rows(); ++i)
       if(line_is_y) {
-	if(fa(i,0) == fa(i,2)) {
-	  Exception e;
-	  e << "field_alignment has zero size in sample direction:\n"
-	    << "  Index: " << i << "\n"
-	    << "  Values: " << fa(i,0) << ", " << fa(i,1) << ", "
-	    << fa(i,2) << ", " << fa(i,3) << "\n";
-	  throw e;
-	}
+        if(fa(i, 0) == fa(i, 2)) {
+          Exception e;
+          e << "field_alignment has zero size in sample direction:\n"
+            << "  Index: " << i << "\n"
+            << "  Values: " << fa(i, 0) << ", " << fa(i, 1) << ", " << fa(i, 2)
+            << ", " << fa(i, 3) << "\n";
+          throw e;
+        }
       } else {
-	if(fa(i,1) == fa(i,3)) {
-	  Exception e;
-	  e << "field_alignment has zero size in sample direction:\n"
-	    << "  Index: " << i << "\n"
-	    << "  Values: " << fa(i,0) << ", " << fa(i,1) << ", "
-	    << fa(i,2) << ", " << fa(i,3) << "\n";
-	  throw e;
-	}
-      }	
+        if(fa(i, 1) == fa(i, 3)) {
+          Exception e;
+          e << "field_alignment has zero size in sample direction:\n"
+            << "  Index: " << i << "\n"
+            << "  Values: " << fa(i, 0) << ", " << fa(i, 1) << ", " << fa(i, 2)
+            << ", " << fa(i, 3) << "\n";
+          throw e;
+        }
+      }
     cache_stale = false;
   }
   mutable double x_0, x_end, p_space, y_0, y_end;
@@ -253,13 +257,13 @@ public:
 };
 
 class GfmFa;
-  
-class GfmFaEqu: public VFunctor {
+
+class GfmFaEqu : public VFunctor {
 public:
-  GfmFaEqu(const GfmFa& F, double X, double Y)
-    : f(F), x(X), y(Y) {}
+  GfmFaEqu(const GfmFa& F, double X, double Y) : f(F), x(X), y(Y) {}
   virtual ~GfmFaEqu() {}
-  virtual blitz::Array<double, 1> operator()(const blitz::Array<double, 1>& X) const;
+  virtual blitz::Array<double, 1>
+  operator()(const blitz::Array<double, 1>& X) const;
   const GfmFa& f;
   double x, y;
 };
@@ -268,56 +272,62 @@ class GfmFa : public GlasGfmCameraModelImp {
 public:
   GfmFa(GlasGfmCamera& Cam) : GlasGfmCameraModelImp(Cam) {}
   virtual ~GfmFa() {}
-  virtual void fc_to_xy(const FrameCoordinate& F, double &X, double& Y)
-    const
+  virtual void fc_to_xy(const FrameCoordinate& F, double& X, double& Y) const
   {
     fill_cache();
     // Right now, just have one block.
     double l = (F.line - cam.first_line_block()(0)) / cam.delta_line_block()(0);
-    double s = (F.sample - cam.first_sample_block()(0)) / cam.delta_sample_block()(0);
-    int i = (int) floor(l);
-    int j = (int) floor(s);
+    double s =
+        (F.sample - cam.first_sample_block()(0)) / cam.delta_sample_block()(0);
+    int i = (int)floor(l);
+    int j = (int)floor(s);
     if(i < 0)
       i = 0;
     if(i > fa.rows() - 1)
-      i = fa.rows() -1;
+      i = fa.rows() - 1;
     if(j < 0)
       j = 0;
     if(j > fa.cols() - 1)
       j = fa.cols() - 1;
-    double x0 = (l - i) * (fa(i,j,1,0,0) - fa(i,j,0,0,0)) + fa(i,j,0,0,0);
-    double x1 = (l - i) * (fa(i,j,1,1,0) - fa(i,j,0,1,0)) + fa(i,j,0,1,0);
-    double y0 = (l - i) * (fa(i,j,1,0,1) - fa(i,j,0,0,1)) + fa(i,j,0,0,1);
-    double y1 = (l - i) * (fa(i,j,1,1,1) - fa(i,j,0,1,1)) + fa(i,j,0,1,1);
+    double x0 =
+        (l - i) * (fa(i, j, 1, 0, 0) - fa(i, j, 0, 0, 0)) + fa(i, j, 0, 0, 0);
+    double x1 =
+        (l - i) * (fa(i, j, 1, 1, 0) - fa(i, j, 0, 1, 0)) + fa(i, j, 0, 1, 0);
+    double y0 =
+        (l - i) * (fa(i, j, 1, 0, 1) - fa(i, j, 0, 0, 1)) + fa(i, j, 0, 0, 1);
+    double y1 =
+        (l - i) * (fa(i, j, 1, 1, 1) - fa(i, j, 0, 1, 1)) + fa(i, j, 0, 1, 1);
     X = (s - j) * (x1 - x0) + x0;
     Y = (s - j) * (y1 - y0) + y0;
   }
   virtual void fc_to_xy(const FrameCoordinateWithDerivative& F,
-			AutoDerivative<double>& X,
-			AutoDerivative<double>& Y) const
+                        AutoDerivative<double>& X,
+                        AutoDerivative<double>& Y) const
   {
     fill_cache();
     // Right now, just have one block
-    AutoDerivative<double> l = (F.line - cam.first_line_block()(0)) / cam.delta_line_block()(0);
-    AutoDerivative<double> s = (F.sample - cam.first_sample_block()(0)) / cam.delta_sample_block()(0);
-    int i = (int) floor(l.value());
-    int j = (int) floor(s.value());
+    AutoDerivative<double> l =
+        (F.line - cam.first_line_block()(0)) / cam.delta_line_block()(0);
+    AutoDerivative<double> s =
+        (F.sample - cam.first_sample_block()(0)) / cam.delta_sample_block()(0);
+    int i = (int)floor(l.value());
+    int j = (int)floor(s.value());
     if(i < 0)
       i = 0;
     if(i > fa.rows() - 1)
-      i = fa.rows() -1;
+      i = fa.rows() - 1;
     if(j < 0)
       j = 0;
     if(j > fa.cols() - 1)
       j = fa.cols() - 1;
     AutoDerivative<double> x0 =
-      (l - i) * (fa(i,j,1,0,0) - fa(i,j,0,0,0)) + fa(i,j,0,0,0);
+        (l - i) * (fa(i, j, 1, 0, 0) - fa(i, j, 0, 0, 0)) + fa(i, j, 0, 0, 0);
     AutoDerivative<double> x1 =
-      (l - i) * (fa(i,j,1,1,0) - fa(i,j,0,1,0)) + fa(i,j,0,1,0);
+        (l - i) * (fa(i, j, 1, 1, 0) - fa(i, j, 0, 1, 0)) + fa(i, j, 0, 1, 0);
     AutoDerivative<double> y0 =
-      (l - i) * (fa(i,j,1,0,1) - fa(i,j,0,0,1)) + fa(i,j,0,0,1);
+        (l - i) * (fa(i, j, 1, 0, 1) - fa(i, j, 0, 0, 1)) + fa(i, j, 0, 0, 1);
     AutoDerivative<double> y1 =
-      (l - i) * (fa(i,j,1,1,1) - fa(i,j,0,1,1)) + fa(i,j,0,1,1);
+        (l - i) * (fa(i, j, 1, 1, 1) - fa(i, j, 0, 1, 1)) + fa(i, j, 0, 1, 1);
     X = (s - j) * (x1 - x0) + x0;
     Y = (s - j) * (y1 - y0) + y0;
   }
@@ -334,8 +344,8 @@ public:
     F.sample = res(1);
   }
   virtual void xy_to_fc(const AutoDerivative<double>& X,
-			const AutoDerivative<double>& Y,
-			FrameCoordinateWithDerivative& F) const
+                        const AutoDerivative<double>& Y,
+                        FrameCoordinateWithDerivative& F) const
   {
     fill_cache();
     FrameCoordinate fc, fc_dx, fc_dy;
@@ -369,8 +379,10 @@ public:
     // This is just a rough estimate of pitch, but it should be
     // sufficient to determine a reasonable tolerance for root
     // finding.
-    double spitch = max(fabs(fa(ra,ra,ra,1,ra) - fa(ra,ra,ra,0,ra)) / cam.delta_sample_block()(0));
-    double lpitch = max(fabs(fa(ra,ra,1,ra,ra) - fa(ra,ra,0,ra,ra)) / cam.delta_sample_block()(0));
+    double spitch = max(fabs(fa(ra, ra, ra, 1, ra) - fa(ra, ra, ra, 0, ra)) /
+                        cam.delta_sample_block()(0));
+    double lpitch = max(fabs(fa(ra, ra, 1, ra, ra) - fa(ra, ra, 0, ra, ra)) /
+                        cam.delta_sample_block()(0));
     max_pitch = std::max(spitch, lpitch);
     // Want solution to 0.001 pixels.
     root_residual_needed = 1e-3 * max_pitch;
@@ -381,7 +393,8 @@ public:
   mutable double root_residual_needed;
 };
 
-blitz::Array<double, 1> GfmFaEqu::operator()(const blitz::Array<double, 1>& X) const
+blitz::Array<double, 1>
+GfmFaEqu::operator()(const blitz::Array<double, 1>& X) const
 {
   FrameCoordinate fc(X(0), X(1));
   blitz::Array<double, 1> res(2);
@@ -390,10 +403,8 @@ blitz::Array<double, 1> GfmFaEqu::operator()(const blitz::Array<double, 1>& X) c
   res(1) -= y;
   return res;
 }
-  
-  
-}
 
+}
 
 void GlasGfmCamera::init_model()
 {
@@ -430,32 +441,24 @@ void GlasGfmCamera::init_model()
 /// cam.frame_to_sc = q_original
 //-----------------------------------------------------------------------
 
-GlasGfmCamera::GlasGfmCamera(const Camera& Cam, int Band,
-			     double Delta_sample,
-			     const std::string& Band_type,
-			     double Band_wavelength,
-			     double Focal_length_meter,
-			     const Time& Focal_length_time)
-: focal_length_(Focal_length_meter),
-  nline_(Cam.number_line(Band)),
-  nsamp_(Cam.number_sample(Band)),
-  band_type_(Band_type),
-  band_wavelength_(Band_wavelength),
-  focal_length_time_(Focal_length_time),
-  sample_number_first_(0),
-  delta_sample_pair_(Delta_sample),
-  field_angle_type_(0),
-  field_angle_interpolation_type_(1),
-  field_alignment_block_(9),
-  ppoff_(3)
+GlasGfmCamera::GlasGfmCamera(const Camera& Cam, int Band, double Delta_sample,
+                             const std::string& Band_type,
+                             double Band_wavelength, double Focal_length_meter,
+                             const Time& Focal_length_time)
+  : focal_length_(Focal_length_meter), nline_(Cam.number_line(Band)),
+    nsamp_(Cam.number_sample(Band)), band_type_(Band_type),
+    band_wavelength_(Band_wavelength), focal_length_time_(Focal_length_time),
+    sample_number_first_(0), delta_sample_pair_(Delta_sample),
+    field_angle_type_(0), field_angle_interpolation_type_(1),
+    field_alignment_block_(9), ppoff_(3)
 {
   // Leave these as empty
   // band_index_, irepband_, isubcat_.
-  frame_to_sc_ = boost::math::quaternion<double>(1,0,0,0);
+  frame_to_sc_ = boost::math::quaternion<double>(1, 0, 0, 0);
   frame_to_sc_nd_ = value(frame_to_sc_);
   init_model();
   field_alignment_fit(Cam, delta_sample_pair_, Band);
-  ppoff_ = 0,0,0;
+  ppoff_ = 0, 0, 0;
   parameter_mask_.resize(4);
   parameter_mask_ = true;
 }
@@ -485,46 +488,35 @@ GlasGfmCamera::GlasGfmCamera(const Camera& Cam, int Band,
 /// cam.frame_to_sc = q_original
 //-----------------------------------------------------------------------
 
-GlasGfmCamera::GlasGfmCamera(const Camera& Cam, int Band,
-			     double Delta_line,
-			     double Delta_sample,
-			     const std::string& Band_type,
-			     double Band_wavelength,
-			     double Focal_length_meter,
-			     const Time& Focal_length_time)
-: focal_length_(Focal_length_meter), 
-  nline_(Cam.number_line(Band)),
-  nsamp_(Cam.number_sample(Band)),
-  band_type_(Band_type),
-  band_wavelength_(Band_wavelength),
-  focal_length_time_(Focal_length_time),
-  sample_number_first_(0),
-  delta_sample_pair_(Delta_sample),
-  field_angle_type_(0),
-  field_angle_interpolation_type_(1),
-  field_alignment_block_(9),
-  ppoff_(3)
+GlasGfmCamera::GlasGfmCamera(const Camera& Cam, int Band, double Delta_line,
+                             double Delta_sample, const std::string& Band_type,
+                             double Band_wavelength, double Focal_length_meter,
+                             const Time& Focal_length_time)
+  : focal_length_(Focal_length_meter), nline_(Cam.number_line(Band)),
+    nsamp_(Cam.number_sample(Band)), band_type_(Band_type),
+    band_wavelength_(Band_wavelength), focal_length_time_(Focal_length_time),
+    sample_number_first_(0), delta_sample_pair_(Delta_sample),
+    field_angle_type_(0), field_angle_interpolation_type_(1),
+    field_alignment_block_(9), ppoff_(3)
 {
   // Leave these as empty
   // band_index_, irepband_, isubcat_.
-  frame_to_sc_ = boost::math::quaternion<double>(1,0,0,0);
+  frame_to_sc_ = boost::math::quaternion<double>(1, 0, 0, 0);
   frame_to_sc_nd_ = value(frame_to_sc_);
   init_model();
   field_alignment_block(Cam, Delta_line, Delta_sample, Band);
-  ppoff_ = 0,0,0;
+  ppoff_ = 0, 0, 0;
   parameter_mask_.resize(4);
   parameter_mask_ = true;
 }
 
 GlasGfmCamera::GlasGfmCamera(int Number_line, int Number_sample)
-: nline_(Number_line),
-  nsamp_(Number_sample),
-  field_alignment_block_(9),
-  ppoff_(3)
+  : nline_(Number_line), nsamp_(Number_sample), field_alignment_block_(9),
+    ppoff_(3)
 {
   // These default values come from the RIP sample NITF file for Hyperion.
   focal_length_ = 1.41009182;
-  frame_to_sc_ = boost::math::quaternion<double>(1,0,0,0);
+  frame_to_sc_ = boost::math::quaternion<double>(1, 0, 0, 0);
   frame_to_sc_nd_ = value(frame_to_sc_);
   field_alignment_.resize(1, 4);
   field_alignment_ = -0.00765, 0, 0.00765, 0;
@@ -532,28 +524,28 @@ GlasGfmCamera::GlasGfmCamera(int Number_line, int Number_sample)
   band_wavelength_ = 1.45;
   // Leave these as empty
   // band_index_, irepband_, isubcat_.
-  focal_length_time_ = Time::parse_time("2005-04-07T00:00:00Z") +
-    26649.88899999857;
+  focal_length_time_ =
+      Time::parse_time("2005-04-07T00:00:00Z") + 26649.88899999857;
   sample_number_first_ = 0;
   delta_sample_pair_ = 256;
 
   // Not used for sensor "S", but set a value so this isn't undefined
   field_angle_type_ = 0;
   field_angle_interpolation_type_ = 1;
-  ppoff_ = 0,0,0;
+  ppoff_ = 0, 0, 0;
   init_model();
   parameter_mask_.resize(4);
   parameter_mask_ = true;
 }
 
-FrameCoordinate GlasGfmCamera::frame_coordinate(const ScLookVector& Sl, 
-						int Band) const
+FrameCoordinate GlasGfmCamera::frame_coordinate(const ScLookVector& Sl,
+                                                int Band) const
 {
   range_check(Band, 0, number_band());
 
   // Just reverse of sc_look_vector.
-  boost::math::quaternion<double> dcs = 
-    conj(frame_to_sc()) * Sl.look_quaternion() * frame_to_sc();
+  boost::math::quaternion<double> dcs =
+      conj(frame_to_sc()) * Sl.look_quaternion() * frame_to_sc();
   double xfp = focal_length() * (dcs.R_component_2() / dcs.R_component_4());
   double yfp = focal_length() * (dcs.R_component_3() / dcs.R_component_4());
   FrameCoordinate res;
@@ -561,18 +553,18 @@ FrameCoordinate GlasGfmCamera::frame_coordinate(const ScLookVector& Sl,
   return res;
 }
 
-FrameCoordinateWithDerivative GlasGfmCamera::frame_coordinate_with_derivative
-(const ScLookVectorWithDerivative& Sl, int Band) const
+FrameCoordinateWithDerivative GlasGfmCamera::frame_coordinate_with_derivative(
+    const ScLookVectorWithDerivative& Sl, int Band) const
 {
   range_check(Band, 0, number_band());
 
-  boost::math::quaternion<AutoDerivative<double> > dcs = 
-    conj(frame_to_sc_with_derivative()) * Sl.look_quaternion() * 
-    frame_to_sc_with_derivative();
+  boost::math::quaternion<AutoDerivative<double>> dcs =
+      conj(frame_to_sc_with_derivative()) * Sl.look_quaternion() *
+      frame_to_sc_with_derivative();
   AutoDerivative<double> xfp = focal_length_with_derivative() *
-    (dcs.R_component_2() / dcs.R_component_4());
+                               (dcs.R_component_2() / dcs.R_component_4());
   AutoDerivative<double> yfp = focal_length_with_derivative() *
-    (dcs.R_component_3() / dcs.R_component_4());
+                               (dcs.R_component_3() / dcs.R_component_4());
   FrameCoordinateWithDerivative res;
   model_->xy_to_fc(xfp, yfp, res);
   return res;
@@ -583,32 +575,32 @@ FrameCoordinateWithDerivative GlasGfmCamera::frame_coordinate_with_derivative
 //-----------------------------------------------------------------------
 
 void GlasGfmCamera::frame_coordinate_to_xy(const FrameCoordinate& F, int Band,
-					   double& xfp, double& yfp) const
+                                           double& xfp, double& yfp) const
 {
   range_check(Band, 0, number_band());
   model_->fc_to_xy(F, xfp, yfp);
 }
 
-ScLookVector GlasGfmCamera::sc_look_vector
-(const FrameCoordinate& F, int Band) const
+ScLookVector GlasGfmCamera::sc_look_vector(const FrameCoordinate& F,
+                                           int Band) const
 {
   range_check(Band, 0, number_band());
   double xfp, yfp;
   model_->fc_to_xy(F, xfp, yfp);
-  boost::math::quaternion<double> lv(0, xfp, yfp, focal_length());  
+  boost::math::quaternion<double> lv(0, xfp, yfp, focal_length());
   return ScLookVector(frame_to_sc() * lv * conj(frame_to_sc()));
 }
 
-ScLookVectorWithDerivative GlasGfmCamera::sc_look_vector_with_derivative
-(const FrameCoordinateWithDerivative& F, int Band) const
+ScLookVectorWithDerivative GlasGfmCamera::sc_look_vector_with_derivative(
+    const FrameCoordinateWithDerivative& F, int Band) const
 {
   range_check(Band, 0, number_band());
   AutoDerivative<double> xfp, yfp;
   model_->fc_to_xy(F, xfp, yfp);
-  boost::math::quaternion<AutoDerivative<double> >
-    lv(0, xfp, yfp, focal_length_with_derivative());  
+  boost::math::quaternion<AutoDerivative<double>> lv(
+      0, xfp, yfp, focal_length_with_derivative());
   return ScLookVectorWithDerivative(frame_to_sc_with_derivative() * lv *
-				    conj(frame_to_sc_with_derivative()));
+                                    conj(frame_to_sc_with_derivative()));
 }
 
 //-----------------------------------------------------------------------
@@ -667,8 +659,8 @@ void GlasGfmCamera::ppoff(const blitz::Array<double, 1>& V)
 /// cam.frame_to_sc = q_original
 //-----------------------------------------------------------------------
 
-void GlasGfmCamera::field_alignment_block
-(const Camera& Cam, double Delta_line, double Delta_sample, int Band)
+void GlasGfmCamera::field_alignment_block(const Camera& Cam, double Delta_line,
+                                          double Delta_sample, int Band)
 {
   if(sensor_type() != "F")
     throw Exception("field_alignment_block only applies to sensor type 'F'");
@@ -685,8 +677,8 @@ void GlasGfmCamera::field_alignment_block
   first_sample_block_(0) = 0;
   delta_line_block_(0) = Delta_line;
   delta_sample_block_(0) = Delta_sample;
-  int nlblock = (int) floor(number_line(0) / Delta_line);
-  int nsblock = (int) floor(number_sample(0) / Delta_sample);
+  int nlblock = (int)floor(number_line(0) / Delta_line);
+  int nsblock = (int)floor(number_sample(0) / Delta_sample);
   blitz::Array<double, 5>& fa = field_alignment_block_[0];
   fa.resize(nlblock, nsblock, 2, 2, 2);
   for(int i = 0; i < fa.rows(); ++i)
@@ -699,22 +691,22 @@ void GlasGfmCamera::field_alignment_block
       ScLookVector slv2 = Cam.sc_look_vector(fc2, Band);
       ScLookVector slv3 = Cam.sc_look_vector(fc3, Band);
       ScLookVector slv4 = Cam.sc_look_vector(fc4, Band);
-      fa(i,j,0,0,0) = slv1.look_vector[0] /
-	(slv1.look_vector[2] / focal_length());
-      fa(i,j,0,0,1) = slv1.look_vector[1] /
-	(slv1.look_vector[2] / focal_length());
-      fa(i,j,0,1,0) = slv2.look_vector[0] /
-	(slv2.look_vector[2] / focal_length());
-      fa(i,j,0,1,1) = slv2.look_vector[1] /
-	(slv2.look_vector[2] / focal_length());
-      fa(i,j,1,1,0) = slv3.look_vector[0] /
-	(slv3.look_vector[2] / focal_length());
-      fa(i,j,1,1,1) = slv3.look_vector[1] /
-	(slv3.look_vector[2] / focal_length());
-      fa(i,j,1,0,0) = slv4.look_vector[0] /
-	(slv4.look_vector[2] / focal_length());
-      fa(i,j,1,0,1) = slv4.look_vector[1] /
-	(slv4.look_vector[2] / focal_length());
+      fa(i, j, 0, 0, 0) =
+          slv1.look_vector[0] / (slv1.look_vector[2] / focal_length());
+      fa(i, j, 0, 0, 1) =
+          slv1.look_vector[1] / (slv1.look_vector[2] / focal_length());
+      fa(i, j, 0, 1, 0) =
+          slv2.look_vector[0] / (slv2.look_vector[2] / focal_length());
+      fa(i, j, 0, 1, 1) =
+          slv2.look_vector[1] / (slv2.look_vector[2] / focal_length());
+      fa(i, j, 1, 1, 0) =
+          slv3.look_vector[0] / (slv3.look_vector[2] / focal_length());
+      fa(i, j, 1, 1, 1) =
+          slv3.look_vector[1] / (slv3.look_vector[2] / focal_length());
+      fa(i, j, 1, 0, 0) =
+          slv4.look_vector[0] / (slv4.look_vector[2] / focal_length());
+      fa(i, j, 1, 0, 1) =
+          slv4.look_vector[1] / (slv4.look_vector[2] / focal_length());
     }
   notify_update();
 }
@@ -726,7 +718,7 @@ void GlasGfmCamera::field_alignment_block
 //-----------------------------------------------------------------------
 
 void GlasGfmCamera::compare_camera(const Camera& Cam, double& max_line_diff,
-				   double& max_sample_diff, int Band) const
+                                   double& max_sample_diff, int Band) const
 {
   if(Cam.number_line(Band) != number_line(0) ||
      Cam.number_sample(Band) != number_sample(0))
@@ -735,17 +727,17 @@ void GlasGfmCamera::compare_camera(const Camera& Cam, double& max_line_diff,
   max_sample_diff = 0;
   for(int i = 0; i < number_line(0); ++i)
     for(int j = 0; j < number_sample(0); ++j) {
-      FrameCoordinate fc(i,j);
+      FrameCoordinate fc(i, j);
       ScLookVector slv = Cam.sc_look_vector(fc, Band);
       ScLookVector slv2 = sc_look_vector(fc, 0);
       FrameCoordinate fc1 = frame_coordinate(slv, 0);
       FrameCoordinate fc2 = Cam.frame_coordinate(slv2, Band);
-      max_line_diff = std::max(std::max(max_line_diff,
-					fabs(fc1.line - fc.line)),
-			       fabs(fc2.line - fc.line));
-      max_sample_diff = std::max(std::max(max_sample_diff,
-					  fabs(fc1.sample - fc.sample)),
-				 fabs(fc2.sample - fc.sample));
+      max_line_diff =
+          std::max(std::max(max_line_diff, fabs(fc1.line - fc.line)),
+                   fabs(fc2.line - fc.line));
+      max_sample_diff =
+          std::max(std::max(max_sample_diff, fabs(fc1.sample - fc.sample)),
+                   fabs(fc2.sample - fc.sample));
     }
 }
 
@@ -773,26 +765,28 @@ void GlasGfmCamera::compare_camera(const Camera& Cam, double& max_line_diff,
 /// cam.frame_to_sc = q_original
 //-----------------------------------------------------------------------
 
-void GlasGfmCamera::field_alignment_fit
-(const Camera& Cam, double Delta_sample, int Band)
+void GlasGfmCamera::field_alignment_fit(const Camera& Cam, double Delta_sample,
+                                        int Band)
 {
   if(sensor_type() != "S")
     throw Exception("field_alignment only applies to sensor type 'S'");
   if(Cam.number_line(Band) != 1)
-    throw Exception("field_alignment only applies to camera with number_line 1");
+    throw Exception(
+        "field_alignment only applies to camera with number_line 1");
   nsamp_ = Cam.number_sample(Band);
   init_model();
   // Right now only support sample number first of 0. We can extend
   // this if needed.
   sample_number_first_ = 0;
   delta_sample_pair_ = Delta_sample;
-  int npair = (int) floor(nsamp_ / delta_sample_pair_  + 0.5);
+  int npair = (int)floor(nsamp_ / delta_sample_pair_ + 0.5);
   // Right now, we need to have delta_sample_pair_ exactly divide the
   // number of samples. It isn't clear if the GLAS standard allows
   // anything else, so at least for now we require this.
   if(nsamp_ % int(delta_sample_pair_) != 0) {
     Exception e;
-    e << "We require delta_sample_pair to exactly divide the number of samples\n"
+    e << "We require delta_sample_pair to exactly divide the number of "
+         "samples\n"
       << "  Delta_sample_pair: " << delta_sample_pair_ << "\n"
       << "  Number sample:     " << nsamp_ << "\n";
     throw e;
@@ -804,10 +798,10 @@ void GlasGfmCamera::field_alignment_fit
     FrameCoordinate fc2(fc1.line, fc1.sample + Delta_sample);
     ScLookVector slv1 = Cam.sc_look_vector(fc1, Band);
     ScLookVector slv2 = Cam.sc_look_vector(fc2, Band);
-    fa(i,0) = slv1.look_vector[0] / (slv1.look_vector[2] / focal_length());
-    fa(i,1) = slv1.look_vector[1] / (slv1.look_vector[2] / focal_length());
-    fa(i,2) = slv2.look_vector[0] / (slv2.look_vector[2] / focal_length());
-    fa(i,3) = slv2.look_vector[1] / (slv2.look_vector[2] / focal_length());
+    fa(i, 0) = slv1.look_vector[0] / (slv1.look_vector[2] / focal_length());
+    fa(i, 1) = slv1.look_vector[1] / (slv1.look_vector[2] / focal_length());
+    fa(i, 2) = slv2.look_vector[0] / (slv2.look_vector[2] / focal_length());
+    fa(i, 3) = slv2.look_vector[1] / (slv2.look_vector[2] / focal_length());
   }
   notify_update();
 }
@@ -834,15 +828,15 @@ void GlasGfmCamera::print(std::ostream& Os) const
      << "  Number sample:     " << number_sample(0) << "\n"
      << "  Focal length:      " << focal_length() << " m\n"
      << "  Focal length time: " << focal_length_time() << "\n"
-     << "  Ppoff:             ("
-     << ppoff()(0) << ", " << ppoff()(1) << ", " << ppoff()(2) << ")\n"
-     << "  Angoff:            ("
-     << angoff()(0) << ", " << angoff()(1) << ", " << angoff()(2) << ")\n";
+     << "  Ppoff:             (" << ppoff()(0) << ", " << ppoff()(1) << ", "
+     << ppoff()(2) << ")\n"
+     << "  Angoff:            (" << angoff()(0) << ", " << angoff()(1) << ", "
+     << angoff()(2) << ")\n";
 }
 
 //-----------------------------------------------------------------------
 /// Set parameter. Right now this is Euler epsilon, beta, delta, focal
-/// length. 
+/// length.
 //-----------------------------------------------------------------------
 
 void GlasGfmCamera::parameter(const blitz::Array<double, 1>& Parm)

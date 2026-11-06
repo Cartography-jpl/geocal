@@ -4,8 +4,8 @@
 #include "statistic.h"
 
 namespace GeoCal {
-  class PanSharpenHelper;
-/****************************************************************//**
+class PanSharpenHelper;
+/****************************************************************/ /**
   This create a set of pan sharpened images from a pan band and a set
   of multispectral bands (at lower resolution).
 
@@ -23,9 +23,8 @@ namespace GeoCal {
 class PanSharpen : public CalcRasterMultiBand {
 public:
   PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
-	     const boost::shared_ptr<RasterImageMultiBand>& Mul, 
-	     bool Force_rpc = false,
-	     bool Log_progress = true);
+             const boost::shared_ptr<RasterImageMultiBand>& Mul,
+             bool Force_rpc = false, bool Log_progress = true);
   virtual ~PanSharpen() {}
 
   // To help with debugging, these are the pieces that make up the pan
@@ -39,18 +38,17 @@ protected:
   virtual void calc(int Start_line, int Start_sample) const;
 private:
   void initialize(const boost::shared_ptr<ImageGroundConnection> Pan_ig,
-		  const boost::shared_ptr<ImageGroundConnection> Ms_ig,
-		  bool Remove_rpc,
-		  bool Log_progress);
+                  const boost::shared_ptr<ImageGroundConnection> Ms_ig,
+                  bool Remove_rpc, bool Log_progress);
   boost::shared_ptr<PanSharpenHelper> phelp;
   blitz::Array<double, 3> to_hcs(const blitz::Array<double, 3>& ncs) const;
   void to_ncs(const blitz::Array<double, 3>& hcs) const;
   void iadj(blitz::Array<double, 2> i, const blitz::Array<double, 2>& pan_data,
-	    const blitz::Array<double, 2>& pansmooth_data) const;
-  double sig0() const {return isq_stat.sigma(); }
-  double sig1() const {return psq_stat.sigma();}
-  double mu0() const {return isq_stat.mean();}
-  double mu1() const {return psq_stat.mean();}
+            const blitz::Array<double, 2>& pansmooth_data) const;
+  double sig0() const { return isq_stat.sigma(); }
+  double sig1() const { return psq_stat.sigma(); }
+  double mu0() const { return isq_stat.mean(); }
+  double mu1() const { return psq_stat.mean(); }
 };
 }
 #endif

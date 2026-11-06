@@ -7,7 +7,7 @@
 #include <blitz/array.h>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
     This is a tiepoint. This is little more than a structure.
 
     Note that we previously had TiePoint a python only object, and
@@ -27,88 +27,90 @@ namespace GeoCal {
 
 class TiePoint : public Printable<TiePoint> {
 public:
-//-----------------------------------------------------------------------
-/// Constructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor.
+  //-----------------------------------------------------------------------
 
   TiePoint(int Number_image)
-    : id_(1),
-      is_gcp_(false),
-      ic_(Number_image),
-      line_sigma_(Number_image),
+    : id_(1), is_gcp_(false), ic_(Number_image), line_sigma_(Number_image),
       sample_sigma_(Number_image)
   {
     line_sigma_ = 0.1;
     sample_sigma_ = 0.1;
   }
 
-//-----------------------------------------------------------------------
-/// Default constructor
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Default constructor
+  //-----------------------------------------------------------------------
 
   TiePoint() {}
   TiePoint(const TiePoint& Tp);
   TiePoint& operator=(const TiePoint& Tp);
-  
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~TiePoint() {}
 
-//-----------------------------------------------------------------------
-/// ID of tiepoint
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// ID of tiepoint
+  //-----------------------------------------------------------------------
 
-  int id() const { return id_;}
+  int id() const { return id_; }
   void id(int V) { id_ = V; }
 
-//-----------------------------------------------------------------------
-/// True if TiePoint is a ground control point.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// True if TiePoint is a ground control point.
+  //-----------------------------------------------------------------------
 
-  bool is_gcp() const { return is_gcp_;}
+  bool is_gcp() const { return is_gcp_; }
   void is_gcp(bool V) { is_gcp_ = V; }
-  
-//-----------------------------------------------------------------------
-// Ground location.
-//-----------------------------------------------------------------------
+
+  //-----------------------------------------------------------------------
+  // Ground location.
+  //-----------------------------------------------------------------------
 
   boost::shared_ptr<GroundCoordinate> ground_location() const
-  { return ground_location_; }
+  {
+    return ground_location_;
+  }
   void ground_location(const boost::shared_ptr<GroundCoordinate>& Gc)
-  { ground_location_ = Gc; }
+  {
+    ground_location_ = Gc;
+  }
 
-//-----------------------------------------------------------------------
-/// Number of images covered by the tie point.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of images covered by the tie point.
+  //-----------------------------------------------------------------------
 
-  int number_image() const { return (int) ic_.size(); }
+  int number_image() const { return (int)ic_.size(); }
 
-//-----------------------------------------------------------------------
-// Number of image coordinate that we have values for.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Number of image coordinate that we have values for.
+  //-----------------------------------------------------------------------
 
   int number_image_location() const
   {
     int res = 0;
     BOOST_FOREACH(const boost::shared_ptr<ImageCoordinate>& i, ic_)
       if(i)
-	++res;
+        ++res;
     return res;
   }
 
-//-----------------------------------------------------------------------  
-/// Image coordinate
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Image coordinate
+  //-----------------------------------------------------------------------
 
   boost::shared_ptr<ImageCoordinate> image_coordinate(int Image_index) const
-  { range_check(Image_index, 0, number_image());
+  {
+    range_check(Image_index, 0, number_image());
     return ic_[Image_index];
   }
   void image_coordinate(int Image_index,
-			const boost::shared_ptr<ImageCoordinate>& Ic,
-			double Line_sigma = 0.1, double Sample_sigma = 0.1)
+                        const boost::shared_ptr<ImageCoordinate>& Ic,
+                        double Line_sigma = 0.1, double Sample_sigma = 0.1)
   {
     range_check(Image_index, 0, number_image());
     ic_[Image_index] = Ic;
@@ -116,9 +118,9 @@ public:
     sample_sigma_(Image_index) = Sample_sigma;
   }
 
-//-----------------------------------------------------------------------
-/// Line sigma.
-//-----------------------------------------------------------------------  
+  //-----------------------------------------------------------------------
+  /// Line sigma.
+  //-----------------------------------------------------------------------
 
   double line_sigma(int Image_index) const
   {
@@ -126,9 +128,9 @@ public:
     return line_sigma_(Image_index);
   }
 
-//-----------------------------------------------------------------------
-/// Sample sigma.
-//-----------------------------------------------------------------------  
+  //-----------------------------------------------------------------------
+  /// Sample sigma.
+  //-----------------------------------------------------------------------
 
   double sample_sigma(int Image_index) const
   {
@@ -140,62 +142,61 @@ public:
   blitz::Array<double, 2> ic_sigma() const;
   blitz::Array<double, 2> ic_pred(const IgcCollection& Igccol) const;
   blitz::Array<double, 2> ic_diff(const IgcCollection& Igccol) const;
-  
+
   virtual void print(std::ostream& Os) const;
 private:
   int id_;
   bool is_gcp_;
   boost::shared_ptr<GroundCoordinate> ground_location_;
-  std::vector<boost::shared_ptr<ImageCoordinate> > ic_;
+  std::vector<boost::shared_ptr<ImageCoordinate>> ic_;
   blitz::Array<double, 1> line_sigma_;
   blitz::Array<double, 1> sample_sigma_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
-typedef std::vector<boost::shared_ptr<TiePoint> > TiePointVector;
+typedef std::vector<boost::shared_ptr<TiePoint>> TiePointVector;
 
-/****************************************************************//**
+/****************************************************************/ /**
   This is a list of TiePoints with a few useful functions added.
 *******************************************************************/
 
-class TiePointCollection: public TiePointVector,
-			  public Printable<TiePointCollection> {
+class TiePointCollection : public TiePointVector,
+                           public Printable<TiePointCollection> {
 public:
-//-----------------------------------------------------------------------
-/// Default constructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Default constructor.
+  //-----------------------------------------------------------------------
 
   TiePointCollection() {}
 
-//-----------------------------------------------------------------------
-/// Constructor with an initial list of TiePoints.
-//-----------------------------------------------------------------------
-  TiePointCollection(const TiePointVector& Tlist)
-    : TiePointVector(Tlist)
-  {}
+  //-----------------------------------------------------------------------
+  /// Constructor with an initial list of TiePoints.
+  //-----------------------------------------------------------------------
+  TiePointCollection(const TiePointVector& Tlist) : TiePointVector(Tlist) {}
 
-//-----------------------------------------------------------------------
-/// Destructor
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor
+  //-----------------------------------------------------------------------
   virtual ~TiePointCollection() {}
 
   void add_ibis_file(const std::string& Ibis_fname,
-		     const boost::shared_ptr<RasterImage>& New_image,
-		     const boost::shared_ptr<Dem>& D);
-  blitz::Array<double, 2> data_array(const boost::shared_ptr<RasterImage>& Ref_image) const;
-  
-//-----------------------------------------------------------------------
-/// Number of gcps.
-//-----------------------------------------------------------------------
+                     const boost::shared_ptr<RasterImage>& New_image,
+                     const boost::shared_ptr<Dem>& D);
+  blitz::Array<double, 2>
+  data_array(const boost::shared_ptr<RasterImage>& Ref_image) const;
+
+  //-----------------------------------------------------------------------
+  /// Number of gcps.
+  //-----------------------------------------------------------------------
   int number_gcp() const;
-  
+
   virtual void print(std::ostream& Os) const;
 private:
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 

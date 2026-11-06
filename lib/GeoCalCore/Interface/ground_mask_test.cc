@@ -10,23 +10,25 @@ class EmptyMask : public GroundMask {
 public:
   EmptyMask() {}
   virtual ~EmptyMask() {}
-  virtual bool mask(const GroundCoordinate& Gc) const {return false;}
-  virtual bool region_masked(const GroundCoordinate& Ulc, 
-			     const GroundCoordinate& Lrc) const
-  {return false;}
-  virtual void print(std::ostream& Os) const
-  {Os << "Empty mask\n";}
+  virtual bool mask(const GroundCoordinate& Gc) const { return false; }
+  virtual bool region_masked(const GroundCoordinate& Ulc,
+                             const GroundCoordinate& Lrc) const
+  {
+    return false;
+  }
+  virtual void print(std::ostream& Os) const { Os << "Empty mask\n"; }
 };
 class AlwaysMask : public GroundMask {
 public:
   AlwaysMask() {}
   virtual ~AlwaysMask() {}
-  virtual bool mask(const GroundCoordinate& Gc) const {return true;}
-  virtual bool region_masked(const GroundCoordinate& Ulc, 
-			     const GroundCoordinate& Lrc) const
-  {return true;}
-  virtual void print(std::ostream& Os) const
-  {Os << "Always mask\n";}
+  virtual bool mask(const GroundCoordinate& Gc) const { return true; }
+  virtual bool region_masked(const GroundCoordinate& Ulc,
+                             const GroundCoordinate& Lrc) const
+  {
+    return true;
+  }
+  virtual void print(std::ostream& Os) const { Os << "Always mask\n"; }
 };
 
 BOOST_AUTO_TEST_CASE(combine_ground_mask)
@@ -42,11 +44,14 @@ BOOST_AUTO_TEST_CASE(combine_ground_mask)
   cmask.mask_list.push_back(empty);
   BOOST_CHECK(!cmask.mask(g1));
   BOOST_CHECK(!cmask.region_masked(g1, g2));
-  BOOST_CHECK_EQUAL(cmask.print_to_string(), "CombinedGroundMask: \n  Mask 1:\nEmpty mask\n");
+  BOOST_CHECK_EQUAL(cmask.print_to_string(),
+                    "CombinedGroundMask: \n  Mask 1:\nEmpty mask\n");
   cmask.mask_list.push_back(always);
   BOOST_CHECK(cmask.mask(g1));
   BOOST_CHECK(cmask.region_masked(g1, g2));
-  BOOST_CHECK_EQUAL(cmask.print_to_string(), "CombinedGroundMask: \n  Mask 1:\nEmpty mask\n  Mask 2:\nAlways mask\n");
+  BOOST_CHECK_EQUAL(
+      cmask.print_to_string(),
+      "CombinedGroundMask: \n  Mask 1:\nEmpty mask\n  Mask 2:\nAlways mask\n");
 }
 
 BOOST_AUTO_TEST_SUITE_END()

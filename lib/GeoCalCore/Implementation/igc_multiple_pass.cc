@@ -6,14 +6,14 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void IgcMultiplePass::serialize(Archive & ar, const unsigned int version)
+void IgcMultiplePass::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(IgcCollection);
   GEOCAL_GENERIC_BASE(WithParameter);
   GEOCAL_BASE(IgcCollection, WithParameter);
   GEOCAL_BASE(IgcMultiplePass, IgcCollection);
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(WithParameterNested)
-    & GEOCAL_NVP(igc_list);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(WithParameterNested) &
+      GEOCAL_NVP(igc_list);
 }
 
 GEOCAL_IMPLEMENT(IgcMultiplePass);
@@ -29,7 +29,7 @@ int IgcMultiplePass::number_image() const
 }
 
 // See base class for description
-boost::shared_ptr<ImageGroundConnection> 
+boost::shared_ptr<ImageGroundConnection>
 IgcMultiplePass::image_ground_connection(int Image_index) const
 {
   range_check(Image_index, 0, number_image());
@@ -59,9 +59,8 @@ void IgcMultiplePass::print(std::ostream& Os) const
     Os << "    " << pname[i] << ": " << p(i) << "\n";
 }
 
-
 // See base class for description
-boost::shared_ptr<IgcCollection> 
+boost::shared_ptr<IgcCollection>
 IgcMultiplePass::subset(const std::vector<int>& Index_set) const
 {
   int nimg = number_image();
@@ -73,7 +72,7 @@ IgcMultiplePass::subset(const std::vector<int>& Index_set) const
     std::vector<int> s;
     BOOST_FOREACH(int i, Index_set)
       if(i >= ioff && i < ioff + igccol->number_image())
-	s.push_back(i - ioff);
+        s.push_back(i - ioff);
     if(s.size() > 0)
       res->add_igc(igccol->subset(s));
   }

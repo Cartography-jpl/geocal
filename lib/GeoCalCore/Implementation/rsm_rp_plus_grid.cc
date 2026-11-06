@@ -9,11 +9,10 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RsmRpPlusGrid::serialize(Archive & ar, const unsigned int version)
+void RsmRpPlusGrid::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RsmBase)
-    & GEOCAL_NVP(rp)
-    & GEOCAL_NVP(rgrid);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(RsmBase) & GEOCAL_NVP(rp) &
+      GEOCAL_NVP(rgrid);
 }
 
 GEOCAL_IMPLEMENT(RsmRpPlusGrid);
@@ -23,8 +22,8 @@ GEOCAL_IMPLEMENT(RsmRpPlusGrid);
 /// Apply the grid to the given X, Y, and Z value.
 //-----------------------------------------------------------------------
 
-ImageCoordinate RsmRpPlusGrid::image_coordinate
-(double X, double Y, double Z) const
+ImageCoordinate RsmRpPlusGrid::image_coordinate(double X, double Y,
+                                                double Z) const
 {
   ImageCoordinate ic = rp->image_coordinate(X, Y, Z);
   ImageCoordinate ic_corr = rgrid->image_coordinate(X, Y, Z, true);
@@ -41,9 +40,10 @@ ImageCoordinate RsmRpPlusGrid::image_coordinate
 /// second the sample.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> RsmRpPlusGrid::image_coordinate
-(const blitz::Array<double, 1>& X, const blitz::Array<double, 1>& Y,
- const blitz::Array<double, 1>& Z) const
+blitz::Array<double, 2>
+RsmRpPlusGrid::image_coordinate(const blitz::Array<double, 1>& X,
+                                const blitz::Array<double, 1>& Y,
+                                const blitz::Array<double, 1>& Z) const
 {
   if(X.rows() != Y.rows() || X.rows() != Z.rows())
     throw Exception("X, Y, and Z need to be the same size");
@@ -63,17 +63,18 @@ blitz::Array<double, 2> RsmRpPlusGrid::image_coordinate
 /// second the sample.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 3> RsmRpPlusGrid::image_coordinate
-(const blitz::Array<double, 2>& X, const blitz::Array<double, 2>& Y,
- const blitz::Array<double, 2>& Z) const
+blitz::Array<double, 3>
+RsmRpPlusGrid::image_coordinate(const blitz::Array<double, 2>& X,
+                                const blitz::Array<double, 2>& Y,
+                                const blitz::Array<double, 2>& Z) const
 {
-  if(X.rows() != Y.rows() || X.rows() != Z.rows() ||
-     X.cols() != Y.cols() || X.cols() != Z.cols())
+  if(X.rows() != Y.rows() || X.rows() != Z.rows() || X.cols() != Y.cols() ||
+     X.cols() != Z.cols())
     throw Exception("X, Y, and Z need to be the same size");
   Array<double, 3> res(2, X.rows(), X.cols());
   for(int i = 0; i < X.rows(); ++i)
     for(int j = 0; j < X.cols(); ++j) {
-      ImageCoordinate ic = image_coordinate(X(i,j), Y(i,j), Z(i,j));
+      ImageCoordinate ic = image_coordinate(X(i, j), Y(i, j), Z(i, j));
       res(0, i, j) = ic.line;
       res(1, i, j) = ic.sample;
     }
@@ -87,21 +88,22 @@ blitz::Array<double, 3> RsmRpPlusGrid::image_coordinate
 /// second the sample.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 4> RsmRpPlusGrid::image_coordinate
-(const blitz::Array<double, 3>& X, const blitz::Array<double, 3>& Y,
- const blitz::Array<double, 3>& Z) const
+blitz::Array<double, 4>
+RsmRpPlusGrid::image_coordinate(const blitz::Array<double, 3>& X,
+                                const blitz::Array<double, 3>& Y,
+                                const blitz::Array<double, 3>& Z) const
 {
-  if(X.rows() != Y.rows() || X.rows() != Z.rows() ||
-     X.cols() != Y.cols() || X.cols() != Z.cols() ||
-     X.depth() != Y.depth() || X.depth() != Z.depth())
+  if(X.rows() != Y.rows() || X.rows() != Z.rows() || X.cols() != Y.cols() ||
+     X.cols() != Z.cols() || X.depth() != Y.depth() || X.depth() != Z.depth())
     throw Exception("X, Y, and Z need to be the same size");
   Array<double, 4> res(2, X.rows(), X.cols(), X.depth());
   for(int i = 0; i < X.rows(); ++i)
     for(int j = 0; j < X.cols(); ++j)
       for(int k = 0; k < X.depth(); ++k) {
-	ImageCoordinate ic = image_coordinate(X(i,j,k), Y(i,j,k), Z(i,j,k));
-	res(0, i, j, k) = ic.line;
-	res(1, i, j, k) = ic.sample;
+        ImageCoordinate ic =
+            image_coordinate(X(i, j, k), Y(i, j, k), Z(i, j, k));
+        res(0, i, j, k) = ic.line;
+        res(1, i, j, k) = ic.sample;
       }
   return res;
 }
@@ -116,15 +118,13 @@ blitz::Array<double, 4> RsmRpPlusGrid::image_coordinate
 /// line/samples to fit over.
 //-----------------------------------------------------------------------
 
-void RsmRpPlusGrid::fit
-(const ImageGroundConnection& Igc,
- const CoordinateConverter& Cconv,
- double Min_height, double Max_height,
- int Min_line, int Max_line, int Min_sample,
- int Max_sample)
+void RsmRpPlusGrid::fit(const ImageGroundConnection& Igc,
+                        const CoordinateConverter& Cconv, double Min_height,
+                        double Max_height, int Min_line, int Max_line,
+                        int Min_sample, int Max_sample)
 {
   rp->fit(Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample,
-	  Max_sample);
+          Max_sample);
   rgrid->fit_corr(Igc, Cconv, *rp);
 }
 
@@ -133,11 +133,11 @@ void RsmRpPlusGrid::fit
 /// This is a 2x3 matrix.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> RsmRpPlusGrid::image_coordinate_jacobian
-(double X, double Y, double Z) const
+blitz::Array<double, 2>
+RsmRpPlusGrid::image_coordinate_jacobian(double X, double Y, double Z) const
 {
   Array<double, 2> res = rp->image_coordinate_jacobian(X, Y, Z);
-  res += rgrid->image_coordinate_jacobian(X,Y,Z, true);
+  res += rgrid->image_coordinate_jacobian(X, Y, Z, true);
   return res;
 }
 

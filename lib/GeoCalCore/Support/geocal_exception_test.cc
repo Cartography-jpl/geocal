@@ -8,10 +8,10 @@ BOOST_FIXTURE_TEST_SUITE(geocal_exception, GlobalFixture)
 BOOST_AUTO_TEST_CASE(basic_test)
 {
   Exception e("test");
-  BOOST_CHECK(std::string(e.what()) =="test");
+  BOOST_CHECK(std::string(e.what()) == "test");
   Exception e2;
   e2 << "Test " << 5;
-  BOOST_CHECK(std::string(e2.what()) =="Test 5");
+  BOOST_CHECK(std::string(e2.what()) == "Test 5");
 }
 
 BOOST_AUTO_TEST_CASE(range)

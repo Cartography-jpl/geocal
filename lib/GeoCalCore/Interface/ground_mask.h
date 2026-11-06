@@ -5,7 +5,7 @@
 #include <vector>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This provides a GroundMask, which can be used to prevent doing some kind
   of processing. An example is a using a Land/Water mask to restrict
   image matching to land, or a cloud mask to restrict image matching
@@ -46,40 +46,40 @@ namespace GeoCal {
 
 class GroundMask : public Printable<GroundMask> {
 public:
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~GroundMask() {}
 
-//-----------------------------------------------------------------------
-/// Indicate if a particular point is masked. If true, the point is
-/// masked and should not be used in processing (e.g., don't do image
-/// matching)
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Indicate if a particular point is masked. If true, the point is
+  /// masked and should not be used in processing (e.g., don't do image
+  /// matching)
+  //-----------------------------------------------------------------------
 
   virtual bool mask(const GroundCoordinate& Gc) const = 0;
 
-//-----------------------------------------------------------------------
-/// Indicated if a region is all masked or not. See the discussion in
-/// the comments of GroundMask for detailed discussion of the check.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Indicated if a region is all masked or not. See the discussion in
+  /// the comments of GroundMask for detailed discussion of the check.
+  //-----------------------------------------------------------------------
 
-  virtual bool region_masked(const GroundCoordinate& Ulc, 
-			     const GroundCoordinate& Lrc) const = 0;
+  virtual bool region_masked(const GroundCoordinate& Ulc,
+                             const GroundCoordinate& Lrc) const = 0;
 
-//-----------------------------------------------------------------------
-/// Print to given stream.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print to given stream.
+  //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const = 0;
 private:
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   This is combines a set of masks into a single one. The combination
   just check each mask in turn, and if any of them indicates a point
   or a region is masked, then we return true.
@@ -92,50 +92,54 @@ private:
   When there are no masks, we return true.
 *******************************************************************/
 
-class CombinedGroundMask: public GroundMask {
+class CombinedGroundMask : public GroundMask {
 public:
-//-----------------------------------------------------------------------
-/// Create a empty CombinedGroundMask.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Create a empty CombinedGroundMask.
+  //-----------------------------------------------------------------------
 
   CombinedGroundMask() {}
 
-//-----------------------------------------------------------------------
-/// Create a CombinedGroundMask using the given set of masks.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Create a CombinedGroundMask using the given set of masks.
+  //-----------------------------------------------------------------------
 
-  CombinedGroundMask(const std::vector<boost::shared_ptr<GroundMask> >& Ml)
-    : mask_list(Ml) {}
+  CombinedGroundMask(const std::vector<boost::shared_ptr<GroundMask>>& Ml)
+    : mask_list(Ml)
+  {
+  }
 
   virtual ~CombinedGroundMask() {}
 
-//-----------------------------------------------------------------------
-/// Create a CombinedGroundMask using the given set of masks, where we get
-/// this from a general InputIterator.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Create a CombinedGroundMask using the given set of masks, where we get
+  /// this from a general InputIterator.
+  //-----------------------------------------------------------------------
 
-  template<typename It> CombinedGroundMask(It First, It Last)
-    : mask_list(First, Last) {}
+  template<typename It>
+  CombinedGroundMask(It First, It Last) : mask_list(First, Last)
+  {
+  }
 
   virtual bool mask(const GroundCoordinate& Gc) const;
-  virtual bool region_masked(const GroundCoordinate& Ulc, 
-			     const GroundCoordinate& Lrc) const;
+  virtual bool region_masked(const GroundCoordinate& Ulc,
+                             const GroundCoordinate& Lrc) const;
 
-//-----------------------------------------------------------------------
-/// Print to given stream.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print to given stream.
+  //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const;
 
-//-----------------------------------------------------------------------
-/// Possibly empty set of masks to use.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Possibly empty set of masks to use.
+  //-----------------------------------------------------------------------
 
-  std::vector<boost::shared_ptr<GroundMask> > mask_list;
+  std::vector<boost::shared_ptr<GroundMask>> mask_list;
 private:
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
 }

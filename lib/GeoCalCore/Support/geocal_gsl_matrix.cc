@@ -17,8 +17,8 @@ void GslMatrix::reset(gsl_matrix* M, bool Owned)
   if(gsl_matrix_ && owned_)
     gsl_matrix_free(gsl_matrix_);
   gsl_matrix_ = M;
-  blitz::Array<double, 2> a(M->data, blitz::shape(M->size1, M->size2), 
-			    blitz::shape(M->tda, 1), blitz::neverDeleteData);
+  blitz::Array<double, 2> a(M->data, blitz::shape(M->size1, M->size2),
+                            blitz::shape(M->tda, 1), blitz::neverDeleteData);
   blitz_array_.reference(a);
   owned_ = Owned;
   block_owned_ = false;
@@ -31,7 +31,7 @@ void GslMatrix::reset(gsl_matrix* M, bool Owned)
 /// original matrix will be modified if the gsl_matrix view of the
 /// data is modified, and the second case it won't. If you don't want
 /// this behaviour, you can form a copy before you pass it to this
-/// constructor. 
+/// constructor.
 //-----------------------------------------------------------------------
 
 void GslMatrix::reset(blitz::Array<double, 2>& M)
@@ -44,13 +44,13 @@ void GslMatrix::reset(blitz::Array<double, 2>& M)
     blitz_array_.reference(M);
   else
     blitz_array_.reference(M.copy());
-  gsl_matrix_ = (gsl_matrix*) malloc(sizeof(gsl_matrix));
+  gsl_matrix_ = (gsl_matrix*)malloc(sizeof(gsl_matrix));
   gsl_matrix_->size1 = blitz_array_.extent(0);
   gsl_matrix_->size2 = blitz_array_.extent(1);
   gsl_matrix_->tda = blitz_array_.extent(1);
   gsl_matrix_->data = blitz_array_.data();
   gsl_matrix_->owner = 0;
-  gsl_matrix_->block = (gsl_block*) malloc(sizeof(gsl_block));
+  gsl_matrix_->block = (gsl_block*)malloc(sizeof(gsl_block));
   gsl_matrix_->block->size = blitz_array_.size();
   gsl_matrix_->block->data = blitz_array_.data();
   owned_ = true;
@@ -83,8 +83,8 @@ void GslVector::reset(gsl_vector* M, bool Owned)
   if(gsl_vector_ && owned_)
     gsl_vector_free(gsl_vector_);
   gsl_vector_ = M;
-  blitz::Array<double, 1> a(M->data, blitz::shape(M->size), 
-			    blitz::shape(M->stride), blitz::neverDeleteData);
+  blitz::Array<double, 1> a(M->data, blitz::shape(M->size),
+                            blitz::shape(M->stride), blitz::neverDeleteData);
   blitz_array_.reference(a);
   owned_ = Owned;
   block_owned_ = false;
@@ -97,7 +97,7 @@ void GslVector::reset(gsl_vector* M, bool Owned)
 /// original vector will be modified if the gsl_vector view of the
 /// data is modified, and the second case it won't. If you don't want
 /// this behaviour, you can form a copy before you pass it to this
-/// constructor. 
+/// constructor.
 //-----------------------------------------------------------------------
 
 void GslVector::reset(blitz::Array<double, 1>& M)
@@ -110,12 +110,12 @@ void GslVector::reset(blitz::Array<double, 1>& M)
     blitz_array_.reference(M);
   else
     blitz_array_.reference(M.copy());
-  gsl_vector_ = (gsl_vector*) malloc(sizeof(gsl_vector));
+  gsl_vector_ = (gsl_vector*)malloc(sizeof(gsl_vector));
   gsl_vector_->size = blitz_array_.extent(0);
   gsl_vector_->stride = 1;
   gsl_vector_->data = blitz_array_.data();
   gsl_vector_->owner = 0;
-  gsl_vector_->block = (gsl_block*) malloc(sizeof(gsl_block));
+  gsl_vector_->block = (gsl_block*)malloc(sizeof(gsl_block));
   gsl_vector_->block->size = blitz_array_.size();
   gsl_vector_->block->data = blitz_array_.data();
   owned_ = true;
@@ -130,7 +130,6 @@ GslVector::~GslVector()
 {
   if(gsl_vector_ && block_owned_)
     free(gsl_vector_->block);
-  if(gsl_vector_ && owned_) 
+  if(gsl_vector_ && owned_)
     gsl_vector_free(gsl_vector_);
 }
-

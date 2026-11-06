@@ -9,36 +9,38 @@
 
 namespace GeoCal {
 
-/****************************************************************//**
+/****************************************************************/ /**
   This is an interest point, determined by a FeatureDetector.
 *******************************************************************/
 
 class InterestPoint : private boost::less_than_comparable<InterestPoint>,
-		      public Printable<InterestPoint> {
+                      public Printable<InterestPoint> {
 public:
-//-----------------------------------------------------------------------
-/// Default constructor
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Default constructor
+  //-----------------------------------------------------------------------
 
   InterestPoint() : image_coordinate(0, 0), weight(0) {}
 
-//-----------------------------------------------------------------------
-/// Constructor
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor
+  //-----------------------------------------------------------------------
 
-  InterestPoint(const ImageCoordinate &Ic, double Weight)
-  : image_coordinate(Ic), weight(Weight) {}
+  InterestPoint(const ImageCoordinate& Ic, double Weight)
+    : image_coordinate(Ic), weight(Weight)
+  {
+  }
 
-//-----------------------------------------------------------------------
-/// Image coordinate of interest point.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Image coordinate of interest point.
+  //-----------------------------------------------------------------------
 
   ImageCoordinate image_coordinate;
 
-//-----------------------------------------------------------------------
-/// Weight of interest point. The higher the weight, the "better" the
-/// point is.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Weight of interest point. The higher the weight, the "better" the
+  /// point is.
+  //-----------------------------------------------------------------------
 
   double weight;
 
@@ -46,7 +48,7 @@ public:
 private:
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 /** \defgroup Miscellaneous Miscellaneous routines. **/
 
@@ -59,9 +61,11 @@ private:
 //-----------------------------------------------------------------------
 
 inline bool operator<(const InterestPoint& I1, const InterestPoint& I2)
-{ return I1.weight < I2.weight; }
+{
+  return I1.weight < I2.weight;
+}
 
-/****************************************************************//**
+/****************************************************************/ /**
   This class detects interest points in an image. An interest point 
   is one that is good for image matching by some sort of criteria.
   For example, a common feature detector is one that tries to detect
@@ -71,59 +75,60 @@ inline bool operator<(const InterestPoint& I1, const InterestPoint& I2)
 
 class FeatureDetector : public Printable<FeatureDetector> {
 public:
-//-----------------------------------------------------------------------
-/// Constructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor.
+  //-----------------------------------------------------------------------
 
-  FeatureDetector() { }
+  FeatureDetector() {}
 
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
-  virtual ~FeatureDetector() { }
+  virtual ~FeatureDetector() {}
 
-//-----------------------------------------------------------------------
-/// Go through a RasterImage, and return a list of InterstPoints for
-/// it. The list isn't in any particular order, but note that
-/// InterstPoints have a natural order by the weight, and you can sort
-/// the points if desired using std::sort, or just pick at the "best"
-/// point by std::max_element.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Go through a RasterImage, and return a list of InterstPoints for
+  /// it. The list isn't in any particular order, but note that
+  /// InterstPoints have a natural order by the weight, and you can sort
+  /// the points if desired using std::sort, or just pick at the "best"
+  /// point by std::max_element.
+  //-----------------------------------------------------------------------
 
   virtual std::vector<InterestPoint>
   interest_point_detect(const RasterImage& Img) const = 0;
   std::vector<ImageCoordinate> interest_point_grid(const RasterImage& Img,
-     const GroundMask& M,					   
-     int Number_grid_line, int Number_grid_sample, int Border = 0) const;
+                                                   const GroundMask& M,
+                                                   int Number_grid_line,
+                                                   int Number_grid_sample,
+                                                   int Border = 0) const;
   std::vector<ImageCoordinate> interest_point_grid(const RasterImage& Img,
-     int Number_grid_line, int Number_grid_sample, int Border = 0) const;
+                                                   int Number_grid_line,
+                                                   int Number_grid_sample,
+                                                   int Border = 0) const;
 
   boost::shared_ptr<ImageCoordinate>
-  interest_point_grid_ptr(const RasterImage& Img,
-			  const GroundMask& M, int i, int j,
-			  int Number_grid_line, int Number_grid_sample, 
-			  int Border = 0) const;
+  interest_point_grid_ptr(const RasterImage& Img, const GroundMask& M, int i,
+                          int j, int Number_grid_line, int Number_grid_sample,
+                          int Border = 0) const;
   boost::shared_ptr<ImageCoordinate>
-  interest_point_grid_ptr(const RasterImage& Img,int i, int j, 
-	  int Number_grid_line, int Number_grid_sample, 
-	  int Border = 0) const;
+  interest_point_grid_ptr(const RasterImage& Img, int i, int j,
+                          int Number_grid_line, int Number_grid_sample,
+                          int Border = 0) const;
 
-  
-//-----------------------------------------------------------------------
-/// Print to stream.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print to stream.
+  //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const = 0;
 protected:
 private:
-  boost::shared_ptr<ImageCoordinate> 
-  ip_grid(const RasterImage& Img, const GroundMask* M,
-	  int i, int j, int Number_grid_line, int Number_grid_sample,
-	  int Border) const;
+  boost::shared_ptr<ImageCoordinate>
+  ip_grid(const RasterImage& Img, const GroundMask* M, int i, int j,
+          int Number_grid_line, int Number_grid_sample, int Border) const;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
 }
@@ -131,4 +136,3 @@ private:
 GEOCAL_EXPORT_KEY(InterestPoint);
 GEOCAL_EXPORT_KEY(FeatureDetector);
 #endif
-

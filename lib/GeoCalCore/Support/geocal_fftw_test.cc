@@ -10,8 +10,8 @@ BOOST_AUTO_TEST_CASE(set_of_point)
 {
 #ifndef HAVE_FFTW
   return;
-#endif  
-// Create a simple lattice and then take the FFT of it
+#endif
+  // Create a simple lattice and then take the FFT of it
   Fftw2dForward fft(256, 256);
   fft.data_in = 0;
   fft.data_in(128, 128) = 1.0;
@@ -48,4 +48,3 @@ BOOST_AUTO_TEST_CASE(set_of_point)
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-

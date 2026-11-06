@@ -17,7 +17,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_EQUAL(f.number_sample(), 10);
   BOOST_CHECK_EQUAL(f.number_tile_line(), 10);
   BOOST_CHECK_EQUAL(f.number_tile_sample(), 10);
-  
+
   for(int i = 0; i < 10; ++i)
     for(int j = 0; j < 10; ++j)
       BOOST_CHECK_EQUAL(f(i, j), (i + j));
@@ -26,7 +26,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
   ImageCoordinate ic_expect(5729.22, 27561.36);
   Geodetic g(35.8399968, 45.0770183, 1017);
   BOOST_CHECK_EQUAL(rpc.image_coordinate(g), ic_expect);
-  
+
   BOOST_CHECK(f.has_map_info());
   BOOST_CHECK_EQUAL(f.map_info().number_x_pixel(), 10);
   BOOST_CHECK_EQUAL(f.map_info().number_y_pixel(), 10);
@@ -70,11 +70,10 @@ BOOST_FIXTURE_TEST_CASE(vicar_label, RpcFixture)
   double y_pixel_res = -0.50;
   int number_x_pixel = 100;
   int number_y_pixel = 200;
-  MapInfo mi(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter), 
-	     ulc_x, ulc_y, 
-	     ulc_x + x_pixel_res * number_x_pixel, 
-	     ulc_y + y_pixel_res * number_y_pixel, 
-	     number_x_pixel, number_y_pixel);
+  MapInfo mi(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter),
+             ulc_x, ulc_y, ulc_x + x_pixel_res * number_x_pixel,
+             ulc_y + y_pixel_res * number_y_pixel, number_x_pixel,
+             number_y_pixel);
   r.set_map_info(mi);
 }
 
@@ -89,7 +88,7 @@ BOOST_FIXTURE_TEST_CASE(vicar_rsm, RsmFixture)
     int val = 0;
     for(int i = 9; i >= 0; --i)
       for(int j = 0; j < 11; ++j, ++val)
-	out.write(i, j, val);
+        out.write(i, j, val);
     out.set_rsm(rsm, VicarFile::RSM_XML_FILE);
   }
   VicarRasterImage in("test_out/vicar_rsm_out.img");
@@ -111,7 +110,7 @@ BOOST_FIXTURE_TEST_CASE(vicar_rsm_nitf, RsmFixtureRadian)
     int val = 0;
     for(int i = 9; i >= 0; --i)
       for(int j = 0; j < 11; ++j, ++val)
-	out.write(i, j, val);
+        out.write(i, j, val);
     out.set_rsm(rsm, VicarFile::RSM_NITF_FILE);
   }
   VicarRasterImage in("test_out/vicar_rsm_nitf_out.img");
@@ -122,8 +121,8 @@ BOOST_AUTO_TEST_CASE(vicar_raster_image_point_vs_area)
   if(!VicarFile::vicar_available())
     return;
   // Check correct handling of pixel area vs point.
-  
-  // These 2 files have the same tiepoint, but in one case this is 
+
+  // These 2 files have the same tiepoint, but in one case this is
   // for area and in the other point. For area, the geotiff (0,0)
   // corresponds to GeoCal (-0.5,-0.5) (since they use a different
   // convention of (0,0) - for geotiff this is the ulc of the first pixel,
@@ -134,10 +133,10 @@ BOOST_AUTO_TEST_CASE(vicar_raster_image_point_vs_area)
   VicarRasterImage fpixel_is_area(pixel_is_area);
   VicarRasterImage fpixel_is_point(pixel_is_point);
   Geodetic ulc(20, 10);
-  BOOST_CHECK_CLOSE(distance(*fpixel_is_area.ground_coordinate(-0.5, -0.5),
-			     ulc), 0, 1e-4);
-  BOOST_CHECK_CLOSE(distance(*fpixel_is_point.ground_coordinate(0, 0),
-			     ulc), 0, 1e-4);
+  BOOST_CHECK_CLOSE(
+      distance(*fpixel_is_area.ground_coordinate(-0.5, -0.5), ulc), 0, 1e-4);
+  BOOST_CHECK_CLOSE(distance(*fpixel_is_point.ground_coordinate(0, 0), ulc), 0,
+                    1e-4);
   BOOST_CHECK(fpixel_is_point.map_info().is_point());
   BOOST_CHECK(!fpixel_is_area.map_info().is_point());
 
@@ -145,18 +144,18 @@ BOOST_AUTO_TEST_CASE(vicar_raster_image_point_vs_area)
   // really meant just as a workaround for the SRTM erroneously
   // marking the files as pixel is point when really it is pixel as
   // area, see Srtm class for details.
-  VicarRasterImage fpixel_is_point_make_area
-    (pixel_is_point, 1, VicarFile::READ, 100, 4, true);
-  BOOST_CHECK_CLOSE
-    (distance(*fpixel_is_point_make_area.ground_coordinate(-0.5, -0.5),
-	      ulc), 0, 1e-4);
+  VicarRasterImage fpixel_is_point_make_area(pixel_is_point, 1, VicarFile::READ,
+                                             100, 4, true);
+  BOOST_CHECK_CLOSE(
+      distance(*fpixel_is_point_make_area.ground_coordinate(-0.5, -0.5), ulc),
+      0, 1e-4);
 }
 
 BOOST_AUTO_TEST_CASE(write_pixel_is_point)
 {
   // Test data where we have data as point instead of image. Already
   // have test above for reading, this checks that we can write this
-  // correctly. 
+  // correctly.
   if(!VicarFile::vicar_available())
     return;
   double ulc_x = 50;
@@ -165,25 +164,24 @@ BOOST_AUTO_TEST_CASE(write_pixel_is_point)
   double y_pixel_res = -0.50;
   int number_x_pixel = 100;
   int number_y_pixel = 200;
-  MapInfo mi(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter), 
-	     ulc_x, ulc_y, 
-	     ulc_x + x_pixel_res * number_x_pixel, 
-	     ulc_y + y_pixel_res * number_y_pixel, 
-	     number_x_pixel, number_y_pixel, true);
+  MapInfo mi(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter),
+             ulc_x, ulc_y, ulc_x + x_pixel_res * number_x_pixel,
+             ulc_y + y_pixel_res * number_y_pixel, number_x_pixel,
+             number_y_pixel, true);
   VicarRasterImage d("test_out/vicar_point.img", mi, "HALF");
   int val = 0;
   for(int i = 0; i < d.number_line(); ++i)
     for(int j = 0; j < d.number_sample(); ++j)
-      d.write(i,j,++val);
+      d.write(i, j, ++val);
   d.close();
   VicarFile f2("test_out/vicar_point.img");
   VicarRasterImage d2("test_out/vicar_point.img");
   BOOST_CHECK(d.map_info().is_point());
   BOOST_CHECK(d2.map_info().is_point());
-  BOOST_CHECK(distance(*d.ground_coordinate(0,0), *d2.ground_coordinate(0,0))
-	      < 0.1);
-  BOOST_CHECK(distance(*d.ground_coordinate(50,70),
-		       *d2.ground_coordinate(50,70)) < 0.1);
+  BOOST_CHECK(
+      distance(*d.ground_coordinate(0, 0), *d2.ground_coordinate(0, 0)) < 0.1);
+  BOOST_CHECK(distance(*d.ground_coordinate(50, 70),
+                       *d2.ground_coordinate(50, 70)) < 0.1);
 }
 
 BOOST_AUTO_TEST_CASE(serialization)
@@ -199,7 +197,7 @@ BOOST_AUTO_TEST_CASE(serialization)
     // Can dump to screen, if we want to see the text
     std::cerr << d;
   boost::shared_ptr<VicarRasterImage> fr =
-    serialize_read_string<VicarRasterImage>(d);
+      serialize_read_string<VicarRasterImage>(d);
   BOOST_CHECK_EQUAL(fr->number_line(), 10);
   BOOST_CHECK_EQUAL(fr->number_sample(), 10);
   BOOST_CHECK_EQUAL(fr->number_tile_line(), 10);
@@ -207,5 +205,3 @@ BOOST_AUTO_TEST_CASE(serialization)
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-
-

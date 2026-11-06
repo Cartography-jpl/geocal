@@ -10,17 +10,17 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void MspiConfigFile::serialize(Archive & ar, const unsigned int version)
+void MspiConfigFile::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(MspiConfigFile);
-  ar & GEOCAL_NVP(key_to_value);
+  ar& GEOCAL_NVP(key_to_value);
 }
 
 template<class Archive>
-void MspiConfigTable::serialize(Archive & ar, const unsigned int version)
+void MspiConfigTable::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(MspiConfigTable);
-  ar & GEOCAL_NVP_(column_to_index) & GEOCAL_NVP(data);
+  ar& GEOCAL_NVP_(column_to_index) & GEOCAL_NVP(data);
 }
 
 GEOCAL_IMPLEMENT(MspiConfigFile);
@@ -44,8 +44,8 @@ MspiConfigFile::MspiConfigFile(const std::string& Fname)
 
 void MspiConfigFile::add_file(const std::string& Fname)
 {
-  std::map<std::string, std::string> key_to_value_new = 
-    add_file_skip_base_version(Fname);
+  std::map<std::string, std::string> key_to_value_new =
+      add_file_skip_base_version(Fname);
   if(key_to_value_new.count("base_version") != 0) {
     boost::filesystem::path p(Fname);
     p = p.parent_path();
@@ -72,7 +72,7 @@ MspiConfigFile::add_file_skip_base_version(const std::string& Fname)
   // We use this to look for duplicates.
   std::set<std::string> new_key;
   std::map<std::string, std::string> key_to_value_new;
-  
+
   // Read in the whole file. We could do this line by line, but these
   // files tend to be short and it is easier just to read
   // everything. IfstreamCs strips off all the comments, so we don't
@@ -88,22 +88,22 @@ MspiConfigFile::add_file_skip_base_version(const std::string& Fname)
 
   // Now break up into keyword/value pairs
   std::string s = buf.str();
-  boost::sregex_iterator i(s.begin(), s.end(), 
-			   boost::regex("^((?:\".*\")?(?:[^:]|\\n)*):\\s*([[:word:]\\-\\.]+)\\s*$"));
+  boost::sregex_iterator i(
+      s.begin(), s.end(),
+      boost::regex("^((?:\".*\")?(?:[^:]|\\n)*):\\s*([[:word:]\\-\\.]+)\\s*$"));
   boost::sregex_iterator iend;
   for(; i != iend; ++i) {
     std::string key = (*i)[2];
     std::string val = (*i)[1];
     boost::trim(val);
     // Strip of leading and trailing '"' if this is in the string.
-    if(val[0] == '"' && val[val.length()-1] == '"')
+    if(val[0] == '"' && val[val.length() - 1] == '"')
       val = val.substr(1, val.length() - 2);
     // Check to see if this is a duplicate. By convention, this is
     // treated as an error.
     if(new_key.count(key) != 0) {
       Exception e;
-      e << "Duplicate key '" << key << "' found in file '"
-	<< Fname << "'";
+      e << "Duplicate key '" << key << "' found in file '" << Fname << "'";
       throw e;
     }
     new_key.insert(key);
@@ -116,12 +116,12 @@ MspiConfigFile::add_file_skip_base_version(const std::string& Fname)
 /// Create a MspiConfigTable for the given table name in the given file.
 //-----------------------------------------------------------------------
 
-MspiConfigTable::MspiConfigTable(const MspiConfigFile& Config, 
-				 const std::string& Table_name)
-: data(Config.value<blitz::Array<std::string, 2> >(Table_name + ".table"))
+MspiConfigTable::MspiConfigTable(const MspiConfigFile& Config,
+                                 const std::string& Table_name)
+  : data(Config.value<blitz::Array<std::string, 2>>(Table_name + ".table"))
 {
-  std::vector<std::string> column_name = 
-    Config.value<std::vector<std::string> >(Table_name + ".columns");
+  std::vector<std::string> column_name =
+      Config.value<std::vector<std::string>>(Table_name + ".columns");
   int index = 0;
   BOOST_FOREACH(std::string cname, column_name)
     column_to_index_[cname] = index++;
@@ -131,8 +131,8 @@ MspiConfigTable::MspiConfigTable(const MspiConfigFile& Config,
 /// Find the given keyword, and return string associated with it.
 //-----------------------------------------------------------------------
 
-const std::string& MspiConfigFile::value_string
-(const std::string& Keyword) const
+const std::string&
+MspiConfigFile::value_string(const std::string& Keyword) const
 {
   if(!have_key(Keyword)) {
     Exception e("The keyword is not found in the MspiConfigFile\n");

@@ -5,56 +5,58 @@
 #include <gsl/gsl_integration.h>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This calculates refraction. The algorithm used here is the one the
   MSP library uses.
 *******************************************************************/
-class RefractionMsp : public Refraction,
-		      public boost::noncopyable{
+class RefractionMsp : public Refraction, public boost::noncopyable {
 public:
-  RefractionMsp(double Wavelength_micrometer=0.6,
-		double Temperature_kelvin = -1,
-		double Pressure_millibar = -1);
+  RefractionMsp(double Wavelength_micrometer = 0.6,
+                double Temperature_kelvin = -1, double Pressure_millibar = -1);
   virtual ~RefractionMsp();
 
-  CartesianFixedLookVector refraction_calc
-  (const GroundCoordinate& Spacecraft_pos,
-   const GroundCoordinate& Gc_before_correction,
-   bool Forward_calc = true) const;
+  CartesianFixedLookVector
+  refraction_calc(const GroundCoordinate& Spacecraft_pos,
+                  const GroundCoordinate& Gc_before_correction,
+                  bool Forward_calc = true) const;
   virtual CartesianFixedLookVector
   refraction_apply(const GroundCoordinate& Spacecraft_pos,
-		   const GroundCoordinate& Gc_no_refraction) const
-  { return refraction_calc(Spacecraft_pos, Gc_no_refraction, true); }
+                   const GroundCoordinate& Gc_no_refraction) const
+  {
+    return refraction_calc(Spacecraft_pos, Gc_no_refraction, true);
+  }
   virtual CartesianFixedLookVector
   refraction_reverse(const GroundCoordinate& Spacecraft_pos,
-  		     const GroundCoordinate& Gc_with_refraction) const
-  { return refraction_calc(Spacecraft_pos, Gc_with_refraction, false); }
+                     const GroundCoordinate& Gc_with_refraction) const
+  {
+    return refraction_calc(Spacecraft_pos, Gc_with_refraction, false);
+  }
   virtual void print(std::ostream& Os) const;
-  
-//-----------------------------------------------------------------------
-/// Wavelength, in micrometers.
-//-----------------------------------------------------------------------
-  
+
+  //-----------------------------------------------------------------------
+  /// Wavelength, in micrometers.
+  //-----------------------------------------------------------------------
+
   double wavelength() const { return wavelength_; }
 
-//-----------------------------------------------------------------------
-/// Temperature of ground point, in kelvin. If < 0, the algorithm
-/// calculates a default value.
-//-----------------------------------------------------------------------
-  
+  //-----------------------------------------------------------------------
+  /// Temperature of ground point, in kelvin. If < 0, the algorithm
+  /// calculates a default value.
+  //-----------------------------------------------------------------------
+
   double temperature() const { return temperature_; }
 
-//-----------------------------------------------------------------------
-/// Pressure of ground point, in millibars. If < 0, the algorithm
-/// calculates a default value.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Pressure of ground point, in millibars. If < 0, the algorithm
+  /// calculates a default value.
+  //-----------------------------------------------------------------------
 
-  double pressure() const { return pressure_;}
-  
+  double pressure() const { return pressure_; }
+
   double f_r(double r) const;
 private:
   double wavelength_, temperature_, pressure_;
-  gsl_integration_glfixed_table *quad_table;
+  gsl_integration_glfixed_table* quad_table;
   double r_calc(double lat, double h) const;
   double r_tropopause(const GroundCoordinate& Gc_target) const;
   double r_stratopause(const GroundCoordinate& Gc_target) const;
@@ -65,14 +67,14 @@ private:
   double temperature_r(double r) const;
   double d_r(double r) const;
   double k_r(double r) const;
-  
+
   // We use these in a few places, so as an optimization calculate
   // once and save
   mutable double rp, r1, r2, ro, s;
   mutable double lat, lon, hrefsurf, t_rp, d_rp, t_r1, d_r1;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 

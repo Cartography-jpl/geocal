@@ -7,16 +7,12 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void IgcSimulatedRayCaster::serialize(Archive & ar, 
-				      const unsigned int version)
+void IgcSimulatedRayCaster::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRaster);
-  ar & GEOCAL_NVP_(igc) 
-    & GEOCAL_NVP_(number_integration_step)
-    & GEOCAL_NVP_(fill_value)
-    & GEOCAL_NVP_(raycast_resolution)
-    & GEOCAL_NVP_(max_height)
-    & GEOCAL_NVP_(img);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(CalcRaster);
+  ar& GEOCAL_NVP_(igc) & GEOCAL_NVP_(number_integration_step) &
+      GEOCAL_NVP_(fill_value) & GEOCAL_NVP_(raycast_resolution) &
+      GEOCAL_NVP_(max_height) & GEOCAL_NVP_(img);
 }
 
 GEOCAL_IMPLEMENT(IgcSimulatedRayCaster);
@@ -29,22 +25,14 @@ GEOCAL_IMPLEMENT(IgcSimulatedRayCaster);
 //-----------------------------------------------------------------------
 
 IgcSimulatedRayCaster::IgcSimulatedRayCaster(
-const boost::shared_ptr<ImageGroundConnection>& Igc,
-const boost::shared_ptr<RasterImage>& Map_projected_image, 
-int Number_integration_step,
-double Raycast_resolution,
-double Max_height,
-int Number_tile_line,
-int Number_tile_sample,
-double Fill_value
-)
-: CalcRaster(Igc->number_line(), Igc->number_sample()),
-  igc_(Igc),
-  number_integration_step_(Number_integration_step),
-  fill_value_(Fill_value),
-  raycast_resolution_(Raycast_resolution),
-  max_height_(Max_height),
-  img_(Map_projected_image)
+    const boost::shared_ptr<ImageGroundConnection>& Igc,
+    const boost::shared_ptr<RasterImage>& Map_projected_image,
+    int Number_integration_step, double Raycast_resolution, double Max_height,
+    int Number_tile_line, int Number_tile_sample, double Fill_value)
+  : CalcRaster(Igc->number_line(), Igc->number_sample()), igc_(Igc),
+    number_integration_step_(Number_integration_step), fill_value_(Fill_value),
+    raycast_resolution_(Raycast_resolution), max_height_(Max_height),
+    img_(Map_projected_image)
 {
   if(raycast_resolution_ < 0)
     raycast_resolution_ = img_->map_info().resolution_meter();
@@ -62,12 +50,12 @@ double Fill_value
 void IgcSimulatedRayCaster::calc(int Lstart, int Sstart) const
 {
   IgcRayCaster rcast(igc_, 1, Lstart, data.rows(), number_integration_step_,
-		     raycast_resolution_, max_height_, Sstart, data.cols());
+                     raycast_resolution_, max_height_, Sstart, data.cols());
   while(!rcast.last_position()) {
     blitz::Array<double, 2> r = rcast.next_radiance(*img_, fill_value_);
-    blitz::Array<double, 1> 
-      t(data(rcast.current_position() - rcast.start_position(), Range::all()));
-    t = r(0,Range::all());
+    blitz::Array<double, 1> t(
+        data(rcast.current_position() - rcast.start_position(), Range::all()));
+    t = r(0, Range::all());
   }
 }
 
@@ -80,10 +68,10 @@ void IgcSimulatedRayCaster::print(std::ostream& Os) const
      << "  Raycast resolution:      " << raycast_resolution() << "\n"
      << "  Max height:              " << max_height() << "\n"
      << "  Fill value:              " << fill_value() << "\n";
-  Os << "  Image ground connection:\n" ;
+  Os << "  Image ground connection:\n";
   opad << *igc_ << "\n";
   opad.strict_sync();
-  Os << "  Map projected image:\n" ;
+  Os << "  Map projected image:\n";
   opad << *img_ << "\n";
   opad.strict_sync();
 }

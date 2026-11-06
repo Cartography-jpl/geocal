@@ -20,7 +20,8 @@ using namespace boost::filesystem;
 /// so new.
 //-----------------------------------------------------------------------
 
-boost::filesystem::path GeoCal::lexically_normal(const boost::filesystem::path& p)
+boost::filesystem::path
+GeoCal::lexically_normal(const boost::filesystem::path& p)
 {
   const char dot = '.';
   const char separator = '/';
@@ -32,50 +33,38 @@ boost::filesystem::path GeoCal::lexically_normal(const boost::filesystem::path& 
   path::iterator stop(last--);
   for(path::iterator itr(start); itr != stop; ++itr) {
     // ignore "." except at start and last
-    if (itr->native().size() == 1
-        && (itr->native())[0] == dot
-        && itr != start
-        && itr != last) continue;
+    if(itr->native().size() == 1 && (itr->native())[0] == dot && itr != start &&
+       itr != last)
+      continue;
 
     // ignore a name and following ".."
-    if (!temp.empty()
-        && itr->native().size() == 2
-        && (itr->native())[0] == dot
-        && (itr->native())[1] == dot) {
-      std::string lf(temp.filename().native());  
-      if (lf.size() > 0  
-          && (lf.size() != 1
-	      || (lf[0] != dot
-		  && lf[0] != separator))
-          && (lf.size() != 2 
-	      || (lf[0] != dot
-		  && lf[1] != dot)
-	      )
-          ) {
-	temp.remove_filename();
-	path::iterator next(itr);
-	if (temp.empty() && ++next != stop
-            && next == last && *last == ".")
-	  temp /= ".";
-	continue;
+    if(!temp.empty() && itr->native().size() == 2 &&
+       (itr->native())[0] == dot && (itr->native())[1] == dot) {
+      std::string lf(temp.filename().native());
+      if(lf.size() > 0 &&
+         (lf.size() != 1 || (lf[0] != dot && lf[0] != separator)) &&
+         (lf.size() != 2 || (lf[0] != dot && lf[1] != dot))) {
+        temp.remove_filename();
+        path::iterator next(itr);
+        if(temp.empty() && ++next != stop && next == last && *last == ".")
+          temp /= ".";
+        continue;
       }
     }
 
     temp /= *itr;
   };
 
-  if (temp.empty())
+  if(temp.empty())
     temp /= ".";
   return temp;
 }
-
 
 //-----------------------------------------------------------------------
 /// Returns true if second path contains the first
 //-----------------------------------------------------------------------
 
-inline bool has_path(const path& p1,
-		     const path& p2)
+inline bool has_path(const path& p1, const path& p2)
 {
   path::iterator i2(p2.begin());
   for(path::iterator i1(p1.begin()); i1 != p1.end(); ++i1, ++i2) {
@@ -91,8 +80,7 @@ inline bool has_path(const path& p1,
 /// Removes second path from the first if it is present.
 //-----------------------------------------------------------------------
 
-inline path remove_path(const path& p1,
-			const path& p2)
+inline path remove_path(const path& p1, const path& p2)
 {
   if(!has_path(p1, p2))
     return p2;
@@ -100,7 +88,7 @@ inline path remove_path(const path& p1,
   for(path::iterator i1(p1.begin()); i1 != p1.end(); ++i1, ++i2)
     ;
   path res("/");
-  for(;i2 != p2.end(); ++i2)
+  for(; i2 != p2.end(); ++i2)
     res /= *i2;
   return res;
 }

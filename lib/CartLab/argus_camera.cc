@@ -6,17 +6,14 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void ArgusCamera::serialize(Archive & ar, const unsigned int version)
+void ArgusCamera::serialize(Archive& ar, const unsigned int version)
 {
-    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
-    ar & GEOCAL_NVP_(roll)
-      & GEOCAL_NVP_(pitch)
-      & GEOCAL_NVP_(yaw);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
+  ar& GEOCAL_NVP_(roll) & GEOCAL_NVP_(pitch) & GEOCAL_NVP_(yaw);
 }
 
 GEOCAL_IMPLEMENT(ArgusCamera);
 #endif
-
 
 //-----------------------------------------------------------------------
 /// Create a ARGUS camera. We read one of the image jpeg files to get
@@ -24,19 +21,16 @@ GEOCAL_IMPLEMENT(ArgusCamera);
 /// are in degrees, Focal_length is in mm.
 //-----------------------------------------------------------------------
 
-ArgusCamera::ArgusCamera(double Yaw, double Pitch, double Roll, 
-			 double Focal_length)
-: roll_(Roll),
-  pitch_(Pitch),
-  yaw_(Yaw)
+ArgusCamera::ArgusCamera(double Yaw, double Pitch, double Roll,
+                         double Focal_length)
+  : roll_(Roll), pitch_(Pitch), yaw_(Yaw)
 {
   focal_length_ = Focal_length;
   nband_ = 1;
   nline_ = 3744;
   nsamp_ = 5616;
   frame_convention_ = QuaternionCamera::LINE_IS_X;
-  principal_point_.push_back(FrameCoordinate(nline_ / 2.0,
-					     nsamp_ / 2.0));
+  principal_point_.push_back(FrameCoordinate(nline_ / 2.0, nsamp_ / 2.0));
   line_direction_ = QuaternionCamera::INCREASE_IS_NEGATIVE;
   sample_direction_ = QuaternionCamera::INCREASE_IS_POSITIVE;
 
@@ -48,9 +42,9 @@ ArgusCamera::ArgusCamera(double Yaw, double Pitch, double Roll,
   line_pitch_ = 24.0 / number_line(0);
   sample_pitch_ = 36.0 / number_sample(0);
 
-  frame_to_sc(quat_rot("ZYX", Yaw * Constant::deg_to_rad, 
-		       Pitch * Constant::deg_to_rad,
-		       Roll * Constant::deg_to_rad));
+  frame_to_sc(quat_rot("ZYX", Yaw * Constant::deg_to_rad,
+                       Pitch * Constant::deg_to_rad,
+                       Roll * Constant::deg_to_rad));
 }
 
 //-----------------------------------------------------------------------
@@ -61,18 +55,21 @@ ArgusCamera::ArgusCamera(double Yaw, double Pitch, double Roll,
 /// camera (i.e., it is not seen).
 //-----------------------------------------------------------------------
 
-FrameCoordinate ArgusCamera::frame_coordinate(const ScLookVector& Sl, 
-					      int Band) const
+FrameCoordinate ArgusCamera::frame_coordinate(const ScLookVector& Sl,
+                                              int Band) const
 {
   range_check(Band, 0, 1);
 
   // Just reverse of sc_look_vector.
-  boost::math::quaternion<double> fv = conj(frame_to_sc()) * Sl.look_quaternion() * frame_to_sc();
+  boost::math::quaternion<double> fv =
+      conj(frame_to_sc()) * Sl.look_quaternion() * frame_to_sc();
   FrameCoordinate fc;
-  fc.line = number_line(0) / 2.0 -
-    focal_length() * (fv.R_component_2() / fv.R_component_4()) / line_pitch();
+  fc.line =
+      number_line(0) / 2.0 -
+      focal_length() * (fv.R_component_2() / fv.R_component_4()) / line_pitch();
   fc.sample = number_sample(0) / 2.0 +
-    focal_length() * (fv.R_component_3() / fv.R_component_4()) / sample_pitch();
+              focal_length() * (fv.R_component_3() / fv.R_component_4()) /
+                  sample_pitch();
   return fc;
 }
 

@@ -4,7 +4,7 @@
 #include "hdf_file.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This is an implementation of an Orbit that reads position, velocity,
   and attitude quaternion from an HDF file. For times that fall
   between the values given in the file, we interpolate to get the
@@ -36,59 +36,55 @@ namespace GeoCal {
    that the attitude goes in the other direction. 
 *******************************************************************/
 
-template<class PositionType, class TimeCreatorType> class HdfOrbit : 
-    public OrbitArray<PositionType, TimeCreatorType> {
+template<class PositionType, class TimeCreatorType>
+class HdfOrbit : public OrbitArray<PositionType, TimeCreatorType> {
 public:
-
-//-----------------------------------------------------------------------
-/// Read the given orbit data file. You can optional pass the base
-/// group of the HDF file, the default is "/Orbit"
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Read the given orbit data file. You can optional pass the base
+  /// group of the HDF file, the default is "/Orbit"
+  //-----------------------------------------------------------------------
 
   HdfOrbit(const std::string& Fname, const std::string& Base_group = "Orbit",
-	   const std::string& Eph_time = "/Ephemeris/Time",
-	   const std::string& Eph_pos = "/Ephemeris/Position",
-	   const std::string& Eph_vel = "/Ephemeris/Velocity",
-	   const std::string& Att_time = "/Attitude/Time",
-	   const std::string& Att_quat = "/Attitude/Quaternion",
-	   bool Att_from_sc_to_ref_frame = true
-	   )
-    : fname(Fname),
-      bgroup(Base_group),
-      eph_time(Eph_time),
-      eph_pos(Eph_pos),
-      eph_vel(Eph_vel),
-      att_time(Att_time),
-      att_quat(Att_quat)
+           const std::string& Eph_time = "/Ephemeris/Time",
+           const std::string& Eph_pos = "/Ephemeris/Position",
+           const std::string& Eph_vel = "/Ephemeris/Velocity",
+           const std::string& Att_time = "/Attitude/Time",
+           const std::string& Att_quat = "/Attitude/Quaternion",
+           bool Att_from_sc_to_ref_frame = true)
+    : fname(Fname), bgroup(Base_group), eph_time(Eph_time), eph_pos(Eph_pos),
+      eph_vel(Eph_vel), att_time(Att_time), att_quat(Att_quat)
   {
-    OrbitArray<PositionType, TimeCreatorType>::att_from_sc_to_ref_frame = Att_from_sc_to_ref_frame;
+    OrbitArray<PositionType, TimeCreatorType>::att_from_sc_to_ref_frame =
+        Att_from_sc_to_ref_frame;
     init();
   }
   virtual ~HdfOrbit() {}
 
-//-----------------------------------------------------------------------
-/// Print to stream
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print to stream
+  //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const
   {
     Os << "HdfOrbit\n"
        << "  File name: " << file_name() << "\n"
-       << "  Min time:      " << OrbitArray<PositionType, TimeCreatorType>::min_time() << "\n"
-       << "  Max time:      " << OrbitArray<PositionType, TimeCreatorType>::max_time() << "\n";
+       << "  Min time:      "
+       << OrbitArray<PositionType, TimeCreatorType>::min_time() << "\n"
+       << "  Max time:      "
+       << OrbitArray<PositionType, TimeCreatorType>::max_time() << "\n";
   }
 
-//-----------------------------------------------------------------------
-/// Return the file name
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return the file name
+  //-----------------------------------------------------------------------
 
-  const std::string& file_name() const {return fname;}
+  const std::string& file_name() const { return fname; }
 
-//-----------------------------------------------------------------------
-/// Return the base group
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return the base group
+  //-----------------------------------------------------------------------
 
-  const std::string& base_group() const {return bgroup;}
+  const std::string& base_group() const { return bgroup; }
 protected:
   HdfOrbit() {}
 private:
@@ -99,8 +95,7 @@ private:
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive& Ar, const unsigned int version);
+  template<class Archive> void load(Archive& Ar, const unsigned int version);
   GEOCAL_SPLIT_MEMBER();
 };
 
@@ -108,25 +103,20 @@ private:
 /// Separate out initialization to make serialization a little easier
 //-----------------------------------------------------------------------
 
-template<class PositionType, class TimeCreatorType> inline 
-void HdfOrbit<PositionType, TimeCreatorType>::init()
+template<class PositionType, class TimeCreatorType>
+inline void HdfOrbit<PositionType, TimeCreatorType>::init()
 {
   using namespace blitz;
   HdfFile f(fname);
-  Array<double, 1> tdouble = 
-    f.read_field<double, 1>(bgroup + eph_time);
-  Array<double, 2> pos = 
-    f.read_field<double, 2>(bgroup + eph_pos);
-  Array<double, 2> vel = 
-    f.read_field<double, 2>(bgroup + eph_vel);
-  Array<double, 1> tdouble2 = 
-    f.read_field<double, 1>(bgroup + att_time);
-  Array<double, 2> quat = 
-    f.read_field<double, 2>(bgroup + att_quat);
-  OrbitArray<PositionType, TimeCreatorType>::init(tdouble,
-     pos, vel, tdouble2, quat,
-     OrbitArray<PositionType, TimeCreatorType>::att_from_sc_to_ref_frame,
-     false);
+  Array<double, 1> tdouble = f.read_field<double, 1>(bgroup + eph_time);
+  Array<double, 2> pos = f.read_field<double, 2>(bgroup + eph_pos);
+  Array<double, 2> vel = f.read_field<double, 2>(bgroup + eph_vel);
+  Array<double, 1> tdouble2 = f.read_field<double, 1>(bgroup + att_time);
+  Array<double, 2> quat = f.read_field<double, 2>(bgroup + att_quat);
+  OrbitArray<PositionType, TimeCreatorType>::init(
+      tdouble, pos, vel, tdouble2, quat,
+      OrbitArray<PositionType, TimeCreatorType>::att_from_sc_to_ref_frame,
+      false);
 }
 
 typedef HdfOrbit<EciTod, TimeAcsCreator> HdfOrbit_EciTod_TimeAcs;

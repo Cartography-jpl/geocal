@@ -23,28 +23,29 @@ using namespace GeoCal;
 /// columns are the image coordinate for the first and second images.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> DemMatch::surface_point
-(int Lstart, int Sstart, int Lend, int Send, int Lstride, int Sstride,
- bool Include_ic) const
+blitz::Array<double, 2> DemMatch::surface_point(int Lstart, int Sstart,
+                                                int Lend, int Send, int Lstride,
+                                                int Sstride,
+                                                bool Include_ic) const
 {
   include_ic = Include_ic;
   process_setup();
-  for(int i = Lstart; i < Lend;  i += Lstride)
+  for(int i = Lstart; i < Lend; i += Lstride)
     for(int j = Sstart; j < Send; j += Sstride) {
       try {
-	++npoint;
-	ic1 = ImageCoordinate(i, j);
-	match_->match(ic1, ic2, line_sigma, sample_sigma, 
-		      success, &diagnosticv);
-	process_match();
+        ++npoint;
+        ic1 = ImageCoordinate(i, j);
+        match_->match(ic1, ic2, line_sigma, sample_sigma, success,
+                      &diagnosticv);
+        process_match();
       } catch(ImageGroundConnectionFailed& E) {
-	// Just treat like out of range error
-	success = false;
-	diagnosticv = IMAGE_GROUND_CONNECTION_FAILED;
-	process_match();
+        // Just treat like out of range error
+        success = false;
+        diagnosticv = IMAGE_GROUND_CONNECTION_FAILED;
+        process_match();
       } catch(Exception& E) {
-	E << "Error occurred in Dem Match at point (" << i << ", " << j << ")";
-	throw;
+        E << "Error occurred in Dem Match at point (" << i << ", " << j << ")";
+        throw;
       }
     }
   return process_res();
@@ -58,33 +59,33 @@ blitz::Array<double, 2> DemMatch::surface_point
 //-----------------------------------------------------------------------
 
 blitz::Array<double, 2> DemMatch::surface_point(const MapInfo& Mi,
-						bool Include_ic) const
+                                                bool Include_ic) const
 {
   include_ic = Include_ic;
   process_setup();
   boost::shared_ptr<GroundCoordinate> gc;
   boost::shared_ptr<SurfaceImageToImageMatch> m =
-    boost::dynamic_pointer_cast<SurfaceImageToImageMatch>(match_);
+      boost::dynamic_pointer_cast<SurfaceImageToImageMatch>(match_);
   if(!m)
     throw Exception("match_ must be a SurfaceImageToImageMatch.");
-  for(int i = 0; i < Mi.number_x_pixel();  ++i)
-    for(int j = 0; j < Mi.number_y_pixel();  ++j) {
+  for(int i = 0; i < Mi.number_x_pixel(); ++i)
+    for(int j = 0; j < Mi.number_y_pixel(); ++j) {
       try {
-	++npoint;
-	gc = Mi.ground_coordinate(i, j);
-	m->match_surf(*gc, ic1, ic2, line_sigma, sample_sigma, 
-		      success, &diagnosticv);
-	process_match();
+        ++npoint;
+        gc = Mi.ground_coordinate(i, j);
+        m->match_surf(*gc, ic1, ic2, line_sigma, sample_sigma, success,
+                      &diagnosticv);
+        process_match();
       } catch(ImageGroundConnectionFailed& E) {
-	// Just treat like out of range error
-	success = false;
-	diagnosticv = IMAGE_GROUND_CONNECTION_FAILED;
-	process_match();
+        // Just treat like out of range error
+        success = false;
+        diagnosticv = IMAGE_GROUND_CONNECTION_FAILED;
+        process_match();
       } catch(Exception& E) {
-	E << "\nError occurred in Dem Match at surface point (" << i << ", " << j << "), gc: " << *gc;
-	throw;
+        E << "\nError occurred in Dem Match at surface point (" << i << ", "
+          << j << "), gc: " << *gc;
+        throw;
       }
-      
     }
   return process_res();
 }
@@ -114,23 +115,23 @@ void DemMatch::process_match() const
     if(success) {
       all_stat->add(dist);
       if(dist < max_dist) {
-	good_stat->add(dist);
-	// Optimization for Ecr
-	Ecr* ecr = dynamic_cast<Ecr*>(p.get());
-	if(ecr) {
-	  Geodetic g = ecr->convert_to_geodetic();
-	  res_lat.push_back(g.latitude());
-	  res_lon.push_back(g.longitude());
-	  res_h.push_back(g.height_reference_surface());
-	} else {
-	  res_lat.push_back(p->latitude());
-	  res_lon.push_back(p->longitude());
-	  res_h.push_back(p->height_reference_surface());
-	}
-	if(include_ic) {
-	  ic1v.push_back(ic1);
-	  ic2v.push_back(ic2);
-	}
+        good_stat->add(dist);
+        // Optimization for Ecr
+        Ecr* ecr = dynamic_cast<Ecr*>(p.get());
+        if(ecr) {
+          Geodetic g = ecr->convert_to_geodetic();
+          res_lat.push_back(g.latitude());
+          res_lon.push_back(g.longitude());
+          res_h.push_back(g.height_reference_surface());
+        } else {
+          res_lat.push_back(p->latitude());
+          res_lon.push_back(p->longitude());
+          res_h.push_back(p->height_reference_surface());
+        }
+        if(include_ic) {
+          ic1v.push_back(ic1);
+          ic2v.push_back(ic2);
+        }
       }
     }
   } else {
@@ -143,7 +144,7 @@ void DemMatch::process_match() const
 
 blitz::Array<double, 2> DemMatch::process_res() const
 {
-  blitz::Array<double, 2> res2((int) res_lat.size(), (include_ic ? 3 + 4 : 3));
+  blitz::Array<double, 2> res2((int)res_lat.size(), (include_ic ? 3 + 4 : 3));
   for(int i = 0; i < res2.rows(); ++i) {
     res2(i, 0) = res_lat[i];
     res2(i, 1) = res_lon[i];

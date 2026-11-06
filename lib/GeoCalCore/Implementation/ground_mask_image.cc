@@ -5,11 +5,11 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void GroundMaskImage::serialize(Archive & ar, const unsigned int version)
+void GroundMaskImage::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(GroundMask);
   GEOCAL_BASE(GroundMaskImage, GroundMask);
-  ar & GEOCAL_NVP(img) & GEOCAL_NVP(maskv) & GEOCAL_NVP_(outside_is_masked);
+  ar& GEOCAL_NVP(img) & GEOCAL_NVP(maskv) & GEOCAL_NVP_(outside_is_masked);
 }
 
 GEOCAL_IMPLEMENT(GroundMaskImage);
@@ -24,13 +24,13 @@ GEOCAL_IMPLEMENT(GroundMaskImage);
 bool GroundMaskImage::mask(const GroundCoordinate& Gc) const
 {
   ImageCoordinate ic = img->coordinate(Gc);
-  int i = (int) floor(ic.line);
-  int j = (int) floor(ic.sample);
-  if(i < 0 || i + 1 >= img->number_line() ||
-     j < 0 || j + 1 >= img->number_sample())
+  int i = (int)floor(ic.line);
+  int j = (int)floor(ic.sample);
+  if(i < 0 || i + 1 >= img->number_line() || j < 0 ||
+     j + 1 >= img->number_sample())
     return outside_is_masked_;
-  return ((*img)(i, j)     ==maskv || (*img)(i, j + 1) ==maskv ||
-	  (*img)(i + 1, j) ==maskv || (*img)(i + 1, j + 1) ==maskv);
+  return ((*img)(i, j) == maskv || (*img)(i, j + 1) == maskv ||
+          (*img)(i + 1, j) == maskv || (*img)(i + 1, j + 1) == maskv);
 }
 
 //-----------------------------------------------------------------------
@@ -38,21 +38,19 @@ bool GroundMaskImage::mask(const GroundCoordinate& Gc) const
 /// the comments of GroundMask for detailed discussion of the check.
 //-----------------------------------------------------------------------
 
-bool GroundMaskImage::region_masked(const GroundCoordinate& Ulc, 
-			      const GroundCoordinate& Lrc) const
+bool GroundMaskImage::region_masked(const GroundCoordinate& Ulc,
+                                    const GroundCoordinate& Lrc) const
 {
   ImageCoordinate ic1 = img->coordinate(Ulc);
   ImageCoordinate ic2 = img->coordinate(Lrc);
-  int i1 = (int) floor(std::min(ic1.line, ic2.line));
-  int j1 = (int) floor(std::min(ic1.sample, ic2.sample));
-  int i2 = (int) ceil(std::max(ic1.line, ic2.line));
-  int j2 = (int) ceil(std::max(ic1.sample, ic2.sample));
+  int i1 = (int)floor(std::min(ic1.line, ic2.line));
+  int j1 = (int)floor(std::min(ic1.sample, ic2.sample));
+  int i2 = (int)ceil(std::max(ic1.line, ic2.line));
+  int j2 = (int)ceil(std::max(ic1.sample, ic2.sample));
 
-  if(i1 < 0 || i2 >= img->number_line() ||
-     j1 < 0 || j2 >= img->number_sample())
+  if(i1 < 0 || i2 >= img->number_line() || j1 < 0 || j2 >= img->number_sample())
     return outside_is_masked_;
-  return blitz::any((*img).read(i1, j1, (i2 - i1) + 1, (j2 - j1) + 1) == 
-		    maskv);
+  return blitz::any((*img).read(i1, j1, (i2 - i1) + 1, (j2 - j1) + 1) == maskv);
 }
 
 //-----------------------------------------------------------------------
@@ -70,5 +68,3 @@ void GroundMaskImage::print(std::ostream& Os) const
   opad << *img << "\n";
   opad.strict_sync();
 }
-
-

@@ -9,19 +9,20 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void TiePoint::serialize(Archive & ar, const unsigned int UNUSED(version))
+void TiePoint::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(TiePoint);
-  ar & GEOCAL_NVP_(id) & GEOCAL_NVP_(is_gcp) & GEOCAL_NVP_(ground_location)
-    & GEOCAL_NVP_(ic) & GEOCAL_NVP_(line_sigma) & GEOCAL_NVP_(sample_sigma);
+  ar& GEOCAL_NVP_(id) & GEOCAL_NVP_(is_gcp) & GEOCAL_NVP_(ground_location) &
+      GEOCAL_NVP_(ic) & GEOCAL_NVP_(line_sigma) & GEOCAL_NVP_(sample_sigma);
 }
 
 template<class Archive>
-void TiePointCollection::serialize(Archive & ar, const unsigned int UNUSED(version))
+void TiePointCollection::serialize(Archive& ar,
+                                   const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(TiePointCollection);
   GEOCAL_BASE(TiePointCollection, TiePointVector);
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(TiePointVector);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(TiePointVector);
 }
 
 GEOCAL_IMPLEMENT(TiePoint);
@@ -33,14 +34,11 @@ GEOCAL_IMPLEMENT(TiePointCollection);
 //-----------------------------------------------------------------------
 
 TiePoint::TiePoint(const TiePoint& Tp)
-  : id_(Tp.id_),
-    is_gcp_(Tp.is_gcp_),
-    ground_location_(Tp.ground_location_->convert_to_cf()),
-    ic_(Tp.ic_.size()),
-    line_sigma_(Tp.line_sigma_.copy()),
-    sample_sigma_(Tp.sample_sigma_.copy())
+  : id_(Tp.id_), is_gcp_(Tp.is_gcp_),
+    ground_location_(Tp.ground_location_->convert_to_cf()), ic_(Tp.ic_.size()),
+    line_sigma_(Tp.line_sigma_.copy()), sample_sigma_(Tp.sample_sigma_.copy())
 {
-  for(int i = 0; i < (int) ic_.size(); ++i)
+  for(int i = 0; i < (int)ic_.size(); ++i)
     if(Tp.ic_[i])
       ic_[i] = boost::make_shared<ImageCoordinate>(*Tp.ic_[i]);
 }
@@ -57,7 +55,7 @@ TiePoint& TiePoint::operator=(const TiePoint& Tp)
   ic_.resize(Tp.ic_.size());
   line_sigma_.reference(Tp.line_sigma_.copy());
   sample_sigma_.reference(Tp.sample_sigma_.copy());
-  for(int i = 0; i < (int) ic_.size(); ++i)
+  for(int i = 0; i < (int)ic_.size(); ++i)
     if(Tp.ic_[i])
       ic_[i] = boost::make_shared<ImageCoordinate>(*Tp.ic_[i]);
   return *this;
@@ -77,12 +75,12 @@ void TiePoint::print(std::ostream& Os) const
     Os << *ground_location() << "\n";
   else
     Os << "None\n";
-  Os  << "  Image coordinate:\n";
+  Os << "  Image coordinate:\n";
   for(int i = 0; i < number_image(); ++i) {
     Os << "     ";
     if(image_coordinate(i))
       Os << *image_coordinate(i) << ", " << line_sigma(i) << ", "
-	 << sample_sigma(i) << "\n";
+         << sample_sigma(i) << "\n";
     else
       Os << "None\n";
   }
@@ -108,8 +106,8 @@ blitz::Array<double, 2> TiePoint::ic() const
       res(0, i) = ic_[i]->line;
       res(1, i) = ic_[i]->sample;
     } else {
-      res(0,i) = nanv;
-      res(1,i) = nanv;
+      res(0, i) = nanv;
+      res(1, i) = nanv;
     }
   return res;
 }
@@ -127,19 +125,18 @@ blitz::Array<double, 2> TiePoint::ic_sigma() const
       res(0, i) = line_sigma_(i);
       res(1, i) = sample_sigma_(i);
     } else {
-      res(0,i) = nanv;
-      res(1,i) = nanv;
+      res(0, i) = nanv;
+      res(1, i) = nanv;
     }
   return res;
 }
 
 //-----------------------------------------------------------------------
-/// Like ic, but uses the supplied igccol to predict the image 
+/// Like ic, but uses the supplied igccol to predict the image
 /// location given our current ground position.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> TiePoint::ic_pred
-(const IgcCollection& Igccol) const
+blitz::Array<double, 2> TiePoint::ic_pred(const IgcCollection& Igccol) const
 {
   blitz::Array<double, 2> res(2, number_image());
   double nanv = nan("");
@@ -149,8 +146,8 @@ blitz::Array<double, 2> TiePoint::ic_pred
       res(0, i) = icp.line;
       res(1, i) = icp.sample;
     } else {
-      res(0,i) = nanv;
-      res(1,i) = nanv;
+      res(0, i) = nanv;
+      res(1, i) = nanv;
     }
   return res;
 }
@@ -159,14 +156,12 @@ blitz::Array<double, 2> TiePoint::ic_pred
 /// Difference between observed and predicted image coordinates
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> TiePoint::ic_diff
-(const IgcCollection& Igccol) const
+blitz::Array<double, 2> TiePoint::ic_diff(const IgcCollection& Igccol) const
 {
   blitz::Array<double, 2> res(2, number_image());
   res = ic() - ic_pred(Igccol);
   return res;
 }
-
 
 //-----------------------------------------------------------------------
 /// Number of gcps.
@@ -203,23 +198,25 @@ void TiePointCollection::print(std::ostream& Os) const
 /// used to map it to the new image.
 //-----------------------------------------------------------------------
 
-void TiePointCollection::add_ibis_file
-(const std::string& Ibis_fname,
- const boost::shared_ptr<RasterImage>& New_image,
- const boost::shared_ptr<Dem>& D)
+void TiePointCollection::add_ibis_file(
+    const std::string& Ibis_fname,
+    const boost::shared_ptr<RasterImage>& New_image,
+    const boost::shared_ptr<Dem>& D)
 {
   IbisFile f(Ibis_fname);
   for(int i = 0; i < f.number_row(); ++i) {
     boost::shared_ptr<GroundCoordinate> gc;
     if(D)
-      gc = New_image->ground_coordinate(VicarImageCoordinate(f.data<double>(i,0), f.data<double>(i,1)), *D);
+      gc = New_image->ground_coordinate(
+          VicarImageCoordinate(f.data<double>(i, 0), f.data<double>(i, 1)), *D);
     else
-      gc = New_image->ground_coordinate(VicarImageCoordinate(f.data<double>(i,0), f.data<double>(i,1)));
+      gc = New_image->ground_coordinate(
+          VicarImageCoordinate(f.data<double>(i, 0), f.data<double>(i, 1)));
     boost::shared_ptr<TiePoint> tp = boost::make_shared<TiePoint>(1);
-    tp->id(i+1);
+    tp->id(i + 1);
     tp->is_gcp(true);
     tp->ground_location(gc->convert_to_cf());
-    VicarImageCoordinate ic(f.data<double>(i,2), f.data<double>(i,3));
+    VicarImageCoordinate ic(f.data<double>(i, 2), f.data<double>(i, 3));
     tp->image_coordinate(0, boost::make_shared<ImageCoordinate>(ic));
     push_back(tp);
   }
@@ -236,18 +233,18 @@ void TiePointCollection::add_ibis_file
 /// for each image in the tiepoints.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> TiePointCollection::data_array
-(const boost::shared_ptr<RasterImage>& Ref_image) const
+blitz::Array<double, 2> TiePointCollection::data_array(
+    const boost::shared_ptr<RasterImage>& Ref_image) const
 {
   double nanv = nan("");
   int numimg = (*this)[0]->number_image();
-  int numcol = 5 +  numimg * 4;
+  int numcol = 5 + numimg * 4;
   if(Ref_image)
     numcol += 2;
   blitz::Array<double, 2> res(size(), numcol);
   for(int i = 0; i < res.rows(); ++i) {
     boost::shared_ptr<TiePoint> tp = (*this)[i];
-    res(i,0) = tp->id();
+    res(i, 0) = tp->id();
     res(i, 1) = (tp->is_gcp() ? 1 : 0);
     res(i, 2) = tp->ground_location()->longitude();
     res(i, 3) = tp->ground_location()->latitude();
@@ -255,22 +252,22 @@ blitz::Array<double, 2> TiePointCollection::data_array
     int j = 5;
     if(Ref_image) {
       ImageCoordinate ic = Ref_image->coordinate(*tp->ground_location());
-      res(i,5) = ic.line;
-      res(i,6) = ic.sample;
+      res(i, 5) = ic.line;
+      res(i, 6) = ic.sample;
       j += 2;
     }
     for(int ii = 0; ii < numimg; ++ii) {
       boost::shared_ptr<ImageCoordinate> ic = tp->image_coordinate(ii);
       if(ic) {
-	res(i, j) = ic->line;
-	res(i, j+1) = ic->sample;
-	res(i, j+2) = tp->line_sigma(ii);
-	res(i, j+3) = tp->sample_sigma(ii);
+        res(i, j) = ic->line;
+        res(i, j + 1) = ic->sample;
+        res(i, j + 2) = tp->line_sigma(ii);
+        res(i, j + 3) = tp->sample_sigma(ii);
       } else {
-	res(i, j) = nanv;
-	res(i, j+1) = nanv;
-	res(i, j+2) = nanv;
-	res(i, j+3) = nanv;
+        res(i, j) = nanv;
+        res(i, j + 1) = nanv;
+        res(i, j + 2) = nanv;
+        res(i, j + 3) = nanv;
       }
       j += 4;
     }

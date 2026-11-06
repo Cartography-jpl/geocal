@@ -22,14 +22,14 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK(e1.position == p);
   BOOST_CHECK(e2.position == p);
 
-  // This is from sc2rpc test. 
+  // This is from sc2rpc test.
 
   Time t = Time::time_acs(215077459.471879);
   EciTodBurl::delta_ut1 = 0.1128609;
   EciTodBurl eci_tod(3435100.496, 945571.538, -6053387.573);
   boost::shared_ptr<GroundCoordinate> gc(eci_tod.convert_to_cf(t));
   Ecr ecr_exp(2508132.035257665440440, 2530473.205708642024547,
-	      -6053387.572999999858439);
+              -6053387.572999999858439);
   BOOST_CHECK(distance(ecr_exp, *gc) < 0.01);
 }
 

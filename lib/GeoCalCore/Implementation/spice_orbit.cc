@@ -9,21 +9,17 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void SpiceOrbit::save(Archive & ar, const unsigned int version) const
+void SpiceOrbit::save(Archive& ar, const unsigned int version) const
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
-    & GEOCAL_NVP_(body_id)
-    & GEOCAL_NVP_(satellite_id)
-    & GEOCAL_NVP_(kernel_name);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit) & GEOCAL_NVP_(body_id) &
+      GEOCAL_NVP_(satellite_id) & GEOCAL_NVP_(kernel_name);
 }
 
 template<class Archive>
-void SpiceOrbit::load(Archive & ar, const unsigned int version)
+void SpiceOrbit::load(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
-    & GEOCAL_NVP_(body_id)
-    & GEOCAL_NVP_(satellite_id)
-    & GEOCAL_NVP_(kernel_name);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit) & GEOCAL_NVP_(body_id) &
+      GEOCAL_NVP_(satellite_id) & GEOCAL_NVP_(kernel_name);
   if(kernel_name_ != "")
     SpiceHelper::add_kernel(kernel_name_);
 }
@@ -31,8 +27,8 @@ void SpiceOrbit::load(Archive & ar, const unsigned int version)
 GEOCAL_IMPLEMENT(SpiceOrbit);
 #endif
 
-template<class T> inline T dotb(const blitz::Array<T, 1>& x, 
-				const blitz::Array<T, 1>& y)
+template<class T>
+inline T dotb(const blitz::Array<T, 1>& x, const blitz::Array<T, 1>& y)
 {
   return sum(x * y);
 }
@@ -42,9 +38,9 @@ template<class T> inline T normb(const blitz::Array<T, 1>& x)
   return std::sqrt(dotb(x, x));
 }
 
-template<class T> inline blitz::Array<T, 1> cross2
-(const blitz::Array<T, 1>& x,
- const blitz::Array<T, 1>& y)
+template<class T>
+inline blitz::Array<T, 1> cross2(const blitz::Array<T, 1>& x,
+                                 const blitz::Array<T, 1>& y)
 {
   blitz::Array<T, 1> res(3);
   res(0) = x(1) * y(2) - x(2) * y(1);
@@ -65,14 +61,12 @@ template<class T> inline blitz::Array<T, 1> cross2
 /// kernel will be loaded.
 ///
 /// Note that if you pass a kernel name, we save that and make sure it
-/// is loaded when we create this class from serialization. 
+/// is loaded when we create this class from serialization.
 //-----------------------------------------------------------------------
 
 SpiceOrbit::SpiceOrbit(int Satellite_id, const std::string& Kernel_name,
-		       int Body_id)
-  : body_id_(Body_id),
-    satellite_id_(Satellite_id),
-    kernel_name_(Kernel_name)
+                       int Body_id)
+  : body_id_(Body_id), satellite_id_(Satellite_id), kernel_name_(Kernel_name)
 {
   if(kernel_name_ != "")
     SpiceHelper::add_kernel(kernel_name_);
@@ -83,9 +77,9 @@ SpiceOrbit::SpiceOrbit(int Satellite_id, const std::string& Kernel_name,
 boost::shared_ptr<OrbitData> SpiceOrbit::orbit_data(Time T) const
 {
   boost::array<double, 3> p, v;
-  SpiceHelper::state_vector(body_id_, 
-		    boost::lexical_cast<std::string>(satellite_spice_id()),
-		    T, p, v);
+  SpiceHelper::state_vector(
+      body_id_, boost::lexical_cast<std::string>(satellite_spice_id()), T, p,
+      v);
   boost::shared_ptr<CartesianFixed> pf;
   if(body_id_ == Ecr::EARTH_NAIF_CODE)
     pf.reset(new Ecr(p));
@@ -102,11 +96,10 @@ boost::shared_ptr<OrbitData> SpiceOrbit::orbit_data(Time T) const
   x = v2 - z * dotb(v2, z);
   x /= normb(x);
   y = cross2(z, x);
-  double sc_to_cf[3][3] = {{x(0), y(0), z(0)},
-			   {x(1), y(1), z(1)},
-			   {x(2), y(2), z(2)}};
-  return boost::shared_ptr<OrbitData>
-    (new QuaternionOrbitData(T, pf, v, matrix_to_quaternion(sc_to_cf)));
+  double sc_to_cf[3][3] = {
+      {x(0), y(0), z(0)}, {x(1), y(1), z(1)}, {x(2), y(2), z(2)}};
+  return boost::shared_ptr<OrbitData>(
+      new QuaternionOrbitData(T, pf, v, matrix_to_quaternion(sc_to_cf)));
 }
 
 // Print to stream
@@ -117,4 +110,3 @@ void SpiceOrbit::print(std::ostream& Os) const
      << "  Satellite ID: " << satellite_id() << "\n"
      << "  Kernel name:  " << kernel_name_ << "\n";
 }
-

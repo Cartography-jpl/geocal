@@ -5,7 +5,7 @@
 
 namespace GeoCal {
 
-/****************************************************************//**
+/****************************************************************/ /**
   This is the coordinates of a frame camera.
 
   We use the same convention that we do for ImageCoordinate, the
@@ -15,68 +15,72 @@ namespace GeoCal {
 
 class FrameCoordinate : public Printable<FrameCoordinate> {
 public:
-//-----------------------------------------------------------------------
-/// Default constructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Default constructor.
+  //-----------------------------------------------------------------------
 
   FrameCoordinate() {}
 
-//-----------------------------------------------------------------------
-/// Create a FrameCoordinate with the given coordinates.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Create a FrameCoordinate with the given coordinates.
+  //-----------------------------------------------------------------------
 
-  FrameCoordinate(double L, double S) :line(L), sample(S) {}
-  double line;			///< Line number
-  double sample;		///< Sample number
+  FrameCoordinate(double L, double S) : line(L), sample(S) {}
+  double line;   ///< Line number
+  double sample; ///< Sample number
   void print(std::ostream& Os) const;
 private:
   friend class boost::serialization::access;
-   template<class Archive>
-   void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void serialize(Archive& ar, const unsigned int version);
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   This is the coordinates of a frame camera, including derivatives.
 *******************************************************************/
 
-class FrameCoordinateWithDerivative : 
-    public Printable<FrameCoordinateWithDerivative> {
+class FrameCoordinateWithDerivative
+  : public Printable<FrameCoordinateWithDerivative> {
 public:
-//-----------------------------------------------------------------------
-/// Default constructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Default constructor.
+  //-----------------------------------------------------------------------
 
   FrameCoordinateWithDerivative() {}
 
-//-----------------------------------------------------------------------
-/// Create FrameCoordinateWithDerivative from FrameCoordinate, so line
-/// and sample are constants rather than having a gradient.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Create FrameCoordinateWithDerivative from FrameCoordinate, so line
+  /// and sample are constants rather than having a gradient.
+  //-----------------------------------------------------------------------
   FrameCoordinateWithDerivative(const FrameCoordinate& F)
   {
     line = F.line;
     sample = F.sample;
   }
 
-//-----------------------------------------------------------------------
-/// Create a FrameCoordinateWithDerivative with the given coordinates.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Create a FrameCoordinateWithDerivative with the given coordinates.
+  //-----------------------------------------------------------------------
 
-  FrameCoordinateWithDerivative(const AutoDerivative<double>& L, 
-				const AutoDerivative<double>& S) 
- :line(L), sample(S) {}
-  AutoDerivative<double> line;			///< Line number
-  AutoDerivative<double> sample;		///< Sample number
+  FrameCoordinateWithDerivative(const AutoDerivative<double>& L,
+                                const AutoDerivative<double>& S)
+    : line(L), sample(S)
+  {
+  }
+  AutoDerivative<double> line;   ///< Line number
+  AutoDerivative<double> sample; ///< Sample number
   void print(std::ostream& Os) const;
 
-//-----------------------------------------------------------------------
-/// Strip off derivative information and return FrameCoordinate.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Strip off derivative information and return FrameCoordinate.
+  //-----------------------------------------------------------------------
   FrameCoordinate value() const
-  { return FrameCoordinate(line.value(), sample.value()); }
+  {
+    return FrameCoordinate(line.value(), sample.value());
+  }
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 

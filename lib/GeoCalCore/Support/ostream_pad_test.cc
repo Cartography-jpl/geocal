@@ -8,7 +8,7 @@ BOOST_FIXTURE_TEST_SUITE(ostream_pad, GlobalFixture)
 BOOST_AUTO_TEST_CASE(basic)
 {
   std::ostringstream os;
-  {// Use destructor to make sure flush is called.
+  { // Use destructor to make sure flush is called.
     OstreamPad opad(os, "> ");
     opad << "Hi there\nBlahblah\n";
     OstreamPad opad2(opad, "+ ");

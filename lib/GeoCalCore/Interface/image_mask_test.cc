@@ -10,23 +10,25 @@ class EmptyMask : public ImageMask {
 public:
   EmptyMask() {}
   virtual ~EmptyMask() {}
-  virtual bool mask(int Line, int Sample) const {return false;}
+  virtual bool mask(int Line, int Sample) const { return false; }
   virtual bool area_any_masked(int Line, int Sample, int Number_line,
-			       int Number_sample) const
-  {return false;}
-  virtual void print(std::ostream& Os) const
-  {Os << "Empty mask\n";}
+                               int Number_sample) const
+  {
+    return false;
+  }
+  virtual void print(std::ostream& Os) const { Os << "Empty mask\n"; }
 };
 class AlwaysMask : public ImageMask {
 public:
   AlwaysMask() {}
   virtual ~AlwaysMask() {}
-  virtual bool mask(int Line, int Sample) const {return true;}
+  virtual bool mask(int Line, int Sample) const { return true; }
   virtual bool area_any_masked(int Line, int Sample, int Number_line,
-			       int Number_sample) const
-  {return true;}
-  virtual void print(std::ostream& Os) const
-  {Os << "Always mask\n";}
+                               int Number_sample) const
+  {
+    return true;
+  }
+  virtual void print(std::ostream& Os) const { Os << "Always mask\n"; }
 };
 
 BOOST_AUTO_TEST_CASE(combine_image_mask)
@@ -40,11 +42,14 @@ BOOST_AUTO_TEST_CASE(combine_image_mask)
   cmask.mask_list.push_back(empty);
   BOOST_CHECK(!cmask.mask(10, 20));
   BOOST_CHECK(!cmask.area_any_masked(10, 20, 100, 100));
-  BOOST_CHECK_EQUAL(cmask.print_to_string(), "CombinedImageMask: \n  Mask 1:\nEmpty mask\n");
+  BOOST_CHECK_EQUAL(cmask.print_to_string(),
+                    "CombinedImageMask: \n  Mask 1:\nEmpty mask\n");
   cmask.mask_list.push_back(always);
   BOOST_CHECK(cmask.mask(10, 20));
   BOOST_CHECK(cmask.area_any_masked(10, 20, 100, 100));
-  BOOST_CHECK_EQUAL(cmask.print_to_string(), "CombinedImageMask: \n  Mask 1:\nEmpty mask\n  Mask 2:\nAlways mask\n");
+  BOOST_CHECK_EQUAL(
+      cmask.print_to_string(),
+      "CombinedImageMask: \n  Mask 1:\nEmpty mask\n  Mask 2:\nAlways mask\n");
 }
 
 BOOST_AUTO_TEST_SUITE_END()

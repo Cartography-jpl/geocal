@@ -10,19 +10,18 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void AirMspiL1b1File::serialize(Archive & ar, const unsigned int version)
+void AirMspiL1b1File::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(TiledFile_float_2)
-    & GEOCAL_NVP(min_l1b1_line)
-    & GEOCAL_NVP(fname)
-    & GEOCAL_NVP_(row_index_to_use);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(TiledFile_float_2) &
+      GEOCAL_NVP(min_l1b1_line) & GEOCAL_NVP(fname) &
+      GEOCAL_NVP_(row_index_to_use);
 }
 
 template<class Archive>
-void AirMspiL1b1::serialize(Archive & ar, const unsigned int version)
+void AirMspiL1b1::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageTiledFile)
-    & GEOCAL_NVP_(l1b1_file);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageTiledFile) &
+      GEOCAL_NVP_(l1b1_file);
 }
 
 GEOCAL_IMPLEMENT(AirMspiL1b1);
@@ -35,32 +34,26 @@ GEOCAL_IMPLEMENT(AirMspiL1b1File);
 /// which is easily exceeded by opening just a few sequences.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<MSPI::Shared::L1B1Reader> 
-AirMspiL1b1File::l1b1_reader() const
+boost::shared_ptr<MSPI::Shared::L1B1Reader> AirMspiL1b1File::l1b1_reader() const
 {
 #ifdef HAVE_MSPI_SHARED
-  return boost::shared_ptr<MSPI::Shared::L1B1Reader>
-    (new MSPI::Shared::L1B1Reader(fname));
+  return boost::shared_ptr<MSPI::Shared::L1B1Reader>(
+      new MSPI::Shared::L1B1Reader(fname));
 #else
   throw Exception("This class requires that MSPI Shared library be available");
 #endif
 }
 
 //-----------------------------------------------------------------------
-/// Constructor. 
+/// Constructor.
 //-----------------------------------------------------------------------
 
-AirMspiL1b1File::AirMspiL1b1File
-(const std::string& Fname, 
- const std::string& Swath_to_use,
- int Min_l1b1_line,
- int Max_l1b1_line,
- int Tile_number_line,
- int Tile_number_sample,
- unsigned int Number_tile
-)
-  : fname(Fname),
-    min_l1b1_line(Min_l1b1_line)
+AirMspiL1b1File::AirMspiL1b1File(const std::string& Fname,
+                                 const std::string& Swath_to_use,
+                                 int Min_l1b1_line, int Max_l1b1_line,
+                                 int Tile_number_line, int Tile_number_sample,
+                                 unsigned int Number_tile)
+  : fname(Fname), min_l1b1_line(Min_l1b1_line)
 {
 #ifdef HAVE_MSPI_SHARED
   boost::shared_ptr<MSPI::Shared::L1B1Reader> l1read = l1b1_reader();
@@ -77,8 +70,7 @@ AirMspiL1b1File::AirMspiL1b1File
   boost::array<index, 2> file_size;
   boost::array<index, 2> tile_size;
   file_size[0] = l1read->number_frame(row_number_to_use()) - min_l1b1_line;
-  if(Max_l1b1_line > -1 &&
-     file_size[0] > Max_l1b1_line - min_l1b1_line + 1)
+  if(Max_l1b1_line > -1 && file_size[0] > Max_l1b1_line - min_l1b1_line + 1)
     file_size[0] = Max_l1b1_line - min_l1b1_line + 1;
   file_size[1] = l1read->number_pixel();
   if(Tile_number_line < 0)
@@ -102,7 +94,7 @@ AirMspiL1b1File::AirMspiL1b1File
 int AirMspiL1b1File::row_index_to_row_number(int Row_index) const
 {
   fill_in_row_number();
-  range_check(Row_index, 0, (int) row_number_.size());
+  range_check(Row_index, 0, (int)row_number_.size());
   return row_number_[Row_index];
 }
 
@@ -113,8 +105,8 @@ int AirMspiL1b1File::row_index_to_row_number(int Row_index) const
 int AirMspiL1b1File::row_number_to_row_index(int Row_number) const
 {
   fill_in_row_number();
-  std::vector<int>::const_iterator f = 
-    std::find(row_number_.begin(), row_number_.end(), Row_number);
+  std::vector<int>::const_iterator f =
+      std::find(row_number_.begin(), row_number_.end(), Row_number);
   if(f == row_number_.end()) {
     Exception e("Row number not assigned to row index: ");
     e << Row_number;
@@ -139,7 +131,7 @@ void AirMspiL1b1File::fill_in_row_number() const
 //-----------------------------------------------------------------------
 
 std::vector<std::string> AirMspiL1b1File::field_names(int Row_index) const
-{ 
+{
 #ifdef HAVE_MSPI_SHARED
   return l1b1_reader()->field_names(row_index_to_row_number(Row_index));
 #else
@@ -160,15 +152,15 @@ std::string AirMspiL1b1File::granule_id() const
 #endif
 }
 
-void AirMspiL1b1File::read_tile(const boost::array<index, 2>& Min_index, 
-	       const boost::array<index, 2>& Max_index, 
-	       float* Res) const
+void AirMspiL1b1File::read_tile(const boost::array<index, 2>& Min_index,
+                                const boost::array<index, 2>& Max_index,
+                                float* Res) const
 {
 #ifdef HAVE_MSPI_SHARED
-  boost::multi_array<float, 2> d = 
-    l1b1_reader()->read_data(row_number_to_use(), "I", Min_index[0] + min_l1b1_line,
-			   Max_index[0] - Min_index[0]);
-  for(int i = 0; i < (int) d.shape()[0]; ++i)
+  boost::multi_array<float, 2> d = l1b1_reader()->read_data(
+      row_number_to_use(), "I", Min_index[0] + min_l1b1_line,
+      Max_index[0] - Min_index[0]);
+  for(int i = 0; i < (int)d.shape()[0]; ++i)
     for(int j = Min_index[1]; j < Max_index[1]; ++j, ++Res)
       *Res = d[i][j];
 #else
@@ -186,8 +178,7 @@ std::vector<Time> AirMspiL1b1File::time() const
   boost::shared_ptr<MSPI::Shared::L1B1Reader> l1read = l1b1_reader();
   Time tepoch = Time::parse_time(l1read->epoch());
   std::vector<double> toffset =
-    l1read->read_time(row_number_to_use(), min_l1b1_line, 
-			   size()[0]);
+      l1read->read_time(row_number_to_use(), min_l1b1_line, size()[0]);
   std::vector<Time> tlist;
   BOOST_FOREACH(double toff, toffset)
     tlist.push_back(tepoch + toff);
@@ -202,7 +193,7 @@ std::vector<Time> AirMspiL1b1File::time() const
 //-----------------------------------------------------------------------
 
 float AirMspiL1b1File::wavelength(int Row_index) const
-{ 
+{
 #ifdef HAVE_MSPI_SHARED
   return l1b1_reader()->wavelength(row_index_to_row_number(Row_index));
 #else
@@ -214,9 +205,8 @@ float AirMspiL1b1File::wavelength(int Row_index) const
 /// Return the polarization angle for the given row_index.
 //-----------------------------------------------------------------------
 
-
 float AirMspiL1b1File::polarization_angle(int Row_index) const
-{ 
+{
 #ifdef HAVE_MSPI_SHARED
   return l1b1_reader()->polarization_angle(row_index_to_row_number(Row_index));
 #else
@@ -229,7 +219,7 @@ float AirMspiL1b1File::polarization_angle(int Row_index) const
 //-----------------------------------------------------------------------
 
 std::string AirMspiL1b1File::swath_name(int Row_index) const
-{ 
+{
 #ifdef HAVE_MSPI_SHARED
   return l1b1_reader()->swath_name(row_index_to_row_number(Row_index));
 #else
@@ -237,34 +227,26 @@ std::string AirMspiL1b1File::swath_name(int Row_index) const
 #endif
 }
 
-
 //-----------------------------------------------------------------------
-/// Constructor. 
+/// Constructor.
 //-----------------------------------------------------------------------
 
-AirMspiL1b1::AirMspiL1b1
-(const std::string& Fname, 
- const std::string& Swath_to_use,
- int Tile_number_line,
- int Tile_number_sample,
- unsigned int Number_tile
-)
-  : l1b1_file_(new AirMspiL1b1File(Fname, Swath_to_use, Tile_number_line, 
-				   Tile_number_sample, Number_tile))
+AirMspiL1b1::AirMspiL1b1(const std::string& Fname,
+                         const std::string& Swath_to_use, int Tile_number_line,
+                         int Tile_number_sample, unsigned int Number_tile)
+  : l1b1_file_(new AirMspiL1b1File(Fname, Swath_to_use, Tile_number_line,
+                                   Tile_number_sample, Number_tile))
 {
   initialize(l1b1_file_);
 }
 
 //-----------------------------------------------------------------------
-/// Constructor. 
+/// Constructor.
 //-----------------------------------------------------------------------
 
-AirMspiL1b1::AirMspiL1b1
-(const boost::shared_ptr<AirMspiL1b1File>& L1b1_file,
- int Tile_number_line,
- int Tile_number_sample,
- unsigned int Number_tile
-)
+AirMspiL1b1::AirMspiL1b1(const boost::shared_ptr<AirMspiL1b1File>& L1b1_file,
+                         int Tile_number_line, int Tile_number_sample,
+                         unsigned int Number_tile)
   : l1b1_file_(L1b1_file)
 {
   initialize(l1b1_file_);

@@ -8,17 +8,18 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RasterImage::serialize
-(Archive & UNUSED(ar), const unsigned int UNUSED(version))
+void RasterImage::serialize(Archive& UNUSED(ar),
+                            const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(RasterImage);
 }
 
 template<class Archive>
-void ArrayRasterImage::serialize(Archive & ar, const unsigned int UNUSED(version))
+void ArrayRasterImage::serialize(Archive& ar,
+                                 const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(ArrayRasterImage);
-  ar & GEOCAL_NVP_(img);
+  ar& GEOCAL_NVP_(img);
 }
 
 GEOCAL_IMPLEMENT(RasterImage);
@@ -30,11 +31,10 @@ GEOCAL_IMPLEMENT(ArrayRasterImage);
 //-----------------------------------------------------------------------
 
 RasterImageTileIterator::RasterImageTileIterator(const RasterImage& Ri)
-  : ri(Ri), istart_(0), jstart_(0), 
+  : ri(Ri), istart_(0), jstart_(0),
     iend_(std::min(Ri.number_tile_line(), Ri.number_line())),
     jend_(std::min(Ri.number_tile_sample(), Ri.number_sample())),
-    ntl(Ri.number_tile_line()),
-    nts(Ri.number_tile_sample())
+    ntl(Ri.number_tile_line()), nts(Ri.number_tile_sample())
 {
 }
 
@@ -44,13 +44,12 @@ RasterImageTileIterator::RasterImageTileIterator(const RasterImage& Ri)
 //-----------------------------------------------------------------------
 
 RasterImageTileIterator::RasterImageTileIterator(const RasterImage& Ri,
-						 int Number_tile_line,
-						 int Number_tile_sample)
-  : ri(Ri), istart_(0), jstart_(0), 
+                                                 int Number_tile_line,
+                                                 int Number_tile_sample)
+  : ri(Ri), istart_(0), jstart_(0),
     iend_(std::min(Number_tile_line, Ri.number_line())),
     jend_(std::min(Number_tile_sample, Ri.number_sample())),
-    ntl(Number_tile_line),
-    nts(Number_tile_sample)
+    ntl(Number_tile_line), nts(Number_tile_sample)
 {
   range_min_check(Number_tile_line, 1);
   range_min_check(Number_tile_sample, 1);
@@ -78,25 +77,26 @@ RasterImageTileIterator& RasterImageTileIterator::operator++()
 /// the given fill value.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> RasterImage::interpolate(double Line, double Sample, 
-	 int Number_line, int Number_sample, double Fill_value) const
+blitz::Array<double, 2> RasterImage::interpolate(double Line, double Sample,
+                                                 int Number_line,
+                                                 int Number_sample,
+                                                 double Fill_value) const
 {
-  int lint = (int) floor(Line);
-  int sint = (int) floor(Sample);
+  int lint = (int)floor(Line);
+  int sint = (int)floor(Sample);
   double lfrac = Line - lint;
   double sfrac = Sample - sint;
-  blitz::Array<double, 2> data = 
-    read_double_with_pad(lint, sint, Number_line + 1, 
-			 Number_sample + 1, Fill_value);
+  blitz::Array<double, 2> data = read_double_with_pad(
+      lint, sint, Number_line + 1, Number_sample + 1, Fill_value);
   blitz::Array<double, 2> res(Number_line, Number_sample);
   blitz::Range r1(0, Number_line - 1);
   blitz::Range r1p1(1, Number_line);
   blitz::Range r2(0, Number_sample - 1);
   blitz::Range r2p1(1, Number_sample);
   res = (1.0 - lfrac - sfrac + lfrac * sfrac) * data(r1, r2) +
-    (sfrac - lfrac * sfrac) * data(r1, r2p1) +
-    (lfrac - lfrac * sfrac) * data(r1p1, r2) +
-    (lfrac * sfrac) * data(r1p1, r2p1);
+        (sfrac - lfrac * sfrac) * data(r1, r2p1) +
+        (lfrac - lfrac * sfrac) * data(r1p1, r2) +
+        (lfrac * sfrac) * data(r1p1, r2p1);
   return res;
 }
 
@@ -104,9 +104,9 @@ blitz::Array<double, 2> RasterImage::interpolate(double Line, double Sample,
 /// Return a subset of the image.
 //-----------------------------------------------------------------------
 
-boost::multi_array<int, 2>
-RasterImage::read_array(int Lstart, int Sstart, int Number_line, 
-			int Number_sample) const 
+boost::multi_array<int, 2> RasterImage::read_array(int Lstart, int Sstart,
+                                                   int Number_line,
+                                                   int Number_sample) const
 {
   boost::multi_array<int, 2> res(boost::extents[Number_line][Number_sample]);
   read_ptr(Lstart, Sstart, Number_line, Number_sample, res.data());
@@ -117,15 +117,13 @@ RasterImage::read_array(int Lstart, int Sstart, int Number_line,
 /// Return a subset of the image.
 //-----------------------------------------------------------------------
 
-blitz::Array<int, 2>
-RasterImage::read(int Lstart, int Sstart, int Number_line, 
-			int Number_sample) const
+blitz::Array<int, 2> RasterImage::read(int Lstart, int Sstart, int Number_line,
+                                       int Number_sample) const
 {
   blitz::Array<int, 2> res(Number_line, Number_sample);
   read_ptr(Lstart, Sstart, Number_line, Number_sample, res.data());
   return res;
 }
-
 
 //-----------------------------------------------------------------------
 /// Return a subset of the image. This variation of read allows the
@@ -134,18 +132,17 @@ RasterImage::read(int Lstart, int Sstart, int Number_line,
 /// outside area.
 //-----------------------------------------------------------------------
 
-blitz::Array<int, 2>
-RasterImage::read_with_pad(int Lstart, int Sstart, int Number_line, 
-			   int Number_sample, int Fill_value) const
+blitz::Array<int, 2> RasterImage::read_with_pad(int Lstart, int Sstart,
+                                                int Number_line,
+                                                int Number_sample,
+                                                int Fill_value) const
 {
   range_min_check(Number_line, 1);
   range_min_check(Number_sample, 1);
   blitz::Array<int, 2> res(Number_line, Number_sample);
   res = Fill_value;
-  if(Lstart >= number_line() ||
-     Sstart >= number_sample() ||
-     Lstart + Number_line <= 0 ||
-     Sstart + Number_sample <= 0)
+  if(Lstart >= number_line() || Sstart >= number_sample() ||
+     Lstart + Number_line <= 0 || Sstart + Number_sample <= 0)
     return res;
   int lind = 0;
   int rline = Lstart;
@@ -167,8 +164,8 @@ RasterImage::read_with_pad(int Lstart, int Sstart, int Number_line,
     nlind = number_line() - rline;
   if(nsind > number_sample() - rsamp)
     nsind = number_sample() - rsamp;
-  res(blitz::Range(lind, lind + nlind-1), blitz::Range(sind, sind + nsind-1)) =
-    read(rline, rsamp, nlind, nsind);
+  res(blitz::Range(lind, lind + nlind - 1),
+      blitz::Range(sind, sind + nsind - 1)) = read(rline, rsamp, nlind, nsind);
   return res;
 }
 
@@ -176,25 +173,20 @@ RasterImage::read_with_pad(int Lstart, int Sstart, int Number_line,
 /// Return a subset of the image.
 //-----------------------------------------------------------------------
 
-blitz::Array<int, 2>
-RasterImage::read(const RasterImageTileIterator& Ti) const
+blitz::Array<int, 2> RasterImage::read(const RasterImageTileIterator& Ti) const
 {
-  return read(Ti.istart(), Ti.jstart(), Ti.number_line(),
-		    Ti.number_sample()); 
+  return read(Ti.istart(), Ti.jstart(), Ti.number_line(), Ti.number_sample());
 }
 
 //-----------------------------------------------------------------------
 // Write a subset of data, coming from a blitz::Array.
 //-----------------------------------------------------------------------
 
-void RasterImage::write(int Lstart, int Sstart, const blitz::Array<int, 2>& A) 
+void RasterImage::write(int Lstart, int Sstart, const blitz::Array<int, 2>& A)
 {
   Array<int, 2> data;
-  if(A.isStorageContiguous() &&
-     A.ordering(0) == 1 &&
-     A.ordering(1) == 2 &&
-     A.isRankStoredAscending(0) &&
-     A.isRankStoredAscending(1))
+  if(A.isStorageContiguous() && A.ordering(0) == 1 && A.ordering(1) == 2 &&
+     A.isRankStoredAscending(0) && A.isRankStoredAscending(1))
     data.reference(A);
   else {
     data.reference(Array<int, 2>(A.shape()));
@@ -203,14 +195,12 @@ void RasterImage::write(int Lstart, int Sstart, const blitz::Array<int, 2>& A)
   write_ptr(Lstart, Sstart, A.rows(), A.cols(), A.dataFirst());
 }
 
-void RasterImage::write(int Lstart, int Sstart, const blitz::Array<double, 2>& A) 
+void RasterImage::write(int Lstart, int Sstart,
+                        const blitz::Array<double, 2>& A)
 {
   Array<double, 2> data;
-  if(A.isStorageContiguous() &&
-     A.ordering(0) == 1 &&
-     A.ordering(1) == 2 &&
-     A.isRankStoredAscending(0) &&
-     A.isRankStoredAscending(1))
+  if(A.isStorageContiguous() && A.ordering(0) == 1 && A.ordering(1) == 2 &&
+     A.isRankStoredAscending(0) && A.isRankStoredAscending(1))
     data.reference(A);
   else {
     data.reference(Array<double, 2>(A.shape()));
@@ -258,7 +248,8 @@ double RasterImage::grid_center_sample_resolution() const
 /// we do the copying.
 //-----------------------------------------------------------------------
 
-void GeoCal::copy(const RasterImage& Img_in, RasterImage& Img_out, bool Diagnostic, int Tile_nline, int Tile_nsamp)
+void GeoCal::copy(const RasterImage& Img_in, RasterImage& Img_out,
+                  bool Diagnostic, int Tile_nline, int Tile_nsamp)
 {
   if(Img_out.number_line() != Img_in.number_line() ||
      Img_out.number_sample() != Img_in.number_sample())
@@ -272,18 +263,16 @@ void GeoCal::copy(const RasterImage& Img_in, RasterImage& Img_out, bool Diagnost
   std::vector<int> buf;
   if(!Img_in.copy_needs_double())
     buf.resize(tnl * tns);
-  for(int istart = 0; istart < Img_out.number_line();
-      istart += tnl)
-    for(int jstart = 0; jstart < Img_out.number_sample();
-	jstart += tns) {
+  for(int istart = 0; istart < Img_out.number_line(); istart += tnl)
+    for(int jstart = 0; jstart < Img_out.number_sample(); jstart += tns) {
       int nl = std::min(tnl, Img_out.number_line() - istart);
       int ns = std::min(tns, Img_out.number_sample() - jstart);
       if(Img_in.copy_needs_double())
-	Img_out.write(istart, jstart,
-		      Img_in.read_double(istart, jstart, nl, ns));
+        Img_out.write(istart, jstart,
+                      Img_in.read_double(istart, jstart, nl, ns));
       else {
-	Img_in.read_ptr(istart, jstart, nl, ns, &(*buf.begin()));
-	Img_out.write_ptr(istart, jstart, nl, ns, &(*buf.begin()));
+        Img_in.read_ptr(istart, jstart, nl, ns, &(*buf.begin()));
+        Img_out.write_ptr(istart, jstart, nl, ns, &(*buf.begin()));
       }
     }
 }
@@ -301,35 +290,32 @@ void GeoCal::copy(const RasterImage& Img_in, RasterImage& Img_out, bool Diagnost
 /// images to a common image.
 //-----------------------------------------------------------------------
 
-void GeoCal::copy_no_fill(const RasterImage& Img_in, RasterImage& Img_out, 
-			  int Fill_value, bool Diagnostic)
+void GeoCal::copy_no_fill(const RasterImage& Img_in, RasterImage& Img_out,
+                          int Fill_value, bool Diagnostic)
 {
   if(Img_out.number_line() != Img_in.number_line() ||
      Img_out.number_sample() != Img_in.number_sample())
     throw Exception("Images need to be the same size");
   int tnl = std::min(Img_in.number_tile_line(), Img_out.number_tile_line());
   int tns = std::min(Img_in.number_tile_sample(), Img_out.number_tile_sample());
-  for(int istart = 0; istart < Img_out.number_line();
-      istart += tnl)
-    for(int jstart = 0; jstart < Img_out.number_sample();
-	jstart += tns) {
+  for(int istart = 0; istart < Img_out.number_line(); istart += tnl)
+    for(int jstart = 0; jstart < Img_out.number_sample(); jstart += tns) {
       if(Diagnostic)
-	std::cerr << "Starting tile (" << istart << ", " << jstart 
-		  << ") of size (" << tnl << ", "
-		  << tns << ")\n";
+        std::cerr << "Starting tile (" << istart << ", " << jstart
+                  << ") of size (" << tnl << ", " << tns << ")\n";
       for(int i = istart; i < Img_out.number_line() && i < istart + tnl; ++i)
-	for(int j = jstart; j < Img_out.number_sample() && j < jstart + tns; 
-	    ++j) {
-	  if(Img_in.copy_needs_double()) {
-	    double v = Img_in.read_double(i, j, 1, 1)(0,0);
-	    if((int) v != Fill_value)
-	      Img_out.write(i, j, v);
-	  } else {
-	    int v = Img_in(i, j);
-	    if(v != Fill_value)
-	      Img_out.write(i, j, v);
-	  }
-	}
+        for(int j = jstart; j < Img_out.number_sample() && j < jstart + tns;
+            ++j) {
+          if(Img_in.copy_needs_double()) {
+            double v = Img_in.read_double(i, j, 1, 1)(0, 0);
+            if((int)v != Fill_value)
+              Img_out.write(i, j, v);
+          } else {
+            int v = Img_in(i, j);
+            if(v != Fill_value)
+              Img_out.write(i, j, v);
+          }
+        }
     }
 }
 
@@ -338,9 +324,8 @@ void GeoCal::copy_no_fill(const RasterImage& Img_in, RasterImage& Img_out,
 /// This fills an image with a given value (often 0).
 //-----------------------------------------------------------------------
 
-void GeoCal::fill_image
-(RasterImage& Img, int Fill_value,
- bool Diagnostic, int Tile_nline, int Tile_nsamp)
+void GeoCal::fill_image(RasterImage& Img, int Fill_value, bool Diagnostic,
+                        int Tile_nline, int Tile_nsamp)
 {
   int tnl = Img.number_tile_line();
   int tns = Img.number_tile_sample();
@@ -348,15 +333,12 @@ void GeoCal::fill_image
     tnl = Tile_nline;
   if(Tile_nsamp > 0)
     tns = Tile_nsamp;
-  for(int istart = 0; istart < Img.number_line();
-      istart += tnl)
-    for(int jstart = 0; jstart < Img.number_sample();
-	jstart += tns) {
+  for(int istart = 0; istart < Img.number_line(); istart += tnl)
+    for(int jstart = 0; jstart < Img.number_sample(); jstart += tns) {
       for(int i = istart; i < Img.number_line() && i < istart + tnl; ++i)
-	for(int j = jstart; j < Img.number_sample() && j < jstart + tns; 
-	    ++j) {
-	  Img.write(i, j, Fill_value);
-	}
+        for(int j = jstart; j < Img.number_sample() && j < jstart + tns; ++j) {
+          Img.write(i, j, Fill_value);
+        }
     }
 }
 
@@ -373,32 +355,29 @@ void GeoCal::fill_image
 /// mosaic and crop wherever there is already data.
 //-----------------------------------------------------------------------
 
-void GeoCal::copy_only_to_fill(const RasterImage& Img_in, RasterImage& Img_out, 
-			       int Fill_value, bool Diagnostic)
+void GeoCal::copy_only_to_fill(const RasterImage& Img_in, RasterImage& Img_out,
+                               int Fill_value, bool Diagnostic)
 {
   if(Img_out.number_line() != Img_in.number_line() ||
      Img_out.number_sample() != Img_in.number_sample())
     throw Exception("Images need to be the same size");
   int tnl = std::min(Img_in.number_tile_line(), Img_out.number_tile_line());
   int tns = std::min(Img_in.number_tile_sample(), Img_out.number_tile_sample());
-  for(int istart = 0; istart < Img_out.number_line();
-      istart += tnl)
-    for(int jstart = 0; jstart < Img_out.number_sample();
-	jstart += tns) {
+  for(int istart = 0; istart < Img_out.number_line(); istart += tnl)
+    for(int jstart = 0; jstart < Img_out.number_sample(); jstart += tns) {
       if(Diagnostic)
-	std::cerr << "Starting tile (" << istart << ", " << jstart 
-		  << ") of size (" << tnl << ", "
-		  << tns << ")\n";
+        std::cerr << "Starting tile (" << istart << ", " << jstart
+                  << ") of size (" << tnl << ", " << tns << ")\n";
       for(int i = istart; i < Img_out.number_line() && i < istart + tnl; ++i)
-	for(int j = jstart; j < Img_out.number_sample() && j < jstart + tns; 
-	    ++j) {
-	  if(Img_out.read(i, j) == Fill_value) {
-	    if(Img_in.copy_needs_double())
-	      Img_out.write(i, j, Img_in.read_double(i,j,1,1)(0,0));
-	    else
-	      Img_out.write(i, j, Img_in(i,j));
-	  }
-	}
+        for(int j = jstart; j < Img_out.number_sample() && j < jstart + tns;
+            ++j) {
+          if(Img_out.read(i, j) == Fill_value) {
+            if(Img_in.copy_needs_double())
+              Img_out.write(i, j, Img_in.read_double(i, j, 1, 1)(0, 0));
+            else
+              Img_out.write(i, j, Img_in(i, j));
+          }
+        }
     }
 }
 
@@ -409,9 +388,9 @@ void GeoCal::copy_only_to_fill(const RasterImage& Img_in, RasterImage& Img_out,
 /// of read as a double, but derived classes can override this.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> 
-RasterImage::read_double(int Lstart, int Sstart, int Number_line, 
-			 int Number_sample) const
+blitz::Array<double, 2> RasterImage::read_double(int Lstart, int Sstart,
+                                                 int Number_line,
+                                                 int Number_sample) const
 {
   Array<int, 2> dataint = read(Lstart, Sstart, Number_line, Number_sample);
   Array<double, 2> res(dataint.shape());
@@ -427,17 +406,15 @@ RasterImage::read_double(int Lstart, int Sstart, int Number_line,
 //-----------------------------------------------------------------------
 
 blitz::Array<double, 2>
-RasterImage::read_double_with_pad(int Lstart, int Sstart, int Number_line, 
-				  int Number_sample, double Fill_value) const
+RasterImage::read_double_with_pad(int Lstart, int Sstart, int Number_line,
+                                  int Number_sample, double Fill_value) const
 {
   range_min_check(Number_line, 1);
   range_min_check(Number_sample, 1);
   blitz::Array<double, 2> res(Number_line, Number_sample);
   res = Fill_value;
-  if(Lstart >= number_line() ||
-     Sstart >= number_sample() ||
-     Lstart + Number_line <= 0 ||
-     Sstart + Number_sample <= 0)
+  if(Lstart >= number_line() || Sstart >= number_sample() ||
+     Lstart + Number_line <= 0 || Sstart + Number_sample <= 0)
     return res;
   int lind = 0;
   int rline = Lstart;
@@ -459,8 +436,9 @@ RasterImage::read_double_with_pad(int Lstart, int Sstart, int Number_line,
     nlind = number_line() - rline;
   if(nsind > number_sample() - rsamp)
     nsind = number_sample() - rsamp;
-  res(blitz::Range(lind, lind + nlind-1), blitz::Range(sind, sind + nsind-1)) =
-    read_double(rline, rsamp, nlind, nsind);
+  res(blitz::Range(lind, lind + nlind - 1),
+      blitz::Range(sind, sind + nsind - 1)) =
+      read_double(rline, rsamp, nlind, nsind);
   return res;
 }
 
@@ -469,9 +447,9 @@ RasterImage::read_double_with_pad(int Lstart, int Sstart, int Number_line,
 /// with python, where this is faster than the normal interface.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> 
+blitz::Array<double, 2>
 RasterImage::coordinate(const blitz::Array<double, 1>& Lat,
-			const blitz::Array<double, 1>& Lon) const
+                        const blitz::Array<double, 1>& Lon) const
 {
   if(Lat.rows() != Lon.rows())
     throw Exception("Lat and Lon need to be the sampe size.");
@@ -483,5 +461,3 @@ RasterImage::coordinate(const blitz::Array<double, 1>& Lat,
   }
   return res;
 }
-
-

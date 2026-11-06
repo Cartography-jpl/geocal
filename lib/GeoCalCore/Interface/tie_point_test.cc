@@ -16,7 +16,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
   tp.image_coordinate(1, boost::make_shared<ImageCoordinate>(3, 4), 0.25, 0.35);
   BOOST_CHECK_EQUAL(tp.id(), 10);
   BOOST_CHECK(tp.is_gcp());
-  BOOST_CHECK(distance(*tp.ground_location(), Ecr(1,2,3)) < 0.1);
+  BOOST_CHECK(distance(*tp.ground_location(), Ecr(1, 2, 3)) < 0.1);
   BOOST_CHECK_EQUAL(tp.number_image(), 5);
   BOOST_CHECK_EQUAL(tp.number_image_location(), 2);
   BOOST_CHECK(!tp.image_coordinate(0));
@@ -43,7 +43,7 @@ BOOST_AUTO_TEST_CASE(tiepoint_collection_test)
   tp.id(12);
   tp.is_gcp(false);
   tpcol.push_back(boost::make_shared<TiePoint>(tp));
-  BOOST_CHECK_EQUAL((int) tpcol.size(), 3);
+  BOOST_CHECK_EQUAL((int)tpcol.size(), 3);
   BOOST_CHECK_EQUAL(tpcol.number_gcp(), 2);
 }
 
@@ -57,15 +57,14 @@ BOOST_AUTO_TEST_CASE(serialization)
   tp->is_gcp(true);
   tp->image_coordinate(3, boost::make_shared<ImageCoordinate>(1, 2), 0.2, 0.3);
   tp->image_coordinate(1, boost::make_shared<ImageCoordinate>(3, 4), 0.25,
-		       0.35);
+                       0.35);
   std::string d = serialize_write_string(tp);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<TiePoint> tp2 = 
-    serialize_read_string<TiePoint>(d);
+  boost::shared_ptr<TiePoint> tp2 = serialize_read_string<TiePoint>(d);
   BOOST_CHECK_EQUAL(tp2->id(), 10);
   BOOST_CHECK(tp2->is_gcp());
-  BOOST_CHECK(distance(*tp2->ground_location(), Ecr(1,2,3)) < 0.1);
+  BOOST_CHECK(distance(*tp2->ground_location(), Ecr(1, 2, 3)) < 0.1);
   BOOST_CHECK_EQUAL(tp2->number_image(), 5);
   BOOST_CHECK_EQUAL(tp2->number_image_location(), 2);
   BOOST_CHECK(!tp2->image_coordinate(0));
@@ -97,9 +96,9 @@ BOOST_AUTO_TEST_CASE(serialization_coll)
   std::string d = serialize_write_string(tpcol);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<TiePointCollection> tpcol2 = 
-    serialize_read_string<TiePointCollection>(d);
-  BOOST_CHECK_EQUAL((int) tpcol2->size(), 3);
+  boost::shared_ptr<TiePointCollection> tpcol2 =
+      serialize_read_string<TiePointCollection>(d);
+  BOOST_CHECK_EQUAL((int)tpcol2->size(), 3);
   BOOST_CHECK_EQUAL(tpcol2->number_gcp(), 2);
 }
 

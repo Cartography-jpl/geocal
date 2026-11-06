@@ -6,7 +6,7 @@
 #include <vector>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This class models the SPOT orbit. The orbit parameters are given 
   by an DIMAP file. This file is an XML file format. You can find 
   documentation for this format at
@@ -45,23 +45,23 @@ namespace GeoCal {
 
 class SpotOrbit : public Orbit {
 public:
-  SpotOrbit(const std::vector<Time>& Ephemeris_time, 
-	    const blitz::Array<double, 2>& Ephemeris,
-	    const std::vector<Time>& Attitude_time,
-	    const blitz::Array<double, 2>& Ypr);
+  SpotOrbit(const std::vector<Time>& Ephemeris_time,
+            const blitz::Array<double, 2>& Ephemeris,
+            const std::vector<Time>& Attitude_time,
+            const blitz::Array<double, 2>& Ypr);
   virtual ~SpotOrbit() {}
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
-  virtual boost::shared_ptr<OrbitData> 
+  virtual boost::shared_ptr<OrbitData>
   orbit_data(const TimeWithDerivative& T) const;
   virtual void print(std::ostream& Os) const;
 private:
   std::vector<Time> teph;
-  std::vector<blitz::Array<double, 1> > posvel;
-  std::map<Time, boost::math::quaternion<double> > sc_to_orb;
+  std::vector<blitz::Array<double, 1>> posvel;
+  std::map<Time, boost::math::quaternion<double>> sc_to_orb;
   SpotOrbit() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 

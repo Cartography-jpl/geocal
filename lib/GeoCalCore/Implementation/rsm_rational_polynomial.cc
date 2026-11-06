@@ -12,46 +12,33 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RsmRationalPolynomial::serialize(Archive & ar, const unsigned int version)
+void RsmRationalPolynomial::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RsmBase)
-    & GEOCAL_NVP_(line_offset)
-    & GEOCAL_NVP_(line_scale)
-    & GEOCAL_NVP_(sample_offset)
-    & GEOCAL_NVP_(sample_scale)    
-    & GEOCAL_NVP_(x_offset)
-    & GEOCAL_NVP_(x_scale)    
-    & GEOCAL_NVP_(y_offset)
-    & GEOCAL_NVP_(y_scale)    
-    & GEOCAL_NVP_(z_offset)
-    & GEOCAL_NVP_(z_scale)
-    & GEOCAL_NVP_(line_num)
-    & GEOCAL_NVP_(line_den)
-    & GEOCAL_NVP_(sample_num)
-    & GEOCAL_NVP_(sample_den)
-    & GEOCAL_NVP_(nline_fit)
-    & GEOCAL_NVP_(nsample_fit)
-    & GEOCAL_NVP_(nheight_fit)
-    & GEOCAL_NVP_(nsecond_pass_fit)
-    & GEOCAL_NVP_(ignore_igc_error_in_fit)
-    & GEOCAL_NVP_(line_fit_error)
-    & GEOCAL_NVP_(sample_fit_error);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(RsmBase) & GEOCAL_NVP_(line_offset) &
+      GEOCAL_NVP_(line_scale) & GEOCAL_NVP_(sample_offset) &
+      GEOCAL_NVP_(sample_scale) & GEOCAL_NVP_(x_offset) & GEOCAL_NVP_(x_scale) &
+      GEOCAL_NVP_(y_offset) & GEOCAL_NVP_(y_scale) & GEOCAL_NVP_(z_offset) &
+      GEOCAL_NVP_(z_scale) & GEOCAL_NVP_(line_num) & GEOCAL_NVP_(line_den) &
+      GEOCAL_NVP_(sample_num) & GEOCAL_NVP_(sample_den) &
+      GEOCAL_NVP_(nline_fit) & GEOCAL_NVP_(nsample_fit) &
+      GEOCAL_NVP_(nheight_fit) & GEOCAL_NVP_(nsecond_pass_fit) &
+      GEOCAL_NVP_(ignore_igc_error_in_fit) & GEOCAL_NVP_(line_fit_error) &
+      GEOCAL_NVP_(sample_fit_error);
   // Older version didn't have row_section_number_ or col_section_number_.
   if(version > 0) {
-    ar & GEOCAL_NVP_(row_section_number)
-      & GEOCAL_NVP_(col_section_number);
+    ar& GEOCAL_NVP_(row_section_number) & GEOCAL_NVP_(col_section_number);
   }
   boost::serialization::split_member(ar, *this, version);
 }
 
 template<class Archive>
-void RsmRationalPolynomial::save(Archive & ar, const unsigned int version) const
+void RsmRationalPolynomial::save(Archive& ar, const unsigned int version) const
 {
   // Nothing more to do
 }
 
 template<class Archive>
-void RsmRationalPolynomial::load(Archive & ar, const unsigned int version)
+void RsmRationalPolynomial::load(Archive& ar, const unsigned int version)
 {
   // Older version didn't have row_section_number_ or col_section_number_.
   if(version == 0) {
@@ -71,7 +58,7 @@ GEOCAL_IMPLEMENT(RsmRationalPolynomial);
 /// case (although it is pretty common).
 ///
 /// You can limit the over all order of cross terms by supplying a
-/// max_order for the numerator, denominator, or both. This holds all 
+/// max_order for the numerator, denominator, or both. This holds all
 /// cross terms with a total order > max to 0. The default is to not
 /// restrict the cross terms.
 ///
@@ -88,38 +75,24 @@ GEOCAL_IMPLEMENT(RsmRationalPolynomial);
 /// by setting Ignore_igc_error_in_fit to true.
 //-----------------------------------------------------------------------
 
-RsmRationalPolynomial::RsmRationalPolynomial
-(int Np_x, int Np_y, int Np_z, int Dp_x, int Dp_y,
- int Dp_z, int N_max_order, int D_max_order,int Nline_fit,
- int Nsample_fit, int Nheight_fit, int Nsecond_pass_fit,
- bool Ignore_igc_error_in_fit,
- int Row_section_number,
- int Col_section_number,
- const std::string& Image_identifier,
- const std::string& Rsm_support_data_edition
- )
- : RsmBase(Image_identifier, Rsm_support_data_edition),
-     row_section_number_(Row_section_number),
-     col_section_number_(Col_section_number),
-     line_offset_(0),
-     line_scale_(0),
-     sample_offset_(0),
-     sample_scale_(0),
-     x_offset_(0),
-     x_scale_(0),
-     y_offset_(0),
-     y_scale_(0),
-     z_offset_(0),
-     z_scale_(0),
-     nline_fit_(Nline_fit),
-     nsample_fit_(Nsample_fit),
-     nheight_fit_(Nheight_fit),
-     nsecond_pass_fit_(Nsecond_pass_fit),
-     ignore_igc_error_in_fit_(Ignore_igc_error_in_fit),
-     line_num_(Np_x, Np_y, Np_z, false, N_max_order),
-     line_den_(Dp_x, Dp_y, Dp_z, true, D_max_order),
-     sample_num_(Np_x, Np_y, Np_z, false, N_max_order),
-     sample_den_(Dp_x, Dp_y, Dp_z, true, D_max_order)
+RsmRationalPolynomial::RsmRationalPolynomial(
+    int Np_x, int Np_y, int Np_z, int Dp_x, int Dp_y, int Dp_z, int N_max_order,
+    int D_max_order, int Nline_fit, int Nsample_fit, int Nheight_fit,
+    int Nsecond_pass_fit, bool Ignore_igc_error_in_fit, int Row_section_number,
+    int Col_section_number, const std::string& Image_identifier,
+    const std::string& Rsm_support_data_edition)
+  : RsmBase(Image_identifier, Rsm_support_data_edition),
+    row_section_number_(Row_section_number),
+    col_section_number_(Col_section_number), line_offset_(0), line_scale_(0),
+    sample_offset_(0), sample_scale_(0), x_offset_(0), x_scale_(0),
+    y_offset_(0), y_scale_(0), z_offset_(0), z_scale_(0), nline_fit_(Nline_fit),
+    nsample_fit_(Nsample_fit), nheight_fit_(Nheight_fit),
+    nsecond_pass_fit_(Nsecond_pass_fit),
+    ignore_igc_error_in_fit_(Ignore_igc_error_in_fit),
+    line_num_(Np_x, Np_y, Np_z, false, N_max_order),
+    line_den_(Dp_x, Dp_y, Dp_z, true, D_max_order),
+    sample_num_(Np_x, Np_y, Np_z, false, N_max_order),
+    sample_den_(Dp_x, Dp_y, Dp_z, true, D_max_order)
 {
 }
 
@@ -127,18 +100,18 @@ RsmRationalPolynomial::RsmRationalPolynomial
 /// Apply the rational polynomial to the given X, Y, and Z value.
 //-----------------------------------------------------------------------
 
-ImageCoordinate RsmRationalPolynomial::image_coordinate
-(double X, double Y, double Z) const
+ImageCoordinate RsmRationalPolynomial::image_coordinate(double X, double Y,
+                                                        double Z) const
 {
   double xs = (X - x_offset_) / x_scale_;
   double ys = (Y - y_offset_) / y_scale_;
   double zs = (Z - z_offset_) / z_scale_;
-  double f1 = line_num_(xs,ys,zs);
-  double f2 = line_den_(xs,ys,zs);
-  double f3 = sample_num_(xs,ys,zs);
-  double f4 = sample_den_(xs,ys,zs);
+  double f1 = line_num_(xs, ys, zs);
+  double f2 = line_den_(xs, ys, zs);
+  double f3 = sample_num_(xs, ys, zs);
+  double f4 = sample_den_(xs, ys, zs);
   return ImageCoordinate(f1 / f2 * line_scale_ + line_offset_,
-			 f3 / f4 * sample_scale_ + sample_offset_);
+                         f3 / f4 * sample_scale_ + sample_offset_);
 }
 
 //-----------------------------------------------------------------------
@@ -148,20 +121,21 @@ ImageCoordinate RsmRationalPolynomial::image_coordinate
 /// second the sample.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> RsmRationalPolynomial::image_coordinate
-(const blitz::Array<double, 1>& X, const blitz::Array<double, 1>& Y,
- const blitz::Array<double, 1>& Z) const
+blitz::Array<double, 2>
+RsmRationalPolynomial::image_coordinate(const blitz::Array<double, 1>& X,
+                                        const blitz::Array<double, 1>& Y,
+                                        const blitz::Array<double, 1>& Z) const
 {
   Range ra = Range::all();
-  Array<double, 1> xs(X.shape()), ys(Y.shape()), zs(Z.shape()),
-    f1(X.shape()), f2(X.shape()), f3(X.shape()), f4(X.shape());
+  Array<double, 1> xs(X.shape()), ys(Y.shape()), zs(Z.shape()), f1(X.shape()),
+      f2(X.shape()), f3(X.shape()), f4(X.shape());
   xs = (X - x_offset_) / x_scale_;
   ys = (Y - y_offset_) / y_scale_;
   zs = (Z - z_offset_) / z_scale_;
-  f1 = line_num_(xs,ys,zs);
-  f2 = line_den_(xs,ys,zs);
-  f3 = sample_num_(xs,ys,zs);
-  f4 = sample_den_(xs,ys,zs);
+  f1 = line_num_(xs, ys, zs);
+  f2 = line_den_(xs, ys, zs);
+  f3 = sample_num_(xs, ys, zs);
+  f4 = sample_den_(xs, ys, zs);
   Array<double, 2> res(2, xs.rows());
   res(0, ra) = f1 / f2 * line_scale_ + line_offset_;
   res(1, ra) = f3 / f4 * sample_scale_ + sample_offset_;
@@ -175,20 +149,21 @@ blitz::Array<double, 2> RsmRationalPolynomial::image_coordinate
 /// second the sample.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 3> RsmRationalPolynomial::image_coordinate
-(const blitz::Array<double, 2>& X, const blitz::Array<double, 2>& Y,
- const blitz::Array<double, 2>& Z) const
+blitz::Array<double, 3>
+RsmRationalPolynomial::image_coordinate(const blitz::Array<double, 2>& X,
+                                        const blitz::Array<double, 2>& Y,
+                                        const blitz::Array<double, 2>& Z) const
 {
   Range ra = Range::all();
-  Array<double, 2> xs(X.shape()), ys(Y.shape()), zs(Z.shape()),
-    f1(X.shape()), f2(X.shape()), f3(X.shape()), f4(X.shape());
+  Array<double, 2> xs(X.shape()), ys(Y.shape()), zs(Z.shape()), f1(X.shape()),
+      f2(X.shape()), f3(X.shape()), f4(X.shape());
   xs = (X - x_offset_) / x_scale_;
   ys = (Y - y_offset_) / y_scale_;
   zs = (Z - z_offset_) / z_scale_;
-  f1 = line_num_(xs,ys,zs);
-  f2 = line_den_(xs,ys,zs);
-  f3 = sample_num_(xs,ys,zs);
-  f4 = sample_den_(xs,ys,zs);
+  f1 = line_num_(xs, ys, zs);
+  f2 = line_den_(xs, ys, zs);
+  f3 = sample_num_(xs, ys, zs);
+  f4 = sample_den_(xs, ys, zs);
   Array<double, 3> res(2, xs.rows(), xs.cols());
   res(0, ra, ra) = f1 / f2 * line_scale_ + line_offset_;
   res(1, ra, ra) = f3 / f4 * sample_scale_ + sample_offset_;
@@ -202,20 +177,21 @@ blitz::Array<double, 3> RsmRationalPolynomial::image_coordinate
 /// second the sample.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 4> RsmRationalPolynomial::image_coordinate
-(const blitz::Array<double, 3>& X, const blitz::Array<double, 3>& Y,
- const blitz::Array<double, 3>& Z) const
+blitz::Array<double, 4>
+RsmRationalPolynomial::image_coordinate(const blitz::Array<double, 3>& X,
+                                        const blitz::Array<double, 3>& Y,
+                                        const blitz::Array<double, 3>& Z) const
 {
   Range ra = Range::all();
-  Array<double, 3> xs(X.shape()), ys(Y.shape()), zs(Z.shape()),
-    f1(X.shape()), f2(X.shape()), f3(X.shape()), f4(X.shape());
+  Array<double, 3> xs(X.shape()), ys(Y.shape()), zs(Z.shape()), f1(X.shape()),
+      f2(X.shape()), f3(X.shape()), f4(X.shape());
   xs = (X - x_offset_) / x_scale_;
   ys = (Y - y_offset_) / y_scale_;
   zs = (Z - z_offset_) / z_scale_;
-  f1 = line_num_(xs,ys,zs);
-  f2 = line_den_(xs,ys,zs);
-  f3 = sample_num_(xs,ys,zs);
-  f4 = sample_den_(xs,ys,zs);
+  f1 = line_num_(xs, ys, zs);
+  f2 = line_den_(xs, ys, zs);
+  f3 = sample_num_(xs, ys, zs);
+  f4 = sample_den_(xs, ys, zs);
   Array<double, 4> res(2, xs.rows(), xs.cols(), xs.depth());
   res(0, ra, ra, ra) = f1 / f2 * line_scale_ + line_offset_;
   res(1, ra, ra, ra) = f3 / f4 * sample_scale_ + sample_offset_;
@@ -251,11 +227,10 @@ void RsmRationalPolynomial::set_rpc_coeff(const Rpc& R)
 /// Find the scale and offset values to cover the given range of data.
 //-----------------------------------------------------------------------
 
-void RsmRationalPolynomial::fit_offset_and_scale
-(double Min_line, double Max_line, double Min_sample,
- double Max_sample, double Min_x, double Max_x,
- double Min_y, double Max_y, double Min_z,
- double Max_z)
+void RsmRationalPolynomial::fit_offset_and_scale(
+    double Min_line, double Max_line, double Min_sample, double Max_sample,
+    double Min_x, double Max_x, double Min_y, double Max_y, double Min_z,
+    double Max_z)
 {
   line_offset_ = (Max_line + Min_line) / 2.0;
   line_scale_ = (Max_line - Min_line) / 2.0;
@@ -276,26 +251,24 @@ void RsmRationalPolynomial::fit_offset_and_scale
 /// call fit_offset_and_scale).
 //-----------------------------------------------------------------------
 
-void RsmRationalPolynomial::fit_data
-(const std::vector<double>& Line,
- const std::vector<double>& Sample,
- const std::vector<double>& X,
- const std::vector<double>& Y,
- const std::vector<double>& Z)
+void RsmRationalPolynomial::fit_data(const std::vector<double>& Line,
+                                     const std::vector<double>& Sample,
+                                     const std::vector<double>& X,
+                                     const std::vector<double>& Y,
+                                     const std::vector<double>& Z)
 {
-  firstIndex i1; secondIndex i2;
+  firstIndex i1;
+  secondIndex i2;
   Range ra = Range::all();
-  if(Line.size() != Sample.size() ||
-     Line.size() != X.size() ||
-     Line.size() != Y.size() ||
-     Line.size() != Z.size())
+  if(Line.size() != Sample.size() || Line.size() != X.size() ||
+     Line.size() != Y.size() || Line.size() != Z.size())
     throw Exception("Line, Sample, X, Y and Z all need to be the same size");
   Array<double, 1> ln_lhs(Line.size());
   Array<double, 1> smp_lhs(Line.size());
   Array<double, 1> xs(Line.size());
   Array<double, 1> ys(Line.size());
   Array<double, 1> zs(Line.size());
-  for(int i = 0; i < (int) Line.size(); ++i) {
+  for(int i = 0; i < (int)Line.size(); ++i) {
     xs(i) = (X[i] - x_offset_) / x_scale_;
     ys(i) = (Y[i] - y_offset_) / y_scale_;
     zs(i) = (Z[i] - z_offset_) / z_scale_;
@@ -303,27 +276,25 @@ void RsmRationalPolynomial::fit_data
     smp_lhs(i) = (Sample[i] - sample_offset_) / sample_scale_;
   }
   Array<double, 2> ln_den_jac =
-    line_den_.jacobian_fitted_coefficent(xs, ys, zs);
+      line_den_.jacobian_fitted_coefficent(xs, ys, zs);
   Array<double, 2> smp_den_jac =
-    sample_den_.jacobian_fitted_coefficent(xs, ys, zs);
+      sample_den_.jacobian_fitted_coefficent(xs, ys, zs);
   Array<double, 2> ln_num_jac =
-    line_num_.jacobian_fitted_coefficent(xs, ys, zs);
+      line_num_.jacobian_fitted_coefficent(xs, ys, zs);
   Array<double, 2> smp_num_jac =
-    sample_num_.jacobian_fitted_coefficent(xs, ys, zs);
-  Array<double, 2> ln_jac(ln_den_jac.rows(), ln_den_jac.cols() +
-			  ln_num_jac.cols());
-  Array<double, 2> smp_jac(smp_den_jac.rows(), smp_den_jac.cols() +
-			   smp_num_jac.cols());
+      sample_num_.jacobian_fitted_coefficent(xs, ys, zs);
+  Array<double, 2> ln_jac(ln_den_jac.rows(),
+                          ln_den_jac.cols() + ln_num_jac.cols());
+  Array<double, 2> smp_jac(smp_den_jac.rows(),
+                           smp_den_jac.cols() + smp_num_jac.cols());
   if(ln_num_jac.cols() > 0)
     ln_jac(ra, Range(0, ln_num_jac.cols() - 1)) = ln_num_jac;
   if(ln_den_jac.cols() > 0)
-    ln_jac(ra, Range(ln_num_jac.cols(), toEnd)) =
-      -ln_lhs(i1) * ln_den_jac;
+    ln_jac(ra, Range(ln_num_jac.cols(), toEnd)) = -ln_lhs(i1) * ln_den_jac;
   if(smp_num_jac.cols() > 0)
     smp_jac(ra, Range(0, smp_num_jac.cols() - 1)) = smp_num_jac;
   if(smp_den_jac.cols() > 0)
-    smp_jac(ra, Range(smp_num_jac.cols(), toEnd)) =
-      -smp_lhs(i1) * smp_den_jac;
+    smp_jac(ra, Range(smp_num_jac.cols(), toEnd)) = -smp_lhs(i1) * smp_den_jac;
   GslMatrix cov;
   GslVector ln_c;
   GslVector smp_c;
@@ -332,23 +303,23 @@ void RsmRationalPolynomial::fit_data
   gsl_fit(smp_jac, smp_lhs, smp_c, cov, chisq);
   blitz::Array<double, 1> empty_coeff;
   if(ln_num_jac.cols() > 0)
-    line_num_.fitted_coefficent(ln_c.blitz_array()(Range(0,
-							 ln_num_jac.cols()-1)));
+    line_num_.fitted_coefficent(
+        ln_c.blitz_array()(Range(0, ln_num_jac.cols() - 1)));
   else
     line_num_.fitted_coefficent(empty_coeff);
   if(ln_den_jac.cols() > 0)
-    line_den_.fitted_coefficent(ln_c.blitz_array()(Range(ln_num_jac.cols(),
-							 toEnd)));
+    line_den_.fitted_coefficent(
+        ln_c.blitz_array()(Range(ln_num_jac.cols(), toEnd)));
   else
     line_den_.fitted_coefficent(empty_coeff);
   if(smp_num_jac.cols() > 0)
-    sample_num_.fitted_coefficent(smp_c.blitz_array()(Range(0,
-					       smp_num_jac.cols()-1)));
+    sample_num_.fitted_coefficent(
+        smp_c.blitz_array()(Range(0, smp_num_jac.cols() - 1)));
   else
     sample_num_.fitted_coefficent(empty_coeff);
   if(smp_den_jac.cols() > 0)
-    sample_den_.fitted_coefficent(smp_c.blitz_array()(Range(smp_num_jac.cols(),
-							    toEnd)));
+    sample_den_.fitted_coefficent(
+        smp_c.blitz_array()(Range(smp_num_jac.cols(), toEnd)));
   else
     sample_den_.fitted_coefficent(empty_coeff);
 }
@@ -363,117 +334,117 @@ void RsmRationalPolynomial::fit_data
 /// line/samples to fit over.
 //-----------------------------------------------------------------------
 
-void RsmRationalPolynomial::fit
-(const ImageGroundConnection& Igc,
- const CoordinateConverter& Cconv,
- double Min_height, double Max_height,
- int Min_line, int Max_line, int Min_sample,
- int Max_sample)
+void RsmRationalPolynomial::fit(const ImageGroundConnection& Igc,
+                                const CoordinateConverter& Cconv,
+                                double Min_height, double Max_height,
+                                int Min_line, int Max_line, int Min_sample,
+                                int Max_sample)
 {
   std::vector<double> line, sample, x, y, z;
   for(int i = 0; i < nline_fit_; ++i)
     for(int j = 0; j < nsample_fit_; ++j)
       for(int k = 0; k < nheight_fit_; ++k) {
-	try {
-	  double ln = Min_line + (Max_line - Min_line) /
-	    (nline_fit_ - 1.0) * i;
-	  double smp = Min_sample + (Max_sample - Min_sample) /
-	    (nsample_fit_ - 1.0) * j;
-	  double h = Min_height + (Max_height - Min_height) /
-	    (nheight_fit_ - 1.0) * k;
-	  boost::shared_ptr<GroundCoordinate> gc =
-	    Igc.ground_coordinate_approx_height(ImageCoordinate(ln, smp), h);
-	  line.push_back(ln);
-	  sample.push_back(smp);
-	  double xv, yv, zv;
-	  Cconv.convert_to_coordinate(*gc, xv, yv, zv);
-	  x.push_back(xv);
-	  y.push_back(yv);
-	  z.push_back(zv);
-	} catch(const ImageGroundConnectionFailed&) {
-	  // Ignore failures, just go to next point.
-	} catch(...) {
-	  if(!ignore_igc_error_in_fit_)
-	    throw;
-	}
+        try {
+          double ln = Min_line + (Max_line - Min_line) / (nline_fit_ - 1.0) * i;
+          double smp =
+              Min_sample + (Max_sample - Min_sample) / (nsample_fit_ - 1.0) * j;
+          double h =
+              Min_height + (Max_height - Min_height) / (nheight_fit_ - 1.0) * k;
+          boost::shared_ptr<GroundCoordinate> gc =
+              Igc.ground_coordinate_approx_height(ImageCoordinate(ln, smp), h);
+          line.push_back(ln);
+          sample.push_back(smp);
+          double xv, yv, zv;
+          Cconv.convert_to_coordinate(*gc, xv, yv, zv);
+          x.push_back(xv);
+          y.push_back(yv);
+          z.push_back(zv);
+        } catch(const ImageGroundConnectionFailed&) {
+          // Ignore failures, just go to next point.
+        } catch(...) {
+          if(!ignore_igc_error_in_fit_)
+            throw;
+        }
       }
   if(line.size() == 0)
     throw Exception("Did not get any points for RsmRationalPolynomial fit");
   fit_offset_and_scale(Min_line, Max_line, Min_sample, Max_sample,
-		       *std::min_element(x.begin(), x.end()),
-		       *std::max_element(x.begin(), x.end()),
-		       *std::min_element(y.begin(), y.end()),
-		       *std::max_element(y.begin(), y.end()),
-		       *std::min_element(z.begin(), z.end()),
-		       *std::max_element(z.begin(), z.end()));
+                       *std::min_element(x.begin(), x.end()),
+                       *std::max_element(x.begin(), x.end()),
+                       *std::min_element(y.begin(), y.end()),
+                       *std::max_element(y.begin(), y.end()),
+                       *std::min_element(z.begin(), z.end()),
+                       *std::max_element(z.begin(), z.end()));
   // Go back through, and also make even spacing in x, y, and
   // z. Without this we can get a polynomial that acts badly at the
   // edge of the fitted range
   if(nsecond_pass_fit_ > 1) {
     for(int i = 0; i < nsecond_pass_fit_; ++i)
       for(int j = 0; j < nsecond_pass_fit_; ++j)
-	for(int k = 0; k < nsecond_pass_fit_; ++k) {
-	  double xv = min_x() + (max_x() - min_x()) / (nsecond_pass_fit_-1) * i;
-	  double yv = min_y() + (max_y() - min_y()) / (nsecond_pass_fit_-1) * j;
-	  double zv = min_z() + (max_z() - min_z()) / (nsecond_pass_fit_-1) * k;
-	  boost::shared_ptr<GroundCoordinate> gc =
-	    Cconv.convert_from_coordinate(xv, yv, zv);
-	  ImageCoordinate ic;
-	  bool success;
-	  try {
-	    Igc.image_coordinate_with_status(*gc, ic, success);
-	    if(success) {
-	      line.push_back(ic.line);
-	      sample.push_back(ic.sample);
-	      x.push_back(xv);
-	      y.push_back(yv);
-	      z.push_back(zv);
-	    }
-	  } catch(const ImageGroundConnectionFailed&) {
-	    // Ignore failures, just go to next point.
-	  } catch(...) {
-	    if(!ignore_igc_error_in_fit_)
-	      throw;
-	  }
-	}
+        for(int k = 0; k < nsecond_pass_fit_; ++k) {
+          double xv =
+              min_x() + (max_x() - min_x()) / (nsecond_pass_fit_ - 1) * i;
+          double yv =
+              min_y() + (max_y() - min_y()) / (nsecond_pass_fit_ - 1) * j;
+          double zv =
+              min_z() + (max_z() - min_z()) / (nsecond_pass_fit_ - 1) * k;
+          boost::shared_ptr<GroundCoordinate> gc =
+              Cconv.convert_from_coordinate(xv, yv, zv);
+          ImageCoordinate ic;
+          bool success;
+          try {
+            Igc.image_coordinate_with_status(*gc, ic, success);
+            if(success) {
+              line.push_back(ic.line);
+              sample.push_back(ic.sample);
+              x.push_back(xv);
+              y.push_back(yv);
+              z.push_back(zv);
+            }
+          } catch(const ImageGroundConnectionFailed&) {
+            // Ignore failures, just go to next point.
+          } catch(...) {
+            if(!ignore_igc_error_in_fit_)
+              throw;
+          }
+        }
   }
   if(false) {
     std::cerr << "# Line Sample X Y Z\n";
     std::cerr << std::setprecision(20) << "\n";
-    for(int i = 0; i  < (int) line.size(); ++i)
-      std::cerr << line[i] << " " << sample[i] << " " << x[i] << " "
-		<< y[i] << " " << z[i] << "\n";
+    for(int i = 0; i < (int)line.size(); ++i)
+      std::cerr << line[i] << " " << sample[i] << " " << x[i] << " " << y[i]
+                << " " << z[i] << "\n";
   }
   fit_data(line, sample, x, y, z);
 }
 
-void RsmRationalPolynomial::fit_data
-(const blitz::Array<double, 2>& Data,
- int Min_line, int Max_line, int Min_sample,
- int Max_sample)
+void RsmRationalPolynomial::fit_data(const blitz::Array<double, 2>& Data,
+                                     int Min_line, int Max_line, int Min_sample,
+                                     int Max_sample)
 {
   std::vector<double> line, sample, x, y, z;
   for(int i = 0; i < Data.rows(); ++i) {
-    double ln = Data(i,0);
-    double smp = Data(i,1);
-    if(ln >= Min_line && ln <= Max_line &&
-       smp >= Min_sample && smp <= Max_sample) {
+    double ln = Data(i, 0);
+    double smp = Data(i, 1);
+    if(ln >= Min_line && ln <= Max_line && smp >= Min_sample &&
+       smp <= Max_sample) {
       line.push_back(ln);
       sample.push_back(smp);
-      x.push_back(Data(i,2));
-      y.push_back(Data(i,3));
-      z.push_back(Data(i,4));
+      x.push_back(Data(i, 2));
+      y.push_back(Data(i, 3));
+      z.push_back(Data(i, 4));
     }
   }
   if(line.size() == 0)
     throw Exception("Did not get any points for RsmRationalPolynomial fit");
   fit_offset_and_scale(Min_line, Max_line, Min_sample, Max_sample,
-		       *std::min_element(x.begin(), x.end()),
-		       *std::max_element(x.begin(), x.end()),
-		       *std::min_element(y.begin(), y.end()),
-		       *std::max_element(y.begin(), y.end()),
-		       *std::min_element(z.begin(), z.end()),
-		       *std::max_element(z.begin(), z.end()));
+                       *std::min_element(x.begin(), x.end()),
+                       *std::max_element(x.begin(), x.end()),
+                       *std::min_element(y.begin(), y.end()),
+                       *std::max_element(y.begin(), y.end()),
+                       *std::min_element(z.begin(), z.end()),
+                       *std::max_element(z.begin(), z.end()));
   fit_data(line, sample, x, y, z);
 }
 
@@ -482,26 +453,27 @@ void RsmRationalPolynomial::fit_data
 /// This is a 2x3 matrix.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> RsmRationalPolynomial::image_coordinate_jacobian
-(double X, double Y, double Z) const
+blitz::Array<double, 2>
+RsmRationalPolynomial::image_coordinate_jacobian(double X, double Y,
+                                                 double Z) const
 {
   Range ra = Range::all();
   Array<double, 2> res(2, 3);
   double xs = (X - x_offset_) / x_scale_;
   double ys = (Y - y_offset_) / y_scale_;
   double zs = (Z - z_offset_) / z_scale_;
-  double f1 = line_num_(xs,ys,zs);
-  double f2 = line_den_(xs,ys,zs);
-  double f3 = sample_num_(xs,ys,zs);
-  double f4 = sample_den_(xs,ys,zs);
-  Array<double, 1> f1_dv = line_num_.jacobian(xs,ys,zs);
-  Array<double, 1> f2_dv = line_den_.jacobian(xs,ys,zs);
-  Array<double, 1> f3_dv = sample_num_.jacobian(xs,ys,zs);
-  Array<double, 1> f4_dv = sample_den_.jacobian(xs,ys,zs);
+  double f1 = line_num_(xs, ys, zs);
+  double f2 = line_den_(xs, ys, zs);
+  double f3 = sample_num_(xs, ys, zs);
+  double f4 = sample_den_(xs, ys, zs);
+  Array<double, 1> f1_dv = line_num_.jacobian(xs, ys, zs);
+  Array<double, 1> f2_dv = line_den_.jacobian(xs, ys, zs);
+  Array<double, 1> f3_dv = sample_num_.jacobian(xs, ys, zs);
+  Array<double, 1> f4_dv = sample_den_.jacobian(xs, ys, zs);
   Array<double, 1> v_scale(3);
-  v_scale = 1/x_scale_, 1/y_scale_, 1/z_scale_;
-  res(0,ra) = (f1_dv * f2 - f1 * f2_dv) / (f2 * f2) * line_scale_ * v_scale;
-  res(1,ra) = (f3_dv * f4 - f3 * f4_dv) / (f4 * f4) * sample_scale_ * v_scale;
+  v_scale = 1 / x_scale_, 1 / y_scale_, 1 / z_scale_;
+  res(0, ra) = (f1_dv * f2 - f1 * f2_dv) / (f2 * f2) * line_scale_ * v_scale;
+  res(1, ra) = (f3_dv * f4 - f3 * f4_dv) / (f4 * f4) * sample_scale_ * v_scale;
   return res;
 }
 
@@ -522,13 +494,13 @@ void RsmRationalPolynomial::print(std::ostream& Os) const
      << "  Y scale:       " << y_scale_ << "\n"
      << "  Z offset:      " << z_offset_ << "\n"
      << "  Z scale:       " << z_scale_ << "\n"
-     << "  Np x:          " << line_num_.coefficient().rows()-1 << "\n"
-     << "  Np y:          " << line_num_.coefficient().cols()-1 << "\n"
-     << "  Np z:          " << line_num_.coefficient().depth()-1 << "\n"
+     << "  Np x:          " << line_num_.coefficient().rows() - 1 << "\n"
+     << "  Np y:          " << line_num_.coefficient().cols() - 1 << "\n"
+     << "  Np z:          " << line_num_.coefficient().depth() - 1 << "\n"
      << "  NMax order:    " << line_num_.max_order() << "\n"
-     << "  Dp x:          " << line_den_.coefficient().rows()-1 << "\n"
-     << "  Dp y:          " << line_den_.coefficient().cols()-1 << "\n"
-     << "  Dp z:          " << line_den_.coefficient().depth()-1 << "\n"
+     << "  Dp x:          " << line_den_.coefficient().rows() - 1 << "\n"
+     << "  Dp y:          " << line_den_.coefficient().cols() - 1 << "\n"
+     << "  Dp z:          " << line_den_.coefficient().depth() - 1 << "\n"
      << "  DMax order:    " << line_den_.max_order() << "\n"
      << "  Nline fit:     " << nline_fit_ << "\n"
      << "  Nsample fit:   " << nsample_fit_ << "\n"
@@ -537,7 +509,8 @@ void RsmRationalPolynomial::print(std::ostream& Os) const
 }
 
 static boost::format secformat("%|1$03d|%|2$03d|");
-static boost::format scaleformat("%|1$+21.14E|%|2$+21.14E|%|3$+21.14E|%|4$+21.14E|%|5$+21.14E|");
+static boost::format
+    scaleformat("%|1$+21.14E|%|2$+21.14E|%|3$+21.14E|%|4$+21.14E|%|5$+21.14E|");
 static boost::format numformat("%|1$+21.14E|");
 
 //-----------------------------------------------------------------------
@@ -557,13 +530,15 @@ std::string RsmRationalPolynomial::tre_string() const
 {
   std::string res = base_tre_string();
   res += str_check_size(secformat % row_section_number_ % col_section_number_,
-			3 + 3);
+                        3 + 3);
   res += write_optional(numformat, line_fit_error_, 21);
   res += write_optional(numformat, sample_fit_error_, 21);
   res += str_check_size(scaleformat % line_offset_ % sample_offset_ %
-			x_offset_ % y_offset_ % z_offset_, 5 * 21);
-  res += str_check_size(scaleformat % line_scale_ % sample_scale_ %
-			x_scale_ % y_scale_ % z_scale_, 5 * 21);
+                            x_offset_ % y_offset_ % z_offset_,
+                        5 * 21);
+  res += str_check_size(scaleformat % line_scale_ % sample_scale_ % x_scale_ %
+                            y_scale_ % z_scale_,
+                        5 * 21);
   res += line_num_.tre_string();
   res += line_den_.tre_string();
   res += sample_num_.tre_string();
@@ -596,8 +571,8 @@ RsmRationalPolynomial::read_tre_string(const std::string& Tre_in)
   res->base_read_tre_string(in);
   res->row_section_number_ = read_size<int>(in, 3);
   res->col_section_number_ = read_size<int>(in, 3);
-  res->line_fit_error_ = read_size<boost::optional<double> >(in, 21);
-  res->sample_fit_error_ = read_size<boost::optional<double> >(in, 21);
+  res->line_fit_error_ = read_size<boost::optional<double>>(in, 21);
+  res->sample_fit_error_ = read_size<boost::optional<double>>(in, 21);
   res->line_offset_ = read_size<double>(in, 21);
   res->sample_offset_ = read_size<double>(in, 21);
   res->x_offset_ = read_size<double>(in, 21);

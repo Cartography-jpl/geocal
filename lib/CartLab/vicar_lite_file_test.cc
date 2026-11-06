@@ -7,7 +7,8 @@ using namespace GeoCal;
 struct VicarLiteFixture : public GlobalFixture {
   std::string fname;
   std::string fname2;
-  VicarLiteFixture() {
+  VicarLiteFixture()
+  {
     fname = test_data_dir() + "vicar.img";
     fname2 = test_data_dir() + "rpc.ntf";
   }
@@ -19,53 +20,55 @@ BOOST_FIXTURE_TEST_SUITE(vicar_lite, VicarLiteFixture)
 class VicarLiteFileTest : public VicarLiteFile {
 public:
   VicarLiteFileTest(const std::string& Fname, access_type Access = READ)
-    : VicarLiteFile(Fname, Access) {}
-void do_test()
-{
-  char c = 0x01;
-  short int si = 0x0102;
-  int i = 0x01020304;
-  int c2 = to_int<unsigned char, false>(&c);
-  int si2 = to_int<short int, false>((char*) &si);
-  int i2 = to_int<int, false>((char*) &i);
-  BOOST_CHECK_EQUAL(c2, (int) c);
-  BOOST_CHECK_EQUAL(si2, (int) si);
-  BOOST_CHECK_EQUAL(i2, (int) i);
-  c2 = (int) to_double<unsigned char, false>(&c);
-  si2 = (int) to_double<short int, false>((char*) &si);
-  i2 = (int) to_double<int, false>((char*) &i);
-  BOOST_CHECK_EQUAL(c2, (int) c);
-  BOOST_CHECK_EQUAL(si2, (int) si);
-  BOOST_CHECK_EQUAL(i2, (int) i);
-  char cb;
-  short int sib;
-  int ib;
-  from_int<unsigned char, false>(c2, reinterpret_cast<char*>(&cb));
-  from_int<short int, false>(si2, reinterpret_cast<char*>(&sib));
-  from_int<int, false>(i2, reinterpret_cast<char*>(&ib));
-  BOOST_CHECK_EQUAL(cb, c);
-  BOOST_CHECK_EQUAL(sib, si);
-  BOOST_CHECK_EQUAL(ib, i);
+    : VicarLiteFile(Fname, Access)
+  {
+  }
+  void do_test()
+  {
+    char c = 0x01;
+    short int si = 0x0102;
+    int i = 0x01020304;
+    int c2 = to_int<unsigned char, false>(&c);
+    int si2 = to_int<short int, false>((char*)&si);
+    int i2 = to_int<int, false>((char*)&i);
+    BOOST_CHECK_EQUAL(c2, (int)c);
+    BOOST_CHECK_EQUAL(si2, (int)si);
+    BOOST_CHECK_EQUAL(i2, (int)i);
+    c2 = (int)to_double<unsigned char, false>(&c);
+    si2 = (int)to_double<short int, false>((char*)&si);
+    i2 = (int)to_double<int, false>((char*)&i);
+    BOOST_CHECK_EQUAL(c2, (int)c);
+    BOOST_CHECK_EQUAL(si2, (int)si);
+    BOOST_CHECK_EQUAL(i2, (int)i);
+    char cb;
+    short int sib;
+    int ib;
+    from_int<unsigned char, false>(c2, reinterpret_cast<char*>(&cb));
+    from_int<short int, false>(si2, reinterpret_cast<char*>(&sib));
+    from_int<int, false>(i2, reinterpret_cast<char*>(&ib));
+    BOOST_CHECK_EQUAL(cb, c);
+    BOOST_CHECK_EQUAL(sib, si);
+    BOOST_CHECK_EQUAL(ib, i);
 
-  c2 = to_int<unsigned char, true>(&c);
-  si2 = to_int<short int, true>((char*) &si);
-  i2 = to_int<int, true>((char*) &i);
-  BOOST_CHECK_EQUAL(c2, (int) 0x01);
-  BOOST_CHECK_EQUAL(si2, (int) 0x0201);
-  BOOST_CHECK_EQUAL(i2, (int) 0x04030201);
-  c2 = (int) to_double<unsigned char, true>(&c);
-  si2 = (int) to_double<short int, true>((char*) &si);
-  i2 = (int) to_double<int, true>((char*) &i);
-  BOOST_CHECK_EQUAL(c2, (int) 0x01);
-  BOOST_CHECK_EQUAL(si2, (int) 0x0201);
-  BOOST_CHECK_EQUAL(i2, (int) 0x04030201);
-  from_int<unsigned char, true>(c2, reinterpret_cast<char*>(&cb));
-  from_int<short int, true>(si2, reinterpret_cast<char*>(&sib));
-  from_int<int, true>(i2, reinterpret_cast<char*>(&ib));
-  BOOST_CHECK_EQUAL(cb, c);
-  BOOST_CHECK_EQUAL(sib, si);
-  BOOST_CHECK_EQUAL(ib, i);
-}
+    c2 = to_int<unsigned char, true>(&c);
+    si2 = to_int<short int, true>((char*)&si);
+    i2 = to_int<int, true>((char*)&i);
+    BOOST_CHECK_EQUAL(c2, (int)0x01);
+    BOOST_CHECK_EQUAL(si2, (int)0x0201);
+    BOOST_CHECK_EQUAL(i2, (int)0x04030201);
+    c2 = (int)to_double<unsigned char, true>(&c);
+    si2 = (int)to_double<short int, true>((char*)&si);
+    i2 = (int)to_double<int, true>((char*)&i);
+    BOOST_CHECK_EQUAL(c2, (int)0x01);
+    BOOST_CHECK_EQUAL(si2, (int)0x0201);
+    BOOST_CHECK_EQUAL(i2, (int)0x04030201);
+    from_int<unsigned char, true>(c2, reinterpret_cast<char*>(&cb));
+    from_int<short int, true>(si2, reinterpret_cast<char*>(&sib));
+    from_int<int, true>(i2, reinterpret_cast<char*>(&ib));
+    BOOST_CHECK_EQUAL(cb, c);
+    BOOST_CHECK_EQUAL(sib, si);
+    BOOST_CHECK_EQUAL(ib, i);
+  }
 };
 
 BOOST_AUTO_TEST_CASE(vicar_lite_file)
@@ -95,7 +98,7 @@ BOOST_AUTO_TEST_CASE(vicar_lite_file)
   ImageCoordinate ic_expect(5729.22, 27561.36);
   Geodetic g(35.8399968, 45.0770183, 1017);
   BOOST_CHECK_EQUAL(rpc.image_coordinate(g), ic_expect);
-  f.do_test();			// Test protected members.
+  f.do_test(); // Test protected members.
 }
 
 BOOST_AUTO_TEST_CASE(vicar_lite_raster_image)
@@ -111,7 +114,7 @@ BOOST_AUTO_TEST_CASE(vicar_lite_raster_image)
   BOOST_CHECK_EQUAL(f.map_info().number_y_pixel(), 10);
   BOOST_CHECK_CLOSE(f.map_info().ulc_x(), 44.799913294865902, 1e-4);
   BOOST_CHECK_CLOSE(f.map_info().ulc_y(), 35.900027777778142, 1e-4);
-  
+
   for(int i = 0; i < 10; ++i)
     for(int j = 0; j < 10; ++j)
       BOOST_CHECK_EQUAL(f(i, j), (i + j));
@@ -133,8 +136,8 @@ BOOST_AUTO_TEST_CASE(vicar_lite_dem)
 BOOST_AUTO_TEST_CASE(vicar_lite_point_vs_area)
 {
   // Check correct handling of pixel area vs point.
-  
-  // These 2 files have the same tiepoint, but in one case this is 
+
+  // These 2 files have the same tiepoint, but in one case this is
   // for area and in the other point. For area, the geotiff (0,0)
   // corresponds to GeoCal (-0.5,-0.5) (since they use a different
   // convention of (0,0) - for geotiff this is the ulc of the first pixel,
@@ -145,10 +148,10 @@ BOOST_AUTO_TEST_CASE(vicar_lite_point_vs_area)
   VicarLiteRasterImage fpixel_is_area(pixel_is_area);
   VicarLiteRasterImage fpixel_is_point(pixel_is_point);
   Geodetic ulc(20, 10);
-  BOOST_CHECK_CLOSE(distance(*fpixel_is_area.ground_coordinate(-0.5, -0.5),
-			     ulc), 0, 1e-4);
-  BOOST_CHECK_CLOSE(distance(*fpixel_is_point.ground_coordinate(0, 0),
-			     ulc), 0, 1e-4);
+  BOOST_CHECK_CLOSE(
+      distance(*fpixel_is_area.ground_coordinate(-0.5, -0.5), ulc), 0, 1e-4);
+  BOOST_CHECK_CLOSE(distance(*fpixel_is_point.ground_coordinate(0, 0), ulc), 0,
+                    1e-4);
   BOOST_CHECK(fpixel_is_point.map_info().is_point());
   BOOST_CHECK(!fpixel_is_area.map_info().is_point());
 
@@ -156,11 +159,11 @@ BOOST_AUTO_TEST_CASE(vicar_lite_point_vs_area)
   // really meant just as a workaround for the SRTM erroneously
   // marking the files as pixel is point when really it is pixel as
   // area, see Srtm class for details.
-  VicarLiteRasterImage fpixel_is_point_make_area
-    (pixel_is_point, 1, VicarLiteFile::READ, -1, -1, true);
-  BOOST_CHECK_CLOSE
-    (distance(*fpixel_is_point_make_area.ground_coordinate(-0.5, -0.5),
-	      ulc), 0, 1e-4);
+  VicarLiteRasterImage fpixel_is_point_make_area(
+      pixel_is_point, 1, VicarLiteFile::READ, -1, -1, true);
+  BOOST_CHECK_CLOSE(
+      distance(*fpixel_is_point_make_area.ground_coordinate(-0.5, -0.5), ulc),
+      0, 1e-4);
 }
 
 BOOST_AUTO_TEST_CASE(serialization_file)
@@ -171,8 +174,7 @@ BOOST_AUTO_TEST_CASE(serialization_file)
   std::string d = serialize_write_string(f);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<VicarLiteFile> fr = 
-    serialize_read_string<VicarLiteFile>(d);
+  boost::shared_ptr<VicarLiteFile> fr = serialize_read_string<VicarLiteFile>(d);
   BOOST_CHECK_EQUAL(fr->number_band(), 1);
   BOOST_CHECK_EQUAL(fr->number_line(), 10);
   BOOST_CHECK_EQUAL(fr->number_sample(), 10);
@@ -196,8 +198,8 @@ BOOST_AUTO_TEST_CASE(serialization_raster)
   std::string d = serialize_write_string(f);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<VicarLiteRasterImage> fr = 
-    serialize_read_string<VicarLiteRasterImage>(d);
+  boost::shared_ptr<VicarLiteRasterImage> fr =
+      serialize_read_string<VicarLiteRasterImage>(d);
   BOOST_CHECK_EQUAL(fr->number_line(), 10);
   BOOST_CHECK_EQUAL(fr->number_sample(), 10);
   BOOST_CHECK_EQUAL(fr->number_tile_line(), 10);
@@ -207,7 +209,7 @@ BOOST_AUTO_TEST_CASE(serialization_raster)
   BOOST_CHECK_EQUAL(fr->map_info().number_y_pixel(), 10);
   BOOST_CHECK_CLOSE(fr->map_info().ulc_x(), 44.799913294865902, 1e-4);
   BOOST_CHECK_CLOSE(fr->map_info().ulc_y(), 35.900027777778142, 1e-4);
-  
+
   for(int i = 0; i < 10; ++i)
     for(int j = 0; j < 10; ++j)
       BOOST_CHECK_EQUAL((*fr)(i, j), (i + j));
@@ -227,8 +229,7 @@ BOOST_AUTO_TEST_CASE(serialization_dem)
   std::string d = serialize_write_string(f);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<VicarLiteDem> fr = 
-    serialize_read_string<VicarLiteDem>(d);
+  boost::shared_ptr<VicarLiteDem> fr = serialize_read_string<VicarLiteDem>(d);
   Geodetic g1(35.9, 44.800, 100);
   BOOST_CHECK_CLOSE(fr->height_reference_surface(g1), 1.0, 1e-4);
 }

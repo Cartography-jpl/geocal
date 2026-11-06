@@ -23,51 +23,45 @@ static VicarOgr vlogr;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void VicarLiteFile::save(Archive & ar, const unsigned int UNUSED(version)) const
+void VicarLiteFile::save(Archive& ar, const unsigned int UNUSED(version)) const
 {
   GEOCAL_GENERIC_BASE(VicarLiteFile);
-  ar & GEOCAL_NVP_(fname) & GEOCAL_NVP_(access)
-    & GEOCAL_NVP_(force_area_pixel);
+  ar& GEOCAL_NVP_(fname) & GEOCAL_NVP_(access) & GEOCAL_NVP_(force_area_pixel);
 }
 
 template<class Archive>
-void VicarLiteFile::load(Archive & ar, const unsigned int UNUSED(version))
+void VicarLiteFile::load(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(VicarLiteFile);
-  ar & GEOCAL_NVP_(fname) & GEOCAL_NVP_(access)
-    & GEOCAL_NVP_(force_area_pixel);
+  ar& GEOCAL_NVP_(fname) & GEOCAL_NVP_(access) & GEOCAL_NVP_(force_area_pixel);
   initialize(fname_, access_, force_area_pixel_);
 }
 
 template<class Archive>
-void VicarLiteRasterImage::save(Archive & ar, const unsigned int UNUSED(version)) const
+void VicarLiteRasterImage::save(Archive& ar,
+                                const unsigned int UNUSED(version)) const
 {
   GEOCAL_BASE(VicarLiteRasterImage, RasterImage);
   GEOCAL_GENERIC_BASE(RasterImage);
-  ar & GEOCAL_NVP_(band) & GEOCAL_NVP_(f)
-    & GEOCAL_NVP_(force_map_info)
-    & GEOCAL_NVP_(number_tile_line)
-    & GEOCAL_NVP_(number_tile_sample);
+  ar& GEOCAL_NVP_(band) & GEOCAL_NVP_(f) & GEOCAL_NVP_(force_map_info) &
+      GEOCAL_NVP_(number_tile_line) & GEOCAL_NVP_(number_tile_sample);
 }
 
 template<class Archive>
-void VicarLiteRasterImage::load(Archive & ar, const unsigned int UNUSED(version))
+void VicarLiteRasterImage::load(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_BASE(VicarLiteRasterImage, RasterImage);
   GEOCAL_GENERIC_BASE(RasterImage);
-  ar & GEOCAL_NVP_(band) & GEOCAL_NVP_(f)
-    & GEOCAL_NVP_(force_map_info)
-    & GEOCAL_NVP_(number_tile_line)
-    & GEOCAL_NVP_(number_tile_sample);
+  ar& GEOCAL_NVP_(band) & GEOCAL_NVP_(f) & GEOCAL_NVP_(force_map_info) &
+      GEOCAL_NVP_(number_tile_line) & GEOCAL_NVP_(number_tile_sample);
   initialize();
 }
 
 template<class Archive>
-void VicarLiteDem::serialize(Archive & ar, const unsigned int UNUSED(version))
+void VicarLiteDem::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo)
-    & GEOCAL_NVP_(band)
-    & GEOCAL_NVP_(f);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo) & GEOCAL_NVP_(band) &
+      GEOCAL_NVP_(f);
 }
 
 GEOCAL_SPLIT_IMPLEMENT(VicarLiteFile);
@@ -84,7 +78,7 @@ GEOCAL_IMPLEMENT(VicarLiteDem);
 bool VicarLiteFile::is_vicar_file(const std::string& Fname)
 {
   std::ifstream in(Fname.c_str());
-  char buf[8  + 1];		// 8 is length of "LBLSIZE="
+  char buf[8 + 1]; // 8 is length of "LBLSIZE="
   buf[8] = '\0';
   in.read(buf, 8);
   return (std::string(buf) == "LBLSIZE=");
@@ -102,24 +96,26 @@ bool VicarLiteFile::is_vicar_file(const std::string& Fname)
 //-----------------------------------------------------------------------
 
 void VicarLiteFile::initialize(const std::string& Fname, access_type Access,
-			       bool Force_area_pixel)
+                               bool Force_area_pixel)
 {
   access_ = Access;
   fname_ = Fname;
   force_area_pixel_ = Force_area_pixel;
-  f_.reset(new std::fstream(fname_.c_str(), (Access ==READ ? std::ios_base::in :
-           std::ios_base::in | std::ios_base::out)));
+  f_.reset(new std::fstream(fname_.c_str(),
+                            (Access == READ
+                                 ? std::ios_base::in
+                                 : std::ios_base::in | std::ios_base::out)));
 
-  f_->exceptions(std::ios_base::badbit|std::ios_base::failbit);
+  f_->exceptions(std::ios_base::badbit | std::ios_base::failbit);
 
-//-----------------------------------------------------------------------
-// Read in labels and process them.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Read in labels and process them.
+  //-----------------------------------------------------------------------
 
   std::string label_data = read_label(data_offset_);
   process_label(label_data);
   int byte_per_pixel;
-  if(label<std::string>("FORMAT") =="BYTE") {
+  if(label<std::string>("FORMAT") == "BYTE") {
     byte_per_pixel = 1;
     type_ = VICAR_BYTE;
   } else if(label<std::string>("FORMAT") == "HALF") {
@@ -144,31 +140,33 @@ void VicarLiteFile::initialize(const std::string& Fname, access_type Access,
   data_offset_ += number_line_binary_ * label<int>("RECSIZE");
   number_byte_binary_ = label<int>("NBB");
 
-//-----------------------------------------------------------------------
-/// Don't currently support binary labels that aren't even multiple of
-/// pixel size,
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Don't currently support binary labels that aren't even multiple of
+  /// pixel size,
+  //-----------------------------------------------------------------------
 
   if(number_byte_binary_ % byte_per_pixel != 0) {
     Exception e;
     e << "VicarLiteFile doesn't support binary labels with the number of "
       << "bytes not an even multiple of the byte_per_pixel."
-      << "The file " << file_name() << " has the label NBB="
-      << number_byte_binary_ << " and bytes per pixel="
-      << byte_per_pixel << ". Note the full VicarFile (which "
+      << "The file " << file_name()
+      << " has the label NBB=" << number_byte_binary_
+      << " and bytes per pixel=" << byte_per_pixel
+      << ". Note the full VicarFile (which "
       << "depends on the VICAR RTL) does support this.";
     throw e;
   }
   number_sample_binary_ = number_byte_binary_ / byte_per_pixel;
-  
-//-----------------------------------------------------------------------
-// Check if there are any more labels at the end of the file. If there
-// are, add this to label_data and reprocess the full list.
-//-----------------------------------------------------------------------
+
+  //-----------------------------------------------------------------------
+  // Check if there are any more labels at the end of the file. If there
+  // are, add this to label_data and reprocess the full list.
+  //-----------------------------------------------------------------------
 
   if(label_["EOL"] == "1") {
     int data_size = number_line_ *
-      (number_sample_ * byte_per_pixel + number_byte_binary_) * number_band_ ;
+                    (number_sample_ * byte_per_pixel + number_byte_binary_) *
+                    number_band_;
     f_->seekg(data_offset_ + data_size, std::ios_base::beg);
     int trash;
     label_data += read_label(trash);
@@ -177,17 +175,17 @@ void VicarLiteFile::initialize(const std::string& Fname, access_type Access,
     process_label(label_data);
   }
 
-//-----------------------------------------------------------------------
-// Close file so we don't need to worry about interference with the
-// memory map
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Close file so we don't need to worry about interference with the
+  // memory map
+  //-----------------------------------------------------------------------
 
   f_.reset();
 
-//-----------------------------------------------------------------------
-// Determine endianess of data, and if it doesn't match that of this
-// system then set swap_needed_ to true.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Determine endianess of data, and if it doesn't match that of this
+  // system then set swap_needed_ to true.
+  //-----------------------------------------------------------------------
 
   std::string intfmt = "LOW";
   if(has_label("INTFMT"))
@@ -198,20 +196,20 @@ void VicarLiteFile::initialize(const std::string& Fname, access_type Access,
 #else
     swap_needed_ = false;
 #endif
-  } else if(intfmt =="HIGH") {
+  } else if(intfmt == "HIGH") {
 #ifdef WORDS_BIGENDIAN
     swap_needed_ = false;
 #else
     swap_needed_ = true;
 #endif
   } else {
-    throw Exception("Unrecognized intfmt " + intfmt + " in file " + 
-		    file_name());
+    throw Exception("Unrecognized intfmt " + intfmt + " in file " +
+                    file_name());
   }
 
-//-----------------------------------------------------------------------
-// Memory map data.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Memory map data.
+  //-----------------------------------------------------------------------
 
   boost::multi_array<char, 4>::size_type ordering[4];
   bool ascending[] = {true, true, true, true};
@@ -219,11 +217,20 @@ void VicarLiteFile::initialize(const std::string& Fname, access_type Access,
   if(has_label("ORG"))
     ord = (*label_.find("ORG")).second;
   if(ord == "BSQ") {
-    ordering[0] = 3; ordering[1] = 2; ordering[2] = 1; ordering[3] = 0;
-  } else if(ord =="BIL") {
-    ordering[0] = 3; ordering[1] = 2; ordering[2] = 0; ordering[3] = 1;
-  } else if(ord =="BIP") {
-    ordering[0] = 3; ordering[1] = 0; ordering[2] = 2; ordering[3] = 1;
+    ordering[0] = 3;
+    ordering[1] = 2;
+    ordering[2] = 1;
+    ordering[3] = 0;
+  } else if(ord == "BIL") {
+    ordering[0] = 3;
+    ordering[1] = 2;
+    ordering[2] = 0;
+    ordering[3] = 1;
+  } else if(ord == "BIP") {
+    ordering[0] = 3;
+    ordering[1] = 0;
+    ordering[2] = 2;
+    ordering[3] = 1;
   } else {
     throw Exception("Unrecognized order " + ord + " in file " + file_name());
   }
@@ -231,16 +238,15 @@ void VicarLiteFile::initialize(const std::string& Fname, access_type Access,
   // We can't actually read compressed data, although it can be useful
   // to look at the labels. If the data is compressed, punt for now.
   // We might do something more sophisticated in the future.
-  if(!has_label("COMPRESS") ||
-     label_["COMPRESS"] == "NONE") {
+  if(!has_label("COMPRESS") || label_["COMPRESS"] == "NONE") {
     is_compressed_ = false;
-    data_raw.reset(new MemoryMapArray<char, 4>
-		   (file_name(), 
-		    boost::extents[number_band()][number_line()]
-		    [number_sample() + number_sample_binary_][byte_per_pixel],
-		    (Access == READ ? MemoryMapArray<char, 4>::READ :
-		     MemoryMapArray<char, 4>::UPDATE), data_offset(),
-		    storage));
+    data_raw.reset(new MemoryMapArray<char, 4>(
+        file_name(),
+        boost::extents[number_band()][number_line()]
+                      [number_sample() + number_sample_binary_][byte_per_pixel],
+        (Access == READ ? MemoryMapArray<char, 4>::READ
+                        : MemoryMapArray<char, 4>::UPDATE),
+        data_offset(), storage));
   } else {
     is_compressed_ = true;
   }
@@ -250,33 +256,31 @@ void VicarLiteFile::initialize(const std::string& Fname, access_type Access,
 /// Create a new VICAR file with the given size.
 //-----------------------------------------------------------------------
 
-VicarLiteFile::VicarLiteFile(const std::string& Fname, int Number_line, 
-	     int Number_sample, const std::string& UNUSED(Type))
-: access_(VicarLiteFile::WRITE),
-  fname_(Fname), force_area_pixel_(false),
-  number_line_(Number_line), 
-  number_sample_(Number_sample)
+VicarLiteFile::VicarLiteFile(const std::string& Fname, int Number_line,
+                             int Number_sample, const std::string& UNUSED(Type))
+  : access_(VicarLiteFile::WRITE), fname_(Fname), force_area_pixel_(false),
+    number_line_(Number_line), number_sample_(Number_sample)
 {
   throw Exception("Not implemented yet");
 }
 
 //-----------------------------------------------------------------------
-/// Read in the label from the current f_ position. Optionally set 
+/// Read in the label from the current f_ position. Optionally set
 //-----------------------------------------------------------------------
 
-std::string VicarLiteFile::read_label(int& lblsize) 
+std::string VicarLiteFile::read_label(int& lblsize)
 {
-//-----------------------------------------------------------------------
-// Read in label size.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Read in label size.
+  //-----------------------------------------------------------------------
 
   std::string t;
   (*f_) >> t;
   lblsize = atoi(t.c_str() + 8);
 
-//-----------------------------------------------------------------------
-// Read in labels.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Read in labels.
+  //-----------------------------------------------------------------------
 
   std::string label_data(lblsize - t.size(), '\0');
   f_->read(&label_data[0], lblsize - t.size());
@@ -290,21 +294,22 @@ std::string VicarLiteFile::read_label(int& lblsize)
 class TokenizerFunction {
 public:
   void reset() {}
-  template <typename InputIterator, typename Token>
-  bool operator()(InputIterator& next,InputIterator end,Token& tok) {
+  template<typename InputIterator, typename Token>
+  bool operator()(InputIterator& next, InputIterator end, Token& tok)
+  {
     bool inquote = false;
     tok = Token();
     if(next == end)
       return false;
     while((*next == ' ' || *next == '=' || *next == '\0') && next != end)
       ++next;
-    for(;next != end; ++next) {
+    for(; next != end; ++next) {
       if(*next == '\'')
-	inquote = (inquote ? false : true);
+        inquote = (inquote ? false : true);
       else if(!inquote && (*next == ' ' || *next == '=' || *next == '\0'))
-	return true;
+        return true;
       else
-	tok += *next;
+        tok += *next;
     }
     return (tok.size() != 0);
   }
@@ -318,14 +323,14 @@ public:
 /// We fill in the set prop_set_ also.
 //-----------------------------------------------------------------------
 
-void VicarLiteFile::process_label(const std::string& label) 
+void VicarLiteFile::process_label(const std::string& label)
 {
-//-----------------------------------------------------------------------
-// Break into tokens. When this is done, we'll read things as <key>,
-// <value>, and then repeat. Spaces separate key/value pairs, and "="
-// separates key and value. We need to be careful about "'", anything
-// is allowed between these two values.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Break into tokens. When this is done, we'll read things as <key>,
+  // <value>, and then repeat. Spaces separate key/value pairs, and "="
+  // separates key and value. We need to be careful about "'", anything
+  // is allowed between these two values.
+  //-----------------------------------------------------------------------
 
   std::string prop = "";
   typedef boost::tokenizer<TokenizerFunction> tok_type;
@@ -335,13 +340,13 @@ void VicarLiteFile::process_label(const std::string& label)
     std::string k = *i++;
     if(i != tok.end()) {
       std::string v = *i++;
-      if(k == "PROPERTY") {	// Starting a new property
-	prop_set_.insert(v);
-	prop = v + " ";
-      } else if(k =="TASK") { // End of  property section
-	prop = "";
+      if(k == "PROPERTY") { // Starting a new property
+        prop_set_.insert(v);
+        prop = v + " ";
+      } else if(k == "TASK") { // End of  property section
+        prop = "";
       } else {
-	label_[prop + k] = v;
+        label_[prop + k] = v;
       }
     }
   }
@@ -355,8 +360,8 @@ MapInfo VicarLiteFile::map_info() const
 {
   using std::string;
   if(property().count("GEOTIFF") != 1)
-    throw Exception("File " + fname_ + 
-       " doesn't contain the GEOTIFF property needed for MapInfo");
+    throw Exception("File " + fname_ +
+                    " doesn't contain the GEOTIFF property needed for MapInfo");
   std::istringstream isp(label<string>("GTMODELTYPEGEOKEY", "GEOTIFF"));
   int projection_id;
   isp >> projection_id;
@@ -364,9 +369,9 @@ MapInfo VicarLiteFile::map_info() const
 #ifdef USE_VICAR_OGR
     return vlogr.from_vicar(*this);
 #else
-    throw Exception("Right now, only Geographic projections are supported. File "
-		    + fname_ + " had projection " + 
-		    label<string>("GTMODELTYPEGEOKEY", "GEOTIFF"));
+    throw Exception(
+        "Right now, only Geographic projections are supported. File " + fname_ +
+        " had projection " + label<string>("GTMODELTYPEGEOKEY", "GEOTIFF"));
 #endif
   if(has_label("GEOTIFF GEOGELLIPSOIDGEOKEY")) {
     std::istringstream ise(label<string>("GEOGELLIPSOIDGEOKEY", "GEOTIFF"));
@@ -376,9 +381,10 @@ MapInfo VicarLiteFile::map_info() const
 #ifdef USE_VICAR_OGR
       return vlogr.from_vicar(*this);
 #else
-      throw Exception("Right now, only WGS-84 reference ellipsoid is supported. File "
-		      + fname_ + " had reference ellipsoid " + 
-		      label<string>("GTMODELTYPEGEOKEY", "GEOTIFF"));
+      throw Exception(
+          "Right now, only WGS-84 reference ellipsoid is supported. File " +
+          fname_ + " had reference ellipsoid " +
+          label<string>("GTMODELTYPEGEOKEY", "GEOTIFF"));
 #endif
   } else if(has_label("GEOTIFF GEOGRAPHICTYPEGEOKEY")) {
     std::istringstream ise(label<string>("GEOGRAPHICTYPEGEOKEY", "GEOTIFF"));
@@ -388,32 +394,33 @@ MapInfo VicarLiteFile::map_info() const
 #ifdef USE_VICAR_OGR
       return vlogr.from_vicar(*this);
 #else
-      throw Exception("Right now, only WGS-84 reference ellipsoid is supported. File "
-		      + fname_ + " had reference ellipsoid " + 
-		      label<string>("GEOGRAPHICTYPEGEOKEY", "GEOTIFF"));
+      throw Exception(
+          "Right now, only WGS-84 reference ellipsoid is supported. File " +
+          fname_ + " had reference ellipsoid " +
+          label<string>("GEOGRAPHICTYPEGEOKEY", "GEOTIFF"));
 #endif
   } else {
-    throw Exception("Must have GEOGELLIPSOIDGEOKEY or GEOGRAPHICTYPEGEOKEY. File" + fname_);
+    throw Exception(
+        "Must have GEOGELLIPSOIDGEOKEY or GEOGRAPHICTYPEGEOKEY. File" + fname_);
   }
   if(has_label("GEOTIFF MODELTRANSFORMATIONTAG")) {
     string t1 = label<string>("MODELTRANSFORMATIONTAG", "GEOTIFF");
     BOOST_FOREACH(char& c, t1)
       if(c == '(' || c == ')' || c == ',')
-	c = ' ';
+        c = ' ';
     std::istringstream is1(t1);
     double a[4][4];
     for(int i = 0; i < 4; ++i)
       for(int j = 0; j < 4; ++j)
-	is1 >> a[i][j];
-    if(fabs(a[0][2]) > 1e-8 || fabs(a[1][2]) > 1e-8 || fabs(a[2][0]) > 1e-8 || 
+        is1 >> a[i][j];
+    if(fabs(a[0][2]) > 1e-8 || fabs(a[1][2]) > 1e-8 || fabs(a[2][0]) > 1e-8 ||
        fabs(a[2][1]) > 1e-8 || fabs(a[2][2]) > 1e-8 || fabs(a[2][3]) > 1e-8 ||
        fabs(a[3][0]) > 1e-8 || fabs(a[3][1]) > 1e-8 || fabs(a[3][2]) > 1e-8)
       throw Exception("We don't work with 3-D data for file " + fname_);
     blitz::Array<double, 1> param(6);
-    param = a[0][3], a[0][0], a[0][1],
-      a[1][3], a[1][0], a[1][1];
+    param = a[0][3], a[0][0], a[0][1], a[1][3], a[1][0], a[1][1];
     MapInfo res(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter),
-		param, number_sample(), number_line());
+                param, number_sample(), number_line());
     return res;
   }
   string t1 = label<string>("MODELTIEPOINTTAG", "GEOTIFF");
@@ -432,32 +439,32 @@ MapInfo VicarLiteFile::map_info() const
   std::istringstream is2(t2);
   double lon_scale, lat_scale;
   is2 >> lon_scale >> lat_scale;
-  lat_scale *= -1;		// Convention of lat_scale in GeoTiff
-				// is opposite of ours.
+  lat_scale *= -1; // Convention of lat_scale in GeoTiff
+  // is opposite of ours.
   lon -= lon_scale * samp;
   lat -= lat_scale * line;
 
-// For Geotiff, there are two ways the parameters are specified. For
-// area based pixels, the ulc is the ulc of the pixel, which is what
-// MapInfo expects. For point, the ulc given is for the center of the
-// pixel. That means we need to offset this by 1/2 pixel to match what
-// we expect in MapInfo. We check and see if the file has metadata
-// giving this information, and if so if we need to offset the pixel.
+  // For Geotiff, there are two ways the parameters are specified. For
+  // area based pixels, the ulc is the ulc of the pixel, which is what
+  // MapInfo expects. For point, the ulc given is for the center of the
+  // pixel. That means we need to offset this by 1/2 pixel to match what
+  // we expect in MapInfo. We check and see if the file has metadata
+  // giving this information, and if so if we need to offset the pixel.
   bool is_point = false;
   if(has_label("GEOTIFF GTRASTERTYPEGEOKEY")) {
     std::istringstream ise(label<string>("GTRASTERTYPEGEOKEY", "GEOTIFF"));
     int rt_id;
     ise >> rt_id;
-    if(rt_id ==2 && !force_area_pixel_) {		// Point type
+    if(rt_id == 2 && !force_area_pixel_) { // Point type
       lon -= 0.5 * lon_scale;
       lat -= 0.5 * lat_scale;
       is_point = true;
     }
   }
   MapInfo res(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter),
-	      lon, lat, lon + number_sample() * lon_scale,
-	      lat + number_line() * lat_scale, number_sample(),
-	      number_line(), is_point);
+              lon, lat, lon + number_sample() * lon_scale,
+              lat + number_line() * lat_scale, number_sample(), number_line(),
+              is_point);
   return res;
 }
 
@@ -479,7 +486,7 @@ bool VicarLiteFile::has_map_info() const
 {
   if(!(has_label("GEOTIFF MODELTRANSFORMATIONTAG") ||
        has_label("GEOTIFF MODELTIEPOINTTAG")))
-     return false;
+    return false;
   // We *probably* have a map info, but VICAR can write out some
   // seriously mangled metadata. Try to actually read the map_info,
   // and if this fails we'll just say we don't have mapinfo
@@ -509,7 +516,7 @@ bool VicarLiteFile::has_rpc() const
 bool VicarLiteFile::has_rsm() const
 {
   return (has_label("GEOTIFF RSM_NITF_FILE") ||
-	  has_label("GEOTIFF RSM_XML_FILE"));
+          has_label("GEOTIFF RSM_XML_FILE"));
 }
 
 //-----------------------------------------------------------------------
@@ -520,7 +527,7 @@ bool VicarLiteFile::has_rsm() const
 bool VicarLiteFile::has_igc_glas_gfm() const
 {
   return (has_label("GEOTIFF GLAS_GFM_NITF_FILE") ||
-	  has_label("GEOTIFF GLAS_GFM_XML_FILE"));
+          has_label("GEOTIFF GLAS_GFM_XML_FILE"));
 }
 
 //-----------------------------------------------------------------------
@@ -535,34 +542,34 @@ Rpc VicarLiteFile::rpc() const
   std::string cetag = label<string>("NITF_CETAG", g);
   if(cetag == "RPC00B")
     res.rpc_type = Rpc::RPC_B;
-  else if(cetag =="RPC00A")
+  else if(cetag == "RPC00A")
     res.rpc_type = Rpc::RPC_A;
   else
     throw MetadataMissing("Don't recognize value of NITF_CETAG");
   if(has_label(g + " NAIF_CODE"))
     res.naif_code(label<int>("NAIF_CODE", g));
-  res.line_offset = atof(label<string>("RPC_FIELD4",  g).c_str());
-  res.sample_offset = atof(label<string>("RPC_FIELD5",  g).c_str());
-  res.latitude_offset = atof(label<string>("RPC_FIELD6",  g).c_str());
-  res.longitude_offset = atof(label<string>("RPC_FIELD7",  g).c_str());
-  res.height_offset = atof(label<string>("RPC_FIELD8",  g).c_str());
-  res.line_scale = atof(label<string>("RPC_FIELD9",  g).c_str());
-  res.sample_scale = atof(label<string>("RPC_FIELD10",  g).c_str());
-  res.latitude_scale = atof(label<string>("RPC_FIELD11",  g).c_str());
-  res.longitude_scale = atof(label<string>("RPC_FIELD12",  g).c_str());
-  res.height_scale = atof(label<string>("RPC_FIELD13",  g).c_str());
+  res.line_offset = atof(label<string>("RPC_FIELD4", g).c_str());
+  res.sample_offset = atof(label<string>("RPC_FIELD5", g).c_str());
+  res.latitude_offset = atof(label<string>("RPC_FIELD6", g).c_str());
+  res.longitude_offset = atof(label<string>("RPC_FIELD7", g).c_str());
+  res.height_offset = atof(label<string>("RPC_FIELD8", g).c_str());
+  res.line_scale = atof(label<string>("RPC_FIELD9", g).c_str());
+  res.sample_scale = atof(label<string>("RPC_FIELD10", g).c_str());
+  res.latitude_scale = atof(label<string>("RPC_FIELD11", g).c_str());
+  res.longitude_scale = atof(label<string>("RPC_FIELD12", g).c_str());
+  res.height_scale = atof(label<string>("RPC_FIELD13", g).c_str());
   res.error_bias = 0.0;
   res.error_random = 0.0;
   for(int i = 1; i <= 20; ++i) {
     std::string is = boost::lexical_cast<std::string>(i);
-    res.line_numerator[i - 1] = 
-      atof(label<string>("RPC_FIELD14" + is, g).c_str());
-    res.line_denominator[i - 1] = 
-      atof(label<string>("RPC_FIELD15" + is, g).c_str());
-    res.sample_numerator[i - 1] = 
-      atof(label<string>("RPC_FIELD16" + is, g).c_str());
-    res.sample_denominator[i - 1] = 
-      atof(label<string>("RPC_FIELD17" + is, g).c_str());
+    res.line_numerator[i - 1] =
+        atof(label<string>("RPC_FIELD14" + is, g).c_str());
+    res.line_denominator[i - 1] =
+        atof(label<string>("RPC_FIELD15" + is, g).c_str());
+    res.sample_numerator[i - 1] =
+        atof(label<string>("RPC_FIELD16" + is, g).c_str());
+    res.sample_denominator[i - 1] =
+        atof(label<string>("RPC_FIELD17" + is, g).c_str());
   }
   return res;
 }

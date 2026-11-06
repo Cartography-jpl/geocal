@@ -27,7 +27,7 @@ private:
   FakeClass() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 
@@ -39,7 +39,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
 {
   ImageCoordinate ic(1, 2);
   ImageCoordinate ic2(2, 3);
-  BOOST_CHECK(ic ==ic && ic !=ic2);
+  BOOST_CHECK(ic == ic && ic != ic2);
   BOOST_CHECK_EQUAL(ic.print_to_string(), "(1, 2)");
 }
 
@@ -47,14 +47,14 @@ BOOST_AUTO_TEST_CASE(vicar_image_coordinate)
 {
   VicarImageCoordinate ic(1, 2);
   VicarImageCoordinate ic2(2, 3);
-  BOOST_CHECK(ic ==ic && ic !=ic2);
+  BOOST_CHECK(ic == ic && ic != ic2);
   BOOST_CHECK_EQUAL(ic.print_to_string(), "VICAR image coordinate (1, 2)");
   ImageCoordinate ic3(ic);
   ImageCoordinate ic3expect(0, 1);
   VicarImageCoordinate ic4(ImageCoordinate(4, 5));
   VicarImageCoordinate ic4expect(5, 6);
-  BOOST_CHECK(ic3 ==ic3expect);
-  BOOST_CHECK(ic4 ==ic4expect);
+  BOOST_CHECK(ic3 == ic3expect);
+  BOOST_CHECK(ic4 == ic4expect);
 }
 
 BOOST_AUTO_TEST_CASE(serialize_function_file)
@@ -67,8 +67,8 @@ BOOST_AUTO_TEST_CASE(serialize_function_file)
     return;
   boost::shared_ptr<ImageCoordinate> ic(new ImageCoordinate(10, 20));
   serialize_write("image_coordinate_test.xml", ic);
-  boost::shared_ptr<ImageCoordinate> ic2 = 
-    serialize_read<ImageCoordinate>("image_coordinate_test.xml");
+  boost::shared_ptr<ImageCoordinate> ic2 =
+      serialize_read<ImageCoordinate>("image_coordinate_test.xml");
   BOOST_CHECK(*ic == *ic2);
   int status __attribute__((unused));
   status = unlink("image_coordinate_test.xml");
@@ -86,8 +86,8 @@ BOOST_AUTO_TEST_CASE(serialization)
   if(false)
     // Can dump to screen, if we want to see the text
     std::cerr << d;
-  boost::shared_ptr<ImageCoordinate> ic2 = 
-    serialize_read_string<ImageCoordinate>(d);
+  boost::shared_ptr<ImageCoordinate> ic2 =
+      serialize_read_string<ImageCoordinate>(d);
   BOOST_CHECK(*ic == *ic2);
 }
 
@@ -102,8 +102,7 @@ BOOST_AUTO_TEST_CASE(serialization_new_class)
   if(false)
     // Can dump to screen, if we want to see the text
     std::cerr << d;
-  boost::shared_ptr<FakeClass> fc2 = 
-    serialize_read_string<FakeClass>(d);
+  boost::shared_ptr<FakeClass> fc2 = serialize_read_string<FakeClass>(d);
   BOOST_CHECK_EQUAL(fc->i1, fc2->i1);
   BOOST_CHECK_EQUAL(fc->i2, fc2->i2);
 }
@@ -119,8 +118,8 @@ BOOST_AUTO_TEST_CASE(serialization2)
   boost::shared_ptr<GenericObject> ic4(new ImageCoordinate(6, 7));
   {
     boost::archive::polymorphic_xml_oarchive oa(os);
-    oa << GEOCAL_NVP(ic) << GEOCAL_NVP(ic2)
-       << GEOCAL_NVP(ic3) << GEOCAL_NVP(ic4);
+    oa << GEOCAL_NVP(ic) << GEOCAL_NVP(ic2) << GEOCAL_NVP(ic3)
+       << GEOCAL_NVP(ic4);
   }
   if(false)
     // Can dump to screen, if we want to see the text
@@ -130,21 +129,21 @@ BOOST_AUTO_TEST_CASE(serialization2)
   ImageCoordinate icr, ic2r;
   boost::shared_ptr<ImageCoordinate> ic3r;
   boost::shared_ptr<GenericObject> ic4r;
-  ia >> GEOCAL_NVP(icr) >> GEOCAL_NVP(ic2r)
-     >> GEOCAL_NVP(ic3r) >> GEOCAL_NVP(ic4r);
-  BOOST_CHECK(ic ==icr);
-  BOOST_CHECK(ic2 ==ic2r);
-  BOOST_CHECK(*ic3 ==*ic3r);
+  ia >> GEOCAL_NVP(icr) >> GEOCAL_NVP(ic2r) >> GEOCAL_NVP(ic3r) >>
+      GEOCAL_NVP(ic4r);
+  BOOST_CHECK(ic == icr);
+  BOOST_CHECK(ic2 == ic2r);
+  BOOST_CHECK(*ic3 == *ic3r);
   boost::shared_ptr<ImageCoordinate> ic4r2 =
-    boost::dynamic_pointer_cast<ImageCoordinate>(ic4r);
-  BOOST_CHECK(*ic4r2 == ImageCoordinate(6,7));
+      boost::dynamic_pointer_cast<ImageCoordinate>(ic4r);
+  BOOST_CHECK(*ic4r2 == ImageCoordinate(6, 7));
 #endif
 }
 
 BOOST_AUTO_TEST_CASE(serialization_save)
 {
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-  // Test where we write out the XML file, and then read this in 
+  // Test where we write out the XML file, and then read this in
   // a separate test. We use this to make sure the registration occurs
   // correctly for this, and format doesn't change.
   //
@@ -175,12 +174,12 @@ BOOST_AUTO_TEST_CASE(serialization_load)
   boost::shared_ptr<GenericObject> ic1r;
   boost::shared_ptr<GenericObject> ic2r;
   ia >> GEOCAL_NVP(ic1r) >> GEOCAL_NVP(ic2r);
-  boost::shared_ptr<ImageCoordinate> ic1 = 
-    boost::dynamic_pointer_cast<ImageCoordinate>(ic1r);
-  boost::shared_ptr<ImageCoordinate> ic2 = 
-    boost::dynamic_pointer_cast<ImageCoordinate>(ic2r);
-  BOOST_CHECK(*ic1 ==ImageCoordinate(4, 5));
-  BOOST_CHECK(*ic2 == ImageCoordinate(6,7));
+  boost::shared_ptr<ImageCoordinate> ic1 =
+      boost::dynamic_pointer_cast<ImageCoordinate>(ic1r);
+  boost::shared_ptr<ImageCoordinate> ic2 =
+      boost::dynamic_pointer_cast<ImageCoordinate>(ic2r);
+  BOOST_CHECK(*ic1 == ImageCoordinate(4, 5));
+  BOOST_CHECK(*ic2 == ImageCoordinate(6, 7));
 #endif
 }
 
@@ -202,8 +201,8 @@ BOOST_AUTO_TEST_CASE(serialization_text)
   boost::archive::polymorphic_text_iarchive ia(is);
   ImageCoordinate icr, ic2r;
   ia >> GEOCAL_NVP(icr) >> GEOCAL_NVP(ic2r);
-  BOOST_CHECK(ic ==icr);
-  BOOST_CHECK(ic2 ==ic2r);
+  BOOST_CHECK(ic == icr);
+  BOOST_CHECK(ic2 == ic2r);
 #endif
 }
 

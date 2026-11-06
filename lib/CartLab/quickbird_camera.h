@@ -3,7 +3,7 @@
 #include "quaternion_camera.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This class models a the QuickBird camera. It is used to convert
   ScLookVector to FrameCoordinate and vice versa.
 
@@ -27,9 +27,9 @@ class QuickBirdCamera : public QuaternionCamera {
 public:
   QuickBirdCamera();
 
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~QuickBirdCamera() {}
 
@@ -37,7 +37,7 @@ public:
 private:
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
 }

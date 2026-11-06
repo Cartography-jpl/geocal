@@ -5,14 +5,22 @@ using namespace GeoCal;
 
 class ObservableTest : public Observable<ObservableTest> {
 public:
-  ObservableTest() :v_(0) {}
+  ObservableTest() : v_(0) {}
   virtual ~ObservableTest() {}
-  int v() const { return v_;}
-  void v(int newv) { v_ = newv; notify_update_do(*this);}
-  virtual void add_observer(Observer<ObservableTest>& Obs) 
-  { add_observer_do(Obs, *this);}
-  virtual void remove_observer(Observer<ObservableTest>& Obs) 
-  { remove_observer_do(Obs, *this);}
+  int v() const { return v_; }
+  void v(int newv)
+  {
+    v_ = newv;
+    notify_update_do(*this);
+  }
+  virtual void add_observer(Observer<ObservableTest>& Obs)
+  {
+    add_observer_do(Obs, *this);
+  }
+  virtual void remove_observer(Observer<ObservableTest>& Obs)
+  {
+    remove_observer_do(Obs, *this);
+  }
 private:
   int v_;
 };
@@ -22,10 +30,7 @@ public:
   ObserverTest() : myv_(-1) {}
   virtual ~ObserverTest() {}
   int myv() { return myv_; }
-  virtual void notify_update(const ObservableTest& T)
-  {
-    myv_ = T.v();
-  }
+  virtual void notify_update(const ObservableTest& T) { myv_ = T.v(); }
 private:
   int myv_;
 };

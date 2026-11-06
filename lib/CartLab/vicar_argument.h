@@ -7,7 +7,7 @@
 
 namespace GeoCal {
 
-/****************************************************************//**
+/****************************************************************/ /**
   This provides access to arguments passed by VICAR.
 
   Note an important limitation of VICAR, you can only initialize the
@@ -27,39 +27,38 @@ namespace GeoCal {
 *******************************************************************/
 class VicarArgument : public Printable<VicarArgument> {
 public:
-  VicarArgument(int Argc, char** Argv, bool copy_primary_input_label = false); 
+  VicarArgument(int Argc, char** Argv, bool copy_primary_input_label = false);
 
   bool has_keyword(const std::string& Keyword);
-  void type(const std::string& Keyword, std::string& Type, 
-		   int& Count);
-  void type(const std::string& Keyword, std::string& Type, 
-		   int& Count, int& Maxlen);
+  void type(const std::string& Keyword, std::string& Type, int& Count);
+  void type(const std::string& Keyword, std::string& Type, int& Count,
+            int& Maxlen);
 
-//-----------------------------------------------------------------------
-/// Stand alone version of argument parsing. This is just a typesafe
-/// version of the Vicar RTL zvp call.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Stand alone version of argument parsing. This is just a typesafe
+  /// version of the Vicar RTL zvp call.
+  //-----------------------------------------------------------------------
 
   template<class T> T arg(const std::string& Keyword);
   void print(std::ostream& Os) const;
   void write_out(const std::string& Keyword, int Val);
   void write_out(const std::string& Keyword, double Val);
-  void write_out(const std::string& Keyword, const std::string& Val, 
-		 int Max_len = 250);
+  void write_out(const std::string& Keyword, const std::string& Val,
+                 int Max_len = 250);
 
-  int zvpw(char *name, void *value, int *count);
-  int zvparmw(char *name, void *value, int *count, int *def,
-		    int maxcnt, int length);
-  int zvparmdw(char *name, void *value, int *count, int *def,
-		     int maxcnt, int length);
+  int zvpw(char* name, void* value, int* count);
+  int zvparmw(char* name, void* value, int* count, int* def, int maxcnt,
+              int length);
+  int zvparmdw(char* name, void* value, int* count, int* def, int maxcnt,
+               int length);
 };
 
 template<> inline int VicarArgument::arg(const std::string& Keyword)
 {
-  std::string tp("b");		// Mac is flaky passing empty strings
-				// around between shared
-				// libraries. W/o this initialization
-				// we crash with ruby.
+  std::string tp("b"); // Mac is flaky passing empty strings
+  // around between shared
+  // libraries. W/o this initialization
+  // we crash with ruby.
   int count;
   type(Keyword, tp, count);
   if(count != 1)
@@ -73,13 +72,12 @@ template<> inline int VicarArgument::arg(const std::string& Keyword)
   return res;
 }
 
-template<> inline std::string 
-VicarArgument::arg(const std::string& Keyword)
+template<> inline std::string VicarArgument::arg(const std::string& Keyword)
 {
-  std::string tp("b");		// Mac is flaky passing empty strings
-				// around between shared
-				// libraries. W/o this initialization
-				// we crash with ruby.
+  std::string tp("b"); // Mac is flaky passing empty strings
+  // around between shared
+  // libraries. W/o this initialization
+  // we crash with ruby.
   int count, maxlen;
   type(Keyword, tp, count, maxlen);
   if(count != 1)
@@ -95,10 +93,10 @@ VicarArgument::arg(const std::string& Keyword)
 
 template<> inline double VicarArgument::arg(const std::string& Keyword)
 {
-  std::string tp("b");		// Mac is flaky passing empty strings
-				// around between shared
-				// libraries. W/o this initialization
-				// we crash with ruby.
+  std::string tp("b"); // Mac is flaky passing empty strings
+  // around between shared
+  // libraries. W/o this initialization
+  // we crash with ruby.
   int count;
   type(Keyword, tp, count);
   if(count != 1)
@@ -107,20 +105,20 @@ template<> inline double VicarArgument::arg(const std::string& Keyword)
     throw Exception("Type '" + tp + "' is not REAL");
   double res;
   int def;
-  int status = zvparmdw(const_cast<char*>(Keyword.c_str()), &res, &count, &def,
-		       0, 0);
+  int status =
+      zvparmdw(const_cast<char*>(Keyword.c_str()), &res, &count, &def, 0, 0);
   if(status != 1)
     throw Exception("Call to zvparmd failed");
   return res;
 }
 
-template<> inline std::vector<int> 
-VicarArgument::arg(const std::string& Keyword)
+template<>
+inline std::vector<int> VicarArgument::arg(const std::string& Keyword)
 {
-  std::string tp("b");		// Mac is flaky passing empty strings
-				// around between shared
-				// libraries. W/o this initialization
-				// we crash with ruby.
+  std::string tp("b"); // Mac is flaky passing empty strings
+  // around between shared
+  // libraries. W/o this initialization
+  // we crash with ruby.
   int count;
   type(Keyword, tp, count);
   if(tp != "INT")
@@ -132,41 +130,41 @@ VicarArgument::arg(const std::string& Keyword)
   return res;
 }
 
-template<> inline std::vector<double> 
-VicarArgument::arg(const std::string& Keyword)
+template<>
+inline std::vector<double> VicarArgument::arg(const std::string& Keyword)
 {
-  std::string tp("b");		// Mac is flaky passing empty strings
-				// around between shared
-				// libraries. W/o this initialization
-				// we crash with ruby.
+  std::string tp("b"); // Mac is flaky passing empty strings
+  // around between shared
+  // libraries. W/o this initialization
+  // we crash with ruby.
   int count;
   type(Keyword, tp, count);
   if(tp != "REAL")
     throw Exception("Type '" + tp + "' is not REAL");
   std::vector<double> res(count);
   int def;
-  int status = zvparmdw(const_cast<char*>(Keyword.c_str()), &res[0], &count, 
-		       &def, 0, 0);
+  int status =
+      zvparmdw(const_cast<char*>(Keyword.c_str()), &res[0], &count, &def, 0, 0);
   if(status != 1)
     throw Exception("Call to zvparmd failed");
   return res;
 }
 
-template<> inline std::vector<std::string>
-VicarArgument::arg(const std::string& Keyword)
+template<>
+inline std::vector<std::string> VicarArgument::arg(const std::string& Keyword)
 {
-  std::string tp("b");		// Mac is flaky passing empty strings
-				// around between shared
-				// libraries. W/o this initialization
-				// we crash with ruby.
+  std::string tp("b"); // Mac is flaky passing empty strings
+  // around between shared
+  // libraries. W/o this initialization
+  // we crash with ruby.
   int count, maxlen;
   type(Keyword, tp, count, maxlen);
   if(tp != "STRING")
     throw Exception("Type '" + tp + "' is not STRING");
   std::vector<char> buf((maxlen + 1) * count);
   int def;
-  int status = zvparmw(const_cast<char*>(Keyword.c_str()), &buf[0], &count, 
-		       &def, 0, maxlen + 1);
+  int status = zvparmw(const_cast<char*>(Keyword.c_str()), &buf[0], &count,
+                       &def, 0, maxlen + 1);
   if(status != 1)
     throw Exception("Call to zvparm failed");
   std::vector<std::string> res;

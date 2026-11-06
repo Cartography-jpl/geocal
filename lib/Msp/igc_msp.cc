@@ -40,9 +40,9 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void IgcMsp::serialize(Archive & ar, const unsigned int version)
+void IgcMsp::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnectionCopy);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnectionCopy);
 }
 
 GEOCAL_IMPLEMENT(IgcMsp);
@@ -53,35 +53,33 @@ GEOCAL_IMPLEMENT(IgcMsp);
 // don't want to expose the internal configuration file to outside users.
 #ifdef HAVE_MSP
 namespace GeoCal {
-class IgcMspImp: public virtual ImageGroundConnection {
+class IgcMspImp : public virtual ImageGroundConnection {
 public:
   IgcMspImp(const std::string& Fname, const boost::shared_ptr<Dem>& D,
-	    int Image_index = 0,
-	    const std::string& Plugin_name = "",
-	    const std::string& Model_name = "")
+            int Image_index = 0, const std::string& Plugin_name = "",
+            const std::string& Model_name = "")
     : fname_(Fname), plugin_name_(Plugin_name), model_name_(Model_name),
       image_index_(Image_index)
-  { dem_ = D; init(); }
+  {
+    dem_ = D;
+    init();
+  }
   virtual ~IgcMspImp() {}
-  virtual boost::shared_ptr<GroundCoordinate> 
-  ground_coordinate_dem(const ImageCoordinate& Ic, 
-			const Dem& D) const;
-  virtual boost::shared_ptr<GroundCoordinate> 
-  ground_coordinate_approx_height(const ImageCoordinate& Ic, 
-				  double H) const;
+  virtual boost::shared_ptr<GroundCoordinate>
+  ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const;
+  virtual boost::shared_ptr<GroundCoordinate>
+  ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const;
   void ground_coordinate_with_cov(const ImageCoordinate& Ic,
-				  const blitz::Array<double, 2>& Ic_cov,
-				  double H,
-				  double H_var,
-				  boost::shared_ptr<GroundCoordinate>& Gp,
-				  blitz::Array<double, 2>& Gp_cov) const;
-  void ce90_le90(const ImageCoordinate& Ic, double H,
-		 double& Ce90, double& Le90) const;
-  virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
-    const;
-  virtual void cf_look_vector(const ImageCoordinate& Ic, 
-			      CartesianFixedLookVector& Lv,
-			      boost::shared_ptr<CartesianFixed>& P) const;
+                                  const blitz::Array<double, 2>& Ic_cov,
+                                  double H, double H_var,
+                                  boost::shared_ptr<GroundCoordinate>& Gp,
+                                  blitz::Array<double, 2>& Gp_cov) const;
+  void ce90_le90(const ImageCoordinate& Ic, double H, double& Ce90,
+                 double& Le90) const;
+  virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) const;
+  virtual void cf_look_vector(const ImageCoordinate& Ic,
+                              CartesianFixedLookVector& Lv,
+                              boost::shared_ptr<CartesianFixed>& P) const;
   virtual bool has_time() const { return true; }
   virtual Time pixel_time(const ImageCoordinate& Ic) const;
   std::string family() const { return model->getFamily(); }
@@ -90,17 +88,29 @@ public:
   std::string pedigree() const { return model->getPedigree(); }
   std::string image_identifer() const { return model->getImageIdentifier(); }
   std::string sensor_identifer() const { return model->getSensorIdentifier(); }
-  std::string platform_identifer() const { return model->getPlatformIdentifier(); }
-  std::string collection_identifer() const { return model->getCollectionIdentifier(); }
-  std::string trajectory_identifer() const { return model->getTrajectoryIdentifier(); }
+  std::string platform_identifer() const
+  {
+    return model->getPlatformIdentifier();
+  }
+  std::string collection_identifer() const
+  {
+    return model->getCollectionIdentifier();
+  }
+  std::string trajectory_identifer() const
+  {
+    return model->getTrajectoryIdentifier();
+  }
   std::string sensor_type() const { return model->getSensorType(); }
   std::string sensor_mode() const { return model->getSensorMode(); }
-  std::string reference_date_time() const { return model->getReferenceDateAndTime(); }
-  std::string file_name() const { return fname_;}
-  int image_index() const { return image_index_;}
+  std::string reference_date_time() const
+  {
+    return model->getReferenceDateAndTime();
+  }
+  std::string file_name() const { return fname_; }
+  int image_index() const { return image_index_; }
   blitz::Array<double, 1> sensor_velocity(const ImageCoordinate& Ic) const;
   std::string generate_rsm_tre(const std::string& Report = "",
-			       const std::string& Rsm_config = "") const;
+                               const std::string& Rsm_config = "") const;
   blitz::Array<double, 2> covariance() const;
   blitz::Array<double, 2> joint_covariance(const IgcMspImp& igc2) const;
 private:
@@ -116,11 +126,10 @@ private:
   IgcMspImp() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
   template<class Archive>
-  void save(Archive & ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive & ar, const unsigned int version);
+  void save(Archive& ar, const unsigned int version) const;
+  template<class Archive> void load(Archive& ar, const unsigned int version);
 };
 }
 
@@ -128,23 +137,22 @@ GEOCAL_EXPORT_KEY(IgcMspImp);
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void IgcMspImp::serialize(Archive & ar, const unsigned int version)
+void IgcMspImp::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection)
-    & GEOCAL_NVP_(fname) & GEOCAL_NVP_(plugin_name)
-    & GEOCAL_NVP_(model_name)
-    & GEOCAL_NVP_(image_index);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection) &
+      GEOCAL_NVP_(fname) & GEOCAL_NVP_(plugin_name) & GEOCAL_NVP_(model_name) &
+      GEOCAL_NVP_(image_index);
   boost::serialization::split_member(ar, *this, version);
 }
 
 template<class Archive>
-void IgcMspImp::save(Archive & ar, const unsigned int version) const
+void IgcMspImp::save(Archive& ar, const unsigned int version) const
 {
   // Nothing more to do
 }
 
 template<class Archive>
-void IgcMspImp::load(Archive & ar, const unsigned int version)
+void IgcMspImp::load(Archive& ar, const unsigned int version)
 {
   init();
 }
@@ -159,182 +167,181 @@ boost::shared_ptr<MSP::CS::CovarianceService> IgcMspImp::cs;
 
 void IgcMspImp::init()
 {
-try {
-  IgcMsp::msp_init();
-  if(!initialized) {
-    sds = boost::make_shared<MSP::SDS::SupportDataService>();
-    sms = boost::make_shared<MSP::SMS::SensorModelService>();
-    cs = boost::make_shared<MSP::CS::CovarianceService>();
-    initialized = true;
+  try {
+    IgcMsp::msp_init();
+    if(!initialized) {
+      sds = boost::make_shared<MSP::SDS::SupportDataService>();
+      sms = boost::make_shared<MSP::SMS::SensorModelService>();
+      cs = boost::make_shared<MSP::CS::CovarianceService>();
+      initialized = true;
+    }
+    boost::shared_ptr<csm::Isd> isd(sds->createIsdFromFile(fname_.c_str()));
+    sds->setImageInIsd(image_index_, *isd);
+    MSP::WarningListType msg;
+    boost::shared_ptr<csm::Model> model_raw;
+    if(plugin_name_ == "")
+      model_raw.reset(sms->createModelFromISD(*isd, 0, &msg));
+    else {
+      const csm::Plugin* t = csm::Plugin::findPlugin(plugin_name_);
+      if(!t)
+        throw Exception("Could not file plugin '" + plugin_name_ + "'");
+      std::list<csm::Warning> msg2;
+      bool can_do = t->canISDBeConvertedToModelState(*isd, model_name_, &msg2);
+      if(can_do)
+        model_raw.reset(t->constructModelFromISD(*isd, model_name_, &msg2));
+      BOOST_FOREACH(const csm::Warning& w, msg2) {
+        std::cout << "Warning:\n"
+                  << w.getMessage() << "\n"
+                  << w.getFunction() << "\n";
+      }
+    }
+    // We may want to turn this off, but for now it is useful to get all
+    // the warning messages when we create the model.
+    BOOST_FOREACH(const MSP::Warning& w, msg) {
+      std::cout << "Warning:\n"
+                << w.getMessage() << "\n"
+                << w.getFunction() << "\n";
+    }
+    model = boost::dynamic_pointer_cast<csm::RasterGM>(model_raw);
+    if(!model)
+      throw Exception("Model needs to be a RasterGM model");
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
   }
-  boost::shared_ptr<csm::Isd> isd(sds->createIsdFromFile(fname_.c_str()));
-  sds->setImageInIsd(image_index_, *isd);
-  MSP::WarningListType msg;
-  boost::shared_ptr<csm::Model> model_raw;
-  if(plugin_name_ == "")
-    model_raw.reset(sms->createModelFromISD(*isd,0,&msg));
-  else {
-    const csm::Plugin* t = csm::Plugin::findPlugin(plugin_name_);
-    if(!t)
-      throw Exception("Could not file plugin '" + plugin_name_ + "'");
-    std::list<csm::Warning> msg2;
-    bool can_do = t->canISDBeConvertedToModelState(*isd, model_name_, &msg2);
-    if(can_do)
-      model_raw.reset(t->constructModelFromISD(*isd, model_name_, &msg2));
-    BOOST_FOREACH(const csm::Warning& w, msg2) {
-      std::cout << "Warning:\n" << w.getMessage() << "\n"
-		<< w.getFunction() << "\n";
-  }
-  }
-  // We may want to turn this off, but for now it is useful to get all
-  // the warning messages when we create the model.
-  BOOST_FOREACH(const MSP::Warning& w, msg) {
-    std::cout << "Warning:\n" << w.getMessage() << "\n"
-	      << w.getFunction() << "\n";
-  }
-  model = boost::dynamic_pointer_cast<csm::RasterGM>(model_raw);
-  if(!model)
-    throw Exception("Model needs to be a RasterGM model");
-} catch(const csm::Error& error) {
-  // Translate MSP error to Geocal error, just so we don't need
-  // additional logic to handle this
-  Exception e;
-  e << "MSP error:\n"
-    << "Message: " << error.getMessage() << "\n"
-    << "Function: " << error.getFunction() << "\n";
-  throw e;
-}
 }
 
-blitz::Array<double, 1> IgcMspImp::sensor_velocity(const ImageCoordinate& Ic)
-  const
+blitz::Array<double, 1>
+IgcMspImp::sensor_velocity(const ImageCoordinate& Ic) const
 {
-try {
-  csm::EcefVector v = model->getSensorVelocity(csm::ImageCoord(Ic.line,
-							       Ic.sample));
-  blitz::Array<double, 1> res(3);
-  res = v.x, v.y, v.z;
-  return res;
-} catch(const csm::Error& error) {
-  // Translate MSP error to Geocal error, just so we don't need
-  // additional logic to handle this
-  Exception e;
-  e << "MSP error:\n"
-    << "Message: " << error.getMessage() << "\n"
-    << "Function: " << error.getFunction() << "\n";
-  throw e;
-}
+  try {
+    csm::EcefVector v =
+        model->getSensorVelocity(csm::ImageCoord(Ic.line, Ic.sample));
+    blitz::Array<double, 1> res(3);
+    res = v.x, v.y, v.z;
+    return res;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
 }
 
 ImageCoordinate IgcMspImp::image_coordinate(const GroundCoordinate& Gc) const
 {
-try {
-  boost::shared_ptr<CartesianFixed> cf = Gc.convert_to_cf();
-  csm::ImageCoord ic = model->groundToImage(csm::EcefCoord(cf->position[0],
-			cf->position[1], cf->position[2]));
-  return ImageCoordinate(ic.line, ic.samp);
-} catch(const csm::Error& error) {
-  // Translate MSP error to Geocal error, just so we don't need
-  // additional logic to handle this
-  Exception e;
-  e << "MSP error:\n"
-    << "Message: " << error.getMessage() << "\n"
-    << "Function: " << error.getFunction() << "\n";
-  throw e;
-}
+  try {
+    boost::shared_ptr<CartesianFixed> cf = Gc.convert_to_cf();
+    csm::ImageCoord ic = model->groundToImage(
+        csm::EcefCoord(cf->position[0], cf->position[1], cf->position[2]));
+    return ImageCoordinate(ic.line, ic.samp);
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
 }
 
-void IgcMspImp::cf_look_vector(const ImageCoordinate& Ic, 
-			       CartesianFixedLookVector& Lv,
-			       boost::shared_ptr<CartesianFixed>& P) const
+void IgcMspImp::cf_look_vector(const ImageCoordinate& Ic,
+                               CartesianFixedLookVector& Lv,
+                               boost::shared_ptr<CartesianFixed>& P) const
 {
-try {
-  csm::EcefLocus lc = model->imageToRemoteImagingLocus(csm::ImageCoord(Ic.line, Ic.sample));
-  P = boost::make_shared<Ecr>(lc.point.x, lc.point.y, lc.point.z);
-  Lv.look_vector[0] = lc.direction.x;
-  Lv.look_vector[1] = lc.direction.y;
-  Lv.look_vector[2] = lc.direction.z;
-} catch(const csm::Error& error) {
-  // Translate MSP error to Geocal error, just so we don't need
-  // additional logic to handle this
-  Exception e;
-  e << "MSP error:\n"
-    << "Message: " << error.getMessage() << "\n"
-    << "Function: " << error.getFunction() << "\n";
-  throw e;
-}
-  
+  try {
+    csm::EcefLocus lc =
+        model->imageToRemoteImagingLocus(csm::ImageCoord(Ic.line, Ic.sample));
+    P = boost::make_shared<Ecr>(lc.point.x, lc.point.y, lc.point.z);
+    Lv.look_vector[0] = lc.direction.x;
+    Lv.look_vector[1] = lc.direction.y;
+    Lv.look_vector[2] = lc.direction.z;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
 }
 
-
-boost::shared_ptr<GroundCoordinate> 
-IgcMspImp::ground_coordinate_approx_height(const ImageCoordinate& Ic, 
-					double H) const
+boost::shared_ptr<GroundCoordinate>
+IgcMspImp::ground_coordinate_approx_height(const ImageCoordinate& Ic,
+                                           double H) const
 {
-try {
-  csm::EcefCoord gp = model->imageToGround(csm::ImageCoord(Ic.line, Ic.sample),
-					    H);
-  return boost::make_shared<Ecr>(gp.x, gp.y, gp.z);
-} catch(const csm::Error& error) {
-  // Translate MSP error to Geocal error, just so we don't need
-  // additional logic to handle this
-  Exception e;
-  e << "MSP error:\n"
-    << "Message: " << error.getMessage() << "\n"
-    << "Function: " << error.getFunction() << "\n";
-  throw e;
-}
+  try {
+    csm::EcefCoord gp =
+        model->imageToGround(csm::ImageCoord(Ic.line, Ic.sample), H);
+    return boost::make_shared<Ecr>(gp.x, gp.y, gp.z);
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
 }
 
-boost::shared_ptr<GroundCoordinate> IgcMspImp::ground_coordinate_dem
-(const ImageCoordinate& Ic, const Dem& D) const
+boost::shared_ptr<GroundCoordinate>
+IgcMspImp::ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const
 {
   const SimpleDem* sd = dynamic_cast<const SimpleDem*>(&D);
   if(!sd)
-    throw Exception("Right now, IgcMsp only works with constant DEMs of SimpleDem");
+    throw Exception(
+        "Right now, IgcMsp only works with constant DEMs of SimpleDem");
   return ground_coordinate_approx_height(Ic, sd->h());
 }
 
-void IgcMspImp::ground_coordinate_with_cov
-(const ImageCoordinate& Ic,
- const blitz::Array<double, 2>& Ic_cov,
- double H,
- double H_var,
- boost::shared_ptr<GroundCoordinate>& Gp,
- blitz::Array<double, 2>& Gp_cov) const
+void IgcMspImp::ground_coordinate_with_cov(
+    const ImageCoordinate& Ic, const blitz::Array<double, 2>& Ic_cov, double H,
+    double H_var, boost::shared_ptr<GroundCoordinate>& Gp,
+    blitz::Array<double, 2>& Gp_cov) const
 {
-  csm::EcefCoordCovar gp =
-    model->imageToGround(csm::ImageCoordCovar(Ic.line, Ic.sample, Ic_cov(0,0),
-					      Ic_cov(0,1), Ic_cov(1,1)),
-			 H, H_var);
+  csm::EcefCoordCovar gp = model->imageToGround(
+      csm::ImageCoordCovar(Ic.line, Ic.sample, Ic_cov(0, 0), Ic_cov(0, 1),
+                           Ic_cov(1, 1)),
+      H, H_var);
   Gp = boost::make_shared<Ecr>(gp.x, gp.y, gp.z);
-  Gp_cov.resize(3,3);
-  Gp_cov(0,0) = gp.covar2d(0,0);
-  Gp_cov(0,1) = gp.covar2d(0,1);
-  Gp_cov(0,2) = gp.covar2d(0,2);
-  Gp_cov(1,0) = gp.covar2d(0,1);
-  Gp_cov(1,1) = gp.covar2d(1,1);
-  Gp_cov(1,2) = gp.covar2d(1,2);
-  Gp_cov(2,0) = gp.covar2d(0,2);
-  Gp_cov(2,1) = gp.covar2d(1,2);
-  Gp_cov(2,2) = gp.covar2d(2,2);
+  Gp_cov.resize(3, 3);
+  Gp_cov(0, 0) = gp.covar2d(0, 0);
+  Gp_cov(0, 1) = gp.covar2d(0, 1);
+  Gp_cov(0, 2) = gp.covar2d(0, 2);
+  Gp_cov(1, 0) = gp.covar2d(0, 1);
+  Gp_cov(1, 1) = gp.covar2d(1, 1);
+  Gp_cov(1, 2) = gp.covar2d(1, 2);
+  Gp_cov(2, 0) = gp.covar2d(0, 2);
+  Gp_cov(2, 1) = gp.covar2d(1, 2);
+  Gp_cov(2, 2) = gp.covar2d(2, 2);
 }
 
-void IgcMspImp::ce90_le90
-(const ImageCoordinate& Ic, double H, double& Ce90, double& Le90) const
+void IgcMspImp::ce90_le90(const ImageCoordinate& Ic, double H, double& Ce90,
+                          double& Le90) const
 {
   boost::shared_ptr<GroundCoordinate> gc;
   blitz::Array<double, 2> gc_cov;
-  blitz::Array<double, 2> ic_cov(2,2);
+  blitz::Array<double, 2> ic_cov(2, 2);
   ic_cov = 0;
-  ground_coordinate_with_cov(Ic,ic_cov,H,0, gc, gc_cov);
+  ground_coordinate_with_cov(Ic, ic_cov, H, 0, gc, gc_cov);
   auto gc_cf = gc->convert_to_cf();
   MSP::GroundPoint gp(gc_cf->position[0], gc_cf->position[1],
-		      gc_cf->position[2]);
-  MSP::Matrix cov(3,3);
+                      gc_cf->position[2]);
+  MSP::Matrix cov(3, 3);
   for(int i = 0; i < 3; ++i)
     for(int j = 0; j < 3; ++j)
-      cov.setElement(i,j,gc_cov(i,j));
+      cov.setElement(i, j, gc_cov(i, j));
   gp.setCovariance(cov);
   cs->getCELE90(gp, Ce90, Le90);
 }
@@ -343,72 +350,71 @@ Time IgcMspImp::pixel_time(const ImageCoordinate& Ic) const
 {
   using namespace boost::posix_time;
   using namespace boost::gregorian;
-try {
-  MSP::IGS::ImagingGeometryService is;
-  MSP::Time tm;
-  double second_from_midnight, second_from_start_of_imaging;
-  is.getImageTime(model.get(), MSP::ImagePoint(Ic.line, Ic.sample),
-		  tm, second_from_midnight, second_from_start_of_imaging);
-  date d(tm.getYear(), Jan, 1);
-  d += date_duration(tm.getDate()-1);
-  Time t = Time::parse_time(to_iso_extended_string(d) + "T00:00:00Z") +
-    second_from_midnight;
-  return t;
-} catch(const csm::Error& error) {
-  // Translate MSP error to Geocal error, just so we don't need
-  // additional logic to handle this
-  Exception e;
-  e << "MSP error:\n"
-    << "Message: " << error.getMessage() << "\n"
-    << "Function: " << error.getFunction() << "\n";
-  throw e;
-}
+  try {
+    MSP::IGS::ImagingGeometryService is;
+    MSP::Time tm;
+    double second_from_midnight, second_from_start_of_imaging;
+    is.getImageTime(model.get(), MSP::ImagePoint(Ic.line, Ic.sample), tm,
+                    second_from_midnight, second_from_start_of_imaging);
+    date d(tm.getYear(), Jan, 1);
+    d += date_duration(tm.getDate() - 1);
+    Time t = Time::parse_time(to_iso_extended_string(d) + "T00:00:00Z") +
+             second_from_midnight;
+    return t;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
 }
 
-std::string IgcMspImp::generate_rsm_tre
-(const std::string& Report,
- const std::string& Rsm_config) const
+std::string IgcMspImp::generate_rsm_tre(const std::string& Report,
+                                        const std::string& Rsm_config) const
 {
-try {
-  std::string cfname(Rsm_config);
-  if(cfname == "") {
-    char *t = getenv("MSP_DATA_DIR");
-    if(!t)
-      throw Exception("Need to either pass in the RSM configuration file, or set the environment variable MSP_DATA_DIR");
-    cfname = std::string(t) + "/rsm/database_settings.strat";
+  try {
+    std::string cfname(Rsm_config);
+    if(cfname == "") {
+      char* t = getenv("MSP_DATA_DIR");
+      if(!t)
+        throw Exception("Need to either pass in the RSM configuration file, or "
+                        "set the environment variable MSP_DATA_DIR");
+      cfname = std::string(t) + "/rsm/database_settings.strat";
+    }
+    MSP::RGS::RGSConfig config;
+    config.read_config_file(cfname);
+    MSP::RGS::RsmGeneratorService generator(&config);
+    std::vector<csm::RasterGM*> mlist;
+    mlist.push_back(model.get());
+    int n_orig_params = 0;
+    double* orig_covariance = NULL;
+    std::vector<std::string> image_ids;
+    std::vector<std::vector<int>> orig_param_numbers_by_image;
+    std::vector<csm::Isd*> isd;
+    IWS_WarningTracker warning;
+    warning = generator.generateRsmWithJointCov(
+        mlist, n_orig_params, orig_covariance, image_ids,
+        orig_param_numbers_by_image, isd, Report);
+    warning.printAllWarnings();
+    // Not sure if we should change this or not
+    const char* sensor_model_type = "IWS_UNKNOWN_SENSOR_MODEL";
+    boost::shared_ptr<csm::RasterGM> rsm_sm(
+        (csm::RasterGM*)sms->createModelFromISD(*isd[0], sensor_model_type));
+    if(!rsm_sm)
+      throw Exception("Trouble creating rsm_sm");
+    return rsm_sm->getModelState();
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
   }
-  MSP::RGS::RGSConfig config;
-  config.read_config_file(cfname);
-  MSP::RGS::RsmGeneratorService generator(&config);
-  std::vector<csm::RasterGM *> mlist;
-  mlist.push_back(model.get());
-  int n_orig_params = 0;
-  double *orig_covariance = NULL;
-  std::vector<std::string> image_ids;
-  std::vector<std::vector<int> > orig_param_numbers_by_image;
-  std::vector<csm::Isd *> isd;
-  IWS_WarningTracker warning;
-  warning = generator.generateRsmWithJointCov(mlist, n_orig_params,
-	      orig_covariance, image_ids, orig_param_numbers_by_image,
-	      isd, Report);
-  warning.printAllWarnings();
-  // Not sure if we should change this or not
-  const char* sensor_model_type = "IWS_UNKNOWN_SENSOR_MODEL";
-  boost::shared_ptr<csm::RasterGM>
-    rsm_sm((csm::RasterGM *) sms->createModelFromISD(*isd[0],
-						     sensor_model_type));
-  if(!rsm_sm)
-    throw Exception("Trouble creating rsm_sm");
-  return rsm_sm->getModelState();
-} catch(const csm::Error& error) {
-  // Translate MSP error to Geocal error, just so we don't need
-  // additional logic to handle this
-  Exception e;
-  e << "MSP error:\n"
-    << "Message: " << error.getMessage() << "\n"
-    << "Function: " << error.getFunction() << "\n";
-  throw e;
-}
 }
 
 blitz::Array<double, 2> IgcMspImp::covariance() const
@@ -416,16 +422,15 @@ blitz::Array<double, 2> IgcMspImp::covariance() const
   MSP::CsmSensorModelList slist;
   slist.push_back(model.get());
   MSP::Matrix m;
-  cs->getFullCovarianceMatrix(slist,m);
+  cs->getFullCovarianceMatrix(slist, m);
   blitz::Array<double, 2> res(m.getRows(), m.getColumns());
   for(int i = 0; i < res.rows(); ++i)
     for(int j = 0; j < res.cols(); ++j)
-      res(i,j) = m.getElement(i,j);
+      res(i, j) = m.getElement(i, j);
   return res;
 }
 
-blitz::Array<double, 2>
-IgcMspImp::joint_covariance(const IgcMspImp& igc2) const
+blitz::Array<double, 2> IgcMspImp::joint_covariance(const IgcMspImp& igc2) const
 {
   MSP::CsmSensorModelList slist;
   slist.push_back(model.get());
@@ -433,18 +438,18 @@ IgcMspImp::joint_covariance(const IgcMspImp& igc2) const
   MSP::Matrix m;
   // Temp
   //cs->getCrossCovarianceMatrix(slist,model.get(), igc2.model.get(), m);
-  cs->getFullCovarianceMatrix(slist,m);
+  cs->getFullCovarianceMatrix(slist, m);
   blitz::Array<double, 2> res(m.getRows(), m.getColumns());
   for(int i = 0; i < res.rows(); ++i)
     for(int j = 0; j < res.cols(); ++j)
-      res(i,j) = m.getElement(i,j);
+      res(i, j) = m.getElement(i, j);
   return res;
 }
 
 #endif // HAVE_MSP
 //-----------------------------------------------------------------------
 /// Return true if we were built with MSP support, false
-/// otherwise. 
+/// otherwise.
 //-----------------------------------------------------------------------
 
 bool GeoCal::have_msp_supported()
@@ -467,13 +472,12 @@ bool GeoCal::have_msp_supported()
 //-----------------------------------------------------------------------
 
 IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& D,
-	       int Image_index)
+               int Image_index)
 {
 #ifdef HAVE_MSP
   igc = boost::make_shared<IgcMspImp>(Fname, D, Image_index);
-  initialize(igc->dem_ptr(),
-	     igc->image(), igc->image_multi_band(),
-	     igc->title(), igc->image_mask(), igc->ground_mask());
+  initialize(igc->dem_ptr(), igc->image(), igc->image_multi_band(),
+             igc->title(), igc->image_mask(), igc->ground_mask());
 #else
   throw MspNotAvailableException();
 #endif
@@ -489,20 +493,18 @@ IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& D,
 //-----------------------------------------------------------------------
 
 IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& D,
-	       int Image_index,
-	       const std::string& Plugin_name, const std::string& Model_name)
+               int Image_index, const std::string& Plugin_name,
+               const std::string& Model_name)
 {
 #ifdef HAVE_MSP
   igc = boost::make_shared<IgcMspImp>(Fname, D, Image_index, Plugin_name,
-				      Model_name);
-  initialize(igc->dem_ptr(),
-	     igc->image(), igc->image_multi_band(),
-	     igc->title(), igc->image_mask(), igc->ground_mask());
+                                      Model_name);
+  initialize(igc->dem_ptr(), igc->image(), igc->image_multi_band(),
+             igc->title(), igc->image_mask(), igc->ground_mask());
 #else
   throw MspNotAvailableException();
 #endif
 }
-
 
 //-----------------------------------------------------------------------
 /// Print a list of all plugins.
@@ -511,25 +513,25 @@ IgcMsp::IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& D,
 void IgcMsp::msp_print_plugin_list()
 {
 #ifdef HAVE_MSP
-try {
-  msp_init();
-  MSP::SDS::SupportDataService sds;
-  boost::shared_ptr<MSP::SMS::SensorModelService> sms =
-    boost::make_shared<MSP::SMS::SensorModelService>();
-  MSP::SMS::NameList plugin_list;
-  sms->getAllRegisteredPlugins(plugin_list);
-  std::cout << "MSP Plugin list:\n";
-  BOOST_FOREACH(const std::string& n, plugin_list)
-    std::cout<< "  " << n << "\n";
-} catch(const csm::Error& error) {
-  // Translate MSP error to Geocal error, just so we don't need
-  // additional logic to handle this
-  Exception e;
-  e << "MSP error:\n"
-    << "Message: " << error.getMessage() << "\n"
-    << "Function: " << error.getFunction() << "\n";
-  throw e;
-}
+  try {
+    msp_init();
+    MSP::SDS::SupportDataService sds;
+    boost::shared_ptr<MSP::SMS::SensorModelService> sms =
+        boost::make_shared<MSP::SMS::SensorModelService>();
+    MSP::SMS::NameList plugin_list;
+    sms->getAllRegisteredPlugins(plugin_list);
+    std::cout << "MSP Plugin list:\n";
+    BOOST_FOREACH(const std::string& n, plugin_list)
+      std::cout << "  " << n << "\n";
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
 #else
   throw MspNotAvailableException();
 #endif
@@ -542,26 +544,26 @@ try {
 std::vector<std::string> IgcMsp::msp_plugin_list()
 {
 #ifdef HAVE_MSP
-try {
-  msp_init();
-  MSP::SDS::SupportDataService sds;
-  boost::shared_ptr<MSP::SMS::SensorModelService> sms =
-    boost::make_shared<MSP::SMS::SensorModelService>();
-  MSP::SMS::NameList plugin_list;
-  sms->getAllRegisteredPlugins(plugin_list);
-  std::vector<std::string> res;
-  BOOST_FOREACH(const std::string& n, plugin_list)
-    res.push_back(n);
-  return res;
-} catch(const csm::Error& error) {
-  // Translate MSP error to Geocal error, just so we don't need
-  // additional logic to handle this
-  Exception e;
-  e << "MSP error:\n"
-    << "Message: " << error.getMessage() << "\n"
-    << "Function: " << error.getFunction() << "\n";
-  throw e;
-}
+  try {
+    msp_init();
+    MSP::SDS::SupportDataService sds;
+    boost::shared_ptr<MSP::SMS::SensorModelService> sms =
+        boost::make_shared<MSP::SMS::SensorModelService>();
+    MSP::SMS::NameList plugin_list;
+    sms->getAllRegisteredPlugins(plugin_list);
+    std::vector<std::string> res;
+    BOOST_FOREACH(const std::string& n, plugin_list)
+      res.push_back(n);
+    return res;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
 #else
   throw MspNotAvailableException();
 #endif
@@ -575,27 +577,27 @@ try {
 std::vector<std::string> IgcMsp::msp_model_list(const std::string& Plugin)
 {
 #ifdef HAVE_MSP
-try {
-  msp_init();
-  // This registers stuff
-  MSP::SDS::SupportDataService sds;
-  boost::shared_ptr<MSP::SMS::SensorModelService> sms =
-    boost::make_shared<MSP::SMS::SensorModelService>();
+  try {
+    msp_init();
+    // This registers stuff
+    MSP::SDS::SupportDataService sds;
+    boost::shared_ptr<MSP::SMS::SensorModelService> sms =
+        boost::make_shared<MSP::SMS::SensorModelService>();
 
-  const csm::Plugin* t = csm::Plugin::findPlugin(Plugin);
-  std::vector<std::string> res;
-  for(int i = 0; i < (int) t->getNumModels(); ++i)
-    res.push_back(t->getModelName(i));
-  return res;
-} catch(const csm::Error& error) {
-  // Translate MSP error to Geocal error, just so we don't need
-  // additional logic to handle this
-  Exception e;
-  e << "MSP error:\n"
-    << "Message: " << error.getMessage() << "\n"
-    << "Function: " << error.getFunction() << "\n";
-  throw e;
-}
+    const csm::Plugin* t = csm::Plugin::findPlugin(Plugin);
+    std::vector<std::string> res;
+    for(int i = 0; i < (int)t->getNumModels(); ++i)
+      res.push_back(t->getModelName(i));
+    return res;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
 #else
   throw MspNotAvailableException();
 #endif
@@ -603,37 +605,37 @@ try {
 
 //-----------------------------------------------------------------------
 /// Return the list of image IDS for the given NITF file. If the file
-/// has only one 
+/// has only one
 //-----------------------------------------------------------------------
 
 std::vector<std::string> IgcMsp::image_ids(const std::string& Fname)
 {
 #ifdef HAVE_MSP
-try {
-  msp_init();
-  // This registers stuff
-  MSP::SDS::SupportDataService sds;
-  boost::shared_ptr<MSP::SMS::SensorModelService> sms =
-    boost::make_shared<MSP::SMS::SensorModelService>();
-  boost::shared_ptr<csm::Isd> isd(sds.createIsdFromFile(Fname.c_str()));
-  int numImages = sds.getNumImages(*isd);
-  // For some reason, our test examples don't work with this. Like so
-  // much with MSP not clear why, we just get "Unrecognized support
-  // data" error. Leave this minor diagnostic in place for now, we can
-  // come back to this.
-  std::cerr << "nuImages: " << numImages << "\n";
-  std::vector<std::string> res;
-  sds.getImageIds(*isd, res);
-  return res;
-} catch(const csm::Error& error) {
-  // Translate MSP error to Geocal error, just so we don't need
-  // additional logic to handle this
-  Exception e;
-  e << "MSP error:\n"
-    << "Message: " << error.getMessage() << "\n"
-    << "Function: " << error.getFunction() << "\n";
-  throw e;
-}
+  try {
+    msp_init();
+    // This registers stuff
+    MSP::SDS::SupportDataService sds;
+    boost::shared_ptr<MSP::SMS::SensorModelService> sms =
+        boost::make_shared<MSP::SMS::SensorModelService>();
+    boost::shared_ptr<csm::Isd> isd(sds.createIsdFromFile(Fname.c_str()));
+    int numImages = sds.getNumImages(*isd);
+    // For some reason, our test examples don't work with this. Like so
+    // much with MSP not clear why, we just get "Unrecognized support
+    // data" error. Leave this minor diagnostic in place for now, we can
+    // come back to this.
+    std::cerr << "nuImages: " << numImages << "\n";
+    std::vector<std::string> res;
+    sds.getImageIds(*isd, res);
+    return res;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
 #else
   throw MspNotAvailableException();
 #endif
@@ -648,21 +650,21 @@ try {
 void IgcMsp::msp_register_plugin(const std::string& Plugin_name)
 {
 #ifdef HAVE_MSP
-try {
-  msp_init();
-  MSP::SDS::SupportDataService sds;
-  boost::shared_ptr<MSP::SMS::SensorModelService> sms =
-    boost::make_shared<MSP::SMS::SensorModelService>();
-  sms->registerPlugin(Plugin_name);
-} catch(const csm::Error& error) {
-  // Translate MSP error to Geocal error, just so we don't need
-  // additional logic to handle this
-  Exception e;
-  e << "MSP error:\n"
-    << "Message: " << error.getMessage() << "\n"
-    << "Function: " << error.getFunction() << "\n";
-  throw e;
-}
+  try {
+    msp_init();
+    MSP::SDS::SupportDataService sds;
+    boost::shared_ptr<MSP::SMS::SensorModelService> sms =
+        boost::make_shared<MSP::SMS::SensorModelService>();
+    sms->registerPlugin(Plugin_name);
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
 #else
   throw MspNotAvailableException();
 #endif
@@ -690,7 +692,7 @@ void* IgcMsp::lib_ptr = 0;
 ///  The solution is to preload the library. You can either define
 ///  LD_PRELOAD=/data/smyth/MSP/install/lib/libMSPcsm.so when starting
 ///  python, or alternatively explicitly load the library in python with
-///  RTLD_GLOBAL: 
+///  RTLD_GLOBAL:
 ///
 ///      ctypes.CDLL(os.environ["CSM_PLUGIN_DIR"] +
 ///         "../lib/libMSPcsm.so", ctypes.RTLD_GLOBAL)
@@ -700,7 +702,7 @@ void* IgcMsp::lib_ptr = 0;
 /// while to track down initially, so we want to document this.
 /// Also, this might change in
 /// a future version of the MSP library (either adding or remove
-/// libraries 
+/// libraries
 //-----------------------------------------------------------------------
 
 void IgcMsp::msp_init()
@@ -710,7 +712,8 @@ void IgcMsp::msp_init()
     return;
   char* t = getenv("CSM_PLUGIN_DIR");
   if(!t)
-    throw Exception("You need to set the environment variable CSM_PLUGIN_DIR to use the MSP plugins");
+    throw Exception("You need to set the environment variable CSM_PLUGIN_DIR "
+                    "to use the MSP plugins");
   std::string lib = std::string(t) + "/../lib/libMSPcsm.so";
   lib_ptr = dlopen(lib.c_str(), RTLD_NOW | RTLD_GLOBAL);
   if(!lib_ptr) {
@@ -768,7 +771,7 @@ std::string IgcMsp::image_identifer() const
   throw MspNotAvailableException();
 #endif
 }
-  
+
 std::string IgcMsp::sensor_identifer() const
 {
 #ifdef HAVE_MSP
@@ -777,7 +780,7 @@ std::string IgcMsp::sensor_identifer() const
   throw MspNotAvailableException();
 #endif
 }
-  
+
 std::string IgcMsp::platform_identifer() const
 {
 #ifdef HAVE_MSP
@@ -786,7 +789,7 @@ std::string IgcMsp::platform_identifer() const
   throw MspNotAvailableException();
 #endif
 }
-  
+
 std::string IgcMsp::collection_identifer() const
 {
 #ifdef HAVE_MSP
@@ -795,7 +798,7 @@ std::string IgcMsp::collection_identifer() const
   throw MspNotAvailableException();
 #endif
 }
-  
+
 std::string IgcMsp::trajectory_identifer() const
 {
 #ifdef HAVE_MSP
@@ -804,7 +807,7 @@ std::string IgcMsp::trajectory_identifer() const
   throw MspNotAvailableException();
 #endif
 }
-  
+
 std::string IgcMsp::sensor_type() const
 {
 #ifdef HAVE_MSP
@@ -813,7 +816,7 @@ std::string IgcMsp::sensor_type() const
   throw MspNotAvailableException();
 #endif
 }
-  
+
 std::string IgcMsp::sensor_mode() const
 {
 #ifdef HAVE_MSP
@@ -822,7 +825,7 @@ std::string IgcMsp::sensor_mode() const
   throw MspNotAvailableException();
 #endif
 }
-  
+
 std::string IgcMsp::reference_date_time() const
 {
 #ifdef HAVE_MSP
@@ -841,8 +844,7 @@ std::string IgcMsp::file_name() const
 #endif
 }
 
-blitz::Array<double, 1> IgcMsp::sensor_velocity(const ImageCoordinate& Ic)
-  const
+blitz::Array<double, 1> IgcMsp::sensor_velocity(const ImageCoordinate& Ic) const
 {
 #ifdef HAVE_MSP
   return boost::dynamic_pointer_cast<IgcMspImp>(igc)->sensor_velocity(Ic);
@@ -860,7 +862,6 @@ int IgcMsp::image_index() const
 #endif
 }
 
-
 //-----------------------------------------------------------------------
 /// Use the MSP RSM generation code to create a TRE string (it doesn't
 /// directly create a NITF file).
@@ -874,15 +875,15 @@ int IgcMsp::image_index() const
 /// do in C++ and we really only need this at the python level anyways.
 //-----------------------------------------------------------------------
 
-std::string IgcMsp::generate_rsm_tre
-(const std::string& Report,
- const std::string& Rsm_config) const
+std::string IgcMsp::generate_rsm_tre(const std::string& Report,
+                                     const std::string& Rsm_config) const
 {
 #ifdef HAVE_MSP
   // The report file gets appended to. Usually we just want "a report
   // file", so we delete anything already there.
   unlink(Report.c_str());
-  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->generate_rsm_tre(Report, Rsm_config);
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->generate_rsm_tre(
+      Report, Rsm_config);
 #else
   throw MspNotAvailableException();
 #endif
@@ -955,13 +956,11 @@ blitz::Array<double, 2> IgcMsp::joint_covariance(const IgcMsp& igc2) const
 /// covariance, set the Ic_cov and H_var to zero (is this correct?)
 //-----------------------------------------------------------------------
 
-void IgcMsp::ground_coordinate_with_cov
-(const ImageCoordinate& Ic,
- const blitz::Array<double, 2>& Ic_cov,
- double H,
- double H_var,
- boost::shared_ptr<GroundCoordinate>& Gp,
- blitz::Array<double, 2>& Gp_cov) const
+void IgcMsp::ground_coordinate_with_cov(const ImageCoordinate& Ic,
+                                        const blitz::Array<double, 2>& Ic_cov,
+                                        double H, double H_var,
+                                        boost::shared_ptr<GroundCoordinate>& Gp,
+                                        blitz::Array<double, 2>& Gp_cov) const
 {
 #ifdef HAVE_MSP
   auto igc_p = boost::dynamic_pointer_cast<IgcMspImp>(igc);
@@ -976,8 +975,8 @@ void IgcMsp::ground_coordinate_with_cov
 /// covariance.
 //-----------------------------------------------------------------------
 
-void IgcMsp::ce90_le90
-(const ImageCoordinate& Ic, double H, double& Ce90, double& Le90) const
+void IgcMsp::ce90_le90(const ImageCoordinate& Ic, double H, double& Ce90,
+                       double& Le90) const
 {
 #ifdef HAVE_MSP
   auto igc_p = boost::dynamic_pointer_cast<IgcMspImp>(igc);

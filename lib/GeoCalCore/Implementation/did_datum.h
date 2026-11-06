@@ -5,7 +5,7 @@
 #include "memory_map_array.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This is a Datum used for the the DID.
 *******************************************************************/
 
@@ -15,33 +15,31 @@ public:
   virtual double undulation(const GroundCoordinate& Gc) const;
   virtual double undulation(const Geodetic& Gc) const;
 
-//-----------------------------------------------------------------------
-/// Destructor
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor
+  //-----------------------------------------------------------------------
 
   virtual ~DidDatum() {}
-//-----------------------------------------------------------------------
-/// Print to stream.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print to stream.
+  //-----------------------------------------------------------------------
 
-  virtual void print(std::ostream& Os) const
-  { Os << "DID Datum\n"; }
+  virtual void print(std::ostream& Os) const { Os << "DID Datum\n"; }
 
-  const std::string& file_name() const {return msl_->file_name();}
+  const std::string& file_name() const { return msl_->file_name(); }
 protected:
   DidDatum() {}
 private:
   void initialize(const std::string& Fname);
-  MapInfo mi_;			///< MapInfo describing how data is
-				///stored.
-  boost::shared_ptr<MemoryMapArray<char, 3> > msl_;
-                                ///< Data. We read this as raw bytes
-                                ///so we don't have any endian problems.
+  MapInfo mi_; ///< MapInfo describing how data is
+  ///stored.
+  boost::shared_ptr<MemoryMapArray<char, 3>> msl_;
+  ///< Data. We read this as raw bytes
+  ///so we don't have any endian problems.
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive& Ar, const unsigned int version);
+  template<class Archive> void load(Archive& Ar, const unsigned int version);
   GEOCAL_SPLIT_MEMBER();
 };
 

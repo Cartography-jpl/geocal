@@ -5,11 +5,11 @@ using namespace GeoCal;
 void ImagePointDisplay::initialize()
 {
   RASTER_FOREACH(*this, i, j)
-    write(i, j, 0);
+  write(i, j, 0);
 
-//-----------------------------------------------------------------------
-// Create color table for image point.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Create color table for image point.
+  //-----------------------------------------------------------------------
 
   GDALColorTable ct;
   GDALColorEntry transparent = {0, 0, 0, 0};
@@ -18,11 +18,11 @@ void ImagePointDisplay::initialize()
   GDALColorEntry startc = {0, 0, 255, 255};
   GDALColorEntry endc = {255, 0, 0, 255};
   for(int i = 0; i < nstep; ++i) {
-    GDALColorEntry ce = 
-      {(short int)((endc.c1 - startc.c1) * i / (nstep - 1) + startc.c1),
-       (short int)((endc.c2 - startc.c2) * i / (nstep - 1) + startc.c2),
-       (short int)((endc.c3 - startc.c3) * i / (nstep - 1) + startc.c3),
-       (short int)((endc.c4 - startc.c4) * i / (nstep - 1) + startc.c4)};
+    GDALColorEntry ce = {
+        (short int)((endc.c1 - startc.c1) * i / (nstep - 1) + startc.c1),
+        (short int)((endc.c2 - startc.c2) * i / (nstep - 1) + startc.c2),
+        (short int)((endc.c3 - startc.c3) * i / (nstep - 1) + startc.c3),
+        (short int)((endc.c4 - startc.c4) * i / (nstep - 1) + startc.c4)};
     ct.SetColorEntry(i + 1, &ce);
   }
   {
@@ -62,9 +62,9 @@ void ImagePointDisplay::initialize()
 
 void ImagePointDisplay::image_point(const ImageCoordinate& Ic, int Cindex)
 {
-  const int cross_size = 5;	// Should be odd.
-  int l = (int) rint(Ic.line);
-  int s = (int) rint(Ic.sample);
+  const int cross_size = 5; // Should be odd.
+  int l = (int)rint(Ic.line);
+  int s = (int)rint(Ic.sample);
   for(int i = l - cross_size / 2; i <= l + cross_size / 2; ++i)
     if(i >= 0 && i < number_line() && s > 0 && s < number_sample())
       write(i, s, Cindex);

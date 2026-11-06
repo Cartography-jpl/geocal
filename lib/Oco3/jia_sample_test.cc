@@ -11,8 +11,8 @@ BOOST_AUTO_TEST_CASE(basic)
 {
   JiaSample js(10);
   BOOST_CHECK_EQUAL(js.blah(), 10);
-  if(false)			// Normally skip so we don't have unit
-				// test output written out.
+  if(false) // Normally skip so we don't have unit
+    // test output written out.
     js.jia_func();
 }
 
@@ -24,11 +24,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   std::string d = serialize_write_string(js);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<JiaSample> jsr = 
-    serialize_read_string<JiaSample>(d);
+  boost::shared_ptr<JiaSample> jsr = serialize_read_string<JiaSample>(d);
   BOOST_CHECK_EQUAL(js->blah(), 10);
 }
 BOOST_AUTO_TEST_SUITE_END()
-
-  
-

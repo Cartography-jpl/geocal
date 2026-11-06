@@ -11,9 +11,9 @@ BOOST_AUTO_TEST_CASE(basic_test)
     return;
   try {
     DatumGeoid96 d;
-    // We compare this the geoid calculation found at 
+    // We compare this the geoid calculation found at
     // http://earth-info.nga.mil/nga-bin/gandg-bin/intpt.cgi
-    BOOST_CHECK_CLOSE(d.undulation(Geodetic(34.2,-118.03)), -33.3435, 1e-4);
+    BOOST_CHECK_CLOSE(d.undulation(Geodetic(34.2, -118.03)), -33.3435, 1e-4);
   } catch(const Exception&) {
     BOOST_WARN_MESSAGE(false, "Skipping DatumGeoid96 test, data wasn't found");
     // Don't worry if we can't find the data.
@@ -51,12 +51,10 @@ BOOST_AUTO_TEST_CASE(serialization)
   std::string d = serialize_write_string(datum);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<Datum> datumr = 
-    serialize_read_string<Datum>(d);
+  boost::shared_ptr<Datum> datumr = serialize_read_string<Datum>(d);
 
-  BOOST_CHECK_CLOSE(datumr->undulation(Geodetic(34.2,-118.03)), -33.3435, 1e-4);
+  BOOST_CHECK_CLOSE(datumr->undulation(Geodetic(34.2, -118.03)), -33.3435,
+                    1e-4);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-
-

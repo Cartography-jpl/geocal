@@ -1,47 +1,41 @@
 #ifndef GROUND_MSPI_IGC_H
 #define GROUND_MSPI_IGC_H
-#include "ipi_image_ground_connection.h" 
-				// Definition of IpiImageGroundConnection
-#include "quaternion_camera.h" 	// Definition of QuaternionCamera.
+#include "ipi_image_ground_connection.h"
+// Definition of IpiImageGroundConnection
+#include "quaternion_camera.h" // Definition of QuaternionCamera.
 
 namespace GeoCal {
 
-/****************************************************************//**
+/****************************************************************/ /**
   This is an ImageGroundConnection for GroundMspi.
 *******************************************************************/
 
 class GroundMspiIgc : public virtual IpiImageGroundConnection {
 public:
   GroundMspiIgc(const Time& Start_time,
-		boost::shared_ptr<GroundCoordinate>& Pos,
-		double Azimuth,
-		double Start_elevation_angle,
-		double Rotation_rate,
-		const std::vector<Time>& Time_tag,
-		const std::string& Camera_config,
-		int Band);
+                boost::shared_ptr<GroundCoordinate>& Pos, double Azimuth,
+                double Start_elevation_angle, double Rotation_rate,
+                const std::vector<Time>& Time_tag,
+                const std::string& Camera_config, int Band);
   GroundMspiIgc(const Time& Start_time,
-		boost::shared_ptr<GroundCoordinate>& Pos,
-		double Azimuth,
-		double Start_elevation_angle,
-		double Rotation_rate,
-		const std::vector<Time>& Time_tag,
-		const boost::shared_ptr<QuaternionCamera>& Cam,
-		int Band);
+                boost::shared_ptr<GroundCoordinate>& Pos, double Azimuth,
+                double Start_elevation_angle, double Rotation_rate,
+                const std::vector<Time>& Time_tag,
+                const boost::shared_ptr<QuaternionCamera>& Cam, int Band);
   virtual ~GroundMspiIgc() {}
   DcsLookVector solar_look(int Line_number) const;
   DcsLookVector normal_look(int Line_number) const;
   DcsLookVector pixel_look(int Sample_number) const;
 
-//-----------------------------------------------------------------------
-/// Band that we are using.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Band that we are using.
+  //-----------------------------------------------------------------------
 
-  int band() const {return ipi()->band(); }
+  int band() const { return ipi()->band(); }
 
-//-----------------------------------------------------------------------
-/// Set band that we are using.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Set band that we are using.
+  //-----------------------------------------------------------------------
 
   void band(int B) { ipi()->band(B); }
 
@@ -56,10 +50,9 @@ private:
   GroundMspiIgc() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 
 GEOCAL_EXPORT_KEY(GroundMspiIgc);
 #endif
-

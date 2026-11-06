@@ -15,24 +15,26 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void GroundCoordinate::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
+void GroundCoordinate::serialize(Archive& UNUSED(ar),
+                                 const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GroundCoordinate);
 }
 
 template<class Archive>
-void CartesianFixed::serialize(Archive & ar, const unsigned int UNUSED(version))
+void CartesianFixed::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GroundCoordinate);
   GEOCAL_BASE(CartesianFixed, GroundCoordinate);
-  ar & GEOCAL_NVP(position);
+  ar& GEOCAL_NVP(position);
 }
 
 template<class Archive>
-void CartesianInertial::serialize(Archive & ar, const unsigned int UNUSED(version))
+void CartesianInertial::serialize(Archive& ar,
+                                  const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(CartesianInertial);
-  ar & GEOCAL_NVP(position);
+  ar& GEOCAL_NVP(position);
 }
 
 GEOCAL_IMPLEMENT(GroundCoordinate);
@@ -40,50 +42,60 @@ GEOCAL_IMPLEMENT(CartesianFixed);
 GEOCAL_IMPLEMENT(CartesianInertial);
 #endif
 
-inline double sqr(double x) { return x * x; }
+inline double sqr(double x)
+{
+  return x * x;
+}
 
-/****************************************************************//**
+/****************************************************************/ /**
   Each toolkit supplies methods to convert to and from CartesianInertial.
 *******************************************************************/
 class DummyToolkitCoordinateInterface : public ToolkitCoordinateInterface {
 public:
   virtual ~DummyToolkitCoordinateInterface() {}
-  virtual void to_inertial(int UNUSED(Body_id), const Time& UNUSED(T), 
-   const CartesianFixed& UNUSED(From), CartesianInertial& UNUSED(To))
+  virtual void to_inertial(int UNUSED(Body_id), const Time& UNUSED(T),
+                           const CartesianFixed& UNUSED(From),
+                           CartesianInertial& UNUSED(To))
   {
-    throw Exception("Need to have either SPICE or SDP toolkit available to convert from CartesianFixed to CartesianInertial.");
+    throw Exception("Need to have either SPICE or SDP toolkit available to "
+                    "convert from CartesianFixed to CartesianInertial.");
   }
-  virtual void to_inertial(int UNUSED(Body_id), const Time& UNUSED(T), 
-			   const CartesianFixed& UNUSED(From), const boost::array<double, 3>& UNUSED(Vel_c),
-			   CartesianInertial& UNUSED(To), boost::array<double, 3>& UNUSED(Vel_ci))
+  virtual void to_inertial(int UNUSED(Body_id), const Time& UNUSED(T),
+                           const CartesianFixed& UNUSED(From),
+                           const boost::array<double, 3>& UNUSED(Vel_c),
+                           CartesianInertial& UNUSED(To),
+                           boost::array<double, 3>& UNUSED(Vel_ci))
   {
-    throw Exception("Need to have either SPICE or SDP toolkit available to convert from CartesianFixed to CartesianInertial.");
+    throw Exception("Need to have either SPICE or SDP toolkit available to "
+                    "convert from CartesianFixed to CartesianInertial.");
   }
   virtual void to_fixed(int UNUSED(Body_id), const Time& UNUSED(T),
-     const CartesianInertial& UNUSED(From), CartesianFixed& UNUSED(To)) 
+                        const CartesianInertial& UNUSED(From),
+                        CartesianFixed& UNUSED(To))
   {
-    throw Exception("Need to have either SPICE or SDP toolkit available to convert from CartesianInertial to CartesianFixed.");
+    throw Exception("Need to have either SPICE or SDP toolkit available to "
+                    "convert from CartesianInertial to CartesianFixed.");
   }
 
   virtual void to_fixed(int UNUSED(Body_id), const Time& UNUSED(T),
-			double UNUSED(Ci_to_cf[3][3]))
+                        double UNUSED(Ci_to_cf[3][3]))
   {
-    throw Exception("Need to have either SPICE or SDP toolkit available to convert from CartesianInertial to CartesianFixed.");
+    throw Exception("Need to have either SPICE or SDP toolkit available to "
+                    "convert from CartesianInertial to CartesianFixed.");
   }
-
 };
 
 #ifdef HAVE_SPICE
 ToolkitCoordinateInterface* CartesianFixed::toolkit_coordinate_interface =
-  new SpiceToolkitCoordinateInterface();
+    new SpiceToolkitCoordinateInterface();
 #else
-  #ifdef HAVE_SDP
+#ifdef HAVE_SDP
 ToolkitCoordinateInterface* CartesianFixed::toolkit_coordinate_interface =
-  new SdpToolkitCoordinateInterface();
-  #else
+    new SdpToolkitCoordinateInterface();
+#else
 ToolkitCoordinateInterface* CartesianFixed::toolkit_coordinate_interface =
-  new DummyToolkitCoordinateInterface();
-  #endif
+    new DummyToolkitCoordinateInterface();
+#endif
 #endif
 
 //-----------------------------------------------------------------------
@@ -112,13 +124,10 @@ double GeoCal::distance(const GroundCoordinate& G1, const GroundCoordinate& G2)
 /// Convert including velocity.
 //-----------------------------------------------------------------------
 
-void GeoCal::convert_position_and_velocity
-(const Time& T,
- const CartesianFixed& Cf,
- const boost::array<double, 3>& Vel_cf,
- boost::shared_ptr<CartesianInertial>& Ci,
- boost::array<double, 3>& Vel_ci
- )
+void GeoCal::convert_position_and_velocity(
+    const Time& T, const CartesianFixed& Cf,
+    const boost::array<double, 3>& Vel_cf,
+    boost::shared_ptr<CartesianInertial>& Ci, boost::array<double, 3>& Vel_ci)
 {
   Ci = Cf.convert_to_ci(T);
   double m[6][6];
@@ -141,16 +150,14 @@ void GeoCal::convert_position_and_velocity
 /// Convert including velocity.
 //-----------------------------------------------------------------------
 
-void GeoCal::convert_position_and_velocity
-(const TimeWithDerivative& T,
- const CartesianFixed& Cf,
- const boost::array<AutoDerivative<double>, 3>& Cf_with_der,
- const boost::array<AutoDerivative<double>, 3>& Vel_cf,
- boost::shared_ptr<CartesianInertial>& Ci,
- boost::array<AutoDerivative<double>, 3>& Ci_with_der,
- boost::array<AutoDerivative<double>, 3>& Vel_ci,
- boost::math::quaternion<AutoDerivative<double> >& Cf_to_ci_q
- )
+void GeoCal::convert_position_and_velocity(
+    const TimeWithDerivative& T, const CartesianFixed& Cf,
+    const boost::array<AutoDerivative<double>, 3>& Cf_with_der,
+    const boost::array<AutoDerivative<double>, 3>& Vel_cf,
+    boost::shared_ptr<CartesianInertial>& Ci,
+    boost::array<AutoDerivative<double>, 3>& Ci_with_der,
+    boost::array<AutoDerivative<double>, 3>& Vel_ci,
+    boost::math::quaternion<AutoDerivative<double>>& Cf_to_ci_q)
 {
   Ci = Cf.convert_to_ci(T.value());
   double m[6][6];
@@ -159,7 +166,7 @@ void GeoCal::convert_position_and_velocity
   const double eps = 1e-3;
   double meps[6][6];
   Cf.cf_to_ci_with_vel(T.value() + eps, meps);
-  blitz::Array<double,1> tmg(T.gradient());
+  blitz::Array<double, 1> tmg(T.gradient());
   AutoDerivative<double> mder[6][6];
   for(int i = 0; i < 6; ++i)
     for(int j = 0; j < 6; ++j) {
@@ -194,14 +201,11 @@ void GeoCal::convert_position_and_velocity
 /// Convert including velocity.
 //-----------------------------------------------------------------------
 
-void GeoCal::convert_position_and_velocity
-(const Time& T,
- const CartesianInertial& Ci,
- const boost::array<double, 3>& Vel_ci,
- boost::shared_ptr<CartesianFixed>& Cf,
- boost::array<double, 3>& Vel_cf,
- boost::math::quaternion<double>& Ci_to_cf_q
- )
+void GeoCal::convert_position_and_velocity(
+    const Time& T, const CartesianInertial& Ci,
+    const boost::array<double, 3>& Vel_ci,
+    boost::shared_ptr<CartesianFixed>& Cf, boost::array<double, 3>& Vel_cf,
+    boost::math::quaternion<double>& Ci_to_cf_q)
 {
   Cf = Ci.convert_to_cf(T);
   double m[6][6];
@@ -230,16 +234,14 @@ void GeoCal::convert_position_and_velocity
 /// Convert including velocity.
 //-----------------------------------------------------------------------
 
-void GeoCal::convert_position_and_velocity
-(const TimeWithDerivative& T,
- const CartesianInertial& Ci,
- const boost::array<AutoDerivative<double>, 3>& Ci_with_der,
- const boost::array<AutoDerivative<double>, 3>& Vel_ci,
- boost::shared_ptr<CartesianFixed>& Cf,
- boost::array<AutoDerivative<double>, 3>& Cf_with_der,
- boost::array<AutoDerivative<double>, 3>& Vel_cf,
- boost::math::quaternion<AutoDerivative<double> >& Ci_to_cf_q
- )
+void GeoCal::convert_position_and_velocity(
+    const TimeWithDerivative& T, const CartesianInertial& Ci,
+    const boost::array<AutoDerivative<double>, 3>& Ci_with_der,
+    const boost::array<AutoDerivative<double>, 3>& Vel_ci,
+    boost::shared_ptr<CartesianFixed>& Cf,
+    boost::array<AutoDerivative<double>, 3>& Cf_with_der,
+    boost::array<AutoDerivative<double>, 3>& Vel_cf,
+    boost::math::quaternion<AutoDerivative<double>>& Ci_to_cf_q)
 {
   Cf = Ci.convert_to_cf(T.value());
   double m[6][6];
@@ -248,7 +250,7 @@ void GeoCal::convert_position_and_velocity
   const double eps = 1e-3;
   double meps[6][6];
   Ci.ci_to_cf_with_vel(T.value() + eps, meps);
-  blitz::Array<double,1> tmg(T.gradient());
+  blitz::Array<double, 1> tmg(T.gradient());
   AutoDerivative<double> mder[6][6];
   for(int i = 0; i < 6; ++i)
     for(int j = 0; j < 6; ++j) {

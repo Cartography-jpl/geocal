@@ -4,7 +4,7 @@
 #include <vector>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This class models the SPOT camera. The camera parameters are given
   by an DIMAP file. This file is an XML file format. You can find 
   documentation for this format at
@@ -22,42 +22,41 @@ namespace GeoCal {
 *******************************************************************/
 
 class SpotCamera : public Camera {
-public: 
-  SpotCamera(const std::vector<double>& Psi_x, 
-	     const std::vector<double>& Psi_y);
+public:
+  SpotCamera(const std::vector<double>& Psi_x,
+             const std::vector<double>& Psi_y);
   virtual ~SpotCamera() {}
 
-//-----------------------------------------------------------------------
-/// Number of bands in camera.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of bands in camera.
+  //-----------------------------------------------------------------------
 
   virtual int number_band() const { return 1; }
 
-//-----------------------------------------------------------------------
-/// Number of lines in camera for given band.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of lines in camera for given band.
+  //-----------------------------------------------------------------------
 
-  virtual int number_line(int Band) const { return 1;}
+  virtual int number_line(int Band) const { return 1; }
 
-//-----------------------------------------------------------------------
-/// Number of samples in camera for given band.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of samples in camera for given band.
+  //-----------------------------------------------------------------------
 
-  virtual int number_sample(int Band) const {return (int) psi_x_.size(); }
+  virtual int number_sample(int Band) const { return (int)psi_x_.size(); }
 
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl,
-					   int Band) const;
-  virtual FrameCoordinateWithDerivative 
-  frame_coordinate_with_derivative(const ScLookVectorWithDerivative& Sl, 
-		   int Band) const;
-  virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
-				      int Band) const;
-  virtual ScLookVectorWithDerivative 
-  sc_look_vector_with_derivative(const FrameCoordinateWithDerivative& F, 
-				 int Band) const;
+                                           int Band) const;
+  virtual FrameCoordinateWithDerivative
+  frame_coordinate_with_derivative(const ScLookVectorWithDerivative& Sl,
+                                   int Band) const;
+  virtual ScLookVector sc_look_vector(const FrameCoordinate& F, int Band) const;
+  virtual ScLookVectorWithDerivative
+  sc_look_vector_with_derivative(const FrameCoordinateWithDerivative& F,
+                                 int Band) const;
   virtual void print(std::ostream& Os) const;
-  const std::vector<double> psi_x() const {return psi_x_;}
-  const std::vector<double> psi_y() const {return psi_y_;}
+  const std::vector<double> psi_x() const { return psi_x_; }
+  const std::vector<double> psi_y() const { return psi_y_; }
 protected:
   SpotCamera() {}
 private:
@@ -65,7 +64,7 @@ private:
   std::vector<double> psi_y_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 GEOCAL_EXPORT_KEY(SpotCamera);

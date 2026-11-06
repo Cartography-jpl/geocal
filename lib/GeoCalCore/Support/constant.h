@@ -2,11 +2,11 @@
 #define CONSTANT_H
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   Contains useful constants.
 *******************************************************************/
 
-  namespace Constant {
+namespace Constant {
 //-----------------------------------------------------------------------
 /// Pi
 //-----------------------------------------------------------------------
@@ -17,7 +17,7 @@ const double pi = 3.14159265358979323846;
 /// Constant for converting from degrees to radians.
 //-----------------------------------------------------------------------
 
-const double deg_to_rad =  pi / 180.0;
+const double deg_to_rad = pi / 180.0;
 
 //-----------------------------------------------------------------------
 /// Constant for converting from radians to degrees.
@@ -29,14 +29,14 @@ const double rad_to_deg = 180.0 / pi;
 /// Constant for converting from arcseconds to radians.
 //-----------------------------------------------------------------------
 
-const double arcsecond_to_rad =  pi / (180.0 * 60 * 60);
+const double arcsecond_to_rad = pi / (180.0 * 60 * 60);
 
 //-----------------------------------------------------------------------
 
 /// Constant for converting from radians to arcseconds.
 //-----------------------------------------------------------------------
 
-const double rad_to_arcsecond =  (180.0 * 60 * 60) / pi;
+const double rad_to_arcsecond = (180.0 * 60 * 60) / pi;
 
 //-----------------------------------------------------------------------
 /// Speed of light, in m/s. Note that this is actually exact, since the
@@ -45,7 +45,6 @@ const double rad_to_arcsecond =  (180.0 * 60 * 60) / pi;
 
 const double speed_of_light = 299792458;
 
-  }
+}
 }
 #endif
-

@@ -20,14 +20,13 @@ BOOST_AUTO_TEST_CASE(eci)
 
   Geodetic g(10, 20, 10000);
   Time t = Time::parse_time("2003-01-01T10:30:00Z");
-  boost::shared_ptr<CartesianInertial> e3 = 
-    g.convert_to_cf()->convert_to_ci(t);
+  boost::shared_ptr<CartesianInertial> e3 = g.convert_to_cf()->convert_to_ci(t);
   boost::array<double, 3> d = {{10.0, 11.0, 12.0}};
   CartesianInertialLookVector lv(d);
   boost::shared_ptr<CartesianInertial> e4 =
-    e3->reference_surface_intersect_approximate(lv, 100);
+      e3->reference_surface_intersect_approximate(lv, 100);
 
-// Check that surface point is in the direction of the lv.
+  // Check that surface point is in the direction of the lv.
 
   d[0] = e4->position[0] - e3->position[0];
   d[1] = e4->position[1] - e3->position[1];
@@ -37,7 +36,7 @@ BOOST_AUTO_TEST_CASE(eci)
   BOOST_CHECK_CLOSE(lv2.direction()[1], lv.direction()[1], 1e-2);
   BOOST_CHECK_CLOSE(lv2.direction()[2], lv.direction()[2], 1e-2);
 
-// Check that height is near desired height.
+  // Check that height is near desired height.
 
   BOOST_CHECK(fabs(e4->convert_to_cf(t)->height_reference_surface() - 100) < 1);
 }
@@ -54,16 +53,15 @@ BOOST_AUTO_TEST_CASE(ecr)
   BOOST_CHECK_CLOSE(e3.latitude(), 10.0, 1e-4);
   BOOST_CHECK_CLOSE(e3.longitude(), 20.0, 1e-4);
   BOOST_CHECK_CLOSE(e3.height_reference_surface(), 50.0, 1e-4);
-  BOOST_CHECK_CLOSE(e3.min_radius_reference_surface(), 
-		    Constant::wgs84_a, 1e-4);
+  BOOST_CHECK_CLOSE(e3.min_radius_reference_surface(), Constant::wgs84_a, 1e-4);
   boost::shared_ptr<CartesianFixed> cf = e3.convert_to_cf();
   BOOST_CHECK(dynamic_cast<Ecr*>(cf.get()) != 0);
   BOOST_CHECK(e3.position == cf->position);
   BOOST_CHECK_EQUAL(e1.print_to_string(), "Ecr: (10 m, 20 m, 30 m)");
 
   Time t = Time::parse_time("2003-01-01T10:30:00Z");
-  boost::shared_ptr<CartesianFixed> e_ecr_start = 
-    Geodetic(10, 20, 30).convert_to_cf();
+  boost::shared_ptr<CartesianFixed> e_ecr_start =
+      Geodetic(10, 20, 30).convert_to_cf();
   boost::shared_ptr<CartesianInertial> e_eci = e_ecr_start->convert_to_ci(t);
   BOOST_CHECK_CLOSE(e_eci->position[0], 888551.27707691176, 1e-4);
   BOOST_CHECK_CLOSE(e_eci->position[1], -6218769.7591331499, 1e-4);
@@ -83,19 +81,20 @@ BOOST_AUTO_TEST_CASE(solar_angle)
   // The results are from an old unit test in MSPI code. We don't
   // expect this to exactly match because the MSPI code used the SDP
   // toolkit. But should be close.
-  BOOST_CHECK_CLOSE(ln.view_zenith(), 9.06966388e-01 * Constant::rad_to_deg, 
-		    0.1);
-  BOOST_CHECK_CLOSE(ln.view_azimuth(), 4.87556601e+00 * Constant::rad_to_deg, 
-		    0.1);
-  CartesianFixedLookVector lv2(Ecr::sub_body_point(Ecr::SUN_NAIF_CODE, t).position);
+  BOOST_CHECK_CLOSE(ln.view_zenith(), 9.06966388e-01 * Constant::rad_to_deg,
+                    0.1);
+  BOOST_CHECK_CLOSE(ln.view_azimuth(), 4.87556601e+00 * Constant::rad_to_deg,
+                    0.1);
+  CartesianFixedLookVector lv2(
+      Ecr::sub_body_point(Ecr::SUN_NAIF_CODE, t).position);
   LnLookVector ln2(lv2, p);
   // The results are from an old unit test in MSPI code. We don't
   // expect this to exactly match because the MSPI code used the SDP
   // toolkit. But should be close.
-  BOOST_CHECK_CLOSE(ln2.view_zenith(), 9.06966388e-01 * Constant::rad_to_deg, 
-		    0.1);
-  BOOST_CHECK_CLOSE(ln2.view_azimuth(), 4.87556601e+00 * Constant::rad_to_deg, 
-		    0.1);
+  BOOST_CHECK_CLOSE(ln2.view_zenith(), 9.06966388e-01 * Constant::rad_to_deg,
+                    0.1);
+  BOOST_CHECK_CLOSE(ln2.view_azimuth(), 4.87556601e+00 * Constant::rad_to_deg,
+                    0.1);
 }
 
 BOOST_AUTO_TEST_CASE(solar_distance)
@@ -103,7 +102,7 @@ BOOST_AUTO_TEST_CASE(solar_distance)
   Time t = Time::parse_time("2010-10-07T19:11:24.500000Z");
   BOOST_CHECK_CLOSE(Ecr::solar_distance(t), 0.99938745098726067, 1e-4);
   BOOST_CHECK_CLOSE(Ecr::body_distance(Ecr::SUN_NAIF_CODE, t),
-		    0.99938745098726067, 1e-4);
+                    0.99938745098726067, 1e-4);
 }
 
 BOOST_AUTO_TEST_CASE(geodetic)
@@ -166,8 +165,8 @@ BOOST_AUTO_TEST_CASE(pos_and_vel)
   vel_cf[1] = 0;
   vel_cf[2] = 0;
   convert_position_and_velocity(t, e, vel_cf, ci, vel_ci);
-  double speed = sqrt(vel_ci[0] * vel_ci[0] + vel_ci[1] * vel_ci[1] + 
-		      vel_ci[2] * vel_ci[2]);
+  double speed = sqrt(vel_ci[0] * vel_ci[0] + vel_ci[1] * vel_ci[1] +
+                      vel_ci[2] * vel_ci[2]);
   BOOST_CHECK(fabs(speed - 465.1) < 10.0);
 }
 
@@ -176,16 +175,15 @@ BOOST_AUTO_TEST_CASE(pos_and_vel_with_der)
   Geodetic g(10, 20, 30);
   Ecr cf(g);
   Time t = Time::parse_time("2003-01-01T10:30:00Z");
-  TimeWithDerivative tder = 
-    TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 7));
-  boost::array<AutoDerivative<double>, 3> cf_der = 
-    {{AutoDerivative<double>(cf.position[0], 1, 7),
-     AutoDerivative<double>(cf.position[1], 2, 7),
-      AutoDerivative<double>(cf.position[2], 3, 7)}};
-  boost::array<AutoDerivative<double>, 3> vel_cf = 
-    {{AutoDerivative<double>(100.0, 4, 7), 
-      AutoDerivative<double>(200.0, 5, 7),
-      AutoDerivative<double>(300, 6, 7)}};
+  TimeWithDerivative tder =
+      TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 7));
+  boost::array<AutoDerivative<double>, 3> cf_der = {
+      {AutoDerivative<double>(cf.position[0], 1, 7),
+       AutoDerivative<double>(cf.position[1], 2, 7),
+       AutoDerivative<double>(cf.position[2], 3, 7)}};
+  boost::array<AutoDerivative<double>, 3> vel_cf = {
+      {AutoDerivative<double>(100.0, 4, 7), AutoDerivative<double>(200.0, 5, 7),
+       AutoDerivative<double>(300, 6, 7)}};
   boost::array<AutoDerivative<double>, 3> vel_ci, ci_der;
   boost::shared_ptr<CartesianInertial> ci;
   convert_position_and_velocity(tder, cf, cf_der, vel_cf, ci, ci_der, vel_ci);
@@ -208,16 +206,15 @@ BOOST_AUTO_TEST_CASE(pos_and_vel_with_der_check_grad)
   Geodetic g(10, 20, 30);
   Ecr cf(g);
   Time t = Time::parse_time("2003-01-01T10:30:00Z");
-  TimeWithDerivative tder = 
-    TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 7));
-  boost::array<AutoDerivative<double>, 3> cf_der = 
-    {{AutoDerivative<double>(cf.position[0], 1, 7),
-     AutoDerivative<double>(cf.position[1], 2, 7),
-      AutoDerivative<double>(cf.position[2], 3, 7)}};
-  boost::array<AutoDerivative<double>, 3> vel_cf = 
-    {{AutoDerivative<double>(100.0, 4, 7), 
-      AutoDerivative<double>(200.0, 5, 7),
-      AutoDerivative<double>(300, 6, 7)}};
+  TimeWithDerivative tder =
+      TimeWithDerivative::time_pgs(AutoDerivative<double>(t.pgs(), 0, 7));
+  boost::array<AutoDerivative<double>, 3> cf_der = {
+      {AutoDerivative<double>(cf.position[0], 1, 7),
+       AutoDerivative<double>(cf.position[1], 2, 7),
+       AutoDerivative<double>(cf.position[2], 3, 7)}};
+  boost::array<AutoDerivative<double>, 3> vel_cf = {
+      {AutoDerivative<double>(100.0, 4, 7), AutoDerivative<double>(200.0, 5, 7),
+       AutoDerivative<double>(300, 6, 7)}};
   boost::array<AutoDerivative<double>, 3> vel_ci, ci_der;
   boost::shared_ptr<CartesianInertial> ci;
   convert_position_and_velocity(tder, cf, cf_der, vel_cf, ci, ci_der, vel_ci);
@@ -238,7 +235,7 @@ BOOST_AUTO_TEST_CASE(pos_and_vel_with_der_check_grad)
   convert_position_and_velocity(t + eps, cf, vel_cf2, cieps, vel_ci2);
   for(int i = 0; i < 3; ++i) {
     jac_fd(i, 0) = (cieps->position[i] - ci->position[i]) / eps;
-    jac2_fd(i, 0) = (vel_ci2[i] - vel_ci[i].value()) /eps;
+    jac2_fd(i, 0) = (vel_ci2[i] - vel_ci[i].value()) / eps;
   }
   eps = 10.0;
   for(int j = 0; j < 3; ++j) {
@@ -248,7 +245,7 @@ BOOST_AUTO_TEST_CASE(pos_and_vel_with_der_check_grad)
     cf.position[j] = old;
     for(int i = 0; i < 3; ++i) {
       jac_fd(i, j + 1) = (cieps->position[i] - ci->position[i]) / eps;
-      jac2_fd(i, j + 1) = (vel_ci2[i] - vel_ci[i].value()) /eps;
+      jac2_fd(i, j + 1) = (vel_ci2[i] - vel_ci[i].value()) / eps;
     }
   }
   for(int j = 0; j < 3; ++j) {
@@ -258,7 +255,7 @@ BOOST_AUTO_TEST_CASE(pos_and_vel_with_der_check_grad)
     vel_cf2[j] = old;
     for(int i = 0; i < 3; ++i) {
       jac_fd(i, j + 4) = (cieps->position[i] - ci->position[i]) / eps;
-      jac2_fd(i, j + 4) = (vel_ci2[i] - vel_ci[i].value()) /eps;
+      jac2_fd(i, j + 4) = (vel_ci2[i] - vel_ci[i].value()) / eps;
     }
   }
   BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
@@ -273,8 +270,7 @@ BOOST_AUTO_TEST_CASE(serialization_eci)
   std::string d = serialize_write_string(eci);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<Eci> ecir = 
-    serialize_read_string<Eci>(d);
+  boost::shared_ptr<Eci> ecir = serialize_read_string<Eci>(d);
   for(int i = 0; i < 3; ++i)
     BOOST_CHECK_CLOSE(eci->position[i], ecir->position[i], 1e-4);
 }
@@ -287,8 +283,7 @@ BOOST_AUTO_TEST_CASE(serialization_ecr)
   std::string d = serialize_write_string(ecr);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<Ecr> ecrr = 
-    serialize_read_string<Ecr>(d);
+  boost::shared_ptr<Ecr> ecrr = serialize_read_string<Ecr>(d);
   for(int i = 0; i < 3; ++i)
     BOOST_CHECK_CLOSE(ecr->position[i], ecrr->position[i], 1e-4);
 }
@@ -301,8 +296,8 @@ BOOST_AUTO_TEST_CASE(serialization_geodetic)
   std::string d = serialize_write_string(gp);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<GroundCoordinate> gpr = 
-    serialize_read_string<GroundCoordinate>(d);
+  boost::shared_ptr<GroundCoordinate> gpr =
+      serialize_read_string<GroundCoordinate>(d);
   BOOST_CHECK(distance(*gp, *gpr) < 1e-2);
 }
 
@@ -314,8 +309,8 @@ BOOST_AUTO_TEST_CASE(serialization_geocentric)
   std::string d = serialize_write_string(gp);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<GroundCoordinate> gpr = 
-    serialize_read_string<GroundCoordinate>(d);
+  boost::shared_ptr<GroundCoordinate> gpr =
+      serialize_read_string<GroundCoordinate>(d);
   BOOST_CHECK(distance(*gp, *gpr) < 1e-2);
 }
 

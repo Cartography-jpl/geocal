@@ -14,12 +14,11 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RsmDirectCovarianceA::serialize(Archive & ar, const unsigned int version)
+void RsmDirectCovarianceA::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RsmDirectCovariance)
-    & GEOCAL_NVP(cconv) & GEOCAL_NVP(parm_index)
-    & GEOCAL_NVP(iidi) & GEOCAL_NVP(npari)
-    & GEOCAL_NVP(cov);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(RsmDirectCovariance) &
+      GEOCAL_NVP(cconv) & GEOCAL_NVP(parm_index) & GEOCAL_NVP(iidi) &
+      GEOCAL_NVP(npari) & GEOCAL_NVP(cov);
 }
 
 GEOCAL_IMPLEMENT(RsmDirectCovarianceA);
@@ -50,10 +49,12 @@ std::string RsmDirectCovarianceA::tre_string() const
     res += str_check_size(str % image_identifier_i(i), 80);
     res += str_check_size(numint % number_parameter_i(i), 2);
   }
-  const LocalRcConverter* gconv = 
-    dynamic_cast<const LocalRcConverter*>(coordinate_converter().get());
+  const LocalRcConverter* gconv =
+      dynamic_cast<const LocalRcConverter*>(coordinate_converter().get());
   if(!gconv)
-    throw Exception("Writing a RSMDCA TRE only supports LocalRcConverter. This is by definition of how the RSM adjustable parameters work");
+    throw Exception(
+        "Writing a RSMDCA TRE only supports LocalRcConverter. This is by "
+        "definition of how the RSM adjustable parameters work");
   for(int i = 0; i < 3; ++i)
     res += str_check_size(num % gconv->parameter()->cf_offset[i], 21);
   // This is column major order
@@ -79,23 +80,21 @@ std::string RsmDirectCovarianceA::tre_string() const
 /// can optionally activate a set of the parameters for the correction.
 //-----------------------------------------------------------------------
 
-RsmDirectCovarianceA::RsmDirectCovarianceA
-(const ImageGroundConnection& Igc,
- const RsmId& Rsm_id,
- const std::string& Triangulation_id,
- bool Activate_image_correction,
- bool Activate_ground_rotation,
- bool Activate_ground_correction
- )
+RsmDirectCovarianceA::RsmDirectCovarianceA(const ImageGroundConnection& Igc,
+                                           const RsmId& Rsm_id,
+                                           const std::string& Triangulation_id,
+                                           bool Activate_image_correction,
+                                           bool Activate_ground_rotation,
+                                           bool Activate_ground_correction)
   : RsmDirectCovariance(Rsm_id.image_identifier(),
-			   Rsm_id.rsm_support_data_edition(),
-			   Triangulation_id),
+                        Rsm_id.rsm_support_data_edition(), Triangulation_id),
     parm_index(36)
 {
   for(int i = 0; i < parm_index.rows(); ++i) {
     parm_index(i) = -1;
   }
-  cconv = boost::make_shared<LocalRcConverter>(boost::make_shared<LocalRcParameter>(Igc));
+  cconv = boost::make_shared<LocalRcConverter>(
+      boost::make_shared<LocalRcParameter>(Igc));
   if(Activate_image_correction)
     activate_image_correction();
   if(Activate_ground_rotation)
@@ -103,7 +102,6 @@ RsmDirectCovarianceA::RsmDirectCovarianceA
   if(Activate_ground_correction)
     activate_ground_correction();
 }
-
 
 //-----------------------------------------------------------------------
 /// Read a TRE string. Note that the TRE does not contain all the
@@ -134,8 +132,8 @@ RsmDirectCovarianceA::read_tre_string(const std::string& Tre_in)
   }
   blitz::Array<double, 1> parm(nparm);
   boost::shared_ptr<LocalRcParameter> lp =
-    boost::make_shared<LocalRcParameter>();
-  lp->cf_prototype = boost::make_shared<Ecr>(0,0,0);
+      boost::make_shared<LocalRcParameter>();
+  lp->cf_prototype = boost::make_shared<Ecr>(0, 0, 0);
   for(int i = 0; i < 3; ++i)
     lp->cf_offset[i] = read_size<double>(in, 21);
   // Column major order
@@ -144,7 +142,7 @@ RsmDirectCovarianceA::read_tre_string(const std::string& Tre_in)
       lp->cf_to_rc[i][j] = read_size<double>(in, 21);
   res->cconv = boost::make_shared<LocalRcConverter>(lp);
   for(int i = 0; i < res->parm_index.rows(); ++i) {
-    boost::optional<int> ind = read_size<boost::optional<int> >(in, 2);
+    boost::optional<int> ind = read_size<boost::optional<int>>(in, 2);
     if(ind)
       res->parm_index(i) = *ind;
     else
@@ -192,8 +190,7 @@ void RsmDirectCovarianceA::print(std::ostream& Os) const
 /// Name of the full parameters
 //-----------------------------------------------------------------------
 
-const std::vector<std::string>&
-RsmDirectCovarianceA::full_parameter_name()
+const std::vector<std::string>& RsmDirectCovarianceA::full_parameter_name()
 {
   static bool filled_in = false;
   static std::vector<std::string> res;
@@ -244,10 +241,10 @@ RsmDirectCovarianceA::full_parameter_name()
 /// we tend to activate them in groups. This function turns on all of
 /// image correction parameters.
 //-----------------------------------------------------------------------
- 
+
 void RsmDirectCovarianceA::activate_image_correction()
 {
-  int ind = (int) num_parameter();
+  int ind = (int)num_parameter();
   for(int i = 0; i < 20; ++i)
     if(parm_index(i) < 1)
       parm_index(i) = ++ind;
@@ -258,10 +255,10 @@ void RsmDirectCovarianceA::activate_image_correction()
 /// we tend to activate them in groups. This function turns on all of
 /// ground rotation parameters.
 //-----------------------------------------------------------------------
- 
+
 void RsmDirectCovarianceA::activate_ground_rotation()
 {
-  int ind = (int) num_parameter();
+  int ind = (int)num_parameter();
   for(int i = 20; i < 27; ++i)
     if(parm_index(i) < 1)
       parm_index(i) = ++ind;
@@ -272,10 +269,10 @@ void RsmDirectCovarianceA::activate_ground_rotation()
 /// we tend to activate them in groups. This function turns on all of
 /// ground correction parameters.
 //-----------------------------------------------------------------------
- 
+
 void RsmDirectCovarianceA::activate_ground_correction()
 {
-  int ind = (int) num_parameter();
+  int ind = (int)num_parameter();
   for(int i = 20; i < 23; ++i)
     if(parm_index(i) < 1)
       parm_index(i) = ++ind;
@@ -283,7 +280,7 @@ void RsmDirectCovarianceA::activate_ground_correction()
     if(parm_index(i) < 1)
       parm_index(i) = ++ind;
 }
- 
+
 int RsmDirectCovarianceA::num_parameter() const
 {
   int nparm = 0;

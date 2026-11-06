@@ -9,9 +9,9 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void EciTod::serialize(Archive & ar, const unsigned int version)
+void EciTod::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianInertial);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianInertial);
 }
 
 GEOCAL_IMPLEMENT(EciTod);
@@ -44,7 +44,7 @@ EciTod::EciTod(const GroundCoordinate& Gc, const Time& T)
 {
   Eci eci(Gc, T);
   SpiceHelper::conversion("J2000", "ECI_TOD", T, eci.position, position);
-}  
+}
 
 //-----------------------------------------------------------------------
 /// Convert to CartesianFixed.
@@ -63,7 +63,7 @@ boost::shared_ptr<CartesianFixed> EciTod::convert_to_cf(const Time& T) const
 //-----------------------------------------------------------------------
 
 void EciTod::ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const
-{ 
+{
   SpiceHelper::conversion_matrix("ECI_TOD", "ITRF93", T);
   mat_copy(SpiceHelper::m, Ci_to_cf);
 }
@@ -74,7 +74,7 @@ void EciTod::ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const
 //-----------------------------------------------------------------------
 
 void EciTod::ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) const
-{ 
+{
   SpiceHelper::conversion_matrix2("ECI_TOD", "ITRF93", T);
   mat_copy(SpiceHelper::m2, Ci_to_cf);
 }
@@ -113,15 +113,15 @@ void EciTod::print(std::ostream& Os) const
 
 boost::shared_ptr<CartesianInertial>
 EciTod::reference_surface_intersect_approximate(
-  const CartesianInertialLookVector& Cl, double Height_reference_surface) 
-  const
+    const CartesianInertialLookVector& Cl,
+    double Height_reference_surface) const
 {
   double aph = Constant::wgs84_a + Height_reference_surface;
   double bph = Constant::wgs84_b + Height_reference_surface;
   boost::array<double, 3> dirci;
-  dirci[0] = Cl.look_vector[0]/ aph;
-  dirci[1] = Cl.look_vector[1]/ aph;
-  dirci[2] = Cl.look_vector[2]/ bph;
+  dirci[0] = Cl.look_vector[0] / aph;
+  dirci[1] = Cl.look_vector[1] / aph;
+  dirci[2] = Cl.look_vector[2] / bph;
   double t = norm(dirci);
   dirci[0] /= t;
   dirci[1] /= t;

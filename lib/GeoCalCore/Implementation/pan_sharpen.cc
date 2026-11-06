@@ -19,21 +19,19 @@ void PanSharpen::calc(int Start_line, int Start_sample) const
   Range ra(Range::all());
   int number_line = data.cols();
   int number_sample = data.depth();
-  Array<double, 3> ncs = mag->read_double(Start_line, Start_sample,
-					 number_line, number_sample);
-  Array<double, 2> pan_data = 
-    pansub->read_double(Start_line, Start_sample,
-			number_line, number_sample);
-  Array<double, 2> pansmooth_data = 
-    psmooth->read_double(Start_line, Start_sample,
-			 number_line, number_sample);
+  Array<double, 3> ncs =
+      mag->read_double(Start_line, Start_sample, number_line, number_sample);
+  Array<double, 2> pan_data =
+      pansub->read_double(Start_line, Start_sample, number_line, number_sample);
+  Array<double, 2> pansmooth_data = psmooth->read_double(
+      Start_line, Start_sample, number_line, number_sample);
   Array<double, 3> hcs = to_hcs(ncs);
-  iadj(hcs(0,ra,ra), pan_data, pansmooth_data);
+  iadj(hcs(0, ra, ra), pan_data, pansmooth_data);
   to_ncs(hcs);
-// Any Nan gets set to the fill value of 0. These Nan may naturally
-// arise if the image pixels are 0 (which happens, and it ok), or just
-// because of some odd condition. We allow this, and then set this to
-// 0 if it occurs.
+  // Any Nan gets set to the fill value of 0. These Nan may naturally
+  // arise if the image pixels are 0 (which happens, and it ok), or just
+  // because of some odd condition. We allow this, and then set this to
+  // 0 if it occurs.
   data = where(blitz_isnan(data), 0.0, data);
 }
 
@@ -43,17 +41,19 @@ void PanSharpen::calc(int Start_line, int Start_sample) const
 /// this and will check for this later.
 //-----------------------------------------------------------------------
 
-Array<double, 3> PanSharpen::to_hcs(const Array<double, 3>& ncs) const 
+Array<double, 3> PanSharpen::to_hcs(const Array<double, 3>& ncs) const
 {
   Range ra(Range::all());
-  firstIndex i1; secondIndex i2; thirdIndex i3;
+  firstIndex i1;
+  secondIndex i2;
+  thirdIndex i3;
   Array<double, 3> res(ncs.shape());
   res(0, ra, ra) = sqrt(sum(sqr(ncs(i3, i1, i2)), i3));
   for(int i = 1; i < ncs.rows(); ++i) {
     Range r(i, toEnd);
     Array<double, 3> ncs_sub(ncs(r, ra, ra));
-    res(i, ra, ra) = 
-      atan(sqrt(sum(sqr(ncs_sub(i3, i1, i2)), i3)) / ncs(i - 1, ra, ra));
+    res(i, ra, ra) =
+        atan(sqrt(sum(sqr(ncs_sub(i3, i1, i2)), i3)) / ncs(i - 1, ra, ra));
   }
   return res;
 }
@@ -84,12 +84,12 @@ void PanSharpen::to_ncs(const Array<double, 3>& hcs) const
 //-----------------------------------------------------------------------
 
 void PanSharpen::iadj(Array<double, 2> i, const Array<double, 2>& pan_data,
-		      const Array<double, 2>& pansmooth_data) const
+                      const Array<double, 2>& pansmooth_data) const
 {
   i *= sqrt(
       (sig0() / sig1() * (sqr(pan_data) - mu1() + sig1()) + mu0() - sig0()) /
-      (sig0() / sig1() * (sqr(pansmooth_data) - mu1() + sig1()) + 
-       mu0() - sig0()));
+      (sig0() / sig1() * (sqr(pansmooth_data) - mu1() + sig1()) + mu0() -
+       sig0()));
 }
 
 //-----------------------------------------------------------------------
@@ -106,154 +106,148 @@ void PanSharpen::iadj(Array<double, 2> i, const Array<double, 2>& pan_data,
 //-----------------------------------------------------------------------
 
 PanSharpen::PanSharpen(const boost::shared_ptr<RasterImage>& Pan,
-		       const boost::shared_ptr<RasterImageMultiBand>& Mul,
-		       bool Force_rpc,
-		       bool Log_progress)
+                       const boost::shared_ptr<RasterImageMultiBand>& Mul,
+                       bool Force_rpc, bool Log_progress)
 {
   boost::shared_ptr<ImageGroundConnection> pan_ig, ms_ig;
   boost::shared_ptr<Dem> d;
   bool remove_rpc;
-  if(!Force_rpc &&
-     Pan->has_map_info() &&
-     Mul->raster_image(0).has_map_info()) {
+  if(!Force_rpc && Pan->has_map_info() && Mul->raster_image(0).has_map_info()) {
     d.reset(new SimpleDem);
     pan_ig.reset(new MapInfoImageGroundConnection(Pan, d));
     ms_ig.reset(new MapInfoImageGroundConnection(Mul, d));
     remove_rpc = true;
   } else {
-    if(!Pan->has_rpc() ||
-       !Mul->raster_image(0).has_rpc())
+    if(!Pan->has_rpc() || !Mul->raster_image(0).has_rpc())
       throw Exception("We require Pan and Mul to have RPCs or map info");
     d.reset(new SimpleDem(Pan->rpc().height_offset));
     pan_ig.reset(new RpcImageGroundConnection(Pan->rpc(), d, Pan));
-    ms_ig.reset
-      (new RpcImageGroundConnection(Mul->raster_image(0).rpc(), d,
-				    Mul));
+    ms_ig.reset(
+        new RpcImageGroundConnection(Mul->raster_image(0).rpc(), d, Mul));
     remove_rpc = false;
   }
   initialize(pan_ig, ms_ig, remove_rpc, Log_progress);
 }
 
 void PanSharpen::initialize(
-const boost::shared_ptr<ImageGroundConnection> Pan_ig,
-const boost::shared_ptr<ImageGroundConnection> Ms_ig,
-bool Remove_rpc,
-bool Log_progress)
+    const boost::shared_ptr<ImageGroundConnection> Pan_ig,
+    const boost::shared_ptr<ImageGroundConnection> Ms_ig, bool Remove_rpc,
+    bool Log_progress)
 {
-  firstIndex i1; secondIndex i2; thirdIndex i3;
+  firstIndex i1;
+  secondIndex i2;
+  thirdIndex i3;
 
-//-----------------------------------------------------------------------
-// Determine the magnification of Mul we need to do to get to the
-// same resolution as Pan.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Determine the magnification of Mul we need to do to get to the
+  // same resolution as Pan.
+  //-----------------------------------------------------------------------
 
-  ImageCoordinate ic1 =
-    Pan_ig->image_coordinate(*Ms_ig->ground_coordinate(ImageCoordinate(0, 0)));
-  ImageCoordinate ic2 =
-    Pan_ig->image_coordinate(*Ms_ig->ground_coordinate(ImageCoordinate(1, 0)));
-  int magfactor = (int) floor(ic2.line - ic1.line + 0.5);
+  ImageCoordinate ic1 = Pan_ig->image_coordinate(
+      *Ms_ig->ground_coordinate(ImageCoordinate(0, 0)));
+  ImageCoordinate ic2 = Pan_ig->image_coordinate(
+      *Ms_ig->ground_coordinate(ImageCoordinate(1, 0)));
+  int magfactor = (int)floor(ic2.line - ic1.line + 0.5);
 
-//-----------------------------------------------------------------------
-// Set up the smoothed version of the pan band and the magnified
-// version of the multispectral bands. This is at the same
-// resolution, but the images aren't yet lined up at the corners (do
-// that in the next step).
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Set up the smoothed version of the pan band and the magnified
+  // version of the multispectral bands. This is at the same
+  // resolution, but the images aren't yet lined up at the corners (do
+  // that in the next step).
+  //-----------------------------------------------------------------------
 
   int nhs = 3;
-  boost::shared_ptr<SmoothImage> psmooth_orig(new SmoothImage(Pan_ig->image(), nhs));
+  boost::shared_ptr<SmoothImage> psmooth_orig(
+      new SmoothImage(Pan_ig->image(), nhs));
 
   // Sometimes we have an old RPC even after the data has been map
   // projected. Remove this if we are using map projected data.
   if(Remove_rpc)
     psmooth_orig->remove_rpc();
   psmooth = psmooth_orig;
-  boost::shared_ptr<ImageGroundConnection> 
-    psmooth_ig(new OffsetImageGroundConnection(Pan_ig, -nhs, -nhs));
-  boost::shared_ptr<ImageGroundConnection>
-    mag_ig(new MagnifyBilinearImageGroundConnection(Ms_ig, magfactor));
-  boost::shared_ptr<RasterImageMultiBandVariable> 
-    mags(new RasterImageMultiBandVariable());
+  boost::shared_ptr<ImageGroundConnection> psmooth_ig(
+      new OffsetImageGroundConnection(Pan_ig, -nhs, -nhs));
+  boost::shared_ptr<ImageGroundConnection> mag_ig(
+      new MagnifyBilinearImageGroundConnection(Ms_ig, magfactor));
+  boost::shared_ptr<RasterImageMultiBandVariable> mags(
+      new RasterImageMultiBandVariable());
   for(int i = 0; i < Ms_ig->number_band(); ++i)
-    mags->add_raster_image(boost::shared_ptr<RasterImage>
-			   (new MagnifyBilinear(Ms_ig->image_multi_band()->raster_image_ptr(i), 
-						magfactor)));
+    mags->add_raster_image(boost::shared_ptr<RasterImage>(new MagnifyBilinear(
+        Ms_ig->image_multi_band()->raster_image_ptr(i), magfactor)));
 
-//-----------------------------------------------------------------------
-// Determine overlap area. We do this in psmooth image, just to pick
-// a common one.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Determine overlap area. We do this in psmooth image, just to pick
+  // a common one.
+  //-----------------------------------------------------------------------
 
-  ImageCoordinate ulc_psmooth(0,0);
-  ImageCoordinate lrc_psmooth(psmooth->number_line(), 
-			      psmooth->number_sample());
-  ImageCoordinate ulc_mag =
-    psmooth_ig->image_coordinate
-    (*mag_ig->ground_coordinate(ImageCoordinate(0,0)));
+  ImageCoordinate ulc_psmooth(0, 0);
+  ImageCoordinate lrc_psmooth(psmooth->number_line(), psmooth->number_sample());
+  ImageCoordinate ulc_mag = psmooth_ig->image_coordinate(
+      *mag_ig->ground_coordinate(ImageCoordinate(0, 0)));
   int nline = mags->raster_image(0).number_line();
   int nsamp = mags->raster_image(0).number_sample();
-  ImageCoordinate lrc_mag =
-    psmooth_ig->image_coordinate
-    (*mag_ig->ground_coordinate(ImageCoordinate(nline,nsamp)));
+  ImageCoordinate lrc_mag = psmooth_ig->image_coordinate(
+      *mag_ig->ground_coordinate(ImageCoordinate(nline, nsamp)));
   ImageCoordinate ulc(std::max(ulc_psmooth.line, ulc_mag.line),
-		      std::max(ulc_psmooth.sample, ulc_mag.sample));
+                      std::max(ulc_psmooth.sample, ulc_mag.sample));
   ImageCoordinate lrc(std::min(lrc_psmooth.line, lrc_mag.line),
-		      std::min(lrc_psmooth.sample, lrc_mag.sample));
+                      std::min(lrc_psmooth.sample, lrc_mag.sample));
   nline = lrc.line - ulc.line;
   nsamp = lrc.sample - ulc.sample;
-  boost::shared_ptr<GroundCoordinate> ulc_g = 
-    psmooth_ig->ground_coordinate(ulc);
-  boost::shared_ptr<GroundCoordinate> lrc_g = 
-    psmooth_ig->ground_coordinate(lrc);
+  boost::shared_ptr<GroundCoordinate> ulc_g =
+      psmooth_ig->ground_coordinate(ulc);
+  boost::shared_ptr<GroundCoordinate> lrc_g =
+      psmooth_ig->ground_coordinate(lrc);
   ImageCoordinate ulc_mul = Ms_ig->image_coordinate(*ulc_g);
   ImageCoordinate lrc_mul = Ms_ig->image_coordinate(*lrc_g);
 
-//-----------------------------------------------------------------------
-// Now subset all the data to the common area.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Now subset all the data to the common area.
+  //-----------------------------------------------------------------------
 
   ulc_mag = mag_ig->image_coordinate(*ulc_g);
-  int ulc_mag_lstart = (int) floor(ulc_mag.line + 0.5);
-  int ulc_mag_sstart = (int) floor(ulc_mag.sample + 0.5);
+  int ulc_mag_lstart = (int)floor(ulc_mag.line + 0.5);
+  int ulc_mag_sstart = (int)floor(ulc_mag.sample + 0.5);
   nline = std::min(nline, mags->raster_image(0).number_line() - ulc_mag_lstart);
-  nsamp = std::min(nsamp, mags->raster_image(0).number_sample() - ulc_mag_sstart);
-  psmooth.reset(new SubRasterImage(psmooth, (int) floor(ulc.line + 0.5),
-	   (int) floor(ulc.sample + 0.5), nline, nsamp));
-  mag.reset(new SubRasterImageMultiBand(mags, ulc_mag_lstart, ulc_mag_sstart, 
-					nline, nsamp));
+  nsamp =
+      std::min(nsamp, mags->raster_image(0).number_sample() - ulc_mag_sstart);
+  psmooth.reset(new SubRasterImage(psmooth, (int)floor(ulc.line + 0.5),
+                                   (int)floor(ulc.sample + 0.5), nline, nsamp));
+  mag.reset(new SubRasterImageMultiBand(mags, ulc_mag_lstart, ulc_mag_sstart,
+                                        nline, nsamp));
   ImageCoordinate ulc_pan = Pan_ig->image_coordinate(*ulc_g);
-  pansub.reset(new SubRasterImage(Pan_ig->image(), 
-				  (int) floor(ulc_pan.line + 0.5),
-	  (int) floor(ulc_pan.sample + 0.5), nline, nsamp));
-  
-  int mulstart_ln = std::max((int) floor(ulc_mul.line), 0);
-  int mulstart_smp = std::max((int) floor(ulc_mul.sample), 0);
-  int mulstart_nline = 
-    std::min(Ms_ig->number_line() - mulstart_ln,
-	     ((int) ceil(lrc_mul.line)) - ((int) floor(ulc_mul.line)));
-  int mulstart_nsamp = 
-    std::min(Ms_ig->number_sample() - mulstart_smp,
-	     ((int) ceil(lrc_mul.sample)) - ((int) floor(ulc_mul.sample)));
-  mulsub.reset(new SubRasterImageMultiBand(Ms_ig->image_multi_band(), 
-					   mulstart_ln, mulstart_smp, 
-					   mulstart_nline, mulstart_nsamp));
+  pansub.reset(
+      new SubRasterImage(Pan_ig->image(), (int)floor(ulc_pan.line + 0.5),
+                         (int)floor(ulc_pan.sample + 0.5), nline, nsamp));
 
-//-----------------------------------------------------------------------
-// Calculate statistics on PS^2 and I^2 as described in the paper.
-//-----------------------------------------------------------------------
+  int mulstart_ln = std::max((int)floor(ulc_mul.line), 0);
+  int mulstart_smp = std::max((int)floor(ulc_mul.sample), 0);
+  int mulstart_nline =
+      std::min(Ms_ig->number_line() - mulstart_ln,
+               ((int)ceil(lrc_mul.line)) - ((int)floor(ulc_mul.line)));
+  int mulstart_nsamp =
+      std::min(Ms_ig->number_sample() - mulstart_smp,
+               ((int)ceil(lrc_mul.sample)) - ((int)floor(ulc_mul.sample)));
+  mulsub.reset(new SubRasterImageMultiBand(Ms_ig->image_multi_band(),
+                                           mulstart_ln, mulstart_smp,
+                                           mulstart_nline, mulstart_nsamp));
+
+  //-----------------------------------------------------------------------
+  // Calculate statistics on PS^2 and I^2 as described in the paper.
+  //-----------------------------------------------------------------------
 
   RasterImageMultiBand* mul_stat = 0;
   if(Log_progress)
     std::cout << "Calculating statistics on multispectral image:\n";
   mul_stat = mulsub.get();
   for(RasterImageTileIterator i(mul_stat->raster_image(0)); !i.end(); ++i) {
-    Array<double, 3> tl = mul_stat->read_double(i.istart(), i.jstart(),
-			     i.number_line(), i.number_sample());
+    Array<double, 3> tl = mul_stat->read_double(
+        i.istart(), i.jstart(), i.number_line(), i.number_sample());
     Array<double, 2> isq(i.number_line(), i.number_sample());
     isq = sum(sqr(tl(i3, i1, i2)), i3);
     for(int j = 0; j < i.number_line(); ++j)
       for(int k = 0; k < i.number_sample(); ++k) {
-	isq_stat += isq(j, k);
+        isq_stat += isq(j, k);
       }
   }
   RasterImage* pan_stat = 0;
@@ -261,11 +255,11 @@ bool Log_progress)
     std::cout << "Calculating statistics on pan image:\n";
   pan_stat = pansub.get();
   for(RasterImageTileIterator i(*pan_stat); !i.end(); ++i) {
-    Array<double, 2> tl = pan_stat->read_double(i.istart(), i.jstart(),
-			     i.number_line(), i.number_sample());
+    Array<double, 2> tl = pan_stat->read_double(
+        i.istart(), i.jstart(), i.number_line(), i.number_sample());
     for(int j = 0; j < i.number_line(); ++j)
       for(int k = 0; k < i.number_sample(); ++k) {
-	psq_stat += tl(j, k) * tl(j, k);
+        psq_stat += tl(j, k) * tl(j, k);
       }
   }
 

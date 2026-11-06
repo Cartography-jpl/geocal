@@ -6,19 +6,20 @@ using namespace H5;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 
 template<class Archive>
-void HdfFile::save(Archive & UNUSED(ar), const unsigned int UNUSED(version)) const
+void HdfFile::save(Archive& UNUSED(ar),
+                   const unsigned int UNUSED(version)) const
 {
   // Nothing more to do
 }
 
 template<class Archive>
-void HdfFile::load(Archive & UNUSED(ar), const unsigned int UNUSED(version))
+void HdfFile::load(Archive& UNUSED(ar), const unsigned int UNUSED(version))
 {
   try {
     h.reset(new H5File(fname, flag));
   } catch(const H5::Exception& e) {
     Exception en;
-    en << "While trying to open file '" << fname 
+    en << "While trying to open file '" << fname
        << "' a HDF 5 Exception thrown:\n"
        << "  " << e.getDetailMsg();
     throw en;
@@ -26,10 +27,10 @@ void HdfFile::load(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 }
 
 template<class Archive>
-void HdfFile::serialize(Archive & ar, const unsigned int version) 
+void HdfFile::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(HdfFile);
-  ar & GEOCAL_NVP(flag) & GEOCAL_NVP(fname);
+  ar& GEOCAL_NVP(flag) & GEOCAL_NVP(fname);
   boost::serialization::split_member(ar, *this, version);
 }
 
@@ -40,8 +41,7 @@ GEOCAL_IMPLEMENT(HdfFile);
 /// Open the given file with the given mode.
 //-----------------------------------------------------------------------
 
-HdfFile::HdfFile(const std::string& Fname, Mode M)
-: fname(Fname)
+HdfFile::HdfFile(const std::string& Fname, Mode M) : fname(Fname)
 {
   switch(M) {
   case READ:
@@ -56,14 +56,14 @@ HdfFile::HdfFile(const std::string& Fname, Mode M)
   default:
     throw Exception("This shouldn't happen");
   }
-  H5::Exception::dontPrint();	// We'll report exceptions ourself,
-				// don't have HDF library print
-				// Warning messages.
+  H5::Exception::dontPrint(); // We'll report exceptions ourself,
+  // don't have HDF library print
+  // Warning messages.
   try {
     h.reset(new H5File(Fname, flag));
   } catch(const H5::Exception& e) {
     Exception en;
-    en << "While trying to open file '" << Fname 
+    en << "While trying to open file '" << Fname
        << "' a HDF 5 Exception thrown:\n"
        << "  " << e.getDetailMsg();
     throw en;
@@ -72,7 +72,7 @@ HdfFile::HdfFile(const std::string& Fname, Mode M)
   if(flag == H5F_ACC_TRUNC)
     flag = H5F_ACC_RDWR;
 }
-    
+
 //-----------------------------------------------------------------------
 /// Determine of object is a group or dataset.
 //-----------------------------------------------------------------------
@@ -88,8 +88,8 @@ bool HdfFile::is_group(const std::string& Objname) const
 /// Determine if object is present.
 //-----------------------------------------------------------------------
 
-bool HdfFile::is_present(const std::string& Objname, 
-			 const H5::H5File& Parent) const
+bool HdfFile::is_present(const std::string& Objname,
+                         const H5::H5File& Parent) const
 {
   try {
     H5G_stat_t statbuf;
@@ -137,6 +137,6 @@ H5::Attribute HdfFile::open_attribute(const std::string& Aname) const
 
 void HdfFile::print(std::ostream& Os) const
 {
-  Os << "HdfFile: \n" 
+  Os << "HdfFile: \n"
      << "  File name: " << file_name() << "\n";
 }

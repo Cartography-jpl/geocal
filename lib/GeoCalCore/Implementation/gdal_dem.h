@@ -6,7 +6,7 @@
 #include "ostream_pad.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This uses a Gdal<T> as a DEM.
 
   The type of T should be one we can convert to a double, and should
@@ -22,28 +22,28 @@ namespace GeoCal {
 
 class GdalDem : public DemTiledFile {
 public:
-  GdalDem(const std::string& Fname, const boost::shared_ptr<Datum>& D =
-	  boost::shared_ptr<Datum>(new NoDatum()),
-	  int Band_id = 1, bool Outside_dem_is_error = false, 
-	  int Number_tile = 4, int Tile_number_line = -1,
-	  int Tile_number_sample = -1);
+  GdalDem(const std::string& Fname,
+          const boost::shared_ptr<Datum>& D =
+              boost::shared_ptr<Datum>(new NoDatum()),
+          int Band_id = 1, bool Outside_dem_is_error = false,
+          int Number_tile = 4, int Tile_number_line = -1,
+          int Tile_number_sample = -1);
 
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~GdalDem() {}
 
-//-----------------------------------------------------------------------
-/// Print to stream.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print to stream.
+  //-----------------------------------------------------------------------
 
-  virtual void print(std::ostream& Os) const 
-  { 
+  virtual void print(std::ostream& Os) const
+  {
     OstreamPad opad(Os, "    ");
     Os << "GDAL Dem:\n"
-       << "  File:    " << *gdal
-       << "  Band id: " << band_id() << "\n"
+       << "  File:    " << *gdal << "  Band id: " << band_id() << "\n"
        << "  Map info:\n";
     opad << map_info();
     opad.strict_sync();
@@ -52,8 +52,8 @@ public:
     opad.strict_sync();
     Os << "  Outside Dem is error: " << outside_dem_is_error() << "\n";
   }
-  int band_id() const {return band_id_;}
-  const std::string& file_name() const {return fname;}
+  int band_id() const { return band_id_; }
+  const std::string& file_name() const { return fname; }
 protected:
   // Needs to be protected to derived classes can use serialization
   // with this.
@@ -62,36 +62,32 @@ private:
   std::string fname;
   int band_id_;
   boost::shared_ptr<GdalBase> gdal;
-  
+
   void initialize(const std::string& Fname, const boost::shared_ptr<Datum>& D,
-		  int Band_id, bool Outside_dem_is_error, 
-		  int Number_tile, int Tile_number_line, int Tile_number_sample);
+                  int Band_id, bool Outside_dem_is_error, int Number_tile,
+                  int Tile_number_line, int Tile_number_sample);
 
-//-----------------------------------------------------------------------
-/// Type dispatched initialization
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Type dispatched initialization
+  //-----------------------------------------------------------------------
 
-  template<class T> void initialize_type(const std::string& Fname,
-					 const boost::shared_ptr<Datum>& D,
-					 int Band_id, 
-					 int Number_tile,
-					 bool Outside_dem_is_error,
-					 int Tile_number_line,
-					 int Tile_number_sample)
+  template<class T>
+  void initialize_type(const std::string& Fname,
+                       const boost::shared_ptr<Datum>& D, int Band_id,
+                       int Number_tile, bool Outside_dem_is_error,
+                       int Tile_number_line, int Tile_number_sample)
   {
-    boost::shared_ptr<Gdal<T> > t(new Gdal<T>(Fname, Band_id, Number_tile, 
-					      false,
-					      Tile_number_line, 
-					      Tile_number_sample));
+    boost::shared_ptr<Gdal<T>> t(new Gdal<T>(Fname, Band_id, Number_tile, false,
+                                             Tile_number_line,
+                                             Tile_number_sample));
     gdal = t;
     DemTiledFile::initialize(t, D, t->map_info(), Outside_dem_is_error,
-			     t->linear_unit_scale(), t->no_data_value());
+                             t->linear_unit_scale(), t->no_data_value());
   }
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive& Ar, const unsigned int version);
+  template<class Archive> void load(Archive& Ar, const unsigned int version);
   GEOCAL_SPLIT_MEMBER();
 };
 }

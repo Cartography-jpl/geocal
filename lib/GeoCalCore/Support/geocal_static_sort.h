@@ -10,7 +10,8 @@ namespace GeoCal {
 /// Simple wrapper around StaticSort to work with data of size 0 to
 /// 30. Data is sorted in place.
 //-----------------------------------------------------------------------
-template<class T> void static_sort(std::vector<T>& d) {
+template<class T> void static_sort(std::vector<T>& d)
+{
   switch(d.size()) {
   case 0:
     return;
@@ -140,4 +141,3 @@ template<class T> void static_sort(std::vector<T>& d) {
 }
 }
 #endif
-

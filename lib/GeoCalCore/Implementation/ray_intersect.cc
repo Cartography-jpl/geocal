@@ -2,15 +2,13 @@
 #include "geocal_matrix.h"
 using namespace GeoCal;
 
-void RayIntersect::two_look_vector_intersect
-(const CartesianFixed& P1,
- const CartesianFixedLookVector& L1,
- const CartesianFixed& P2,
- const CartesianFixedLookVector& L2,
- boost::shared_ptr<CartesianFixed>& P, double& Dist)
+void RayIntersect::two_look_vector_intersect(
+    const CartesianFixed& P1, const CartesianFixedLookVector& L1,
+    const CartesianFixed& P2, const CartesianFixedLookVector& L2,
+    boost::shared_ptr<CartesianFixed>& P, double& Dist)
 {
   // Given a line 1 as P1 + t1 * u1 for scalar t1 and a second line
-  // 2 as P2 + t2 * u2, then the distance between the closest points 
+  // 2 as P2 + t2 * u2, then the distance between the closest points
   // on the lines is given by (P21) . (u1 x u2 ) / | u1 x u2 |
   // (where P21 is P2 - P1).
   //
@@ -30,7 +28,7 @@ void RayIntersect::two_look_vector_intersect
   //
   // If we want the point closest to both lines, then we can average
   // q1 and q2 (this gives the point half way between each).
- 
+
   boost::array<double, 3> u1(L1.direction());
   boost::array<double, 3> u2(L2.direction());
   boost::array<double, 3> m;
@@ -55,4 +53,3 @@ void RayIntersect::two_look_vector_intersect
   // Divide by 2 to give distance of qavg to q1 and q2.
   Dist = fabs(dot(p21, m) / sqrt(m2)) / 2;
 }
-

@@ -7,8 +7,7 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void VelocityAberration::serialize
-(Archive & ar, const unsigned int version)
+void VelocityAberration::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(VelocityAberration);
   // Dummy placeholder, just so we can have derived classes call
@@ -17,21 +16,20 @@ void VelocityAberration::serialize
   // *always* have base classes do something, so we can add stuff in
   // the future w/o breaking a bunch of code.
   std::string p = "empty";
-  ar & GEOCAL_NVP2("placeholder", p);
+  ar& GEOCAL_NVP2("placeholder", p);
 }
 
 template<class Archive>
-void NoVelocityAberration::serialize
-(Archive & ar, const unsigned int version)
+void NoVelocityAberration::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(VelocityAberration);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(VelocityAberration);
 }
 
 template<class Archive>
-void VelocityAberrationFirstOrder::serialize
-(Archive & ar, const unsigned int version)
+void VelocityAberrationFirstOrder::serialize(Archive& ar,
+                                             const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(VelocityAberration);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(VelocityAberration);
 }
 
 GEOCAL_IMPLEMENT(VelocityAberration);

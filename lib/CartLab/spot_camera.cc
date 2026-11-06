@@ -6,14 +6,13 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void SpotCamera::serialize(Archive & ar, const unsigned int version)
+void SpotCamera::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(Camera);
   GEOCAL_GENERIC_BASE(WithParameter);
   GEOCAL_BASE(Camera, WithParameter);
   GEOCAL_BASE(SpotCamera, Camera);
-  ar & GEOCAL_NVP_(psi_x)
-    & GEOCAL_NVP_(psi_y);
+  ar& GEOCAL_NVP_(psi_x) & GEOCAL_NVP_(psi_y);
 }
 
 GEOCAL_IMPLEMENT(SpotCamera);
@@ -28,12 +27,11 @@ GEOCAL_IMPLEMENT(SpotCamera);
 /// We require that Psi_y be strictly increasing.
 //-----------------------------------------------------------------------
 
-SpotCamera::SpotCamera(const std::vector<double>& Psi_x, 
-		       const std::vector<double>& Psi_y)
-  : psi_x_(Psi_x),
-    psi_y_(Psi_y)
+SpotCamera::SpotCamera(const std::vector<double>& Psi_x,
+                       const std::vector<double>& Psi_y)
+  : psi_x_(Psi_x), psi_y_(Psi_y)
 {
-  range_min_check((int) psi_x_.size(), 2);
+  range_min_check((int)psi_x_.size(), 2);
   if(psi_x_.size() != psi_y_.size())
     throw Exception("psi_x and psi_y need to be the same size");
   for(int i = 1; i < number_sample(0); ++i)
@@ -46,16 +44,16 @@ SpotCamera::SpotCamera(const std::vector<double>& Psi_x,
 /// line coordinate. For some camera models, it is more expensive to
 /// calculate the sample number than the line (e.g., MISR camera needs
 /// to use the pixel-theta measurements). For functions that only need
-/// the line information, it is wasteful to do the full calculation. 
+/// the line information, it is wasteful to do the full calculation.
 ///
 /// The default version of this function just calls frame_coordinate
 /// and returns the line portion, but a derived class can override
 /// this default with a faster way of calculation the line
-/// information. 
+/// information.
 //-----------------------------------------------------------------------
 
 FrameCoordinate SpotCamera::frame_coordinate(const ScLookVector& Sl,
-					     int Band) const
+                                             int Band) const
 {
   range_check(Band, 0, number_band());
   // Pick a value to use for outside the range of the data.
@@ -68,51 +66,54 @@ FrameCoordinate SpotCamera::frame_coordinate(const ScLookVector& Sl,
     fres.sample = (yang - psi_y_[0]) / psi_delta;
     fres.line = (xang - (psi_x_[0] + psi_xdelta * fres.sample)) / psi_delta;
   } else if(yang >= psi_y_[number_sample(Band) - 1]) {
-    fres.sample = number_sample(Band) - 1 + 
-      (yang - psi_y_[number_sample(Band) - 1]) / psi_delta;
-    fres.line = (xang - 
-		 (psi_x_[number_sample(Band) - 1] + psi_xdelta * 
-		  (fres.sample - (number_sample(Band) - 1)))) / psi_delta;
+    fres.sample = number_sample(Band) - 1 +
+                  (yang - psi_y_[number_sample(Band) - 1]) / psi_delta;
+    fres.line =
+        (xang - (psi_x_[number_sample(Band) - 1] +
+                 psi_xdelta * (fres.sample - (number_sample(Band) - 1)))) /
+        psi_delta;
   } else {
-    int i = (int) (upper_bound(psi_y_.begin(), psi_y_.end(), yang) - 
-		   psi_y_.begin()) - 1;
+    int i = (int)(upper_bound(psi_y_.begin(), psi_y_.end(), yang) -
+                  psi_y_.begin()) -
+            1;
     fres.sample = (yang - psi_y_[i]) / (psi_y_[i + 1] - psi_y_[i]) + i;
-    fres.line = (xang - 
-		 (psi_x_[i] + (psi_x_[i + 1] - psi_x_[i]) * (fres.sample - i))) / 
-      psi_delta;
+    fres.line =
+        (xang - (psi_x_[i] + (psi_x_[i + 1] - psi_x_[i]) * (fres.sample - i))) /
+        psi_delta;
   }
   return fres;
 }
 
-FrameCoordinateWithDerivative SpotCamera::frame_coordinate_with_derivative
-(const ScLookVectorWithDerivative& Sl,
- int Band) const
+FrameCoordinateWithDerivative SpotCamera::frame_coordinate_with_derivative(
+    const ScLookVectorWithDerivative& Sl, int Band) const
 {
   range_check(Band, 0, number_band());
   // Pick a value to use for outside the range of the data.
   double psi_delta = psi_y_[1] - psi_y_[0];
   double psi_xdelta = psi_x_[1] - psi_x_[0];
-  AutoDerivative<double> xang = 
-    std::atan(-Sl.look_vector[1] / Sl.look_vector[2]);
-  AutoDerivative<double> yang = 
-    std::atan(Sl.look_vector[0] / Sl.look_vector[2]);
+  AutoDerivative<double> xang =
+      std::atan(-Sl.look_vector[1] / Sl.look_vector[2]);
+  AutoDerivative<double> yang =
+      std::atan(Sl.look_vector[0] / Sl.look_vector[2]);
   FrameCoordinateWithDerivative fres;
   if(yang < psi_y_[0]) {
     fres.sample = (yang - psi_y_[0]) / psi_delta;
     fres.line = (xang - (psi_x_[0] + psi_xdelta * fres.sample)) / psi_delta;
   } else if(yang >= psi_y_[number_sample(Band) - 1]) {
-    fres.sample = number_sample(Band) - 1 + 
-      (yang - psi_y_[number_sample(Band) - 1]) / psi_delta;
-    fres.line = (xang - 
-		 (psi_x_[number_sample(Band) - 1] + psi_xdelta * 
-		  (fres.sample - (number_sample(Band) - 1)))) / psi_delta;
+    fres.sample = number_sample(Band) - 1 +
+                  (yang - psi_y_[number_sample(Band) - 1]) / psi_delta;
+    fres.line =
+        (xang - (psi_x_[number_sample(Band) - 1] +
+                 psi_xdelta * (fres.sample - (number_sample(Band) - 1)))) /
+        psi_delta;
   } else {
-    int i = (int) (upper_bound(psi_y_.begin(), psi_y_.end(), yang) - 
-		   psi_y_.begin()) - 1;
+    int i = (int)(upper_bound(psi_y_.begin(), psi_y_.end(), yang) -
+                  psi_y_.begin()) -
+            1;
     fres.sample = (yang - psi_y_[i]) / (psi_y_[i + 1] - psi_y_[i]) + i;
-    fres.line = (xang - 
-		 (psi_x_[i] + (psi_x_[i + 1] - psi_x_[i]) * (fres.sample - i))) / 
-      psi_delta;
+    fres.line =
+        (xang - (psi_x_[i] + (psi_x_[i + 1] - psi_x_[i]) * (fres.sample - i))) /
+        psi_delta;
   }
   return fres;
 }
@@ -125,8 +126,8 @@ FrameCoordinateWithDerivative SpotCamera::frame_coordinate_with_derivative
 /// camera has infinite extent.
 //-----------------------------------------------------------------------
 
-ScLookVector SpotCamera::sc_look_vector(const FrameCoordinate& F, 
-					int Band) const
+ScLookVector SpotCamera::sc_look_vector(const FrameCoordinate& F,
+                                        int Band) const
 {
   range_check(Band, 0, number_band());
   // Pick a value to use for outside the range of the data.
@@ -137,12 +138,12 @@ ScLookVector SpotCamera::sc_look_vector(const FrameCoordinate& F,
     yang = psi_y_[0] + psi_delta * F.sample;
     xang = psi_x_[0] + psi_xdelta * F.sample;
   } else if(F.sample >= number_sample(Band) - 1) {
-    yang = psi_y_[number_sample(Band) - 1] + psi_delta * 
-      (F.sample - (number_sample(Band) - 1));
-    xang = psi_x_[number_sample(Band) - 1] + psi_xdelta * 
-      (F.sample - (number_sample(Band) - 1));
+    yang = psi_y_[number_sample(Band) - 1] +
+           psi_delta * (F.sample - (number_sample(Band) - 1));
+    xang = psi_x_[number_sample(Band) - 1] +
+           psi_xdelta * (F.sample - (number_sample(Band) - 1));
   } else {
-    int i = (int) floor(F.sample);
+    int i = (int)floor(F.sample);
     yang = psi_y_[i] + (psi_y_[i + 1] - psi_y_[i]) * (F.sample - i);
     xang = psi_x_[i] + (psi_x_[i + 1] - psi_x_[i]) * (F.sample - i);
   }
@@ -150,9 +151,8 @@ ScLookVector SpotCamera::sc_look_vector(const FrameCoordinate& F,
   return ScLookVector(-tan(yang), tan(xang), -1);
 }
 
-ScLookVectorWithDerivative SpotCamera::sc_look_vector_with_derivative
-(const FrameCoordinateWithDerivative& F, 
- int Band) const
+ScLookVectorWithDerivative SpotCamera::sc_look_vector_with_derivative(
+    const FrameCoordinateWithDerivative& F, int Band) const
 {
   range_check(Band, 0, number_band());
   // Pick a value to use for outside the range of the data.
@@ -163,12 +163,12 @@ ScLookVectorWithDerivative SpotCamera::sc_look_vector_with_derivative
     yang = psi_y_[0] + psi_delta * F.sample;
     xang = psi_x_[0] + psi_xdelta * F.sample;
   } else if(F.sample >= number_sample(Band) - 1) {
-    yang = psi_y_[number_sample(Band) - 1] + psi_delta * 
-      (F.sample - (number_sample(Band) - 1));
-    xang = psi_x_[number_sample(Band) - 1] + psi_xdelta * 
-      (F.sample - (number_sample(Band) - 1));
+    yang = psi_y_[number_sample(Band) - 1] +
+           psi_delta * (F.sample - (number_sample(Band) - 1));
+    xang = psi_x_[number_sample(Band) - 1] +
+           psi_xdelta * (F.sample - (number_sample(Band) - 1));
   } else {
-    int i = (int) floor(F.sample.value());
+    int i = (int)floor(F.sample.value());
     yang = psi_y_[i] + (psi_y_[i + 1] - psi_y_[i]) * (F.sample - i);
     xang = psi_x_[i] + (psi_x_[i + 1] - psi_x_[i]) * (F.sample - i);
   }
@@ -180,7 +180,6 @@ ScLookVectorWithDerivative SpotCamera::sc_look_vector_with_derivative
   }
   return ScLookVectorWithDerivative(-std::tan(yang), std::tan(xang), t);
 }
-
 
 //-----------------------------------------------------------------------
 /// Print to a stream.

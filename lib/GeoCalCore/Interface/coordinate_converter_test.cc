@@ -10,8 +10,8 @@ BOOST_FIXTURE_TEST_SUITE(geodetic_converter, GlobalFixture)
 BOOST_AUTO_TEST_CASE(basic_test)
 {
   GeodeticConverter gc;
-  boost::shared_ptr<GroundCoordinate> gp = 
-    gc.convert_from_coordinate(40, 30, 50);
+  boost::shared_ptr<GroundCoordinate> gp =
+      gc.convert_from_coordinate(40, 30, 50);
   Geodetic g(*gp);
   BOOST_CHECK_CLOSE(g.latitude(), 30.0, 1e-4);
   BOOST_CHECK_CLOSE(g.longitude(), 40.0, 1e-4);
@@ -34,8 +34,8 @@ BOOST_AUTO_TEST_CASE(serialization)
   std::string d = serialize_write_string(gc);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<CoordinateConverter> gcr = 
-    serialize_read_string<CoordinateConverter>(d);
+  boost::shared_ptr<CoordinateConverter> gcr =
+      serialize_read_string<CoordinateConverter>(d);
   BOOST_CHECK(gcr->is_same(*gc));
 }
 

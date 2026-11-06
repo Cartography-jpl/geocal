@@ -3,7 +3,7 @@
 #include "filtering_fstream.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
    It can be convenient to allow comments in a text data file that are
    ignored by the program reading it. This class supports that, by
    reading files as a normal ifstream, except comment beginning with
@@ -14,7 +14,7 @@ namespace GeoCal {
    ".gz", then we gunzip the file.
 *******************************************************************/
 
-class IfstreamCs: public FilteringIstream {
+class IfstreamCs : public FilteringIstream {
 public:
   IfstreamCs(const std::string& Fname, const std::string& Comment_start = "#");
   virtual ~IfstreamCs() {}

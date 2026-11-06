@@ -4,7 +4,7 @@
 #include "ray_caster.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This is used to project data to the surface using a RayCaster. This
   is similar to IgcMapProjected, except rather than going from the
   ground to the image we go from the image to the ground. Depending on
@@ -32,41 +32,33 @@ namespace GeoCal {
   caster.
 *******************************************************************/
 
-class RayCasterResampler: public Printable<RayCasterResampler> {
+class RayCasterResampler : public Printable<RayCasterResampler> {
 public:
   RayCasterResampler(const boost::shared_ptr<RayCaster>& Ray_caster,
-		     const boost::shared_ptr<MapInfo>& Map_info);
+                     const boost::shared_ptr<MapInfo>& Map_info);
   virtual ~RayCasterResampler() {}
   void ray_cast_step(blitz::Array<int, 6> Ray_cast_res);
   void final_rad_step(const RasterImage& Input_img,
-		      blitz::Array<int, 6> Ray_cast_res,
-		      blitz::Array<int, 2> Rad_res,
-		      blitz::Array<int, 2> Scratch_count);
+                      blitz::Array<int, 6> Ray_cast_res,
+                      blitz::Array<int, 2> Rad_res,
+                      blitz::Array<int, 2> Scratch_count);
   void final_rad_step_double(const RasterImage& Input_img,
-			     blitz::Array<int, 6> Ray_cast_res,
-			     blitz::Array<double, 2> Rad_res,
-			     blitz::Array<int, 2> Scratch_count);
-  const boost::shared_ptr<RayCaster>& ray_caster() const  { return ray_caster_;}
-  const boost::shared_ptr<MapInfo>& map_info() const  { return mi_;}
-  virtual void print(std::ostream& Os) const
-  { Os << "RayCasterResampler\n"; }
+                             blitz::Array<int, 6> Ray_cast_res,
+                             blitz::Array<double, 2> Rad_res,
+                             blitz::Array<int, 2> Scratch_count);
+  const boost::shared_ptr<RayCaster>& ray_caster() const { return ray_caster_; }
+  const boost::shared_ptr<MapInfo>& map_info() const { return mi_; }
+  virtual void print(std::ostream& Os) const { Os << "RayCasterResampler\n"; }
 private:
   boost::shared_ptr<RayCaster> ray_caster_;
   boost::shared_ptr<MapInfo> mi_;
   RayCasterResampler() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
 }
 
 GEOCAL_EXPORT_KEY(RayCasterResampler);
 #endif
-  
-  
-  
-  
-  
-
-  

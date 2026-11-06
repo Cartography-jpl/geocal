@@ -5,7 +5,7 @@
 #include "image_matcher.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
    This is an ImageToImageMatch that takes two image ground
    connections along with a MapInfo to project to. The data is matched
    at the surface, although the results are reported in image
@@ -29,73 +29,76 @@ namespace GeoCal {
    (e.g., geotiff label or whatever in the data).
 *******************************************************************/
 
-class SurfaceImageToImageMatch: public ImageToImageMatch {
+class SurfaceImageToImageMatch : public ImageToImageMatch {
 public:
-  SurfaceImageToImageMatch
-  (const boost::shared_ptr<ImageGroundConnection>& Igc1, 
-   const boost::shared_ptr<ImageGroundConnection>& Igc2,
-   const MapInfo& Map_info,
-   const boost::shared_ptr<ImageMatcher>& Matcher,
-   int Grid_spacing = 1);
-  SurfaceImageToImageMatch
-  (const boost::shared_ptr<ImageGroundConnection>& Igc1, 
-   const boost::shared_ptr<RasterImage>& Surface_image1,
-   const boost::shared_ptr<ImageGroundConnection>& Igc2,
-   const boost::shared_ptr<RasterImage>& Surface_image2,
-   const boost::shared_ptr<ImageMatcher>& Matcher);
+  SurfaceImageToImageMatch(const boost::shared_ptr<ImageGroundConnection>& Igc1,
+                           const boost::shared_ptr<ImageGroundConnection>& Igc2,
+                           const MapInfo& Map_info,
+                           const boost::shared_ptr<ImageMatcher>& Matcher,
+                           int Grid_spacing = 1);
+  SurfaceImageToImageMatch(const boost::shared_ptr<ImageGroundConnection>& Igc1,
+                           const boost::shared_ptr<RasterImage>& Surface_image1,
+                           const boost::shared_ptr<ImageGroundConnection>& Igc2,
+                           const boost::shared_ptr<RasterImage>& Surface_image2,
+                           const boost::shared_ptr<ImageMatcher>& Matcher);
   virtual ~SurfaceImageToImageMatch() {}
   virtual void match(const ImageCoordinate& Ic1, ImageCoordinate& Ic2,
-		     double& Line_sigma, double& Sample_sigma,
-		     bool& Success, int* Diagnostic = 0) const;
-  virtual void print(std::ostream& Os) const 
-  { Os << "SurfaceImageToImageMatch\n"; }
+                     double& Line_sigma, double& Sample_sigma, bool& Success,
+                     int* Diagnostic = 0) const;
+  virtual void print(std::ostream& Os) const
+  {
+    Os << "SurfaceImageToImageMatch\n";
+  }
 
-  void match_surf(const GroundCoordinate& Gc, 
-		  ImageCoordinate& Ic1, ImageCoordinate& Ic2,
-		  double& Line_sigma, double& Sample_sigma,
-		  bool& Success, int* Diagnostic = 0) const;
+  void match_surf(const GroundCoordinate& Gc, ImageCoordinate& Ic1,
+                  ImageCoordinate& Ic2, double& Line_sigma,
+                  double& Sample_sigma, bool& Success,
+                  int* Diagnostic = 0) const;
 
-//-----------------------------------------------------------------------
-/// ImageGroundConnection for image 1.
-//-----------------------------------------------------------------------
-
-  const boost::shared_ptr<ImageGroundConnection>&
-  image_ground_connection1() const { return igc1; }
-
-//-----------------------------------------------------------------------
-/// ImageGroundConnection for image 2.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// ImageGroundConnection for image 1.
+  //-----------------------------------------------------------------------
 
   const boost::shared_ptr<ImageGroundConnection>&
-  image_ground_connection2() const { return igc2; }
+  image_ground_connection1() const
+  {
+    return igc1;
+  }
 
-//-----------------------------------------------------------------------
-/// Matcher we are using
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// ImageGroundConnection for image 2.
+  //-----------------------------------------------------------------------
 
-  const boost::shared_ptr<ImageMatcher>&
-  matcher() const {return matcher_;}
+  const boost::shared_ptr<ImageGroundConnection>&
+  image_ground_connection2() const
+  {
+    return igc2;
+  }
 
-//-----------------------------------------------------------------------
-/// Indicate if we are doing the map projection on demand, or if we 
-/// already have the data map projected.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Matcher we are using
+  //-----------------------------------------------------------------------
+
+  const boost::shared_ptr<ImageMatcher>& matcher() const { return matcher_; }
+
+  //-----------------------------------------------------------------------
+  /// Indicate if we are doing the map projection on demand, or if we
+  /// already have the data map projected.
+  //-----------------------------------------------------------------------
 
   bool map_project_on_demand() const { return map_project_on_demand_; }
 
-//-----------------------------------------------------------------------
-/// Surface projected image 1.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Surface projected image 1.
+  //-----------------------------------------------------------------------
 
-  const boost::shared_ptr<RasterImage>&
-  surface_image1() const { return simg1; }
+  const boost::shared_ptr<RasterImage>& surface_image1() const { return simg1; }
 
-//-----------------------------------------------------------------------
-/// Surface projected image 2.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Surface projected image 2.
+  //-----------------------------------------------------------------------
 
-  const boost::shared_ptr<RasterImage>&
-  surface_image2() const { return simg2; }
+  const boost::shared_ptr<RasterImage>& surface_image2() const { return simg2; }
 
 private:
   boost::shared_ptr<ImageGroundConnection> igc1, igc2;
@@ -108,7 +111,7 @@ private:
   SurfaceImageToImageMatch() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 

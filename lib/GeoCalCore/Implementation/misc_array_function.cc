@@ -22,22 +22,20 @@ inline double median_calc(std::vector<double>& d)
   if(d.size() <= 30) {
     static_sort(d);
     if(d.size() % 2 == 1) {
-      int n = (d.size() - 1)  / 2;
+      int n = (d.size() - 1) / 2;
       return d[n];
     } else {
       int n = d.size() / 2 - 1;
-      return (d[n] + d[n+1]) / 2;
+      return (d[n] + d[n + 1]) / 2;
     }
   } else {
     if(d.size() % 2 == 1) {
-      int n = (d.size() - 1)  / 2;
-      std::nth_element(d.begin(), d.begin() + n,
-		       d.end());
+      int n = (d.size() - 1) / 2;
+      std::nth_element(d.begin(), d.begin() + n, d.end());
       return d[n];
     } else {
       int n = d.size() / 2 - 1;
-      std::nth_element(d.begin(), d.begin() + n,
-		       d.end());
+      std::nth_element(d.begin(), d.begin() + n, d.end());
       double t1 = d[n];
       // This is the n+1 element. Data is partially sorted, to all
       // the values in d.begin() + n + 1, d.end()
@@ -72,14 +70,12 @@ inline double median_calc(std::vector<double>& d)
 /// faster.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> GeoCal::array_local_median
-(const blitz::Array<double, 2>& In,
- int Window_nrow, int Window_ncol,
- array_local_edge_handle Edge_handle,
- int Number_task)
+blitz::Array<double, 2>
+GeoCal::array_local_median(const blitz::Array<double, 2>& In, int Window_nrow,
+                           int Window_ncol, array_local_edge_handle Edge_handle,
+                           int Number_task)
 {
-  if(Window_nrow % 2 != 1 ||
-     Window_ncol % 2 != 1)
+  if(Window_nrow % 2 != 1 || Window_ncol % 2 != 1)
     throw Exception("Window size needs to be odd");
   int hnr = (Window_nrow - 1) / 2;
   int hnc = (Window_ncol - 1) / 2;
@@ -90,44 +86,43 @@ blitz::Array<double, 2> GeoCal::array_local_median
   // our self.
   //std::for_each(std::execution::par,
   //boost::counting_iterator<int>(0), boost::counting_iterator<int>(res.size()),
-  auto func = [Edge_handle, hnr, hnc, &In, &res] (int, int istart, int iend)
-  {
+  auto func = [Edge_handle, hnr, hnc, &In, &res](int, int istart, int iend) {
     std::vector<double> scratch;
-    scratch.reserve((2*hnr+1)*(2*hnc+1));
+    scratch.reserve((2 * hnr + 1) * (2 * hnc + 1));
     for(int i = istart; i < iend; ++i)
       for(int j = 0; j < res.cols(); ++j) {
-	scratch.clear();
-	if(Edge_handle == ARRAY_LOCAL_MEDIAN_ZEROPAD) {
-	  for(int ii = i - hnr; ii <= i + hnr; ++ii)
-	    for(int ji = j - hnc; ji <= j + hnc; ++ji)
-	      if(ii >= 0 && ii < In.rows() && ji >= 0 && ji < In.cols())
-		scratch.push_back(In(ii,ji));
-	      else
-		scratch.push_back(0);
-	} else {
-	  int iimin = std::max(i - hnr,0);
-	  int iimax = std::min(i + hnr, In.rows()-1);
-	  int jjmin = std::max(j - hnc, 0);
-	  int jjmax = std::min(j + hnc, In.cols()-1);
-	  for(int ii = iimin; ii <= iimax; ++ii)
-	    for(int ji = jjmin; ji <= jjmax; ++ji)
-	      scratch.push_back(In(ii,ji));
-	}
-	res(i,j) = median_calc(scratch);
+        scratch.clear();
+        if(Edge_handle == ARRAY_LOCAL_MEDIAN_ZEROPAD) {
+          for(int ii = i - hnr; ii <= i + hnr; ++ii)
+            for(int ji = j - hnc; ji <= j + hnc; ++ji)
+              if(ii >= 0 && ii < In.rows() && ji >= 0 && ji < In.cols())
+                scratch.push_back(In(ii, ji));
+              else
+                scratch.push_back(0);
+        } else {
+          int iimin = std::max(i - hnr, 0);
+          int iimax = std::min(i + hnr, In.rows() - 1);
+          int jjmin = std::max(j - hnc, 0);
+          int jjmax = std::min(j + hnc, In.cols() - 1);
+          for(int ii = iimin; ii <= iimax; ++ii)
+            for(int ji = jjmin; ji <= jjmax; ++ji)
+              scratch.push_back(In(ii, ji));
+        }
+        res(i, j) = median_calc(scratch);
       }
   };
   parallel_row_blocks(res.rows(), Number_task, func);
   if(Edge_handle == ARRAY_LOCAL_MEDIAN_REPEAT) {
     for(int i = 0; i < res.rows(); ++i)
-      for(int j = 0; j < res.cols();++j) {
-	if(i - hnr < 0)
-	  res(i,j) = res(hnr, j);
-	if(i+hnr >= res.rows())
-	  res(i,j)=res(res.rows()-hnr-1,j);
-	if(j - hnc < 0)
-	  res(i,j)=res(i,hnc);
-	if(j+hnc >= res.cols())
-	  res(i,j) = res(i,res.cols()-hnc-1);
+      for(int j = 0; j < res.cols(); ++j) {
+        if(i - hnr < 0)
+          res(i, j) = res(hnr, j);
+        if(i + hnr >= res.rows())
+          res(i, j) = res(res.rows() - hnr - 1, j);
+        if(j - hnc < 0)
+          res(i, j) = res(i, hnc);
+        if(j + hnc >= res.cols())
+          res(i, j) = res(i, res.cols() - hnc - 1);
       }
   }
   return res;
@@ -143,12 +138,11 @@ blitz::Array<double, 2> GeoCal::array_local_median
 /// useful in python but slow to generate there.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> GeoCal::ray_cast_ground_coordinate
-(const boost::shared_ptr<ImageGroundConnection>& Igc,
- const CoordinateConverter& Cconv)
+blitz::Array<double, 2> GeoCal::ray_cast_ground_coordinate(
+    const boost::shared_ptr<ImageGroundConnection>& Igc,
+    const CoordinateConverter& Cconv)
 {
-  blitz::Array<double, 2> res(Igc->number_line() * Igc->number_sample(),
-			      5);
+  blitz::Array<double, 2> res(Igc->number_line() * Igc->number_sample(), 5);
   // We use a really large resolution, to force the number of
   // subpixels to to 1.
   IgcRayCaster rcast(Igc, 1, 0, -1, 1, 1e6);
@@ -156,11 +150,11 @@ blitz::Array<double, 2> GeoCal::ray_cast_ground_coordinate
   while(!rcast.last_position()) {
     blitz::Array<double, 6> d = rcast.next_position();
     for(int s = 0; s < d.cols(); ++s) {
-      Ecr pt(d(0,s,0,0,0,0), d(0,s,0,0,0,1), d(0,s,0,0,0,2));
-      res(resind,0) = rcast.current_position();
-      res(resind,1) = s;
-      Cconv.convert_to_coordinate(pt, res(resind,2), res(resind,3),
-				  res(resind,4));
+      Ecr pt(d(0, s, 0, 0, 0, 0), d(0, s, 0, 0, 0, 1), d(0, s, 0, 0, 0, 2));
+      res(resind, 0) = rcast.current_position();
+      res(resind, 1) = s;
+      Cconv.convert_to_coordinate(pt, res(resind, 2), res(resind, 3),
+                                  res(resind, 4));
       ++resind;
     }
   }
@@ -181,50 +175,45 @@ blitz::Array<double, 2> GeoCal::ray_cast_ground_coordinate
 /// through 100 tasks).
 //-----------------------------------------------------------------------
 
-blitz::Array<bool, 2> GeoCal::linear_gradient_bad_pixel_detection
-(const blitz::Array<double, 2>& Img,
- int Window_size,
- double Percentile,
- double Thresh_fact,
- double Nfail_thresh_percentage,
- array_local_edge_handle Edge_handle,
- int Number_task
-)
+blitz::Array<bool, 2> GeoCal::linear_gradient_bad_pixel_detection(
+    const blitz::Array<double, 2>& Img, int Window_size, double Percentile,
+    double Thresh_fact, double Nfail_thresh_percentage,
+    array_local_edge_handle Edge_handle, int Number_task)
 {
   range_check_inclusive(Percentile, 0.0, 100.0);
   range_check_inclusive(Nfail_thresh_percentage, 0.0, 100.0);
-  
+
   // Difference right, left, up, down. This trims the edges, we'll add
   // that back in shortly. Note that other than a sign up and down are the
   // same, as is left and right. We take an abs value in next step, so we only
   // need to calculate one of these.
-  blitz::Array<double, 2> down_diff(Img.rows()-1,Img.cols());
-  blitz::Array<double, 2> right_diff(Img.rows(),Img.cols()-1);
+  blitz::Array<double, 2> down_diff(Img.rows() - 1, Img.cols());
+  blitz::Array<double, 2> right_diff(Img.rows(), Img.cols() - 1);
   for(int i = 0; i < down_diff.rows(); ++i)
     for(int j = 0; j < down_diff.cols(); ++j)
-      down_diff(i,j) = Img(i,j) - Img(i+1,j);
+      down_diff(i, j) = Img(i, j) - Img(i + 1, j);
   for(int i = 0; i < right_diff.rows(); ++i)
     for(int j = 0; j < right_diff.cols(); ++j)
-      right_diff(i,j) = Img(i,j) - Img(i,j+1);
-  
+      right_diff(i, j) = Img(i, j) - Img(i, j + 1);
+
   // Local median
   blitz::Array<double, 2> down_diff_local_med(down_diff.shape());
   blitz::Array<double, 2> right_diff_local_med(right_diff.shape());
-  down_diff_local_med = blitz::abs(down_diff -
-				   array_local_median(down_diff, 1, Window_size, Edge_handle,
-						      Number_task));
-  right_diff_local_med = blitz::abs(right_diff -
-				    array_local_median(right_diff, Window_size, 1, Edge_handle,
-						       Number_task));
+  down_diff_local_med =
+      blitz::abs(down_diff - array_local_median(down_diff, 1, Window_size,
+                                                Edge_handle, Number_task));
+  right_diff_local_med =
+      blitz::abs(right_diff - array_local_median(right_diff, Window_size, 1,
+                                                 Edge_handle, Number_task));
 
   // Calculate threshold. Note this is slightly different than what we
   // do in the python, we don't bother handling the small difference
   // in Percentile*size not exactly matching a integer value - this is
   // a pretty small effect and not worth the extra handling for this.
-  int ndwn = (int) round((int) down_diff_local_med.size() * Percentile / 100.0);
-  int nrgt = (int) round((int) right_diff_local_med.size() * Percentile / 100.0);
-  range_check(ndwn, 0, (int) down_diff_local_med.size());
-  range_check(nrgt, 0, (int) right_diff_local_med.size());
+  int ndwn = (int)round((int)down_diff_local_med.size() * Percentile / 100.0);
+  int nrgt = (int)round((int)right_diff_local_med.size() * Percentile / 100.0);
+  range_check(ndwn, 0, (int)down_diff_local_med.size());
+  range_check(nrgt, 0, (int)right_diff_local_med.size());
   // nth_element rearranges the data, so we need to make a copy here
   // for working with
   blitz::Array<double, 2> dwn(down_diff_local_med.copy());
@@ -252,30 +241,30 @@ blitz::Array<bool, 2> GeoCal::linear_gradient_bad_pixel_detection
   for(int i = 0; i < nfail.rows(); ++i)
     for(int j = 0; j < nfail.cols(); ++j) {
       if(i < nfail_down.rows()) {
-	nfail(i,j) += nfail_down(i,j);
-	nfail(i+1,j) += nfail_down(i,j);
+        nfail(i, j) += nfail_down(i, j);
+        nfail(i + 1, j) += nfail_down(i, j);
       }
       if(j < nfail_right.cols()) {
-	nfail(i,j) += nfail_right(i,j);
-	nfail(i,j+1) += nfail_right(i,j);
+        nfail(i, j) += nfail_right(i, j);
+        nfail(i, j + 1) += nfail_right(i, j);
       }
     }
-  
+
   // Convert to percentage
   blitz::Array<double, 2> npix(Img.shape());
   npix = 4;
   for(int i = 0; i < npix.cols(); ++i) {
-    npix(0,i) = 3;
-    npix(Img.rows()-1,i) = 3;
+    npix(0, i) = 3;
+    npix(Img.rows() - 1, i) = 3;
   }
   for(int i = 0; i < npix.rows(); ++i) {
-    npix(i,0) = 3;
-    npix(i,Img.cols()-1) = 3;
+    npix(i, 0) = 3;
+    npix(i, Img.cols() - 1) = 3;
   }
-  npix(0,0) = 2;
-  npix(0,Img.cols()-1) = 2;
-  npix(Img.rows()-1,0) = 2;
-  npix(Img.rows()-1,Img.cols()-1) = 2;
+  npix(0, 0) = 2;
+  npix(0, Img.cols() - 1) = 2;
+  npix(Img.rows() - 1, 0) = 2;
+  npix(Img.rows() - 1, Img.cols() - 1) = 2;
 
   nfail *= 100.0 / npix;
   blitz::Array<bool, 2> res(Img.shape());

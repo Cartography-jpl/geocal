@@ -1,20 +1,19 @@
 #include "combine_orbit.h"
 #include "geocal_serialize_support.h"
 #include "ostream_pad.h"
-#include <algorithm>  // For std::sort, std::upper_bound
+#include <algorithm> // For std::sort, std::upper_bound
 using namespace GeoCal;
 
 template<class Archive>
-void CombineOrbit::serialize(Archive & ar, const unsigned int version)
+void CombineOrbit::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
-    & GEOCAL_NVP_(orb_list);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit) & GEOCAL_NVP_(orb_list);
 
   // On deserialization, reset transient cache and mark as unsorted
   if(Archive::is_loading::value) {
     last_used_index_ = -1;
     last_used_orbit_.reset();
-    is_sorted_ = false;  // Will sort on first access
+    is_sorted_ = false; // Will sort on first access
   }
 }
 
@@ -24,13 +23,16 @@ GEOCAL_IMPLEMENT(CombineOrbit);
 void CombineOrbit::add_orbit(const boost::shared_ptr<GeoCal::Orbit>& orb)
 {
   // Step 1: Find and classify overlaps with the new orbit
-  std::vector<int> min_time_overlaps;  // Orbits that overlap new orbit's min_time
-  std::vector<int> max_time_overlaps;  // Orbits that overlap new orbit's max_time
+  std::vector<int>
+      min_time_overlaps; // Orbits that overlap new orbit's min_time
+  std::vector<int>
+      max_time_overlaps; // Orbits that overlap new orbit's max_time
 
   for(size_t i = 0; i < orb_list_.size(); ++i) {
     bool overlaps = !(orb->max_time() <= orb_list_[i]->min_time() ||
                       orb_list_[i]->max_time() <= orb->min_time());
-    if(!overlaps) continue;
+    if(!overlaps)
+      continue;
 
     // Classify the type of overlap
     if(orb_list_[i]->min_time() < orb->min_time() &&
@@ -49,17 +51,15 @@ void CombineOrbit::add_orbit(const boost::shared_ptr<GeoCal::Orbit>& orb)
   // Step 2: Validate constraint for new orbit - at most 1 overlap each end
   if(min_time_overlaps.size() > 1) {
     GeoCal::Exception e;
-    e << "Cannot add orbit with time range ["
-      << orb->min_time() << ", " << orb->max_time()
-      << ") - has " << min_time_overlaps.size()
+    e << "Cannot add orbit with time range [" << orb->min_time() << ", "
+      << orb->max_time() << ") - has " << min_time_overlaps.size()
       << " overlaps at its min_time, maximum 1 allowed";
     throw e;
   }
   if(max_time_overlaps.size() > 1) {
     GeoCal::Exception e;
-    e << "Cannot add orbit with time range ["
-      << orb->min_time() << ", " << orb->max_time()
-      << ") - has " << max_time_overlaps.size()
+    e << "Cannot add orbit with time range [" << orb->min_time() << ", "
+      << orb->max_time() << ") - has " << max_time_overlaps.size()
       << " overlaps at its max_time, maximum 1 allowed";
     throw e;
   }
@@ -72,7 +72,8 @@ void CombineOrbit::add_orbit(const boost::shared_ptr<GeoCal::Orbit>& orb)
     // Count how many orbits already overlap this existing orbit's max_time
     int max_time_overlap_count = 0;
     for(size_t i = 0; i < orb_list_.size(); ++i) {
-      if((int)i == idx) continue;
+      if((int)i == idx)
+        continue;
       // Does orbit i overlap orbit[idx]'s max_time?
       if(orb_list_[i]->min_time() >= orb_list_[idx]->min_time() &&
          orb_list_[i]->min_time() < orb_list_[idx]->max_time()) {
@@ -81,9 +82,8 @@ void CombineOrbit::add_orbit(const boost::shared_ptr<GeoCal::Orbit>& orb)
     }
     if(max_time_overlap_count >= 1) {
       GeoCal::Exception e;
-      e << "Cannot add orbit with time range ["
-        << orb->min_time() << ", " << orb->max_time()
-        << ") - existing orbit at index " << idx
+      e << "Cannot add orbit with time range [" << orb->min_time() << ", "
+        << orb->max_time() << ") - existing orbit at index " << idx
         << " already has a max_time overlap";
       throw e;
     }
@@ -96,7 +96,8 @@ void CombineOrbit::add_orbit(const boost::shared_ptr<GeoCal::Orbit>& orb)
     // Count how many orbits already overlap this existing orbit's min_time
     int min_time_overlap_count = 0;
     for(size_t i = 0; i < orb_list_.size(); ++i) {
-      if((int)i == idx) continue;
+      if((int)i == idx)
+        continue;
       // Does orbit i overlap orbit[idx]'s min_time?
       if(orb_list_[i]->min_time() < orb_list_[idx]->min_time() &&
          orb_list_[i]->max_time() > orb_list_[idx]->min_time()) {
@@ -105,9 +106,8 @@ void CombineOrbit::add_orbit(const boost::shared_ptr<GeoCal::Orbit>& orb)
     }
     if(min_time_overlap_count >= 1) {
       GeoCal::Exception e;
-      e << "Cannot add orbit with time range ["
-        << orb->min_time() << ", " << orb->max_time()
-        << ") - existing orbit at index " << idx
+      e << "Cannot add orbit with time range [" << orb->min_time() << ", "
+        << orb->max_time() << ") - existing orbit at index " << idx
         << " already has a min_time overlap";
       throw e;
     }
@@ -140,12 +140,13 @@ void CombineOrbit::ensure_sorted() const
 {
   if(!is_sorted_ && !orb_list_.empty()) {
     // Sort by min_time (const_cast needed for mutable operation)
-    std::sort(const_cast<std::vector<boost::shared_ptr<Orbit>>&>(orb_list_).begin(),
-              const_cast<std::vector<boost::shared_ptr<Orbit>>&>(orb_list_).end(),
-              [](const boost::shared_ptr<Orbit>& a,
-                 const boost::shared_ptr<Orbit>& b) {
-                return a->min_time() < b->min_time();
-              });
+    std::sort(
+        const_cast<std::vector<boost::shared_ptr<Orbit>>&>(orb_list_).begin(),
+        const_cast<std::vector<boost::shared_ptr<Orbit>>&>(orb_list_).end(),
+        [](const boost::shared_ptr<Orbit>& a,
+           const boost::shared_ptr<Orbit>& b) {
+          return a->min_time() < b->min_time();
+        });
     const_cast<bool&>(is_sorted_) = true;
   }
 }
@@ -170,8 +171,7 @@ boost::shared_ptr<OrbitData> CombineOrbit::orbit_data(Time T) const
   }
 
   // Check cached orbit first (temporal locality optimization)
-  if(last_used_orbit_ &&
-     T >= last_used_orbit_->min_time() &&
+  if(last_used_orbit_ && T >= last_used_orbit_->min_time() &&
      T < last_used_orbit_->max_time())
     return last_used_orbit_->orbit_data(T);
 
@@ -179,10 +179,11 @@ boost::shared_ptr<OrbitData> CombineOrbit::orbit_data(Time T) const
   ensure_sorted();
 
   // Binary search: find first orbit with min_time > T
-  auto upper = std::upper_bound(orb_list_.begin(), orb_list_.end(), T,
-                                 [](Time t, const boost::shared_ptr<Orbit>& orb) {
-                                   return t < orb->min_time();
-                                 });
+  auto upper =
+      std::upper_bound(orb_list_.begin(), orb_list_.end(), T,
+                       [](Time t, const boost::shared_ptr<Orbit>& orb) {
+                         return t < orb->min_time();
+                       });
 
   // Candidate is the orbit just before upper
   if(upper == orb_list_.begin()) {
@@ -195,7 +196,7 @@ boost::shared_ptr<OrbitData> CombineOrbit::orbit_data(Time T) const
 
   // Walk backwards from candidate to find earliest orbit containing T
   // Stop when we find an orbit with max_time <= T (no earlier orbit can contain T)
-  for(auto it = candidate; ; --it) {
+  for(auto it = candidate;; --it) {
     if(T >= (*it)->min_time() && T < (*it)->max_time()) {
       // Found orbit containing T with earliest min_time
       last_used_orbit_ = *it;
@@ -230,8 +231,7 @@ CombineOrbit::orbit_data(const GeoCal::TimeWithDerivative& T) const
   }
 
   // Check cached orbit first
-  if(last_used_orbit_ &&
-     T >= last_used_orbit_->min_time() &&
+  if(last_used_orbit_ && T >= last_used_orbit_->min_time() &&
      T < last_used_orbit_->max_time())
     return last_used_orbit_->orbit_data(T);
 
@@ -239,11 +239,11 @@ CombineOrbit::orbit_data(const GeoCal::TimeWithDerivative& T) const
   ensure_sorted();
 
   // Binary search: find first orbit with min_time > T
-  auto upper = std::upper_bound(orb_list_.begin(), orb_list_.end(), T,
-                                 [](const TimeWithDerivative& t,
-                                    const boost::shared_ptr<Orbit>& orb) {
-                                   return t < orb->min_time();
-                                 });
+  auto upper = std::upper_bound(
+      orb_list_.begin(), orb_list_.end(), T,
+      [](const TimeWithDerivative& t, const boost::shared_ptr<Orbit>& orb) {
+        return t < orb->min_time();
+      });
 
   // Candidate is the orbit just before upper
   if(upper == orb_list_.begin()) {
@@ -256,7 +256,7 @@ CombineOrbit::orbit_data(const GeoCal::TimeWithDerivative& T) const
 
   // Walk backwards from candidate to find earliest orbit containing T
   // Stop when we find an orbit with max_time <= T (no earlier orbit can contain T)
-  for(auto it = candidate; ; --it) {
+  for(auto it = candidate;; --it) {
     if(T >= (*it)->min_time() && T < (*it)->max_time()) {
       // Found orbit containing T with earliest min_time
       last_used_orbit_ = *it;

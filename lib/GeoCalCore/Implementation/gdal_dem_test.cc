@@ -1,5 +1,5 @@
 #include "unit_test_support.h"
-#include "gdal_dem.h"    
+#include "gdal_dem.h"
 #include "gdal_datum.h"
 using namespace GeoCal;
 
@@ -25,7 +25,7 @@ BOOST_AUTO_TEST_CASE(gdal_dem_scale)
   // unit test input. So we fake this as having no datum. Since we are
   // just testing the handling of the scaling, this doesn't affect the
   // actual test.
-  
+
   std::string fname = test_data_dir() + "dem_foot.tif";
   GdalDem d(fname, boost::shared_ptr<Datum>(new SimpleDatum(10)));
   Geodetic g1(34, -117.9);
@@ -39,13 +39,12 @@ BOOST_AUTO_TEST_CASE(serialization)
     return;
 
   std::string fname = test_data_dir() + "cib_sample.img";
-  boost::shared_ptr<Dem> dem(new GdalDem(fname, 
-					 boost::shared_ptr<Datum>(new SimpleDatum(10))));
+  boost::shared_ptr<Dem> dem(
+      new GdalDem(fname, boost::shared_ptr<Datum>(new SimpleDatum(10))));
   std::string d = serialize_write_string(dem);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<GdalDem> demr = 
-    serialize_read_string<GdalDem>(d);
+  boost::shared_ptr<GdalDem> demr = serialize_read_string<GdalDem>(d);
   Geodetic g1(35.895, 44.800, 100);
   BOOST_CHECK_CLOSE(demr->height_reference_surface(g1), 69.6 + 10.0, 1e-4);
 }

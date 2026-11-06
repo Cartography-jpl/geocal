@@ -8,18 +8,16 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void SensrbCamera::serialize(Archive & ar, const unsigned int version)
+void SensrbCamera::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
-  ar & GEOCAL_NVP_(calibration_date) & GEOCAL_NVP_(detection_type)
-    & GEOCAL_NVP_(p_distort) & GEOCAL_NVP_(radial_distort_limit);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
+  ar& GEOCAL_NVP_(calibration_date) & GEOCAL_NVP_(detection_type) &
+      GEOCAL_NVP_(p_distort) & GEOCAL_NVP_(radial_distort_limit);
 }
-
 
 GEOCAL_IMPLEMENT(SensrbCamera);
 #endif
 
-  
 void SensrbCamera::print(std::ostream& Os) const
 {
   OstreamPad opad(Os, "    ");
@@ -32,14 +30,14 @@ void SensrbCamera::print(std::ostream& Os) const
      << "   Line pitch:       " << line_pitch() << " mm\n"
      << "   Sample pitch:     " << sample_pitch() << " mm\n"
      << "   Principal point:  " << principal_point(0) << "\n"
-     << "   Frame convention: " << (frame_convention() == LINE_IS_X ?
-				    "LINE_IS_X\n" : "LINE_IS_Y\n")
-     << "   Line direction:   " << (line_direction() == INCREASE_IS_POSITIVE ?
-				    "INCREASE_IS_POSITIVE\n" :
-				    "INCREASE_IS_NEGATIVE\n")
-     << "   Sample direction:  " << (sample_direction() == INCREASE_IS_POSITIVE ?
-				    "INCREASE_IS_POSITIVE\n" :
-				    "INCREASE_IS_NEGATIVE\n")
+     << "   Frame convention: "
+     << (frame_convention() == LINE_IS_X ? "LINE_IS_X\n" : "LINE_IS_Y\n")
+     << "   Line direction:   "
+     << (line_direction() == INCREASE_IS_POSITIVE ? "INCREASE_IS_POSITIVE\n"
+                                                  : "INCREASE_IS_NEGATIVE\n")
+     << "   Sample direction:  "
+     << (sample_direction() == INCREASE_IS_POSITIVE ? "INCREASE_IS_POSITIVE\n"
+                                                    : "INCREASE_IS_NEGATIVE\n")
      << "   Frame to spacecraft: " << frame_to_sc() << "\n"
      << "   P_distort:\n";
   opad << p_distort() << "\n";
@@ -78,9 +76,9 @@ void SensrbCamera::fill_in_max() const
   // max_r2 = x*x + y*y;
 }
 
-void SensrbCamera::dcs_to_focal_plane
-(int Band, const boost::math::quaternion<double>& Dcs,
- double& Xfp, double& Yfp) const
+void SensrbCamera::dcs_to_focal_plane(
+    int Band, const boost::math::quaternion<double>& Dcs, double& Xfp,
+    double& Yfp) const
 {
   for(int i = 0; i < p_distort_.rows(); ++i)
     if(fabs(p_distort_(i)) > 1e-20)
@@ -107,24 +105,24 @@ void SensrbCamera::dcs_to_focal_plane
   // 	      << "  Yfp: " << Yfp << "\n";
 }
 
-void SensrbCamera::dcs_to_focal_plane
-(int Band, const boost::math::quaternion<AutoDerivative<double> >& Dcs,
- AutoDerivative<double>& Xfp, AutoDerivative<double>& Yfp) const
+void SensrbCamera::dcs_to_focal_plane(
+    int Band, const boost::math::quaternion<AutoDerivative<double>>& Dcs,
+    AutoDerivative<double>& Xfp, AutoDerivative<double>& Yfp) const
 {
   for(int i = 0; i < p_distort_.rows(); ++i)
     if(fabs(p_distort_(i)) > 1e-20)
       throw Exception("We don't currently support nonzero distortions");
   // Skip distortions
-  Xfp = focal_length_with_derivative() * 
-    (Dcs.R_component_2() / Dcs.R_component_4());
-  Yfp = focal_length_with_derivative() * 
-    (Dcs.R_component_3() / Dcs.R_component_4());
+  Xfp = focal_length_with_derivative() *
+        (Dcs.R_component_2() / Dcs.R_component_4());
+  Yfp = focal_length_with_derivative() *
+        (Dcs.R_component_3() / Dcs.R_component_4());
 
   // Suppress warning about variables not being used. We aren't, but I
   // want to leave them in place for now and just not get a warning.
-  (void) max_r2_filled_in;
-  (void) max_rp2;
-  (void) max_r2;
+  (void)max_r2_filled_in;
+  (void)max_rp2;
+  (void)max_r2;
   // fill_in_max();
   // AutoDerivative<double> x, y;
   // QuaternionCamera::dcs_to_focal_plane(Band, Dcs, x, y);
@@ -137,8 +135,8 @@ void SensrbCamera::dcs_to_focal_plane
   // Yfp = y / (1 - dr_over_r);
 }
 
-boost::math::quaternion<double> SensrbCamera::focal_plane_to_dcs
-(int Band, double Xfp, double Yfp) const
+boost::math::quaternion<double>
+SensrbCamera::focal_plane_to_dcs(int Band, double Xfp, double Yfp) const
 {
   for(int i = 0; i < p_distort_.rows(); ++i)
     if(fabs(p_distort_(i)) > 1e-20)
@@ -165,17 +163,16 @@ boost::math::quaternion<double> SensrbCamera::focal_plane_to_dcs
   // return QuaternionCamera::focal_plane_to_dcs(Band, x, y);
 }
 
-boost::math::quaternion<AutoDerivative<double> >
-SensrbCamera::focal_plane_to_dcs
-(int Band, const AutoDerivative<double>& Xfp, 
- const AutoDerivative<double>& Yfp) const
+boost::math::quaternion<AutoDerivative<double>>
+SensrbCamera::focal_plane_to_dcs(int Band, const AutoDerivative<double>& Xfp,
+                                 const AutoDerivative<double>& Yfp) const
 {
   for(int i = 0; i < p_distort_.rows(); ++i)
     if(fabs(p_distort_(i)) > 1e-20)
       throw Exception("We don't currently support nonzero distortions");
   // Skip distortions
-  return boost::math::quaternion<AutoDerivative<double> >
-    (0, Xfp, Yfp, focal_length_with_derivative());
+  return boost::math::quaternion<AutoDerivative<double>>(
+      0, Xfp, Yfp, focal_length_with_derivative());
 
   // fill_in_max();
   // double rp2 = (Xfp.value() *Xfp.value() + Yfp.value() * Yfp.value());
@@ -203,10 +200,9 @@ SensrbCamera::focal_plane_to_dcs
 /// normally use in our quaternion calculations).
 //-----------------------------------------------------------------------
 
-void SensrbCamera::quaternion_to_sensor_angle
-(const boost::math::quaternion<double>& Frame_to_sc_or_ned,
- double& Sensor_angle_1, double& Sensor_angle_2, double& Sensor_angle_3
- )
+void SensrbCamera::quaternion_to_sensor_angle(
+    const boost::math::quaternion<double>& Frame_to_sc_or_ned,
+    double& Sensor_angle_1, double& Sensor_angle_2, double& Sensor_angle_3)
 {
   boost::math::quaternion<double> m_ins_to_cam = conj(Frame_to_sc_or_ned);
   // This is equation 6, with the matrix
@@ -216,7 +212,7 @@ void SensrbCamera::quaternion_to_sensor_angle
   // as a quaternion
   boost::math::quaternion<double> m_sen_to_cam(0.5, 0.5, 0.5, -0.5);
   boost::math::quaternion<double> m_ins_to_sen =
-    conj(m_sen_to_cam) * m_ins_to_cam;
+      conj(m_sen_to_cam) * m_ins_to_cam;
   double y, p, r;
   quat_to_ypr(m_ins_to_sen, y, p, r);
   Sensor_angle_1 = -y * Constant::rad_to_deg;
@@ -234,8 +230,8 @@ void SensrbCamera::quaternion_to_sensor_angle
 /// normally use in our quaternion calculations).
 //-----------------------------------------------------------------------
 
-boost::math::quaternion<double> SensrbCamera::sensor_angle_to_quaternion
-(double Sensor_angle_1, double Sensor_angle_2, double Sensor_angle_3)
+boost::math::quaternion<double> SensrbCamera::sensor_angle_to_quaternion(
+    double Sensor_angle_1, double Sensor_angle_2, double Sensor_angle_3)
 {
   // This is equation 6, with the matrix
   // [[ 0, 1,  0],
@@ -246,13 +242,9 @@ boost::math::quaternion<double> SensrbCamera::sensor_angle_to_quaternion
   // The angle rotations are passive rather than active. Our code
   // generates active, so we change the sign for a passive rotation.
   boost::math::quaternion<double> m_ins_to_sen =
-    quat_rot("XYZ", -Sensor_angle_3 * Constant::deg_to_rad,
-	     -Sensor_angle_2 * Constant::deg_to_rad,
-	     -Sensor_angle_1 * Constant::deg_to_rad);
+      quat_rot("XYZ", -Sensor_angle_3 * Constant::deg_to_rad,
+               -Sensor_angle_2 * Constant::deg_to_rad,
+               -Sensor_angle_1 * Constant::deg_to_rad);
   boost::math::quaternion<double> m_ins_to_cam = m_sen_to_cam * m_ins_to_sen;
   return conj(m_ins_to_cam);
 }
-
-
-
-

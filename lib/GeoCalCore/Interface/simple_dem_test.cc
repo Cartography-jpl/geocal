@@ -42,7 +42,6 @@ BOOST_AUTO_TEST_CASE(serialization)
   BOOST_CHECK_CLOSE(demr->distance_to_surface(g2), height2, 1e-4);
 }
 
-
 BOOST_AUTO_TEST_CASE(simple_datum)
 {
   SimpleDatum datum;
@@ -66,12 +65,12 @@ BOOST_AUTO_TEST_CASE(serialization_datum)
 BOOST_AUTO_TEST_CASE(failure_case)
 {
   Ecr cf(-2476218.3081625318, -4239788.305709024, 4088301.3991399906);
-  CartesianFixedLookVector lv(-16.508420817465716, 21.316931438730403, 12.989757605481763);
+  CartesianFixedLookVector lv(-16.508420817465716, 21.316931438730403,
+                              12.989757605481763);
   SimpleDem dem;
-  BOOST_CHECK_THROW(dem.intersect(cf, lv, 100),
-		    ConvergenceFailure);
+  BOOST_CHECK_THROW(dem.intersect(cf, lv, 100), ConvergenceFailure);
   BOOST_CHECK_THROW(dem.intersect_start_length(cf, lv, 100, 29597.700365968903),
-		    ConvergenceFailure);
+                    ConvergenceFailure);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

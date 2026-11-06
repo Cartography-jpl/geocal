@@ -4351,6 +4351,29 @@ MOSTLYCLEANFILES = dummy.pdf test_out/vicar_copy.img \
 	swig_pyi/__init__.pyi
 @WITH_DOCUMENTATION_TRUE@geocaldocdir = ${datarootdir}/doc/geocal
 @WITH_DOCUMENTATION_TRUE@geocaldocsearchdir = ${geocaldocdir}/html/search
+
+#=================================================================
+# C++ formatting and lint (same targets as swig-rules-skeleton).
+# "make format" formats the C++ in lib/ with clang-format (.clang-format
+# and .clang-format-ignore at the top of the source tree), "make
+# format-check" only checks it (fails if a file isn't formatted). "make
+# lint" runs clang-tidy with the checks in .clang-tidy and fails on any
+# finding. clang-format and clang-tidy come from the pixi env (clang-tools,
+# pinned so everyone formats the same way). The file lists come from git,
+# so these work in a git checkout only. The python code has the same
+# targets in python/Makefile (ruff).
+#
+# lint also writes compile_commands.json (with the extra flags clangd needs,
+# see script/make_compile_commands.py), so it can be linked into the source
+# tree for clangd. clang-tidy runs on the library and unit test sources in
+# the source tree (not files generated in the build directory, and not the
+# SWIG wrappers); headers that only the wrappers include aren't checked.
+CLANG_FORMAT = clang-format
+CLANG_TIDY_FLAGS = --quiet --warnings-as-errors='*' \
+  --config-file=$(abs_top_srcdir)/.clang-tidy
+
+LINT_NJOB = 10
+FORMAT_FILES = 'lib/*.h' 'lib/*.cc' 'lib/*.hpp' 'lib/*.cpp'
 sdbxdocdir = ${datarootdir}/doc/libsdbx
 dist_sdbxdoc_DATA = $(srcdir)/@srcsdbx@/doc/html/*
 sdbxdir = $(includedir)/sdbx
@@ -15463,6 +15486,22 @@ clean_unit_test:
 @WITH_DOCUMENTATION_TRUE@	@echo "Note, this should usually be done from the main branch only"
 @WITH_DOCUMENTATION_TRUE@	cd $(srcdir) && ghp-import $(abs_builddir)/doc/geocal/html -m "Update doxygen documentation"
 @WITH_DOCUMENTATION_TRUE@	@echo "You now need to push the gh-pages branchs to github for these to be visible (git push origin gh-pages)"
+
+format:
+	cd $(srcdir) && git ls-files $(FORMAT_FILES) | xargs -r $(CLANG_FORMAT) -i
+
+format-check:
+	cd $(srcdir) && git ls-files $(FORMAT_FILES) | \
+	  xargs -r $(CLANG_FORMAT) --dry-run --Werror
+
+lint:
+	$(PYTHON) $(srcdir)/script/make_compile_commands.py --clangd \
+	  libgeocal.la geocal_test_all _swig_wrap.la
+	$(PYTHON) -c 'import json, os; src = os.path.realpath("$(abs_top_srcdir)") + "/"; [print(e["file"]) for e in json.load(open("compile_commands.json")) if os.path.realpath(e["file"]).startswith(src) and not e["file"].endswith("_wrap.cc")]' | \
+	  xargs -r -P $(LINT_NJOB) -n 1 sh $(srcdir)/script/run_clang_tidy.sh $(CLANG_TIDY_FLAGS)
+	@echo "clang-tidy: no findings"
+
+.PHONY: format format-check lint
 
 # Allow searchs for .i in this directory
 vpath %.i $(srcdir)/@swigrules@/include

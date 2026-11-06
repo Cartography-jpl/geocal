@@ -5,13 +5,13 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void PiecewiseLinear::save(Archive & ar, const unsigned int version) const
+void PiecewiseLinear::save(Archive& ar, const unsigned int version) const
 {
   // Nothing more to do
 }
 
 template<class Archive>
-void PiecewiseLinear::load(Archive & ar, const unsigned int version)
+void PiecewiseLinear::load(Archive& ar, const unsigned int version)
 {
   // Older version did not have parameter mask, this was assumed to be
   // all true
@@ -22,55 +22,53 @@ void PiecewiseLinear::load(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void PiecewiseLinear::serialize(Archive & ar, const unsigned int version)
+void PiecewiseLinear::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(PiecewiseLinear);
-  ar & GEOCAL_NVP_(x) & GEOCAL_NVP_(y) & GEOCAL_NVP_(t)
-    & GEOCAL_NVP_(parameter_size);
+  ar& GEOCAL_NVP_(x) & GEOCAL_NVP_(y) & GEOCAL_NVP_(t) &
+      GEOCAL_NVP_(parameter_size);
   // Older version didn't have parameter mask saved, it was assumed
   // this was all true
   if(version > 0)
-    ar & GEOCAL_NVP_(pm);
+    ar& GEOCAL_NVP_(pm);
   boost::serialization::split_member(ar, *this, version);
 }
 
 GEOCAL_IMPLEMENT(PiecewiseLinear);
 #endif
 
-PiecewiseLinear::PiecewiseLinear
-(const blitz::Array<Time, 1>& X, 
- const ArrayAd<double, 1>& Y,
- const blitz::Array<int, 1>& T)
+PiecewiseLinear::PiecewiseLinear(const blitz::Array<Time, 1>& X,
+                                 const ArrayAd<double, 1>& Y,
+                                 const blitz::Array<int, 1>& T)
   : x_(X.copy()), y_(X.rows(), Y.number_variable()), t_(T.copy())
 {
   if(T.rows() != X.rows() - 1)
     throw Exception("T must have number rows = X rows - 1");
-  parameter_size_ = std::count(T.begin(), T.end(), (int) LINEAR) + 1;
-  if(Y.rows() != parameter_size_) 
+  parameter_size_ = std::count(T.begin(), T.end(), (int)LINEAR) + 1;
+  if(Y.rows() != parameter_size_)
     throw Exception("Y.rows must be count(T) == LINEAR + 1");
   parameter_with_derivative(Y);
   for(int i = 0; i < X.rows() - 1; ++i)
-    if(X(i) >= X(i+1))
+    if(X(i) >= X(i + 1))
       throw Exception("X must be sorted.");
   pm_.resize(parameter_size_);
   pm_ = true;
 }
 
-PiecewiseLinear::PiecewiseLinear
-(const std::vector<Time>& X, 
- const blitz::Array<int, 1>& T)
-  : x_((int) X.size()), y_((int) X.size(), 0), t_(T.copy())
+PiecewiseLinear::PiecewiseLinear(const std::vector<Time>& X,
+                                 const blitz::Array<int, 1>& T)
+  : x_((int)X.size()), y_((int)X.size(), 0), t_(T.copy())
 {
   if(t_.rows() != x_.rows() - 1)
     throw Exception("T must have number rows = X rows - 1");
   for(int i = 0; i < x_.rows(); ++i)
     x_(i) = X[i];
-  parameter_size_ = std::count(t_.begin(), t_.end(), (int) LINEAR) + 1;
+  parameter_size_ = std::count(t_.begin(), t_.end(), (int)LINEAR) + 1;
   blitz::Array<double, 1> y(parameter_size_);
   y = 0;
   parameter(y);
   for(int i = 0; i < x_.rows() - 1; ++i)
-    if(x_(i) >= x_(i+1))
+    if(x_(i) >= x_(i + 1))
       throw Exception("X must be sorted.");
   pm_.resize(parameter_size_);
   pm_ = true;
@@ -120,37 +118,37 @@ double PiecewiseLinear::value(const Time& x) const
   if(x >= x_(x_.rows() - 1))
     return y_.value()(x_.rows() - 1);
   int i = std::lower_bound(x_.data(), x_.data() + x_.rows(), x) - x_.data();
-  switch(t_(i-1)) {
+  switch(t_(i - 1)) {
   case CONSTANT:
-    return y_.value()(i-1);
+    return y_.value()(i - 1);
     break;
   case LINEAR:
   case LINEAR_TO_ZERO:
-    return y_.value()(i-1) + (y_.value()(i) -y_.value()(i-1)) *
-      (x - x_(i-1)) / (x_(i) - x_(i-1));
+    return y_.value()(i - 1) + (y_.value()(i) - y_.value()(i - 1)) *
+                                   (x - x_(i - 1)) / (x_(i) - x_(i - 1));
     break;
   default:
     throw Exception("This should be impossible");
   }
 }
 
-AutoDerivative<double> PiecewiseLinear::value_with_derivative
-(const TimeWithDerivative& x) const
+AutoDerivative<double>
+PiecewiseLinear::value_with_derivative(const TimeWithDerivative& x) const
 {
   if(x.value() <= x_(0))
     return y_.value()(0);
   if(x.value() >= x_(x_.rows() - 1))
     return y_.value()(x_.rows() - 1);
-  int i = std::lower_bound(x_.data(), x_.data() + x_.rows(), x.value()) - 
-    x_.data();
-  switch(t_(i-1)) {
+  int i =
+      std::lower_bound(x_.data(), x_.data() + x_.rows(), x.value()) - x_.data();
+  switch(t_(i - 1)) {
   case CONSTANT:
-    return y_(i-1);
+    return y_(i - 1);
     break;
   case LINEAR:
   case LINEAR_TO_ZERO:
-    return y_(i-1) + (y_(i) -y_(i-1)) *
-      (x - x_(i-1)) / (x_(i) - x_(i-1));
+    return y_(i - 1) +
+           (y_(i) - y_(i - 1)) * (x - x_(i - 1)) / (x_(i) - x_(i - 1));
     break;
   default:
     throw Exception("This should be impossible");
@@ -158,7 +156,7 @@ AutoDerivative<double> PiecewiseLinear::value_with_derivative
 }
 
 // See base class for description
-void PiecewiseLinear::parameter_mask(const blitz::Array<bool, 1>& Pm) 
+void PiecewiseLinear::parameter_mask(const blitz::Array<bool, 1>& Pm)
 {
   if(Pm.rows() != pm_.rows())
     throw Exception("Parameter mask not the expected size");
@@ -171,10 +169,14 @@ void PiecewiseLinear::print(std::ostream& Os) const
   Os << "            X                        Y     Function Type\n";
   Os << "       ---------                ---------  -------------\n";
   for(int i = 0; i < x_.rows(); ++i)
-    Os << std::setw(10) << x_(i) << " " 
-       << std::setw(10) << y_.value()(i) << " "
-       << std::setw(10) << (i == t_.rows() ? "C" :
-			    (t_(i) == LINEAR ? "L" :
-			     (t_(i) == CONSTANT ? "C" :
-			      (t_(i) == LINEAR_TO_ZERO ? "LZ" : "?")))) << "\n";
+    Os << std::setw(10) << x_(i) << " " << std::setw(10) << y_.value()(i) << " "
+       << std::setw(10)
+       << (i == t_.rows()
+               ? "C"
+               : (t_(i) == LINEAR
+                      ? "L"
+                      : (t_(i) == CONSTANT
+                             ? "C"
+                             : (t_(i) == LINEAR_TO_ZERO ? "LZ" : "?"))))
+       << "\n";
 }

@@ -7,11 +7,11 @@ using namespace blitz;
 //-----------------------------------------------------------------------
 
 MagnifyReplicate::MagnifyReplicate(const boost::shared_ptr<RasterImage>& Data,
-				   int Magfactor, int Number_tile)
+                                   int Magfactor, int Number_tile)
   : CalcRaster(Data->number_line() * Magfactor,
-	       Data->number_sample() * Magfactor,
-	       Data->number_tile_line() * Magfactor,
-	       Data->number_tile_sample() * Magfactor, Number_tile),
+               Data->number_sample() * Magfactor,
+               Data->number_tile_line() * Magfactor,
+               Data->number_tile_sample() * Magfactor, Number_tile),
     raw_data(Data), magfactor_(Magfactor)
 {
   range_min_check(Magfactor, 1);
@@ -22,10 +22,9 @@ MagnifyReplicate::MagnifyReplicate(const boost::shared_ptr<RasterImage>& Data,
     parm(4) /= Magfactor;
     parm(5) /= Magfactor;
     Data->map_info().index_to_coordinate(-0.5 / magfactor_, -0.5 / magfactor_,
-					 parm(0), parm(3));
+                                         parm(0), parm(3));
     map_info_.reset(new MapInfo(Data->map_info().coordinate_converter_ptr(),
-				parm,
-				number_sample(), number_line()));
+                                parm, number_sample(), number_line()));
   }
   if(Data->has_rpc()) {
     rpc_.reset(new Rpc(Data->rpc()));
@@ -41,12 +40,12 @@ MagnifyReplicate::MagnifyReplicate(const boost::shared_ptr<RasterImage>& Data,
 
 void MagnifyReplicate::calc(int Lstart, int Sstart) const
 {
-  int data_lstart = (int) floor(Lstart / (double) magfactor_);
-  int data_sstart = (int) floor(Sstart / (double) magfactor_);
+  int data_lstart = (int)floor(Lstart / (double)magfactor_);
+  int data_sstart = (int)floor(Sstart / (double)magfactor_);
   int res_lstart = Lstart - data_lstart * magfactor_;
   int res_sstart = Sstart - data_sstart * magfactor_;
-  int nl = (int) ceil((data.rows() + res_lstart) / (double) magfactor_);
-  int ns = (int) ceil((data.cols() + res_sstart) / (double) magfactor_);
+  int nl = (int)ceil((data.rows() + res_lstart) / (double)magfactor_);
+  int ns = (int)ceil((data.cols() + res_sstart) / (double)magfactor_);
   Array<double, 2> d = raw_data->read_double(data_lstart, data_sstart, nl, ns);
   Array<double, 2> res(d.rows() * magfactor_, d.cols() * magfactor_);
   for(int i = 0; i < magfactor_; ++i) {
@@ -60,6 +59,3 @@ void MagnifyReplicate::calc(int Lstart, int Sstart) const
   Range r2(res_sstart, res_sstart + data.cols() - 1);
   data = res(r1, r2);
 }
-
-
-

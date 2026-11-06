@@ -3,7 +3,7 @@
 #include "raster_image_multi_band.h"
 #include "calc_raster.h"
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This create a cloud mask using WorldView2 mulispectral data. This
   cloud mask has two parts:
 
@@ -22,10 +22,10 @@ namespace GeoCal {
 *******************************************************************/
 class WorldView2CloudMask : public CalcRaster {
 public:
-  enum {CLEAR = 0, SHADOW = 1, CLOUDY = 2};
-  WorldView2CloudMask(const RasterImageMultiBand&
-		      Mul_spec_data, int Min_cloud_size,
-		      double Cloud_threshold, double Shadow_threshold);
+  enum { CLEAR = 0, SHADOW = 1, CLOUDY = 2 };
+  WorldView2CloudMask(const RasterImageMultiBand& Mul_spec_data,
+                      int Min_cloud_size, double Cloud_threshold,
+                      double Shadow_threshold);
   virtual ~WorldView2CloudMask() {}
 protected:
   virtual void calc(int Lstart, int Sstart) const;
@@ -34,7 +34,7 @@ private:
   boost::shared_ptr<RasterImage> cloud_data;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 GEOCAL_EXPORT_KEY(WorldView2CloudMask);

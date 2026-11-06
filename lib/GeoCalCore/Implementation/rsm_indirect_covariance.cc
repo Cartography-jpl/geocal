@@ -9,12 +9,11 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RsmIndirectCovariance::serialize(Archive & ar, const unsigned int version)
+void RsmIndirectCovariance::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(RsmIndirectCovariance);
-  ar & GEOCAL_NVP_(image_identifier)
-    & GEOCAL_NVP_(rsm_support_data_edition)
-    & GEOCAL_NVP_(triangulation_id);
+  ar& GEOCAL_NVP_(image_identifier) & GEOCAL_NVP_(rsm_support_data_edition) &
+      GEOCAL_NVP_(triangulation_id);
 }
 
 GEOCAL_IMPLEMENT(RsmIndirectCovariance);
@@ -32,9 +31,9 @@ static boost::format num("%|1$+21.14E|");
 
 std::string RsmIndirectCovariance::base_tre_string() const
 {
- return str_check_size(f % image_identifier_
-		       % rsm_support_data_edition_
-		       % triangulation_id_, 80+40+40);
+  return str_check_size(f % image_identifier_ % rsm_support_data_edition_ %
+                            triangulation_id_,
+                        80 + 40 + 40);
 }
 
 void RsmIndirectCovariance::base_read_tre_string(std::istream& In)

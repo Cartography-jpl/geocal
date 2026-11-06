@@ -14,9 +14,9 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void EciTodBurl::serialize(Archive & ar, const unsigned int version)
+void EciTodBurl::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianInertial);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartesianInertial);
 }
 
 GEOCAL_IMPLEMENT(EciTodBurl);
@@ -49,7 +49,7 @@ void EciTodBurl::ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const
   eos_coords(T.et(), T.acs() + delta_ut1, ci_to_j2000, &Ci_to_cf[0][0]);
 #else
   throw Exception("Need to compile with carto library to use EciTodBurl");
-#endif    
+#endif
 }
 
 //-----------------------------------------------------------------------
@@ -58,7 +58,7 @@ void EciTodBurl::ci_to_cf(const Time& T, double Ci_to_cf[3][3]) const
 //-----------------------------------------------------------------------
 
 void EciTodBurl::ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) const
-{ 
+{
   // Mike burl doesn't actually implement this. But we can get the
   // motion of the earth from spice, and then use the rotation matrix
   // from Mike Burl.
@@ -70,9 +70,9 @@ void EciTodBurl::ci_to_cf_with_vel(const Time& T, double Ci_to_cf[6][6]) const
   for(int i = 0; i < 3; ++i)
     for(int j = 0; j < 3; ++j) {
       Ci_to_cf[i][j] = m[i][j];
-      Ci_to_cf[i+3][j+3] = m[i][j];
+      Ci_to_cf[i + 3][j + 3] = m[i][j];
     }
-  Eci e(1,2,3);
+  Eci e(1, 2, 3);
   double m2[6][6];
   e.ci_to_cf_with_vel(T, m2);
   for(int i = 3; i < 6; ++i)
@@ -103,15 +103,15 @@ void EciTodBurl::print(std::ostream& Os) const
 
 boost::shared_ptr<CartesianInertial>
 EciTodBurl::reference_surface_intersect_approximate(
-  const CartesianInertialLookVector& Cl, double Height_reference_surface) 
-  const
+    const CartesianInertialLookVector& Cl,
+    double Height_reference_surface) const
 {
   double aph = Constant::wgs84_a + Height_reference_surface;
   double bph = Constant::wgs84_b + Height_reference_surface;
   boost::array<double, 3> dirci;
-  dirci[0] = Cl.look_vector[0]/ aph;
-  dirci[1] = Cl.look_vector[1]/ aph;
-  dirci[2] = Cl.look_vector[2]/ bph;
+  dirci[0] = Cl.look_vector[0] / aph;
+  dirci[1] = Cl.look_vector[1] / aph;
+  dirci[2] = Cl.look_vector[2] / bph;
   double t = norm(dirci);
   dirci[0] /= t;
   dirci[1] /= t;

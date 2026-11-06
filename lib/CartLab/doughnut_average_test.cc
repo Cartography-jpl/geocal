@@ -16,14 +16,12 @@ double calc(const RasterImage& Ri, int ln, int smp)
   const int dhs = (5 - 1) / 2;
   for(int i = ln - whs; i <= ln + whs; ++i)
     for(int j = smp - whs; j <= smp + whs; ++j)
-      if(i >= 0 && i < Ri.number_line() &&
-	 j >=0 && j < Ri.number_sample() &&
-	 !(i >= ln - dhs && i <= ln + dhs &&
-	   j >= smp - dhs && j <= smp + dhs))
-	if(Ri(i, j) != 0) {
-	  cnt += 1;
-	  sum += Ri(i,j);
-	}
+      if(i >= 0 && i < Ri.number_line() && j >= 0 && j < Ri.number_sample() &&
+         !(i >= ln - dhs && i <= ln + dhs && j >= smp - dhs && j <= smp + dhs))
+        if(Ri(i, j) != 0) {
+          cnt += 1;
+          sum += Ri(i, j);
+        }
   return sum / cnt;
 }
 BOOST_AUTO_TEST_CASE(basic)
@@ -33,8 +31,8 @@ BOOST_AUTO_TEST_CASE(basic)
   for(int i = 0; i < mi->number_line(); ++i)
     for(int j = 0; j < mi->number_sample(); ++j)
       mi->write(i, j, ++val);
-  boost::shared_ptr<RasterImageMultiBandVariable> mb
-    (new RasterImageMultiBandVariable());
+  boost::shared_ptr<RasterImageMultiBandVariable> mb(
+      new RasterImageMultiBandVariable());
   mb->add_raster_image(mi);
   DoughnutAverage davg(mb, 11, 5);
   BOOST_CHECK_EQUAL(davg.window_size(), 11);
@@ -47,25 +45,25 @@ BOOST_AUTO_TEST_CASE(basic)
 
   // Check proper handling of subsetting
   Range ra(Range::all());
-  Array<double, 3> d1 = davg.read_double(10,15,20,25);
-  BOOST_CHECK_MATRIX_CLOSE(d1, dall(ra,Range(10,29), Range(15,39)));
+  Array<double, 3> d1 = davg.read_double(10, 15, 20, 25);
+  BOOST_CHECK_MATRIX_CLOSE(d1, dall(ra, Range(10, 29), Range(15, 39)));
   // Check processing near edges
-  Array<double, 3> d2 = davg.read_double(0,0,20,25);
-  BOOST_CHECK_MATRIX_CLOSE(d2, dall(ra,Range(0,19), Range(0,24)));
-  Array<double, 3> d3 = davg.read_double(80,0,20,25);
-  BOOST_CHECK_MATRIX_CLOSE(d3, dall(ra,Range(80,99), Range(0,24)));
-  Array<double, 3> d4 = davg.read_double(0,175,20,25);
-  BOOST_CHECK_MATRIX_CLOSE(d4, dall(ra,Range(0,19), Range(175,199)));
+  Array<double, 3> d2 = davg.read_double(0, 0, 20, 25);
+  BOOST_CHECK_MATRIX_CLOSE(d2, dall(ra, Range(0, 19), Range(0, 24)));
+  Array<double, 3> d3 = davg.read_double(80, 0, 20, 25);
+  BOOST_CHECK_MATRIX_CLOSE(d3, dall(ra, Range(80, 99), Range(0, 24)));
+  Array<double, 3> d4 = davg.read_double(0, 175, 20, 25);
+  BOOST_CHECK_MATRIX_CLOSE(d4, dall(ra, Range(0, 19), Range(175, 199)));
 }
 // Compare with test data from a previous Shiva run.
 BOOST_AUTO_TEST_CASE(shiva)
 {
-  boost::shared_ptr<RasterImageMultiBandVariable> mb
-    (new RasterImageMultiBandVariable());
-  mb->add_raster_image(boost::shared_ptr<RasterImage>
-     (new VicarLiteRasterImage(shiva_test_data_dir() + "pre_pan_sub.img")));
-  mb->add_raster_image(boost::shared_ptr<RasterImage>
-     (new VicarLiteRasterImage(shiva_test_data_dir() + "post_pan_sub.img")));
+  boost::shared_ptr<RasterImageMultiBandVariable> mb(
+      new RasterImageMultiBandVariable());
+  mb->add_raster_image(boost::shared_ptr<RasterImage>(
+      new VicarLiteRasterImage(shiva_test_data_dir() + "pre_pan_sub.img")));
+  mb->add_raster_image(boost::shared_ptr<RasterImage>(
+      new VicarLiteRasterImage(shiva_test_data_dir() + "post_pan_sub.img")));
   boost::shared_ptr<DoughnutAverage> davg(new DoughnutAverage(mb, 11, 5));
   VicarLiteRasterImage cvd_expect(shiva_test_data_dir() + "cvdnorm_sub.img");
   // Expect edges to be different because we aren't calculating
@@ -76,38 +74,38 @@ BOOST_AUTO_TEST_CASE(shiva)
   int ns = cvd_expect.number_sample() - 12;
   // Round off allows us to have up to a difference of 1.
   BOOST_CHECK(max(abs(cvd_expect.read_double(ls, ss, nl, ns) -
-		      davg->cvdnorm(1, ls, ss, nl, ns))) < 1.01);
+                      davg->cvdnorm(1, ls, ss, nl, ns))) < 1.01);
 
   VicarLiteRasterImage pandif_expect(shiva_test_data_dir() + "pandif_sub.img");
   // Note, we removed the abs after shiva. Add back in here so we can
   // do comparison.
   BOOST_CHECK(max(abs(pandif_expect.read_double(ls, ss, nl, ns) -
-		      abs(davg->pandif(ls, ss, nl, ns)))) < 1.01);
-  boost::shared_ptr<RasterImage> cvdnorm_img(new RasterImageWrapCvdNorm(davg, 1));
+                      abs(davg->pandif(ls, ss, nl, ns)))) < 1.01);
+  boost::shared_ptr<RasterImage> cvdnorm_img(
+      new RasterImageWrapCvdNorm(davg, 1));
   boost::shared_ptr<RasterImage> pandif_img(new RasterImageWrapPandif(davg));
   BOOST_CHECK(max(abs(cvd_expect.read(ls, ss, nl, ns) -
-		      cvdnorm_img->read(ls, ss, nl, ns))) <= 2);
+                      cvdnorm_img->read(ls, ss, nl, ns))) <= 2);
   BOOST_CHECK(max(abs(pandif_expect.read(ls, ss, nl, ns) -
-		      abs(pandif_img->read(ls, ss, nl, ns)))) <= 2);
-  
+                      abs(pandif_img->read(ls, ss, nl, ns)))) <= 2);
 }
 
 BOOST_AUTO_TEST_CASE(serialization_doughnut_average)
 {
   if(!have_serialize_supported())
     return;
-  boost::shared_ptr<RasterImageMultiBandVariable> mb
-    (new RasterImageMultiBandVariable());
-  mb->add_raster_image(boost::shared_ptr<RasterImage>
-     (new VicarLiteRasterImage(shiva_test_data_dir() + "pre_pan_sub.img")));
-  mb->add_raster_image(boost::shared_ptr<RasterImage>
-     (new VicarLiteRasterImage(shiva_test_data_dir() + "post_pan_sub.img")));
+  boost::shared_ptr<RasterImageMultiBandVariable> mb(
+      new RasterImageMultiBandVariable());
+  mb->add_raster_image(boost::shared_ptr<RasterImage>(
+      new VicarLiteRasterImage(shiva_test_data_dir() + "pre_pan_sub.img")));
+  mb->add_raster_image(boost::shared_ptr<RasterImage>(
+      new VicarLiteRasterImage(shiva_test_data_dir() + "post_pan_sub.img")));
   boost::shared_ptr<DoughnutAverage> davg(new DoughnutAverage(mb, 11, 5));
   std::string d = serialize_write_string(davg);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<DoughnutAverage> davgr = 
-    serialize_read_string<DoughnutAverage>(d);
+  boost::shared_ptr<DoughnutAverage> davgr =
+      serialize_read_string<DoughnutAverage>(d);
 
   VicarLiteRasterImage cvd_expect(shiva_test_data_dir() + "cvdnorm_sub.img");
   // Expect edges to be different because we aren't calculating
@@ -118,39 +116,40 @@ BOOST_AUTO_TEST_CASE(serialization_doughnut_average)
   int ns = cvd_expect.number_sample() - 12;
   // Round off allows us to have up to a difference of 1.
   BOOST_CHECK(max(abs(cvd_expect.read_double(ls, ss, nl, ns) -
-		      davgr->cvdnorm(1, ls, ss, nl, ns))) < 1.01);
+                      davgr->cvdnorm(1, ls, ss, nl, ns))) < 1.01);
 
   VicarLiteRasterImage pandif_expect(shiva_test_data_dir() + "pandif_sub.img");
   // Note, we removed the abs after shiva. Add back in here so we can
   // do comparison.
   BOOST_CHECK(max(abs(pandif_expect.read_double(ls, ss, nl, ns) -
-		      abs(davgr->pandif(ls, ss, nl, ns)))) < 1.01);
-  boost::shared_ptr<RasterImage> cvdnorm_img(new RasterImageWrapCvdNorm(davgr, 1));
+                      abs(davgr->pandif(ls, ss, nl, ns)))) < 1.01);
+  boost::shared_ptr<RasterImage> cvdnorm_img(
+      new RasterImageWrapCvdNorm(davgr, 1));
   boost::shared_ptr<RasterImage> pandif_img(new RasterImageWrapPandif(davgr));
   BOOST_CHECK(max(abs(cvd_expect.read(ls, ss, nl, ns) -
-		      cvdnorm_img->read(ls, ss, nl, ns))) <= 2);
+                      cvdnorm_img->read(ls, ss, nl, ns))) <= 2);
   BOOST_CHECK(max(abs(pandif_expect.read(ls, ss, nl, ns) -
-		      abs(pandif_img->read(ls, ss, nl, ns)))) <= 2);
-  
+                      abs(pandif_img->read(ls, ss, nl, ns)))) <= 2);
 }
 
 BOOST_AUTO_TEST_CASE(serialization_cvdnorm)
 {
   if(!have_serialize_supported())
     return;
-  boost::shared_ptr<RasterImageMultiBandVariable> mb
-    (new RasterImageMultiBandVariable());
-  mb->add_raster_image(boost::shared_ptr<RasterImage>
-     (new VicarLiteRasterImage(shiva_test_data_dir() + "pre_pan_sub.img")));
-  mb->add_raster_image(boost::shared_ptr<RasterImage>
-     (new VicarLiteRasterImage(shiva_test_data_dir() + "post_pan_sub.img")));
+  boost::shared_ptr<RasterImageMultiBandVariable> mb(
+      new RasterImageMultiBandVariable());
+  mb->add_raster_image(boost::shared_ptr<RasterImage>(
+      new VicarLiteRasterImage(shiva_test_data_dir() + "pre_pan_sub.img")));
+  mb->add_raster_image(boost::shared_ptr<RasterImage>(
+      new VicarLiteRasterImage(shiva_test_data_dir() + "post_pan_sub.img")));
   boost::shared_ptr<DoughnutAverage> davg(new DoughnutAverage(mb, 11, 5));
-  boost::shared_ptr<RasterImage> cvdnorm_img(new RasterImageWrapCvdNorm(davg, 1));
+  boost::shared_ptr<RasterImage> cvdnorm_img(
+      new RasterImageWrapCvdNorm(davg, 1));
   std::string d = serialize_write_string(cvdnorm_img);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<RasterImage> cvdnorm_imgr = 
-    serialize_read_string<RasterImage>(d);
+  boost::shared_ptr<RasterImage> cvdnorm_imgr =
+      serialize_read_string<RasterImage>(d);
 
   VicarLiteRasterImage cvd_expect(shiva_test_data_dir() + "cvdnorm_sub.img");
   // Expect edges to be different because we aren't calculating
@@ -161,26 +160,26 @@ BOOST_AUTO_TEST_CASE(serialization_cvdnorm)
   int ns = cvd_expect.number_sample() - 12;
 
   BOOST_CHECK(max(abs(cvd_expect.read(ls, ss, nl, ns) -
-		      cvdnorm_imgr->read(ls, ss, nl, ns))) <= 2);
+                      cvdnorm_imgr->read(ls, ss, nl, ns))) <= 2);
 }
 
 BOOST_AUTO_TEST_CASE(serialization_pandif)
 {
   if(!have_serialize_supported())
     return;
-  boost::shared_ptr<RasterImageMultiBandVariable> mb
-    (new RasterImageMultiBandVariable());
-  mb->add_raster_image(boost::shared_ptr<RasterImage>
-     (new VicarLiteRasterImage(shiva_test_data_dir() + "pre_pan_sub.img")));
-  mb->add_raster_image(boost::shared_ptr<RasterImage>
-     (new VicarLiteRasterImage(shiva_test_data_dir() + "post_pan_sub.img")));
+  boost::shared_ptr<RasterImageMultiBandVariable> mb(
+      new RasterImageMultiBandVariable());
+  mb->add_raster_image(boost::shared_ptr<RasterImage>(
+      new VicarLiteRasterImage(shiva_test_data_dir() + "pre_pan_sub.img")));
+  mb->add_raster_image(boost::shared_ptr<RasterImage>(
+      new VicarLiteRasterImage(shiva_test_data_dir() + "post_pan_sub.img")));
   boost::shared_ptr<DoughnutAverage> davg(new DoughnutAverage(mb, 11, 5));
   boost::shared_ptr<RasterImage> pandif_img(new RasterImageWrapPandif(davg));
   std::string d = serialize_write_string(pandif_img);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<RasterImage> pandif_imgr = 
-    serialize_read_string<RasterImage>(d);
+  boost::shared_ptr<RasterImage> pandif_imgr =
+      serialize_read_string<RasterImage>(d);
 
   VicarLiteRasterImage pandif_expect(shiva_test_data_dir() + "pandif_sub.img");
   // Expect edges to be different because we aren't calculating
@@ -191,7 +190,7 @@ BOOST_AUTO_TEST_CASE(serialization_pandif)
   int ns = pandif_expect.number_sample() - 12;
 
   BOOST_CHECK(max(abs(pandif_expect.read(ls, ss, nl, ns) -
-		      abs(pandif_imgr->read(ls, ss, nl, ns)))) <= 2);
+                      abs(pandif_imgr->read(ls, ss, nl, ns)))) <= 2);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

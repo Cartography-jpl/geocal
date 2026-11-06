@@ -6,15 +6,15 @@
 extern "C" {
 #include <taeconf.inp>
 #include <parblk.inc>
-// We can't include taeintproto.h because it contains structures with 
+// We can't include taeintproto.h because it contains structures with
 // the reserved name "class".
-void q_init(struct PARBLK *p, FUNINT pool_size, FUNINT mode);
-FUNCTION CODE q_intg(struct PARBLK* p, const TEXT name[], FUNINT count, 
-		     TAEINT intg[], FUNINT mode);
-FUNCTION CODE q_real(struct PARBLK* p, const TEXT name[], FUNINT count, 
-		     TAEFLOAT real[], FUNINT mode);
-FUNCTION CODE q_string(struct PARBLK *p, const TEXT name[],
-		       FUNINT count, const TEXT *vector[], FUNINT mode);
+void q_init(struct PARBLK* p, FUNINT pool_size, FUNINT mode);
+FUNCTION CODE q_intg(struct PARBLK* p, const TEXT name[], FUNINT count,
+                     TAEINT intg[], FUNINT mode);
+FUNCTION CODE q_real(struct PARBLK* p, const TEXT name[], FUNINT count,
+                     TAEFLOAT real[], FUNINT mode);
+FUNCTION CODE q_string(struct PARBLK* p, const TEXT name[], FUNINT count,
+                       const TEXT* vector[], FUNINT mode);
 }
 #endif
 #include <iostream>
@@ -24,7 +24,7 @@ using namespace GeoCal;
 /// Set up to parse VICAR arguments. VICAR arguments are accessed by
 /// keywords. This isn't a bad interface, but because we also want to
 /// support straight unix command line style arguments, we have the
-/// VicarArgument interface in terms of index number (first argument, 
+/// VicarArgument interface in terms of index number (first argument,
 /// second argument, etc.). Keyword_list gives the list of keywords in
 /// order that we want.
 ///
@@ -44,8 +44,8 @@ using namespace GeoCal;
 /// behavior by setting Copy_primary_input_label to true.
 //-----------------------------------------------------------------------
 
-VicarArgument::VicarArgument(int Argc, char** Argv, 
-			     bool Copy_primary_input_label)
+VicarArgument::VicarArgument(int Argc, char** Argv,
+                             bool Copy_primary_input_label)
 {
 #ifdef HAVE_VICAR_RTL
   if(!zvzinit(Argc, Argv))
@@ -74,14 +74,14 @@ bool VicarArgument::has_keyword(const std::string& Keyword)
 /// Return the type and count for the given keyword.
 //-----------------------------------------------------------------------
 
-void VicarArgument::type(const std::string& Keyword, std::string& Type, 
-			 int& Count)
+void VicarArgument::type(const std::string& Keyword, std::string& Type,
+                         int& Count)
 {
 #ifdef HAVE_VICAR_RTL
   int def, maxlen;
   char tp[100];
-  int status = zvpstat(const_cast<char*>(Keyword.c_str()), &Count, 
-		       &def, &maxlen, tp);
+  int status =
+      zvpstat(const_cast<char*>(Keyword.c_str()), &Count, &def, &maxlen, tp);
   if(status != 1)
     throw Exception("Call to zvpstat failed");
   Type = tp;
@@ -94,14 +94,14 @@ void VicarArgument::type(const std::string& Keyword, std::string& Type,
 /// Return the type, count and maxlen for the given keyword.
 //-----------------------------------------------------------------------
 
-void VicarArgument::type(const std::string& Keyword, std::string& Type, 
-			 int& Count, int& Maxlen)
+void VicarArgument::type(const std::string& Keyword, std::string& Type,
+                         int& Count, int& Maxlen)
 {
 #ifdef HAVE_VICAR_RTL
   int def;
   char tp[100];
-  int status = zvpstat(const_cast<char*>(Keyword.c_str()), &Count, 
-		       &def, &Maxlen, tp);
+  int status =
+      zvpstat(const_cast<char*>(Keyword.c_str()), &Count, &def, &Maxlen, tp);
   if(status != 1)
     throw Exception("Call to zvpstat failed");
   Type = tp;
@@ -125,7 +125,7 @@ void VicarArgument::print(std::ostream& Os) const
 /// otherwise we throw an exception saying that it isn't available.
 //-----------------------------------------------------------------------
 
-int VicarArgument::zvpw(char *name, void *value, int *count)
+int VicarArgument::zvpw(char* name, void* value, int* count)
 {
 #ifdef HAVE_VICAR_RTL
   return zvp(name, value, count);
@@ -140,8 +140,8 @@ int VicarArgument::zvpw(char *name, void *value, int *count)
 /// otherwise we throw an exception saying that it isn't available.
 //-----------------------------------------------------------------------
 
-int VicarArgument::zvparmw(char *name, void *value, int *count, int *def,
-			   int maxcnt, int length)
+int VicarArgument::zvparmw(char* name, void* value, int* count, int* def,
+                           int maxcnt, int length)
 {
 #ifdef HAVE_VICAR_RTL
   return zvparm(name, value, count, def, maxcnt, length);
@@ -156,8 +156,8 @@ int VicarArgument::zvparmw(char *name, void *value, int *count, int *def,
 /// otherwise we throw an exception saying that it isn't available.
 //-----------------------------------------------------------------------
 
-int VicarArgument::zvparmdw(char *name, void *value, int *count, int *def,
-			    int maxcnt, int length)
+int VicarArgument::zvparmdw(char* name, void* value, int* count, int* def,
+                            int maxcnt, int length)
 {
 #ifdef HAVE_VICAR_RTL
   return zvparmd(name, value, count, def, maxcnt, length);
@@ -175,7 +175,7 @@ void VicarArgument::write_out(const std::string& Keyword, int Val)
 #ifdef HAVE_VICAR_RTL
   // This is copied directly from cartoTaeUtils.c. We have a copy here so
   // we don't need to link to that library.
-  struct PARBLK parblk; 
+  struct PARBLK parblk;
 
   q_init(&parblk, 500, P_ABORT);
   q_intg(&parblk, Keyword.c_str(), 1, &Val, P_ADD);
@@ -190,7 +190,7 @@ void VicarArgument::write_out(const std::string& Keyword, double Val)
 #ifdef HAVE_VICAR_RTL
   // This is copied directly from cartoTaeUtils.c. We have a copy here so
   // we don't need to link to that library.
-  struct PARBLK parblk; 
+  struct PARBLK parblk;
 
   q_init(&parblk, 500, P_ABORT);
   q_real(&parblk, Keyword.c_str(), 1, &Val, P_ADD);
@@ -200,17 +200,16 @@ void VicarArgument::write_out(const std::string& Keyword, double Val)
 #endif
 }
 
-void VicarArgument::write_out(const std::string& Keyword, 
-			      const std::string& Val,
-			      int Max_len)
+void VicarArgument::write_out(const std::string& Keyword,
+                              const std::string& Val, int Max_len)
 {
 #ifdef HAVE_VICAR_RTL
   // This is copied directly from cartoTaeUtils.c. We have a copy here so
   // we don't need to link to that library.
-  struct PARBLK parblk; 
+  struct PARBLK parblk;
 
   q_init(&parblk, 500, P_ABORT);
-  if(Val.size() > (size_t) (Max_len - 1))
+  if(Val.size() > (size_t)(Max_len - 1))
     throw Exception("string value is too long");
   const char* v[1];
   v[0] = Val.c_str();
@@ -220,4 +219,3 @@ void VicarArgument::write_out(const std::string& Keyword,
   throw VicarNotAvailableException();
 #endif
 }
-

@@ -1,0 +1,6 @@
+# Generated SWIG wrappers
+bindings/**
+# Vendored and patched third party code
+thirdparty/**
+boost_fix/**
+lib/GeoCalCore/Support/boost/**

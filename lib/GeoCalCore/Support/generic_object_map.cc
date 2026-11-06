@@ -5,13 +5,13 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void GenericObjectMap::serialize(Archive & ar,
-			const unsigned int UNUSED(version))
+void GenericObjectMap::serialize(Archive& ar,
+                                 const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GenericObjectMap);
-  typedef std::map<std::string, boost::shared_ptr<GenericObject> >
-    MapGenericObject;
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(MapGenericObject);
+  typedef std::map<std::string, boost::shared_ptr<GenericObject>>
+      MapGenericObject;
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(MapGenericObject);
 }
 
 GEOCAL_IMPLEMENT(GenericObjectMap);

@@ -15,7 +15,7 @@ namespace GeoCal {
 /// the 4-tuple is (q1, q2, q3, q4). That means when we bring this over
 /// to the boost library, we need to reorder this to the 4-tuple (q4,
 ///  q1, q2, q3).
-///  
+///
 /// Something we do *not* change but you should be aware of is that
 /// the sensor coordinate system has the line/along track direction as
 /// +y and the sample/cross track as -x. We have support for this in
@@ -27,8 +27,9 @@ namespace GeoCal {
 /// samples of this. So you may need to multiply m_sen_to_cam or
 /// conj(m_sen_to_cam) to get the quaternions you are expecting.
 //-----------------------------------------------------------------------
-  
-template<class T> inline  boost::math::quaternion<T>
+
+template<class T>
+inline boost::math::quaternion<T>
 nitf_to_quaternion(const blitz::Array<T, 1>& Data)
 {
   if(Data.rows() != 4)
@@ -40,13 +41,14 @@ nitf_to_quaternion(const blitz::Array<T, 1>& Data)
 /// Reverse nitf_to_quaternion. See nitf_to_quaternion for
 /// documentation on what this does.
 //-----------------------------------------------------------------------
-  
-template<class T> inline blitz::Array<T, 1>
+
+template<class T>
+inline blitz::Array<T, 1>
 quaternion_to_nitf(const boost::math::quaternion<T>& Q)
 {
   blitz::Array<T, 1> res(4);
-  res = -Q.R_component_2(), -Q.R_component_3(),
-    -Q.R_component_4(), Q.R_component_1();
+  res = -Q.R_component_2(), -Q.R_component_3(), -Q.R_component_4(),
+  Q.R_component_1();
   return res;
 }
 
@@ -54,9 +56,9 @@ quaternion_to_nitf(const boost::math::quaternion<T>& Q)
 /// Reverse nitf_to_quaternion. See nitf_to_quaternion for
 /// documentation on what this does.
 //-----------------------------------------------------------------------
-  
-template<class T> inline blitz::Array<T, 1>
-quaternion_to_nitf(const blitz::Array<T, 1>& Q)
+
+template<class T>
+inline blitz::Array<T, 1> quaternion_to_nitf(const blitz::Array<T, 1>& Q)
 {
   if(Q.rows() != 4)
     throw GeoCal::Exception("Array must be size 4");
@@ -69,22 +71,21 @@ quaternion_to_nitf(const blitz::Array<T, 1>& Q)
 /// Reverse nitf_to_quaternion. See nitf_to_quaternion for
 /// documentation on what this does.
 //-----------------------------------------------------------------------
-  
-template<class T> inline blitz::Array<T, 2>
-quaternion_to_nitf(const blitz::Array<T, 2>& Q)
+
+template<class T>
+inline blitz::Array<T, 2> quaternion_to_nitf(const blitz::Array<T, 2>& Q)
 {
   blitz::Range ra = blitz::Range::all();
   if(Q.cols() != 4)
     throw GeoCal::Exception("Array must be size 4");
   blitz::Array<T, 2> res(Q.rows(), 4);
   // Move real part
-  res(ra,0) = -Q(1,ra);
-  res(ra,1) = -Q(2,ra);
-  res(ra,2) = -Q(3,ra);
-  res(ra,3) = Q(0,ra);
+  res(ra, 0) = -Q(1, ra);
+  res(ra, 1) = -Q(2, ra);
+  res(ra, 2) = -Q(3, ra);
+  res(ra, 3) = Q(0, ra);
   return res;
 }
-  
+
 }
 #endif
-

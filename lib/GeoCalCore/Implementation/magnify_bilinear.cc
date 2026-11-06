@@ -7,11 +7,11 @@ using namespace blitz;
 //-----------------------------------------------------------------------
 
 MagnifyBilinear::MagnifyBilinear(const boost::shared_ptr<RasterImage>& Data,
-				 int Magfactor, int Number_tile)
+                                 int Magfactor, int Number_tile)
   : CalcRaster((Data->number_line() - 1) * Magfactor,
-	       (Data->number_sample() - 1) * Magfactor,
-	       Data->number_tile_line() * Magfactor,
-	       Data->number_tile_sample() * Magfactor, Number_tile),
+               (Data->number_sample() - 1) * Magfactor,
+               Data->number_tile_line() * Magfactor,
+               Data->number_tile_sample() * Magfactor, Number_tile),
     raw_data(Data), magfactor(Magfactor)
 {
   range_min_check(Magfactor, 1);
@@ -22,10 +22,9 @@ MagnifyBilinear::MagnifyBilinear(const boost::shared_ptr<RasterImage>& Data,
     parm(4) /= Magfactor;
     parm(5) /= Magfactor;
     Data->map_info().index_to_coordinate(-0.5 / magfactor, -0.5 / magfactor,
-					 parm(0), parm(3));
+                                         parm(0), parm(3));
     map_info_.reset(new MapInfo(Data->map_info().coordinate_converter_ptr(),
-				parm,
-				number_sample(), number_line()));
+                                parm, number_sample(), number_line()));
   }
   if(Data->has_rpc()) {
     rpc_.reset(new Rpc(Data->rpc()));
@@ -42,25 +41,25 @@ MagnifyBilinear::MagnifyBilinear(const boost::shared_ptr<RasterImage>& Data,
 // Stencil used to do bilinear interpolation at one value
 struct BilinearIntepolate {
   static double ln, smp;
-  template<typename T1,typename T2,typename T3,typename T4,typename T5,
-	   typename T6,
-	   typename T7,typename T8,typename T9,typename T10,typename T11>
+  template<typename T1, typename T2, typename T3, typename T4, typename T5,
+           typename T6, typename T7, typename T8, typename T9, typename T10,
+           typename T11>
   static inline void apply(T1& A, T2& B, T3, T4, T5, T6, T7, T8, T9, T10, T11)
   {
-    A = B(0,0) * (1 - ln) * (1 - smp) + B(0, 1) * (1 - ln) * smp
-      + B(1, 0) * ln * (1 - smp) + B(1, 1) * ln * smp;
+    A = B(0, 0) * (1 - ln) * (1 - smp) + B(0, 1) * (1 - ln) * smp +
+        B(1, 0) * ln * (1 - smp) + B(1, 1) * ln * smp;
   }
-  static const bool hasExtent = false; 
+  static const bool hasExtent = false;
 };
 
 double BilinearIntepolate::ln, BilinearIntepolate::smp;
 
 void MagnifyBilinear::calc(int Lstart, int Sstart) const
 {
-  int data_lstart = (int) floor(Lstart / magfactor);
-  int data_sstart = (int) floor(Sstart / magfactor);
-  int nl = (int) ceil((Lstart + data.rows()) / magfactor)  - data_lstart + 1;
-  int ns = (int) ceil((Sstart + data.cols()) / magfactor) - data_sstart + 1;
+  int data_lstart = (int)floor(Lstart / magfactor);
+  int data_sstart = (int)floor(Sstart / magfactor);
+  int nl = (int)ceil((Lstart + data.rows()) / magfactor) - data_lstart + 1;
+  int ns = (int)ceil((Sstart + data.cols()) / magfactor) - data_sstart + 1;
   if((data_lstart + nl) < raw_data->number_line())
     nl += 1;
   if((data_sstart + ns) < raw_data->number_sample())
@@ -83,6 +82,3 @@ void MagnifyBilinear::calc(int Lstart, int Sstart) const
   Range r2(res_sstart, res_sstart + data.cols() - 1);
   data = res(r1, r2);
 }
-
-
-

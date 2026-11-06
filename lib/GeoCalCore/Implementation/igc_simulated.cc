@@ -11,24 +11,18 @@ using namespace blitz;
 //-----------------------------------------------------------------------
 
 IgcSimulated::IgcSimulated(
-const boost::shared_ptr<ImageGroundConnection>& Igc,
-const boost::shared_ptr<RasterImage>& Map_projected_image, 
-int Avg_fact,
-bool Read_into_memory,
-int Number_tile_line,
-int Number_tile_sample,
-double Fill_value
-)
-  : CalcRaster(Igc->number_line(), Igc->number_sample()),
-    igc_(Igc),
-    avg_factor_(Avg_fact),
-    fill_value_(Fill_value),
-    read_into_memory_(Read_into_memory),
-    img_(Map_projected_image)
+    const boost::shared_ptr<ImageGroundConnection>& Igc,
+    const boost::shared_ptr<RasterImage>& Map_projected_image, int Avg_fact,
+    bool Read_into_memory, int Number_tile_line, int Number_tile_sample,
+    double Fill_value)
+  : CalcRaster(Igc->number_line(), Igc->number_sample()), igc_(Igc),
+    avg_factor_(Avg_fact), fill_value_(Fill_value),
+    read_into_memory_(Read_into_memory), img_(Map_projected_image)
 {
   if(avg_factor_ < 0)
-    avg_factor_ = 
-      (int) floor(Igc->resolution_meter() / Map_projected_image->map_info().resolution_meter());
+    avg_factor_ =
+        (int)floor(Igc->resolution_meter() /
+                   Map_projected_image->map_info().resolution_meter());
   if(avg_factor_ > 1)
     img_avg_.reset(new RasterAveraged(img_, avg_factor_, avg_factor_));
   else
@@ -50,14 +44,14 @@ void IgcSimulated::calc(int Lstart, int Sstart) const
 {
   for(int i = 0; i < data.rows(); ++i)
     for(int j = 0; j < data.cols(); ++j) {
-      boost::shared_ptr<GroundCoordinate> gc = 
-	igc_->ground_coordinate(ImageCoordinate(Lstart + i, Sstart + j));
+      boost::shared_ptr<GroundCoordinate> gc =
+          igc_->ground_coordinate(ImageCoordinate(Lstart + i, Sstart + j));
       ImageCoordinate ic = img_avg_->coordinate(*gc);
       if(ic.line < 0 || ic.line > img_avg_->number_line() - 1 ||
-	 ic.sample < 0 || ic.sample > img_avg_->number_sample() - 1)
-	data(i, j) = fill_value_;
+         ic.sample < 0 || ic.sample > img_avg_->number_sample() - 1)
+        data(i, j) = fill_value_;
       else
-	data(i, j) = img_avg_->unchecked_interpolate(ic.line, ic.sample);
+        data(i, j) = img_avg_->unchecked_interpolate(ic.line, ic.sample);
     }
 }
 
@@ -67,13 +61,13 @@ void IgcSimulated::print(std::ostream& Os) const
   OstreamPad opad(Os, "    ");
   Os << "IgcSimulated:\n"
      << "  Avg_factor:       " << avg_factor() << "\n"
-     << "  Read into memory: " << (read_into_memory() ? "true" : "false") 
+     << "  Read into memory: " << (read_into_memory() ? "true" : "false")
      << "\n"
      << "  Fill value:   " << fill_value() << "\n";
-  Os << "  Image ground connection:\n" ;
+  Os << "  Image ground connection:\n";
   opad << *igc_ << "\n";
   opad.strict_sync();
-  Os << "  Map projected image:\n" ;
+  Os << "  Map projected image:\n";
   opad << *img_ << "\n";
   opad.strict_sync();
 }

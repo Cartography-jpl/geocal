@@ -3,4 +3,3 @@
 
 #define BOOST_TEST_MODULE "GeoCal Unit Tests"
 #include <boost/test/included/unit_test.hpp>
-

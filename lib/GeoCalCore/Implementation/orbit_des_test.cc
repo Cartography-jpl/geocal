@@ -36,8 +36,7 @@ BOOST_AUTO_TEST_CASE(pos_csephb)
   BOOST_CHECK_EQUAL(p2->is_cf(), p.is_cf());
   BOOST_CHECK_CLOSE(p2->time_step(), p.time_step(), 1e-4);
   if(false)
-    std::cerr << p << "\n"
-	      << *p2 << "\n";
+    std::cerr << p << "\n" << *p2 << "\n";
 }
 
 BOOST_AUTO_TEST_CASE(att_csattb)
@@ -58,43 +57,43 @@ BOOST_AUTO_TEST_CASE(att_csattb)
   BOOST_CHECK_EQUAL(att2->is_cf(), att.is_cf());
   BOOST_CHECK_CLOSE(att2->time_step(), att.time_step(), 1e-4);
   if(false)
-    std::cerr << att << "\n"
-	      << *att2 << "\n";
+    std::cerr << att << "\n" << *att2 << "\n";
 }
 
 BOOST_AUTO_TEST_CASE(att_csattb_sign_change)
 {
   blitz::Range ra = blitz::Range::all();
   boost::math::quaternion<double> q1(0.0007963267107332633, 0.0, 0.0,
-			       0.9999996829318346);
+                                     0.9999996829318346);
   boost::math::quaternion<double> q2(0.009203543268808336, 0.0, 0.0,
-			       -0.9999576464987401);
-  blitz::Array<double, 2> att(10,4);
-  att(0,ra) = quaternion_to_nitf(q1);
-  att(1,ra) = quaternion_to_nitf(q1);
-  att(2,ra) = quaternion_to_nitf(q1);
-  att(3,ra) = quaternion_to_nitf(q1);
-  att(4,ra) = quaternion_to_nitf(q1);
-  att(5,ra) = quaternion_to_nitf(q2);
-  att(6,ra) = quaternion_to_nitf(q2);
-  att(7,ra) = quaternion_to_nitf(q2);
-  att(8,ra) = quaternion_to_nitf(q2);
-  att(9,ra) = quaternion_to_nitf(q2);
+                                     -0.9999576464987401);
+  blitz::Array<double, 2> att(10, 4);
+  att(0, ra) = quaternion_to_nitf(q1);
+  att(1, ra) = quaternion_to_nitf(q1);
+  att(2, ra) = quaternion_to_nitf(q1);
+  att(3, ra) = quaternion_to_nitf(q1);
+  att(4, ra) = quaternion_to_nitf(q1);
+  att(5, ra) = quaternion_to_nitf(q2);
+  att(6, ra) = quaternion_to_nitf(q2);
+  att(7, ra) = quaternion_to_nitf(q2);
+  att(8, ra) = quaternion_to_nitf(q2);
+  att(9, ra) = quaternion_to_nitf(q2);
   Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
   AttCsattb a2(att, t, 1.0, true, AttCsattb::LINEAR);
-  AttCsattb a3(att, t, 1.0, true, AttCsattb::LAGRANGE,
-	       AttCsattb::LAGRANGE_3);
-  AttCsattb a5(att, t, 1.0, true, AttCsattb::LAGRANGE,
-	       AttCsattb::LAGRANGE_5);
+  AttCsattb a3(att, t, 1.0, true, AttCsattb::LAGRANGE, AttCsattb::LAGRANGE_3);
+  AttCsattb a5(att, t, 1.0, true, AttCsattb::LAGRANGE, AttCsattb::LAGRANGE_5);
   for(Time it = t + 3.0; it < t + 7.0; it += 0.25) {
-    BOOST_CHECK(quaternion_delta_angle(a2.att_q(it-0.25), a2.att_q(it)) < 0.02);
-    BOOST_CHECK(quaternion_delta_angle(a3.att_q(it-0.25), a3.att_q(it)) < 0.02);
-    BOOST_CHECK(quaternion_delta_angle(a5.att_q(it-0.25), a5.att_q(it)) < 0.02);
+    BOOST_CHECK(quaternion_delta_angle(a2.att_q(it - 0.25), a2.att_q(it)) <
+                0.02);
+    BOOST_CHECK(quaternion_delta_angle(a3.att_q(it - 0.25), a3.att_q(it)) <
+                0.02);
+    BOOST_CHECK(quaternion_delta_angle(a5.att_q(it - 0.25), a5.att_q(it)) <
+                0.02);
     if(false)
       std::cerr << "it: " << it << "\n"
-		<< "  " << a2.att_q(it) << "\n"
-		<< "  " << a3.att_q(it) << "\n"
-		<< "  " << a5.att_q(it) << "\n";
+                << "  " << a2.att_q(it) << "\n"
+                << "  " << a3.att_q(it) << "\n"
+                << "  " << a5.att_q(it) << "\n";
   }
 }
 BOOST_AUTO_TEST_CASE(orbit_des)
@@ -102,24 +101,26 @@ BOOST_AUTO_TEST_CASE(orbit_des)
   Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
   KeplerOrbit korb(t, t + 100.0);
   OrbitDes orb(boost::make_shared<PosCsephb>(korb, 1.0, PosCsephb::LAGRANGE,
-					     PosCsephb::LAGRANGE_5),
-	       boost::make_shared<AttCsattb>(korb, 1.0, AttCsattb::LAGRANGE,
-					     AttCsattb::LAGRANGE_3));
+                                             PosCsephb::LAGRANGE_5),
+               boost::make_shared<AttCsattb>(korb, 1.0, AttCsattb::LAGRANGE,
+                                             AttCsattb::LAGRANGE_3));
   boost::shared_ptr<Camera> cam(new SimpleCamera);
   boost::shared_ptr<Dem> dem(new SimpleDem(100));
-  boost::shared_ptr<RasterImage> img(new ConstantRasterImage(cam->number_line(0),
-				     cam->number_sample(0), 10));
+  boost::shared_ptr<RasterImage> img(
+      new ConstantRasterImage(cam->number_line(0), cam->number_sample(0), 10));
   ImageCoordinate ic(1.0, 1504 / 2);
   for(Time ti = orb.min_time(); ti < orb.max_time(); ti += 0.5) {
-    BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) < 1e-2);
+    BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) <
+                1e-2);
     OrbitDataImageGroundConnection igc(orb.orbit_data(ti), cam, dem, img);
     OrbitDataImageGroundConnection kigc(korb.orbit_data(ti), cam, dem, img);
     if(false)
       std::cerr << ti << ": "
-		<< GeoCal::distance(*igc.ground_coordinate(ic),
-				    *kigc.ground_coordinate(ic)) << "\n";
+                << GeoCal::distance(*igc.ground_coordinate(ic),
+                                    *kigc.ground_coordinate(ic))
+                << "\n";
     BOOST_CHECK(GeoCal::distance(*igc.ground_coordinate(ic),
-     				 *kigc.ground_coordinate(ic)) < 1e-2);
+                                 *kigc.ground_coordinate(ic)) < 1e-2);
   }
   // Check that initially CartesianInertial
   BOOST_CHECK(!orb.pos_csephb()->is_cf());
@@ -129,15 +130,17 @@ BOOST_AUTO_TEST_CASE(orbit_des)
   BOOST_CHECK(!orb.pos_csephb()->is_cf());
   BOOST_CHECK(!orb.att_csattb()->is_cf());
   for(Time ti = orb.min_time(); ti < orb.max_time(); ti += 0.5) {
-    BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) < 1e-2);
+    BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) <
+                1e-2);
     OrbitDataImageGroundConnection igc(orb.orbit_data(ti), cam, dem, img);
     OrbitDataImageGroundConnection kigc(korb.orbit_data(ti), cam, dem, img);
     if(false)
       std::cerr << ti << ": "
-		<< GeoCal::distance(*igc.ground_coordinate(ic),
-				    *kigc.ground_coordinate(ic)) << "\n";
+                << GeoCal::distance(*igc.ground_coordinate(ic),
+                                    *kigc.ground_coordinate(ic))
+                << "\n";
     BOOST_CHECK(GeoCal::distance(*igc.ground_coordinate(ic),
-     				 *kigc.ground_coordinate(ic)) < 1e-2);
+                                 *kigc.ground_coordinate(ic)) < 1e-2);
   }
 
   // Convert to cf
@@ -145,15 +148,17 @@ BOOST_AUTO_TEST_CASE(orbit_des)
   BOOST_CHECK(orb.pos_csephb()->is_cf());
   BOOST_CHECK(orb.att_csattb()->is_cf());
   for(Time ti = orb.min_time(); ti < orb.max_time(); ti += 0.5) {
-    BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) < 1e-2);
+    BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) <
+                1e-2);
     OrbitDataImageGroundConnection igc(orb.orbit_data(ti), cam, dem, img);
     OrbitDataImageGroundConnection kigc(korb.orbit_data(ti), cam, dem, img);
     if(false)
       std::cerr << ti << ": "
-		<< GeoCal::distance(*igc.ground_coordinate(ic),
-				    *kigc.ground_coordinate(ic)) << "\n";
+                << GeoCal::distance(*igc.ground_coordinate(ic),
+                                    *kigc.ground_coordinate(ic))
+                << "\n";
     BOOST_CHECK(GeoCal::distance(*igc.ground_coordinate(ic),
-     				 *kigc.ground_coordinate(ic)) < 1e-2);
+                                 *kigc.ground_coordinate(ic)) < 1e-2);
   }
 
   // Convert back
@@ -161,15 +166,17 @@ BOOST_AUTO_TEST_CASE(orbit_des)
   BOOST_CHECK(!orb.pos_csephb()->is_cf());
   BOOST_CHECK(!orb.att_csattb()->is_cf());
   for(Time ti = orb.min_time(); ti < orb.max_time(); ti += 0.5) {
-    BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) < 1e-2);
+    BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) <
+                1e-2);
     OrbitDataImageGroundConnection igc(orb.orbit_data(ti), cam, dem, img);
     OrbitDataImageGroundConnection kigc(korb.orbit_data(ti), cam, dem, img);
     if(false)
       std::cerr << ti << ": "
-		<< GeoCal::distance(*igc.ground_coordinate(ic),
-				    *kigc.ground_coordinate(ic)) << "\n";
+                << GeoCal::distance(*igc.ground_coordinate(ic),
+                                    *kigc.ground_coordinate(ic))
+                << "\n";
     BOOST_CHECK(GeoCal::distance(*igc.ground_coordinate(ic),
-     				 *kigc.ground_coordinate(ic)) < 1e-2);
+                                 *kigc.ground_coordinate(ic)) < 1e-2);
   }
 }
 
@@ -183,8 +190,7 @@ BOOST_AUTO_TEST_CASE(serialization_pos_csephb)
   std::string d = serialize_write_string(p);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<PosCsephb> pr = 
-    serialize_read_string<PosCsephb>(d);
+  boost::shared_ptr<PosCsephb> pr = serialize_read_string<PosCsephb>(d);
   BOOST_CHECK_CLOSE(pr->min_time() - t, 0.0, 1e-4);
   BOOST_CHECK_CLOSE(pr->max_time() - t, 100.0, 1e-4);
   BOOST_CHECK_CLOSE(pr->pos_vel(t)(0), -1788501.0, 1e-4);
@@ -202,8 +208,7 @@ BOOST_AUTO_TEST_CASE(serialization_att_csattb)
   std::string d = serialize_write_string(att);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<AttCsattb> attr = 
-    serialize_read_string<AttCsattb>(d);
+  boost::shared_ptr<AttCsattb> attr = serialize_read_string<AttCsattb>(d);
   BOOST_CHECK_CLOSE(attr->min_time() - t, 0.0, 1e-4);
   BOOST_CHECK_CLOSE(attr->max_time() - t, 100.0, 1e-4);
 }
@@ -215,13 +220,12 @@ BOOST_AUTO_TEST_CASE(serialization_orbit_des)
   Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
   KeplerOrbit korb(t, t + 100.0);
   boost::shared_ptr<Orbit> orb =
-    boost::make_shared<OrbitDes>(boost::make_shared<PosCsephb>(korb, 1.0),
-				 boost::make_shared<AttCsattb>(korb, 1.0));
+      boost::make_shared<OrbitDes>(boost::make_shared<PosCsephb>(korb, 1.0),
+                                   boost::make_shared<AttCsattb>(korb, 1.0));
   std::string d = serialize_write_string(orb);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<Orbit> orbr = 
-    serialize_read_string<Orbit>(d);
+  boost::shared_ptr<Orbit> orbr = serialize_read_string<Orbit>(d);
   BOOST_CHECK_CLOSE(orbr->min_time() - t, 0.0, 1e-4);
   BOOST_CHECK_CLOSE(orbr->max_time() - t, 100.0, 1e-4);
   BOOST_CHECK_CLOSE(orbr->position_ci(t)->position[0], -1788501.0, 1e-4);
@@ -236,11 +240,10 @@ BOOST_AUTO_TEST_CASE(snip_example)
   // conventions, we'll likely remove this test when we are done with it.
   return;
   // Test to sort out orientation etc.
-  boost::shared_ptr<OrbitDes> orb_des = 
-    serialize_read<OrbitDes>("/home/smyth/Local/SNIP NITF Example/orb_des.xml");
+  boost::shared_ptr<OrbitDes> orb_des = serialize_read<OrbitDes>(
+      "/home/smyth/Local/SNIP NITF Example/orb_des.xml");
   Time tm = Time::parse_time("2005-04-07T07:24:10Z");
   std::cerr << *orb_des->orbit_data(tm);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-

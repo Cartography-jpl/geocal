@@ -6,19 +6,19 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void OrbitDataImageGroundConnection::serialize(Archive & ar, const unsigned int version)
+void OrbitDataImageGroundConnection::serialize(Archive& ar,
+                                               const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
-  ar & GEOCAL_NVP(orb) & GEOCAL_NVP(od) & GEOCAL_NVP(cam)
-    & GEOCAL_NVP_(refraction)
-    & GEOCAL_NVP(res) & GEOCAL_NVP(b) & GEOCAL_NVP(max_h);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
+  ar& GEOCAL_NVP(orb) & GEOCAL_NVP(od) & GEOCAL_NVP(cam) &
+      GEOCAL_NVP_(refraction) & GEOCAL_NVP(res) & GEOCAL_NVP(b) &
+      GEOCAL_NVP(max_h);
   if(orb)
     orb->add_observer(*this);
-  if(version >=1)
+  if(version >= 1)
     // Older versions didn't have this.
-    ar & GEOCAL_NVP_(velocity_aberration);
+    ar& GEOCAL_NVP_(velocity_aberration);
 }
 
 GEOCAL_IMPLEMENT(OrbitDataImageGroundConnection);
 #endif
-

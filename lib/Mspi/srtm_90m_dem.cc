@@ -8,31 +8,29 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void Srtm90mData::serialize(Archive & ar, const unsigned int version)
+void Srtm90mData::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GdalCartLabMultifile);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(GdalCartLabMultifile);
 }
 
 template<class Archive>
-void Srtm90mDem::save(Archive & ar, const unsigned int version) const
+void Srtm90mDem::save(Archive& ar, const unsigned int version) const
 {
   GEOCAL_GENERIC_BASE(Dem);
   GEOCAL_BASE(DemMapInfo, Dem);
   GEOCAL_BASE(Srtm90mDem, DemMapInfo);
-  ar & GEOCAL_NVP_(datum)
-    & GEOCAL_NVP_(outside_dem_is_error)
-    & GEOCAL_NVP2("srtm_90m_dem_data", f);
+  ar& GEOCAL_NVP_(datum) & GEOCAL_NVP_(outside_dem_is_error) &
+      GEOCAL_NVP2("srtm_90m_dem_data", f);
 }
 
 template<class Archive>
-void Srtm90mDem::load(Archive & ar, const unsigned int version)
+void Srtm90mDem::load(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(Dem);
   GEOCAL_BASE(DemMapInfo, Dem);
   GEOCAL_BASE(Srtm90mDem, DemMapInfo);
-  ar & GEOCAL_NVP_(datum)
-    & GEOCAL_NVP_(outside_dem_is_error)
-    & GEOCAL_NVP2("srtm_90m_dem_data", f);
+  ar& GEOCAL_NVP_(datum) & GEOCAL_NVP_(outside_dem_is_error) &
+      GEOCAL_NVP2("srtm_90m_dem_data", f);
   map_info_ = f->map_info();
 }
 
@@ -58,32 +56,22 @@ GEOCAL_SPLIT_IMPLEMENT(Srtm90mDem);
 /// read the entire file.
 //-----------------------------------------------------------------------
 
-Srtm90mData::Srtm90mData
-(const std::string& Dir,
- bool No_coverage_is_error,
- int Number_line_per_tile,
- int Number_sample_per_tile, 
- int Number_tile_each_file, 
- int Number_file
-)
-: GdalCartLabMultifile(Dir, "USGSDATA", Number_line_per_tile,
-		       Number_sample_per_tile,
-		       Number_tile_each_file,
-		       Number_file,
-		       No_coverage_is_error,
-		       FILL_VALUE)
+Srtm90mData::Srtm90mData(const std::string& Dir, bool No_coverage_is_error,
+                         int Number_line_per_tile, int Number_sample_per_tile,
+                         int Number_tile_each_file, int Number_file)
+  : GdalCartLabMultifile(Dir, "USGSDATA", Number_line_per_tile,
+                         Number_sample_per_tile, Number_tile_each_file,
+                         Number_file, No_coverage_is_error, FILL_VALUE)
 {
   file_name_end = "_L1.tif";
 
-  lat_ref = 47,
-  lon_ref = -87;
-  int num_per_deg= 1200;
-  mi_ref = MapInfo(boost::shared_ptr<CoordinateConverter>
-    		   (new GeodeticConverter()),
-    		   lon_ref, lat_ref + 1, lon_ref + 1, lat_ref, num_per_deg,
-    		   num_per_deg);
+  lat_ref = 47, lon_ref = -87;
+  int num_per_deg = 1200;
+  mi_ref = MapInfo(
+      boost::shared_ptr<CoordinateConverter>(new GeodeticConverter()), lon_ref,
+      lat_ref + 1, lon_ref + 1, lat_ref, num_per_deg, num_per_deg);
 
-  mi_ref = mi_ref.subset(-0.5,-0.5,1201,1201);
+  mi_ref = mi_ref.subset(-0.5, -0.5, 1201, 1201);
   file_spacing_number_line = 1200;
   file_spacing_number_sample = 1200;
   init_loc_to_file();
@@ -94,7 +82,7 @@ Srtm90mData::Srtm90mData
 //-----------------------------------------------------------------------
 
 void Srtm90mDem::print(std::ostream& Os) const
-{     
+{
   OstreamPad opad(Os, "    ");
   Os << "SRTM 90m DEM:\n"
      << "  Datum:\n";
@@ -103,7 +91,6 @@ void Srtm90mDem::print(std::ostream& Os) const
   Os << "  Data directory: " << directory_base() << "\n";
   Os << "  Outside Dem is error: " << outside_dem_is_error() << "\n";
 }
-
 
 //-----------------------------------------------------------------------
 /// Constructor. You can provide the directory to look for DEM
@@ -116,17 +103,13 @@ void Srtm90mDem::print(std::ostream& Os) const
 /// instead. This is controlled by Outside_dem_is_error.
 //-----------------------------------------------------------------------
 
-Srtm90mDem::Srtm90mDem
-(const std::string& Dir,
- bool Outside_dem_is_error,
- const boost::shared_ptr<Datum>& D
-)
-: 
-  f(new Srtm90mData(Dir, Outside_dem_is_error, 1201, 1201))
+Srtm90mDem::Srtm90mDem(const std::string& Dir, bool Outside_dem_is_error,
+                       const boost::shared_ptr<Datum>& D)
+  : f(new Srtm90mData(Dir, Outside_dem_is_error, 1201, 1201))
 {
   boost::shared_ptr<Datum> d(D);
   if(!d) {
-#ifdef HAVE_VICAR_RTL    
+#ifdef HAVE_VICAR_RTL
     d.reset(new DatumGeoid96());
 #else
     throw Exception("DatumGeoid96 wasn't included in the build");
@@ -138,4 +121,3 @@ Srtm90mDem::Srtm90mDem
   // and we can revisit if needed.
   initialize(d, f->map_info(), Outside_dem_is_error);
 }
-

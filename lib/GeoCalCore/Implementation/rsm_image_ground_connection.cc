@@ -7,22 +7,23 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RsmImageGroundConnection::serialize(Archive & ar, const unsigned int version)
+void RsmImageGroundConnection::serialize(Archive& ar,
+                                         const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
-  ar & GEOCAL_NVP_(rsm);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
+  ar& GEOCAL_NVP_(rsm);
   boost::serialization::split_member(ar, *this, version);
 }
 
 template<class Archive>
-void RsmImageGroundConnection::save
-(Archive & ar, const unsigned int version) const
+void RsmImageGroundConnection::save(Archive& ar,
+                                    const unsigned int version) const
 {
   // Nothing more to do
 }
 
 template<class Archive>
-void RsmImageGroundConnection::load(Archive & ar, const unsigned int version)
+void RsmImageGroundConnection::load(Archive& ar, const unsigned int version)
 {
   if(rsm_)
     add_object(rsm_);
@@ -31,18 +32,15 @@ void RsmImageGroundConnection::load(Archive & ar, const unsigned int version)
 GEOCAL_IMPLEMENT(RsmImageGroundConnection);
 #endif
 
-void
-RsmImageGroundConnection::cf_look_vector
-(const ImageCoordinate& Ic,
- CartesianFixedLookVector& Lv,
- boost::shared_ptr<CartesianFixed>& P) const
+void RsmImageGroundConnection::cf_look_vector(
+    const ImageCoordinate& Ic, CartesianFixedLookVector& Lv,
+    boost::shared_ptr<CartesianFixed>& P) const
 {
   double z = rsm_->rsm_base()->initial_guess_z(Ic.line, Ic.sample);
-  boost::shared_ptr<GroundCoordinate> gc1 =
-    rsm_->ground_coordinate_z(Ic, z);
+  boost::shared_ptr<GroundCoordinate> gc1 = rsm_->ground_coordinate_z(Ic, z);
   double delta_h = 10;
   boost::shared_ptr<GroundCoordinate> gc2 =
-    rsm_->ground_coordinate_z(Ic, z + delta_h);
+      rsm_->ground_coordinate_z(Ic, z + delta_h);
   P = gc1->convert_to_cf();
   boost::shared_ptr<CartesianFixed> ec2 = gc2->convert_to_cf();
   Lv.look_vector[0] = ec2->position[0] - P->position[0];
@@ -50,10 +48,8 @@ RsmImageGroundConnection::cf_look_vector
   Lv.look_vector[2] = ec2->position[2] - P->position[2];
 }
 
-void RsmImageGroundConnection::image_coordinate_extended
-(const GroundCoordinate& Gc,
- ImageCoordinate& Res,
- bool& Success) const
+void RsmImageGroundConnection::image_coordinate_extended(
+    const GroundCoordinate& Gc, ImageCoordinate& Res, bool& Success) const
 {
   bool in_valid_range;
   rsm_->image_coordinate(Gc, Res, in_valid_range);
@@ -63,7 +59,8 @@ void RsmImageGroundConnection::image_coordinate_extended
     Success = true;
 }
 
-ImageCoordinate RsmImageGroundConnection::image_coordinate(const GroundCoordinate& Gc) const
+ImageCoordinate
+RsmImageGroundConnection::image_coordinate(const GroundCoordinate& Gc) const
 {
   ImageCoordinate res;
   bool in_valid_range;
@@ -73,8 +70,8 @@ ImageCoordinate RsmImageGroundConnection::image_coordinate(const GroundCoordinat
   return res;
 }
 
-void RsmImageGroundConnection::image_coordinate_with_status
-(const GroundCoordinate& Gc, ImageCoordinate& Res, bool& Success) const
+void RsmImageGroundConnection::image_coordinate_with_status(
+    const GroundCoordinate& Gc, ImageCoordinate& Res, bool& Success) const
 {
   bool in_valid_range;
   rsm_->image_coordinate(Gc, Res, in_valid_range);
@@ -84,10 +81,12 @@ void RsmImageGroundConnection::image_coordinate_with_status
     Success = true;
 }
 
-Array<double, 2> RsmImageGroundConnection::image_coordinate_jac_cf
-(const CartesianFixed& Gc) const
+Array<double, 2> RsmImageGroundConnection::image_coordinate_jac_cf(
+    const CartesianFixed& Gc) const
 {
-  firstIndex i1; secondIndex i2; thirdIndex i3;
+  firstIndex i1;
+  secondIndex i2;
+  thirdIndex i3;
   Array<double, 2> res(2, 3);
   double x, y, z;
   rsm_->coordinate_converter()->convert_to_coordinate(Gc, x, y, z);
@@ -103,15 +102,14 @@ Array<double, 2> RsmImageGroundConnection::image_coordinate_jac_cf
     dxyz_dcf(2, i) = (z2 - z) / eps;
     gc2->position[i] -= eps;
   }
-  Array<double, 2> jac_xyz = 
-    rsm_->image_coordinate_jacobian(x, y, z);
+  Array<double, 2> jac_xyz = rsm_->image_coordinate_jacobian(x, y, z);
   res = sum(jac_xyz(i1, i3) * dxyz_dcf(i3, i2), i3);
   return res;
 }
 
-boost::shared_ptr<GroundCoordinate> 
+boost::shared_ptr<GroundCoordinate>
 RsmImageGroundConnection::ground_coordinate_dem(const ImageCoordinate& Ic,
-						const Dem& D) const
+                                                const Dem& D) const
 {
   try {
     return rsm_->ground_coordinate(Ic, D);
@@ -120,13 +118,12 @@ RsmImageGroundConnection::ground_coordinate_dem(const ImageCoordinate& Ic,
   }
 }
 
-boost::shared_ptr<GroundCoordinate> 
-RsmImageGroundConnection::ground_coordinate_approx_height
-(const ImageCoordinate& Ic,
- double H) const
+boost::shared_ptr<GroundCoordinate>
+RsmImageGroundConnection::ground_coordinate_approx_height(
+    const ImageCoordinate& Ic, double H) const
 {
   try {
-    return rsm_->ground_coordinate_approx_height(Ic,H);
+    return rsm_->ground_coordinate_approx_height(Ic, H);
   } catch(const ConvergenceFailure& E_original) {
     throw ImageGroundConnectionFailed();
   }
@@ -140,5 +137,3 @@ void RsmImageGroundConnection::print(std::ostream& Os) const
   opad << *rsm_ << "\n";
   opad.strict_sync();
 }
-
-

@@ -1,6 +1,6 @@
 #include "unit_test_support.h"
 #include <cstdlib>
-#include "geocal_time.h"    
+#include "geocal_time.h"
 #include "boost/date_time/posix_time/posix_time.hpp"
 
 using namespace GeoCal;
@@ -15,7 +15,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE((t - 200.0).pgs(), 100.0 - 200.0, 1e-6);
   t = Time::time_gps(100.0);
   BOOST_CHECK_CLOSE(t.gps(), 100.0, 1e-6);
-  Time  t2 = t;
+  Time t2 = t;
   t2 += 10;
   BOOST_CHECK(t < t2);
   BOOST_CHECK(t2 > t);
@@ -25,8 +25,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
   Time r = Time::parse_time("1996-07-03T04:13:57.987654Z");
   BOOST_CHECK_CLOSE(r.pgs(), 110520840.987654, 1e-6);
   r += 2.0 * 365 * 24 * 60 * 60; // This goes through a leapsecond
-  BOOST_CHECK_EQUAL(r.to_string(), 
-		    std::string("1998-07-03T04:13:56.987654Z"));
+  BOOST_CHECK_EQUAL(r.to_string(), std::string("1998-07-03T04:13:56.987654Z"));
 
   // This example was extracted from the unit test for the vicar
   // proc sc2rpc.
@@ -49,7 +48,7 @@ BOOST_AUTO_TEST_CASE(time_with_derivative)
   BOOST_CHECK_CLOSE((t - 200.0).value().pgs(), 100.0 - 200.0, 1e-6);
   t = TimeWithDerivative::time_gps(tm);
   BOOST_CHECK_CLOSE(t.gps().value(), 100.0, 1e-6);
-  TimeWithDerivative  t2 = t;
+  TimeWithDerivative t2 = t;
   t2 += 10;
   BOOST_CHECK(t < t2);
   BOOST_CHECK(t2 > t);
@@ -62,7 +61,7 @@ BOOST_AUTO_TEST_CASE(unix_time_interface)
 {
   // Even if we have a different toolkit available, good to test the
   // unix interface to make sure it is working.
-  ToolkitTimeInterface* original_toolkit = Time::toolkit_time_interface;  
+  ToolkitTimeInterface* original_toolkit = Time::toolkit_time_interface;
   try {
     Time::toolkit_time_interface = Time::_unix_toolkit_time_interface;
     Time t = Time::time_pgs(100.0);
@@ -71,7 +70,7 @@ BOOST_AUTO_TEST_CASE(unix_time_interface)
     BOOST_CHECK_CLOSE((t - 200.0).pgs(), 100.0 - 200.0, 1e-6);
     t = Time::time_gps(100.0);
     BOOST_CHECK_CLOSE(t.gps(), 100.0, 1e-6);
-    Time  t2 = t;
+    Time t2 = t;
     t2 += 10;
     BOOST_CHECK(t < t2);
     BOOST_CHECK(t2 > t);
@@ -82,8 +81,8 @@ BOOST_AUTO_TEST_CASE(unix_time_interface)
     BOOST_CHECK_CLOSE(r.pgs(), 110520840.987654, 1e-6);
     BOOST_CHECK_EQUAL(r.to_string(), "1996-07-03T04:13:57.987654Z");
     r += 2.0 * 365 * 24 * 60 * 60; // This goes through a leapsecond
-    BOOST_CHECK_EQUAL(r.to_string(), 
-		      std::string("1998-07-03T04:13:56.987654Z"));
+    BOOST_CHECK_EQUAL(r.to_string(),
+                      std::string("1998-07-03T04:13:56.987654Z"));
   } catch(...) {
     Time::toolkit_time_interface = original_toolkit;
     throw;
@@ -110,7 +109,7 @@ BOOST_AUTO_TEST_CASE(problem_time)
   // problem, which we've tried to fix by explicitly handling
   // fractional seconds separately.
   BOOST_CHECK_EQUAL(Time::parse_time("2015-01-24T20:43:46.428490Z").to_string(),
-		    std::string("2015-01-24T20:43:46.428490Z"));
+                    std::string("2015-01-24T20:43:46.428490Z"));
 }
 
 BOOST_AUTO_TEST_CASE(serialization)
@@ -130,15 +129,14 @@ BOOST_AUTO_TEST_CASE(serialization_time_with_derivative)
   if(!have_serialize_supported())
     return;
   AutoDerivative<double> tmval(100.0, 0, 10);
-  boost::shared_ptr<TimeWithDerivative> tm
-    (new TimeWithDerivative(TimeWithDerivative::time_pgs(tmval)));
+  boost::shared_ptr<TimeWithDerivative> tm(
+      new TimeWithDerivative(TimeWithDerivative::time_pgs(tmval)));
   std::string d = serialize_write_string(tm);
   if(false)
     std::cerr << d;
   boost::shared_ptr<TimeWithDerivative> tmr =
-    serialize_read_string<TimeWithDerivative>(d);
+      serialize_read_string<TimeWithDerivative>(d);
   BOOST_CHECK_CLOSE(tmr->value().pgs(), 100.0, 1e-6);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-

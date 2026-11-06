@@ -8,27 +8,23 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void QuadraticGeometricModel::serialize(Archive & ar, const unsigned int version)
+void QuadraticGeometricModel::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GeometricModel)
-    & GEOCAL_NVP(tp)
-    & GEOCAL_NVP(trans)
-    & GEOCAL_NVP(inv_trans)
-    & GEOCAL_NVP(mag_ln)
-    & GEOCAL_NVP(mag_smp)
-    & GEOCAL_NVP(ft)
-    & GEOCAL_NVP(min_tp_to_fit_);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(GeometricModel) & GEOCAL_NVP(tp) &
+      GEOCAL_NVP(trans) & GEOCAL_NVP(inv_trans) & GEOCAL_NVP(mag_ln) &
+      GEOCAL_NVP(mag_smp) & GEOCAL_NVP(ft) & GEOCAL_NVP(min_tp_to_fit_);
   boost::serialization::split_member(ar, *this, version);
 }
 
 template<class Archive>
-void QuadraticGeometricModel::save(Archive & ar, const unsigned int version) const
+void QuadraticGeometricModel::save(Archive& ar,
+                                   const unsigned int version) const
 {
   // Nothing more to do
 }
 
 template<class Archive>
-void QuadraticGeometricModel::load(Archive & ar, const unsigned int version)
+void QuadraticGeometricModel::load(Archive& ar, const unsigned int version)
 {
   // Connect class to tp as observer
   if(tp)
@@ -47,15 +43,14 @@ const int QuadraticGeometricModel::min_tp_for_quadratic = 12;
 /// Constructor. This creates an identity transformation.
 //-----------------------------------------------------------------------
 
-QuadraticGeometricModel::QuadraticGeometricModel
-(FitType Ft,
- double Magnify_line, 
- double Magnify_sample)
-  : trans(12), inv_trans(12), mag_ln(Magnify_line), 
-    mag_smp(Magnify_sample), ft(Ft), min_tp_to_fit_(-1)
+QuadraticGeometricModel::QuadraticGeometricModel(FitType Ft,
+                                                 double Magnify_line,
+                                                 double Magnify_sample)
+  : trans(12), inv_trans(12), mag_ln(Magnify_line), mag_smp(Magnify_sample),
+    ft(Ft), min_tp_to_fit_(-1)
 {
-  trans = 1,0,0,0,0,0,0,1,0,0,0,0;
-  inv_trans = 1,0,0,0,0,0,0,1,0,0,0,0;
+  trans = 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0;
+  inv_trans = 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0;
 }
 
 //-----------------------------------------------------------------------
@@ -63,46 +58,45 @@ QuadraticGeometricModel::QuadraticGeometricModel
 /// transformation if Tp is null.
 //-----------------------------------------------------------------------
 
-QuadraticGeometricModel::QuadraticGeometricModel
-(const boost::shared_ptr<GeometricTiePoints>& Tp,
- int Min_tp_to_fit,
- FitType Ft,
- double Magnify_line, 
- double Magnify_sample)
-  : tp(Tp), trans(12), inv_trans(12), mag_ln(Magnify_line), 
+QuadraticGeometricModel::QuadraticGeometricModel(
+    const boost::shared_ptr<GeometricTiePoints>& Tp, int Min_tp_to_fit,
+    FitType Ft, double Magnify_line, double Magnify_sample)
+  : tp(Tp), trans(12), inv_trans(12), mag_ln(Magnify_line),
     mag_smp(Magnify_sample), ft(Ft), min_tp_to_fit_(Min_tp_to_fit)
 {
-  trans = 1,0,0,0,0,0,0,1,0,0,0,0;
-  inv_trans = 1,0,0,0,0,0,0,1,0,0,0,0;
+  trans = 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0;
+  inv_trans = 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0;
   if(tp) {
     tp->add_observer(*this);
     fit_transformation(*tp);
   }
 }
 
-ImageCoordinate QuadraticGeometricModel::original_image_coordinate
-(const ImageCoordinate& Resampled_ic) const
+ImageCoordinate QuadraticGeometricModel::original_image_coordinate(
+    const ImageCoordinate& Resampled_ic) const
 {
   double px = Resampled_ic.line * mag_ln;
   double py = Resampled_ic.sample * mag_smp;
   ImageCoordinate res;
-  res.line = trans(0)*px+trans(1)*py+trans(2)+trans(3)*px*px+
-    trans(4)*py*py+trans(5)*px*py;
-  res.sample = trans(6)*px+trans(7)*py+trans(8)+trans(9)*px*px+
-    trans(10)*py*py+trans(11)*px*py;
+  res.line = trans(0) * px + trans(1) * py + trans(2) + trans(3) * px * px +
+             trans(4) * py * py + trans(5) * px * py;
+  res.sample = trans(6) * px + trans(7) * py + trans(8) + trans(9) * px * px +
+               trans(10) * py * py + trans(11) * px * py;
   return res;
 }
 
-ImageCoordinate QuadraticGeometricModel::resampled_image_coordinate
-(const ImageCoordinate& Original_ic) const
+ImageCoordinate QuadraticGeometricModel::resampled_image_coordinate(
+    const ImageCoordinate& Original_ic) const
 {
   double px = Original_ic.line;
   double py = Original_ic.sample;
   ImageCoordinate res;
-  res.line = inv_trans(0)*px+inv_trans(1)*py+inv_trans(2)+inv_trans(3)*px*px+
-    inv_trans(4)*py*py+inv_trans(5)*px*py;
-  res.sample = inv_trans(6)*px+inv_trans(7)*py+inv_trans(8)+inv_trans(9)*px*px+
-    inv_trans(10)*py*py+inv_trans(11)*px*py;
+  res.line = inv_trans(0) * px + inv_trans(1) * py + inv_trans(2) +
+             inv_trans(3) * px * px + inv_trans(4) * py * py +
+             inv_trans(5) * px * py;
+  res.sample = inv_trans(6) * px + inv_trans(7) * py + inv_trans(8) +
+               inv_trans(9) * px * px + inv_trans(10) * py * py +
+               inv_trans(11) * px * py;
   res.line /= mag_ln;
   res.sample /= mag_smp;
   return res;
@@ -127,8 +121,8 @@ void QuadraticGeometricModel::fit_transformation(const GeometricTiePoints& Tp)
 //-----------------------------------------------------------------------
 
 void QuadraticGeometricModel::fit_single(const blitz::Array<double, 2>& x,
-		const blitz::Array<double, 2>& y,
-		blitz::Array<double, 1>& tr)
+                                         const blitz::Array<double, 2>& y,
+                                         blitz::Array<double, 1>& tr)
 {
   bool do_quadratic = (fit_type() == QUADRATIC);
   // If we have too few points, do a quadratic fit even if we've been
@@ -144,11 +138,11 @@ void QuadraticGeometricModel::fit_single(const blitz::Array<double, 2>& x,
   mat(ra, 2) = 1;
   if(do_quadratic) {
     mat(ra, 3) = px * px;
-    mat(ra, 4) = py*py;
-    mat(ra, 5) = py*px;
+    mat(ra, 4) = py * py;
+    mat(ra, 5) = py * px;
   }
-  GslVector gsl_ln(y(ra,0));
-  GslVector gsl_smp(y(ra,1));
+  GslVector gsl_ln(y(ra, 0));
+  GslVector gsl_smp(y(ra, 1));
   GslMatrix gsl_mat(mat);
   GslVector coeff;
   double chisq;
@@ -174,7 +168,7 @@ void QuadraticGeometricModel::print(std::ostream& Os) const
 {
   OstreamPad opad(Os, "    ");
   Os << "QuadraticGeometricModel:\n"
-     << "  fit_type: " << (fit_type() == LINEAR ? "LINEAR" : "QUADRATIC") 
+     << "  fit_type: " << (fit_type() == LINEAR ? "LINEAR" : "QUADRATIC")
      << "\n"
      << "  magnify_line: " << magnify_line() << "\n"
      << "  magnify_sample: " << magnify_sample() << "\n"
@@ -185,5 +179,3 @@ void QuadraticGeometricModel::print(std::ostream& Os) const
   opad << inverse_transformation() << "\n";
   opad.strict_sync();
 }
-
-

@@ -26,11 +26,12 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
   Time texpect = tmin + 1000 * 40.8e-3;
   FrameCoordinate fc(0, 30);
-  CartesianInertialLookVector lv = 
-    orb->ci_look_vector(texpect, cam->sc_look_vector(fc, band));
-  boost::shared_ptr<CartesianFixed> pt = 
-    orb->position_ci(texpect)->reference_surface_intersect_approximate(lv)->
-    convert_to_cf(texpect);
+  CartesianInertialLookVector lv =
+      orb->ci_look_vector(texpect, cam->sc_look_vector(fc, band));
+  boost::shared_ptr<CartesianFixed> pt =
+      orb->position_ci(texpect)
+          ->reference_surface_intersect_approximate(lv)
+          ->convert_to_cf(texpect);
   Time tres;
   FrameCoordinate fres;
   bool success;
@@ -47,8 +48,9 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
   fc.sample = -30;
   lv = orb->ci_look_vector(texpect, cam->sc_look_vector(fc, band));
-  pt = orb->position_ci(texpect)->reference_surface_intersect_approximate(lv)->
-    convert_to_cf(texpect);
+  pt = orb->position_ci(texpect)
+           ->reference_surface_intersect_approximate(lv)
+           ->convert_to_cf(texpect);
   ipi.time(*pt, tres, fres, success);
   BOOST_CHECK(success);
   BOOST_CHECK(fabs(tres - texpect) < 1.0 / 16 * 40.8e-3);
@@ -69,18 +71,17 @@ BOOST_AUTO_TEST_CASE(refraction_test)
   boost::shared_ptr<Orbit> orb(new KeplerOrbit);
   boost::shared_ptr<Camera> cam(new SimpleCamera);
   boost::shared_ptr<TimeTable> tt(new ConstantSpacingTimeTable(tmin, tmax));
-  boost::shared_ptr<Refraction> ref =
-    boost::make_shared<RefractionMsp>();
+  boost::shared_ptr<Refraction> ref = boost::make_shared<RefractionMsp>();
   boost::shared_ptr<VelocityAberration> vabb =
-    boost::make_shared<VelocityAberrationExact>();
+      boost::make_shared<VelocityAberrationExact>();
   int band = 0;
   Ipi ipi(orb, cam, band, tmin, tmax, tt, ref, vabb);
 
   Time texpect = tmin + 1000 * 40.8e-3;
   FrameCoordinate fc(0, 30);
   auto od = orb->orbit_data(texpect);
-  auto pt = od->reference_surface_intersect_approximate(*cam, fc, band, 0,
-							ref, vabb);
+  auto pt =
+      od->reference_surface_intersect_approximate(*cam, fc, band, 0, ref, vabb);
   Time tres;
   FrameCoordinate fres;
   bool success;
@@ -96,8 +97,8 @@ BOOST_AUTO_TEST_CASE(refraction_test)
   BOOST_CHECK_EQUAL(ic, ic_expect);
 
   fc.sample = -30;
-  pt = od->reference_surface_intersect_approximate(*cam, fc, band, 0,
-						   ref, vabb);
+  pt =
+      od->reference_surface_intersect_approximate(*cam, fc, band, 0, ref, vabb);
   ipi.time(*pt, tres, fres, success);
   BOOST_CHECK(success);
   BOOST_CHECK(fabs(tres - texpect) < 1.0 / 16 * 40.8e-3);
@@ -117,27 +118,24 @@ BOOST_AUTO_TEST_CASE(jac_test)
   Time tmax = tmin + 2000 * 40.8e-3;
   boost::shared_ptr<Orbit> orb(new KeplerOrbit);
   SimpleCamera cam1;
-  boost::shared_ptr<QuaternionCamera> cam
-    ( new QuaternionCamera(quat_rot_z(cam1.epsilon()) *
-			   quat_rot_y(cam1.beta()) *
-			   quat_rot_x(cam1.delta()),
-			   cam1.number_line(0), cam1.number_sample(0), 
-			   cam1.line_pitch() / 1e-3, 
-			   cam1.sample_pitch() / 1e-3,
-			   cam1.focal_length() / 1e-3,
-			   FrameCoordinate(cam1.number_line(0) / 2.0, 
-					   cam1.number_sample(0) / 2.0)));
+  boost::shared_ptr<QuaternionCamera> cam(new QuaternionCamera(
+      quat_rot_z(cam1.epsilon()) * quat_rot_y(cam1.beta()) *
+          quat_rot_x(cam1.delta()),
+      cam1.number_line(0), cam1.number_sample(0), cam1.line_pitch() / 1e-3,
+      cam1.sample_pitch() / 1e-3, cam1.focal_length() / 1e-3,
+      FrameCoordinate(cam1.number_line(0) / 2.0, cam1.number_sample(0) / 2.0)));
   boost::shared_ptr<TimeTable> tt(new ConstantSpacingTimeTable(tmin, tmax));
   int band = 0;
   Ipi ipi(orb, cam, band, tmin, tmax, tt);
 
   Time texpect = tmin + 1000 * 40.8e-3;
   FrameCoordinate fc(0, 30);
-  CartesianInertialLookVector lv = 
-    orb->ci_look_vector(texpect, cam->sc_look_vector(fc, band));
-  boost::shared_ptr<CartesianFixed> pt = 
-    orb->position_ci(texpect)->reference_surface_intersect_approximate(lv)->
-    convert_to_cf(texpect);
+  CartesianInertialLookVector lv =
+      orb->ci_look_vector(texpect, cam->sc_look_vector(fc, band));
+  boost::shared_ptr<CartesianFixed> pt =
+      orb->position_ci(texpect)
+          ->reference_surface_intersect_approximate(lv)
+          ->convert_to_cf(texpect);
   Time tres;
   FrameCoordinate fres;
   bool success;
@@ -203,10 +201,10 @@ BOOST_AUTO_TEST_CASE(jac_test)
   }
   // Fairly large disagreement, but results seem to be about 1% of
   // finite difference, which is acceptable.
-  BOOST_CHECK_MATRIX_CLOSE_TOL(jac_calc(0,Range::all()), 
-			       jac_fd(0,Range::all()), 3);
-  BOOST_CHECK_MATRIX_CLOSE_TOL(jac_calc(2,Range::all()), 
-			       jac_fd(2,Range::all()), 80);
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac_calc(0, Range::all()),
+                               jac_fd(0, Range::all()), 3);
+  BOOST_CHECK_MATRIX_CLOSE_TOL(jac_calc(2, Range::all()),
+                               jac_fd(2, Range::all()), 80);
   BOOST_CHECK_MATRIX_CLOSE_TOL(jac_calc2, jac_fd2, 100);
 }
 

@@ -10,25 +10,16 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void MspiCamera::serialize(Archive & ar, const unsigned int version)
+void MspiCamera::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
-  ar & GEOCAL_NVP(fname) 
-    & GEOCAL_NVP_(granule_id)
-    & GEOCAL_NVP_(epsilon)
-    & GEOCAL_NVP_(psi)
-    & GEOCAL_NVP_(theta)
-    & GEOCAL_NVP_(boresight_angle)
-    & GEOCAL_NVP_(yaw)
-    & GEOCAL_NVP_(pitch)
-    & GEOCAL_NVP_(roll)
-    & GEOCAL_NVP_(row_number)
-    & GEOCAL_NVP_(line_pitch_per_band)
-    & GEOCAL_NVP_(paraxial_transform)
-    & GEOCAL_NVP_(inversion)
-    & GEOCAL_NVP_(parameter_mask);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(QuaternionCamera);
+  ar& GEOCAL_NVP(fname) & GEOCAL_NVP_(granule_id) & GEOCAL_NVP_(epsilon) &
+      GEOCAL_NVP_(psi) & GEOCAL_NVP_(theta) & GEOCAL_NVP_(boresight_angle) &
+      GEOCAL_NVP_(yaw) & GEOCAL_NVP_(pitch) & GEOCAL_NVP_(roll) &
+      GEOCAL_NVP_(row_number) & GEOCAL_NVP_(line_pitch_per_band) &
+      GEOCAL_NVP_(paraxial_transform) & GEOCAL_NVP_(inversion) &
+      GEOCAL_NVP_(parameter_mask);
 }
-
 
 GEOCAL_IMPLEMENT(MspiCamera);
 #endif
@@ -38,34 +29,35 @@ GEOCAL_IMPLEMENT(MspiCamera);
 //-----------------------------------------------------------------------
 
 void MspiCamera::read_config_file(const std::string& File_name,
-				  const std::string& Extra_config_file)
+                                  const std::string& Extra_config_file)
 {
   fname = File_name;
   MspiConfigFile config(File_name);
   if(Extra_config_file != "")
     config.add_file(Extra_config_file);
 
-//-------------------------------------------------------
-// Get camera mode
-// 0 = MSPI/AirMspi; 1 = AirMSPI2
-//-------------------------------------------------------
+  //-------------------------------------------------------
+  // Get camera mode
+  // 0 = MSPI/AirMspi; 1 = AirMSPI2
+  //-------------------------------------------------------
 
   int camera_mode = 0;
-  if (config.have_key("camera_mode")) {
+  if(config.have_key("camera_mode")) {
     camera_mode = config.value<int>("camera_mode");
   }
 
-//-------------------------------------------------------
-// Some hardcoded values that we don't expect to change.
-//-------------------------------------------------------
+  //-------------------------------------------------------
+  // Some hardcoded values that we don't expect to change.
+  //-------------------------------------------------------
 
   frame_convention_ = QuaternionCamera::LINE_IS_Y;
 
-//-------------------------------------------------------
-// Value we read from the configuration file.
-//-------------------------------------------------------
+  //-------------------------------------------------------
+  // Value we read from the configuration file.
+  //-------------------------------------------------------
 
-  sample_pitch_ = config.value<double>("sample_pitch"); // pixel size along sample axis (millimeters)
+  sample_pitch_ = config.value<double>(
+      "sample_pitch"); // pixel size along sample axis (millimeters)
   boresight_angle_ = config.value<double>("boresight_angle");
   yaw_ = config.value<double>("camera_yaw");
   pitch_ = config.value<double>("camera_pitch");
@@ -74,66 +66,69 @@ void MspiCamera::read_config_file(const std::string& File_name,
   nline_ = 1;
   nsamp_ = config.value<int>("number_sample");
   nband_ = config.value<int>("number_band");
-  line_direction_ = (config.value<int>("line_direction") == -1 ?
-		       QuaternionCamera::INCREASE_IS_NEGATIVE :
-		       QuaternionCamera::INCREASE_IS_POSITIVE);
-  sample_direction_ = (config.value<int>("sample_direction") == -1 ?
-		       QuaternionCamera::INCREASE_IS_NEGATIVE :
-		       QuaternionCamera::INCREASE_IS_POSITIVE);
+  line_direction_ = (config.value<int>("line_direction") == -1
+                         ? QuaternionCamera::INCREASE_IS_NEGATIVE
+                         : QuaternionCamera::INCREASE_IS_POSITIVE);
+  sample_direction_ = (config.value<int>("sample_direction") == -1
+                           ? QuaternionCamera::INCREASE_IS_NEGATIVE
+                           : QuaternionCamera::INCREASE_IS_POSITIVE);
   inversion_ = config.value<int>("inversion");
   granule_id_ = config.value<std::string>("granule_id");
 
-  row_number_ = config.value<std::vector<int> >("row_numbers");
-  if ((int)row_number_.size() != number_band()) {
+  row_number_ = config.value<std::vector<int>>("row_numbers");
+  if((int)row_number_.size() != number_band()) {
     throw Exception("row_number_ size does not match number_band");
   }
 
-  std::vector<double> X0(config.value<std::vector<double> >("X0"));
-  if ((int)X0.size() != number_band()) {
+  std::vector<double> X0(config.value<std::vector<double>>("X0"));
+  if((int)X0.size() != number_band()) {
     throw Exception("X0 size does not match number_band");
   }
 
-  std::vector<double> Y0(config.value<std::vector<double> >("Y0"));
-  if ((int)Y0.size() != number_band()) {
+  std::vector<double> Y0(config.value<std::vector<double>>("Y0"));
+  if((int)Y0.size() != number_band()) {
     throw Exception("Y0 size does not match number_band");
   }
-  
-//--------------------------------------------------------------------------
-// Configure line pitch for each row.  This is added to support dual focal
-// planes for AirMSPI-2.
-//--------------------------------------------------------------------------
 
-  if (camera_mode == 1) {
-    std::vector<double> tmp = config.value<std::vector<double> >("line_pitch_per_band");
-    for (size_t i = 0 ; i < tmp.size() ; i++) {
-      line_pitch_per_band_.emplace_back(tmp[i]);  // translate double to AutoDerivative<double>
+  //--------------------------------------------------------------------------
+  // Configure line pitch for each row.  This is added to support dual focal
+  // planes for AirMSPI-2.
+  //--------------------------------------------------------------------------
+
+  if(camera_mode == 1) {
+    std::vector<double> tmp =
+        config.value<std::vector<double>>("line_pitch_per_band");
+    for(size_t i = 0; i < tmp.size(); i++) {
+      line_pitch_per_band_.emplace_back(
+          tmp[i]); // translate double to AutoDerivative<double>
     }
   } else {
     AutoDerivative<double> line_pitch = config.value<double>("line_pitch");
     line_pitch_per_band_.assign(number_band(), line_pitch);
   }
 
-//--------------------------------------------------------------------------
-// Calculate principal point in pixel units
-//--------------------------------------------------------------------------
+  //--------------------------------------------------------------------------
+  // Calculate principal point in pixel units
+  //--------------------------------------------------------------------------
 
-  for (int iband = 0; iband < number_band(); ++iband) {
+  for(int iband = 0; iband < number_band(); ++iband) {
     AutoDerivative<double> this_line_pitch = line_pitch_per_band_[iband];
     AutoDerivative<double> origin_line = Y0[iband] / this_line_pitch;
     AutoDerivative<double> origin_sample = X0[iband] / sample_pitch_;
-    principal_point_.push_back(FrameCoordinateWithDerivative(origin_line, origin_sample));
+    principal_point_.push_back(
+        FrameCoordinateWithDerivative(origin_line, origin_sample));
   }
-  
-//--------------------------------------------------------------------------
-// Set up transformation to and from paraxial coordinates.
-//--------------------------------------------------------------------------
+
+  //--------------------------------------------------------------------------
+  // Set up transformation to and from paraxial coordinates.
+  //--------------------------------------------------------------------------
 
   paraxial_transform_.reset(new MspiParaxialTransform(File_name));
 
-//--------------------------------------------------------------------------
-// Small-angle rotations between camera and detector coordinate systems. 
-// Nominally these are zero.
-//--------------------------------------------------------------------------
+  //--------------------------------------------------------------------------
+  // Small-angle rotations between camera and detector coordinate systems.
+  // Nominally these are zero.
+  //--------------------------------------------------------------------------
 
   epsilon_ = 0;
   psi_ = 0;
@@ -142,9 +137,9 @@ void MspiCamera::read_config_file(const std::string& File_name,
   parameter_mask_.resize(3);
   parameter_mask_ = true;
 
-//--------------------------------------------------------------------------
-// Setup rotation matrix. This is a side effect of setting the parameters.
-//--------------------------------------------------------------------------
+  //--------------------------------------------------------------------------
+  // Setup rotation matrix. This is a side effect of setting the parameters.
+  //--------------------------------------------------------------------------
 
   parameter(parameter());
 
@@ -172,17 +167,17 @@ void MspiCamera::parameter_with_derivative(const ArrayAd<double, 1>& Parm)
   // Confirmed that old code had these angles negative. We need to
   // verify that this is actually what is intended, but it does match
   // the old code.
-  // 
+  //
   // The negative values give a passive rotation, vs. active rotation
   // for positive values
-  frame_to_sc_with_derivative
-    (quat_rot("ZYXYXYZ", -yaw_with_derivative() * Constant::deg_to_rad, 
-	     -pitch_with_derivative() * Constant::deg_to_rad, 
-	     -roll_with_derivative()  * Constant::deg_to_rad, 
-	     AutoDerivative<double>(-boresight_angle())  * Constant::deg_to_rad, 
-	     AutoDerivative<double>(theta()) * Constant::deg_to_rad, 
-	     AutoDerivative<double>(psi())  * Constant::deg_to_rad, 
-	      AutoDerivative<double>(epsilon())  * Constant::deg_to_rad));
+  frame_to_sc_with_derivative(quat_rot(
+      "ZYXYXYZ", -yaw_with_derivative() * Constant::deg_to_rad,
+      -pitch_with_derivative() * Constant::deg_to_rad,
+      -roll_with_derivative() * Constant::deg_to_rad,
+      AutoDerivative<double>(-boresight_angle()) * Constant::deg_to_rad,
+      AutoDerivative<double>(theta()) * Constant::deg_to_rad,
+      AutoDerivative<double>(psi()) * Constant::deg_to_rad,
+      AutoDerivative<double>(epsilon()) * Constant::deg_to_rad));
   notify_update();
 }
 
@@ -200,85 +195,81 @@ std::vector<std::string> MspiCamera::parameter_name() const
 // See base class for description
 
 void MspiCamera::dcs_to_focal_plane(int Band,
-				    const boost::math::quaternion<double>& Dcs,
-				    double& Xfp, double& Yfp) const
+                                    const boost::math::quaternion<double>& Dcs,
+                                    double& Xfp, double& Yfp) const
 {
-//---------------------------------------------------------
-// Go to paraxial focal plane. Units are millimeters.
-//---------------------------------------------------------
+  //---------------------------------------------------------
+  // Go to paraxial focal plane. Units are millimeters.
+  //---------------------------------------------------------
 
   double yf = (focal_length() / Dcs.R_component_4()) * (-Dcs.R_component_2());
   double xf = (focal_length() / Dcs.R_component_4()) * Dcs.R_component_3();
 
-//-------------------------------------------------------------------------
-// Transform paraxial focal plane coordinate to real focal plane coordinate.
-// Units are millimeters.
-//-------------------------------------------------------------------------
-  
-  paraxial_transform_->paraxial_to_real(row_number_[Band], xf, yf, 
-					Xfp, Yfp);
+  //-------------------------------------------------------------------------
+  // Transform paraxial focal plane coordinate to real focal plane coordinate.
+  // Units are millimeters.
+  //-------------------------------------------------------------------------
+
+  paraxial_transform_->paraxial_to_real(row_number_[Band], xf, yf, Xfp, Yfp);
 }
 
-void MspiCamera::dcs_to_focal_plane(int Band,
-	    const boost::math::quaternion<AutoDerivative<double> >& Dcs,
-	    AutoDerivative<double>& Xfp, AutoDerivative<double>& Yfp) const
+void MspiCamera::dcs_to_focal_plane(
+    int Band, const boost::math::quaternion<AutoDerivative<double>>& Dcs,
+    AutoDerivative<double>& Xfp, AutoDerivative<double>& Yfp) const
 {
-//---------------------------------------------------------
-// Go to paraxial focal plane. Units are millimeters.
-//---------------------------------------------------------
+  //---------------------------------------------------------
+  // Go to paraxial focal plane. Units are millimeters.
+  //---------------------------------------------------------
 
-  AutoDerivative<double> yf = 
-    (focal_length() / Dcs.R_component_4()) * (-Dcs.R_component_2());
-  AutoDerivative<double> xf = 
-    (focal_length() / Dcs.R_component_4()) * Dcs.R_component_3();
+  AutoDerivative<double> yf =
+      (focal_length() / Dcs.R_component_4()) * (-Dcs.R_component_2());
+  AutoDerivative<double> xf =
+      (focal_length() / Dcs.R_component_4()) * Dcs.R_component_3();
 
-//-------------------------------------------------------------------------
-// Transform paraxial focal plane coordinate to real focal plane coordinate.
-// Units are millimeters.
-//-------------------------------------------------------------------------
-  
-  paraxial_transform_->paraxial_to_real(row_number_[Band], xf, yf, 
-					Xfp, Yfp);
+  //-------------------------------------------------------------------------
+  // Transform paraxial focal plane coordinate to real focal plane coordinate.
+  // Units are millimeters.
+  //-------------------------------------------------------------------------
+
+  paraxial_transform_->paraxial_to_real(row_number_[Band], xf, yf, Xfp, Yfp);
 }
 
 // See base class for description
-boost::math::quaternion<double> 
+boost::math::quaternion<double>
 MspiCamera::focal_plane_to_dcs(int Band, double Xfp, double Yfp) const
 {
-//-------------------------------------------------------------------------
-/// Convert to paraxial coordinates.
-//-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
+  /// Convert to paraxial coordinates.
+  //-------------------------------------------------------------------------
 
   double xf, yf;
-  paraxial_transform_->real_to_paraxial(row_number_[Band], Xfp, Yfp,
-					xf, yf);
+  paraxial_transform_->real_to_paraxial(row_number_[Band], Xfp, Yfp, xf, yf);
 
-//-------------------------------------------------------------------------
-/// Then to detector coordinates look vector.
-//-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
+  /// Then to detector coordinates look vector.
+  //-------------------------------------------------------------------------
 
   return boost::math::quaternion<double>(0, -yf, xf, focal_length());
 }
 
-boost::math::quaternion<AutoDerivative<double> >
-MspiCamera::focal_plane_to_dcs(int Band, const AutoDerivative<double>& Xfp, 
-			       const AutoDerivative<double>& Yfp) const
+boost::math::quaternion<AutoDerivative<double>>
+MspiCamera::focal_plane_to_dcs(int Band, const AutoDerivative<double>& Xfp,
+                               const AutoDerivative<double>& Yfp) const
 {
-//-------------------------------------------------------------------------
-/// Convert to paraxial coordinates.
-//-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
+  /// Convert to paraxial coordinates.
+  //-------------------------------------------------------------------------
 
   AutoDerivative<double> xf, yf;
-  paraxial_transform_->real_to_paraxial(row_number_[Band], Xfp, Yfp,
-					xf, yf);
+  paraxial_transform_->real_to_paraxial(row_number_[Band], Xfp, Yfp, xf, yf);
 
-//-------------------------------------------------------------------------
-/// Then to detector coordinates look vector.
-//-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
+  /// Then to detector coordinates look vector.
+  //-------------------------------------------------------------------------
 
-  return boost::math::quaternion<AutoDerivative<double> >(0, -yf, xf, focal_length());
+  return boost::math::quaternion<AutoDerivative<double>>(0, -yf, xf,
+                                                         focal_length());
 }
-
 
 //-----------------------------------------------------------------------
 /// Print to stream.
@@ -294,13 +285,13 @@ void MspiCamera::print(std::ostream& Os) const
 }
 
 //-----------------------------------------------------------------------
-/// Return the band number for the given row. 
+/// Return the band number for the given row.
 //-----------------------------------------------------------------------
 
 int MspiCamera::band_number(int Row_number) const
 {
-  std::vector<int>::const_iterator f = 
-    std::find(row_number_.begin(), row_number_.end(), Row_number);
+  std::vector<int>::const_iterator f =
+      std::find(row_number_.begin(), row_number_.end(), Row_number);
   if(f == row_number_.end()) {
     Exception e("Row number not assigned to camera model band: ");
     e << Row_number;
@@ -315,15 +306,15 @@ int MspiCamera::band_number(int Row_number) const
 /// (MSPI L1B2 ATB equation 14 -- *modified* to use Forigin in place of b0)
 //-----------------------------------------------------------------------
 
-double MspiCamera::angular_separation
-(int Reference_band, int Target_band) const
+double MspiCamera::angular_separation(int Reference_band, int Target_band) const
 {
   range_check(Reference_band, 0, number_band());
   range_check(Target_band, 0, number_band());
-  return
-    (atan(line_pitch_per_band_[Target_band].value() * principal_point(Target_band).line / focal_length()) -
-     atan(line_pitch_per_band_[Reference_band].value() * principal_point(Reference_band).line / focal_length()))
-    * inversion_;
+  return (atan(line_pitch_per_band_[Target_band].value() *
+               principal_point(Target_band).line / focal_length()) -
+          atan(line_pitch_per_band_[Reference_band].value() *
+               principal_point(Reference_band).line / focal_length())) *
+         inversion_;
 }
 
 //-----------------------------------------------------------------------
@@ -334,20 +325,20 @@ double MspiCamera::angular_separation
 /// than zero for frame line will not produce a different result.
 //-----------------------------------------------------------------------
 
-void MspiCamera::paraxial_offset
-(int Band,
- const FrameCoordinate& F,
- double& Line_offset,
- double& Sample_offset) const
+void MspiCamera::paraxial_offset(int Band, const FrameCoordinate& F,
+                                 double& Line_offset,
+                                 double& Sample_offset) const
 {
   range_check(Band, 0, number_band());
   double line_pitch = line_pitch_per_band_[Band].value();
-  double xf_prime = (F.sample - principal_point(Band).sample) * sample_pitch() * samp_dir();
-  double yf_prime = (F.line - principal_point(Band).line) * line_pitch * line_dir();
-  
+  double xf_prime =
+      (F.sample - principal_point(Band).sample) * sample_pitch() * samp_dir();
+  double yf_prime =
+      (F.line - principal_point(Band).line) * line_pitch * line_dir();
+
   double xf, yf;
   paraxial_transform_->real_to_paraxial(row_number_[Band], xf_prime, yf_prime,
-					xf, yf);
+                                        xf, yf);
   Line_offset = inversion_ * (yf - yf_prime) / line_pitch;
   Sample_offset = (xf - xf_prime) / sample_pitch();
 }
@@ -363,26 +354,20 @@ void MspiCamera::parameter_mask(const blitz::Array<bool, 1>& Pm)
 /// Convert focal plane coordinates to FrameCoordinate
 //-----------------------------------------------------------------------
 
-FrameCoordinate
-MspiCamera::focal_plane_to_fc(
-  int Band,
-  double Xfp,
-  double Yfp
-  ) const
+FrameCoordinate MspiCamera::focal_plane_to_fc(int Band, double Xfp,
+                                              double Yfp) const
 {
   range_check(Band, 0, number_band());
   double line_pitch = line_pitch_per_band_[Band].value();
   FrameCoordinate fc;
-  if (frame_convention_ == LINE_IS_Y) {
-    fc.sample = principal_point(Band).sample +
-      Xfp / sample_pitch() * samp_dir();
-    fc.line = principal_point(Band).line +
-      Yfp / line_pitch * line_dir();
+  if(frame_convention_ == LINE_IS_Y) {
+    fc.sample =
+        principal_point(Band).sample + Xfp / sample_pitch() * samp_dir();
+    fc.line = principal_point(Band).line + Yfp / line_pitch * line_dir();
   } else {
-    fc.sample = principal_point(Band).sample +
-      Yfp / sample_pitch() * samp_dir();
-    fc.line = principal_point(Band).line +
-      Xfp / line_pitch * line_dir();
+    fc.sample =
+        principal_point(Band).sample + Yfp / sample_pitch() * samp_dir();
+    fc.line = principal_point(Band).line + Xfp / line_pitch * line_dir();
   }
   return fc;
 }
@@ -392,25 +377,23 @@ MspiCamera::focal_plane_to_fc(
 ///-----------------------------------------------------------------------
 
 FrameCoordinateWithDerivative
-MspiCamera::focal_plane_to_fc(
-  int Band,
-  const AutoDerivative<double>& Xfp,
-  const AutoDerivative<double>& Yfp
-  ) const
+MspiCamera::focal_plane_to_fc(int Band, const AutoDerivative<double>& Xfp,
+                              const AutoDerivative<double>& Yfp) const
 {
   range_check(Band, 0, number_band());
-  AutoDerivative<double> line_pitch_with_derivative = line_pitch_per_band_[Band];
+  AutoDerivative<double> line_pitch_with_derivative =
+      line_pitch_per_band_[Band];
   FrameCoordinateWithDerivative fc;
   if(frame_convention_ == LINE_IS_Y) {
     fc.sample = principal_point_with_derivative(Band).sample +
-      Xfp / sample_pitch_with_derivative() * samp_dir();
+                Xfp / sample_pitch_with_derivative() * samp_dir();
     fc.line = principal_point_with_derivative(Band).line +
-      Yfp / line_pitch_with_derivative * line_dir();
+              Yfp / line_pitch_with_derivative * line_dir();
   } else {
     fc.sample = principal_point_with_derivative(Band).sample +
-      Yfp / sample_pitch_with_derivative() * samp_dir();
+                Yfp / sample_pitch_with_derivative() * samp_dir();
     fc.line = principal_point_with_derivative(Band).line +
-      Xfp / line_pitch_with_derivative * line_dir();
+              Xfp / line_pitch_with_derivative * line_dir();
   }
   return fc;
 }
@@ -419,26 +402,19 @@ MspiCamera::focal_plane_to_fc(
 /// Convert FrameCoordinate to focal plane coordinates.
 //-----------------------------------------------------------------------
 
-void
-MspiCamera::fc_to_focal_plane(
-  const FrameCoordinate& Fc,
-  int Band,
-  double& Xfp,
-  double& Yfp
-  ) const
+void MspiCamera::fc_to_focal_plane(const FrameCoordinate& Fc, int Band,
+                                   double& Xfp, double& Yfp) const
 {
   range_check(Band, 0, number_band());
   double line_pitch = line_pitch_per_band_[Band].value();
-  if (frame_convention_ == LINE_IS_Y) {
+  if(frame_convention_ == LINE_IS_Y) {
     Xfp = (Fc.sample - principal_point(Band).sample) * sample_pitch() *
-      samp_dir();
-    Yfp = (Fc.line - principal_point(Band).line) * line_pitch
-      * line_dir();
+          samp_dir();
+    Yfp = (Fc.line - principal_point(Band).line) * line_pitch * line_dir();
   } else {
     Yfp = (Fc.sample - principal_point(Band).sample) * sample_pitch() *
-      samp_dir();
-    Xfp = (Fc.line - principal_point(Band).line) * line_pitch
-      * line_dir();
+          samp_dir();
+    Xfp = (Fc.line - principal_point(Band).line) * line_pitch * line_dir();
   }
 }
 
@@ -446,25 +422,22 @@ MspiCamera::fc_to_focal_plane(
 /// Convert FrameCoordinateWithDerivative to focal plane coordinates.
 //-----------------------------------------------------------------------
 
-void
-MspiCamera::fc_to_focal_plane(
-  const FrameCoordinateWithDerivative& Fc,
-  int Band,
-  AutoDerivative<double>& Xfp,
-  AutoDerivative<double>& Yfp
-  ) const
+void MspiCamera::fc_to_focal_plane(const FrameCoordinateWithDerivative& Fc,
+                                   int Band, AutoDerivative<double>& Xfp,
+                                   AutoDerivative<double>& Yfp) const
 {
   range_check(Band, 0, number_band());
-  AutoDerivative<double> line_pitch_with_derivative = line_pitch_per_band_[Band];
-  if (frame_convention_ == LINE_IS_Y) {
+  AutoDerivative<double> line_pitch_with_derivative =
+      line_pitch_per_band_[Band];
+  if(frame_convention_ == LINE_IS_Y) {
     Xfp = (Fc.sample - principal_point_with_derivative(Band).sample) *
-      sample_pitch_with_derivative() * samp_dir();
+          sample_pitch_with_derivative() * samp_dir();
     Yfp = (Fc.line - principal_point_with_derivative(Band).line) *
-      line_pitch_with_derivative * line_dir();
+          line_pitch_with_derivative * line_dir();
   } else {
     Yfp = (Fc.sample - principal_point_with_derivative(Band).sample) *
-      sample_pitch_with_derivative() * samp_dir();
+          sample_pitch_with_derivative() * samp_dir();
     Xfp = (Fc.line - principal_point_with_derivative(Band).line) *
-      line_pitch_with_derivative * line_dir();
+          line_pitch_with_derivative * line_dir();
   }
 }

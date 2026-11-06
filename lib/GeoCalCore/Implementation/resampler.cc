@@ -17,19 +17,15 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void Resampler::serialize(Archive & ar, const unsigned int version)
+void Resampler::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(Resampler);
-  ar & GEOCAL_NVP(mi)
-    & GEOCAL_NVP(nsub)
-    & GEOCAL_NVP_(data_index);
+  ar& GEOCAL_NVP(mi) & GEOCAL_NVP(nsub) & GEOCAL_NVP_(data_index);
   // Version 0 didn't have a swath range, which is the same as the
   // default of the full swath set by the default constructor.
   if(version > 0)
-    ar & GEOCAL_NVP_(swath_line_start)
-      & GEOCAL_NVP_(swath_number_line)
-      & GEOCAL_NVP_(swath_sample_start)
-      & GEOCAL_NVP_(swath_number_sample);
+    ar& GEOCAL_NVP_(swath_line_start) & GEOCAL_NVP_(swath_number_line) &
+        GEOCAL_NVP_(swath_sample_start) & GEOCAL_NVP_(swath_number_sample);
 }
 
 GEOCAL_IMPLEMENT(Resampler);
@@ -58,14 +54,14 @@ namespace GeoCal {
 class ResamplerInterpolate {
 public:
   ResamplerInterpolate(const blitz::Array<double, 2>& X,
-		       const blitz::Array<double, 2>& Y, int Nsub)
+                       const blitz::Array<double, 2>& Y, int Nsub)
     : x(X), y(Y), nl(X.rows()), ns(X.cols())
   {
     setup(nl, Nsub, lcell, lfrac);
     setup(ns, Nsub, scell, sfrac);
   }
-  int number_row() const { return (int) lcell.size(); }
-  int number_col() const { return (int) scell.size(); }
+  int number_row() const { return (int)lcell.size(); }
+  int number_col() const { return (int)scell.size(); }
   void operator()(int I, int J, double& X, double& Y) const
   {
     X = interp(x, lcell[I], scell[J], lfrac[I], sfrac[J]);
@@ -73,7 +69,7 @@ public:
   }
 private:
   static void setup(int N, int Nsub, std::vector<int>& Cell,
-		    std::vector<double>& Frac)
+                    std::vector<double>& Frac)
   {
     Cell.resize(N * Nsub);
     Frac.resize(N * Nsub);
@@ -81,13 +77,13 @@ private:
       double p = (k + 0.5) / Nsub - 0.5;
       // With a single line or sample, we can't interpolate, so we just
       // use the raw values in that direction.
-      int c = (N < 2 ? 0 : std::min(std::max((int) std::floor(p), 0), N - 2));
+      int c = (N < 2 ? 0 : std::min(std::max((int)std::floor(p), 0), N - 2));
       Cell[k] = c;
       Frac[k] = (N < 2 ? 0.0 : p - c);
     }
   }
-  double interp(const blitz::Array<double, 2>& A, int iy, int ix,
-		double ty, double tx) const
+  double interp(const blitz::Array<double, 2>& A, int iy, int ix, double ty,
+                double tx) const
   {
     int iy1 = (nl < 2 ? iy : iy + 1);
     int ix1 = (ns < 2 ? ix : ix + 1);
@@ -177,18 +173,18 @@ private:
 /// See resample_field for a description of Number_task.
 //-------------------------------------------------------------------------
 
-Resampler::Resampler
-(const boost::shared_ptr<RasterImage>& X_coor,
- const boost::shared_ptr<RasterImage>& Y_coor,
- const MapInfo& Mi, int Num_sub_pixel, bool Exactly_match_mi,
- double Fill_value_threshold, int Number_task)
+Resampler::Resampler(const boost::shared_ptr<RasterImage>& X_coor,
+                     const boost::shared_ptr<RasterImage>& Y_coor,
+                     const MapInfo& Mi, int Num_sub_pixel,
+                     bool Exactly_match_mi, double Fill_value_threshold,
+                     int Number_task)
   : nsub(Num_sub_pixel)
 {
   range_min_check(Num_sub_pixel, 1);
-  blitz::Array<double, 2> x = X_coor->read_double(0, 0, X_coor->number_line(),
-						  X_coor->number_sample());
-  blitz::Array<double, 2> y = Y_coor->read_double(0, 0, Y_coor->number_line(),
-						  Y_coor->number_sample());
+  blitz::Array<double, 2> x =
+      X_coor->read_double(0, 0, X_coor->number_line(), X_coor->number_sample());
+  blitz::Array<double, 2> y =
+      Y_coor->read_double(0, 0, Y_coor->number_line(), Y_coor->number_sample());
   if(x.rows() != y.rows() || x.cols() != y.cols())
     throw Exception("X_coor and Y_coor need to be the same size");
   // Mark fill as NaN before interpolating, so it carries through to
@@ -196,9 +192,9 @@ Resampler::Resampler
   const double nan = std::numeric_limits<double>::quiet_NaN();
   for(int i = 0; i < x.rows(); ++i)
     for(int j = 0; j < x.cols(); ++j)
-      if(!(x(i,j) > Fill_value_threshold && y(i,j) > Fill_value_threshold)) {
-	x(i,j) = nan;
-	y(i,j) = nan;
+      if(!(x(i, j) > Fill_value_threshold && y(i, j) > Fill_value_threshold)) {
+        x(i, j) = nan;
+        y(i, j) = nan;
       }
   // We interpolate the coordinates as we go, rather than creating
   // the full size interpolated arrays.
@@ -239,20 +235,20 @@ Resampler::Resampler
 /// resample_field for a description of Number_task.
 //-------------------------------------------------------------------------
 
-Resampler::Resampler
-(const blitz::Array<double, 2>& X_coor_interpolated,
- const blitz::Array<double, 2>& Y_coor_interpolated,
- const MapInfo& Mi, int Num_sub_pixel, bool Exactly_match_mi,
- double Fill_value_threshold, int Number_task)
+Resampler::Resampler(const blitz::Array<double, 2>& X_coor_interpolated,
+                     const blitz::Array<double, 2>& Y_coor_interpolated,
+                     const MapInfo& Mi, int Num_sub_pixel,
+                     bool Exactly_match_mi, double Fill_value_threshold,
+                     int Number_task)
   : nsub(Num_sub_pixel)
 {
   range_min_check(Num_sub_pixel, 1);
   if(X_coor_interpolated.rows() != Y_coor_interpolated.rows() ||
      X_coor_interpolated.cols() != Y_coor_interpolated.cols())
-    throw Exception("X_coor_interpolated and Y_coor_interpolated need to be the same size");
-  auto coor = [&X_coor_interpolated, &Y_coor_interpolated]
-    (int i, int j, double& X, double& Y)
-  {
+    throw Exception(
+        "X_coor_interpolated and Y_coor_interpolated need to be the same size");
+  auto coor = [&X_coor_interpolated,
+               &Y_coor_interpolated](int i, int j, double& X, double& Y) {
     X = X_coor_interpolated(i, j);
     Y = Y_coor_interpolated(i, j);
   };
@@ -298,16 +294,16 @@ Resampler::Resampler
 /// See resample_field for a description of Number_task.
 //-------------------------------------------------------------------------
 
-boost::shared_ptr<Resampler> Resampler::create_from_lat_lon
-(const blitz::Array<double, 2>& Latitude,
- const blitz::Array<double, 2>& Longitude,
- const MapInfo& Mi, int Num_sub_pixel, int Boundary,
- double Fill_value_threshold, int Number_task)
+boost::shared_ptr<Resampler>
+Resampler::create_from_lat_lon(const blitz::Array<double, 2>& Latitude,
+                               const blitz::Array<double, 2>& Longitude,
+                               const MapInfo& Mi, int Num_sub_pixel,
+                               int Boundary, double Fill_value_threshold,
+                               int Number_task)
 {
   range_min_check(Num_sub_pixel, 1);
   range_min_check(Boundary, 0);
-  if(Latitude.rows() != Longitude.rows() ||
-     Latitude.cols() != Longitude.cols())
+  if(Latitude.rows() != Longitude.rows() || Latitude.cols() != Longitude.cols())
     throw Exception("Latitude and Longitude need to be the same size");
   int nline = Latitude.rows();
   int nsamp = Latitude.cols();
@@ -319,17 +315,17 @@ boost::shared_ptr<Resampler> Resampler::create_from_lat_lon
   blitz::Array<double, 2> x(nline, nsamp), y(nline, nsamp);
   for(int i = 0; i < nline; ++i)
     for(int j = 0; j < nsamp; ++j) {
-      x(i,j) = Longitude(i,j);
-      y(i,j) = Latitude(i,j);
-      if(!(x(i,j) > Fill_value_threshold && y(i,j) > Fill_value_threshold)) {
-	x(i,j) = nan;
-	y(i,j) = nan;
+      x(i, j) = Longitude(i, j);
+      y(i, j) = Latitude(i, j);
+      if(!(x(i, j) > Fill_value_threshold && y(i, j) > Fill_value_threshold)) {
+        x(i, j) = nan;
+        y(i, j) = nan;
       }
     }
   bool done = false;
 #ifdef HAVE_GDAL
   const OgrCoordinateConverter* oc =
-    dynamic_cast<const OgrCoordinateConverter*>(&Mi.coordinate_converter());
+      dynamic_cast<const OgrCoordinateConverter*>(&Mi.coordinate_converter());
   if(oc && oc->ogr().inverse_transform() && x.size() > 0) {
     // Bulk transform, which is much faster than doing each point. This
     // is the same as OgrWrapper::lat_lon_coordinate_convert.
@@ -337,15 +333,15 @@ boost::shared_ptr<Resampler> Resampler::create_from_lat_lon
     std::vector<int> success(x.size(), 0);
     // Note that operation Transform really is const, this just doesn't
     // have the right signature in GDAL.
-    const_cast<OGRCoordinateTransformation*>(oc->ogr().inverse_transform())->
-      Transform(x.size(), xc.dataFirst(), yc.dataFirst(), nullptr,
-		success.data());
+    const_cast<OGRCoordinateTransformation*>(oc->ogr().inverse_transform())
+        ->Transform(x.size(), xc.dataFirst(), yc.dataFirst(), nullptr,
+                    success.data());
     int k = 0;
     for(int i = 0; i < nline; ++i)
       for(int j = 0; j < nsamp; ++j, ++k) {
-	bool ok = success[k] && !std::isnan(x(i,j));
-	x(i,j) = (ok ? xc(i,j) : nan);
-	y(i,j) = (ok ? yc(i,j) : nan);
+        bool ok = success[k] && !std::isnan(x(i, j));
+        x(i, j) = (ok ? xc(i, j) : nan);
+        y(i, j) = (ok ? yc(i, j) : nan);
       }
     done = true;
   }
@@ -353,14 +349,14 @@ boost::shared_ptr<Resampler> Resampler::create_from_lat_lon
   if(!done) {
     for(int i = 0; i < nline; ++i)
       for(int j = 0; j < nsamp; ++j) {
-	if(std::isnan(x(i,j)))
-	  continue;
-	double lon = x(i,j);
-	if(lon > 180)
-	  lon -= 360;
-	double z;
-	Mi.coordinate_converter().convert_to_coordinate
-	  (Geodetic(y(i,j), lon), x(i,j), y(i,j), z);
+        if(std::isnan(x(i, j)))
+          continue;
+        double lon = x(i, j);
+        if(lon > 180)
+          lon -= 360;
+        double z;
+        Mi.coordinate_converter().convert_to_coordinate(Geodetic(y(i, j), lon),
+                                                        x(i, j), y(i, j), z);
       }
   }
 
@@ -370,7 +366,7 @@ boost::shared_ptr<Resampler> Resampler::create_from_lat_lon
   // Geodetic MapInfo is fine). We check the part we use in init.
   int ls, le, ss, se;
   range_in_mi(x, y, Mi, 1, ls, le, ss, se,
-	      std::numeric_limits<double>::lowest(), false);
+              std::numeric_limits<double>::lowest(), false);
   if(le < ls || se < ss) {
     Exception e;
     e << "Resampler::create_from_lat_lon: none of the swath falls in the "
@@ -389,8 +385,7 @@ boost::shared_ptr<Resampler> Resampler::create_from_lat_lon
   // Coordinates of subpixel (I, J), relative to subpixel (Ioff, Joff)
   // of the subset.
   int ioff = 0, joff = 0;
-  auto coor = [&](int i, int j, double& X, double& Y)
-  {
+  auto coor = [&](int i, int j, double& X, double& Y) {
     interp(i + ioff, j + joff, X, Y);
   };
 
@@ -398,34 +393,32 @@ boost::shared_ptr<Resampler> Resampler::create_from_lat_lon
   // store anything else, init recalculates the coordinates.
   int nrow = interp.number_row();
   int ncol = interp.number_col();
-  int ntask = default_number_task((long) nrow * ncol, Number_task);
+  int ntask = default_number_task((long)nrow * ncol, Number_task);
   double nline_mi = Mi.number_y_pixel();
   double nsamp_mi = Mi.number_x_pixel();
   struct Range {
     int lstart, lend, sstart, send;
   };
   std::vector<Range> trange(std::max(std::min(ntask, nrow), 1),
-			    Range{nrow, -1, ncol, -1});
-  parallel_row_blocks(nrow, ntask,
-    [&](int k, int istart, int iend)
-    {
-      Range r{nrow, -1, ncol, -1};
-      for(int i = istart; i < iend; ++i)
-	for(int j = 0; j < ncol; ++j) {
-	  double xv, yv, xindex, yindex;
-	  coor(i, j, xv, yv);
-	  Mi.coordinate_to_index(xv, yv, xindex, yindex);
-	  // Same as the range check in determine_range, NaN fails it.
-	  if(yindex > -0.5 && yindex < nline_mi - 0.5 &&
-	     xindex > -0.5 && xindex < nsamp_mi - 0.5) {
-	    r.lstart = std::min(r.lstart, i);
-	    r.lend = std::max(r.lend, i);
-	    r.sstart = std::min(r.sstart, j);
-	    r.send = std::max(r.send, j);
-	  }
-	}
-      trange[k] = r;
-    });
+                            Range{nrow, -1, ncol, -1});
+  parallel_row_blocks(nrow, ntask, [&](int k, int istart, int iend) {
+    Range r{nrow, -1, ncol, -1};
+    for(int i = istart; i < iend; ++i)
+      for(int j = 0; j < ncol; ++j) {
+        double xv, yv, xindex, yindex;
+        coor(i, j, xv, yv);
+        Mi.coordinate_to_index(xv, yv, xindex, yindex);
+        // Same as the range check in determine_range, NaN fails it.
+        if(yindex > -0.5 && yindex < nline_mi - 0.5 && xindex > -0.5 &&
+           xindex < nsamp_mi - 0.5) {
+          r.lstart = std::min(r.lstart, i);
+          r.lend = std::max(r.lend, i);
+          r.sstart = std::min(r.sstart, j);
+          r.send = std::max(r.send, j);
+        }
+      }
+    trange[k] = r;
+  });
   Range rt{nrow, -1, ncol, -1};
   for(const auto& r : trange) {
     rt.lstart = std::min(rt.lstart, r.lstart);
@@ -449,7 +442,7 @@ boost::shared_ptr<Resampler> Resampler::create_from_lat_lon
   boost::shared_ptr<Resampler> res(new Resampler());
   res->nsub = nsub;
   res->init((r1 - r0 + 1) * nsub, (c1 - c0 + 1) * nsub, coor, Mi, true,
-	    std::numeric_limits<double>::lowest(), Number_task);
+            std::numeric_limits<double>::lowest(), Number_task);
   res->swath_line_start_ = l0 + r0;
   res->swath_number_line_ = r1 - r0 + 1;
   res->swath_sample_start_ = s0 + c0;
@@ -506,24 +499,26 @@ public:
     int i1 = 0, j1 = 0, i2 = 0, j2 = 0;
     double step = 0;
   };
-  template<class F> ResamplerCoordinateCheck
-  (int Number_row, int Number_col, int Step, F Coor, const MapInfo& Mi,
-   double Fill_value_threshold);
+  template<class F>
+  ResamplerCoordinateCheck(int Number_row, int Number_col, int Step, F Coor,
+                           const MapInfo& Mi, double Fill_value_threshold);
   bool good(double X, double Y) const
-  { return X > fill_value_threshold && Y > fill_value_threshold; }
+  {
+    return X > fill_value_threshold && Y > fill_value_threshold;
+  }
 
-//-------------------------------------------------------------------------
-/// Check the raw points in rows [Istart, Iend) (in the full grid, so
-/// only every step rows are raw rows), comparing each raw point with
-/// the next raw point in its row and the one in the next raw row. The
-/// main loop just accumulates whether a row has a problem, without
-/// branching on each point, which is noticeably faster. If a row has
-/// a problem we go back and find exactly where. Fills in P with the
-/// first problem found.
-//-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
+  /// Check the raw points in rows [Istart, Iend) (in the full grid, so
+  /// only every step rows are raw rows), comparing each raw point with
+  /// the next raw point in its row and the one in the next raw row. The
+  /// main loop just accumulates whether a row has a problem, without
+  /// branching on each point, which is noticeably faster. If a row has
+  /// a problem we go back and find exactly where. Fills in P with the
+  /// first problem found.
+  //-------------------------------------------------------------------------
 
-  template<class F> void check_rows(int Istart, int Iend, F Coor,
-				    Problem& P) const
+  template<class F>
+  void check_rows(int Istart, int Iend, F Coor, Problem& P) const
   {
     if(!enabled)
       return;
@@ -538,62 +533,62 @@ public:
       double x, y;
       Coor(i, 0, x, y);
       for(int jr = 0; jr < nraw_col; ++jr) {
-	int j = jr * step;
-	bool g = (x > thresh) & (y > thresh);
-	double xr = x, yr = y;
-	bool gr = false;
-	if(jr + 1 < nraw_col) {
-	  Coor(i, j + step, xr, yr);
-	  gr = (xr > thresh) & (yr > thresh);
-	}
-	double xd = x, yd = y;
-	bool gd = false;
-	if(have_next) {
-	  Coor(i + step, j, xd, yd);
-	  gd = (xd > thresh) & (yd > thresh);
-	}
-	double sr, sd;
-	if(geo) {
-	  sr = std::abs(xr - x);
-	  sd = std::abs(xd - x);
-	} else {
-	  sr = (xr - x) * (xr - x) + (yr - y) * (yr - y);
-	  sd = (xd - x) * (xd - x) + (yd - y) * (yd - y);
-	}
-	bad |= (g & gr & (sr > lim)) | (g & gd & (sd > lim));
-	x = xr;
-	y = yr;
+        int j = jr * step;
+        bool g = (x > thresh) & (y > thresh);
+        double xr = x, yr = y;
+        bool gr = false;
+        if(jr + 1 < nraw_col) {
+          Coor(i, j + step, xr, yr);
+          gr = (xr > thresh) & (yr > thresh);
+        }
+        double xd = x, yd = y;
+        bool gd = false;
+        if(have_next) {
+          Coor(i + step, j, xd, yd);
+          gd = (xd > thresh) & (yd > thresh);
+        }
+        double sr, sd;
+        if(geo) {
+          sr = std::abs(xr - x);
+          sd = std::abs(xd - x);
+        } else {
+          sr = (xr - x) * (xr - x) + (yr - y) * (yr - y);
+          sd = (xd - x) * (xd - x) + (yd - y) * (yd - y);
+        }
+        bad |= (g & gr & (sr > lim)) | (g & gd & (sd > lim));
+        x = xr;
+        y = yr;
       }
       if(bad) {
-	// Find the first bad pair in this row.
-	for(int jr = 0; jr < nraw_col && !P.found; ++jr) {
-	  int j = jr * step;
-	  double x1, y1;
-	  Coor(i, j, x1, y1);
-	  if(!good(x1, y1))
-	    continue;
-	  if(jr + 1 < nraw_col) {
-	    double x2, y2;
-	    Coor(i, j + step, x2, y2);
-	    if(good(x2, y2))
-	      test(i, j, x1, y1, i, j + step, x2, y2, P);
-	  }
-	  if(!P.found && have_next) {
-	    double x2, y2;
-	    Coor(i + step, j, x2, y2);
-	    if(good(x2, y2))
-	      test(i, j, x1, y1, i + step, j, x2, y2, P);
-	  }
-	}
-	return;
+        // Find the first bad pair in this row.
+        for(int jr = 0; jr < nraw_col && !P.found; ++jr) {
+          int j = jr * step;
+          double x1, y1;
+          Coor(i, j, x1, y1);
+          if(!good(x1, y1))
+            continue;
+          if(jr + 1 < nraw_col) {
+            double x2, y2;
+            Coor(i, j + step, x2, y2);
+            if(good(x2, y2))
+              test(i, j, x1, y1, i, j + step, x2, y2, P);
+          }
+          if(!P.found && have_next) {
+            double x2, y2;
+            Coor(i + step, j, x2, y2);
+            if(good(x2, y2))
+              test(i, j, x1, y1, i + step, j, x2, y2, P);
+          }
+        }
+        return;
       }
     }
   }
-  template<class F> void throw_if_problem
-  (const std::vector<Problem>& Tproblem, F Coor) const;
+  template<class F>
+  void throw_if_problem(const std::vector<Problem>& Tproblem, F Coor) const;
 private:
-  void test(int I1, int J1, double X1, double Y1, int I2, int J2,
-	    double X2, double Y2, Problem& P) const
+  void test(int I1, int J1, double X1, double Y1, int I2, int J2, double X2,
+            double Y2, Problem& P) const
   {
     double s;
     bool bad;
@@ -606,7 +601,10 @@ private:
     }
     if(bad) {
       P.found = true;
-      P.i1 = I1; P.j1 = J1; P.i2 = I2; P.j2 = J2;
+      P.i1 = I1;
+      P.j1 = J1;
+      P.i2 = I2;
+      P.j2 = J2;
       P.step = (ptype != PROJECTED ? s : std::sqrt(s));
     }
   }
@@ -621,9 +619,11 @@ private:
 /// step from a sample of the points.
 //-------------------------------------------------------------------------
 
-template<class F> ResamplerCoordinateCheck::ResamplerCoordinateCheck
-(int Number_row, int Number_col, int Step, F Coor, const MapInfo& Mi,
- double Fill_value_threshold)
+template<class F>
+ResamplerCoordinateCheck::ResamplerCoordinateCheck(int Number_row,
+                                                   int Number_col, int Step,
+                                                   F Coor, const MapInfo& Mi,
+                                                   double Fill_value_threshold)
   : ptype(PROJECTED), enabled(true), nrow(Number_row), ncol(Number_col),
     step(std::max(Step, 1)), fill_value_threshold(Fill_value_threshold),
     max_step2(0)
@@ -636,16 +636,16 @@ template<class F> ResamplerCoordinateCheck::ResamplerCoordinateCheck
 #ifdef HAVE_GDAL
   else {
     const OgrCoordinateConverter* oc =
-      dynamic_cast<const OgrCoordinateConverter*>(&c);
+        dynamic_cast<const OgrCoordinateConverter*>(&c);
     // We only handle traditional GIS order (longitude, latitude),
     // which is what we use. For authority compliant order X is
     // latitude, so we skip the check rather than giving a wrong
     // answer.
     if(oc && oc->ogr().ogr().IsGeographic()) {
       if(oc->ogr().use_traditional_gis_order())
-	ptype = GEODETIC;
+        ptype = GEODETIC;
       else
-	enabled = false;
+        enabled = false;
     }
   }
 #endif
@@ -660,23 +660,24 @@ template<class F> ResamplerCoordinateCheck::ResamplerCoordinateCheck
   // Median of a sample of the squared steps between raw points.
   int nraw_row = (nrow - 1) / step + 1;
   int nraw_col = (ncol - 1) / step + 1;
-  int stride = std::max(1, (int) std::sqrt((double) nraw_row * nraw_col / 32768.0));
+  int stride =
+      std::max(1, (int)std::sqrt((double)nraw_row * nraw_col / 32768.0));
   std::vector<double> sstep;
   for(int i = 0; i < nraw_row; i += stride)
     for(int j = 0; j < nraw_col; j += stride) {
       double x, y, x2, y2;
       Coor(i * step, j * step, x, y);
       if(!good(x, y))
-	continue;
+        continue;
       if(j + 1 < nraw_col) {
-	Coor(i * step, (j + 1) * step, x2, y2);
-	if(good(x2, y2))
-	  sstep.push_back((x2 - x) * (x2 - x) + (y2 - y) * (y2 - y));
+        Coor(i * step, (j + 1) * step, x2, y2);
+        if(good(x2, y2))
+          sstep.push_back((x2 - x) * (x2 - x) + (y2 - y) * (y2 - y));
       }
       if(i + 1 < nraw_row) {
-	Coor((i + 1) * step, j * step, x2, y2);
-	if(good(x2, y2))
-	  sstep.push_back((x2 - x) * (x2 - x) + (y2 - y) * (y2 - y));
+        Coor((i + 1) * step, j * step, x2, y2);
+        if(good(x2, y2))
+          sstep.push_back((x2 - x) * (x2 - x) + (y2 - y) * (y2 - y));
       }
     }
   // Not enough data to say anything
@@ -685,9 +686,9 @@ template<class F> ResamplerCoordinateCheck::ResamplerCoordinateCheck
     return;
   }
   std::nth_element(sstep.begin(), sstep.begin() + sstep.size() / 2,
-		   sstep.end());
+                   sstep.end());
   max_step2 = sstep[sstep.size() / 2] * Resampler::max_step_ratio() *
-    Resampler::max_step_ratio();
+              Resampler::max_step_ratio();
   // All the points the same (e.g., duplicated data). Nothing to
   // compare against.
   if(max_step2 <= 0)
@@ -701,8 +702,9 @@ template<class F> ResamplerCoordinateCheck::ResamplerCoordinateCheck
 /// have a problem, so the speed isn't important.
 //-------------------------------------------------------------------------
 
-template<class F> void ResamplerCoordinateCheck::throw_if_problem
-(const std::vector<Problem>& Tproblem, F Coor) const
+template<class F>
+void ResamplerCoordinateCheck::throw_if_problem(
+    const std::vector<Problem>& Tproblem, F Coor) const
 {
   const Problem* p = 0;
   for(const auto& t : Tproblem)
@@ -719,45 +721,44 @@ template<class F> void ResamplerCoordinateCheck::throw_if_problem
     // arbitrary longitude, so count that as well.
     for(int i = 0; i < nrow && !pole; i += step)
       for(int j = 0; j < ncol && !pole; j += step) {
-	double x, y;
-	Coor(i, j, x, y);
-	if(good(x, y) && std::abs(y) > 90 - 1e-6)
-	  pole = true;
-	if(i + step >= nrow || j + step >= ncol)
-	  continue;
-	double cx[4], cy[4];
-	int ci[4] = {i, i, i + step, i + step};
-	int cj[4] = {j, j + step, j + step, j};
-	bool ok = true;
-	for(int c = 0; c < 4; ++c) {
-	  Coor(ci[c], cj[c], cx[c], cy[c]);
-	  ok = ok && good(cx[c], cy[c]);
-	}
-	if(!ok)
-	  continue;
-	double w = 0;
-	for(int c = 0; c < 4; ++c)
-	  w += std::fmod(cx[(c + 1) % 4] - cx[c] + 540.0, 360.0) - 180.0;
-	if(std::abs(w) > 180)
-	  pole = true;
+        double x, y;
+        Coor(i, j, x, y);
+        if(good(x, y) && std::abs(y) > 90 - 1e-6)
+          pole = true;
+        if(i + step >= nrow || j + step >= ncol)
+          continue;
+        double cx[4], cy[4];
+        int ci[4] = {i, i, i + step, i + step};
+        int cj[4] = {j, j + step, j + step, j};
+        bool ok = true;
+        for(int c = 0; c < 4; ++c) {
+          Coor(ci[c], cj[c], cx[c], cy[c]);
+          ok = ok && good(cx[c], cy[c]);
+        }
+        if(!ok)
+          continue;
+        double w = 0;
+        for(int c = 0; c < 4; ++c)
+          w += std::fmod(cx[(c + 1) % 4] - cx[c] + 540.0, 360.0) - 180.0;
+        if(std::abs(w) > 180)
+          pole = true;
       }
   }
   Exception e;
-  e << "Resampler: the coordinates jump between line " << p->i1
-    << ", sample " << p->j1 << " and line " << p->i2 << ", sample "
-    << p->j2 << ".\n";
+  e << "Resampler: the coordinates jump between line " << p->i1 << ", sample "
+    << p->j1 << " and line " << p->i2 << ", sample " << p->j2 << ".\n";
   if(pole)
     e << "The data covers a pole (a jump of " << p->step
       << " degrees in longitude). Neither a Geodetic nor a Geodetic360 "
       << "MapInfo can handle this. Use a polar projection, such as polar "
       << "stereographic.";
   else if(ptype == GEODETIC)
-    e << "The data crosses the -180/180 longitude line (a jump of "
-      << p->step << " degrees), and the MapInfo is Geodetic. Use a "
+    e << "The data crosses the -180/180 longitude line (a jump of " << p->step
+      << " degrees), and the MapInfo is Geodetic. Use a "
       << "Geodetic360 MapInfo for data that crosses the date line.";
   else if(ptype == GEODETIC360)
-    e << "The data crosses the 0/360 longitude line (a jump of "
-      << p->step << " degrees), and the MapInfo is Geodetic360. Use a "
+    e << "The data crosses the 0/360 longitude line (a jump of " << p->step
+      << " degrees), and the MapInfo is Geodetic360. Use a "
       << "Geodetic MapInfo for data that crosses the prime meridian.";
   else
     e << "The step is " << p->step << ", which is more than "
@@ -788,15 +789,15 @@ template<class F> void ResamplerCoordinateCheck::throw_if_problem
 /// general (e.g., OgrCoordinateConverter).
 //-------------------------------------------------------------------------
 
-template<class F> void Resampler::init
-(int Number_row, int Number_col, F Coor,
- const MapInfo& Mi, bool Exactly_match_mi, double Fill_value_threshold,
- int Number_task)
+template<class F>
+void Resampler::init(int Number_row, int Number_col, F Coor, const MapInfo& Mi,
+                     bool Exactly_match_mi, double Fill_value_threshold,
+                     int Number_task)
 {
   ResamplerCoordinateCheck check(Number_row, Number_col, nsub, Coor, Mi,
-				 Fill_value_threshold);
+                                 Fill_value_threshold);
   data_index_.resize(Number_row, Number_col, 2);
-  int ntask = default_number_task((long) Number_row * Number_col, Number_task);
+  int ntask = default_number_task((long)Number_row * Number_col, Number_task);
   // Min and max index of the points that aren't fill, for each task.
   struct Range {
     bool found = false;
@@ -811,42 +812,40 @@ template<class F> void Resampler::init
   // index can't be INT_MIN, we don't get anywhere close to that.
   const int fill_flag = std::numeric_limits<int>::min();
   const int missing_value = (Exactly_match_mi ? -9999 : fill_flag);
-  parallel_row_blocks(Number_row, ntask,
-    [&](int k, int istart, int iend)
-    {
-      Range r;
-      check.check_rows(istart, iend, Coor, tproblem[k]);
-      for(int i = istart; i < iend; ++i) {
-	for(int j = 0; j < Number_col; ++j) {
-	  double x, y, xindex, yindex;
-	  Coor(i, j, x, y);
-	  // Missing if either coordinate is NaN or fill. Note that
-	  // comparisons with NaN are false.
-	  if(!(x > Fill_value_threshold && y > Fill_value_threshold)) {
-	    data_index_(i,j,0) = missing_value;
-	    data_index_(i,j,1) = missing_value;
-	    continue;
-	  }
-	  Mi.coordinate_to_index(x, y, xindex, yindex);
-	  // This is the same as blitz::cast<int>(blitz::rint(..)) that
-	  // we used to use.
-	  int ln = (int) std::rint(yindex);
-	  int smp = (int) std::rint(xindex);
-	  data_index_(i,j,0) = ln;
-	  data_index_(i,j,1) = smp;
-	  if(!r.found) {
-	    r.found = true;
-	    r.minx = r.maxx = smp;
-	    r.miny = r.maxy = ln;
-	  }
-	  r.minx = std::min(smp, r.minx);
-	  r.maxx = std::max(smp, r.maxx);
-	  r.miny = std::min(ln, r.miny);
-	  r.maxy = std::max(ln, r.maxy);
-	}
+  parallel_row_blocks(Number_row, ntask, [&](int k, int istart, int iend) {
+    Range r;
+    check.check_rows(istart, iend, Coor, tproblem[k]);
+    for(int i = istart; i < iend; ++i) {
+      for(int j = 0; j < Number_col; ++j) {
+        double x, y, xindex, yindex;
+        Coor(i, j, x, y);
+        // Missing if either coordinate is NaN or fill. Note that
+        // comparisons with NaN are false.
+        if(!(x > Fill_value_threshold && y > Fill_value_threshold)) {
+          data_index_(i, j, 0) = missing_value;
+          data_index_(i, j, 1) = missing_value;
+          continue;
+        }
+        Mi.coordinate_to_index(x, y, xindex, yindex);
+        // This is the same as blitz::cast<int>(blitz::rint(..)) that
+        // we used to use.
+        int ln = (int)std::rint(yindex);
+        int smp = (int)std::rint(xindex);
+        data_index_(i, j, 0) = ln;
+        data_index_(i, j, 1) = smp;
+        if(!r.found) {
+          r.found = true;
+          r.minx = r.maxx = smp;
+          r.miny = r.maxy = ln;
+        }
+        r.minx = std::min(smp, r.minx);
+        r.maxx = std::max(smp, r.maxx);
+        r.miny = std::min(ln, r.miny);
+        r.maxy = std::max(ln, r.maxy);
       }
-      trange[k] = r;
-    });
+    }
+    trange[k] = r;
+  });
   check.throw_if_problem(tproblem, Coor);
   // Determine min and max xindex and yindex of the points that aren't
   // fill.
@@ -854,7 +853,7 @@ template<class F> void Resampler::init
   for(const auto& t : trange)
     if(t.found) {
       if(!r.found)
-	r = t;
+        r = t;
       r.minx = std::min(t.minx, r.minx);
       r.maxx = std::max(t.maxx, r.maxx);
       r.miny = std::min(t.miny, r.miny);
@@ -862,8 +861,8 @@ template<class F> void Resampler::init
     }
   if(!r.found) {
     Exception e;
-    e << "Resampler: there are no valid coordinates. All "
-      << Number_row << " x " << Number_col
+    e << "Resampler: there are no valid coordinates. All " << Number_row
+      << " x " << Number_col
       << " points are NaN or fill (<= Fill_value_threshold = "
       << Fill_value_threshold << ").";
     throw e;
@@ -875,20 +874,18 @@ template<class F> void Resampler::init
   mi = Mi.subset(r.minx, r.miny, r.maxx - r.minx + 1, r.maxy - r.miny + 1);
   // Shift to the subsetted MapInfo, and set all the fill points to
   // -9999 so we don't use the data.
-  parallel_row_blocks(Number_row, ntask,
-    [&](int, int istart, int iend)
-    {
-      for(int i = istart; i < iend; ++i)
-	for(int j = 0; j < Number_col; ++j) {
-	  if(data_index_(i,j,0) == fill_flag) {
-	    data_index_(i,j,0) = -9999;
-	    data_index_(i,j,1) = -9999;
-	  } else {
-	    data_index_(i,j,0) -= r.miny;
-	    data_index_(i,j,1) -= r.minx;
-	  }
-	}
-    });
+  parallel_row_blocks(Number_row, ntask, [&](int, int istart, int iend) {
+    for(int i = istart; i < iend; ++i)
+      for(int j = 0; j < Number_col; ++j) {
+        if(data_index_(i, j, 0) == fill_flag) {
+          data_index_(i, j, 0) = -9999;
+          data_index_(i, j, 1) = -9999;
+        } else {
+          data_index_(i, j, 0) -= r.miny;
+          data_index_(i, j, 1) -= r.minx;
+        }
+      }
+  });
 }
 
 //-------------------------------------------------------------------------
@@ -922,14 +919,14 @@ void Resampler::clear()
 /// another discontinuity of the map projection).
 //-------------------------------------------------------------------------
 
-void Resampler::determine_range(const blitz::Array<double, 2>& X_coor_interpolated,
-				const blitz::Array<double, 2>& Y_coor_interpolated,
-				const MapInfo& Mi, int Num_sub_pixel,
-				int& lstart, int& lend, int& sstart, int& send,
-				double Fill_value_threshold)
+void Resampler::determine_range(
+    const blitz::Array<double, 2>& X_coor_interpolated,
+    const blitz::Array<double, 2>& Y_coor_interpolated, const MapInfo& Mi,
+    int Num_sub_pixel, int& lstart, int& lend, int& sstart, int& send,
+    double Fill_value_threshold)
 {
   range_in_mi(X_coor_interpolated, Y_coor_interpolated, Mi, Num_sub_pixel,
-	      lstart, lend, sstart, send, Fill_value_threshold, true);
+              lstart, lend, sstart, send, Fill_value_threshold, true);
 }
 
 //-------------------------------------------------------------------------
@@ -938,67 +935,65 @@ void Resampler::determine_range(const blitz::Array<double, 2>& X_coor_interpolat
 //-------------------------------------------------------------------------
 
 void Resampler::range_in_mi(const blitz::Array<double, 2>& X_coor_interpolated,
-			    const blitz::Array<double, 2>& Y_coor_interpolated,
-			    const MapInfo& Mi, int Num_sub_pixel,
-			    int& lstart, int& lend, int& sstart, int& send,
-			    double Fill_value_threshold, bool Check)
+                            const blitz::Array<double, 2>& Y_coor_interpolated,
+                            const MapInfo& Mi, int Num_sub_pixel, int& lstart,
+                            int& lend, int& sstart, int& send,
+                            double Fill_value_threshold, bool Check)
 {
   if(X_coor_interpolated.rows() != Y_coor_interpolated.rows() ||
      X_coor_interpolated.cols() != Y_coor_interpolated.cols())
-    throw Exception("X_coor_interpolated and Y_coor_interpolated need to be the same size");
+    throw Exception(
+        "X_coor_interpolated and Y_coor_interpolated need to be the same size");
   int nrow = X_coor_interpolated.rows();
   int ncol = X_coor_interpolated.cols();
-  auto coor = [&X_coor_interpolated, &Y_coor_interpolated]
-    (int i, int j, double& X, double& Y)
-  {
+  auto coor = [&X_coor_interpolated,
+               &Y_coor_interpolated](int i, int j, double& X, double& Y) {
     X = X_coor_interpolated(i, j);
     Y = Y_coor_interpolated(i, j);
   };
   // Only used if Check is true, but cheap to create.
   ResamplerCoordinateCheck check(nrow, ncol, Num_sub_pixel, coor, Mi,
-				 Fill_value_threshold);
-  int ntask = default_number_task((long) nrow * ncol, -1);
+                                 Fill_value_threshold);
+  int ntask = default_number_task((long)nrow * ncol, -1);
   // NaN fails the range check below, so we only need to check for
   // fill if we have a threshold.
   bool has_threshold =
-    (Fill_value_threshold > std::numeric_limits<double>::lowest());
+      (Fill_value_threshold > std::numeric_limits<double>::lowest());
   double nline_mi = Mi.number_y_pixel();
   double nsamp_mi = Mi.number_x_pixel();
   struct Range {
     int lstart, lend, sstart, send;
   };
   std::vector<Range> trange(std::max(std::min(ntask, nrow), 1),
-			    Range{nrow, -1, ncol, -1});
+                            Range{nrow, -1, ncol, -1});
   std::vector<ResamplerCoordinateCheck::Problem> tproblem(trange.size());
-  parallel_row_blocks(nrow, ntask,
-    [&](int k, int istart, int iend)
-    {
-      Range r{nrow, -1, ncol, -1};
-      if(Check)
-	check.check_rows(istart, iend, coor, tproblem[k]);
-      for(int i = istart; i < iend; ++i) {
-	for(int j = 0; j < ncol; ++j) {
-	  double x = X_coor_interpolated(i,j);
-	  double y = Y_coor_interpolated(i,j);
-	  if(has_threshold &&
-	     !(x > Fill_value_threshold && y > Fill_value_threshold))
-	    continue;
-	  double xindex, yindex;
-	  Mi.coordinate_to_index(x, y, xindex, yindex);
-	  // Range check in double, so NaN (missing) fails it. This is
-	  // the same as 0 <= std::round(index) < n, since std::round
-	  // rounds half way cases away from zero.
-	  if(yindex > -0.5 && yindex < nline_mi - 0.5 &&
-	     xindex > -0.5 && xindex < nsamp_mi - 0.5) {
-	    r.lstart = std::min(r.lstart, i);
-	    r.lend = std::max(r.lend, i);
-	    r.sstart = std::min(r.sstart, j);
-	    r.send = std::max(r.send, j);
-	  }
-	}
+  parallel_row_blocks(nrow, ntask, [&](int k, int istart, int iend) {
+    Range r{nrow, -1, ncol, -1};
+    if(Check)
+      check.check_rows(istart, iend, coor, tproblem[k]);
+    for(int i = istart; i < iend; ++i) {
+      for(int j = 0; j < ncol; ++j) {
+        double x = X_coor_interpolated(i, j);
+        double y = Y_coor_interpolated(i, j);
+        if(has_threshold &&
+           !(x > Fill_value_threshold && y > Fill_value_threshold))
+          continue;
+        double xindex, yindex;
+        Mi.coordinate_to_index(x, y, xindex, yindex);
+        // Range check in double, so NaN (missing) fails it. This is
+        // the same as 0 <= std::round(index) < n, since std::round
+        // rounds half way cases away from zero.
+        if(yindex > -0.5 && yindex < nline_mi - 0.5 && xindex > -0.5 &&
+           xindex < nsamp_mi - 0.5) {
+          r.lstart = std::min(r.lstart, i);
+          r.lend = std::max(r.lend, i);
+          r.sstart = std::min(r.sstart, j);
+          r.send = std::max(r.send, j);
+        }
       }
-      trange[k] = r;
-    });
+    }
+    trange[k] = r;
+  });
   if(Check)
     check.throw_if_problem(tproblem, coor);
   lstart = nrow;
@@ -1029,11 +1024,11 @@ bool Resampler::empty_resample() const
   for(int i = 0; i < data_index_.rows(); ++i)
     for(int j = 0; j < data_index_.cols(); ++j) {
       int ln, smp;
-      ln = data_index_(i,j,0);
-      smp = data_index_(i,j,1);
-      if(ln >= 0 && ln < mi.number_y_pixel() &&
-	 smp >=0 && smp < mi.number_x_pixel())
-	return false;
+      ln = data_index_(i, j, 0);
+      smp = data_index_(i, j, 1);
+      if(ln >= 0 && ln < mi.number_y_pixel() && smp >= 0 &&
+         smp < mi.number_x_pixel())
+        return false;
     }
   return true;
 }
@@ -1047,11 +1042,12 @@ bool Resampler::empty_resample() const
 /// no fill data.
 //-------------------------------------------------------------------------
 
-bool Resampler::empty_resample(const boost::shared_ptr<RasterImage>& Data, double Fill_value_threshold) const
+bool Resampler::empty_resample(const boost::shared_ptr<RasterImage>& Data,
+                               double Fill_value_threshold) const
 {
-  return empty_resample(Data->read_double(0, 0, Data->number_line(),
-					  Data->number_sample()),
-			Fill_value_threshold);
+  return empty_resample(
+      Data->read_double(0, 0, Data->number_line(), Data->number_sample()),
+      Fill_value_threshold);
 }
 
 //-------------------------------------------------------------------------
@@ -1064,18 +1060,18 @@ bool Resampler::empty_resample(const boost::shared_ptr<RasterImage>& Data, doubl
 //-------------------------------------------------------------------------
 
 bool Resampler::empty_resample(const blitz::Array<double, 2>& Data,
-			       double Fill_value_threshold) const
+                               double Fill_value_threshold) const
 {
   check_data_size(Data.rows(), Data.cols());
   for(int i = 0; i < data_index_.rows(); ++i)
     for(int j = 0; j < data_index_.cols(); ++j) {
       int ln, smp;
-      ln = data_index_(i,j,0);
-      smp = data_index_(i,j,1);
-      if(ln >= 0 && ln < mi.number_y_pixel() &&
-	 smp >=0 && smp < mi.number_x_pixel() &&
-	 Data(i / nsub, j / nsub) > Fill_value_threshold)
-	return false;
+      ln = data_index_(i, j, 0);
+      smp = data_index_(i, j, 1);
+      if(ln >= 0 && ln < mi.number_y_pixel() && smp >= 0 &&
+         smp < mi.number_x_pixel() &&
+         Data(i / nsub, j / nsub) > Fill_value_threshold)
+        return false;
     }
   return true;
 }
@@ -1092,26 +1088,25 @@ void Resampler::check_data_size(int Number_line, int Number_sample) const
   // With a swath range, the data needs to be exactly the subset. A
   // larger array (e.g., the full swath passed by mistake) would
   // otherwise silently give a shifted result.
-  if(has_swath_range() &&
-     (Number_line != swath_number_line_ ||
-      Number_sample != swath_number_sample_)) {
+  if(has_swath_range() && (Number_line != swath_number_line_ ||
+                           Number_sample != swath_number_sample_)) {
     Exception e;
     e << "Resampler: the data should be the subset of the swath given by "
       << "the swath range of the Resampler, lines " << swath_line_start_
-      << " to " << swath_line_start_ + swath_number_line_ - 1
-      << " and samples " << swath_sample_start_ << " to "
+      << " to " << swath_line_start_ + swath_number_line_ - 1 << " and samples "
+      << swath_sample_start_ << " to "
       << swath_sample_start_ + swath_number_sample_ - 1 << " ("
       << swath_number_line_ << " x " << swath_number_sample_
       << "). The data is " << Number_line << " x " << Number_sample
       << ". In python, subset the data with line_range and sample_range.";
     throw e;
   }
-  if((long) Number_line * nsub < data_index_.rows() ||
-     (long) Number_sample * nsub < data_index_.cols()) {
+  if((long)Number_line * nsub < data_index_.rows() ||
+     (long)Number_sample * nsub < data_index_.cols()) {
     Exception e;
     e << "data_index should be larger than magnified data\n"
-      << "d:          " << (long) Number_line * nsub << " x "
-      << (long) Number_sample * nsub << "\n"
+      << "d:          " << (long)Number_line * nsub << " x "
+      << (long)Number_sample * nsub << "\n"
       << "data_index: " << data_index_.rows() << " x " << data_index_.cols()
       << "\n";
     throw e;
@@ -1139,15 +1134,16 @@ void Resampler::check_data_size(int Number_line, int Number_sample) const
 /// function for a description of Number_task.
 //-------------------------------------------------------------------------
 
-blitz::Array<double, 2> Resampler::resample_field
-(const boost::shared_ptr<RasterImage>& Data,
- double Scale_data, bool Negative_to_zero, double Fill_value,
- bool Use_smallest_ic, double Fill_value_threshold, int Number_task) const
+blitz::Array<double, 2>
+Resampler::resample_field(const boost::shared_ptr<RasterImage>& Data,
+                          double Scale_data, bool Negative_to_zero,
+                          double Fill_value, bool Use_smallest_ic,
+                          double Fill_value_threshold, int Number_task) const
 {
-  return resample_field(Data->read_double(0, 0, Data->number_line(),
-					  Data->number_sample()),
-			Scale_data, Negative_to_zero, Fill_value,
-			Use_smallest_ic, Fill_value_threshold, Number_task);
+  return resample_field(
+      Data->read_double(0, 0, Data->number_line(), Data->number_sample()),
+      Scale_data, Negative_to_zero, Fill_value, Use_smallest_ic,
+      Fill_value_threshold, Number_task);
 }
 
 //-------------------------------------------------------------------------
@@ -1174,10 +1170,11 @@ blitz::Array<double, 2> Resampler::resample_field
 /// a ThreadPool task, or by two threads at the same time.
 //-------------------------------------------------------------------------
 
-blitz::Array<double, 2> Resampler::resample_field
-(const blitz::Array<double, 2>& Data,
- double Scale_data, bool Negative_to_zero, double Fill_value,
- bool Use_smallest_ic, double Fill_value_threshold, int Number_task) const
+blitz::Array<double, 2>
+Resampler::resample_field(const blitz::Array<double, 2>& Data,
+                          double Scale_data, bool Negative_to_zero,
+                          double Fill_value, bool Use_smallest_ic,
+                          double Fill_value_threshold, int Number_task) const
 {
   check_data_size(Data.rows(), Data.cols());
   int nline_out = mi.number_y_pixel();
@@ -1186,63 +1183,61 @@ blitz::Array<double, 2> Resampler::resample_field
   int ncol = data_index_.cols();
   blitz::Array<double, 2> res(nline_out, nsamp_out);
   // Final value for an output pixel, given the sum and count.
-  auto final_value = [&](double sum, int count) -> double
-  {
+  auto final_value = [&](double sum, int count) -> double {
     double v = (count == 0 ? Fill_value : sum / count * Scale_data);
     if(Negative_to_zero && v < 0)
       v = 0;
     return v;
   };
-  int ntask = default_number_task((long) nrow * ncol, Number_task);
+  int ntask = default_number_task((long)nrow * ncol, Number_task);
 
   // Divide data_index into tiles. We want a reasonable number of
   // tiles for each task, but not so small that the bounding boxes
   // overlap a lot.
   std::vector<ResampleTile> tile;
   if(ntask > 1 && nrow > 0 && ncol > 0) {
-    int tsize = (int) std::ceil(std::sqrt((double) nrow * ncol / ntask));
+    int tsize = (int)std::ceil(std::sqrt((double)nrow * ncol / ntask));
     tsize = std::max(std::min(tsize, 1024), 16);
     for(int i = 0; i < nrow; i += tsize)
       for(int j = 0; j < ncol; j += tsize) {
-	ResampleTile t;
-	t.istart = i;
-	t.iend = std::min(i + tsize, nrow);
-	t.jstart = j;
-	t.jend = std::min(j + tsize, ncol);
-	tile.push_back(t);
+        ResampleTile t;
+        t.istart = i;
+        t.iend = std::min(i + tsize, nrow);
+        t.jstart = j;
+        t.jend = std::min(j + tsize, ncol);
+        tile.push_back(t);
       }
     // Find the bounding box of each tile.
-    parallel_row_blocks((int) tile.size(), ntask,
-      [&](int, int kstart, int kend)
-      {
-	for(int k = kstart; k < kend; ++k) {
-	  ResampleTile& t = tile[k];
-	  int lmin = nline_out, lmax = -1, smin = nsamp_out, smax = -1;
-	  for(int i = t.istart; i < t.iend; ++i)
-	    for(int j = t.jstart; j < t.jend; ++j) {
-	      int ln = data_index_(i,j,0);
-	      int smp = data_index_(i,j,1);
-	      if(ln >= 0 && ln < nline_out && smp >=0 && smp < nsamp_out) {
-		lmin = std::min(lmin, ln);
-		lmax = std::max(lmax, ln);
-		smin = std::min(smin, smp);
-		smax = std::max(smax, smp);
-	      }
-	    }
-	  if(lmax >= 0) {
-	    t.lstart = lmin;
-	    t.nline = lmax - lmin + 1;
-	    t.sstart = smin;
-	    t.nsamp = smax - smin + 1;
-	  }
-	}
-      });
+    parallel_row_blocks(
+        (int)tile.size(), ntask, [&](int, int kstart, int kend) {
+          for(int k = kstart; k < kend; ++k) {
+            ResampleTile& t = tile[k];
+            int lmin = nline_out, lmax = -1, smin = nsamp_out, smax = -1;
+            for(int i = t.istart; i < t.iend; ++i)
+              for(int j = t.jstart; j < t.jend; ++j) {
+                int ln = data_index_(i, j, 0);
+                int smp = data_index_(i, j, 1);
+                if(ln >= 0 && ln < nline_out && smp >= 0 && smp < nsamp_out) {
+                  lmin = std::min(lmin, ln);
+                  lmax = std::max(lmax, ln);
+                  smin = std::min(smin, smp);
+                  smax = std::max(smax, smp);
+                }
+              }
+            if(lmax >= 0) {
+              t.lstart = lmin;
+              t.nline = lmax - lmin + 1;
+              t.sstart = smin;
+              t.nsamp = smax - smin + 1;
+            }
+          }
+        });
     // If the bounding boxes are much larger than the output (e.g., a
     // strongly curved swath), the memory isn't worth it. Just do this
     // in one thread.
     double total = 0;
     for(const auto& t : tile)
-      total += (double) t.nline * t.nsamp;
+      total += (double)t.nline * t.nsamp;
     if(total > 2.0 * nline_out * nsamp_out)
       ntask = 1;
   }
@@ -1254,98 +1249,94 @@ blitz::Array<double, 2> Resampler::resample_field
     cnt = 0;
     for(int i = 0; i < nrow; ++i)
       for(int j = 0; j < ncol; ++j) {
-	int ln = data_index_(i,j,0);
-	int smp = data_index_(i,j,1);
-	if(ln >= 0 && ln < nline_out && smp >=0 && smp < nsamp_out) {
-	  double d = Data(i / nsub, j / nsub);
-	  // Add data, unless it is fill or we already have data there
-	  // and Use_smallest_ic is true
-	  if(d > Fill_value_threshold &&
-	     (!Use_smallest_ic || cnt(ln,smp) == 0)) {
-	    sum(ln,smp) += d;
-	    cnt(ln,smp) += 1;
-	  }
-	}
+        int ln = data_index_(i, j, 0);
+        int smp = data_index_(i, j, 1);
+        if(ln >= 0 && ln < nline_out && smp >= 0 && smp < nsamp_out) {
+          double d = Data(i / nsub, j / nsub);
+          // Add data, unless it is fill or we already have data there
+          // and Use_smallest_ic is true
+          if(d > Fill_value_threshold &&
+             (!Use_smallest_ic || cnt(ln, smp) == 0)) {
+            sum(ln, smp) += d;
+            cnt(ln, smp) += 1;
+          }
+        }
       }
     for(int i = 0; i < res.rows(); ++i)
       for(int j = 0; j < res.cols(); ++j)
-	res(i,j) = final_value(sum(i,j), cnt(i,j));
+        res(i, j) = final_value(sum(i, j), cnt(i, j));
     return res;
   }
 
   // Accumulate the data for each tile.
-  parallel_row_blocks((int) tile.size(), ntask,
-    [&](int, int kstart, int kend)
-    {
-      for(int k = kstart; k < kend; ++k) {
-	ResampleTile& t = tile[k];
-	t.sum.assign((size_t) t.nline * t.nsamp, 0.0);
-	t.cnt.assign(t.sum.size(), 0);
-	if(Use_smallest_ic)
-	  t.first.assign(t.sum.size(), std::numeric_limits<long>::max());
-	if(t.nline == 0)
-	  continue;
-	for(int i = t.istart; i < t.iend; ++i)
-	  for(int j = t.jstart; j < t.jend; ++j) {
-	    int ln = data_index_(i,j,0);
-	    int smp = data_index_(i,j,1);
-	    if(ln >= 0 && ln < nline_out && smp >=0 && smp < nsamp_out) {
-	      double d = Data(i / nsub, j / nsub);
-	      if(d > Fill_value_threshold) {
-		size_t q = (size_t) (ln - t.lstart) * t.nsamp + (smp - t.sstart);
-		// We go through the tile in order, so the first value
-		// we see has the smallest position in the tile.
-		if(!Use_smallest_ic) {
-		  t.sum[q] += d;
-		  t.cnt[q] += 1;
-		} else if(t.cnt[q] == 0) {
-		  t.sum[q] = d;
-		  t.cnt[q] = 1;
-		  t.first[q] = (long) i * ncol + j;
-		}
-	      }
-	    }
-	  }
-      }
-    });
+  parallel_row_blocks((int)tile.size(), ntask, [&](int, int kstart, int kend) {
+    for(int k = kstart; k < kend; ++k) {
+      ResampleTile& t = tile[k];
+      t.sum.assign((size_t)t.nline * t.nsamp, 0.0);
+      t.cnt.assign(t.sum.size(), 0);
+      if(Use_smallest_ic)
+        t.first.assign(t.sum.size(), std::numeric_limits<long>::max());
+      if(t.nline == 0)
+        continue;
+      for(int i = t.istart; i < t.iend; ++i)
+        for(int j = t.jstart; j < t.jend; ++j) {
+          int ln = data_index_(i, j, 0);
+          int smp = data_index_(i, j, 1);
+          if(ln >= 0 && ln < nline_out && smp >= 0 && smp < nsamp_out) {
+            double d = Data(i / nsub, j / nsub);
+            if(d > Fill_value_threshold) {
+              size_t q = (size_t)(ln - t.lstart) * t.nsamp + (smp - t.sstart);
+              // We go through the tile in order, so the first value
+              // we see has the smallest position in the tile.
+              if(!Use_smallest_ic) {
+                t.sum[q] += d;
+                t.cnt[q] += 1;
+              } else if(t.cnt[q] == 0) {
+                t.sum[q] = d;
+                t.cnt[q] = 1;
+                t.first[q] = (long)i * ncol + j;
+              }
+            }
+          }
+        }
+    }
+  });
 
   // Merge the tiles, dividing the output into blocks of lines. We go
   // through the tiles in the same order for every output pixel, so
   // the result doesn't depend on how the work is divided up.
-  parallel_row_blocks(nline_out, ntask,
-    [&](int, int lstart, int lend)
-    {
-      int nl = lend - lstart;
-      std::vector<double> sum((size_t) nl * nsamp_out, 0.0);
-      std::vector<int> cnt(sum.size(), 0);
-      std::vector<long> first;
-      if(Use_smallest_ic)
-	first.assign(sum.size(), std::numeric_limits<long>::max());
-      for(const auto& t : tile) {
-	int l1 = std::max(lstart, t.lstart);
-	int l2 = std::min(lend, t.lstart + t.nline);
-	for(int l = l1; l < l2; ++l)
-	  for(int s = 0; s < t.nsamp; ++s) {
-	    size_t qt = (size_t) (l - t.lstart) * t.nsamp + s;
-	    if(t.cnt[qt] == 0)
-	      continue;
-	    size_t q = (size_t) (l - lstart) * nsamp_out + t.sstart + s;
-	    if(!Use_smallest_ic) {
-	      sum[q] += t.sum[qt];
-	      cnt[q] += t.cnt[qt];
-	    } else if(t.first[qt] < first[q]) {
-	      first[q] = t.first[qt];
-	      sum[q] = t.sum[qt];
-	      cnt[q] = 1;
-	    }
-	  }
+  parallel_row_blocks(nline_out, ntask, [&](int, int lstart, int lend) {
+    int nl = lend - lstart;
+    std::vector<double> sum((size_t)nl * nsamp_out, 0.0);
+    std::vector<int> cnt(sum.size(), 0);
+    std::vector<long> first;
+    if(Use_smallest_ic)
+      first.assign(sum.size(), std::numeric_limits<long>::max());
+    for(const auto& t : tile) {
+      int l1 = std::max(lstart, t.lstart);
+      int l2 = std::min(lend, t.lstart + t.nline);
+      for(int l = l1; l < l2; ++l)
+        for(int s = 0; s < t.nsamp; ++s) {
+          size_t qt = (size_t)(l - t.lstart) * t.nsamp + s;
+          if(t.cnt[qt] == 0)
+            continue;
+          size_t q = (size_t)(l - lstart) * nsamp_out + t.sstart + s;
+          if(!Use_smallest_ic) {
+            sum[q] += t.sum[qt];
+            cnt[q] += t.cnt[qt];
+          } else if(t.first[qt] < first[q]) {
+            first[q] = t.first[qt];
+            sum[q] = t.sum[qt];
+            cnt[q] = 1;
+          }
+        }
+    }
+    for(int l = lstart; l < lend; ++l)
+      for(int s = 0; s < nsamp_out; ++s) {
+        size_t q = (size_t)(l - lstart) * nsamp_out + s;
+        res(l, s) = final_value(sum[q], cnt[q]);
       }
-      for(int l = lstart; l < lend; ++l)
-	for(int s = 0; s < nsamp_out; ++s) {
-	  size_t q = (size_t) (l - lstart) * nsamp_out + s;
-	  res(l, s) = final_value(sum[q], cnt[q]);
-	}
-    });
+  });
   return res;
 }
 
@@ -1365,29 +1356,27 @@ blitz::Array<double, 2> Resampler::resample_field
 /// no fill data.
 //-------------------------------------------------------------------------
 
-void Resampler::resample_field
-(const std::string& Fname,
- const boost::shared_ptr<RasterImage>& Data,
- double Scale_data, const std::string& File_type, bool Negative_to_zero,
- double Fill_value, double Fill_value_threshold) const
+void Resampler::resample_field(const std::string& Fname,
+                               const boost::shared_ptr<RasterImage>& Data,
+                               double Scale_data, const std::string& File_type,
+                               bool Negative_to_zero, double Fill_value,
+                               double Fill_value_threshold) const
 {
   blitz::Array<double, 2> res(resample_field(Data, Scale_data, Negative_to_zero,
-					     Fill_value, false,
-					     Fill_value_threshold));
+                                             Fill_value, false,
+                                             Fill_value_threshold));
   VicarRasterImage f(Fname, mi, File_type);
-  f.write(0,0,res);
+  f.write(0, 0, res);
 }
-
 
 //-------------------------------------------------------------------------
 /// Various fields from the map_info. This is just all in a function
 /// because this is much faster to do in C++ vs. looping in python.
 //-------------------------------------------------------------------------
 
-void Resampler::map_values
-(const Dem& d,
- blitz::Array<double, 2>& Lat, blitz::Array<double, 2>& Lon,
- blitz::Array<double, 2>& Height) const
+void Resampler::map_values(const Dem& d, blitz::Array<double, 2>& Lat,
+                           blitz::Array<double, 2>& Lon,
+                           blitz::Array<double, 2>& Height) const
 {
   Lat.resize(mi.number_y_pixel(), mi.number_x_pixel());
   Lon.resize(Lat.shape());
@@ -1395,7 +1384,6 @@ void Resampler::map_values
   for(int i = 0; i < Lat.rows(); ++i)
     for(int j = 0; j < Lat.cols(); ++j) {
       boost::shared_ptr<GroundCoordinate> gp = mi.ground_coordinate(j, i, d);
-      gp->lat_lon_height(Lat(i,j), Lon(i,j), Height(i,j));
+      gp->lat_lon_height(Lat(i, j), Lon(i, j), Height(i, j));
     }
 }
-

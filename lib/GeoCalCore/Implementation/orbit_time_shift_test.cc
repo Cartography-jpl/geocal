@@ -9,7 +9,7 @@ using namespace blitz;
 
 class OrbitTimeShiftFixture : public GlobalFixture {
 public:
-  OrbitTimeShiftFixture() 
+  OrbitTimeShiftFixture()
   {
     std::string fname = test_data_dir() + "sample_orbit.h5";
 #ifdef HAVE_HDF5
@@ -36,10 +36,8 @@ BOOST_AUTO_TEST_CASE(basic)
     return;
   for(int i = 0; i < 3; ++i)
     BOOST_CHECK_CLOSE(orb->position_cf(t)->position[i],
-		      orb_orig->position_cf(t-tshift)->position[i],  1e-4);
+                      orb_orig->position_cf(t - tshift)->position[i], 1e-4);
 }
-
-
 
 BOOST_AUTO_TEST_CASE(serialization)
 {
@@ -49,12 +47,10 @@ BOOST_AUTO_TEST_CASE(serialization)
   std::string d = serialize_write_string(orb);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<Orbit> orbr = 
-    serialize_read_string<OrbitTimeShift>(d);
+  boost::shared_ptr<Orbit> orbr = serialize_read_string<OrbitTimeShift>(d);
   for(int i = 0; i < 3; ++i)
     BOOST_CHECK_CLOSE(orbr->position_cf(t)->position[i],
-		      orb_orig->position_cf(t-tshift)->position[i],  1e-4);
+                      orb_orig->position_cf(t - tshift)->position[i], 1e-4);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-

@@ -6,7 +6,7 @@
 #include <map>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This handles the non-linearity of MSPI camera optics. This goes to
   and from real frame camera coordinate (i.e. x and y of the CCD) and the
   location we'd get for a pinhole camera with no non-linearity  (the
@@ -20,63 +20,60 @@ namespace GeoCal {
   processing software design consideration for GroundMSPI L1B2
   process", Rev A.1, April 4, 2012.
 *******************************************************************/
-class MspiParaxialTransform: public Printable<MspiParaxialTransform> {
+class MspiParaxialTransform : public Printable<MspiParaxialTransform> {
 public:
   MspiParaxialTransform(const std::string& File_name);
   virtual ~MspiParaxialTransform() {}
-  void paraxial_to_real(int Row_number, double Paraxial_x,
-			double Paraxial_y, double& Real_x, 
-			double& Real_y) const;
-  void paraxial_to_real(int Row_number, const AutoDerivative<double>& 
-			Paraxial_x,
-			const AutoDerivative<double>& Paraxial_y, 
-			AutoDerivative<double>& Real_x, 
-			AutoDerivative<double>& Real_y) const;
-  void real_to_paraxial(int Row_number,
-			double Real_x,
-			double Real_y,
-			double& Paraxial_x,
-			double& Paraxial_y) const;
-  void real_to_paraxial(int Row_number,
-			const AutoDerivative<double>& Real_x,
-			const AutoDerivative<double>& Real_y,
-			AutoDerivative<double>& Paraxial_x,
-			AutoDerivative<double>& Paraxial_y) const;
-  
-//-----------------------------------------------------------------------
-/// File name for MspiConfigFile.
-//-----------------------------------------------------------------------
+  void paraxial_to_real(int Row_number, double Paraxial_x, double Paraxial_y,
+                        double& Real_x, double& Real_y) const;
+  void paraxial_to_real(int Row_number,
+                        const AutoDerivative<double>& Paraxial_x,
+                        const AutoDerivative<double>& Paraxial_y,
+                        AutoDerivative<double>& Real_x,
+                        AutoDerivative<double>& Real_y) const;
+  void real_to_paraxial(int Row_number, double Real_x, double Real_y,
+                        double& Paraxial_x, double& Paraxial_y) const;
+  void real_to_paraxial(int Row_number, const AutoDerivative<double>& Real_x,
+                        const AutoDerivative<double>& Real_y,
+                        AutoDerivative<double>& Paraxial_x,
+                        AutoDerivative<double>& Paraxial_y) const;
 
-  const std::string& file_name() const {return fname;}
-  void file_name(const std::string& Fname) {fname = Fname;}
+  //-----------------------------------------------------------------------
+  /// File name for MspiConfigFile.
+  //-----------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
-/// True if we have the given row.
-//-----------------------------------------------------------------------
+  const std::string& file_name() const { return fname; }
+  void file_name(const std::string& Fname) { fname = Fname; }
+
+  //-----------------------------------------------------------------------
+  /// True if we have the given row.
+  //-----------------------------------------------------------------------
   bool has_row(int Row_number) const
-  { return row_to_index.count(Row_number) > 0; }
+  {
+    return row_to_index.count(Row_number) > 0;
+  }
   virtual void print(std::ostream& Os) const;
 
-//-----------------------------------------------------------------------
-/// Parameters for Paraxial transform
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Parameters for Paraxial transform
+  //-----------------------------------------------------------------------
 
-  const blitz::Array<double, 2>& a() const {return a_; }
-  const blitz::Array<double, 2>& b() const {return b_; }
-  const blitz::Array<double, 2>& c() const {return c_; }
-  const blitz::Array<double, 2>& d() const {return d_; }
-  const std::vector<double>& y0() const {return y0_; }
-  
+  const blitz::Array<double, 2>& a() const { return a_; }
+  const blitz::Array<double, 2>& b() const { return b_; }
+  const blitz::Array<double, 2>& c() const { return c_; }
+  const blitz::Array<double, 2>& d() const { return d_; }
+  const std::vector<double>& y0() const { return y0_; }
+
 private:
   std::string fname;
   std::map<int, int> row_to_index;
   blitz::Array<double, 2> a_, b_, c_, d_;
-  std::vector<double> y0_;  // Y coordinate of principal point for each row
+  std::vector<double> y0_; // Y coordinate of principal point for each row
   int paraxial_y_mode_;
   MspiParaxialTransform() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 

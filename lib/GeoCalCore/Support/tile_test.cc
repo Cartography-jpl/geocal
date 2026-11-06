@@ -24,12 +24,12 @@ BOOST_AUTO_TEST_CASE(tile_use)
   BOOST_CHECK(!t.changed);
   BOOST_CHECK(t.in_tile(i));
   t.data(i) = 5;
-  BOOST_CHECK(t.data(i) ==5);
+  BOOST_CHECK(t.data(i) == 5);
   t.changed = true;
   t.swap(mini, maxi);
   BOOST_CHECK(!t.changed);
-  BOOST_CHECK(t.min_index() ==mini);
-  BOOST_CHECK(t.max_index() ==maxi);
+  BOOST_CHECK(t.min_index() == mini);
+  BOOST_CHECK(t.max_index() == maxi);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

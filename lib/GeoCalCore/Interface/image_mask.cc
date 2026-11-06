@@ -7,25 +7,27 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void ImageMask::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
+void ImageMask::serialize(Archive& UNUSED(ar),
+                          const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(ImageMask);
 }
 
 template<class Archive>
-void OffsetImageMask::serialize(Archive & ar, const unsigned int UNUSED(version))
+void OffsetImageMask::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(ImageMask);
   GEOCAL_BASE(OffsetImageMask, ImageMask);
-  ar & GEOCAL_NVP_(im) & GEOCAL_NVP_(line_offset) & GEOCAL_NVP_(sample_offset);
+  ar& GEOCAL_NVP_(im) & GEOCAL_NVP_(line_offset) & GEOCAL_NVP_(sample_offset);
 }
 
 template<class Archive>
-void CombinedImageMask::serialize(Archive & ar, const unsigned int UNUSED(version))
+void CombinedImageMask::serialize(Archive& ar,
+                                  const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(ImageMask);
   GEOCAL_BASE(CombinedImageMask, ImageMask);
-  ar & GEOCAL_NVP(mask_list);
+  ar& GEOCAL_NVP(mask_list);
 }
 
 GEOCAL_IMPLEMENT(ImageMask);
@@ -40,10 +42,10 @@ GEOCAL_IMPLEMENT(CombinedImageMask);
 
 bool ImageMask::mask_ic(const ImageCoordinate& Ic) const
 {
-  int ln = (int) floor(Ic.line);
-  int smp = (int) floor(Ic.sample);
+  int ln = (int)floor(Ic.line);
+  int smp = (int)floor(Ic.sample);
   return area_any_masked(ln, smp, (ln == Ic.line ? 1 : 2),
-			 (smp == Ic.sample ? 1 : 2));
+                         (smp == Ic.sample ? 1 : 2));
 }
 
 //-----------------------------------------------------------------------
@@ -52,12 +54,12 @@ bool ImageMask::mask_ic(const ImageCoordinate& Ic) const
 //-----------------------------------------------------------------------
 
 bool ImageMask::area_any_masked(int Line, int Sample, int Number_line,
-				int Number_sample) const
+                                int Number_sample) const
 {
   for(int ln = Line; ln < Line + Number_line; ++ln)
     for(int smp = Sample; smp < Sample + Number_sample; ++smp)
       if(mask(ln, smp))
-	return true;
+        return true;
   return false;
 }
 
@@ -75,7 +77,7 @@ bool CombinedImageMask::mask(int Line, int Sample) const
 // See base class for description
 
 bool CombinedImageMask::area_any_masked(int Line, int Sample, int Number_line,
-			       int Number_sample) const
+                                        int Number_sample) const
 {
   BOOST_FOREACH(boost::shared_ptr<ImageMask> m, mask_list) {
     if(m->area_any_masked(Line, Sample, Number_line, Number_sample))
@@ -105,7 +107,7 @@ void OffsetImageMask::print(std::ostream& Os) const
 
 void CombinedImageMask::print(std::ostream& Os) const
 {
-  if(mask_list.size() ==0)
+  if(mask_list.size() == 0)
     Os << "Empty CombinedImageMask\n";
   else {
     Os << "CombinedImageMask: \n";

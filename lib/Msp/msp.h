@@ -25,25 +25,25 @@
 #include "RsmGeneratorService.h"
 #include "RGSConfig.h"
 
-#include <sstream>		// Definition of ostringstream.
+#include <sstream> // Definition of ostringstream.
 #include <boost/shared_ptr.hpp>
 #include <blitz/array.h>
 
-/****************************************************************//**
+/****************************************************************/ /**
   Copy of exception we use in geocal. Note we can't link in geocal,
   because this library must use the much older gcc 4.85 CXX ABI,
   which means we can't link to geocal.
 *******************************************************************/
 
-class Exception: public std::exception {
+class Exception : public std::exception {
 public:
   //-----------------------------------------------------------------------
   /// Default constructor. Can give an optional string describing
   /// the error.
   //-----------------------------------------------------------------------
 
-  Exception(const std::string& W = "") 
-  { 
+  Exception(const std::string& W = "")
+  {
     // This reserve shouldn't really be necessary, but on a Mac
     // 10.4.11 using gcc 4.0.1, there is some kind of bug where we get
     // a "Double free" error when printing in Ruby. I never tracked
@@ -55,7 +55,7 @@ public:
     std::string buf("blah");
     buf.reserve(1000);
     s_.str(buf);
-    s_ << W;  
+    s_ << W;
   }
 
   //-----------------------------------------------------------------------
@@ -67,20 +67,20 @@ public:
     try {
       std::string cp(E.s_.str());
       s_.str(cp);
-    } catch(...) {		// Ignore all errors.
+    } catch(...) { // Ignore all errors.
     }
   }
-  
+
   //-----------------------------------------------------------------------
   /// Destructor.
   //-----------------------------------------------------------------------
-    
+
   virtual ~Exception() throw() {}
 
   //-----------------------------------------------------------------------
   /// Write to exception what() string.
   //-----------------------------------------------------------------------
-    
+
   template<class T> inline Exception& operator<<(const T& V)
   {
     s_ << V;
@@ -91,12 +91,12 @@ public:
   /// Print out description of object.
   //-----------------------------------------------------------------------
 
-  virtual void print(std::ostream& Os) const 
+  virtual void print(std::ostream& Os) const
   {
     Os << "GeoCal Exception:\n"
-       << "=========================\n" 
+       << "=========================\n"
        << what() << "\n"
-       << "=========================\n" ;
+       << "=========================\n";
   }
 
   //-----------------------------------------------------------------------
@@ -113,7 +113,7 @@ private:
   std::ostringstream s_;
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   This is close to a ImageGroundConnection that uses the MSP (Mensuration
   Service Program) library to implement an ImageGroundConnection. This
   uses a set of plugins for the CSM (Community Sensor Model, see 
@@ -145,32 +145,46 @@ public:
   static std::vector<std::string> msp_model_list(const std::string& Plugin);
   static void msp_register_plugin(const std::string& Plugin_name);
   static std::vector<std::string> image_ids(const std::string& Fname);
-  const std::string& file_name() const { return fname_;}
-  int image_index() const { return image_index_;}
+  const std::string& file_name() const { return fname_; }
+  int image_index() const { return image_index_; }
   std::string family() const { return model->getFamily(); }
   std::string version() const { return model->getVersion().version(); }
   std::string model_name() const { return model->getModelName(); }
   std::string pedigree() const { return model->getPedigree(); }
   std::string image_identifer() const { return model->getImageIdentifier(); }
   std::string sensor_identifer() const { return model->getSensorIdentifier(); }
-  std::string platform_identifer() const { return model->getPlatformIdentifier(); }
-  std::string collection_identifer() const { return model->getCollectionIdentifier(); }
-  std::string trajectory_identifer() const { return model->getTrajectoryIdentifier(); }
+  std::string platform_identifer() const
+  {
+    return model->getPlatformIdentifier();
+  }
+  std::string collection_identifer() const
+  {
+    return model->getCollectionIdentifier();
+  }
+  std::string trajectory_identifer() const
+  {
+    return model->getTrajectoryIdentifier();
+  }
   std::string sensor_type() const { return model->getSensorType(); }
   std::string sensor_mode() const { return model->getSensorMode(); }
-  std::string reference_date_time() const { return model->getReferenceDateAndTime(); }
+  std::string reference_date_time() const
+  {
+    return model->getReferenceDateAndTime();
+  }
   blitz::Array<double, 1> sensor_velocity(double Line, double Sample);
   std::string generate_rsm_tre(const std::string& Report = "",
-   			       const std::string& Rsm_config = "") const;
+                               const std::string& Rsm_config = "") const;
   blitz::Array<double, 1> ce90_le90(double Line, double Sample, double H) const;
-  blitz::Array<double, 2> ground_coordinate_with_cov
-  (double Line, double Sample, const blitz::Array<double, 2>& Ic_cov,
-   double H, double H_var) const;
+  blitz::Array<double, 2>
+  ground_coordinate_with_cov(double Line, double Sample,
+                             const blitz::Array<double, 2>& Ic_cov, double H,
+                             double H_var) const;
   blitz::Array<double, 2> covariance() const;
   blitz::Array<double, 2> joint_covariance(const Msp& igc2) const;
   std::string pixel_time_base(double Line, double Sample) const;
   double pixel_time_offset(double Line, double Sample) const;
-  blitz::Array<double, 1> image_coordinate(const blitz::Array<double, 1>& Gc_ecr) const;
+  blitz::Array<double, 1>
+  image_coordinate(const blitz::Array<double, 1>& Gc_ecr) const;
   blitz::Array<double, 2> cf_look_vector(double Line, double Sample) const;
   blitz::Array<double, 1>
   ground_coordinate_approx_height(double Line, double Sample, double H) const;

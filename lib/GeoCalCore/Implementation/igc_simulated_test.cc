@@ -12,27 +12,26 @@ using namespace GeoCal;
 BOOST_FIXTURE_TEST_SUITE(igc_simulated, GlobalFixture)
 BOOST_AUTO_TEST_CASE(full_res)
 {
-  boost::shared_ptr<Dem> 
-    dem(new VicarLiteDem(stereo_test_data_dir() + "nevada_elv_aoi.img", true));
-  boost::shared_ptr<RasterImage> 
-    img(new VicarLiteRasterImage(stereo_test_data_dir() + "10MAY21-1.img"));
-  boost::shared_ptr<ImageGroundConnection>
-    igc(new RpcImageGroundConnection(img->rpc(), dem, img));
-  boost::shared_ptr<RasterImage> 
-    simg(new GdalRasterImage(stereo_test_data_dir() + 
-			     "10MAY21-1_projected.tif"));
+  boost::shared_ptr<Dem> dem(
+      new VicarLiteDem(stereo_test_data_dir() + "nevada_elv_aoi.img", true));
+  boost::shared_ptr<RasterImage> img(
+      new VicarLiteRasterImage(stereo_test_data_dir() + "10MAY21-1.img"));
+  boost::shared_ptr<ImageGroundConnection> igc(
+      new RpcImageGroundConnection(img->rpc(), dem, img));
+  boost::shared_ptr<RasterImage> simg(
+      new GdalRasterImage(stereo_test_data_dir() + "10MAY21-1_projected.tif"));
   IgcSimulated igc_sim(igc, simg);
 
   // Manually inspected output as ok. For testing, just check a single
   // value. If this fails, you may want to enable writing out the full
   // output and seeing what is going on.
   BOOST_CHECK_CLOSE(igc_sim.read_double(473, 1000, 5, 5)(0, 0),
-  		    378.45949734573293, 1e-2);
+                    378.45949734573293, 1e-2);
   // Optionally write this out for manual inspection
   if(false) {
 #ifdef HAVE_VICAR_RTL
     VicarRasterImage out("full_res.img", "HALF", igc_sim.number_line(),
-			 igc_sim.number_sample());
+                         igc_sim.number_sample());
     copy(igc_sim, out);
 #endif
   }

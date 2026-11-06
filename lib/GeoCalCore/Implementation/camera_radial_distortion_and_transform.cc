@@ -8,14 +8,14 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void CameraRadialDistortionAndTransform::serialize(Archive & ar, const unsigned int version)
+void CameraRadialDistortionAndTransform::serialize(Archive& ar,
+                                                   const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CameraRadialDistortion);
-  ar & GEOCAL_NVP_(bin_mode) & GEOCAL_NVP_(ccd_off) & GEOCAL_NVP_(ccd_cen)
-    & GEOCAL_NVP_(t_off) & GEOCAL_NVP_(tinv_off)
-    & GEOCAL_NVP_(t_m) & GEOCAL_NVP_(tinv_m);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(CameraRadialDistortion);
+  ar& GEOCAL_NVP_(bin_mode) & GEOCAL_NVP_(ccd_off) & GEOCAL_NVP_(ccd_cen) &
+      GEOCAL_NVP_(t_off) & GEOCAL_NVP_(tinv_off) & GEOCAL_NVP_(t_m) &
+      GEOCAL_NVP_(tinv_m);
 }
-
 
 GEOCAL_IMPLEMENT(CameraRadialDistortionAndTransform);
 #endif
@@ -30,8 +30,8 @@ void CameraRadialDistortionAndTransform::print(std::ostream& Os) const
      << "   Line pitch:      " << line_pitch() << " mm\n"
      << "   Sample pitch:    " << sample_pitch() << " mm\n"
      << "   Principal point: " << principal_point(0) << "\n"
-     << "   Frame convention: " << (frame_convention() == LINE_IS_X ?
-				    "LINE_IS_X\n" : "LINE_IS_Y\n")
+     << "   Frame convention: "
+     << (frame_convention() == LINE_IS_X ? "LINE_IS_X\n" : "LINE_IS_Y\n")
      << "   Frame to spacecraft: " << frame_to_sc() << "\n"
      << "   Bin mode:         " << bin_mode() << "\n"
      << "   K_distort:\n";
@@ -59,52 +59,53 @@ void CameraRadialDistortionAndTransform::print(std::ostream& Os) const
 
 FrameCoordinate
 CameraRadialDistortionAndTransform::focal_plane_to_fc(int Band, double Xfp,
-						      double Yfp) const
+                                                      double Yfp) const
 {
   range_check(Band, 0, number_band());
-  double ccd_sample = tinv_off_(0) + Xfp * tinv_m_(0,0) + Yfp * tinv_m_(0,1);
-  double ccd_line = tinv_off_(1) + Xfp * tinv_m_(1,0) + Yfp * tinv_m_(1,1);
+  double ccd_sample = tinv_off_(0) + Xfp * tinv_m_(0, 0) + Yfp * tinv_m_(0, 1);
+  double ccd_line = tinv_off_(1) + Xfp * tinv_m_(1, 0) + Yfp * tinv_m_(1, 1);
   FrameCoordinate fc;
   fc.line = ccd_line - (ccd_off_(1) - ccd_cen_(1) - (bin_mode_ / 2.0 - 0.5));
   fc.sample = (ccd_sample - (ccd_off_(0) - ccd_cen_(0))) / bin_mode_;
   return fc;
 }
 
-FrameCoordinateWithDerivative CameraRadialDistortionAndTransform::focal_plane_to_fc
-(int Band, const AutoDerivative<double>& Xfp,
- const AutoDerivative<double>& Yfp) const
+FrameCoordinateWithDerivative
+CameraRadialDistortionAndTransform::focal_plane_to_fc(
+    int Band, const AutoDerivative<double>& Xfp,
+    const AutoDerivative<double>& Yfp) const
 {
   range_check(Band, 0, number_band());
   AutoDerivative<double> ccd_sample =
-    tinv_off_(0) + Xfp * tinv_m_(0,0) + Yfp * tinv_m_(0,1);
-  AutoDerivative<double> ccd_line  =
-    tinv_off_(1) + Xfp * tinv_m_(1,0) + Yfp * tinv_m_(1,1);
+      tinv_off_(0) + Xfp * tinv_m_(0, 0) + Yfp * tinv_m_(0, 1);
+  AutoDerivative<double> ccd_line =
+      tinv_off_(1) + Xfp * tinv_m_(1, 0) + Yfp * tinv_m_(1, 1);
   FrameCoordinateWithDerivative fc;
   fc.line = ccd_line - (ccd_off_(1) - ccd_cen_(1) - (bin_mode_ / 2.0 - 0.5));
   fc.sample = (ccd_sample - (ccd_off_(0) - ccd_cen_(0))) / bin_mode_;
   return fc;
 }
-  
-void CameraRadialDistortionAndTransform::fc_to_focal_plane(const FrameCoordinate& Fc, int Band,
-					 double& Xfp, double& Yfp) const
+
+void CameraRadialDistortionAndTransform::fc_to_focal_plane(
+    const FrameCoordinate& Fc, int Band, double& Xfp, double& Yfp) const
 {
   range_check(Band, 0, number_band());
-  double ccd_line = Fc.line + ccd_off_(1) - ccd_cen_(1) - (bin_mode_ / 2.0 - 0.5);
+  double ccd_line =
+      Fc.line + ccd_off_(1) - ccd_cen_(1) - (bin_mode_ / 2.0 - 0.5);
   double ccd_sample = Fc.sample * bin_mode_ + ccd_off_(0) - ccd_cen_(0);
-  Xfp = t_off_(0) + ccd_sample * t_m_(0,0) + ccd_line * t_m_(0,1);
-  Yfp = t_off_(1) + ccd_sample * t_m_(1,0) + ccd_line * t_m_(1,1);
+  Xfp = t_off_(0) + ccd_sample * t_m_(0, 0) + ccd_line * t_m_(0, 1);
+  Yfp = t_off_(1) + ccd_sample * t_m_(1, 0) + ccd_line * t_m_(1, 1);
 }
 
-void CameraRadialDistortionAndTransform::fc_to_focal_plane
-(const FrameCoordinateWithDerivative& Fc, int Band,
- AutoDerivative<double>& Xfp, AutoDerivative<double>& Yfp) const
+void CameraRadialDistortionAndTransform::fc_to_focal_plane(
+    const FrameCoordinateWithDerivative& Fc, int Band,
+    AutoDerivative<double>& Xfp, AutoDerivative<double>& Yfp) const
 {
   range_check(Band, 0, number_band());
   AutoDerivative<double> ccd_line =
-    Fc.line + ccd_off_(1) - ccd_cen_(1) - (bin_mode_ / 2.0 - 0.5);
+      Fc.line + ccd_off_(1) - ccd_cen_(1) - (bin_mode_ / 2.0 - 0.5);
   AutoDerivative<double> ccd_sample =
-    Fc.sample * bin_mode_ + ccd_off_(0) - ccd_cen_(0);
-  Xfp = t_off_(0) + ccd_sample * t_m_(0,0) + ccd_line * t_m_(0,1);
-  Yfp = t_off_(1) + ccd_sample * t_m_(1,0) + ccd_line * t_m_(1,1);
+      Fc.sample * bin_mode_ + ccd_off_(0) - ccd_cen_(0);
+  Xfp = t_off_(0) + ccd_sample * t_m_(0, 0) + ccd_line * t_m_(0, 1);
+  Yfp = t_off_(1) + ccd_sample * t_m_(1, 0) + ccd_line * t_m_(1, 1);
 }
-

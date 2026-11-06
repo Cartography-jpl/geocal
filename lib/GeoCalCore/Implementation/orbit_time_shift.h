@@ -3,7 +3,7 @@
 #include "orbit.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This is a simple adapter for an underlying orbit that allows us to
   "shift" the time of orbit. For a time "t", this returns orbit data
   from the underlying data at t-toffset, but with the time for the
@@ -20,42 +20,42 @@ namespace GeoCal {
 class OrbitTimeShift : public Orbit {
 public:
   OrbitTimeShift(const boost::shared_ptr<Orbit> Orbit_original,
-		 double Time_shift);
+                 double Time_shift);
   virtual ~OrbitTimeShift() {}
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
-  virtual boost::shared_ptr<OrbitData> 
+  virtual boost::shared_ptr<OrbitData>
   orbit_data(const TimeWithDerivative& T) const
-  { 
+  {
     // Right now don't handle derivatives. We can revisit this if
     // this becomes an issue.
     return orbit_data(T.value());
   }
   virtual void print(std::ostream& Os) const;
 
-//-----------------------------------------------------------------------
-/// The original orbit
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// The original orbit
+  //-----------------------------------------------------------------------
 
   const boost::shared_ptr<Orbit> orbit_original() const
-  {return orbit_original_; }
+  {
+    return orbit_original_;
+  }
 
-//-----------------------------------------------------------------------
-/// Time shift applied to orbit, in seconds.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Time shift applied to orbit, in seconds.
+  //-----------------------------------------------------------------------
 
-  double time_shift() const {return time_shift_;}
+  double time_shift() const { return time_shift_; }
 protected:
   OrbitTimeShift() {}
 private:
-  boost::shared_ptr<Orbit>  orbit_original_;
+  boost::shared_ptr<Orbit> orbit_original_;
   double time_shift_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 
 GEOCAL_EXPORT_KEY(OrbitTimeShift);
 #endif
-
-

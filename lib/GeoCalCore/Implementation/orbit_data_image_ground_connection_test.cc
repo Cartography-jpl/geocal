@@ -16,8 +16,8 @@ BOOST_AUTO_TEST_CASE(basic)
   boost::shared_ptr<OrbitData> od = orb.orbit_data(tmin);
   boost::shared_ptr<Camera> cam(new SimpleCamera);
   boost::shared_ptr<Dem> dem(new SimpleDem(100));
-  boost::shared_ptr<RasterImage> img(new ConstantRasterImage(cam->number_line(0),
-				     cam->number_sample(0), 10));
+  boost::shared_ptr<RasterImage> img(
+      new ConstantRasterImage(cam->number_line(0), cam->number_sample(0), 10));
   OrbitDataImageGroundConnection igc(od, cam, dem, img);
   ImageCoordinate ic(1.0, 1504 / 2);
   Geodetic g(*igc.ground_coordinate(ic));
@@ -49,17 +49,19 @@ BOOST_AUTO_TEST_CASE(jacobian)
 {
   Time tmin = Time::parse_time("2003-01-01T11:11:00Z");
   boost::shared_ptr<OrbitOffsetCorrection> orb =
-    boost::make_shared<OrbitOffsetCorrection>(boost::make_shared<KeplerOrbit>());
+      boost::make_shared<OrbitOffsetCorrection>(
+          boost::make_shared<KeplerOrbit>());
   orb->insert_attitude_time_point(tmin);
   orb->insert_position_time_point(tmin);
   boost::shared_ptr<Camera> cam(new SimpleCamera);
   boost::shared_ptr<Dem> dem(new SimpleDem(100));
-  boost::shared_ptr<RasterImage> img(new ConstantRasterImage(cam->number_line(0),
-				     cam->number_sample(0), 10));
+  boost::shared_ptr<RasterImage> img(
+      new ConstantRasterImage(cam->number_line(0), cam->number_sample(0), 10));
   OrbitDataImageGroundConnection igc(orb, tmin, cam, dem, img);
   ImageCoordinate ic(1.0, 1504 / 2);
   Geodetic g(*igc.ground_coordinate(ic));
-  blitz::Array<double, 2> jac1 = igc.image_coordinate_jac_cf(*g.convert_to_cf());
+  blitz::Array<double, 2> jac1 =
+      igc.image_coordinate_jac_cf(*g.convert_to_cf());
   BOOST_CHECK_EQUAL(jac1.rows(), 2);
   BOOST_CHECK_EQUAL(jac1.cols(), 3);
   orb->add_identity_gradient();
@@ -77,15 +79,15 @@ BOOST_AUTO_TEST_CASE(serialize)
   boost::shared_ptr<OrbitData> od = orb.orbit_data(tmin);
   boost::shared_ptr<Camera> cam(new SimpleCamera);
   boost::shared_ptr<Dem> dem(new SimpleDem(100));
-  boost::shared_ptr<RasterImage> img(new ConstantRasterImage(cam->number_line(0),
-				     cam->number_sample(0), 10));
-  boost::shared_ptr<ImageGroundConnection> igc
-    (new OrbitDataImageGroundConnection (od, cam, dem, img));
+  boost::shared_ptr<RasterImage> img(
+      new ConstantRasterImage(cam->number_line(0), cam->number_sample(0), 10));
+  boost::shared_ptr<ImageGroundConnection> igc(
+      new OrbitDataImageGroundConnection(od, cam, dem, img));
   std::string d = serialize_write_string(igc);
   if(false)
     std::cerr << d;
   boost::shared_ptr<OrbitDataImageGroundConnection> igcr =
-    serialize_read_string<OrbitDataImageGroundConnection>(d);
+      serialize_read_string<OrbitDataImageGroundConnection>(d);
   ImageCoordinate ic(1.0, 1504 / 2);
   Geodetic g(*igcr->ground_coordinate(ic));
   BOOST_CHECK_CLOSE(g.latitude(), -4.8406639328445964, 1e-2);
@@ -119,9 +121,9 @@ BOOST_AUTO_TEST_CASE(include_refraction)
   boost::shared_ptr<OrbitData> od = orb.orbit_data(tmin);
   boost::shared_ptr<Camera> cam(new SimpleCamera);
   boost::shared_ptr<Dem> dem(new SimpleDem(100));
-  boost::shared_ptr<RasterImage> img(new MemoryRasterImage(cam->number_line(0),
-						   cam->number_sample(0)));
-  boost::shared_ptr<Refraction> ref(new RefractionSdp(0,0));
+  boost::shared_ptr<RasterImage> img(
+      new MemoryRasterImage(cam->number_line(0), cam->number_sample(0)));
+  boost::shared_ptr<Refraction> ref(new RefractionSdp(0, 0));
   OrbitDataImageGroundConnection igc(od, cam, dem, img, "Image", ref);
   ImageCoordinate ic(1.0, 1504 / 2);
   Geodetic g(*igc.ground_coordinate(ic));
@@ -150,4 +152,3 @@ BOOST_AUTO_TEST_CASE(include_refraction)
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-

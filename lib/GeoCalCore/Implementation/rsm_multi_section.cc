@@ -15,8 +15,8 @@ typedef blitz::Array<boost::shared_ptr<RsmBase>, 2> blitz_rsm_base_array_2d;
 BOOST_SERIALIZATION_SPLIT_FREE(blitz_rsm_base_array_2d);
 
 template<class Archive, class T>
-void boost::serialization::save(Archive& ar, const blitz::Array<T, 2>& A, 
-			      const unsigned version) 
+void boost::serialization::save(Archive& ar, const blitz::Array<T, 2>& A,
+                                const unsigned version)
 {
   using boost::serialization::make_array;
   if(A.size() > 0 && !A.isStorageContiguous())
@@ -29,8 +29,8 @@ void boost::serialization::save(Archive& ar, const blitz::Array<T, 2>& A,
 }
 
 template<typename Archive, class T>
-void boost::serialization::load(Archive& ar, blitz::Array<T, 2>& A, 
-				const unsigned version) 
+void boost::serialization::load(Archive& ar, blitz::Array<T, 2>& A,
+                                const unsigned version)
 {
   using boost::serialization::make_array;
   int rows, cols;
@@ -40,22 +40,21 @@ void boost::serialization::load(Archive& ar, blitz::Array<T, 2>& A,
     ar >> GEOCAL_NVP2("data", make_array(A.data(), A.size()));
 }
 
-template void boost::serialization::load(polymorphic_iarchive& ar, 
-					 blitz::Array<boost::shared_ptr<RsmBase>, 2>& A, 
-					 const unsigned version);
-template void boost::serialization::save(polymorphic_oarchive& ar, 
-					 const blitz::Array<boost::shared_ptr<RsmBase>, 2>& A, 
-					 const unsigned version);
+template void
+boost::serialization::load(polymorphic_iarchive& ar,
+                           blitz::Array<boost::shared_ptr<RsmBase>, 2>& A,
+                           const unsigned version);
+template void
+boost::serialization::save(polymorphic_oarchive& ar,
+                           const blitz::Array<boost::shared_ptr<RsmBase>, 2>& A,
+                           const unsigned version);
 
 template<class Archive>
-void RsmMultiSection::serialize(Archive & ar, const unsigned int version)
+void RsmMultiSection::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RsmBase)
-    & GEOCAL_NVP(nline_sec)
-    & GEOCAL_NVP(nsamp_sec)
-    & GEOCAL_NVP_(border)
-    & GEOCAL_NVP(sec)
-    & GEOCAL_NVP(lp);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(RsmBase) & GEOCAL_NVP(nline_sec) &
+      GEOCAL_NVP(nsamp_sec) & GEOCAL_NVP_(border) & GEOCAL_NVP(sec) &
+      GEOCAL_NVP(lp);
 }
 
 GEOCAL_IMPLEMENT(RsmMultiSection);
@@ -70,22 +69,21 @@ GEOCAL_IMPLEMENT(RsmMultiSection);
 /// avoid extrapolating.
 //-----------------------------------------------------------------------
 
-RsmMultiSection::RsmMultiSection
-(int Nline, int Nsamp, int Nrow_section, int Ncol_section,
- const RsmBase& Rsm_prototype, int Border,
- const std::string& Image_identifier,
- const std::string& Rsm_support_data_edition
-)
-  : RsmBase(Image_identifier, Rsm_support_data_edition),
-    border_(Border), sec(Nrow_section, Ncol_section)
+RsmMultiSection::RsmMultiSection(int Nline, int Nsamp, int Nrow_section,
+                                 int Ncol_section, const RsmBase& Rsm_prototype,
+                                 int Border,
+                                 const std::string& Image_identifier,
+                                 const std::string& Rsm_support_data_edition)
+  : RsmBase(Image_identifier, Rsm_support_data_edition), border_(Border),
+    sec(Nrow_section, Ncol_section)
 {
   for(int i = 0; i < sec.rows(); ++i)
     for(int j = 0; j < sec.cols(); ++j) {
-      sec(i,j) = Rsm_prototype.clone();
-      sec(i,j)->image_identifier(Image_identifier);
-      sec(i,j)->rsm_support_data_edition(Rsm_support_data_edition);
-      sec(i,j)->row_section_number(i + 1);
-      sec(i,j)->col_section_number(j + 1);
+      sec(i, j) = Rsm_prototype.clone();
+      sec(i, j)->image_identifier(Image_identifier);
+      sec(i, j)->rsm_support_data_edition(Rsm_support_data_edition);
+      sec(i, j)->row_section_number(i + 1);
+      sec(i, j)->col_section_number(j + 1);
     }
   nline_sec = double(Nline) / sec.rows();
   nsamp_sec = double(Nsamp) / sec.cols();
@@ -98,9 +96,10 @@ RsmMultiSection::RsmMultiSection
 /// second the sample.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> RsmMultiSection::image_coordinate
-(const blitz::Array<double, 1>& X, const blitz::Array<double, 1>& Y,
- const blitz::Array<double, 1>& Z) const
+blitz::Array<double, 2>
+RsmMultiSection::image_coordinate(const blitz::Array<double, 1>& X,
+                                  const blitz::Array<double, 1>& Y,
+                                  const blitz::Array<double, 1>& Z) const
 {
   if(X.rows() != Y.rows() || X.rows() != Z.rows())
     throw Exception("X, Y, and Z need to be the same size");
@@ -120,17 +119,18 @@ blitz::Array<double, 2> RsmMultiSection::image_coordinate
 /// second the sample.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 3> RsmMultiSection::image_coordinate
-(const blitz::Array<double, 2>& X, const blitz::Array<double, 2>& Y,
- const blitz::Array<double, 2>& Z) const
+blitz::Array<double, 3>
+RsmMultiSection::image_coordinate(const blitz::Array<double, 2>& X,
+                                  const blitz::Array<double, 2>& Y,
+                                  const blitz::Array<double, 2>& Z) const
 {
-  if(X.rows() != Y.rows() || X.rows() != Z.rows() ||
-     X.cols() != Y.cols() || X.cols() != Z.cols())
+  if(X.rows() != Y.rows() || X.rows() != Z.rows() || X.cols() != Y.cols() ||
+     X.cols() != Z.cols())
     throw Exception("X, Y, and Z need to be the same size");
   Array<double, 3> res(2, X.rows(), X.cols());
   for(int i = 0; i < X.rows(); ++i)
     for(int j = 0; j < X.cols(); ++j) {
-      ImageCoordinate ic = image_coordinate(X(i,j), Y(i,j), Z(i,j));
+      ImageCoordinate ic = image_coordinate(X(i, j), Y(i, j), Z(i, j));
       res(0, i, j) = ic.line;
       res(1, i, j) = ic.sample;
     }
@@ -144,21 +144,22 @@ blitz::Array<double, 3> RsmMultiSection::image_coordinate
 /// second the sample.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 4> RsmMultiSection::image_coordinate
-(const blitz::Array<double, 3>& X, const blitz::Array<double, 3>& Y,
- const blitz::Array<double, 3>& Z) const
+blitz::Array<double, 4>
+RsmMultiSection::image_coordinate(const blitz::Array<double, 3>& X,
+                                  const blitz::Array<double, 3>& Y,
+                                  const blitz::Array<double, 3>& Z) const
 {
-  if(X.rows() != Y.rows() || X.rows() != Z.rows() ||
-     X.cols() != Y.cols() || X.cols() != Z.cols() ||
-     X.depth() != Y.depth() || X.depth() != Z.depth())
+  if(X.rows() != Y.rows() || X.rows() != Z.rows() || X.cols() != Y.cols() ||
+     X.cols() != Z.cols() || X.depth() != Y.depth() || X.depth() != Z.depth())
     throw Exception("X, Y, and Z need to be the same size");
   Array<double, 4> res(2, X.rows(), X.cols(), X.depth());
   for(int i = 0; i < X.rows(); ++i)
     for(int j = 0; j < X.cols(); ++j)
       for(int k = 0; k < X.depth(); ++k) {
-	ImageCoordinate ic = image_coordinate(X(i,j,k), Y(i,j,k), Z(i,j,k));
-	res(0, i, j, k) = ic.line;
-	res(1, i, j, k) = ic.sample;
+        ImageCoordinate ic =
+            image_coordinate(X(i, j, k), Y(i, j, k), Z(i, j, k));
+        res(0, i, j, k) = ic.line;
+        res(1, i, j, k) = ic.sample;
       }
   return res;
 }
@@ -173,12 +174,10 @@ blitz::Array<double, 4> RsmMultiSection::image_coordinate
 /// line/samples to fit over.
 //-----------------------------------------------------------------------
 
-void RsmMultiSection::fit
-(const ImageGroundConnection& Igc,
- const CoordinateConverter& Cconv,
- double Min_height, double Max_height,
- int Min_line, int Max_line, int Min_sample,
- int Max_sample)
+void RsmMultiSection::fit(const ImageGroundConnection& Igc,
+                          const CoordinateConverter& Cconv, double Min_height,
+                          double Max_height, int Min_line, int Max_line,
+                          int Min_sample, int Max_sample)
 {
   fit_start(Igc, Cconv, Min_height, Max_height);
   for(int i = 0; i < sec.rows(); ++i)
@@ -187,7 +186,8 @@ void RsmMultiSection::fit
 }
 
 void RsmMultiSection::fit_data(const blitz::Array<double, 2>& Data,
-	       int Min_line, int Max_line, int Min_sample, int Max_sample)
+                               int Min_line, int Max_line, int Min_sample,
+                               int Max_sample)
 {
   fit_start(Data);
   lp.min_line(0);
@@ -205,41 +205,41 @@ void RsmMultiSection::fit_data(const blitz::Array<double, 2>& Data,
 //-----------------------------------------------------------------------
 
 void RsmMultiSection::fit_start(const ImageGroundConnection& Igc,
-				const CoordinateConverter& Cconv,
-				double Min_height, double Max_height)
+                                const CoordinateConverter& Cconv,
+                                double Min_height, double Max_height)
 {
-  lp.fit(Igc, Cconv, Min_height, Max_height, 0, Igc.number_line() - 1,
-	 0, Igc.number_sample() - 1);
+  lp.fit(Igc, Cconv, Min_height, Max_height, 0, Igc.number_line() - 1, 0,
+         Igc.number_sample() - 1);
   // Based on examples, the MSP library seems to prefer that all
   // sections have the same z start and delta. This isn't actually
   // required from the RSM standard, but seems to be one of the those
   // "unstated" requirements. This gives access  for RsmMultiSection to
   // pass the z values to use, rather than computing this in fit.
   bool first = true;
-  double min_x=0, max_x=0, min_y=0, max_y=0, min_z=0, max_z=0;
+  double min_x = 0, max_x = 0, min_y = 0, max_y = 0, min_z = 0, max_z = 0;
   for(double i = 0; i < 2; ++i)
     for(double j = 0; j < 2; ++j)
       for(double k = 0; k < 2; ++k) {
-	double ln = (i == 0 ? 0 : Igc.number_line() - 1);
-	double smp = (j == 0 ? 0 : Igc.number_sample() - 1);
-	double h = (k == 0 ? Min_height : Max_height);
-	boost::shared_ptr<GroundCoordinate> gc =
-	  Igc.ground_coordinate_approx_height(ImageCoordinate(ln, smp), h);
-	double xv, yv, zv;
-	Cconv.convert_to_coordinate(*gc, xv, yv, zv);
-	if(first) {
-	  min_x = max_x = xv;
-	  min_y = max_y = yv;
-	  min_z = max_z = zv;
-	  first = false;
-	} else {
-	  min_x = std::min(min_x, xv);
-	  max_x = std::max(max_x, xv);
-	  min_y = std::min(min_y, yv);
-	  max_y = std::max(max_y, yv);
-	  min_z = std::min(min_z, zv);
-	  max_z = std::max(max_z, zv);
-	}
+        double ln = (i == 0 ? 0 : Igc.number_line() - 1);
+        double smp = (j == 0 ? 0 : Igc.number_sample() - 1);
+        double h = (k == 0 ? Min_height : Max_height);
+        boost::shared_ptr<GroundCoordinate> gc =
+            Igc.ground_coordinate_approx_height(ImageCoordinate(ln, smp), h);
+        double xv, yv, zv;
+        Cconv.convert_to_coordinate(*gc, xv, yv, zv);
+        if(first) {
+          min_x = max_x = xv;
+          min_y = max_y = yv;
+          min_z = max_z = zv;
+          first = false;
+        } else {
+          min_x = std::min(min_x, xv);
+          max_x = std::max(max_x, xv);
+          min_y = std::min(min_y, yv);
+          max_y = std::max(max_y, yv);
+          min_z = std::min(min_z, zv);
+          max_z = std::max(max_z, zv);
+        }
       }
   double pad = 0.05;
   min_z -= (Max_height - Min_height) * pad;
@@ -249,7 +249,7 @@ void RsmMultiSection::fit_start(const ImageGroundConnection& Igc,
   if(dynamic_cast<const LocalRcConverter*>(&Cconv)) {
     for(int i = 0; i < sec.rows(); ++i)
       for(int j = 0; j < sec.cols(); ++j)
-	sec(i,j)->set_z_range(min_z, max_z);
+        sec(i, j)->set_z_range(min_z, max_z);
   }
 }
 
@@ -258,11 +258,11 @@ void RsmMultiSection::fit_start(const blitz::Array<double, 2>& Data)
   blitz::Range ra = blitz::Range::all();
   std::vector<double> ln, smp, x, y, z;
   for(int i = 0; i < Data.rows(); ++i) {
-    ln.push_back(Data(i,0));
-    smp.push_back(Data(i,1));
-    x.push_back(Data(i,2));
-    y.push_back(Data(i,3));
-    z.push_back(Data(i,4));
+    ln.push_back(Data(i, 0));
+    smp.push_back(Data(i, 1));
+    x.push_back(Data(i, 2));
+    y.push_back(Data(i, 3));
+    z.push_back(Data(i, 4));
   }
   lp.fit_data(ln, smp, x, y, z);
   // Based on examples, the MSP library seems to prefer that all
@@ -272,17 +272,16 @@ void RsmMultiSection::fit_start(const blitz::Array<double, 2>& Data)
   // pass the z values to use, rather than computing this in fit.
   // Note this is only used by RsmGrid, RsmRationalPolynomial just
   // ignores this.
-  double min_z = blitz::min(Data(ra,4));
-  double max_z = blitz::max(Data(ra,4));
+  double min_z = blitz::min(Data(ra, 4));
+  double max_z = blitz::max(Data(ra, 4));
   double pad = 0.05;
   double p = pad * (max_z - min_z);
   min_z -= p;
   max_z += p;
   for(int i = 0; i < sec.rows(); ++i)
     for(int j = 0; j < sec.cols(); ++j)
-      sec(i,j)->set_z_range(min_z, max_z);
+      sec(i, j)->set_z_range(min_z, max_z);
 }
-
 
 //-----------------------------------------------------------------------
 /// Fit a single segment. This is intended for doing parallel fitting
@@ -291,19 +290,18 @@ void RsmMultiSection::fit_start(const blitz::Array<double, 2>& Data)
 
 const boost::shared_ptr<RsmBase>&
 RsmMultiSection::fit_section(int i, int j, const ImageGroundConnection& Igc,
-	    const CoordinateConverter& Cconv,
-	    double Min_height, double Max_height)
+                             const CoordinateConverter& Cconv,
+                             double Min_height, double Max_height)
 {
   range_check(i, 0, sec.rows());
   range_check(j, 0, sec.cols());
-  sec(i,j)->fit(Igc, Cconv, Min_height, Max_height,
-		std::max(int(nline_sec * i) - border_, 0),
-		std::min(int(nline_sec * (i + 1)) + border_,
-			 Igc.number_line()-1),
-		std::max(int(nsamp_sec * j) - border_, 0),
-		std::min(int(nsamp_sec * (j + 1)) + border_,
-			 Igc.number_sample()-1));
-  return sec(i,j);
+  sec(i, j)->fit(
+      Igc, Cconv, Min_height, Max_height,
+      std::max(int(nline_sec * i) - border_, 0),
+      std::min(int(nline_sec * (i + 1)) + border_, Igc.number_line() - 1),
+      std::max(int(nsamp_sec * j) - border_, 0),
+      std::min(int(nsamp_sec * (j + 1)) + border_, Igc.number_sample() - 1));
+  return sec(i, j);
 }
 
 const boost::shared_ptr<RsmBase>&
@@ -311,14 +309,12 @@ RsmMultiSection::fit_section(int i, int j, const blitz::Array<double, 2>& Data)
 {
   range_check(i, 0, sec.rows());
   range_check(j, 0, sec.cols());
-  sec(i,j)->fit_data(Data,
-		std::max(int(nline_sec * i) - border_, 0),
-		std::min(int(nline_sec * (i + 1)) + border_,
-			 lp.max_line()),
-		std::max(int(nsamp_sec * j) - border_, 0),
-		std::min(int(nsamp_sec * (j + 1)) + border_,
-			 lp.max_sample()));
-  return sec(i,j);
+  sec(i, j)->fit_data(
+      Data, std::max(int(nline_sec * i) - border_, 0),
+      std::min(int(nline_sec * (i + 1)) + border_, lp.max_line()),
+      std::max(int(nsamp_sec * j) - border_, 0),
+      std::min(int(nsamp_sec * (j + 1)) + border_, lp.max_sample()));
+  return sec(i, j);
 }
 
 //-----------------------------------------------------------------------
@@ -386,9 +382,9 @@ double RsmMultiSection::min_x() const
   for(int i = 0; i < sec.rows(); ++i)
     for(int j = 0; j < sec.cols(); ++j)
       if(i == 0 && j == 0)
-	res = sec(i,j)->min_x();
+        res = sec(i, j)->min_x();
       else
-	res = std::min(res, sec(i,j)->min_x());
+        res = std::min(res, sec(i, j)->min_x());
   return res;
 }
 
@@ -398,9 +394,9 @@ double RsmMultiSection::max_x() const
   for(int i = 0; i < sec.rows(); ++i)
     for(int j = 0; j < sec.cols(); ++j)
       if(i == 0 && j == 0)
-	res = sec(i,j)->max_x();
+        res = sec(i, j)->max_x();
       else
-	res = std::max(res, sec(i,j)->max_x());
+        res = std::max(res, sec(i, j)->max_x());
   return res;
 }
 
@@ -410,9 +406,9 @@ double RsmMultiSection::min_y() const
   for(int i = 0; i < sec.rows(); ++i)
     for(int j = 0; j < sec.cols(); ++j)
       if(i == 0 && j == 0)
-	res = sec(i,j)->min_y();
+        res = sec(i, j)->min_y();
       else
-	res = std::min(res, sec(i,j)->min_y());
+        res = std::min(res, sec(i, j)->min_y());
   return res;
 }
 
@@ -422,9 +418,9 @@ double RsmMultiSection::max_y() const
   for(int i = 0; i < sec.rows(); ++i)
     for(int j = 0; j < sec.cols(); ++j)
       if(i == 0 && j == 0)
-	res = sec(i,j)->max_y();
+        res = sec(i, j)->max_y();
       else
-	res = std::max(res, sec(i,j)->max_y());
+        res = std::max(res, sec(i, j)->max_y());
   return res;
 }
 
@@ -434,9 +430,9 @@ double RsmMultiSection::min_z() const
   for(int i = 0; i < sec.rows(); ++i)
     for(int j = 0; j < sec.cols(); ++j)
       if(i == 0 && j == 0)
-	res = sec(i,j)->min_z();
+        res = sec(i, j)->min_z();
       else
-	res = std::min(res, sec(i,j)->min_z());
+        res = std::min(res, sec(i, j)->min_z());
   return res;
 }
 
@@ -446,9 +442,9 @@ double RsmMultiSection::max_z() const
   for(int i = 0; i < sec.rows(); ++i)
     for(int j = 0; j < sec.cols(); ++j)
       if(i == 0 && j == 0)
-	res = sec(i,j)->max_z();
+        res = sec(i, j)->max_z();
       else
-	res = std::max(res, sec(i,j)->max_z());
+        res = std::max(res, sec(i, j)->max_z());
   return res;
 }
 
@@ -462,9 +458,9 @@ RsmMultiSection::section_ls(double Line, double Sample) const
 {
   int i = floor(Line / nline_sec);
   int j = floor(Sample / nsamp_sec);
-  i = std::min(std::max(i,0), sec.rows() - 1);
-  j = std::min(std::max(j,0), sec.cols() - 1);
-  return sec(i,j);
+  i = std::min(std::max(i, 0), sec.rows() - 1);
+  j = std::min(std::max(j, 0), sec.cols() - 1);
+  return sec(i, j);
 }
 
 //-----------------------------------------------------------------------
@@ -475,11 +471,12 @@ RsmMultiSection::section_ls(double Line, double Sample) const
 const boost::shared_ptr<RsmBase>&
 RsmMultiSection::section_xyz(double X, double Y, double Z) const
 {
-  ImageCoordinate ic = lp.image_coordinate(X,Y,Z);
-  return section_ls(ic.line,ic.sample);
+  ImageCoordinate ic = lp.image_coordinate(X, Y, Z);
+  return section_ls(ic.line, ic.sample);
 }
 
-static boost::format secformat("%|1$03d|%|2$03d|%|3$03d|%|4$+21.14E|%|5$+21.14E|");
+static boost::format
+    secformat("%|1$03d|%|2$03d|%|3$03d|%|4$+21.14E|%|5$+21.14E|");
 
 //-----------------------------------------------------------------------
 /// Write to TRE string.
@@ -501,8 +498,9 @@ std::string RsmMultiSection::tre_string() const
 {
   std::string res = base_tre_string();
   res += lp.tre_string();
-  res += str_check_size(secformat % sec.rows() % sec.cols() % sec.size()
-			% nline_sec % nsamp_sec, 3 * 3 + 2 * 21);
+  res += str_check_size(secformat % sec.rows() % sec.cols() % sec.size() %
+                            nline_sec % nsamp_sec,
+                        3 * 3 + 2 * 21);
   return res;
 }
 
@@ -530,7 +528,7 @@ RsmMultiSection::read_tre_string(const std::string& Tre_in)
   res->base_read_tre_string(in);
   res->lp.read_tre_string(in);
   int nrow = read_size<int>(in, 3);
-  int ncol= read_size<int>(in, 3);
+  int ncol = read_size<int>(in, 3);
   int sz = read_size<int>(in, 3);
   if(sz != nrow * ncol) {
     Exception e;
@@ -543,13 +541,13 @@ RsmMultiSection::read_tre_string(const std::string& Tre_in)
   res->sec.resize(nrow, ncol);
   for(int i = 0; i < nrow; ++i)
     for(int j = 0; j < ncol; ++j)
-      res->sec(i,j).reset();
+      res->sec(i, j).reset();
   res->nline_sec = read_size<double>(in, 21);
   res->nsamp_sec = read_size<double>(in, 21);
   res->lp.min_line(0);
-  res->lp.max_line((int) floor(res->nline_sec * nrow + 0.5) - 1);
+  res->lp.max_line((int)floor(res->nline_sec * nrow + 0.5) - 1);
   res->lp.min_sample(0);
-  res->lp.max_sample((int) floor(res->nsamp_sec * ncol + 0.5) - 1);
+  res->lp.max_sample((int)floor(res->nsamp_sec * ncol + 0.5) - 1);
   check_end_of_stream(in);
   return res;
 }

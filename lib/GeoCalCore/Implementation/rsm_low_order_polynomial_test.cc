@@ -4,13 +4,12 @@
 using namespace GeoCal;
 using namespace blitz;
 
-  
 BOOST_FIXTURE_TEST_SUITE(rsm_low_order_polynomial, RsmLowOrderPolynomialFixture)
 BOOST_AUTO_TEST_CASE(basic_test)
 {
   ImageCoordinate ic_expect = rpc.image_coordinate(gp);
   ImageCoordinate ic = rlop->image_coordinate(gp.longitude(), gp.latitude(),
-					      gp.height_reference_surface());
+                                              gp.height_reference_surface());
   BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 3e-2);
   BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 3e-2);
 }
@@ -25,7 +24,7 @@ BOOST_AUTO_TEST_CASE(tre)
   r.read_tre_string(in);
   ImageCoordinate ic_expect = rpc.image_coordinate(gp);
   ImageCoordinate ic = r.image_coordinate(gp.longitude(), gp.latitude(),
-					  gp.height_reference_surface());
+                                          gp.height_reference_surface());
   BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 3e-2);
   BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 3e-2);
 }
@@ -37,11 +36,11 @@ BOOST_AUTO_TEST_CASE(serialize)
   std::string d = serialize_write_string(rlop);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<RsmLowOrderPolynomial> rr = 
-    serialize_read_string<RsmLowOrderPolynomial>(d);
+  boost::shared_ptr<RsmLowOrderPolynomial> rr =
+      serialize_read_string<RsmLowOrderPolynomial>(d);
   ImageCoordinate ic_expect = rpc.image_coordinate(gp);
   ImageCoordinate ic = rr->image_coordinate(gp.longitude(), gp.latitude(),
-					  gp.height_reference_surface());
+                                            gp.height_reference_surface());
   BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 3e-2);
   BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 3e-2);
 }

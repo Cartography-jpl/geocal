@@ -7,7 +7,7 @@ BOOST_FIXTURE_TEST_SUITE(printable, GlobalFixture)
 
 class Test : public Printable<Test> {
 public:
-  void print(std::ostream& Os) const {Os << "Test";}
+  void print(std::ostream& Os) const { Os << "Test"; }
 };
 
 BOOST_AUTO_TEST_CASE(basic_test)

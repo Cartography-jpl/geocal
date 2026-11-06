@@ -3,7 +3,7 @@
 #include "orbit.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This class stores orbit data with attitude represented as
   Euler angles (Yaw, Pitch, Roll) in degrees relative to a local
   orbital frame.
@@ -53,10 +53,9 @@ public:
   /// @param Roll - Roll angle in degrees (rotation about X-axis)
   /// @param Euler_order - String specifying rotation order (default "ZYX")
   //-----------------------------------------------------------------------
-  YprOrbitData(const Time& Tm,
-               const boost::shared_ptr<CartesianFixed>& pos_cf,
-               const boost::array<double, 3>& vel_fixed,
-               double Yaw, double Pitch, double Roll,
+  YprOrbitData(const Time& Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
+               const boost::array<double, 3>& vel_fixed, double Yaw,
+               double Pitch, double Roll,
                const std::string& Euler_order = "ZYX");
 
   //-----------------------------------------------------------------------
@@ -72,8 +71,8 @@ public:
   //-----------------------------------------------------------------------
   YprOrbitData(const Time& Tm,
                const boost::shared_ptr<CartesianInertial>& pos_ci,
-               const boost::array<double, 3>& vel_inertial,
-               double Yaw, double Pitch, double Roll,
+               const boost::array<double, 3>& vel_inertial, double Yaw,
+               double Pitch, double Roll,
                const std::string& Euler_order = "ZYX");
 
   //-----------------------------------------------------------------------
@@ -131,8 +130,8 @@ protected:
 
   void initialize_from_ypr(const Time& Tm,
                            const boost::shared_ptr<CartesianFixed>& pos_cf,
-                           const boost::array<double, 3>& vel_fixed,
-                           double Yaw, double Pitch, double Roll,
+                           const boost::array<double, 3>& vel_fixed, double Yaw,
+                           double Pitch, double Roll,
                            const std::string& Euler_order);
 
   void initialize_from_ypr(const Time& Tm,
@@ -146,14 +145,14 @@ protected:
                      const boost::array<double, 3>& vel_ci);
 
 private:
-  double yaw_;    // Rotation about Z-axis in degrees
-  double pitch_;  // Rotation about Y-axis in degrees
-  double roll_;   // Rotation about X-axis in degrees
-  std::string euler_order_;  // e.g., "ZYX", "XYZ", "321"
+  double yaw_;              // Rotation about Z-axis in degrees
+  double pitch_;            // Rotation about Y-axis in degrees
+  double roll_;             // Rotation about X-axis in degrees
+  std::string euler_order_; // e.g., "ZYX", "XYZ", "321"
 
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 

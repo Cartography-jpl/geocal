@@ -8,7 +8,7 @@
 #include <boost/shared_ptr.hpp>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This is a single ARGUS navigation file record. In addition to the
   normal things in an OrbitData class, this contains some other
   metadata. This matches what is stored in the ARGUS CSV navigation
@@ -22,76 +22,68 @@ namespace GeoCal {
 
 class ArgusOrbitData : public AircraftOrbitData {
 public:
-//-----------------------------------------------------------------------
-/// Constructor
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor
+  //-----------------------------------------------------------------------
 
-  ArgusOrbitData(const Time& Tm,
-		 const std::string& File_name, int Camera_number,
-		 const Geodetic& Position, 
-		 const boost::array<double, 3>& Vel_fixed,
-		 double Roll, double Pitch,
-		 double Heading)
+  ArgusOrbitData(const Time& Tm, const std::string& File_name,
+                 int Camera_number, const Geodetic& Position,
+                 const boost::array<double, 3>& Vel_fixed, double Roll,
+                 double Pitch, double Heading)
     : AircraftOrbitData(Tm, Position, Vel_fixed, Roll, Pitch, Heading),
       camera_number_(Camera_number), file_name_(File_name)
-  { }
+  {
+  }
 
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~ArgusOrbitData() {}
   virtual void print(std::ostream& Os) const;
 
-//-----------------------------------------------------------------------
-/// File with JPEG data.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// File with JPEG data.
+  //-----------------------------------------------------------------------
 
-  const std::string& file_name() const { return file_name_;}
+  const std::string& file_name() const { return file_name_; }
 
   boost::shared_ptr<GdalRasterImage> image(int band = 1) const;
 
   void save_ortho(const MapInfo& Mi, const Camera& Cam, const Dem& D,
-		  const std::string& Fname,
-		  const std::string& Type, int Border = 10,
-		  int Grid_spacing = 1) const;
+                  const std::string& Fname, const std::string& Type,
+                  int Border = 10, int Grid_spacing = 1) const;
   void add_ortho_to_image(const boost::shared_ptr<RasterImage>& M1,
-			  const boost::shared_ptr<RasterImage>& M2,
-			  const boost::shared_ptr<RasterImage>& M3,
-			  const Camera& Cam,
-			  const Dem& D,
-			  int Border = 10) const;
-  static void mosaic(const std::vector<boost::shared_ptr<ArgusOrbitData> > 
-		     &Od,
-		     const std::vector<boost::shared_ptr<Camera> >& Cam,
-		     const Dem& D,
-		     const MapInfo& Mi, const std::string& Fname,
-		     const std::string& Type,
-		     int Border = 10);
+                          const boost::shared_ptr<RasterImage>& M2,
+                          const boost::shared_ptr<RasterImage>& M3,
+                          const Camera& Cam, const Dem& D,
+                          int Border = 10) const;
+  static void mosaic(const std::vector<boost::shared_ptr<ArgusOrbitData>>& Od,
+                     const std::vector<boost::shared_ptr<Camera>>& Cam,
+                     const Dem& D, const MapInfo& Mi, const std::string& Fname,
+                     const std::string& Type, int Border = 10);
 
-//-----------------------------------------------------------------------
-/// Camera number. This is 1 - 13.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Camera number. This is 1 - 13.
+  //-----------------------------------------------------------------------
 
-  int camera_number() const { return camera_number_;}
+  int camera_number() const { return camera_number_; }
 
 protected:
   ArgusOrbitData() {}
 private:
-  static void save_to_file(const std::string& Fname, 
-			   const RasterImage& M1,
-			   const RasterImage& M2, 
-			   const RasterImage& M3, 
-			   const std::string& Type);
+  static void save_to_file(const std::string& Fname, const RasterImage& M1,
+                           const RasterImage& M2, const RasterImage& M3,
+                           const std::string& Type);
   int camera_number_;
   std::string file_name_;
   mutable boost::shared_ptr<GDALDataset> gdal_data_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   This read a CSV navigation file and uses it to generate a Orbit. 
   We access the data in two ways. The first is the standard time 
   index, giving a OrbitData for that time (interpolating if needed).
@@ -112,12 +104,12 @@ public:
 
   double focal_length(int camera_num) const;
 
-//-----------------------------------------------------------------------
-/// Number of rows of data we have.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of rows of data we have.
+  //-----------------------------------------------------------------------
 
   int number_row() const { return number_row_; }
-  const std::string& file_name() const {return fname;}
+  const std::string& file_name() const { return fname; }
 protected:
   ArgusOrbit() {}
 private:
@@ -129,16 +121,15 @@ private:
   /// for different cameras that are within row_time_tolerance are
   /// considered to be in the same row.
 
-  typedef std::map<std::pair<int, int>, 
-		   boost::shared_ptr<ArgusOrbitData> > row_map;
+  typedef std::map<std::pair<int, int>, boost::shared_ptr<ArgusOrbitData>>
+      row_map;
   row_map row_data;
   /// Number of rows we have.
   int number_row_;
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive& Ar, const unsigned int version);
+  template<class Archive> void load(Archive& Ar, const unsigned int version);
   GEOCAL_SPLIT_MEMBER();
 };
 }

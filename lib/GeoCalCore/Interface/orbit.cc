@@ -13,43 +13,43 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void OrbitData::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
+void OrbitData::serialize(Archive& UNUSED(ar),
+                          const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(OrbitData);
 }
 
 template<class Archive>
-void Orbit::serialize(Archive & ar, const unsigned int UNUSED(version))
+void Orbit::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(Orbit);
   GEOCAL_GENERIC_BASE(WithParameter);
   GEOCAL_BASE(Orbit, WithParameter);
-  ar & GEOCAL_NVP(min_tm) & GEOCAL_NVP(max_tm);
+  ar& GEOCAL_NVP(min_tm) & GEOCAL_NVP(max_tm);
 }
 
 template<class Archive>
-void KeplerOrbit::serialize(Archive & ar, const unsigned int UNUSED(version))
+void KeplerOrbit::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
-    & GEOCAL_NVP_(epoch) & GEOCAL_NVP_(a) & GEOCAL_NVP_(ap)
-    & GEOCAL_NVP_(e) & GEOCAL_NVP_(freq_rev) & GEOCAL_NVP_(ma)
-    & GEOCAL_NVP_(inc) & GEOCAL_NVP_(ra) & GEOCAL_NVP_(r);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit) & GEOCAL_NVP_(epoch) &
+      GEOCAL_NVP_(a) & GEOCAL_NVP_(ap) & GEOCAL_NVP_(e) &
+      GEOCAL_NVP_(freq_rev) & GEOCAL_NVP_(ma) & GEOCAL_NVP_(inc) &
+      GEOCAL_NVP_(ra) & GEOCAL_NVP_(r);
 }
 
 template<class Archive>
-void QuaternionOrbitData::serialize(Archive & ar, const unsigned int UNUSED(version))
+void QuaternionOrbitData::serialize(Archive& ar,
+                                    const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(OrbitData);
   GEOCAL_BASE(QuaternionOrbitData, OrbitData);
-  ar & GEOCAL_NVP(tm) & GEOCAL_NVP(pos) & GEOCAL_NVP(pos_with_der)
-    & GEOCAL_NVP(vel_cf) & GEOCAL_NVP(vel_cf_with_der) 
-    & GEOCAL_NVP_(sc_to_cf) & GEOCAL_NVP(sc_to_cf_with_der)
-    & GEOCAL_NVP_(from_cf)
-    & GEOCAL_NVP(have_ci_to_cf)
-    & GEOCAL_NVP_(ci_to_cf)
-    & GEOCAL_NVP_(ci_to_cf_der)
-    & GEOCAL_NVP(pos_ci) & GEOCAL_NVP(pos_ci_with_der) & GEOCAL_NVP(vel_ci)
-    & GEOCAL_NVP(vel_ci_with_der);
+  ar& GEOCAL_NVP(tm) & GEOCAL_NVP(pos) & GEOCAL_NVP(pos_with_der) &
+      GEOCAL_NVP(vel_cf) & GEOCAL_NVP(vel_cf_with_der) & GEOCAL_NVP_(sc_to_cf) &
+      GEOCAL_NVP(sc_to_cf_with_der) & GEOCAL_NVP_(from_cf) &
+      GEOCAL_NVP(have_ci_to_cf) & GEOCAL_NVP_(ci_to_cf) &
+      GEOCAL_NVP_(ci_to_cf_der) & GEOCAL_NVP(pos_ci) &
+      GEOCAL_NVP(pos_ci_with_der) & GEOCAL_NVP(vel_ci) &
+      GEOCAL_NVP(vel_ci_with_der);
 }
 
 GEOCAL_IMPLEMENT(OrbitData);
@@ -59,26 +59,25 @@ GEOCAL_IMPLEMENT(Orbit);
 #endif
 
 //-----------------------------------------------------------------------
-/// Return the footprint on the ground for the given camera and dem. 
+/// Return the footprint on the ground for the given camera and dem.
 /// This just calls surface_intersect for the four corner points.
 //-----------------------------------------------------------------------
 
-std::vector<boost::shared_ptr<GroundCoordinate> >
-OrbitData::footprint(const Camera& C, const Dem& D, 
-	  double Resolution,
-	  int Band, double Max_height) const
+std::vector<boost::shared_ptr<GroundCoordinate>>
+OrbitData::footprint(const Camera& C, const Dem& D, double Resolution, int Band,
+                     double Max_height) const
 {
   int ns = C.number_sample(Band) - 1;
   int nl = C.number_line(Band) - 1;
-  std::vector<boost::shared_ptr<GroundCoordinate> > res;
-  res.push_back(surface_intersect(C, FrameCoordinate(0, 0),
-				  D, Resolution, Band, Max_height));
-  res.push_back(surface_intersect(C, FrameCoordinate(0, ns),
-				  D, Resolution, Band, Max_height));
-  res.push_back(surface_intersect(C, FrameCoordinate(nl, ns),
-				  D, Resolution, Band, Max_height));
-  res.push_back(surface_intersect(C, FrameCoordinate(nl, 0),
-				  D, Resolution, Band, Max_height));
+  std::vector<boost::shared_ptr<GroundCoordinate>> res;
+  res.push_back(surface_intersect(C, FrameCoordinate(0, 0), D, Resolution, Band,
+                                  Max_height));
+  res.push_back(surface_intersect(C, FrameCoordinate(0, ns), D, Resolution,
+                                  Band, Max_height));
+  res.push_back(surface_intersect(C, FrameCoordinate(nl, ns), D, Resolution,
+                                  Band, Max_height));
+  res.push_back(surface_intersect(C, FrameCoordinate(nl, 0), D, Resolution,
+                                  Band, Max_height));
   return res;
 }
 
@@ -89,32 +88,27 @@ OrbitData::footprint(const Camera& C, const Dem& D,
 /// 30 meter, so resolution shouldn't be better than 30).
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<CartesianFixed>
-OrbitData::surface_intersect
-(const Camera& C, 
- const FrameCoordinate& Fc,
- const Dem& D,
- double Resolution,
- int Band, double Max_height,
- const boost::shared_ptr<Refraction>& Ref,
- const boost::shared_ptr<VelocityAberration>& Vabb) const
+boost::shared_ptr<CartesianFixed> OrbitData::surface_intersect(
+    const Camera& C, const FrameCoordinate& Fc, const Dem& D, double Resolution,
+    int Band, double Max_height, const boost::shared_ptr<Refraction>& Ref,
+    const boost::shared_ptr<VelocityAberration>& Vabb) const
 {
   bool include_aberration = (Vabb ? false : true);
-  auto gc_uncorr = D.intersect(*position_cf(),
-		cf_look_vector(C.sc_look_vector(Fc, Band), include_aberration),
-		Resolution, Max_height);
+  auto gc_uncorr = D.intersect(
+      *position_cf(),
+      cf_look_vector(C.sc_look_vector(Fc, Band), include_aberration),
+      Resolution, Max_height);
   if(Vabb) {
-    CartesianFixedLookVector lv_vabb = Vabb->
-      velocity_aberration_apply(*position_cf(), *gc_uncorr, velocity_cf());
+    CartesianFixedLookVector lv_vabb = Vabb->velocity_aberration_apply(
+        *position_cf(), *gc_uncorr, velocity_cf());
     gc_uncorr = D.intersect(*position_cf(), lv_vabb, Resolution, Max_height);
   }
   if(!Ref)
     return gc_uncorr;
-  CartesianFixedLookVector lv = 
-    Ref->refraction_apply(*position_cf(), *gc_uncorr);
+  CartesianFixedLookVector lv =
+      Ref->refraction_apply(*position_cf(), *gc_uncorr);
   return D.intersect(*position_cf(), lv, Resolution, Max_height);
 }
-
 
 //-----------------------------------------------------------------------
 /// Calculate the approximate resolution on the ground of a given
@@ -126,8 +120,9 @@ OrbitData::surface_intersect
 
 double OrbitData::resolution_meter(const Camera& C, int Band) const
 {
-  return resolution_meter(C, FrameCoordinate(C.number_line(Band)/ 2,
-					     C.number_sample(Band)/ 2), Band);
+  return resolution_meter(
+      C, FrameCoordinate(C.number_line(Band) / 2, C.number_sample(Band) / 2),
+      Band);
 }
 
 //-----------------------------------------------------------------------
@@ -139,16 +134,16 @@ double OrbitData::resolution_meter(const Camera& C, int Band) const
 //-----------------------------------------------------------------------
 
 double OrbitData::resolution_meter(const Camera& C, const FrameCoordinate& Fc,
-				   int Band) const
+                                   int Band) const
 {
-  boost::shared_ptr<GroundCoordinate> gc1 = 
-    reference_surface_intersect_approximate(C, Fc, Band);
-  boost::shared_ptr<GroundCoordinate> gc2 = 
-    reference_surface_intersect_approximate(C, 
-		    FrameCoordinate(Fc.line + 1, Fc.sample), Band);
-  boost::shared_ptr<GroundCoordinate> gc3 = 
-    reference_surface_intersect_approximate(C, 
-		    FrameCoordinate(Fc.line, Fc.sample + 1), Band);
+  boost::shared_ptr<GroundCoordinate> gc1 =
+      reference_surface_intersect_approximate(C, Fc, Band);
+  boost::shared_ptr<GroundCoordinate> gc2 =
+      reference_surface_intersect_approximate(
+          C, FrameCoordinate(Fc.line + 1, Fc.sample), Band);
+  boost::shared_ptr<GroundCoordinate> gc3 =
+      reference_surface_intersect_approximate(
+          C, FrameCoordinate(Fc.line, Fc.sample + 1), Band);
   double d1 = distance(*gc1, *gc2);
   double d2 = distance(*gc1, *gc3);
   return std::max(d1, d2);
@@ -159,11 +154,10 @@ double OrbitData::resolution_meter(const Camera& C, const FrameCoordinate& Fc,
 /// is seen.
 //-----------------------------------------------------------------------
 
-FrameCoordinate OrbitData::frame_coordinate
-(const GroundCoordinate& Gc, 
- const Camera& C, int Band,
- const boost::shared_ptr<Refraction>& Ref,
- const boost::shared_ptr<VelocityAberration>& Vabb) const
+FrameCoordinate OrbitData::frame_coordinate(
+    const GroundCoordinate& Gc, const Camera& C, int Band,
+    const boost::shared_ptr<Refraction>& Ref,
+    const boost::shared_ptr<VelocityAberration>& Vabb) const
 {
   ScLookVector sl = sc_look_vector(*Gc.convert_to_cf(), Ref, Vabb);
   return C.frame_coordinate(sl, Band);
@@ -175,46 +169,44 @@ FrameCoordinate OrbitData::frame_coordinate
 /// and this OrbitData.
 //-----------------------------------------------------------------------
 
-FrameCoordinateWithDerivative 
-OrbitData::frame_coordinate_with_derivative
-(const GroundCoordinate& Gc, const Camera& C, int Band,
- const boost::shared_ptr<Refraction>& Ref,
- const boost::shared_ptr<VelocityAberration>& Vabb) const
+FrameCoordinateWithDerivative OrbitData::frame_coordinate_with_derivative(
+    const GroundCoordinate& Gc, const Camera& C, int Band,
+    const boost::shared_ptr<Refraction>& Ref,
+    const boost::shared_ptr<VelocityAberration>& Vabb) const
 {
-  ScLookVectorWithDerivative sl = sc_look_vector_with_derivative
-    (*Gc.convert_to_cf(), Ref, Vabb);
+  ScLookVectorWithDerivative sl =
+      sc_look_vector_with_derivative(*Gc.convert_to_cf(), Ref, Vabb);
   return C.frame_coordinate_with_derivative(sl, Band);
 }
 
 //-----------------------------------------------------------------------
-/// Return location on the reference surface that a particular frame 
-/// coordinate is seen. This is approximate, in the same way 
+/// Return location on the reference surface that a particular frame
+/// coordinate is seen. This is approximate, in the same way
 /// CartesianFixed::reference_intersect_approximate is approximate.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<CartesianFixed> 
-OrbitData::reference_surface_intersect_approximate
-(const Camera& C, 
- const FrameCoordinate& Fc, int Band, double Height_reference_surface,
- const boost::shared_ptr<Refraction>& Ref,
- const boost::shared_ptr<VelocityAberration>& Vabb) const
+boost::shared_ptr<CartesianFixed>
+OrbitData::reference_surface_intersect_approximate(
+    const Camera& C, const FrameCoordinate& Fc, int Band,
+    double Height_reference_surface, const boost::shared_ptr<Refraction>& Ref,
+    const boost::shared_ptr<VelocityAberration>& Vabb) const
 {
   bool include_aberration = (Vabb ? false : true);
   ScLookVector sl = C.sc_look_vector(Fc, Band);
   CartesianFixedLookVector lv = cf_look_vector(sl, include_aberration);
-  auto gc_uncorr = position_cf()->reference_surface_intersect_approximate(lv, 
-         Height_reference_surface);
+  auto gc_uncorr = position_cf()->reference_surface_intersect_approximate(
+      lv, Height_reference_surface);
   if(Vabb) {
-    CartesianFixedLookVector lv_vabb = Vabb->
-      velocity_aberration_apply(*position_cf(), *gc_uncorr, velocity_cf());
-    gc_uncorr = position_cf()->reference_surface_intersect_approximate(lv_vabb,
-       Height_reference_surface);
+    CartesianFixedLookVector lv_vabb = Vabb->velocity_aberration_apply(
+        *position_cf(), *gc_uncorr, velocity_cf());
+    gc_uncorr = position_cf()->reference_surface_intersect_approximate(
+        lv_vabb, Height_reference_surface);
   }
   if(!Ref)
     return gc_uncorr;
   lv = Ref->refraction_apply(*position_cf(), *gc_uncorr);
-  return position_cf()->reference_surface_intersect_approximate(lv,
-       Height_reference_surface);
+  return position_cf()->reference_surface_intersect_approximate(
+      lv, Height_reference_surface);
 }
 
 //-----------------------------------------------------------------------
@@ -224,24 +216,15 @@ OrbitData::reference_surface_intersect_approximate
 /// valid for. The default values are a nominal orbit for MISR.
 //-----------------------------------------------------------------------
 
-KeplerOrbit::KeplerOrbit(Time Min_time, 
-			 Time Max_time,
-			 Time Epoch,
-			 double Semimajor_axis,
-			 double Eccentricity,
-			 double Inclination, 
-			 double Ra_ascending_node,
-			 double Ap_at_epoch,
-			 double Mean_anomaly_at_epoch)
-: Orbit(Min_time, Max_time),
-  epoch_(Epoch),
-  a_(Semimajor_axis),
-  ap_(Ap_at_epoch * Constant::deg_to_rad),
-  e_(Eccentricity),
-  ma_(Mean_anomaly_at_epoch * Constant::deg_to_rad),
-  inc_(Inclination * Constant::deg_to_rad),
-  ra_(Ra_ascending_node * Constant::deg_to_rad),
-  r_(3, 3)
+KeplerOrbit::KeplerOrbit(Time Min_time, Time Max_time, Time Epoch,
+                         double Semimajor_axis, double Eccentricity,
+                         double Inclination, double Ra_ascending_node,
+                         double Ap_at_epoch, double Mean_anomaly_at_epoch)
+  : Orbit(Min_time, Max_time), epoch_(Epoch), a_(Semimajor_axis),
+    ap_(Ap_at_epoch * Constant::deg_to_rad), e_(Eccentricity),
+    ma_(Mean_anomaly_at_epoch * Constant::deg_to_rad),
+    inc_(Inclination * Constant::deg_to_rad),
+    ra_(Ra_ascending_node * Constant::deg_to_rad), r_(3, 3)
 {
   calc_freq_rev();
   calc_r();
@@ -253,9 +236,9 @@ KeplerOrbit::KeplerOrbit(Time Min_time,
 
 void KeplerOrbit::calc_freq_rev()
 {
-  const double GM = 3.986032e14; 
-				// G * mass earth, in m^3 / s^2. This
-				// is from A E Roy "Orbital Motion"
+  const double GM = 3.986032e14;
+  // G * mass earth, in m^3 / s^2. This
+  // is from A E Roy "Orbital Motion"
   freq_rev_ = sqrt(GM / (a_ * a_ * a_));
 }
 
@@ -265,28 +248,24 @@ void KeplerOrbit::calc_freq_rev()
 //-----------------------------------------------------------------------
 
 void KeplerOrbit::calc_r()
-{  
-//-----------------------------------------------------------------------
-// Rotate about x axis by inclination.
-//-----------------------------------------------------------------------
+{
+  //-----------------------------------------------------------------------
+  // Rotate about x axis by inclination.
+  //-----------------------------------------------------------------------
 
   blitz::Array<double, 2> r1(3, 3);
-  r1 = 1,         0,          0,
-       0, cos(inc_), -sin(inc_),
-       0, sin(inc_),  cos(inc_);
+  r1 = 1, 0, 0, 0, cos(inc_), -sin(inc_), 0, sin(inc_), cos(inc_);
 
-//-----------------------------------------------------------------------
-// Then, rotate about z axis by Ra_ascending_node
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Then, rotate about z axis by Ra_ascending_node
+  //-----------------------------------------------------------------------
 
   blitz::Array<double, 2> r2(3, 3);
-  r2 = cos(ra_), -sin(ra_), 0,
-       sin(ra_),  cos(ra_), 0,
-	      0,         0, 1;
+  r2 = cos(ra_), -sin(ra_), 0, sin(ra_), cos(ra_), 0, 0, 0, 1;
 
-//-----------------------------------------------------------------------
-// Combine rotations to give r_.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Combine rotations to give r_.
+  //-----------------------------------------------------------------------
 
   blitz::firstIndex i1;
   blitz::secondIndex i2;
@@ -299,24 +278,27 @@ void KeplerOrbit::calc_r()
 /// for details.
 //-----------------------------------------------------------------------
 
-class KeplerEquation: public DFunctorWithDerivative {
+class KeplerEquation : public DFunctorWithDerivative {
 public:
-  KeplerEquation(const AutoDerivative<double>& wt, 
-		 const AutoDerivative<double>& e) 
-    : e_(e) 
+  KeplerEquation(const AutoDerivative<double>& wt,
+                 const AutoDerivative<double>& e)
+    : e_(e)
   {
-    wt_ = AutoDerivative<double>(fmod(wt.value(), 2 * Constant::pi), 
-				 wt.gradient());
+    wt_ = AutoDerivative<double>(fmod(wt.value(), 2 * Constant::pi),
+                                 wt.gradient());
     if(wt_ < 0)
       wt_ += 2 * Constant::pi;
   }
   virtual ~KeplerEquation() {}
   virtual double operator()(const double& psi) const
-  { return wt_.value() - (psi - e_.value() * sin(psi));}
-  virtual double df(double psi) const
-  { return -(1.0 - e_.value() * cos(psi));}
+  {
+    return wt_.value() - (psi - e_.value() * sin(psi));
+  }
+  virtual double df(double psi) const { return -(1.0 - e_.value() * cos(psi)); }
   virtual AutoDerivative<double> f_with_derivative(double psi) const
-  { return wt_ - (psi - e_ * sin(psi)); }
+  {
+    return wt_ - (psi - e_ * sin(psi));
+  }
 private:
   AutoDerivative<double> wt_;
   AutoDerivative<double> e_;
@@ -326,8 +308,8 @@ private:
 /// Calculate OrbitData for KeplerOrbit.
 //-----------------------------------------------------------------------
 
-template<class T> inline T dotb(const blitz::Array<T, 1>& x, 
-				const blitz::Array<T, 1>& y)
+template<class T>
+inline T dotb(const blitz::Array<T, 1>& x, const blitz::Array<T, 1>& y)
 {
   return sum(x * y);
 }
@@ -337,9 +319,9 @@ template<class T> inline T normb(const blitz::Array<T, 1>& x)
   return std::sqrt(dotb(x, x));
 }
 
-template<class T> inline blitz::Array<T, 1> cross2
-(const blitz::Array<T, 1>& x,
- const blitz::Array<T, 1>& y)
+template<class T>
+inline blitz::Array<T, 1> cross2(const blitz::Array<T, 1>& x,
+                                 const blitz::Array<T, 1>& y)
 {
   blitz::Array<T, 1> res(3);
   res(0) = x(1) * y(2) - x(2) * y(1);
@@ -352,29 +334,28 @@ boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data(Time T) const
 {
   range_check_inclusive(T, min_time(), max_time());
 
-//-----------------------------------------------------------------------
-// Calculate r, theta, and their derivatives using Kepler's equations.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Calculate r, theta, and their derivatives using Kepler's equations.
+  //-----------------------------------------------------------------------
 
-  double eccentric_anomaly = 
-    root(KeplerEquation(freq_rev_ * (T - epoch_) + ma_, e_), 0, 
-	 2 * Constant::pi);
+  double eccentric_anomaly = root(
+      KeplerEquation(freq_rev_ * (T - epoch_) + ma_, e_), 0, 2 * Constant::pi);
 
   double spsi = sin(eccentric_anomaly);
   double cpsi = cos(eccentric_anomaly);
 
-// This is in the range -pi to pi
-  double theta = 2 * atan(sqrt((1 + e_) / (1 - e_)) * 
-			  tan(eccentric_anomaly / 2));
+  // This is in the range -pi to pi
+  double theta =
+      2 * atan(sqrt((1 + e_) / (1 - e_)) * tan(eccentric_anomaly / 2));
   double r = a_ * (1 - e_ * cpsi);
   double psidot = freq_rev_ / (1 - e_ * cpsi);
   double rdot = a_ * e_ * spsi * psidot;
-  double thetadot = spsi * (1 - e_ * e_) / 
-    (sin(theta) * (1 - e_ * cpsi) * (1 - e_ * cpsi)) * psidot;
+  double thetadot = spsi * (1 - e_ * e_) /
+                    (sin(theta) * (1 - e_ * cpsi) * (1 - e_ * cpsi)) * psidot;
 
-//-----------------------------------------------------------------------
-// Get Cartesian coordinates of point & velocity
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Get Cartesian coordinates of point & velocity
+  //-----------------------------------------------------------------------
 
   blitz::Array<double, 1> pos(3), vel(3);
   double ctheta = cos(theta + ap_);
@@ -386,61 +367,61 @@ boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data(Time T) const
   vel(1) = rdot * stheta + r * ctheta * thetadot;
   vel(2) = 0;
 
-//-----------------------------------------------------------------------
-// Rotate to proper inclination and longitude of ascending node.
-//-----------------------------------------------------------------------
-  
+  //-----------------------------------------------------------------------
+  // Rotate to proper inclination and longitude of ascending node.
+  //-----------------------------------------------------------------------
+
   blitz::firstIndex i1;
   blitz::secondIndex i2;
   Array<double, 1> p(3), v(3);
   p = sum(r_(i1, i2) * pos(i2), i2);
   v = sum(r_(i1, i2) * vel(i2), i2);
 
-//-----------------------------------------------------------------------
-// Create matrix.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Create matrix.
+  //-----------------------------------------------------------------------
 
   Array<double, 1> x(3), y(3), z(3);
   z = -p / normb(p);
   x = v - z * dotb(v, z);
   x /= normb(x);
   y = cross2(z, x);
-  double sc_to_ci[3][3] = {{x(0), y(0), z(0)},
-			   {x(1), y(1), z(1)},
-			   {x(2), y(2), z(2)}};
+  double sc_to_ci[3][3] = {
+      {x(0), y(0), z(0)}, {x(1), y(1), z(1)}, {x(2), y(2), z(2)}};
   boost::shared_ptr<CartesianInertial> pci(new Eci(p(0), p(1), p(2)));
   boost::array<double, 3> v2 = {{v(0), v(1), v(2)}};
-  return boost::shared_ptr<OrbitData>(new QuaternionOrbitData(T, pci, v2, 
-		      matrix_to_quaternion(sc_to_ci)));
+  return boost::shared_ptr<OrbitData>(
+      new QuaternionOrbitData(T, pci, v2, matrix_to_quaternion(sc_to_ci)));
 }
 
-boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data
-(const TimeWithDerivative& T) const
+boost::shared_ptr<OrbitData>
+KeplerOrbit::orbit_data(const TimeWithDerivative& T) const
 {
   range_check_inclusive(T.value(), min_time(), max_time());
 
-//-----------------------------------------------------------------------
-// Calculate r, theta, and their derivatives using Kepler's equations.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Calculate r, theta, and their derivatives using Kepler's equations.
+  //-----------------------------------------------------------------------
 
-  AutoDerivative<double> eccentric_anomaly = root_with_derivative
-    (KeplerEquation(freq_rev_ * (T - epoch_) + ma_, e_), 0, 2 * Constant::pi);
+  AutoDerivative<double> eccentric_anomaly = root_with_derivative(
+      KeplerEquation(freq_rev_ * (T - epoch_) + ma_, e_), 0, 2 * Constant::pi);
 
   AutoDerivative<double> spsi = std::sin(eccentric_anomaly);
   AutoDerivative<double> cpsi = std::cos(eccentric_anomaly);
 
-// This is in the range -pi to pi
-  AutoDerivative<double> theta = 
-    2 * std::atan(sqrt((1 + e_) / (1 - e_)) * std::tan(eccentric_anomaly / 2));
+  // This is in the range -pi to pi
+  AutoDerivative<double> theta = 2 * std::atan(sqrt((1 + e_) / (1 - e_)) *
+                                               std::tan(eccentric_anomaly / 2));
   AutoDerivative<double> r = a_ * (1 - e_ * cpsi);
   AutoDerivative<double> psidot = freq_rev_ / (1 - e_ * cpsi);
   AutoDerivative<double> rdot = a_ * e_ * spsi * psidot;
-  AutoDerivative<double> thetadot = spsi * (1 - e_ * e_) / 
-    (std::sin(theta) * (1 - e_ * cpsi) * (1 - e_ * cpsi)) * psidot;
+  AutoDerivative<double> thetadot =
+      spsi * (1 - e_ * e_) /
+      (std::sin(theta) * (1 - e_ * cpsi) * (1 - e_ * cpsi)) * psidot;
 
-//-----------------------------------------------------------------------
-// Get Cartesian coordinates of point & velocity
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Get Cartesian coordinates of point & velocity
+  //-----------------------------------------------------------------------
 
   blitz::Array<AutoDerivative<double>, 1> pos(3), vel(3);
   AutoDerivative<double> ctheta = std::cos(theta + ap_);
@@ -452,35 +433,33 @@ boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data
   vel(1) = rdot * stheta + r * ctheta * thetadot;
   vel(2) = 0;
 
-//-----------------------------------------------------------------------
-// Rotate to proper inclination and longitude of ascending node.
-//-----------------------------------------------------------------------
-  
+  //-----------------------------------------------------------------------
+  // Rotate to proper inclination and longitude of ascending node.
+  //-----------------------------------------------------------------------
+
   blitz::firstIndex i1;
   blitz::secondIndex i2;
   Array<AutoDerivative<double>, 1> p(3), v(3);
   p = sum(r_(i1, i2) * pos(i2), i2);
   v = sum(r_(i1, i2) * vel(i2), i2);
 
-//-----------------------------------------------------------------------
-// Create matrix.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Create matrix.
+  //-----------------------------------------------------------------------
 
   Array<AutoDerivative<double>, 1> x(3), y(3), z(3);
   z = -p / normb(p);
   x = v - z * dotb(v, z);
   x /= normb(x);
   y = cross2(z, x);
-  AutoDerivative<double> sc_to_ci[3][3] = {{x(0), y(0), z(0)},
-					   {x(1), y(1), z(1)},
-					   {x(2), y(2), z(2)}};
-  boost::shared_ptr<CartesianInertial> 
-    pci(new Eci(p(0).value(), p(1).value(), p(2).value())) ;
+  AutoDerivative<double> sc_to_ci[3][3] = {
+      {x(0), y(0), z(0)}, {x(1), y(1), z(1)}, {x(2), y(2), z(2)}};
+  boost::shared_ptr<CartesianInertial> pci(
+      new Eci(p(0).value(), p(1).value(), p(2).value()));
   boost::array<AutoDerivative<double>, 3> pci_der = {{p(0), p(1), p(2)}};
   boost::array<AutoDerivative<double>, 3> v2 = {{v(0), v(1), v(2)}};
-  return boost::shared_ptr<OrbitData>(new QuaternionOrbitData(T, pci, pci_der,
-		      v2, 
-   		      matrix_to_quaternion(sc_to_ci)));
+  return boost::shared_ptr<OrbitData>(new QuaternionOrbitData(
+      T, pci, pci_der, v2, matrix_to_quaternion(sc_to_ci)));
 }
 
 //-----------------------------------------------------------------------
@@ -490,17 +469,17 @@ boost::shared_ptr<OrbitData> KeplerOrbit::orbit_data
 void KeplerOrbit::print(std::ostream& Os) const
 {
   Os << "Kepler orbit:\n"
-     << "  Time Range:            " << min_time().to_string() << " to " 
+     << "  Time Range:            " << min_time().to_string() << " to "
      << max_time().to_string() << "\n"
      << "  Epoch of data:         " << epoch_.to_string() << "\n"
-     << "  Semimajor axis:        " << a_  << " m\n"
+     << "  Semimajor axis:        " << a_ << " m\n"
      << "  Eccentricity:          " << e_ << "\n"
      << "  Inclination:           " << inc_ * Constant::rad_to_deg << " deg\n"
-     << "  Right ascension of ascending node:\n" 
+     << "  Right ascension of ascending node:\n"
      << "                         " << ra_ * Constant::rad_to_deg << " deg\n"
      << "  Argument of perigee at epoch:\n"
      << "                         " << ap_ * Constant::rad_to_deg << " deg\n"
-     << "  Mean anomoly at epoch: " << ma_  * Constant::rad_to_deg << " deg\n";
+     << "  Mean anomoly at epoch: " << ma_ * Constant::rad_to_deg << " deg\n";
 }
 
 //-----------------------------------------------------------------------
@@ -515,10 +494,10 @@ void KeplerOrbit::print(std::ostream& Os) const
 /// otherwise it is CartesianInertial.
 //-----------------------------------------------------------------------
 
-QuaternionOrbitData::QuaternionOrbitData
-(const QuaternionOrbitData& Start,
- const boost::array<AutoDerivative<double>, 3>& Pos_off,
- const boost::math::quaternion<AutoDerivative<double> >& Sc_to_sc_corr)
+QuaternionOrbitData::QuaternionOrbitData(
+    const QuaternionOrbitData& Start,
+    const boost::array<AutoDerivative<double>, 3>& Pos_off,
+    const boost::math::quaternion<AutoDerivative<double>>& Sc_to_sc_corr)
 {
   tm = Start.tm;
   pos = Start.pos->create(Start.pos->position);
@@ -542,31 +521,31 @@ QuaternionOrbitData::QuaternionOrbitData
     pos->position[0] += Pos_off[0].value();
     pos->position[1] += Pos_off[1].value();
     pos->position[2] += Pos_off[2].value();
-    pos_with_der = boost::math::quaternion<AutoDerivative<double> >
-      (0,pos_with_der.R_component_2() + Pos_off[0],
-       pos_with_der.R_component_3() + Pos_off[1],
-       pos_with_der.R_component_4() + Pos_off[2]);
+    pos_with_der = boost::math::quaternion<AutoDerivative<double>>(
+        0, pos_with_der.R_component_2() + Pos_off[0],
+        pos_with_der.R_component_3() + Pos_off[1],
+        pos_with_der.R_component_4() + Pos_off[2]);
     if(have_ci_to_cf) {
-      pos_ci_with_der = conj(ci_to_cf_with_derivative()) * pos_with_der * 
-	ci_to_cf_with_derivative();
+      pos_ci_with_der = conj(ci_to_cf_with_derivative()) * pos_with_der *
+                        ci_to_cf_with_derivative();
       boost::array<double, 3> p = {{pos_ci_with_der.R_component_2().value(),
-				    pos_ci_with_der.R_component_3().value(),
-				    pos_ci_with_der.R_component_4().value()}};
+                                    pos_ci_with_der.R_component_3().value(),
+                                    pos_ci_with_der.R_component_4().value()}};
       pos_ci = pos_ci->create(p);
     }
   } else {
     pos_ci->position[0] += Pos_off[0].value();
     pos_ci->position[1] += Pos_off[1].value();
     pos_ci->position[2] += Pos_off[2].value();
-    pos_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
-      (0,pos_ci_with_der.R_component_2() + Pos_off[0],
-       pos_ci_with_der.R_component_3() + Pos_off[1],
-       pos_ci_with_der.R_component_4() + Pos_off[2]);
-    pos_with_der = ci_to_cf_with_derivative() * pos_ci_with_der * 
-      conj(ci_to_cf_with_derivative());
+    pos_ci_with_der = boost::math::quaternion<AutoDerivative<double>>(
+        0, pos_ci_with_der.R_component_2() + Pos_off[0],
+        pos_ci_with_der.R_component_3() + Pos_off[1],
+        pos_ci_with_der.R_component_4() + Pos_off[2]);
+    pos_with_der = ci_to_cf_with_derivative() * pos_ci_with_der *
+                   conj(ci_to_cf_with_derivative());
     boost::array<double, 3> p = {{pos_with_der.R_component_2().value(),
-				  pos_with_der.R_component_3().value(),
-				  pos_with_der.R_component_4().value()}};
+                                  pos_with_der.R_component_3().value(),
+                                  pos_with_der.R_component_4().value()}};
     pos = pos->create(p);
   }
 }
@@ -575,8 +554,7 @@ QuaternionOrbitData::QuaternionOrbitData
 /// Copy constructor.
 //-----------------------------------------------------------------------
 
-QuaternionOrbitData::QuaternionOrbitData
-(const QuaternionOrbitData& V)
+QuaternionOrbitData::QuaternionOrbitData(const QuaternionOrbitData& V)
 {
   tm = V.tm;
   pos = V.pos->create(V.pos->position);
@@ -589,7 +567,7 @@ QuaternionOrbitData::QuaternionOrbitData
   have_ci_to_cf = V.have_ci_to_cf;
   if(V.have_ci_to_cf) {
     ci_to_cf_ = V.ci_to_cf_;
-    ci_to_cf_der_ =V.ci_to_cf_der_;
+    ci_to_cf_der_ = V.ci_to_cf_der_;
     pos_ci = V.pos_ci->create(V.pos_ci->position);
     pos_ci_with_der = V.pos_ci_with_der;
     vel_ci = V.vel_ci;
@@ -611,10 +589,9 @@ QuaternionOrbitData::QuaternionOrbitData
 /// This version does not include the derivative calculation.
 //-----------------------------------------------------------------------
 
-QuaternionOrbitData::QuaternionOrbitData
-(const QuaternionOrbitData& Start,
- const boost::array<double, 3>& Pos_off,
- const boost::math::quaternion<double>& Sc_to_sc_corr)
+QuaternionOrbitData::QuaternionOrbitData(
+    const QuaternionOrbitData& Start, const boost::array<double, 3>& Pos_off,
+    const boost::math::quaternion<double>& Sc_to_sc_corr)
 {
   tm = Start.tm;
   pos = Start.pos->create(Start.pos->position);
@@ -635,15 +612,13 @@ QuaternionOrbitData::QuaternionOrbitData
     pos->position[0] += Pos_off[0];
     pos->position[1] += Pos_off[1];
     pos->position[2] += Pos_off[2];
-    pos_with_der = 
-      boost::math::quaternion<double>(0, pos->position[0], 
-				      pos->position[1], pos->position[2]);
+    pos_with_der = boost::math::quaternion<double>(
+        0, pos->position[0], pos->position[1], pos->position[2]);
     if(have_ci_to_cf) {
-      pos_ci_with_der = conj(ci_to_cf()) * pos_with_der * 
-	ci_to_cf();
+      pos_ci_with_der = conj(ci_to_cf()) * pos_with_der * ci_to_cf();
       boost::array<double, 3> p = {{pos_ci_with_der.R_component_2().value(),
-				    pos_ci_with_der.R_component_3().value(),
-				    pos_ci_with_der.R_component_4().value()}};
+                                    pos_ci_with_der.R_component_3().value(),
+                                    pos_ci_with_der.R_component_4().value()}};
       pos_ci = pos_ci->create(p);
     }
   } else {
@@ -651,13 +626,12 @@ QuaternionOrbitData::QuaternionOrbitData
     pos_ci->position[0] += Pos_off[0];
     pos_ci->position[1] += Pos_off[1];
     pos_ci->position[2] += Pos_off[2];
-    pos_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
-      (0,pos_ci->position[0],pos_ci->position[1],pos_ci->position[2]);
-    pos_with_der = ci_to_cf() * pos_ci_with_der * 
-      conj(ci_to_cf());
+    pos_ci_with_der = boost::math::quaternion<AutoDerivative<double>>(
+        0, pos_ci->position[0], pos_ci->position[1], pos_ci->position[2]);
+    pos_with_der = ci_to_cf() * pos_ci_with_der * conj(ci_to_cf());
     boost::array<double, 3> p = {{pos_with_der.R_component_2().value(),
-				  pos_with_der.R_component_3().value(),
-				  pos_with_der.R_component_4().value()}};
+                                  pos_with_der.R_component_3().value(),
+                                  pos_with_der.R_component_4().value()}};
     pos = pos->create(p);
   }
 }
@@ -667,19 +641,17 @@ QuaternionOrbitData::QuaternionOrbitData
 /// coordinate system (e.g., Ecr coordinates).
 //-----------------------------------------------------------------------
 
-QuaternionOrbitData::QuaternionOrbitData(Time Tm, 
-   const boost::shared_ptr<CartesianFixed>& pos_cf,
-   const boost::array<double, 3>& vel_fixed,
-   const boost::math::quaternion<double>& sc_to_cf_q)
-  : tm(Tm), pos(pos_cf), 
-    pos_with_der(0, pos_cf->position[0], 
-		 pos_cf->position[1], pos_cf->position[2]),
-    vel_cf(0, vel_fixed[0], vel_fixed[1], vel_fixed[2]), 
-    vel_cf_with_der(0, vel_fixed[0], vel_fixed[1], vel_fixed[2]), 
-    sc_to_cf_(sc_to_cf_q), 
-    sc_to_cf_with_der(sc_to_cf_q), 
-    from_cf_(true), have_ci_to_cf(false)
-{ 
+QuaternionOrbitData::QuaternionOrbitData(
+    Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
+    const boost::array<double, 3>& vel_fixed,
+    const boost::math::quaternion<double>& sc_to_cf_q)
+  : tm(Tm), pos(pos_cf), pos_with_der(0, pos_cf->position[0],
+                                      pos_cf->position[1], pos_cf->position[2]),
+    vel_cf(0, vel_fixed[0], vel_fixed[1], vel_fixed[2]),
+    vel_cf_with_der(0, vel_fixed[0], vel_fixed[1], vel_fixed[2]),
+    sc_to_cf_(sc_to_cf_q), sc_to_cf_with_der(sc_to_cf_q), from_cf_(true),
+    have_ci_to_cf(false)
+{
   normalize(sc_to_cf_);
   normalize(sc_to_cf_with_der);
 }
@@ -689,21 +661,19 @@ QuaternionOrbitData::QuaternionOrbitData(Time Tm,
 /// coordinate system (e.g., Ecr coordinates).
 //-----------------------------------------------------------------------
 
-QuaternionOrbitData::QuaternionOrbitData
-(const TimeWithDerivative& Tm, 
- const boost::shared_ptr<CartesianFixed>& pos_cf,
- const boost::array<AutoDerivative<double>, 3>& pos_cf_with_der,
- const boost::array<AutoDerivative<double>, 3>& vel_fixed,
- const boost::math::quaternion<AutoDerivative<double> >& sc_to_cf_q
-)
-: tm(Tm), pos(pos_cf), 
-  pos_with_der(0, pos_cf_with_der[0], pos_cf_with_der[1], pos_cf_with_der[2]),
-  vel_cf(0, vel_fixed[0].value(), vel_fixed[1].value(), vel_fixed[2].value()), 
-  vel_cf_with_der(0, vel_fixed[0], vel_fixed[1], vel_fixed[2]), 
-  sc_to_cf_(value(sc_to_cf_q)), 
-  sc_to_cf_with_der(sc_to_cf_q), 
-  from_cf_(true), have_ci_to_cf(false)
-{ 
+QuaternionOrbitData::QuaternionOrbitData(
+    const TimeWithDerivative& Tm,
+    const boost::shared_ptr<CartesianFixed>& pos_cf,
+    const boost::array<AutoDerivative<double>, 3>& pos_cf_with_der,
+    const boost::array<AutoDerivative<double>, 3>& vel_fixed,
+    const boost::math::quaternion<AutoDerivative<double>>& sc_to_cf_q)
+  : tm(Tm), pos(pos_cf),
+    pos_with_der(0, pos_cf_with_der[0], pos_cf_with_der[1], pos_cf_with_der[2]),
+    vel_cf(0, vel_fixed[0].value(), vel_fixed[1].value(), vel_fixed[2].value()),
+    vel_cf_with_der(0, vel_fixed[0], vel_fixed[1], vel_fixed[2]),
+    sc_to_cf_(value(sc_to_cf_q)), sc_to_cf_with_der(sc_to_cf_q), from_cf_(true),
+    have_ci_to_cf(false)
+{
   normalize(sc_to_cf_);
   normalize(sc_to_cf_with_der);
 }
@@ -713,19 +683,18 @@ QuaternionOrbitData::QuaternionOrbitData
 /// coordinate system (e.g., Ecr coordinates).
 //-----------------------------------------------------------------------
 
-void QuaternionOrbitData::initialize(Time Tm, 
-   const boost::shared_ptr<CartesianFixed>& pos_cf,
-   const boost::array<double, 3>& vel_fixed,
-   const boost::math::quaternion<double>& sc_to_cf_q)
-{ 
+void QuaternionOrbitData::initialize(
+    Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
+    const boost::array<double, 3>& vel_fixed,
+    const boost::math::quaternion<double>& sc_to_cf_q)
+{
   from_cf_ = true;
   tm = Tm;
   pos = pos_cf;
-  pos_with_der = 
-    boost::math::quaternion<double>(0, pos_cf->position[0], 
-				    pos_cf->position[1], pos_cf->position[2]);
-  vel_cf = boost::math::quaternion<double>(0, vel_fixed[0], vel_fixed[1], 
-					   vel_fixed[2]);
+  pos_with_der = boost::math::quaternion<double>(
+      0, pos_cf->position[0], pos_cf->position[1], pos_cf->position[2]);
+  vel_cf = boost::math::quaternion<double>(0, vel_fixed[0], vel_fixed[1],
+                                           vel_fixed[2]);
   vel_cf_with_der = vel_cf;
   sc_to_cf_ = sc_to_cf_q;
   sc_to_cf_with_der = sc_to_cf_q;
@@ -739,20 +708,20 @@ void QuaternionOrbitData::initialize(Time Tm,
 /// coordinate system (e.g., Ecr coordinates).
 //-----------------------------------------------------------------------
 
-void QuaternionOrbitData::initialize
-(const TimeWithDerivative& Tm, 
- const boost::shared_ptr<CartesianFixed>& pos_cf,
- const boost::array<AutoDerivative<double>, 3>& pos_cf_with_der,
- const boost::array<AutoDerivative<double>, 3>& vel_fixed, const 
- boost::math::quaternion<AutoDerivative<double> >& sc_to_cf_q)
-{ 
+void QuaternionOrbitData::initialize(
+    const TimeWithDerivative& Tm,
+    const boost::shared_ptr<CartesianFixed>& pos_cf,
+    const boost::array<AutoDerivative<double>, 3>& pos_cf_with_der,
+    const boost::array<AutoDerivative<double>, 3>& vel_fixed,
+    const boost::math::quaternion<AutoDerivative<double>>& sc_to_cf_q)
+{
   from_cf_ = true;
   tm = Tm;
   pos = pos_cf;
-  pos_with_der = boost::math::quaternion<AutoDerivative<double> >
-    (0, pos_cf_with_der[0], pos_cf_with_der[1], pos_cf_with_der[2]);
-  vel_cf_with_der = boost::math::quaternion<AutoDerivative<double> >
-    (0, vel_fixed[0], vel_fixed[1], vel_fixed[2]);
+  pos_with_der = boost::math::quaternion<AutoDerivative<double>>(
+      0, pos_cf_with_der[0], pos_cf_with_der[1], pos_cf_with_der[2]);
+  vel_cf_with_der = boost::math::quaternion<AutoDerivative<double>>(
+      0, vel_fixed[0], vel_fixed[1], vel_fixed[2]);
   vel_cf = value(vel_cf_with_der);
   sc_to_cf_ = value(sc_to_cf_q);
   sc_to_cf_with_der = sc_to_cf_q;
@@ -766,12 +735,12 @@ void QuaternionOrbitData::initialize
 /// coordinate system (e.g., Eci coordinates).
 //-----------------------------------------------------------------------
 
-QuaternionOrbitData::QuaternionOrbitData(Time Tm, 
-   const boost::shared_ptr<CartesianInertial>& pos_ci,
-   const boost::array<double, 3>& vel_inertial,
-   const boost::math::quaternion<double>& sc_to_ci_q)
-: have_ci_to_cf(false)
-{ 
+QuaternionOrbitData::QuaternionOrbitData(
+    Time Tm, const boost::shared_ptr<CartesianInertial>& pos_ci,
+    const boost::array<double, 3>& vel_inertial,
+    const boost::math::quaternion<double>& sc_to_ci_q)
+  : have_ci_to_cf(false)
+{
   initialize(Tm, pos_ci, vel_inertial, sc_to_ci_q);
 }
 
@@ -780,15 +749,14 @@ QuaternionOrbitData::QuaternionOrbitData(Time Tm,
 /// coordinate system (e.g., Eci coordinates).
 //-----------------------------------------------------------------------
 
-QuaternionOrbitData::QuaternionOrbitData
-(const TimeWithDerivative& Tm, 
- const boost::shared_ptr<CartesianInertial>& pos_ci,
- const boost::array<AutoDerivative<double>, 3>& pos_ci_with_der,
- const boost::array<AutoDerivative<double>, 3>& vel_inertial,
- const boost::math::quaternion<AutoDerivative<double> >& sc_to_ci_q
-)
-: have_ci_to_cf(false)
-{ 
+QuaternionOrbitData::QuaternionOrbitData(
+    const TimeWithDerivative& Tm,
+    const boost::shared_ptr<CartesianInertial>& pos_ci,
+    const boost::array<AutoDerivative<double>, 3>& pos_ci_with_der,
+    const boost::array<AutoDerivative<double>, 3>& vel_inertial,
+    const boost::math::quaternion<AutoDerivative<double>>& sc_to_ci_q)
+  : have_ci_to_cf(false)
+{
   initialize(Tm, pos_ci, pos_ci_with_der, vel_inertial, sc_to_ci_q);
 }
 
@@ -797,19 +765,18 @@ QuaternionOrbitData::QuaternionOrbitData
 /// coordinate system (e.g., Eci coordinates).
 //-----------------------------------------------------------------------
 
-void QuaternionOrbitData::initialize(Time Tm, 
-   const boost::shared_ptr<CartesianInertial>& Pos_ci,
-   const boost::array<double, 3>& vel_inertial,
-   const boost::math::quaternion<double>& sc_to_ci_q)
-{ 
+void QuaternionOrbitData::initialize(
+    Time Tm, const boost::shared_ptr<CartesianInertial>& Pos_ci,
+    const boost::array<double, 3>& vel_inertial,
+    const boost::math::quaternion<double>& sc_to_ci_q)
+{
   from_cf_ = false;
   tm = Tm;
   pos_ci = Pos_ci;
-  pos_ci_with_der = boost::math::quaternion<double>(0, pos_ci->position[0],
-						    pos_ci->position[1],
-						    pos_ci->position[2]);
+  pos_ci_with_der = boost::math::quaternion<double>(
+      0, pos_ci->position[0], pos_ci->position[1], pos_ci->position[2]);
   vel_ci = boost::math::quaternion<double>(0, vel_inertial[0], vel_inertial[1],
-					   vel_inertial[2]);
+                                           vel_inertial[2]);
   vel_ci_with_der = vel_ci;
   boost::array<double, 3> vcf;
   convert_position_and_velocity(Tm, *Pos_ci, vel_inertial, pos, vcf, ci_to_cf_);
@@ -817,9 +784,8 @@ void QuaternionOrbitData::initialize(Time Tm,
   have_ci_to_cf = true;
   vel_cf = boost::math::quaternion<double>(0, vcf[0], vcf[1], vcf[2]);
   vel_cf_with_der = vel_cf;
-  pos_with_der = boost::math::quaternion<double>(0, pos->position[0], 
-						 pos->position[1],
-						 pos->position[2]);
+  pos_with_der = boost::math::quaternion<double>(
+      0, pos->position[0], pos->position[1], pos->position[2]);
   sc_to_cf_ = ci_to_cf() * sc_to_ci_q;
   sc_to_cf_with_der = sc_to_cf_;
   normalize(sc_to_cf_);
@@ -830,7 +796,8 @@ void QuaternionOrbitData::initialize(Time Tm,
 /// Set sc_to_ci
 //-----------------------------------------------------------------------
 
-void QuaternionOrbitData::sc_to_ci(const boost::math::quaternion<double>& sc_to_ci_q)
+void QuaternionOrbitData::sc_to_ci(
+    const boost::math::quaternion<double>& sc_to_ci_q)
 {
   sc_to_cf_ = ci_to_cf() * sc_to_ci_q;
   sc_to_cf_with_der = sc_to_cf_;
@@ -842,8 +809,8 @@ void QuaternionOrbitData::sc_to_ci(const boost::math::quaternion<double>& sc_to_
 /// Set sc_to_ci_with_derivative
 //-----------------------------------------------------------------------
 
-void QuaternionOrbitData::sc_to_ci_with_derivative
-(const boost::math::quaternion<AutoDerivative<double> >& sc_to_ci_q)
+void QuaternionOrbitData::sc_to_ci_with_derivative(
+    const boost::math::quaternion<AutoDerivative<double>>& sc_to_ci_q)
 {
   sc_to_cf_with_der = ci_to_cf_with_derivative() * sc_to_ci_q;
   sc_to_cf_ = value(sc_to_cf_with_der);
@@ -856,31 +823,31 @@ void QuaternionOrbitData::sc_to_ci_with_derivative
 /// coordinate system (e.g., Eci coordinates).
 //-----------------------------------------------------------------------
 
-void QuaternionOrbitData::initialize
-(const TimeWithDerivative& Tm, 
- const boost::shared_ptr<CartesianInertial>& Pos_ci,
- const boost::array<AutoDerivative<double>, 3>& Pos_ci_with_der,
- const boost::array<AutoDerivative<double>, 3>& vel_inertial,
- const boost::math::quaternion<AutoDerivative<double> >& sc_to_ci_q)
-{ 
+void QuaternionOrbitData::initialize(
+    const TimeWithDerivative& Tm,
+    const boost::shared_ptr<CartesianInertial>& Pos_ci,
+    const boost::array<AutoDerivative<double>, 3>& Pos_ci_with_der,
+    const boost::array<AutoDerivative<double>, 3>& vel_inertial,
+    const boost::math::quaternion<AutoDerivative<double>>& sc_to_ci_q)
+{
   from_cf_ = false;
   tm = Tm;
   pos_ci = Pos_ci;
-  pos_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
-    (0, Pos_ci_with_der[0], Pos_ci_with_der[1], Pos_ci_with_der[2]);
-  vel_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
-    (0, vel_inertial[0], vel_inertial[1], vel_inertial[2]);
+  pos_ci_with_der = boost::math::quaternion<AutoDerivative<double>>(
+      0, Pos_ci_with_der[0], Pos_ci_with_der[1], Pos_ci_with_der[2]);
+  vel_ci_with_der = boost::math::quaternion<AutoDerivative<double>>(
+      0, vel_inertial[0], vel_inertial[1], vel_inertial[2]);
   vel_ci = value(vel_ci_with_der);
 
   boost::array<AutoDerivative<double>, 3> pder, vcf;
-  convert_position_and_velocity(tm, *Pos_ci, Pos_ci_with_der, vel_inertial, 
-				pos, pder, vcf, ci_to_cf_der_);
+  convert_position_and_velocity(tm, *Pos_ci, Pos_ci_with_der, vel_inertial, pos,
+                                pder, vcf, ci_to_cf_der_);
   ci_to_cf_ = value(ci_to_cf_der_);
-  vel_cf_with_der = boost::math::quaternion<AutoDerivative<double> >
-    (0, vcf[0], vcf[1], vcf[2]);
+  vel_cf_with_der = boost::math::quaternion<AutoDerivative<double>>(
+      0, vcf[0], vcf[1], vcf[2]);
   vel_cf = value(vel_cf_with_der);
-  pos_with_der = boost::math::quaternion<AutoDerivative<double> >
-    (0, pder[0], pder[1], pder[2]);
+  pos_with_der = boost::math::quaternion<AutoDerivative<double>>(
+      0, pder[0], pder[1], pder[2]);
   sc_to_cf_with_der = ci_to_cf_with_derivative() * sc_to_ci_q;
   sc_to_cf_ = value(sc_to_cf_with_der);
   have_ci_to_cf = true;
@@ -892,13 +859,14 @@ void QuaternionOrbitData::initialize
 /// Convert to CartesianInertialLookVector.
 //-----------------------------------------------------------------------
 
-CartesianInertialLookVector 
+CartesianInertialLookVector
 QuaternionOrbitData::ci_look_vector(const ScLookVector& Sl,
-				    bool Include_velocity_aberration) const
+                                    bool Include_velocity_aberration) const
 {
   fill_in_ci_to_cf();
-  boost::math::quaternion<double> ci = 
-    conj(ci_to_cf()) * sc_to_cf_ * Sl.look_quaternion() * conj(sc_to_cf_) * ci_to_cf();
+  boost::math::quaternion<double> ci = conj(ci_to_cf()) * sc_to_cf_ *
+                                       Sl.look_quaternion() * conj(sc_to_cf_) *
+                                       ci_to_cf();
   if(Include_velocity_aberration) {
     // Do aberration of light correction. See comment in front of
     // QuaternionOrbitData for discussion of the approximation used here.
@@ -912,15 +880,15 @@ QuaternionOrbitData::ci_look_vector(const ScLookVector& Sl,
 /// Convert to CartesianInertialLookVector.
 //-----------------------------------------------------------------------
 
-CartesianInertialLookVectorWithDerivative 
-QuaternionOrbitData::ci_look_vector
-(const ScLookVectorWithDerivative& Sl, bool Include_velocity_aberration) const
+CartesianInertialLookVectorWithDerivative
+QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative& Sl,
+                                    bool Include_velocity_aberration) const
 {
   fill_in_ci_to_cf();
-  boost::math::quaternion<AutoDerivative<double> > ci = 
-    conj(ci_to_cf_with_derivative()) * 
-    sc_to_cf_with_der * Sl.look_quaternion() * conj(sc_to_cf_with_der)
-    * ci_to_cf_with_derivative();
+  boost::math::quaternion<AutoDerivative<double>> ci =
+      conj(ci_to_cf_with_derivative()) * sc_to_cf_with_der *
+      Sl.look_quaternion() * conj(sc_to_cf_with_der) *
+      ci_to_cf_with_derivative();
   if(Include_velocity_aberration) {
     // Do aberration of light correction. See comment in front of
     // QuaternionOrbitData for discussion of the approximation used here.
@@ -935,11 +903,11 @@ QuaternionOrbitData::ci_look_vector
 //-----------------------------------------------------------------------
 
 CartesianFixedLookVector
-QuaternionOrbitData::cf_look_vector
-(const ScLookVector& Sl, bool Include_velocity_aberration) const
+QuaternionOrbitData::cf_look_vector(const ScLookVector& Sl,
+                                    bool Include_velocity_aberration) const
 {
-  boost::math::quaternion<double> cf = sc_to_cf_ * Sl.look_quaternion() * 
-    conj(sc_to_cf_);
+  boost::math::quaternion<double> cf =
+      sc_to_cf_ * Sl.look_quaternion() * conj(sc_to_cf_);
   if(Include_velocity_aberration) {
     // Do aberration of light correction. See comment in front of
     // QuaternionOrbitData for discussion of the approximation used here.
@@ -954,12 +922,11 @@ QuaternionOrbitData::cf_look_vector
 //-----------------------------------------------------------------------
 
 CartesianFixedLookVectorWithDerivative
-QuaternionOrbitData::cf_look_vector
-(const ScLookVectorWithDerivative& Sl, bool Include_velocity_aberration) const
+QuaternionOrbitData::cf_look_vector(const ScLookVectorWithDerivative& Sl,
+                                    bool Include_velocity_aberration) const
 {
-  boost::math::quaternion<AutoDerivative<double> > cf = 
-    sc_to_cf_with_der * Sl.look_quaternion() * 
-    conj(sc_to_cf_with_der);
+  boost::math::quaternion<AutoDerivative<double>> cf =
+      sc_to_cf_with_der * Sl.look_quaternion() * conj(sc_to_cf_with_der);
   if(Include_velocity_aberration) {
     // Do aberration of light correction. See comment in front of
     // QuaternionOrbitData for discussion of the approximation used here.
@@ -973,11 +940,9 @@ QuaternionOrbitData::cf_look_vector
 /// Find the ScLookVector that sees a given point.
 //-----------------------------------------------------------------------
 
-ScLookVector
-QuaternionOrbitData::sc_look_vector
-(const CartesianFixed& Gc,
- const boost::shared_ptr<Refraction>& Ref,
- const boost::shared_ptr<VelocityAberration>& Vabb) const
+ScLookVector QuaternionOrbitData::sc_look_vector(
+    const CartesianFixed& Gc, const boost::shared_ptr<Refraction>& Ref,
+    const boost::shared_ptr<VelocityAberration>& Vabb) const
 {
   // TODO add VelocityAberration
   CartesianFixedLookVector lv;
@@ -997,20 +962,16 @@ QuaternionOrbitData::sc_look_vector
 /// Find the ScLookVector that sees a given point.
 //-----------------------------------------------------------------------
 
-ScLookVectorWithDerivative
-QuaternionOrbitData::sc_look_vector_with_derivative
-(const CartesianFixed& Gc,
- const boost::shared_ptr<Refraction>& Ref,
- const boost::shared_ptr<VelocityAberration>& Vabb) const
+ScLookVectorWithDerivative QuaternionOrbitData::sc_look_vector_with_derivative(
+    const CartesianFixed& Gc, const boost::shared_ptr<Refraction>& Ref,
+    const boost::shared_ptr<VelocityAberration>& Vabb) const
 {
   // TODO add refraction and VelocityAberration
   boost::array<double, 3> p1 = Gc.position;
   boost::array<AutoDerivative<double>, 3> p2 = position_cf_with_derivative();
   if(Ref) {
-    auto gc_uncorr =
-      SimpleDem().intersect(*position_cf(),
-			    Ref->refraction_reverse(*position_cf(), Gc),
-			    1);
+    auto gc_uncorr = SimpleDem().intersect(
+        *position_cf(), Ref->refraction_reverse(*position_cf(), Gc), 1);
     p1 = gc_uncorr->position;
   }
   CartesianFixedLookVectorWithDerivative lv;
@@ -1024,22 +985,22 @@ QuaternionOrbitData::sc_look_vector_with_derivative
 /// Convert to ScLookVector.
 //-----------------------------------------------------------------------
 
-ScLookVector 
-QuaternionOrbitData::sc_look_vector
-(const CartesianInertialLookVector& Ci, bool Include_velocity_aberration) const
+ScLookVector
+QuaternionOrbitData::sc_look_vector(const CartesianInertialLookVector& Ci,
+                                    bool Include_velocity_aberration) const
 {
   boost::math::quaternion<double> sc;
   if(!Include_velocity_aberration) {
     sc = conj(sc_to_cf_) *
-      (ci_to_cf() * Ci.look_quaternion() * conj(ci_to_cf())) * sc_to_cf_;
+         (ci_to_cf() * Ci.look_quaternion() * conj(ci_to_cf())) * sc_to_cf_;
   } else {
     // Do aberration of light correction. See comment in front of
     // QuaternionOrbitData for discussion of the approximation used here.
     fill_in_ci_to_cf();
     double k = Ci.length() / Constant::speed_of_light;
     sc = conj(sc_to_cf_) *
-      (ci_to_cf() * (Ci.look_quaternion() + k * vel_ci) * conj(ci_to_cf())) *
-      sc_to_cf_;
+         (ci_to_cf() * (Ci.look_quaternion() + k * vel_ci) * conj(ci_to_cf())) *
+         sc_to_cf_;
   }
   return ScLookVector(sc);
 }
@@ -1048,22 +1009,26 @@ QuaternionOrbitData::sc_look_vector
 /// Convert to ScLookVector.
 //-----------------------------------------------------------------------
 
-ScLookVectorWithDerivative 
-QuaternionOrbitData::sc_look_vector
-(const CartesianInertialLookVectorWithDerivative& Ci, bool Include_velocity_aberration) 
-const
+ScLookVectorWithDerivative QuaternionOrbitData::sc_look_vector(
+    const CartesianInertialLookVectorWithDerivative& Ci,
+    bool Include_velocity_aberration) const
 {
-  boost::math::quaternion<AutoDerivative<double> > sc;
+  boost::math::quaternion<AutoDerivative<double>> sc;
   if(!Include_velocity_aberration) {
-    sc = conj(sc_to_cf_with_der) * 
-      (ci_to_cf_with_derivative() * Ci.look_quaternion() * conj(ci_to_cf_with_derivative())) * sc_to_cf_with_der;
+    sc = conj(sc_to_cf_with_der) *
+         (ci_to_cf_with_derivative() * Ci.look_quaternion() *
+          conj(ci_to_cf_with_derivative())) *
+         sc_to_cf_with_der;
   } else {
     // Do aberration of light correction. See comment in front of
     // QuaternionOrbitData for discussion of the approximation used here.
     fill_in_ci_to_cf();
     AutoDerivative<double> k = Ci.length() / Constant::speed_of_light;
-    sc = conj(sc_to_cf_with_der) * 
-      (ci_to_cf_with_derivative() * (Ci.look_quaternion() + k * vel_ci_with_der) * conj(ci_to_cf_with_derivative())) * sc_to_cf_with_der;
+    sc = conj(sc_to_cf_with_der) *
+         (ci_to_cf_with_derivative() *
+          (Ci.look_quaternion() + k * vel_ci_with_der) *
+          conj(ci_to_cf_with_derivative())) *
+         sc_to_cf_with_der;
   }
   return ScLookVectorWithDerivative(sc);
 }
@@ -1072,8 +1037,9 @@ const
 /// Convert to ScLookVector.
 //-----------------------------------------------------------------------
 
-ScLookVector QuaternionOrbitData::sc_look_vector
-(const CartesianFixedLookVector& Cf, bool Include_velocity_aberration) const
+ScLookVector
+QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVector& Cf,
+                                    bool Include_velocity_aberration) const
 {
   boost::math::quaternion<double> sc;
   if(!Include_velocity_aberration) {
@@ -1091,12 +1057,11 @@ ScLookVector QuaternionOrbitData::sc_look_vector
 /// Convert to ScLookVector.
 //-----------------------------------------------------------------------
 
-ScLookVectorWithDerivative 
-QuaternionOrbitData::sc_look_vector
-(const CartesianFixedLookVectorWithDerivative& Cf,
- bool Include_velocity_aberration) const
+ScLookVectorWithDerivative QuaternionOrbitData::sc_look_vector(
+    const CartesianFixedLookVectorWithDerivative& Cf,
+    bool Include_velocity_aberration) const
 {
-  boost::math::quaternion<AutoDerivative<double> > sc;
+  boost::math::quaternion<AutoDerivative<double>> sc;
   if(!Include_velocity_aberration) {
     sc = conj(sc_to_cf_with_der) * (Cf.look_quaternion()) * sc_to_cf_with_der;
   } else {
@@ -1104,7 +1069,7 @@ QuaternionOrbitData::sc_look_vector
     // QuaternionOrbitData for discussion of the approximation used here.
     AutoDerivative<double> k = Cf.length() / Constant::speed_of_light;
     sc = conj(sc_to_cf_with_der) *
-      (Cf.look_quaternion() + k * vel_cf_with_der) * sc_to_cf_with_der;
+         (Cf.look_quaternion() + k * vel_cf_with_der) * sc_to_cf_with_der;
   }
   return ScLookVectorWithDerivative(sc);
 }
@@ -1116,9 +1081,8 @@ QuaternionOrbitData::sc_look_vector
 boost::array<double, 3> QuaternionOrbitData::velocity_ci() const
 {
   fill_in_ci_to_cf();
-  boost::array<double, 3> res = {{vel_ci.R_component_2(), 
-				  vel_ci.R_component_3(),
-				  vel_ci.R_component_4()}};
+  boost::array<double, 3> res = {
+      {vel_ci.R_component_2(), vel_ci.R_component_3(), vel_ci.R_component_4()}};
   return res;
 }
 
@@ -1126,14 +1090,13 @@ boost::array<double, 3> QuaternionOrbitData::velocity_ci() const
 /// Return velocity.
 //-----------------------------------------------------------------------
 
-boost::array<AutoDerivative<double>, 3> 
+boost::array<AutoDerivative<double>, 3>
 QuaternionOrbitData::velocity_ci_with_derivative() const
 {
   fill_in_ci_to_cf();
-  boost::array<AutoDerivative<double>, 3> res = 
-    {{vel_ci_with_der.R_component_2(), 
-      vel_ci_with_der.R_component_3(),
-      vel_ci_with_der.R_component_4()}};
+  boost::array<AutoDerivative<double>, 3> res = {
+      {vel_ci_with_der.R_component_2(), vel_ci_with_der.R_component_3(),
+       vel_ci_with_der.R_component_4()}};
   return res;
 }
 
@@ -1146,9 +1109,8 @@ void QuaternionOrbitData::print(std::ostream& Os) const
   Os << "Quaternion Orbit Data\n"
      << "Time:     " << time().to_string() << "\n"
      << "Position (CartesianFixed): " << *pos << "\n"
-     << "Velocity(CartesianFixed): (" << vel_cf.R_component_2() << " m/s, " 
-     << vel_cf.R_component_3() <<  "m/s, "
-     << vel_cf.R_component_4() << " m/s)\n"
+     << "Velocity(CartesianFixed): (" << vel_cf.R_component_2() << " m/s, "
+     << vel_cf.R_component_3() << "m/s, " << vel_cf.R_component_4() << " m/s)\n"
      << "Spacecraft cartesian fixed: " << sc_to_cf_ << "\n";
 }
 
@@ -1163,13 +1125,12 @@ void QuaternionOrbitData::print(std::ostream& Os) const
 /// t1. This function then returns Pres and Vres.
 //-----------------------------------------------------------------------
 
-template<class T> inline void interpolate(const boost::array<T, 3>& P1,
-		   const boost::array<T, 3>& V1,
-		   const boost::array<T, 3>& P2,
-		   const boost::array<T, 3>& V2,
-		   const T& toffset, double tspace,
-		   boost::array<T, 3>& Pres,
-		   boost::array<T, 3>& Vres)
+template<class T>
+inline void
+interpolate(const boost::array<T, 3>& P1, const boost::array<T, 3>& V1,
+            const boost::array<T, 3>& P2, const boost::array<T, 3>& V2,
+            const T& toffset, double tspace, boost::array<T, 3>& Pres,
+            boost::array<T, 3>& Vres)
 {
   const boost::array<T, 3>& c0 = P1;
   boost::array<T, 3> c1, c2, c3;
@@ -1196,7 +1157,6 @@ template<class T> inline void interpolate(const boost::array<T, 3>& P1,
 /// a linear interpolation of that angle for the given time.
 //-----------------------------------------------------------------------
 
-
 //-----------------------------------------------------------------------
 /// This is a utility function for use by derived classes. A common
 /// way of getting orbit data is to have discrete measurements of the
@@ -1209,23 +1169,22 @@ template<class T> inline void interpolate(const boost::array<T, 3>& P1,
 //-----------------------------------------------------------------------
 
 void Orbit::interpolate(const boost::array<double, 3>& P1,
-		   const boost::array<double, 3>& V1,
-		   const boost::array<double, 3>& P2,
-		   const boost::array<double, 3>& V2,
-		   double toffset, double tspace,
-		   boost::array<double, 3>& Pres,
-		   boost::array<double, 3>& Vres)
+                        const boost::array<double, 3>& V1,
+                        const boost::array<double, 3>& P2,
+                        const boost::array<double, 3>& V2, double toffset,
+                        double tspace, boost::array<double, 3>& Pres,
+                        boost::array<double, 3>& Vres)
 {
   ::interpolate(P1, V1, P2, V2, toffset, tspace, Pres, Vres);
 }
 
 void Orbit::interpolate(const boost::array<AutoDerivative<double>, 3>& P1,
-		   const boost::array<AutoDerivative<double>, 3>& V1,
-		   const boost::array<AutoDerivative<double>, 3>& P2,
-		   const boost::array<AutoDerivative<double>, 3>& V2,
-		   const AutoDerivative<double>& toffset, double tspace,
-		   boost::array<AutoDerivative<double>, 3>& Pres,
-		   boost::array<AutoDerivative<double>, 3>& Vres)
+                        const boost::array<AutoDerivative<double>, 3>& V1,
+                        const boost::array<AutoDerivative<double>, 3>& P2,
+                        const boost::array<AutoDerivative<double>, 3>& V2,
+                        const AutoDerivative<double>& toffset, double tspace,
+                        boost::array<AutoDerivative<double>, 3>& Pres,
+                        boost::array<AutoDerivative<double>, 3>& Vres)
 {
   ::interpolate(P1, V1, P2, V2, toffset, tspace, Pres, Vres);
 }
@@ -1241,18 +1200,18 @@ void Orbit::interpolate(const boost::array<AutoDerivative<double>, 3>& P1,
 /// a linear interpolation of that angle for the given time.
 //-----------------------------------------------------------------------
 
-boost::math::quaternion<double> Orbit::interpolate(
-              const boost::math::quaternion<double>& Q1, 
-              const boost::math::quaternion<double>& Q2,
-	      double toffset, double tspace)
+boost::math::quaternion<double>
+Orbit::interpolate(const boost::math::quaternion<double>& Q1,
+                   const boost::math::quaternion<double>& Q2, double toffset,
+                   double tspace)
 {
   return interpolate_quaternion_rotation(Q1, Q2, toffset, tspace);
 }
 
-boost::math::quaternion<AutoDerivative<double> > Orbit::interpolate(
-              const boost::math::quaternion<AutoDerivative<double> >& Q1, 
-              const boost::math::quaternion<AutoDerivative<double> >& Q2,
-	      const AutoDerivative<double>& toffset, double tspace)
+boost::math::quaternion<AutoDerivative<double>>
+Orbit::interpolate(const boost::math::quaternion<AutoDerivative<double>>& Q1,
+                   const boost::math::quaternion<AutoDerivative<double>>& Q2,
+                   const AutoDerivative<double>& toffset, double tspace)
 {
   return interpolate_quaternion_rotation(Q1, Q2, toffset, tspace);
 }
@@ -1263,9 +1222,8 @@ boost::math::quaternion<AutoDerivative<double> > Orbit::interpolate(
 
 boost::array<double, 3> QuaternionOrbitData::velocity_cf() const
 {
-  boost::array<double, 3> res = {{vel_cf.R_component_2(),
-				  vel_cf.R_component_3(),
-				  vel_cf.R_component_4()}};
+  boost::array<double, 3> res = {
+      {vel_cf.R_component_2(), vel_cf.R_component_3(), vel_cf.R_component_4()}};
   return res;
 }
 
@@ -1273,46 +1231,41 @@ boost::array<double, 3> QuaternionOrbitData::velocity_cf() const
 /// Velocity in CartisianFixed coordinates.
 //-----------------------------------------------------------------------
 
-boost::array<AutoDerivative<double>, 3> QuaternionOrbitData::velocity_cf_with_derivative() const
+boost::array<AutoDerivative<double>, 3>
+QuaternionOrbitData::velocity_cf_with_derivative() const
 {
-  boost::array<AutoDerivative<double>, 3> res = 
-    {{vel_cf_with_der.R_component_2(),
-      vel_cf_with_der.R_component_3(),
-      vel_cf_with_der.R_component_4()}};
+  boost::array<AutoDerivative<double>, 3> res = {
+      {vel_cf_with_der.R_component_2(), vel_cf_with_der.R_component_3(),
+       vel_cf_with_der.R_component_4()}};
   return res;
 }
-
 
 //-----------------------------------------------------------------------
 /// Calculate ci_to_cf() on demand.
 //-----------------------------------------------------------------------
 
-void QuaternionOrbitData::fill_in_ci_to_cf() const 
+void QuaternionOrbitData::fill_in_ci_to_cf() const
 {
-    if(!have_ci_to_cf) {
-      boost::array<AutoDerivative<double>, 3> vci, cider;
-      boost::math::quaternion<AutoDerivative<double> > cf_to_ci_der;
-      boost::array<AutoDerivative<double>, 3> pder =
-	{{pos_with_der.R_component_2(),
-	  pos_with_der.R_component_3(),
-	  pos_with_der.R_component_4() 
-	  }};
-      boost::array<AutoDerivative<double>, 3> vcf = 
-	{{vel_cf_with_der.R_component_2(),
-	  vel_cf_with_der.R_component_3(),
-	  vel_cf_with_der.R_component_4()
-	  }};
-      convert_position_and_velocity(tm, *pos, pder, vcf, 
-				    pos_ci, cider, vci, cf_to_ci_der);
-      ci_to_cf_der_ = conj(cf_to_ci_der);
-      ci_to_cf_ = value(ci_to_cf_der_);
-      pos_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
-	(0, cider[0], cider[1], cider[2]);
-      vel_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
-	(0, vci[0], vci[1], vci[2]);
-      vel_ci = value(vel_ci_with_der);
-      have_ci_to_cf = true;
-    }
+  if(!have_ci_to_cf) {
+    boost::array<AutoDerivative<double>, 3> vci, cider;
+    boost::math::quaternion<AutoDerivative<double>> cf_to_ci_der;
+    boost::array<AutoDerivative<double>, 3> pder = {
+        {pos_with_der.R_component_2(), pos_with_der.R_component_3(),
+         pos_with_der.R_component_4()}};
+    boost::array<AutoDerivative<double>, 3> vcf = {
+        {vel_cf_with_der.R_component_2(), vel_cf_with_der.R_component_3(),
+         vel_cf_with_der.R_component_4()}};
+    convert_position_and_velocity(tm, *pos, pder, vcf, pos_ci, cider, vci,
+                                  cf_to_ci_der);
+    ci_to_cf_der_ = conj(cf_to_ci_der);
+    ci_to_cf_ = value(ci_to_cf_der_);
+    pos_ci_with_der = boost::math::quaternion<AutoDerivative<double>>(
+        0, cider[0], cider[1], cider[2]);
+    vel_ci_with_der = boost::math::quaternion<AutoDerivative<double>>(
+        0, vci[0], vci[1], vci[2]);
+    vel_ci = value(vel_ci_with_der);
+    have_ci_to_cf = true;
+  }
 }
 
 //-----------------------------------------------------------------------
@@ -1320,20 +1273,20 @@ void QuaternionOrbitData::fill_in_ci_to_cf() const
 /// Interpolate between two QuaternionOrbitData for the given time.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<QuaternionOrbitData>
- QuaternionOrbitData::interpolate
-(const QuaternionOrbitData& t1, const QuaternionOrbitData& t2,
- const TimeWithDerivative& tm, bool Extrapolation_ok)
+boost::shared_ptr<QuaternionOrbitData> QuaternionOrbitData::interpolate(
+    const QuaternionOrbitData& t1, const QuaternionOrbitData& t2,
+    const TimeWithDerivative& tm, bool Extrapolation_ok)
 {
   if(!Extrapolation_ok && (tm.value() < t1.time() || tm.value() > t2.time()))
     throw Exception("tm needs to be between t1 and t2");
   double tspace = t2.time() - t1.time();
   AutoDerivative<double> toffset = tm - t1.time_with_derivative();
-  boost::math::quaternion<AutoDerivative<double> > sc_to_cf_ = 
-    interpolate_quaternion_rotation(t1.sc_to_cf_with_derivative(), 
-			   t2.sc_to_cf_with_derivative(), toffset, tspace);
-  boost::array<AutoDerivative<double>, 3> pos1, pos2, vel1, vel2, 
-    vel_cf, pos_cf;
+  boost::math::quaternion<AutoDerivative<double>> sc_to_cf_ =
+      interpolate_quaternion_rotation(t1.sc_to_cf_with_derivative(),
+                                      t2.sc_to_cf_with_derivative(), toffset,
+                                      tspace);
+  boost::array<AutoDerivative<double>, 3> pos1, pos2, vel1, vel2, vel_cf,
+      pos_cf;
   pos1[0] = t1.pos_with_der.R_component_2();
   pos1[1] = t1.pos_with_der.R_component_3();
   pos1[2] = t1.pos_with_der.R_component_4();
@@ -1346,24 +1299,23 @@ boost::shared_ptr<QuaternionOrbitData>
   vel2[0] = t2.vel_cf_with_der.R_component_2();
   vel2[1] = t2.vel_cf_with_der.R_component_3();
   vel2[2] = t2.vel_cf_with_der.R_component_4();
-  ::interpolate(pos1, vel1, pos2, vel2, toffset, tspace,
-		pos_cf, vel_cf);
+  ::interpolate(pos1, vel1, pos2, vel2, toffset, tspace, pos_cf, vel_cf);
   boost::array<double, 3> p;
   p[0] = pos_cf[0].value();
   p[1] = pos_cf[1].value();
   p[2] = pos_cf[2].value();
-  boost::shared_ptr<QuaternionOrbitData> res
-    (new QuaternionOrbitData(tm, t1.pos->create(p), pos_cf, 
-			     vel_cf, sc_to_cf_));
+  boost::shared_ptr<QuaternionOrbitData> res(new QuaternionOrbitData(
+      tm, t1.pos->create(p), pos_cf, vel_cf, sc_to_cf_));
   res->from_cf_ = t1.from_cf_;
   if(t1.have_ci_to_cf) {
     t2.fill_in_ci_to_cf();
     res->have_ci_to_cf = true;
-    res->ci_to_cf_der_ = interpolate_quaternion_rotation(t1.ci_to_cf_der_, t2.ci_to_cf_der_, toffset, tspace);
+    res->ci_to_cf_der_ = interpolate_quaternion_rotation(
+        t1.ci_to_cf_der_, t2.ci_to_cf_der_, toffset, tspace);
     res->ci_to_cf_ = value(res->ci_to_cf_der_);
-    
-    boost::array<AutoDerivative<double>, 3> pos1, pos2, vel1, vel2, 
-      vel_ci, pos_ci;
+
+    boost::array<AutoDerivative<double>, 3> pos1, pos2, vel1, vel2, vel_ci,
+        pos_ci;
     pos1[0] = t1.pos_ci_with_der.R_component_2();
     pos1[1] = t1.pos_ci_with_der.R_component_3();
     pos1[2] = t1.pos_ci_with_der.R_component_4();
@@ -1376,17 +1328,16 @@ boost::shared_ptr<QuaternionOrbitData>
     vel2[0] = t2.vel_ci_with_der.R_component_2();
     vel2[1] = t2.vel_ci_with_der.R_component_3();
     vel2[2] = t2.vel_ci_with_der.R_component_4();
-    ::interpolate(pos1, vel1, pos2, vel2, toffset, tspace,
-		  pos_ci, vel_ci);
+    ::interpolate(pos1, vel1, pos2, vel2, toffset, tspace, pos_ci, vel_ci);
     boost::array<double, 3> p;
     p[0] = pos_ci[0].value();
     p[1] = pos_ci[1].value();
     p[2] = pos_cf[2].value();
     res->pos_ci = t1.pos_ci->create(p);
-    res->pos_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
-      (0,pos_ci[0], pos_ci[1], pos_ci[2]);
-    res->vel_ci_with_der = boost::math::quaternion<AutoDerivative<double> >
-      (0,vel_ci[0], vel_ci[1], vel_ci[2]);
+    res->pos_ci_with_der = boost::math::quaternion<AutoDerivative<double>>(
+        0, pos_ci[0], pos_ci[1], pos_ci[2]);
+    res->vel_ci_with_der = boost::math::quaternion<AutoDerivative<double>>(
+        0, vel_ci[0], vel_ci[1], vel_ci[2]);
     res->vel_ci = value(res->vel_ci_with_der);
   }
   return res;
@@ -1399,21 +1350,17 @@ boost::shared_ptr<QuaternionOrbitData>
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<QuaternionOrbitData>
-QuaternionOrbitData::interpolate
-(const QuaternionOrbitData& t1, 
- const QuaternionOrbitData& t2,
- const Time& tm,
- bool Extrapolation_ok)
+QuaternionOrbitData::interpolate(const QuaternionOrbitData& t1,
+                                 const QuaternionOrbitData& t2, const Time& tm,
+                                 bool Extrapolation_ok)
 {
   if(!Extrapolation_ok && (tm < t1.time() || tm > t2.time()))
     throw Exception("tm needs to be between t1 and t2");
   double tspace = t2.time() - t1.time();
   double toffset = tm - t1.time();
-  boost::math::quaternion<double> sc_to_cf_ = 
-    interpolate_quaternion_rotation(t1.sc_to_cf(), 
-			   t2.sc_to_cf(), toffset, tspace);
-  boost::array<double, 3> pos1, pos2, vel1, vel2, 
-    vel_cf, pos_cf;
+  boost::math::quaternion<double> sc_to_cf_ = interpolate_quaternion_rotation(
+      t1.sc_to_cf(), t2.sc_to_cf(), toffset, tspace);
+  boost::array<double, 3> pos1, pos2, vel1, vel2, vel_cf, pos_cf;
   pos1[0] = t1.pos->position[0];
   pos1[1] = t1.pos->position[1];
   pos1[2] = t1.pos->position[2];
@@ -1426,20 +1373,18 @@ QuaternionOrbitData::interpolate
   vel2[0] = t2.vel_cf.R_component_2();
   vel2[1] = t2.vel_cf.R_component_3();
   vel2[2] = t2.vel_cf.R_component_4();
-  ::interpolate(pos1, vel1, pos2, vel2, toffset, tspace,
-		pos_cf, vel_cf);
-  boost::shared_ptr<QuaternionOrbitData> res
-    (new QuaternionOrbitData(tm, t1.pos->create(pos_cf),
-			     vel_cf, sc_to_cf_));
+  ::interpolate(pos1, vel1, pos2, vel2, toffset, tspace, pos_cf, vel_cf);
+  boost::shared_ptr<QuaternionOrbitData> res(
+      new QuaternionOrbitData(tm, t1.pos->create(pos_cf), vel_cf, sc_to_cf_));
   res->from_cf_ = t1.from_cf_;
   if(t1.have_ci_to_cf) {
     t2.fill_in_ci_to_cf();
     res->have_ci_to_cf = true;
-    res->ci_to_cf_der_ = interpolate_quaternion_rotation(t1.ci_to_cf_der_, t2.ci_to_cf_der_, toffset, tspace);
+    res->ci_to_cf_der_ = interpolate_quaternion_rotation(
+        t1.ci_to_cf_der_, t2.ci_to_cf_der_, toffset, tspace);
     res->ci_to_cf_ = value(res->ci_to_cf_der_);
-    
-    boost::array<double, 3> pos1, pos2, vel1, vel2, 
-      vel_ci, pos_ci;
+
+    boost::array<double, 3> pos1, pos2, vel1, vel2, vel_ci, pos_ci;
     pos1[0] = t1.pos_ci->position[0];
     pos1[1] = t1.pos_ci->position[1];
     pos1[2] = t1.pos_ci->position[2];
@@ -1452,18 +1397,14 @@ QuaternionOrbitData::interpolate
     vel2[0] = t2.vel_ci.R_component_2();
     vel2[1] = t2.vel_ci.R_component_3();
     vel2[2] = t2.vel_ci.R_component_4();
-    ::interpolate(pos1, vel1, pos2, vel2, toffset, tspace,
-		  pos_ci, vel_ci);
+    ::interpolate(pos1, vel1, pos2, vel2, toffset, tspace, pos_ci, vel_ci);
     res->pos_ci = t1.pos_ci->create(pos_ci);
-    res->pos_ci_with_der = 
-      boost::math::quaternion<double>(0, 
-				      res->pos_ci->position[0],
-				      res->pos_ci->position[1],
-				      res->pos_ci->position[2]);
-    res->vel_ci = boost::math::quaternion<double>
-      (0,vel_ci[0], vel_ci[1], vel_ci[2]);
+    res->pos_ci_with_der = boost::math::quaternion<double>(
+        0, res->pos_ci->position[0], res->pos_ci->position[1],
+        res->pos_ci->position[2]);
+    res->vel_ci =
+        boost::math::quaternion<double>(0, vel_ci[0], vel_ci[1], vel_ci[2]);
     res->vel_ci_with_der = res->vel_ci;
   }
   return res;
 }
-

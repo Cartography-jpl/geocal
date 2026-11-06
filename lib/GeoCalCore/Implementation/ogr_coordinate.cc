@@ -9,43 +9,42 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void OgrWrapper::save(Archive & ar, const unsigned int version) const
+void OgrWrapper::save(Archive& ar, const unsigned int version) const
 {
   GEOCAL_GENERIC_BASE(OgrWrapper);
   std::string wkt_s = wkt();
   bool u = use_traditional_gis_order();
-  ar & GEOCAL_NVP2("wkt", wkt_s)
-    & GEOCAL_NVP2("use_traditional_gis_order", u);
+  ar& GEOCAL_NVP2("wkt", wkt_s) & GEOCAL_NVP2("use_traditional_gis_order", u);
 }
 
 template<class Archive>
-void OgrWrapper::load(Archive & ar, const unsigned int version)
+void OgrWrapper::load(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(OgrWrapper);
   std::string wkt_s;
-  ar & GEOCAL_NVP2("wkt", wkt_s);
+  ar& GEOCAL_NVP2("wkt", wkt_s);
   // Older version assumed GDAL 2, which doesn't support axis
   // reordering (so use_traditional_gis_order is always true)
   bool u = true;
   if(version > 0)
-    ar & GEOCAL_NVP2("use_traditional_gis_order", u);
+    ar& GEOCAL_NVP2("use_traditional_gis_order", u);
   init(wkt_s, u);
 }
 
 template<class Archive>
-void OgrCoordinate::serialize(Archive & ar, const unsigned int version)
+void OgrCoordinate::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(GroundCoordinate);
   GEOCAL_BASE(OgrCoordinate, GroundCoordinate);
-  ar & GEOCAL_NVP(x) & GEOCAL_NVP(y) & GEOCAL_NVP(z) & GEOCAL_NVP_(ogr);
+  ar& GEOCAL_NVP(x) & GEOCAL_NVP(y) & GEOCAL_NVP(z) & GEOCAL_NVP_(ogr);
 }
 
 template<class Archive>
-void OgrCoordinateConverter::serialize(Archive & ar, const unsigned int version)
+void OgrCoordinateConverter::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(CoordinateConverter);
   GEOCAL_BASE(OgrCoordinateConverter, CoordinateConverter);
-  ar & GEOCAL_NVP_(ogr);
+  ar& GEOCAL_NVP_(ogr);
 }
 
 GEOCAL_IMPLEMENT(OgrCoordinate);
@@ -58,8 +57,9 @@ GEOCAL_SPLIT_IMPLEMENT(OgrWrapper);
 //-----------------------------------------------------------------------
 
 std::map<std::string, int> OgrWrapper::name_to_naif;
-std::map<int, boost::shared_ptr<OGRSpatialReference> > OgrWrapper::naif_to_g_or_pc;
-std::map<int, boost::shared_ptr<OGRSpatialReference> > OgrWrapper::naif_to_cf;
+std::map<int, boost::shared_ptr<OGRSpatialReference>>
+    OgrWrapper::naif_to_g_or_pc;
+std::map<int, boost::shared_ptr<OGRSpatialReference>> OgrWrapper::naif_to_cf;
 bool OgrWrapper::init_naif_done = false;
 
 //-----------------------------------------------------------------------
@@ -108,7 +108,7 @@ void OgrWrapper::init_naif()
     PRIMEM[\"Reference meridian 0\",0],\
     UNIT[\"Decimal_Degree\",0.0174532925199433]]";
   add_spatial_reference("moon", PlanetConstant::MOON_NAIF_CODE, wkt);
-  
+
   // Can add new planets here. Can also just call
   // add_spatial_reference directly from C++ or python to add a planet
   // without/before updating this code.
@@ -130,11 +130,13 @@ OgrWrapper::OgrWrapper(const std::string& Wkt, bool Use_traditional_gis_order)
 //-----------------------------------------------------------------------
 
 void OgrWrapper::handle_gis_order(OGRSpatialReference& Ogr,
-				  bool Use_traditional_gis_order)
+                                  bool Use_traditional_gis_order)
 {
-#if(GDAL_VERSION_MAJOR <= 2)
+#if (GDAL_VERSION_MAJOR <= 2)
   if(!Use_traditional_gis_order)
-    throw Exception("GDAL doesn't support anything other than traditional GIS order before version 3.0.0. Your GDAL version is " GDAL_RELEASE_NAME);
+    throw Exception(
+        "GDAL doesn't support anything other than traditional GIS order before "
+        "version 3.0.0. Your GDAL version is " GDAL_RELEASE_NAME);
 #else
   if(Use_traditional_gis_order)
     Ogr.SetAxisMappingStrategy(OAMS_TRADITIONAL_GIS_ORDER);
@@ -181,11 +183,10 @@ OgrWrapper::OgrWrapper(const boost::shared_ptr<OGRSpatialReference>& Ogr)
 /// you are working on a planet we didn't already add this for.
 //-----------------------------------------------------------------------
 
-void OgrWrapper::add_spatial_reference
-(const std::string& Name,
- int Naif_code,
- boost::shared_ptr<OGRSpatialReference>& Geodetic_or_planetocentric,
- boost::shared_ptr<OGRSpatialReference>& Cf)
+void OgrWrapper::add_spatial_reference(
+    const std::string& Name, int Naif_code,
+    boost::shared_ptr<OGRSpatialReference>& Geodetic_or_planetocentric,
+    boost::shared_ptr<OGRSpatialReference>& Cf)
 {
   init_naif();
   name_to_naif[Name] = Naif_code;
@@ -202,10 +203,8 @@ void OgrWrapper::add_spatial_reference
 /// you are working on a planet we didn't already add this for.
 //-----------------------------------------------------------------------
 
-void OgrWrapper::add_spatial_reference
-(const std::string& Name,
- int Naif_code,
- const std::string& Wkt_planetocentric)
+void OgrWrapper::add_spatial_reference(const std::string& Name, int Naif_code,
+                                       const std::string& Wkt_planetocentric)
 {
   auto o1 = boost::make_shared<OGRSpatialReference>();
   boost::shared_ptr<OGRSpatialReference> o2;
@@ -222,19 +221,20 @@ void OgrWrapper::add_spatial_reference
 /// inverse_transform().
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> OgrWrapper::lat_lon_coordinate_convert
-(const blitz::Array<double, 1>& latitude,
- const blitz::Array<double, 1>& longitude) const
+blitz::Array<double, 2> OgrWrapper::lat_lon_coordinate_convert(
+    const blitz::Array<double, 1>& latitude,
+    const blitz::Array<double, 1>& longitude) const
 {
   blitz::Range ra = blitz::Range::all();
   if(latitude.rows() != longitude.rows())
     throw Exception("latitude and longitude need to be the same size");
   blitz::Array<double, 1> x = longitude.copy();
   blitz::Array<double, 1> y = latitude.copy();
-  const_cast<OGRCoordinateTransformation*>(inverse_transform())->Transform(latitude.rows(), &x(0), &y(0));
+  const_cast<OGRCoordinateTransformation*>(inverse_transform())
+      ->Transform(latitude.rows(), &x(0), &y(0));
   blitz::Array<double, 2> res(x.rows(), 2);
-  res(ra,0) = x;
-  res(ra,1) = y;
+  res(ra, 0) = x;
+  res(ra, 1) = y;
   return res;
 }
 
@@ -251,14 +251,14 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
     gname = geoccs_name();
   boost::algorithm::to_lower(gname);
   naif_code_ = Ecr::EARTH_NAIF_CODE; // Default, if we don't find a
-				     // planet reference
-  for (const auto& i : name_to_naif)
+                                     // planet reference
+  for(const auto& i : name_to_naif)
     if(gname.find(i.first) != std::string::npos) {
       naif_code_ = i.second;
       break;
     }
-  OGRSpatialReference * og = naif_to_g_or_pc[naif_code_].get();
-  OGRSpatialReference * og_cf = naif_to_cf[naif_code_].get();
+  OGRSpatialReference* og = naif_to_g_or_pc[naif_code_].get();
+  OGRSpatialReference* og_cf = naif_to_cf[naif_code_].get();
   // Create and stash the converts to and from the
   // geodetic/planetocentric and cartesian fixed coordinates. We use
   // this to convert between other coordinate systems.
@@ -274,7 +274,8 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
       delete ogr_inverse_transform_;
       delete ogr_cf_transform_;
       delete ogr_cf_inverse_transform_;
-      throw Exception("Couldn't create transformation to geodetic coordinate system");
+      throw Exception(
+          "Couldn't create transformation to geodetic coordinate system");
     }
     ogr_inverse_transform_ = OGRCreateCoordinateTransformation(og, ogr_.get());
     if(!ogr_inverse_transform_) {
@@ -282,7 +283,8 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
       delete ogr_inverse_transform_;
       delete ogr_cf_transform_;
       delete ogr_cf_inverse_transform_;
-      throw Exception("Couldn't create transformation from geodetic coordinate system");
+      throw Exception(
+          "Couldn't create transformation from geodetic coordinate system");
     }
   }
   if(og_cf) {
@@ -292,15 +294,18 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
       delete ogr_inverse_transform_;
       delete ogr_cf_transform_;
       delete ogr_cf_inverse_transform_;
-      throw Exception("Couldn't create transformation to cartesian fixed coordinate system");
+      throw Exception("Couldn't create transformation to cartesian fixed "
+                      "coordinate system");
     }
-    ogr_cf_inverse_transform_ = OGRCreateCoordinateTransformation(og_cf, ogr_.get());
+    ogr_cf_inverse_transform_ =
+        OGRCreateCoordinateTransformation(og_cf, ogr_.get());
     if(!ogr_cf_inverse_transform_) {
       delete ogr_transform_;
       delete ogr_inverse_transform_;
       delete ogr_cf_transform_;
       delete ogr_cf_inverse_transform_;
-      throw Exception("Couldn't create transformation to cartesian fixed coordinate system");
+      throw Exception("Couldn't create transformation to cartesian fixed "
+                      "coordinate system");
     }
   }
 }
@@ -310,20 +315,20 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
 //-----------------------------------------------------------------------
 
 OgrCoordinate::OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
-			     const Geodetic& G)
+                             const Geodetic& G)
   : ogr_(Ogr)
 {
   if(ogr_->naif_code() != Ecr::EARTH_NAIF_CODE)
     throw Exception("Can't convert from Geodetic");
-  x = G.longitude(); 
+  x = G.longitude();
   y = G.latitude();
   z = G.height_reference_surface();
   // Note that operation Transform really is const, this just doesn't
   // have the right signature in GDAL.
   if(ogr_->inverse_transform()) {
-    int status = 
-      const_cast<OGRCoordinateTransformation&>(*ogr_->inverse_transform()).
-      Transform(1, &x, &y, &z);
+    int status =
+        const_cast<OGRCoordinateTransformation&>(*ogr_->inverse_transform())
+            .Transform(1, &x, &y, &z);
     if(!status)
       throw Exception("Call to OGR Transform failed");
     return;
@@ -336,20 +341,20 @@ OgrCoordinate::OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
 //-----------------------------------------------------------------------
 
 OgrCoordinate::OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
-			     const Planetocentric& G)
+                             const Planetocentric& G)
   : ogr_(Ogr)
 {
   if(ogr_->naif_code() != G.naif_code())
     throw Exception("Can't convert from Planetocentric");
-  x = G.longitude(); 
+  x = G.longitude();
   y = G.latitude();
   z = G.height_reference_surface();
   // Note that operation Transform really is const, this just doesn't
   // have the right signature in GDAL.
   if(ogr_->inverse_transform()) {
-    int status = 
-      const_cast<OGRCoordinateTransformation&>(*ogr_->inverse_transform()).
-      Transform(1, &x, &y, &z);
+    int status =
+        const_cast<OGRCoordinateTransformation&>(*ogr_->inverse_transform())
+            .Transform(1, &x, &y, &z);
     if(!status)
       throw Exception("Call to OGR Transform failed");
     return;
@@ -362,7 +367,7 @@ OgrCoordinate::OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
 //-----------------------------------------------------------------------
 
 OgrCoordinate::OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
-			     const GroundCoordinate& G)
+                             const GroundCoordinate& G)
   : ogr_(Ogr)
 {
   if(ogr_->cf_transform()) {
@@ -370,23 +375,24 @@ OgrCoordinate::OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
     if(ogr_->naif_code() != cf->naif_code()) {
       Exception e;
       e << "Inconsistent NAIF codes.\n"
-	<< "  G:    " << cf->naif_code() << "\n"
-	<< "  ogr_: " << ogr_->naif_code();
+        << "  G:    " << cf->naif_code() << "\n"
+        << "  ogr_: " << ogr_->naif_code();
       throw e;
     }
     x = cf->position[0];
     y = cf->position[1];
     z = cf->position[2];
-    int status = 
-      const_cast<OGRCoordinateTransformation&>(*ogr_->cf_inverse_transform()).
-      Transform(1, &x, &y, &z);
+    int status =
+        const_cast<OGRCoordinateTransformation&>(*ogr_->cf_inverse_transform())
+            .Transform(1, &x, &y, &z);
     if(!status)
       throw Exception("Call to OGR Transform failed");
   }
   // y really is first, latitude is y
   G.lat_lon_height(y, x, z);
-  int status = const_cast<OGRCoordinateTransformation&>
-    (*ogr_->inverse_transform()).Transform(1, &x, &y, &z);
+  int status =
+      const_cast<OGRCoordinateTransformation&>(*ogr_->inverse_transform())
+          .Transform(1, &x, &y, &z);
   if(!status)
     throw Exception("Call to OGR Transform failed");
 }
@@ -397,8 +403,8 @@ OgrCoordinate::OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
 /// http://www.epsg-registry.org
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<OgrWrapper> OgrWrapper::from_epsg
-(int Epsg_id, bool Use_traditional_gis_order)
+boost::shared_ptr<OgrWrapper>
+OgrWrapper::from_epsg(int Epsg_id, bool Use_traditional_gis_order)
 {
   boost::shared_ptr<OGRSpatialReference> ogr(new OGRSpatialReference);
   OGRErr status = ogr->importFromEPSG(Epsg_id);
@@ -412,8 +418,9 @@ boost::shared_ptr<OgrWrapper> OgrWrapper::from_epsg
 /// Create a OgrWrapper for a coordinate system from a Proj 4 string.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<OgrWrapper> OgrWrapper::from_proj4
-(const std::string& Proj4_string, bool Use_traditional_gis_order)
+boost::shared_ptr<OgrWrapper>
+OgrWrapper::from_proj4(const std::string& Proj4_string,
+                       bool Use_traditional_gis_order)
 {
   boost::shared_ptr<OGRSpatialReference> ogr(new OGRSpatialReference);
   OGRErr status = ogr->importFromProj4(Proj4_string.c_str());
@@ -429,7 +436,7 @@ boost::shared_ptr<OgrWrapper> OgrWrapper::from_proj4
 
 std::string OgrCoordinate::to_proj4() const
 {
-  char *res;
+  char* res;
   ogr().ogr().exportToProj4(&res);
   std::string ress(res);
   CPLFree(res);
@@ -444,7 +451,7 @@ std::string OgrCoordinate::to_proj4() const
 
 bool OgrWrapper::use_traditional_gis_order() const
 {
-#if(GDAL_VERSION_MAJOR <= 2)
+#if (GDAL_VERSION_MAJOR <= 2)
   return true;
 #else
   OSRAxisMappingStrategy s = ogr_->GetAxisMappingStrategy();
@@ -454,9 +461,10 @@ bool OgrWrapper::use_traditional_gis_order() const
   case OAMS_AUTHORITY_COMPLIANT:
     return false;
   default:
-    throw Exception("OgrWrapper::use_traditional_gis_order() doesn't handle OAMS_CUSTOM");
+    throw Exception(
+        "OgrWrapper::use_traditional_gis_order() doesn't handle OAMS_CUSTOM");
   }
-#endif  
+#endif
 }
 
 //-----------------------------------------------------------------------
@@ -478,7 +486,7 @@ OgrWrapper::~OgrWrapper()
 
 std::string OgrWrapper::pretty_wkt() const
 {
-  char *res;
+  char* res;
   ogr_->exportToPrettyWkt(&res);
   std::string ress(res);
   CPLFree(res);
@@ -491,7 +499,7 @@ std::string OgrWrapper::pretty_wkt() const
 
 std::string OgrWrapper::wkt() const
 {
-  char *res;
+  char* res;
   ogr_->exportToWkt(&res);
   std::string ress(res);
   CPLFree(res);
@@ -504,12 +512,11 @@ std::string OgrWrapper::wkt() const
 
 void OgrWrapper::print(std::ostream& Os) const
 {
-  Os << "OgrWrapper:\n"
-     << pretty_wkt() << "\n";
+  Os << "OgrWrapper:\n" << pretty_wkt() << "\n";
 }
 
 //-----------------------------------------------------------------------
-/// When converting to the GEOTIFF header format used by VICAR, this 
+/// When converting to the GEOTIFF header format used by VICAR, this
 /// is the value that the PROJECTEDCSTYPEGEOKEY should have. This is
 /// just the EPSG id written as text.
 //-----------------------------------------------------------------------
@@ -523,7 +530,7 @@ std::string OgrWrapper::projected_cs_type_geo_key() const
 }
 
 //-----------------------------------------------------------------------
-/// When converting to the GEOTIFF header format used by VICAR, this 
+/// When converting to the GEOTIFF header format used by VICAR, this
 /// is the value that the PCSCitationGeoKey should have. This is
 /// a short text description of the projection.
 //-----------------------------------------------------------------------
@@ -543,7 +550,7 @@ std::string OgrWrapper::pcs_citation_geo_key() const
 
 std::string OgrWrapper::geogcs_name() const
 {
-  const char* t =ogr_->GetAttrValue("GEOGCS");
+  const char* t = ogr_->GetAttrValue("GEOGCS");
   if(t)
     return t;
   else
@@ -556,7 +563,7 @@ std::string OgrWrapper::geogcs_name() const
 
 std::string OgrWrapper::geoccs_name() const
 {
-  const char* t =ogr_->GetAttrValue("GEOCCS");
+  const char* t = ogr_->GetAttrValue("GEOCCS");
   if(t)
     return t;
   else
@@ -576,12 +583,12 @@ std::string OgrWrapper::geoccs_name() const
 
 double OgrCoordinate::latitude() const
 {
-  double xr = x, yr = y , zr = z;
+  double xr = x, yr = y, zr = z;
   // Note that operation Transform really is const, this just doesn't
   // have the right signature in GDAL.
   if(ogr_->transform()) {
-    int status = const_cast<OGRCoordinateTransformation&>(*ogr_->transform()).
-      Transform(1, &xr, &yr, &zr);
+    int status = const_cast<OGRCoordinateTransformation&>(*ogr_->transform())
+                     .Transform(1, &xr, &yr, &zr);
     if(!status)
       throw Exception("Call to OGR Transform failed");
     return yr;
@@ -598,12 +605,12 @@ double OgrCoordinate::latitude() const
 
 double OgrCoordinate::longitude() const
 {
-  double xr = x, yr = y , zr = z;
+  double xr = x, yr = y, zr = z;
   // Note that operation Transform really is const, this just doesn't
   // have the right signature in GDAL.
   if(ogr_->transform()) {
-    int status = const_cast<OGRCoordinateTransformation&>(*ogr_->transform()).
-      Transform(1, &xr, &yr, &zr);
+    int status = const_cast<OGRCoordinateTransformation&>(*ogr_->transform())
+                     .Transform(1, &xr, &yr, &zr);
     if(!status)
       throw Exception("Call to OGR Transform failed");
     return xr;
@@ -620,12 +627,12 @@ double OgrCoordinate::longitude() const
 
 double OgrCoordinate::height_reference_surface() const
 {
-  double xr = x, yr = y , zr = z;
+  double xr = x, yr = y, zr = z;
   // Note that operation Transform really is const, this just doesn't
   // have the right signature in GDAL.
   if(ogr_->transform()) {
-    int status = const_cast<OGRCoordinateTransformation&>(*ogr_->transform()).
-      Transform(1, &xr, &yr, &zr);
+    int status = const_cast<OGRCoordinateTransformation&>(*ogr_->transform())
+                     .Transform(1, &xr, &yr, &zr);
     if(!status)
       throw Exception("Call to OGR Transform failed");
     return zr;
@@ -636,15 +643,15 @@ double OgrCoordinate::height_reference_surface() const
   return cf->height_reference_surface();
 }
 
-void OgrCoordinate::lat_lon_height(double& Latitude, double& Longitude, 
-				   double& Height_reference_surface) const
+void OgrCoordinate::lat_lon_height(double& Latitude, double& Longitude,
+                                   double& Height_reference_surface) const
 {
-  double xr = x, yr = y , zr = z;
+  double xr = x, yr = y, zr = z;
   // Note that operation Transform really is const, this just doesn't
   // have the right signature in GDAL.
   if(ogr_->transform()) {
-    int status = const_cast<OGRCoordinateTransformation&>(*ogr_->transform()).
-      Transform(1, &xr, &yr, &zr);
+    int status = const_cast<OGRCoordinateTransformation&>(*ogr_->transform())
+                     .Transform(1, &xr, &yr, &zr);
     if(!status)
       throw Exception("Call to OGR Transform failed");
     Latitude = yr;
@@ -666,12 +673,12 @@ void OgrCoordinate::lat_lon_height(double& Latitude, double& Longitude,
 
 boost::shared_ptr<CartesianFixed> OgrCoordinate::convert_to_cf() const
 {
-  double xr = x, yr = y , zr = z;
+  double xr = x, yr = y, zr = z;
   if(ogr_->cf_transform()) {
-  // Note that operation Transform really is const, this just doesn't
-  // have the right signature in GDAL.
-    int status = const_cast<OGRCoordinateTransformation&>(*ogr_->cf_transform()).
-      Transform(1, &xr, &yr, &zr);
+    // Note that operation Transform really is const, this just doesn't
+    // have the right signature in GDAL.
+    int status = const_cast<OGRCoordinateTransformation&>(*ogr_->cf_transform())
+                     .Transform(1, &xr, &yr, &zr);
     if(!status)
       throw Exception("Call to OGR Transform failed");
     if(naif_code() == Ecr::EARTH_NAIF_CODE)
@@ -680,8 +687,8 @@ boost::shared_ptr<CartesianFixed> OgrCoordinate::convert_to_cf() const
   }
   double lat, lon, h;
   lat_lon_height(lat, lon, h);
-  return boost::make_shared<PlanetFixed>(Planetocentric(lat, lon, h,
-							naif_code()));
+  return boost::make_shared<PlanetFixed>(
+      Planetocentric(lat, lon, h, naif_code()));
 }
 
 //-----------------------------------------------------------------------
@@ -690,7 +697,8 @@ boost::shared_ptr<CartesianFixed> OgrCoordinate::convert_to_cf() const
 
 void OgrCoordinate::print(std::ostream& Os) const
 {
-  Os << "OgrCoordinate: " << ogr_->pcs_citation_geo_key() << " : (" << x << ", " << y << ", " << z << ")";
+  Os << "OgrCoordinate: " << ogr_->pcs_citation_geo_key() << " : (" << x << ", "
+     << y << ", " << z << ")";
 }
 
 //-----------------------------------------------------------------------
@@ -713,17 +721,17 @@ int OgrCoordinate::utm_zone() const
 /// zone number (use negative number for southern zones), or if left
 /// blank we determine the appropriate zone to use.
 //-----------------------------------------------------------------------
-  
+
 OgrCoordinate OgrCoordinate::to_utm(const Geodetic& Gc, int zone)
 {
   if(zone == -999) {
-    zone = (int) floor((Gc.longitude() + 180.0) / 6.0 + 1.0);
+    zone = (int)floor((Gc.longitude() + 180.0) / 6.0 + 1.0);
     if(Gc.latitude() < 0)
       zone = -zone;
   }
   boost::shared_ptr<OGRSpatialReference> ogr(new OGRSpatialReference);
   ogr->SetWellKnownGeogCS("WGS84");
-  ogr->SetUTM((zone > 0 ? zone  : -zone), (zone > 0));
+  ogr->SetUTM((zone > 0 ? zone : -zone), (zone > 0));
   boost::shared_ptr<OgrWrapper> ogrw(new OgrWrapper(ogr));
   return OgrCoordinate(ogrw, Gc);
 }
@@ -734,8 +742,7 @@ OgrCoordinate OgrCoordinate::to_utm(const Geodetic& Gc, int zone)
 
 void OgrCoordinateConverter::print(std::ostream& Os) const
 {
-  Os << "OgrCoordinateConverter:\n"
-     << ogr_->pretty_wkt() << "\n";
+  Os << "OgrCoordinateConverter:\n" << ogr_->pretty_wkt() << "\n";
 }
 
 //-----------------------------------------------------------------------
@@ -744,8 +751,8 @@ void OgrCoordinateConverter::print(std::ostream& Os) const
 
 bool OgrCoordinateConverter::is_same(const CoordinateConverter& Conv) const
 {
-  const OgrCoordinateConverter* c = 
-    dynamic_cast<const OgrCoordinateConverter*>(&Conv);
+  const OgrCoordinateConverter* c =
+      dynamic_cast<const OgrCoordinateConverter*>(&Conv);
   if(!c)
     return false;
   return ogr().ogr().IsSame(&c->ogr().ogr());
@@ -761,11 +768,11 @@ OgrCoordinateConverter::utm_converter(int Zone)
 {
   boost::shared_ptr<OGRSpatialReference> ogr(new OGRSpatialReference);
   ogr->SetWellKnownGeogCS("WGS84");
-  ogr->SetUTM((Zone > 0 ? Zone  : -Zone), (Zone > 0));
-#if(GDAL_VERSION_MAJOR >= 3)
+  ogr->SetUTM((Zone > 0 ? Zone : -Zone), (Zone > 0));
+#if (GDAL_VERSION_MAJOR >= 3)
   ogr->SetAxisMappingStrategy(OAMS_TRADITIONAL_GIS_ORDER);
-#endif  
+#endif
   boost::shared_ptr<OgrWrapper> ogrw(new OgrWrapper(ogr));
-  return boost::shared_ptr<OgrCoordinateConverter>
-    (new OgrCoordinateConverter(ogrw));
+  return boost::shared_ptr<OgrCoordinateConverter>(
+      new OgrCoordinateConverter(ogrw));
 }

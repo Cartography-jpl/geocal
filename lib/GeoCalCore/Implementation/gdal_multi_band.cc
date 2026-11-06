@@ -8,16 +8,16 @@ using namespace GeoCal;
 //-----------------------------------------------------------------------
 
 GdalMultiBand::GdalMultiBand(const std::string& Fname, int Number_tile,
-		int Tile_number_line, int Tile_number_sample)
+                             int Tile_number_line, int Tile_number_sample)
 {
   boost::shared_ptr<GdalRasterImage> g(new GdalRasterImage(Fname));
   raster_image_.push_back(g);
   gd = g->data_set();
   // b is 1 based.
   for(int b = 2; b <= gd->GetRasterCount(); ++b)
-    raster_image_.push_back(boost::shared_ptr<GdalRasterImage>
-			    (new GdalRasterImage(gd, b, Number_tile, Tile_number_line,
-						 Tile_number_sample)));
+    raster_image_.push_back(
+        boost::shared_ptr<GdalRasterImage>(new GdalRasterImage(
+            gd, b, Number_tile, Tile_number_line, Tile_number_sample)));
 }
 
 //-----------------------------------------------------------------------
@@ -26,45 +26,42 @@ GdalMultiBand::GdalMultiBand(const std::string& Fname, int Number_tile,
 //-----------------------------------------------------------------------
 
 GdalMultiBand::GdalMultiBand(const std::string& Fname, int Number_tile,
-			     const std::string& Allowed_drivers,
-			     const std::string& Open_options,
-			     const std::string& Sibling_files,
-			     int Tile_number_line, int Tile_number_sample)
+                             const std::string& Allowed_drivers,
+                             const std::string& Open_options,
+                             const std::string& Sibling_files,
+                             int Tile_number_line, int Tile_number_sample)
 {
-  boost::shared_ptr<GdalRasterImage> g(new GdalRasterImage(Fname, 1, Allowed_drivers,
-							   Open_options, Sibling_files));
+  boost::shared_ptr<GdalRasterImage> g(new GdalRasterImage(
+      Fname, 1, Allowed_drivers, Open_options, Sibling_files));
   raster_image_.push_back(g);
   gd = g->data_set();
   // b is 1 based.
   for(int b = 2; b <= gd->GetRasterCount(); ++b)
-    raster_image_.push_back(boost::shared_ptr<GdalRasterImage>
-			    (new GdalRasterImage(gd, b, Number_tile, Tile_number_line,
-						 Tile_number_sample)));
+    raster_image_.push_back(
+        boost::shared_ptr<GdalRasterImage>(new GdalRasterImage(
+            gd, b, Number_tile, Tile_number_line, Tile_number_sample)));
 }
 
 //-----------------------------------------------------------------------
 /// Create a new file. All the arguments here are the same as for
-/// GdalRasterImage. 
+/// GdalRasterImage.
 //-----------------------------------------------------------------------
 
-GdalMultiBand::GdalMultiBand(const std::string& Fname, const std::string& 
-			     Driver_name, int Number_line, int Number_sample,
-			     int Number_band,
-			     int Dt, const std::string& Options, 
-			     int Number_tile,
-			     int Tile_number_line, 
-			     int Tile_number_sample)
+GdalMultiBand::GdalMultiBand(const std::string& Fname,
+                             const std::string& Driver_name, int Number_line,
+                             int Number_sample, int Number_band, int Dt,
+                             const std::string& Options, int Number_tile,
+                             int Tile_number_line, int Tile_number_sample)
 {
-  boost::shared_ptr<GdalRasterImage> g
-    (new GdalRasterImage(Fname, Driver_name, Number_line, Number_sample, 
-			 Number_band, Dt, Options, Number_tile, 
-			 Tile_number_line, Tile_number_sample)); 
+  boost::shared_ptr<GdalRasterImage> g(new GdalRasterImage(
+      Fname, Driver_name, Number_line, Number_sample, Number_band, Dt, Options,
+      Number_tile, Tile_number_line, Tile_number_sample));
   raster_image_.push_back(g);
   gd = g->data_set();
   // b is 1 based.
   for(int b = 2; b <= gd->GetRasterCount(); ++b)
-    raster_image_.push_back(boost::shared_ptr<GdalRasterImage>
-			    (new GdalRasterImage(gd, b)));
+    raster_image_.push_back(
+        boost::shared_ptr<GdalRasterImage>(new GdalRasterImage(gd, b)));
 }
 
 //-----------------------------------------------------------------------
@@ -73,24 +70,22 @@ GdalMultiBand::GdalMultiBand(const std::string& Fname, const std::string&
 //-----------------------------------------------------------------------
 
 GdalMultiBand::GdalMultiBand(const std::string& Fname,
-			     const std::string& Driver_name,
-			     const GdalRasterImage& Source,
-			     const std::string& Options, 
-			     bool Log_progress,
-			     int Number_tile,
-			     int Tile_number_line, int Tile_number_sample)
+                             const std::string& Driver_name,
+                             const GdalRasterImage& Source,
+                             const std::string& Options, bool Log_progress,
+                             int Number_tile, int Tile_number_line,
+                             int Tile_number_sample)
 {
-  boost::shared_ptr<GdalRasterImage> g
-    (new GdalRasterImage(Fname, Driver_name, Source, Options, Log_progress,
-			 1, Number_tile, 
-			 Tile_number_line, Tile_number_sample)); 
+  boost::shared_ptr<GdalRasterImage> g(
+      new GdalRasterImage(Fname, Driver_name, Source, Options, Log_progress, 1,
+                          Number_tile, Tile_number_line, Tile_number_sample));
   raster_image_.push_back(g);
   gd = g->data_set();
   // b is 1 based.
   for(int b = 2; b <= gd->GetRasterCount(); ++b)
-    raster_image_.push_back(boost::shared_ptr<GdalRasterImage>
-			    (new GdalRasterImage(gd, b,
-		 Number_tile, Tile_number_line, Tile_number_sample)));
+    raster_image_.push_back(
+        boost::shared_ptr<GdalRasterImage>(new GdalRasterImage(
+            gd, b, Number_tile, Tile_number_line, Tile_number_sample)));
 }
 
 //-----------------------------------------------------------------------
@@ -98,23 +93,20 @@ GdalMultiBand::GdalMultiBand(const std::string& Fname,
 /// the CreateCopy command.
 //-----------------------------------------------------------------------
 
-
 GdalMultiBand::GdalMultiBand(const std::string& Fname,
-			     const std::string& Driver_name,
-			     const GdalMultiBand& Source,
-			     const std::string& Options, 
-			     bool Log_progress,
-			     int Number_tile,
-			     int Tile_number_line, 
-			     int Tile_number_sample)
+                             const std::string& Driver_name,
+                             const GdalMultiBand& Source,
+                             const std::string& Options, bool Log_progress,
+                             int Number_tile, int Tile_number_line,
+                             int Tile_number_sample)
 {
-  gd = gdal_create_copy(Fname, Driver_name, *Source.data_set(),
-			Options, Log_progress);
+  gd = gdal_create_copy(Fname, Driver_name, *Source.data_set(), Options,
+                        Log_progress);
   // b is 1 based.
   for(int b = 1; b <= gd->GetRasterCount(); ++b)
-    raster_image_.push_back(boost::shared_ptr<GdalRasterImage>
-			    (new GdalRasterImage(gd, b, 
-		 Number_tile, Tile_number_line, Tile_number_sample)));
+    raster_image_.push_back(
+        boost::shared_ptr<GdalRasterImage>(new GdalRasterImage(
+            gd, b, Number_tile, Tile_number_line, Tile_number_sample)));
 }
 
 //-----------------------------------------------------------------------
@@ -122,16 +114,13 @@ GdalMultiBand::GdalMultiBand(const std::string& Fname,
 /// information (if found) from the first band in RasterImageMultiBand.
 //-----------------------------------------------------------------------
 
-void GdalMultiBand::save(const std::string& Oname, 
-			 const std::string& Driver,
-			 const RasterImageMultiBand& d,
-			 bool Log_progress,
-			 int Dt,
-			 const std::string& Options)
+void GdalMultiBand::save(const std::string& Oname, const std::string& Driver,
+                         const RasterImageMultiBand& d, bool Log_progress,
+                         int Dt, const std::string& Options)
 {
   GdalMultiBand m(Oname, Driver, d.raster_image(0).number_line(),
-		  d.raster_image(0).number_sample(),
-		  d.number_band(), Dt, Options);
+                  d.raster_image(0).number_sample(), d.number_band(), Dt,
+                  Options);
   if(d.raster_image(0).has_map_info())
     m.set_map_info(d.raster_image(0).map_info());
   if(d.raster_image(0).has_rpc())
@@ -150,10 +139,9 @@ void GdalMultiBand::save(const std::string& Oname,
 
 void GdalMultiBand::flush() const
 {
-  BOOST_FOREACH(const boost::shared_ptr<RasterImage>& braw, 
-		raster_image_) {
-    boost::shared_ptr<GdalRasterImage> b = 
-      boost::dynamic_pointer_cast<GdalRasterImage>(braw);
+  BOOST_FOREACH(const boost::shared_ptr<RasterImage>& braw, raster_image_) {
+    boost::shared_ptr<GdalRasterImage> b =
+        boost::dynamic_pointer_cast<GdalRasterImage>(braw);
     if(b)
       b->flush();
   }
@@ -167,17 +155,16 @@ void GdalMultiBand::flush() const
 
 void GdalMultiBand::close() const
 {
-  BOOST_FOREACH(const boost::shared_ptr<RasterImage>& braw, 
-		raster_image_) {
-    boost::shared_ptr<GdalRasterImage> b = 
-      boost::dynamic_pointer_cast<GdalRasterImage>(braw);
+  BOOST_FOREACH(const boost::shared_ptr<RasterImage>& braw, raster_image_) {
+    boost::shared_ptr<GdalRasterImage> b =
+        boost::dynamic_pointer_cast<GdalRasterImage>(braw);
     if(b)
       b->close();
   }
 }
 
-void GdalMultiBand::print(std::ostream& Os) const 
-{ 
+void GdalMultiBand::print(std::ostream& Os) const
+{
   Os << "GdalMultiBand\n"
      << "  Filename: " << gdal_raster_image(0)->file_names()[0] << "\n";
 }

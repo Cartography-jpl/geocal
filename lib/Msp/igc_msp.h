@@ -8,28 +8,31 @@
 
 namespace GeoCal {
 bool have_msp_supported();
-  
-/****************************************************************//**
+
+/****************************************************************/ /**
   Exception thrown if MSP isn't available.
 *******************************************************************/
 
 class MspNotAvailableException : public Exception {
 public:
-//-----------------------------------------------------------------------
-/// Constructor
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor
+  //-----------------------------------------------------------------------
 
-  MspNotAvailableException() : Exception("Geocal library wasn't configured to use MSP library during installation, so can't call MSP functions.")
-  { }
+  MspNotAvailableException()
+    : Exception("Geocal library wasn't configured to use MSP library during "
+                "installation, so can't call MSP functions.")
+  {
+  }
 
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~MspNotAvailableException() throw() {}
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   This is an ImageGroundConnection that uses the MSP (Mensuration
   Service Program) library to implement an ImageGroundConnection. This
   uses a set of plugins for the CSM (Community Sensor Model, see 
@@ -43,14 +46,15 @@ public:
   ImageGroundConnection objects.
 *******************************************************************/
 
-class IgcMsp: public virtual ImageGroundConnectionCopy {
+class IgcMsp : public virtual ImageGroundConnectionCopy {
 public:
-  IgcMsp(const std::string& Fname,
-     const boost::shared_ptr<Dem>& D = boost::shared_ptr<Dem>(new SimpleDem()),
-	 int Image_index = 0);
+  IgcMsp(
+      const std::string& Fname,
+      const boost::shared_ptr<Dem>& D = boost::shared_ptr<Dem>(new SimpleDem()),
+      int Image_index = 0);
   IgcMsp(const std::string& Fname, const boost::shared_ptr<Dem>& D,
-	 int Image_index,
-	 const std::string& Plugin_name, const std::string& Model_name);
+         int Image_index, const std::string& Plugin_name,
+         const std::string& Model_name);
   virtual ~IgcMsp() {}
   blitz::Array<double, 2> covariance() const;
   blitz::Array<double, 2> joint_covariance(const IgcMsp& igc2) const;
@@ -77,21 +81,20 @@ public:
   virtual void print(std::ostream& Os) const;
   blitz::Array<double, 1> sensor_velocity(const ImageCoordinate& Ic) const;
   std::string generate_rsm_tre(const std::string& Report = "",
-			       const std::string& Rsm_config = "") const;
+                               const std::string& Rsm_config = "") const;
   void ground_coordinate_with_cov(const ImageCoordinate& Ic,
-				  const blitz::Array<double, 2>& Ic_cov,
-				  double H,
-				  double H_var,
-				  boost::shared_ptr<GroundCoordinate>& Gp,
-				  blitz::Array<double, 2>& Gp_cov) const;
-  void ce90_le90(const ImageCoordinate& Ic, double H,
-		 double& Ce90, double& Le90) const;
+                                  const blitz::Array<double, 2>& Ic_cov,
+                                  double H, double H_var,
+                                  boost::shared_ptr<GroundCoordinate>& Gp,
+                                  blitz::Array<double, 2>& Gp_cov) const;
+  void ce90_le90(const ImageCoordinate& Ic, double H, double& Ce90,
+                 double& Le90) const;
 private:
   static void* lib_ptr;
   IgcMsp() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 

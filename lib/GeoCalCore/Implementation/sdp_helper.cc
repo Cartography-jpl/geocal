@@ -3,8 +3,8 @@
 #include "ground_coordinate.h"
 #include "geocal_exception.h"
 #ifdef HAVE_SDP
-#define LINUX			// Prevent error message when
-				// including next file.
+#define LINUX // Prevent error message when
+              // including next file.
 #include <PGS_TD.h>
 #include <PGS_CSC.h>
 #endif
@@ -20,8 +20,8 @@ Time SdpHelper::parse_time(const std::string& Time_string)
 {
 #ifdef HAVE_SDP
   double pgs;
-  PGSt_SMF_code pgs_status_code = 
-    PGS_TD_UTCtoTAI(const_cast<char*>(Time_string.c_str()), &pgs);
+  PGSt_SMF_code pgs_status_code =
+      PGS_TD_UTCtoTAI(const_cast<char*>(Time_string.c_str()), &pgs);
   if(pgs_status_code != PGS_S_SUCCESS) {
     Exception e("Call to PGS_TD_UTCtoTAI failed with message");
     char m[PGS_SMF_MAX_MSG_SIZE];
@@ -63,7 +63,7 @@ std::string SdpHelper::to_string(const Time& T)
 //-----------------------------------------------------------------------
 
 void SdpHelper::convert_to_eci(const Time& T, const CartesianFixed& From,
-			       CartesianInertial& To)
+                               CartesianInertial& To)
 {
 #ifdef HAVE_SDP
   PGSt_double ecr[6];
@@ -73,11 +73,9 @@ void SdpHelper::convert_to_eci(const Time& T, const CartesianFixed& From,
   ecr[1] = From.position[1];
   ecr[2] = From.position[2];
   ecr[3] = ecr[4] = ecr[5] = 0;
-  PGSt_SMF_status status = 
-    PGS_CSC_ECRtoECI(1, const_cast<char*>(T.to_string().c_str()),
-		     &offset, &ecr, &eci);
-  if(status != PGSCSC_W_PREDICTED_UT1 &&
-     status != PGS_S_SUCCESS) {
+  PGSt_SMF_status status = PGS_CSC_ECRtoECI(
+      1, const_cast<char*>(T.to_string().c_str()), &offset, &ecr, &eci);
+  if(status != PGSCSC_W_PREDICTED_UT1 && status != PGS_S_SUCCESS) {
     Exception e("Call to PGS_CSC_ECRtoECI failed with message");
     char m[PGS_SMF_MAX_MSG_SIZE];
     PGS_SMF_GetMsgByCode(status, m);
@@ -99,16 +97,13 @@ void SdpHelper::convert_to_eci(const Time& T, const CartesianFixed& From,
 void SdpHelper::convert_to_ecr(const Time& T, double Ci_to_cf[3][3])
 {
 #ifdef HAVE_SDP
-  PGSt_double eci[3][6] = {{1, 0, 0, 0, 0, 0}, 
-			   {0, 1, 0, 0, 0, 0}, 
-			   {0, 0, 1, 0, 0, 0}};
+  PGSt_double eci[3][6] = {
+      {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 1, 0, 0, 0}};
   PGSt_double ecr[3][6];
   PGSt_double offset = 0.0;
-  PGSt_SMF_status status = 
-    PGS_CSC_ECItoECR(3, const_cast<char*>(T.to_string().c_str()),
-		     &offset, eci, ecr);
-  if(status != PGSCSC_W_PREDICTED_UT1 &&
-     status != PGS_S_SUCCESS) {
+  PGSt_SMF_status status = PGS_CSC_ECItoECR(
+      3, const_cast<char*>(T.to_string().c_str()), &offset, eci, ecr);
+  if(status != PGSCSC_W_PREDICTED_UT1 && status != PGS_S_SUCCESS) {
     Exception e("Call to PGS_CSC_ECRtoECI failed with message");
     char m[PGS_SMF_MAX_MSG_SIZE];
     PGS_SMF_GetMsgByCode(status, m);
@@ -134,7 +129,7 @@ void SdpHelper::convert_to_ecr(const Time& T, double Ci_to_cf[3][3])
 //-----------------------------------------------------------------------
 
 void SdpHelper::convert_to_ecr(const Time& T, const CartesianInertial& From,
-			       CartesianFixed& To)
+                               CartesianFixed& To)
 {
 #ifdef HAVE_SDP
   PGSt_double ecr[6];
@@ -144,11 +139,9 @@ void SdpHelper::convert_to_ecr(const Time& T, const CartesianInertial& From,
   eci[1] = From.position[1];
   eci[2] = From.position[2];
   eci[3] = eci[4] = eci[5] = 0;
-  PGSt_SMF_status status = 
-    PGS_CSC_ECItoECR(1, const_cast<char*>(T.to_string().c_str()),
-		     &offset, &eci, &ecr);
-  if(status != PGSCSC_W_PREDICTED_UT1 &&
-     status != PGS_S_SUCCESS) {
+  PGSt_SMF_status status = PGS_CSC_ECItoECR(
+      1, const_cast<char*>(T.to_string().c_str()), &offset, &eci, &ecr);
+  if(status != PGSCSC_W_PREDICTED_UT1 && status != PGS_S_SUCCESS) {
     Exception e("Call to PGS_CSC_ECItoECR failed with message");
     char m[PGS_SMF_MAX_MSG_SIZE];
     PGS_SMF_GetMsgByCode(status, m);
@@ -164,7 +157,7 @@ void SdpHelper::convert_to_ecr(const Time& T, const CartesianInertial& From,
 }
 
 Time SdpToolkitTimeInterface::parse_time(const std::string Time_string) const
-{ 
+{
   return SdpHelper::parse_time(Time_string);
 }
 
@@ -180,11 +173,13 @@ std::string SdpToolkitTimeInterface::to_string(const Time& T) const
 /// this for earth, any other body will trigger an error.
 //-----------------------------------------------------------------------
 
-void SdpToolkitCoordinateInterface::to_inertial(int Body_id, 
-  const Time& T, const CartesianFixed& From, CartesianInertial& To)
+void SdpToolkitCoordinateInterface::to_inertial(int Body_id, const Time& T,
+                                                const CartesianFixed& From,
+                                                CartesianInertial& To)
 {
-  if(Body_id != 399)		// Are we Earth?
-    throw Exception("The SDP toolkit only supports the Earth for converting to and from inertial coordinates");
+  if(Body_id != 399) // Are we Earth?
+    throw Exception("The SDP toolkit only supports the Earth for converting to "
+                    "and from inertial coordinates");
   SdpHelper::convert_to_eci(T, From, To);
 }
 
@@ -193,13 +188,13 @@ void SdpToolkitCoordinateInterface::to_inertial(int Body_id,
 /// given body, including velocity. We use the NAIF coding for the
 /// bodies (see the SPICE documentation for details). We use this
 /// because it is a unique  coding, the underlying toolkit doesn't
-/// need to be SPICE. 
+/// need to be SPICE.
 //-----------------------------------------------------------------------
 
-void SdpToolkitCoordinateInterface::to_inertial
-(int Body_id, const Time& T, 
- const CartesianFixed& From, const boost::array<double, 3>& Vel_cf,
- CartesianInertial& To, boost::array<double, 3>& Vel_ci)
+void SdpToolkitCoordinateInterface::to_inertial(
+    int Body_id, const Time& T, const CartesianFixed& From,
+    const boost::array<double, 3>& Vel_cf, CartesianInertial& To,
+    boost::array<double, 3>& Vel_ci)
 {
   throw Exception("Not implemented for SDP toolkit");
 }
@@ -209,25 +204,28 @@ void SdpToolkitCoordinateInterface::to_inertial
 /// CartesianFixed for the given body. We use the NAIF coding for
 /// the bodies (see the SPICE  documentation for details). Note that
 /// the SDP toolkit only can do  this for earth, any other body will
-/// trigger an error. 
+/// trigger an error.
 //-----------------------------------------------------------------------
 
-void SdpToolkitCoordinateInterface::to_fixed(int Body_id, 
-const Time& T, double Ci_to_cf[3][3])
+void SdpToolkitCoordinateInterface::to_fixed(int Body_id, const Time& T,
+                                             double Ci_to_cf[3][3])
 {
-  if(Body_id != 399)		// Are we Earth?
-    throw Exception("The SDP toolkit only supports the Earth for converting to and from inertial coordinates");
+  if(Body_id != 399) // Are we Earth?
+    throw Exception("The SDP toolkit only supports the Earth for converting to "
+                    "and from inertial coordinates");
   SdpHelper::convert_to_ecr(T, Ci_to_cf);
 }
 
-void SdpToolkitCoordinateInterface::to_fixed_with_vel(int Body_id, 
-const Time& T, double Ci_to_cf[6][6])
+void SdpToolkitCoordinateInterface::to_fixed_with_vel(int Body_id,
+                                                      const Time& T,
+                                                      double Ci_to_cf[6][6])
 {
   throw Exception("Not implemented for SDP toolkit");
 }
 
-void SdpToolkitCoordinateInterface::to_inertial_with_vel(int Body_id, 
-const Time& T, double Cf_to_ci[6][6])
+void SdpToolkitCoordinateInterface::to_inertial_with_vel(int Body_id,
+                                                         const Time& T,
+                                                         double Cf_to_ci[6][6])
 {
   throw Exception("Not implemented for SDP toolkit");
 }
@@ -239,11 +237,13 @@ const Time& T, double Cf_to_ci[6][6])
 /// this for earth, any other body will trigger an error.
 //-----------------------------------------------------------------------
 
-void SdpToolkitCoordinateInterface::to_fixed(int Body_id, 
-  const Time& T, const CartesianInertial& From, CartesianFixed& To)
+void SdpToolkitCoordinateInterface::to_fixed(int Body_id, const Time& T,
+                                             const CartesianInertial& From,
+                                             CartesianFixed& To)
 {
-  if(Body_id != 399)		// Are we Earth?
-    throw Exception("The SDP toolkit only supports the Earth for converting to and from inertial coordinates");
+  if(Body_id != 399) // Are we Earth?
+    throw Exception("The SDP toolkit only supports the Earth for converting to "
+                    "and from inertial coordinates");
   SdpHelper::convert_to_ecr(T, From, To);
 }
 
@@ -252,20 +252,19 @@ void SdpToolkitCoordinateInterface::to_fixed(int Body_id,
 /// given body, including velocity. We use the NAIF coding for the
 /// bodies (see the SPICE documentation for details). We use this
 /// because it is a unique  coding, the underlying toolkit doesn't
-/// need to be SPICE. 
+/// need to be SPICE.
 //-----------------------------------------------------------------------
 
-void SdpToolkitCoordinateInterface::to_fixed
-(int Body_id, const Time& T, 
- const CartesianInertial& From, const boost::array<double, 3>& Vel_ci,
- CartesianFixed& To, boost::array<double, 3>& Vel_cf)
+void SdpToolkitCoordinateInterface::to_fixed(
+    int Body_id, const Time& T, const CartesianInertial& From,
+    const boost::array<double, 3>& Vel_ci, CartesianFixed& To,
+    boost::array<double, 3>& Vel_cf)
 {
   throw Exception("Not implemented for SDP toolkit");
 }
 
-void
-SdpToolkitCoordinateInterface::sub_solar_point(int Body_id, const Time& T,
-					       CartesianFixed& P)
+void SdpToolkitCoordinateInterface::sub_solar_point(int Body_id, const Time& T,
+                                                    CartesianFixed& P)
 {
   throw Exception("Not implemented for SDP toolkit");
 }

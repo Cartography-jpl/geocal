@@ -13,9 +13,9 @@
 #include <cmath>
 
 namespace GeoCal {
-  class RasterImageTileIterator;
-  
-/****************************************************************//**
+class RasterImageTileIterator;
+
+/****************************************************************/ /**
   This is a general image class. Conceptually, an image is just a two
   dimensional array of integers, although it is not necessarily
   implemented this way. This is an abstract class, containing behavior
@@ -51,27 +51,27 @@ class RasterImage : public Printable<RasterImage> {
 public:
   virtual ~RasterImage() {}
 
-//-----------------------------------------------------------------------
-/// This does a bilinear interpolation of the data for fractional
-/// Line and Sample.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// This does a bilinear interpolation of the data for fractional
+  /// Line and Sample.
+  //-----------------------------------------------------------------------
 
   double interpolate(double Line, double Sample) const
   {
-    range_check(Line, 0.0, (double) (number_line() - 1));
-    range_check(Sample, 0.0, (double) (number_sample() - 1));
+    range_check(Line, 0.0, (double)(number_line() - 1));
+    range_check(Sample, 0.0, (double)(number_sample() - 1));
     return unchecked_interpolate(Line, Sample);
   }
 
-//-----------------------------------------------------------------------
-/// This does a bilinear interpolation of the data for fractional
-/// Line and Sample. This does not do range checking.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// This does a bilinear interpolation of the data for fractional
+  /// Line and Sample. This does not do range checking.
+  //-----------------------------------------------------------------------
 
   double unchecked_interpolate(double Line, double Sample) const
   {
-    int i = (int) Line;
-    int j = (int) Sample;
+    int i = (int)Line;
+    int j = (int)Sample;
     double t1 = unchecked_read_double(i, j);
     double t2 = unchecked_read_double(i, j + 1);
     double t3 = unchecked_read_double(i + 1, j);
@@ -81,17 +81,17 @@ public:
     return t5 + (t6 - t5) * (Line - i);
   }
 
-//-----------------------------------------------------------------------
-/// This calculates the derivative of interpolate with respect to Line
-/// and Sample. First entry in results is derivative with respect to
-/// Line, the second is with respect to the Sample.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// This calculates the derivative of interpolate with respect to Line
+  /// and Sample. First entry in results is derivative with respect to
+  /// Line, the second is with respect to the Sample.
+  //-----------------------------------------------------------------------
 
-  boost::array<double, 2> interpolate_derivative(double Line, double Sample) 
-    const
+  boost::array<double, 2> interpolate_derivative(double Line,
+                                                 double Sample) const
   {
-    int i = (int) Line;
-    int j = (int) Sample;
+    int i = (int)Line;
+    int j = (int)Sample;
     range_check(i, 0, number_line() - 1);
     range_check(j, 0, number_sample() - 1);
     double t1 = unchecked_read_double(i, j);
@@ -108,58 +108,64 @@ public:
     return res;
   }
 
-  virtual blitz::Array<double, 2> interpolate(double Line, double Sample, 
-      int Number_line, int Number_sample, double Fill_value = 0.0) const;
+  virtual blitz::Array<double, 2> interpolate(double Line, double Sample,
+                                              int Number_line,
+                                              int Number_sample,
+                                              double Fill_value = 0.0) const;
 
-//-----------------------------------------------------------------------
-/// This does a bilinear interpolation of the data for fractional
-/// Line and Sample.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// This does a bilinear interpolation of the data for fractional
+  /// Line and Sample.
+  //-----------------------------------------------------------------------
 
-  double interpolate(const ImageCoordinate& Ic) const 
-  { return interpolate(Ic.line, Ic.sample); }
+  double interpolate(const ImageCoordinate& Ic) const
+  {
+    return interpolate(Ic.line, Ic.sample);
+  }
 
-//-----------------------------------------------------------------------
-/// Some RasterImage may have overviews which are lower resolution
-/// images. If we do have these, then this will return the lower
-/// resolution RasterImage that has at least the given number of
-/// samples. If we don't have an overview, this returns a null - which
-/// the calling routine needs to be ready to handle.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Some RasterImage may have overviews which are lower resolution
+  /// images. If we do have these, then this will return the lower
+  /// resolution RasterImage that has at least the given number of
+  /// samples. If we don't have an overview, this returns a null - which
+  /// the calling routine needs to be ready to handle.
+  //-----------------------------------------------------------------------
 
-  virtual boost::shared_ptr<RasterImage> overview
-  (int UNUSED(Min_number_sample)) const
-  { return boost::shared_ptr<RasterImage>(); }
+  virtual boost::shared_ptr<RasterImage>
+  overview(int UNUSED(Min_number_sample)) const
+  {
+    return boost::shared_ptr<RasterImage>();
+  }
 
-//-----------------------------------------------------------------------
-/// Return number of lines in the image.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return number of lines in the image.
+  //-----------------------------------------------------------------------
 
   virtual int number_line() const = 0;
 
-//-----------------------------------------------------------------------
-/// Return number of samples in the image.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return number of samples in the image.
+  //-----------------------------------------------------------------------
 
   virtual int number_sample() const = 0;
 
-//-----------------------------------------------------------------------
-/// Number of lines in the preferred tile size. Default is the entire 
-/// image.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of lines in the preferred tile size. Default is the entire
+  /// image.
+  //-----------------------------------------------------------------------
 
-  virtual int number_tile_line() const {return number_line();}
+  virtual int number_tile_line() const { return number_line(); }
 
-//-----------------------------------------------------------------------
-/// Number of samples in the preferred tile size. Default is the entire 
-/// image.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of samples in the preferred tile size. Default is the entire
+  /// image.
+  //-----------------------------------------------------------------------
 
-  virtual int number_tile_sample() const {return number_sample();}
+  virtual int number_tile_sample() const { return number_sample(); }
 
-//-----------------------------------------------------------------------
-/// Return pixel value at given line and sample.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return pixel value at given line and sample.
+  //-----------------------------------------------------------------------
 
   int operator()(int Line, int Sample) const
   {
@@ -168,61 +174,58 @@ public:
     return unchecked_read(Line, Sample);
   }
 
-//-----------------------------------------------------------------------
-/// Most of the time you should use the range checked operator(). But
-/// for some tight loops the range checking may be prohibitive. In
-/// those cases you can use this unchecked version.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Most of the time you should use the range checked operator(). But
+  /// for some tight loops the range checking may be prohibitive. In
+  /// those cases you can use this unchecked version.
+  //-----------------------------------------------------------------------
 
   virtual int unchecked_read(int Line, int Sample) const = 0;
   virtual double unchecked_read_double(int Line, int Sample) const = 0;
 
-//-----------------------------------------------------------------------
-/// As an optimization, we assume when copying that data can be
-/// represented as a int. That is true of many images. But we actually
-/// need to use double, then we need to know that in the copy command.
-/// This function indicates if we need a double or not.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// As an optimization, we assume when copying that data can be
+  /// represented as a int. That is true of many images. But we actually
+  /// need to use double, then we need to know that in the copy command.
+  /// This function indicates if we need a double or not.
+  //-----------------------------------------------------------------------
 
-  virtual bool copy_needs_double() const {return false;}
-  
-//-----------------------------------------------------------------------
-/// Alternate name for operator(). Languages that wrap this class such
-/// as Ruby don't support operator(), so we give another name for the
-/// same function.
-//-----------------------------------------------------------------------
+  virtual bool copy_needs_double() const { return false; }
 
-  int read(int Line, int Sample) const {return (*this)(Line, Sample);}
+  //-----------------------------------------------------------------------
+  /// Alternate name for operator(). Languages that wrap this class such
+  /// as Ruby don't support operator(), so we give another name for the
+  /// same function.
+  //-----------------------------------------------------------------------
 
-  boost::multi_array<int, 2>
-    read_array(int Lstart, int Sstart, int Number_line, int Number_sample) 
-    const;
+  int read(int Line, int Sample) const { return (*this)(Line, Sample); }
 
-//-----------------------------------------------------------------------
-/// Return a subset of the image.
-//-----------------------------------------------------------------------
+  boost::multi_array<int, 2> read_array(int Lstart, int Sstart, int Number_line,
+                                        int Number_sample) const;
 
-  virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
-			int Number_sample, int* Res) const = 0;
-  blitz::Array<int, 2>
-  read(int Lstart, int Sstart, int Number_line, int Number_sample) 
-    const;
-  blitz::Array<int, 2>
-  read_with_pad(int Lstart, int Sstart, int Number_line, int Number_sample,
-		int Fill_value = 0) const;
-  blitz::Array<int, 2>
-  read(const RasterImageTileIterator& Ti) const; 
+  //-----------------------------------------------------------------------
+  /// Return a subset of the image.
+  //-----------------------------------------------------------------------
 
-  virtual blitz::Array<double, 2> 
-  read_double(int Lstart, int Sstart, int Number_line, 
-	      int Number_sample) const;
-  blitz::Array<double, 2>
-  read_double_with_pad(int Lstart, int Sstart, int Number_line, 
-		       int Number_sample, double Fill_value = 0.0) const;
+  virtual void read_ptr(int Lstart, int Sstart, int Number_line,
+                        int Number_sample, int* Res) const = 0;
+  blitz::Array<int, 2> read(int Lstart, int Sstart, int Number_line,
+                            int Number_sample) const;
+  blitz::Array<int, 2> read_with_pad(int Lstart, int Sstart, int Number_line,
+                                     int Number_sample,
+                                     int Fill_value = 0) const;
+  blitz::Array<int, 2> read(const RasterImageTileIterator& Ti) const;
 
-//-----------------------------------------------------------------------
-/// Write the pixel value to the given location.
-//-----------------------------------------------------------------------
+  virtual blitz::Array<double, 2>
+  read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const;
+  blitz::Array<double, 2> read_double_with_pad(int Lstart, int Sstart,
+                                               int Number_line,
+                                               int Number_sample,
+                                               double Fill_value = 0.0) const;
+
+  //-----------------------------------------------------------------------
+  /// Write the pixel value to the given location.
+  //-----------------------------------------------------------------------
 
   virtual void write(int Line, int Sample, int Val)
   {
@@ -237,162 +240,185 @@ public:
     unchecked_write(Line, Sample, Val);
   }
 
-//-----------------------------------------------------------------------
-/// Most of the time you should use the range checked write. But
-/// for some tight loops the range checking may be prohibitive. In
-/// those cases you can use this unchecked version.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Most of the time you should use the range checked write. But
+  /// for some tight loops the range checking may be prohibitive. In
+  /// those cases you can use this unchecked version.
+  //-----------------------------------------------------------------------
 
   virtual void unchecked_write(int Line, int Sample, int Val) = 0;
   virtual void unchecked_write(int Line, int Sample, double Val) = 0;
 
-//-----------------------------------------------------------------------
-/// Write a subset of the data. The default is just to call write for
-/// each pixel, but derived classes can implement more efficient
-/// versions of this.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Write a subset of the data. The default is just to call write for
+  /// each pixel, but derived classes can implement more efficient
+  /// versions of this.
+  //-----------------------------------------------------------------------
 
-  virtual void write_ptr(int Lstart, int Sstart, int Number_line, 
-			 int Number_sample, const int* V)
+  virtual void write_ptr(int Lstart, int Sstart, int Number_line,
+                         int Number_sample, const int* V)
   {
     for(int i = Lstart; i < Lstart + Number_line; ++i)
       for(int j = Sstart; j < Sstart + Number_sample; ++j, ++V)
-	write(i, j, *V);
+        write(i, j, *V);
   }
-  virtual void write_ptr(int Lstart, int Sstart, int Number_line, 
-			 int Number_sample, const double* V)
+  virtual void write_ptr(int Lstart, int Sstart, int Number_line,
+                         int Number_sample, const double* V)
   {
     for(int i = Lstart; i < Lstart + Number_line; ++i)
       for(int j = Sstart; j < Sstart + Number_sample; ++j, ++V)
-	write(i, j, *V);
+        write(i, j, *V);
   }
 
   virtual void write(int Lstart, int Sstart, const blitz::Array<int, 2>& A);
   virtual void write(int Lstart, int Sstart, const blitz::Array<double, 2>& A);
 
-//-----------------------------------------------------------------------
-/// Print to stream.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print to stream.
+  //-----------------------------------------------------------------------
 
-  virtual void print(std::ostream& Os) const 
-  { Os << "Raster image " << number_line() << " x " 
-       << number_sample() << "\n"; }
+  virtual void print(std::ostream& Os) const
+  {
+    Os << "Raster image " << number_line() << " x " << number_sample() << "\n";
+  }
 
-/// *********************************************************************
-/// Functions available if we have MapInfo data.
-/// *********************************************************************
+  /// *********************************************************************
+  /// Functions available if we have MapInfo data.
+  /// *********************************************************************
 
-//-----------------------------------------------------------------------
-/// Indicate if we have MapInfo. The default is false, but derived
-/// classes can override this.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Indicate if we have MapInfo. The default is false, but derived
+  /// classes can override this.
+  //-----------------------------------------------------------------------
 
-  virtual bool has_map_info() const {return false;}
+  virtual bool has_map_info() const { return false; }
 
-///-----------------------------------------------------------------------
-/// MapInfo for image.
-//-----------------------------------------------------------------------
+  ///-----------------------------------------------------------------------
+  /// MapInfo for image.
+  //-----------------------------------------------------------------------
 
-  virtual const MapInfo& map_info() const 
-  { throw Exception("Do not have MapInfo for this RasterImage"); }
+  virtual const MapInfo& map_info() const
+  {
+    throw Exception("Do not have MapInfo for this RasterImage");
+  }
 
-//-----------------------------------------------------------------------
-/// Shortcut to calling mapinfo().ground_coordinate.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Shortcut to calling mapinfo().ground_coordinate.
+  //-----------------------------------------------------------------------
 
-  boost::shared_ptr<GroundCoordinate> ground_coordinate
-  (const ImageCoordinate& Ic) const
-  { return map_info().ground_coordinate(Ic.sample, Ic.line); }
+  boost::shared_ptr<GroundCoordinate>
+  ground_coordinate(const ImageCoordinate& Ic) const
+  {
+    return map_info().ground_coordinate(Ic.sample, Ic.line);
+  }
 
-//-----------------------------------------------------------------------
-/// Shortcut to calling mapinfo().ground_coordinate.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Shortcut to calling mapinfo().ground_coordinate.
+  //-----------------------------------------------------------------------
 
-  boost::shared_ptr<GroundCoordinate> ground_coordinate
-  (const ImageCoordinate& Ic, const Dem& D) const
-  { return map_info().ground_coordinate(Ic.sample, Ic.line, D); }
+  boost::shared_ptr<GroundCoordinate>
+  ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const
+  {
+    return map_info().ground_coordinate(Ic.sample, Ic.line, D);
+  }
 
-//-----------------------------------------------------------------------
-/// Shortcut to calling mapinfo().ground_coordinate.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Shortcut to calling mapinfo().ground_coordinate.
+  //-----------------------------------------------------------------------
 
-  boost::shared_ptr<GroundCoordinate> ground_coordinate
-  (double Line, double Sample) const
-  { return map_info().ground_coordinate(Sample, Line); }
+  boost::shared_ptr<GroundCoordinate> ground_coordinate(double Line,
+                                                        double Sample) const
+  {
+    return map_info().ground_coordinate(Sample, Line);
+  }
 
-//-----------------------------------------------------------------------
-/// Shortcut to calling mapinfo().ground_coordinate.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Shortcut to calling mapinfo().ground_coordinate.
+  //-----------------------------------------------------------------------
 
-  boost::shared_ptr<GroundCoordinate> ground_coordinate
-  (double Line, double Sample, const Dem& D) const
-  { return map_info().ground_coordinate(Sample, Line, D); }
+  boost::shared_ptr<GroundCoordinate>
+  ground_coordinate(double Line, double Sample, const Dem& D) const
+  {
+    return map_info().ground_coordinate(Sample, Line, D);
+  }
 
-//-----------------------------------------------------------------------
-/// Shortcut to calling mapinfo().coordinate.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Shortcut to calling mapinfo().coordinate.
+  //-----------------------------------------------------------------------
 
   ImageCoordinate coordinate(const GroundCoordinate& Gc) const
-  { ImageCoordinate ic; map_info().coordinate(Gc, ic.sample, ic.line);
-    return ic;}
+  {
+    ImageCoordinate ic;
+    map_info().coordinate(Gc, ic.sample, ic.line);
+    return ic;
+  }
   ImageCoordinate coordinate(const Geodetic& Gc) const
-  { ImageCoordinate ic; map_info().coordinate(Gc, ic.sample, ic.line);
-    return ic;}
+  {
+    ImageCoordinate ic;
+    map_info().coordinate(Gc, ic.sample, ic.line);
+    return ic;
+  }
   blitz::Array<double, 2> coordinate(const blitz::Array<double, 1>& Lat,
-				     const blitz::Array<double, 1>& Lon) const;
-  
+                                     const blitz::Array<double, 1>& Lon) const;
+
   double grid_center_line_resolution() const;
   double grid_center_sample_resolution() const;
 
-/// *********************************************************************
-/// Functions available if we have RPC
-/// *********************************************************************
+  /// *********************************************************************
+  /// Functions available if we have RPC
+  /// *********************************************************************
 
-//-----------------------------------------------------------------------
-/// Indicate if we have Rpc. The default is false, but derived
-/// classes can override this.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Indicate if we have Rpc. The default is false, but derived
+  /// classes can override this.
+  //-----------------------------------------------------------------------
 
-  virtual bool has_rpc() const {return false;}
+  virtual bool has_rpc() const { return false; }
 
-///-----------------------------------------------------------------------
-/// Rpc for image.
-//-----------------------------------------------------------------------
+  ///-----------------------------------------------------------------------
+  /// Rpc for image.
+  //-----------------------------------------------------------------------
 
-  virtual Rpc rpc() const 
-  { throw Exception("Do not have RPC for this RasterImage"); }
+  virtual Rpc rpc() const
+  {
+    throw Exception("Do not have RPC for this RasterImage");
+  }
 
-///-----------------------------------------------------------------------
-/// Pointer version of rpc(). This makes python happier.
-///-----------------------------------------------------------------------
+  ///-----------------------------------------------------------------------
+  /// Pointer version of rpc(). This makes python happier.
+  ///-----------------------------------------------------------------------
 
   boost::shared_ptr<Rpc> rpc_ptr() const
-  { return boost::shared_ptr<Rpc>(new Rpc(rpc())); }
+  {
+    return boost::shared_ptr<Rpc>(new Rpc(rpc()));
+  }
 
-/// *********************************************************************
-/// Functions available if we have RSM
-/// *********************************************************************
+  /// *********************************************************************
+  /// Functions available if we have RSM
+  /// *********************************************************************
 
-//-----------------------------------------------------------------------
-/// Indicate if we have Rsm. The default is false, but derived
-/// classes can override this.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Indicate if we have Rsm. The default is false, but derived
+  /// classes can override this.
+  //-----------------------------------------------------------------------
 
-  virtual bool has_rsm() const {return false;}
+  virtual bool has_rsm() const { return false; }
 
-///-----------------------------------------------------------------------
-/// Rsm for image.
-//-----------------------------------------------------------------------
+  ///-----------------------------------------------------------------------
+  /// Rsm for image.
+  //-----------------------------------------------------------------------
 
-  virtual boost::shared_ptr<Rsm> rsm() const 
-  { throw Exception("Do not have RSM for this RasterImage"); }
+  virtual boost::shared_ptr<Rsm> rsm() const
+  {
+    throw Exception("Do not have RSM for this RasterImage");
+  }
 private:
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   This is a array of Raster Image. This isn't much more than a 
   std::vector, but we do have added support in python of being able to
   serialize this.
@@ -400,84 +426,96 @@ private:
 
 class ArrayRasterImage : public Printable<ArrayRasterImage> {
 public:
-//-----------------------------------------------------------------------
-/// Create an empty array.
-//-----------------------------------------------------------------------
-  
+  //-----------------------------------------------------------------------
+  /// Create an empty array.
+  //-----------------------------------------------------------------------
+
   ArrayRasterImage() {}
   virtual ~ArrayRasterImage() {}
-  
-//-----------------------------------------------------------------------
-/// Add to the array.
-//-----------------------------------------------------------------------
+
+  //-----------------------------------------------------------------------
+  /// Add to the array.
+  //-----------------------------------------------------------------------
   void push_back(const boost::shared_ptr<RasterImage>& Img)
-  { img_.push_back(Img); }
+  {
+    img_.push_back(Img);
+  }
 
-//-----------------------------------------------------------------------
-/// Return size
-//-----------------------------------------------------------------------
-  int size() const {return int(img_.size()); }
+  //-----------------------------------------------------------------------
+  /// Return size
+  //-----------------------------------------------------------------------
+  int size() const { return int(img_.size()); }
 
-//-----------------------------------------------------------------------
-/// Return value at given index
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return value at given index
+  //-----------------------------------------------------------------------
   const boost::shared_ptr<RasterImage>& operator()(int I) const
-  { range_check(I, 0, size()); return img_[I];}
+  {
+    range_check(I, 0, size());
+    return img_[I];
+  }
 
   boost::shared_ptr<RasterImage>& operator()(int I)
-  { range_check(I, 0, size()); return img_[I];}
+  {
+    range_check(I, 0, size());
+    return img_[I];
+  }
 
   void print(std::ostream& Os) const
   {
     Os << "ArrayRasterImage of " << size() << " images";
   }
 private:
-  std::vector<boost::shared_ptr<RasterImage> > img_;
+  std::vector<boost::shared_ptr<RasterImage>> img_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
-};  
+  void serialize(Archive& ar, const unsigned int version);
+};
 
-void copy(const RasterImage& Img_in, RasterImage& Img_out, bool diagnostic = false, int Tile_nline = -1, int Tile_nsamp = -1);
-void copy_no_fill(const RasterImage& Img_in, RasterImage& Img_out, int Fill_value = 0, bool diagnostic = false);
-void copy_only_to_fill(const RasterImage& Img_in, RasterImage& Img_out, int Fill_value = 0, bool diagnostic = false);
-void fill_image(RasterImage& Img, int Fill_value = 0, bool diagnostic = false, int Tile_nline = -1, int Tile_nsamp = -1);
+void copy(const RasterImage& Img_in, RasterImage& Img_out,
+          bool diagnostic = false, int Tile_nline = -1, int Tile_nsamp = -1);
+void copy_no_fill(const RasterImage& Img_in, RasterImage& Img_out,
+                  int Fill_value = 0, bool diagnostic = false);
+void copy_only_to_fill(const RasterImage& Img_in, RasterImage& Img_out,
+                       int Fill_value = 0, bool diagnostic = false);
+void fill_image(RasterImage& Img, int Fill_value = 0, bool diagnostic = false,
+                int Tile_nline = -1, int Tile_nsamp = -1);
 
-  
 /// Loop through all data, going by tiles.
 
-#define RASTER_FOREACH(IMG, IND1, IND2) \
-for(int i1 = 0; i1 < (IMG).number_line(); i1 += (IMG).number_tile_line()) \
-  for(int j1 = 0; j1 < (IMG).number_sample(); j1 += (IMG).number_tile_sample()) \
-    for(int IND1 = i1; IND1 < i1 + (IMG).number_tile_line() && \
-        IND1 < (IMG).number_line(); ++IND1) \
-      for(int IND2 = j1; IND2 < j1 + (IMG).number_tile_sample() && \
-          IND2 < (IMG).number_sample(); ++IND2)
+#define RASTER_FOREACH(IMG, IND1, IND2)                                        \
+  for(int i1 = 0; i1 < (IMG).number_line(); i1 += (IMG).number_tile_line())    \
+    for(int j1 = 0; j1 < (IMG).number_sample();                                \
+        j1 += (IMG).number_tile_sample())                                      \
+      for(int IND1 = i1;                                                       \
+          IND1 < i1 + (IMG).number_tile_line() && IND1 < (IMG).number_line();  \
+          ++IND1)                                                              \
+        for(int IND2 = j1; IND2 < j1 + (IMG).number_tile_sample() &&           \
+                           IND2 < (IMG).number_sample();                       \
+            ++IND2)
 
-/****************************************************************//**
+/****************************************************************/ /**
   It can be useful to step through a Raster Image in tiles. This is
   a helper class for RasterImage to do this.
 *******************************************************************/
 
-class RasterImageTileIterator : public Printable<RasterImageTileIterator>
-{
+class RasterImageTileIterator : public Printable<RasterImageTileIterator> {
 public:
   RasterImageTileIterator(const RasterImage& Ri);
-  RasterImageTileIterator(const RasterImage& Ri, int Number_tile_line, 
-			  int Number_tile_sample);
-  int istart() const { return istart_;}
-  int jstart() const { return jstart_;}
-  int iend() const {return iend_;}
-  int jend() const {return jend_;}
-  int number_line() const {return iend_ - istart_; }
-  int number_sample() const {return jend_ - jstart_; }
-  bool end() const
-  { return istart() >= ri.number_line(); }
+  RasterImageTileIterator(const RasterImage& Ri, int Number_tile_line,
+                          int Number_tile_sample);
+  int istart() const { return istart_; }
+  int jstart() const { return jstart_; }
+  int iend() const { return iend_; }
+  int jend() const { return jend_; }
+  int number_line() const { return iend_ - istart_; }
+  int number_sample() const { return jend_ - jstart_; }
+  bool end() const { return istart() >= ri.number_line(); }
   RasterImageTileIterator& operator++();
   void print(std::ostream& Os) const
-  { 
-    Os << "RasterImageTileIterator (" << istart() << ", " << jstart() 
-       << ") - (" << iend() << ", " << jend() << ")";
+  {
+    Os << "RasterImageTileIterator (" << istart() << ", " << jstart() << ") - ("
+       << iend() << ", " << jend() << ")";
   }
 private:
   const RasterImage& ri;
@@ -489,4 +527,3 @@ private:
 GEOCAL_EXPORT_KEY(ArrayRasterImage);
 GEOCAL_EXPORT_KEY(RasterImage);
 #endif
-

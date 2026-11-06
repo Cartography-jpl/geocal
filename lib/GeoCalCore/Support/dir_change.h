@@ -35,12 +35,13 @@ public:
   }
   // We can't throw an exception from a destructor (this calls
   // std::terminate), so just report a failure to change back.
-  ~DirChange() 
+  ~DirChange()
   {
     int status = fchdir(dirhandle);
     if(status != 0)
-      std::cerr << "DirChange: failed to change back to the original directory: "
-		<< strerror(errno) << "\n";
+      std::cerr
+          << "DirChange: failed to change back to the original directory: "
+          << strerror(errno) << "\n";
     close(dirhandle);
   }
   DirChange(const DirChange&) = delete;

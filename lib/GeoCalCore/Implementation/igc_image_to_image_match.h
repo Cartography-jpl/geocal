@@ -6,44 +6,51 @@
 #include "printable.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   ImageToImageMatch where the images and prediction comes from
   ImageGroundConnection objects.
 *******************************************************************/
 
-class IgcImageToImageMatch: public ImageToImageMatch {
+class IgcImageToImageMatch : public ImageToImageMatch {
 public:
-  IgcImageToImageMatch(const boost::shared_ptr<ImageGroundConnection>& Igc1, 
-		       const boost::shared_ptr<ImageGroundConnection>& Igc2,
-		       const boost::shared_ptr<ImageMatcher>& Matcher)
-    : igc1(Igc1), igc2(Igc2), matcher_(Matcher) {}
+  IgcImageToImageMatch(const boost::shared_ptr<ImageGroundConnection>& Igc1,
+                       const boost::shared_ptr<ImageGroundConnection>& Igc2,
+                       const boost::shared_ptr<ImageMatcher>& Matcher)
+    : igc1(Igc1), igc2(Igc2), matcher_(Matcher)
+  {
+  }
   enum Diagnostic { IMAGE_MASKED = 1, IMAGE_COOR_FAILED = 11 };
   virtual ~IgcImageToImageMatch() {}
   virtual void match(const ImageCoordinate& Ic1, ImageCoordinate& Ic2,
-		     double& Line_sigma, double& Sample_sigma,
-		     bool& Success, int* Diagnostic = 0) const;
+                     double& Line_sigma, double& Sample_sigma, bool& Success,
+                     int* Diagnostic = 0) const;
   virtual void print(std::ostream& Os) const { Os << "IgcImageToImageMatcher"; }
 
-//-----------------------------------------------------------------------
-/// ImageGroundConnection for image 1.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// ImageGroundConnection for image 1.
+  //-----------------------------------------------------------------------
 
   const boost::shared_ptr<ImageGroundConnection>&
-  image_ground_connection1() const { return igc1; }
+  image_ground_connection1() const
+  {
+    return igc1;
+  }
 
-//-----------------------------------------------------------------------
-/// ImageGroundConnection for image 2.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// ImageGroundConnection for image 2.
+  //-----------------------------------------------------------------------
 
   const boost::shared_ptr<ImageGroundConnection>&
-  image_ground_connection2() const { return igc2; }
+  image_ground_connection2() const
+  {
+    return igc2;
+  }
 
-//-----------------------------------------------------------------------
-/// Matcher we are using
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Matcher we are using
+  //-----------------------------------------------------------------------
 
-  const boost::shared_ptr<ImageMatcher>&
-  matcher() const {return matcher_;}
+  const boost::shared_ptr<ImageMatcher>& matcher() const { return matcher_; }
 private:
   boost::shared_ptr<ImageGroundConnection> igc1, igc2;
   boost::shared_ptr<ImageMatcher> matcher_;

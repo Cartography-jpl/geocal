@@ -2,7 +2,7 @@
 #include "ibis_file.h"
 #include "geocal_serialize_support.h"
 #ifdef HAVE_VICAR_RTL
-#include "ibisfile.h"		// Vicar P1 routines for IBIS access.
+#include "ibisfile.h" // Vicar P1 routines for IBIS access.
 #endif
 #include <boost/foreach.hpp>
 
@@ -15,17 +15,17 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void IbisFile::save(Archive & ar, const unsigned int version) const
+void IbisFile::save(Archive& ar, const unsigned int version) const
 {
   GEOCAL_GENERIC_BASE(IbisFile);
-  ar & GEOCAL_NVP_(access) & GEOCAL_NVP_(fname);
+  ar& GEOCAL_NVP_(access) & GEOCAL_NVP_(fname);
 }
 
 template<class Archive>
-void IbisFile::load(Archive & ar, const unsigned int version)
+void IbisFile::load(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(IbisFile);
-  ar & GEOCAL_NVP_(access) & GEOCAL_NVP_(fname);
+  ar& GEOCAL_NVP_(access) & GEOCAL_NVP_(fname);
   unit_ = -1;
   unit_ = VicarFile::file_name_to_unit(fname_);
   unit_open();
@@ -42,8 +42,8 @@ GEOCAL_SPLIT_IMPLEMENT(IbisFile);
 /// otherwise we throw an exception saying that it isn't available.
 //-----------------------------------------------------------------------
 
-int IbisFile::IBISColumnReadw(int ibis_id, char *buffer , int column, 
-			      int srow, int nrows)
+int IbisFile::IBISColumnReadw(int ibis_id, char* buffer, int column, int srow,
+                              int nrows)
 {
 #ifdef HAVE_VICAR_RTL
   return IBISColumnRead(ibis_id, buffer, column, srow, nrows);
@@ -58,8 +58,8 @@ int IbisFile::IBISColumnReadw(int ibis_id, char *buffer , int column,
 /// otherwise we throw an exception saying that it isn't available.
 //-----------------------------------------------------------------------
 
-int IbisFile::IBISColumnWritew(int ibis_id, char *buffer, int column, 
-			      int srow, int nrows)
+int IbisFile::IBISColumnWritew(int ibis_id, char* buffer, int column, int srow,
+                               int nrows)
 {
 #ifdef HAVE_VICAR_RTL
   return IBISColumnWrite(ibis_id, buffer, column, srow, nrows);
@@ -74,8 +74,7 @@ int IbisFile::IBISColumnWritew(int ibis_id, char *buffer, int column,
 /// otherwise we throw an exception saying that it isn't available.
 //-----------------------------------------------------------------------
 
-int IbisFile::IBISColumnSetw(int ibis_id, char* name, void* value,
-			     int column)
+int IbisFile::IBISColumnSetw(int ibis_id, char* name, void* value, int column)
 {
 #ifdef HAVE_VICAR_RTL
   return IBISColumnSet(ibis_id, name, value, column);
@@ -107,9 +106,7 @@ IbisColumnBase::IbisColumnBase(IbisFile& F, int Index, int Size_byte)
 //-----------------------------------------------------------------------
 
 IbisFile::IbisFile(const std::string& Fname, access_type Access)
-: access_(Access),
-  fname_(Fname),
-  unit_(-1)
+  : access_(Access), fname_(Fname), unit_(-1)
 {
   unit_ = VicarFile::file_name_to_unit(Fname);
   unit_open();
@@ -126,16 +123,13 @@ IbisFile::IbisFile(const std::string& Fname, access_type Access)
 /// given as "COLUMN" or "ROW".
 //-----------------------------------------------------------------------
 
-IbisFile::IbisFile(const std::string& Fname, int Number_row, 
-		   const std::vector<std::string>& Format, 
-		   const std::string& Organization)
-: access_(WRITE),
-  fname_(Fname),
-  unit_(-1),
-  nrow(Number_row)
+IbisFile::IbisFile(const std::string& Fname, int Number_row,
+                   const std::vector<std::string>& Format,
+                   const std::string& Organization)
+  : access_(WRITE), fname_(Fname), unit_(-1), nrow(Number_row)
 {
 #ifdef HAVE_VICAR_RTL
-  ncol = (int) Format.size();
+  ncol = (int)Format.size();
 
   // Massage Format to put it into the form expected by IBISFileOpen.
   std::vector<char> fmt(IFMT_SIZE * ncol, '\0');
@@ -159,7 +153,7 @@ IbisFile::IbisFile(const std::string& Fname, int Number_row,
 /// is done by the destructor. But it is useful to have for use by python.
 //-----------------------------------------------------------------------
 
-void IbisFile::close() 
+void IbisFile::close()
 {
 #ifdef HAVE_VICAR_RTL
   flush();
@@ -168,14 +162,14 @@ void IbisFile::close()
     if(status != 1) {
       VicarException e(status);
       e << "Call to IBISFileClose failed for unit " << unit() << " file name "
-	<< file_name();
+        << file_name();
       throw e;
     }
   }
   ibis_fh_ = -1;
   if(unit_ != -1)
     v2_deactivate_a_unit(unit_); // Can't do this through IBIS close
-				// like we can for a vicar file.
+  // like we can for a vicar file.
   unit_ = -1;
 #else
   throw VicarNotAvailableException();
@@ -194,11 +188,11 @@ IbisFile::data_type IbisFile::read_column_data_type(int I) const
   range_check(I, 0, number_col());
   char tname[I2_MAX_TYPE_NAME];
   // +1 is because this is 1-based rather than 0-based.
-  int status = IBISColumnGet(ibis_fh(), const_cast<char*>(ICOLUMN_FORMAT), 
-			     tname, I + 1);
+  int status =
+      IBISColumnGet(ibis_fh(), const_cast<char*>(ICOLUMN_FORMAT), tname, I + 1);
   if(status != 1)
-    throw VicarException(status, "Call to IBISColumnGet failed for file " + 
-			 fname_);
+    throw VicarException(status,
+                         "Call to IBISColumnGet failed for file " + fname_);
   if(tname == VicarType::vicar_type<VicarByte>())
     return VICAR_BYTE;
   if(tname == VicarType::vicar_type<VicarHalf>())
@@ -212,7 +206,7 @@ IbisFile::data_type IbisFile::read_column_data_type(int I) const
   if(tname[0] == 'A')
     return VICAR_ASCII;
   VicarException e(status);
-  e << "Call to IBISColumnGet returned an unrecognized type '" << tname 
+  e << "Call to IBISColumnGet returned an unrecognized type '" << tname
     << "' for file " << fname_ << " column " << I;
   throw e;
 #else
@@ -230,11 +224,11 @@ int IbisFile::read_column_size(int I) const
   range_check(I, 0, number_col());
   int res;
   // +1 is because this is 1-based rather than 0-based.
-  int status = IBISColumnGet(ibis_fh(), const_cast<char*>(ICOLUMN_SIZE), 
-			     (char*) &res, I + 1);
+  int status = IBISColumnGet(ibis_fh(), const_cast<char*>(ICOLUMN_SIZE),
+                             (char*)&res, I + 1);
   if(status != 1)
-    throw VicarException(status, "Call to IBISColumnGet failed for file " + 
-			 fname_);
+    throw VicarException(status,
+                         "Call to IBISColumnGet failed for file " + fname_);
   return res;
 #else
   throw VicarNotAvailableException();
@@ -257,13 +251,14 @@ IbisFile::~IbisFile()
 void IbisFile::unit_open(const char* Format, const char* Org) const
 {
 #ifdef HAVE_VICAR_RTL
-  const char *a = (access_ == READ ? IMODE_READ :
-		   (access_ == UPDATE ? IMODE_UPDATE : IMODE_WRITE));
-  int status = IBISFileOpen(unit_, &ibis_fh_, const_cast<char*>(a), ncol, nrow, 
-			    const_cast<char*>(Format), const_cast<char*>(Org));
+  const char* a =
+      (access_ == READ ? IMODE_READ
+                       : (access_ == UPDATE ? IMODE_UPDATE : IMODE_WRITE));
+  int status = IBISFileOpen(unit_, &ibis_fh_, const_cast<char*>(a), ncol, nrow,
+                            const_cast<char*>(Format), const_cast<char*>(Org));
   if(status != 1)
-    throw VicarException(status, "Call to IBISFileOpen failed for file " + 
-			 fname_);
+    throw VicarException(status,
+                         "Call to IBISFileOpen failed for file " + fname_);
 #else
   throw VicarNotAvailableException();
 #endif
@@ -276,15 +271,15 @@ void IbisFile::unit_open(const char* Format, const char* Org) const
 void IbisFile::read_metadata()
 {
 #ifdef HAVE_VICAR_RTL
-  int status = IBISFileGet(ibis_fh(), const_cast<char*>(IFILE_NR), &nrow, 
-			   1, 1, 0);
+  int status =
+      IBISFileGet(ibis_fh(), const_cast<char*>(IFILE_NR), &nrow, 1, 1, 0);
   if(status != 1)
-    throw VicarException(status, "Call to IBISFileGet failed for file " + 
-			 fname_);
+    throw VicarException(status,
+                         "Call to IBISFileGet failed for file " + fname_);
   status = IBISFileGet(ibis_fh(), const_cast<char*>(IFILE_NC), &ncol, 1, 1, 0);
   if(status != 1)
-    throw VicarException(status, "Call to IBISFileGet failed for file " + 
-			 fname_);
+    throw VicarException(status,
+                         "Call to IBISFileGet failed for file " + fname_);
 #else
   throw VicarNotAvailableException();
 #endif
@@ -330,11 +325,11 @@ void IbisFile::create_col()
 /// IBIS file handle number used in IBIS calls
 //-----------------------------------------------------------------------
 
-int IbisFile::ibis_fh() const 
+int IbisFile::ibis_fh() const
 {
-  if(ibis_fh_ ==-1)
+  if(ibis_fh_ == -1)
     unit_open();
-  return ibis_fh_; 
+  return ibis_fh_;
 }
 
 //-----------------------------------------------------------------------
@@ -346,7 +341,7 @@ void IbisFile::flush()
 {
 #ifdef HAVE_VICAR_RTL
   if(access() == READ)
-    return;			// Nothing to do
+    return; // Nothing to do
   typedef boost::shared_ptr<IbisColumnBase> c_ref;
   BOOST_FOREACH(c_ref& i, col) {
     i->flush();
@@ -356,21 +351,20 @@ void IbisFile::flush()
     if(status != 1) {
       VicarException e(status);
       e << "Call to IBISFileClose failed for unit " << unit() << " file name "
-	<< file_name();
+        << file_name();
       throw e;
     }
   }
 
   // Even if we opened this with WRITE, after flushing we are updating
   // an existing file.
-  
+
   access_ = UPDATE;
   ibis_fh_ = -1;
 #else
   throw VicarNotAvailableException();
 #endif
 }
-
 
 //-----------------------------------------------------------------------
 /// Print to a stream.
@@ -388,19 +382,18 @@ void IbisFile::print(std::ostream& Os) const
 // Special cases for std::string columns
 //-----------------------------------------------------------------------
 
-template<> IbisColumn<std::string>::IbisColumn(IbisFile& F, int Index, 
-					       int Size_byte)
-: IbisColumnBase(F, Index, Size_byte),
-  data(F.number_row())
+template<>
+IbisColumn<std::string>::IbisColumn(IbisFile& F, int Index, int Size_byte)
+  : IbisColumnBase(F, Index, Size_byte), data(F.number_row())
 {
 #ifdef HAVE_VICAR_RTL
   if(F.access() != IbisFile::WRITE) {
     std::vector<char> d(f.number_row() * size_byte(), '\0');
-    int status = IBISColumnRead(f.ibis_fh(), &d[0],
-				index + 1, 0, f.number_row());
+    int status =
+        IBISColumnRead(f.ibis_fh(), &d[0], index + 1, 0, f.number_row());
     for(int i = 0; i < f.number_row(); ++i) {
-      std::string s(d.begin() + i * size_byte(), 
-		    d.begin() + (i + 1) * size_byte());
+      std::string s(d.begin() + i * size_byte(),
+                    d.begin() + (i + 1) * size_byte());
       data[i] = s.substr(0, s.find_first_of('\0'));
     }
     if(status != 1)
@@ -415,9 +408,8 @@ template<> void IbisColumn<std::string>::flush()
 {
 #ifdef HAVE_VICAR_RTL
   if(f.access() == IbisFile::WRITE ||
-     (f.access() == IbisFile::UPDATE &&
-      update)) {
-    if((int) data.size() != f.number_row())
+     (f.access() == IbisFile::UPDATE && update)) {
+    if((int)data.size() != f.number_row())
       throw Exception("data.size() is no longer f.number_row()");
     std::vector<char> d(f.number_row() * size_byte(), '\0');
     for(int i = 0; i < f.number_row(); ++i) {
@@ -426,8 +418,8 @@ template<> void IbisColumn<std::string>::flush()
       std::string trunc = data[i].substr(0, size_byte() - 1);
       std::copy(trunc.begin(), trunc.end(), d.begin() + size_byte() * i);
     }
-    int status = IBISColumnWrite(f.ibis_fh(), &d[0], 
-				 index + 1, 0, f.number_row());
+    int status =
+        IBISColumnWrite(f.ibis_fh(), &d[0], index + 1, 0, f.number_row());
     if(status != 1)
       throw VicarException(status, "IBISColumnWrite call failed");
     update = false;
@@ -479,12 +471,11 @@ void IbisFile::set_column_type(int i, data_type dt)
   default:
     throw Exception("This shouldn't be able to happen");
   }
-  
+
   // The VICAR C API takes char*, but doesn't modify the strings
-  int status = IbisFile::IBISColumnSetw(ibis_fh(),
-					const_cast<char*>("U_FORMAT"),
-					const_cast<char*>(val.c_str()),
-					i + 1);
+  int status =
+      IbisFile::IBISColumnSetw(ibis_fh(), const_cast<char*>("U_FORMAT"),
+                               const_cast<char*>(val.c_str()), i + 1);
   if(status != 1)
     throw VicarException(status, "IBISColumnSet call failed");
   switch(dt) {

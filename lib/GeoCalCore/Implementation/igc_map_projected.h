@@ -6,7 +6,7 @@
 
 namespace GeoCal {
 
-/****************************************************************//**
+/****************************************************************/ /**
   The functionality that is common between IgcMapProjected and
   IgcMapProjectedMultiBand
 *******************************************************************/
@@ -15,24 +15,24 @@ class IgcMapProjectedBase : public Printable<IgcMapProjectedBase> {
 public:
   virtual ~IgcMapProjectedBase() {}
   const boost::shared_ptr<ImageGroundConnection>& igc_original() const
-  { return igc_original_; }
+  {
+    return igc_original_;
+  }
   int avg_factor() const { return avg_factor_; }
   int grid_spacing() const { return grid_spacing_; }
   bool read_into_memory() const { return read_into_memory_; }
-  double fill_value() const {return fill_value_;}
+  double fill_value() const { return fill_value_; }
 
-//-----------------------------------------------------------------------
-/// Print to given stream.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print to given stream.
+  //-----------------------------------------------------------------------
 
-  virtual void print(std::ostream& Os) const { Os << "IgcMapProjectedBase";}
+  virtual void print(std::ostream& Os) const { Os << "IgcMapProjectedBase"; }
 protected:
-  IgcMapProjectedBase(const MapInfo& Mi, 
-		      const boost::shared_ptr<ImageGroundConnection>& Igc,
-		      int Grid_spacing,
-		      int Avg_fact,
-		      bool Read_into_memory,
-		      double Fill_value);
+  IgcMapProjectedBase(const MapInfo& Mi,
+                      const boost::shared_ptr<ImageGroundConnection>& Igc,
+                      int Grid_spacing, int Avg_fact, bool Read_into_memory,
+                      double Fill_value);
   boost::shared_ptr<ImageGroundConnection> igc_original_;
   boost::shared_ptr<ImageGroundConnection> igc_;
   int avg_factor_;
@@ -45,14 +45,13 @@ protected:
   IgcMapProjectedBase() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
   template<class Archive>
-  void save(Archive & ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive & ar, const unsigned int version);
+  void save(Archive& ar, const unsigned int version) const;
+  template<class Archive> void load(Archive& ar, const unsigned int version);
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   This is a RasterImage that has been map projected using an
   ImageGroundConnection.
 
@@ -84,19 +83,15 @@ protected:
 
 class IgcMapProjected : public CalcRaster, public IgcMapProjectedBase {
 public:
-  IgcMapProjected(const MapInfo& Mi, 
-		  const boost::shared_ptr<ImageGroundConnection>& Igc,
-		  int Grid_spacing = 1,
-		  int Avg_fact = -1,
-		  bool Read_into_memory = true,
-		  int Number_tile_line = -1,
-		  int Number_tile_sample = -1,
-		  double Fill_value = 0.0
-		  );
+  IgcMapProjected(const MapInfo& Mi,
+                  const boost::shared_ptr<ImageGroundConnection>& Igc,
+                  int Grid_spacing = 1, int Avg_fact = -1,
+                  bool Read_into_memory = true, int Number_tile_line = -1,
+                  int Number_tile_sample = -1, double Fill_value = 0.0);
 
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~IgcMapProjected() {}
   virtual void print(std::ostream& Os) const;
@@ -108,10 +103,10 @@ private:
   void calc_grid(int Lstart, int Sstart) const;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   This is a RasterImageMultiBand that has been map projected using an
   ImageGroundConnection.
 
@@ -141,21 +136,20 @@ private:
   memory.
 *******************************************************************/
 
-class IgcMapProjectedMultiBand : public CalcRasterMultiBand, 
-				 public IgcMapProjectedBase {
+class IgcMapProjectedMultiBand : public CalcRasterMultiBand,
+                                 public IgcMapProjectedBase {
 public:
-  IgcMapProjectedMultiBand(const MapInfo& Mi, 
-			   const boost::shared_ptr<ImageGroundConnection>& Igc,
-			   int Grid_spacing = 1,
-			   int Avg_fact = -1,
-			   bool Read_into_memory = true,
-			   int Number_tile_line = -1,
-			   int Number_tile_sample = -1,
-			   double Fill_value = 0.0);
+  IgcMapProjectedMultiBand(const MapInfo& Mi,
+                           const boost::shared_ptr<ImageGroundConnection>& Igc,
+                           int Grid_spacing = 1, int Avg_fact = -1,
+                           bool Read_into_memory = true,
+                           int Number_tile_line = -1,
+                           int Number_tile_sample = -1,
+                           double Fill_value = 0.0);
 
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~IgcMapProjectedMultiBand() {}
   virtual void print(std::ostream& Os) const;
@@ -167,7 +161,7 @@ private:
   void calc_grid(int Lstart, int Sstart) const;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
 }

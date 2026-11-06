@@ -7,23 +7,22 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void GeotiffFile::save(Archive & ar, const unsigned int version) const
+void GeotiffFile::save(Archive& ar, const unsigned int version) const
 {
   // Nothing more to do
 }
 
 template<class Archive>
-void GeotiffFile::load(Archive & ar, const unsigned int version)
+void GeotiffFile::load(Archive& ar, const unsigned int version)
 {
   init();
 }
 
 template<class Archive>
-void GeotiffFile::serialize(Archive & ar, const unsigned int version)
+void GeotiffFile::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(GeotiffFile);
-  ar & GEOCAL_NVP_(fname)
-    & GEOCAL_NVP_(mode);
+  ar& GEOCAL_NVP_(fname) & GEOCAL_NVP_(mode);
   boost::serialization::split_member(ar, *this, version);
 }
 
@@ -34,16 +33,16 @@ GEOCAL_IMPLEMENT(GeotiffFile);
 extern "C" {
 typedef int tagtype_t;
 typedef uint32_t ttag_t;
-TIFF * XTIFFOpen(const char* name, const char* mode);
-void XTIFFClose(TIFF *tif);
-GTIF *GTIFNew(void *tif);
-void GTIFFree(GTIF *gtif);
-int  GTIFWriteKeys(GTIF *gtif);
-int GTIFKeyInfo(GTIF *gtif, int key, int *size, tagtype_t* type);
-int GTIFKeyGet(GTIF *gtif, int key, void *val, int index, int count);
-int GTIFKeySet(GTIF *gtif, int keyID, tagtype_t type, int count,...);
-char *GTIFKeyName(int key);
-char *GTIFValueName(int key,int value);
+TIFF* XTIFFOpen(const char* name, const char* mode);
+void XTIFFClose(TIFF* tif);
+GTIF* GTIFNew(void* tif);
+void GTIFFree(GTIF* gtif);
+int GTIFWriteKeys(GTIF* gtif);
+int GTIFKeyInfo(GTIF* gtif, int key, int* size, tagtype_t* type);
+int GTIFKeyGet(GTIF* gtif, int key, void* val, int index, int count);
+int GTIFKeySet(GTIF* gtif, int keyID, tagtype_t type, int count, ...);
+char* GTIFKeyName(int key);
+char* GTIFValueName(int key, int value);
 int TIFFSetField(TIFF*, ttag_t, ...);
 int TIFFGetField(TIFF*, ttag_t, ...);
 int32_t TIFFWriteEncodedStrip(TIFF*, uint32_t, void*, int32_t);
@@ -57,13 +56,13 @@ void GeotiffFile::init()
   if(!tif) {
     Exception e;
     e << "Trouble opening TIFF file " << fname_;
-    throw ;
+    throw;
   }
   gtif = GTIFNew(tif);
   if(!gtif) {
     Exception e;
     e << "Trouble calling GTIFNew for file " << fname_;
-    throw ;
+    throw;
   }
 }
 
@@ -294,7 +293,6 @@ void GeotiffFile::set_key(geokey_t K, const std::string& V)
   if(status != 1)
     throw Exception("Call to GTIFKeySet failed");
 }
-  
 
 //-----------------------------------------------------------------------
 /// Write the key value to the file.
@@ -341,7 +339,6 @@ template<> double GeotiffFile::get_key(geokey_t K) const
   if(status != 1)
     throw Exception("Error getting geotiff key");
   return v;
-  
 }
 
 //-----------------------------------------------------------------------
@@ -354,7 +351,7 @@ template<> std::string GeotiffFile::get_key(geokey_t K) const
   if(size == 0)
     throw Exception("Error getting geotiff key");
   std::vector<char> v(size);
-  if(GTIFKeyGet(gtif, K, &v[0], 0, size) ==0)
+  if(GTIFKeyGet(gtif, K, &v[0], 0, size) == 0)
     throw Exception("Trouble reading ASCII tag in geotiff file");
   std::string vs(&v[0]);
   return vs;
@@ -366,7 +363,7 @@ template<> std::string GeotiffFile::get_key(geokey_t K) const
 
 void GeotiffFile::set_tiftag(tiftag_t K, int V)
 {
-  int status = TIFFSetField(tif, (ttag_t) K, V);
+  int status = TIFFSetField(tif, (ttag_t)K, V);
   if(status != 1)
     throw Exception("Error setting tiff field");
 }
@@ -377,7 +374,7 @@ void GeotiffFile::set_tiftag(tiftag_t K, int V)
 
 void GeotiffFile::set_tiftag(tiftag_t K, const blitz::Array<double, 1>& V)
 {
-  int status = TIFFSetField(tif, (ttag_t) K, V.rows(), &V(0));
+  int status = TIFFSetField(tif, (ttag_t)K, V.rows(), &V(0));
   if(status != 1)
     throw Exception("Error setting tiff field");
 }
@@ -414,11 +411,10 @@ void GeotiffFile::write_1x1_file()
 bool GeotiffFile::has_tiftag(tiftag_t K) const
 {
   uint32_t count;
-  void *data;
+  void* data;
   int status = TIFFGetField(tif, K, &count, &data);
   return status == 1;
 }
-
 
 //-----------------------------------------------------------------------
 /// Return the value of a tiff tag.
@@ -440,10 +436,10 @@ template<> int GeotiffFile::get_tiftag(tiftag_t K) const
 template<> blitz::Array<double, 1> GeotiffFile::get_tiftag(tiftag_t K) const
 {
   uint16_t count;
-  double *data;
+  double* data;
   int status = TIFFGetField(tif, K, &count, &data);
   if(status != 1)
     throw Exception("Trouble retrieving tiftag.");
-  blitz::Array<double,1> res(data, blitz::shape(count), blitz::duplicateData);
+  blitz::Array<double, 1> res(data, blitz::shape(count), blitz::duplicateData);
   return res;
 }

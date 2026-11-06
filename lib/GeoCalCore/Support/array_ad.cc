@@ -3,11 +3,13 @@
 using namespace GeoCal;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 
-template<class T, int D> template<class Archive> 
+template<class T, int D>
+template<class Archive>
 void ArrayAd<T, D>::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
-  boost::serialization::void_cast_register<GeoCal::ArrayAd<T, D>, GenericObject>();
-  ar & GEOCAL_NVP(val) & GEOCAL_NVP(jac) & GEOCAL_NVP(is_const);
+  boost::serialization::void_cast_register<GeoCal::ArrayAd<T, D>,
+                                           GenericObject>();
+  ar& GEOCAL_NVP(val) & GEOCAL_NVP(jac) & GEOCAL_NVP(is_const);
 }
 
 GEOCAL_IMPLEMENT(ArrayAd_1d);

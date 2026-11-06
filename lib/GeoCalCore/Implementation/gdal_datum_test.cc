@@ -22,8 +22,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   std::string d = serialize_write_string(datum);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<GdalDatum> datumr = 
-    serialize_read_string<GdalDatum>(d);
+  boost::shared_ptr<GdalDatum> datumr = serialize_read_string<GdalDatum>(d);
 
   BOOST_CHECK_CLOSE(datumr->undulation(Geodetic(40, -100, 0)), -25.0, 1e-4);
 }

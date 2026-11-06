@@ -15,20 +15,15 @@
 #include <boost/foreach.hpp>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   Helper class that gives us a reference that we can assign a
   AutoDerivative to and write into the correct space in a ArrayAd.
 *******************************************************************/
-template<class T> class AutoDerivativeRef :
-public Printable<AutoDerivativeRef<T> >
-{
+template<class T>
+class AutoDerivativeRef : public Printable<AutoDerivativeRef<T>> {
 public:
-  AutoDerivativeRef(T& V, const blitz::Array<T, 1>& G)
-    : v(V), grad(G) 
-  { }
-  AutoDerivativeRef(T& V)
-    : v(V)
-  { }
+  AutoDerivativeRef(T& V, const blitz::Array<T, 1>& G) : v(V), grad(G) {}
+  AutoDerivativeRef(T& V) : v(V) {}
   // This is const because although the values change, the reference doesn't
   const AutoDerivativeRef<T>& operator=(const AutoDerivative<T>& D) const
   {
@@ -40,8 +35,8 @@ public:
     else {
       Exception e;
       e << "Size of gradient in AutoDerivative doesn't match value you "
-	<< "are trying to assign. Size of destination is " << grad.rows()
-	<< " and size of source is " << D.gradient().rows();
+        << "are trying to assign. Size of destination is " << grad.rows()
+        << " and size of source is " << D.gradient().rows();
       throw e;
     }
     return *this;
@@ -56,99 +51,108 @@ public:
     else {
       Exception e;
       e << "Size of gradient in AutoDerivative doesn't match value you "
-	<< "are trying to assign. Size of destination is " << grad.rows()
-	<< " and size of source is " << D.gradient().rows();
+        << "are trying to assign. Size of destination is " << grad.rows()
+        << " and size of source is " << D.gradient().rows();
       throw e;
     }
     return *this;
   }
-  T& value_ref() const {return v;}
-  blitz::Array<T, 1>& gradient_ref() const {return grad; }
-  T value() const {return v;}
-  const blitz::Array<T, 1>& gradient() const {return grad; }
-  friend AutoDerivative<T> operator+(const AutoDerivativeRef<T>& X, 
-				     const AutoDerivativeRef<T>& Y)
-  { AutoDerivative<T> r(X);
-    r+= Y;
+  T& value_ref() const { return v; }
+  blitz::Array<T, 1>& gradient_ref() const { return grad; }
+  T value() const { return v; }
+  const blitz::Array<T, 1>& gradient() const { return grad; }
+  friend AutoDerivative<T> operator+(const AutoDerivativeRef<T>& X,
+                                     const AutoDerivativeRef<T>& Y)
+  {
+    AutoDerivative<T> r(X);
+    r += Y;
     return r;
   }
-  friend AutoDerivative<T> operator-(const AutoDerivativeRef<T>& X, 
-				     const AutoDerivativeRef<T>& Y)
-  { AutoDerivative<T> r(X);
-    r-= Y;
+  friend AutoDerivative<T> operator-(const AutoDerivativeRef<T>& X,
+                                     const AutoDerivativeRef<T>& Y)
+  {
+    AutoDerivative<T> r(X);
+    r -= Y;
     return r;
   }
   friend AutoDerivative<T> operator-(const AutoDerivativeRef<T>& X)
-  { AutoDerivative<T> r(X);
-    r*= -1;
+  {
+    AutoDerivative<T> r(X);
+    r *= -1;
     return r;
   }
   friend AutoDerivative<T> operator+(const AutoDerivativeRef<T>& X)
-  { return AutoDerivative<T>(X);}
-  friend AutoDerivative<T> operator*(const AutoDerivativeRef<T>& X, 
-				     const AutoDerivativeRef<T>& Y)
-  { AutoDerivative<T> r(X);
-    r*= Y;
+  {
+    return AutoDerivative<T>(X);
+  }
+  friend AutoDerivative<T> operator*(const AutoDerivativeRef<T>& X,
+                                     const AutoDerivativeRef<T>& Y)
+  {
+    AutoDerivative<T> r(X);
+    r *= Y;
     return r;
   }
-  friend AutoDerivative<T> operator/(const AutoDerivativeRef<T>& X, 
-				     const AutoDerivativeRef<T>& Y)
-  { AutoDerivative<T> r(X);
-    r/= Y;
+  friend AutoDerivative<T> operator/(const AutoDerivativeRef<T>& X,
+                                     const AutoDerivativeRef<T>& Y)
+  {
+    AutoDerivative<T> r(X);
+    r /= Y;
     return r;
   }
-  friend AutoDerivative<T> operator+(const AutoDerivativeRef<T>& X, 
-				     const T& Y)
-  { AutoDerivative<T> r(X);
-    r+= Y;
+  friend AutoDerivative<T> operator+(const AutoDerivativeRef<T>& X, const T& Y)
+  {
+    AutoDerivative<T> r(X);
+    r += Y;
     return r;
   }
-  friend AutoDerivative<T> operator-(const AutoDerivativeRef<T>& X, 
-				     const T& Y)
-  { AutoDerivative<T> r(X);
-    r-= Y;
+  friend AutoDerivative<T> operator-(const AutoDerivativeRef<T>& X, const T& Y)
+  {
+    AutoDerivative<T> r(X);
+    r -= Y;
     return r;
   }
-  friend AutoDerivative<T> operator*(const AutoDerivativeRef<T>& X, 
-				     const T& Y)
-  { AutoDerivative<T> r(X);
-    r*= Y;
+  friend AutoDerivative<T> operator*(const AutoDerivativeRef<T>& X, const T& Y)
+  {
+    AutoDerivative<T> r(X);
+    r *= Y;
     return r;
   }
-  friend AutoDerivative<T> operator/(const AutoDerivativeRef<T>& X, 
-				     const T& Y)
-  { AutoDerivative<T> r(X);
-    r/= Y;
+  friend AutoDerivative<T> operator/(const AutoDerivativeRef<T>& X, const T& Y)
+  {
+    AutoDerivative<T> r(X);
+    r /= Y;
     return r;
   }
-  friend AutoDerivative<T> operator+(const T& X, 
-				     const AutoDerivativeRef<T>& Y)
-  { AutoDerivative<T> r(Y);
-    r+= X;
+  friend AutoDerivative<T> operator+(const T& X, const AutoDerivativeRef<T>& Y)
+  {
+    AutoDerivative<T> r(Y);
+    r += X;
     return r;
   }
-  friend AutoDerivative<T> operator-(const T& X, 
-				     const AutoDerivativeRef<T>& Y)
-  { AutoDerivative<T> r(X);
-    r-= Y;
+  friend AutoDerivative<T> operator-(const T& X, const AutoDerivativeRef<T>& Y)
+  {
+    AutoDerivative<T> r(X);
+    r -= Y;
     return r;
   }
-  friend AutoDerivative<T> operator*(const T& X, 
-				     const AutoDerivativeRef<T>& Y)
-  { AutoDerivative<T> r(Y);
-    r*= X;
+  friend AutoDerivative<T> operator*(const T& X, const AutoDerivativeRef<T>& Y)
+  {
+    AutoDerivative<T> r(Y);
+    r *= X;
     return r;
   }
-  friend AutoDerivative<T> operator/(const T& X, 
-				     const AutoDerivativeRef<T>& Y)
-  { AutoDerivative<T> r(X);
-    r/= Y;
+  friend AutoDerivative<T> operator/(const T& X, const AutoDerivativeRef<T>& Y)
+  {
+    AutoDerivative<T> r(X);
+    r /= Y;
     return r;
   }
   void print(std::ostream& Os) const
-  { Os << "AutoDerivativeRef\n"
+  {
+    Os << "AutoDerivativeRef\n"
        << "  Value: " << value() << "\n"
-       << "  Gradient:\n" << gradient() << "\n";
+       << "  Gradient:\n"
+       << gradient() << "\n";
   }
 private:
   T& v;
@@ -157,7 +161,7 @@ private:
   mutable blitz::Array<T, 1> grad;
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   There are a number of tools that can be used to do "Automatic
   Differentiation" (see for example
   http://www.autodiff.org/?module=Tools). 
@@ -191,73 +195,70 @@ private:
   See also ArrayAd which work with this class for Arrays of 
   AutoDerivative.
 *******************************************************************/
-template<class T> class AutoDerivative: 
-public Printable<AutoDerivative<T> >,
-boost::totally_ordered<class AutoDerivative<T> >,
-boost::totally_ordered<class AutoDerivative<T>, T>
-{
+template<class T>
+class AutoDerivative : public Printable<AutoDerivative<T>>,
+                       boost::totally_ordered<class AutoDerivative<T>>,
+                       boost::totally_ordered<class AutoDerivative<T>, T> {
 public:
   typedef T value_type;
 
-//-----------------------------------------------------------------------
-/// Default constructor, data is initialized to zero. Note that this
-/// initialization to 0 is *required* for this to work correctly with
-/// boost::math::quaternion. This is because the constructor that
-/// takes a single AutoDerivative<T> (used by various operators)
-/// relies on T() being initialized to 0.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Default constructor, data is initialized to zero. Note that this
+  /// initialization to 0 is *required* for this to work correctly with
+  /// boost::math::quaternion. This is because the constructor that
+  /// takes a single AutoDerivative<T> (used by various operators)
+  /// relies on T() being initialized to 0.
+  //-----------------------------------------------------------------------
 
   AutoDerivative() : val(0) {}
 
-//-----------------------------------------------------------------------
-/// Constructor that takes a value and a gradient. This makes a shallow
-/// copy of the gradient, so we point to the same area in memory as G. If 
-/// you want a deep copy, then pass in G.copy() rather than G.
-//-----------------------------------------------------------------------
-  
-  AutoDerivative(const T& Val, const blitz::Array<T, 1>& G)
-    : val(Val), grad(G) {}
+  //-----------------------------------------------------------------------
+  /// Constructor that takes a value and a gradient. This makes a shallow
+  /// copy of the gradient, so we point to the same area in memory as G. If
+  /// you want a deep copy, then pass in G.copy() rather than G.
+  //-----------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
-/// Convert AutoDerivativeRef to a AutoDerivative.
-//-----------------------------------------------------------------------
- AutoDerivative(const AutoDerivativeRef<T>& V)
-   : val(V.value()), grad(V.gradient().copy()) { }
+  AutoDerivative(const T& Val, const blitz::Array<T, 1>& G) : val(Val), grad(G)
+  {
+  }
 
-//-----------------------------------------------------------------------
-/// Constructor for a value of the i_th independent variable (0 based). We
-/// create a gradient that is all 0, except for "1" in the i_th location.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Convert AutoDerivativeRef to a AutoDerivative.
+  //-----------------------------------------------------------------------
+  AutoDerivative(const AutoDerivativeRef<T>& V)
+    : val(V.value()), grad(V.gradient().copy())
+  {
+  }
 
-  AutoDerivative(const T& Val, int i_th, int nvars)
-    : val(Val), grad(nvars)
+  //-----------------------------------------------------------------------
+  /// Constructor for a value of the i_th independent variable (0 based). We
+  /// create a gradient that is all 0, except for "1" in the i_th location.
+  //-----------------------------------------------------------------------
+
+  AutoDerivative(const T& Val, int i_th, int nvars) : val(Val), grad(nvars)
   {
     range_check(i_th, 0, nvars);
     grad = 0;
     grad(i_th) = 1;
   }
 
-//-----------------------------------------------------------------------
-/// Constructor for a value that is a constant. 
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor for a value that is a constant.
+  //-----------------------------------------------------------------------
 
-  AutoDerivative(const T& Val)
-    : val(Val)
+  AutoDerivative(const T& Val) : val(Val) {}
+
+  //-----------------------------------------------------------------------
+  /// Copy constructor. This does a deep copy.
+  //-----------------------------------------------------------------------
+
+  AutoDerivative(const AutoDerivative<T>& D) : val(D.val), grad(D.grad.copy())
   {
   }
 
-//-----------------------------------------------------------------------
-/// Copy constructor. This does a deep copy.
-//-----------------------------------------------------------------------
-
-  AutoDerivative(const AutoDerivative<T>& D)
-    : val(D.val), grad(D.grad.copy())
-  {
-  }
-
-//-----------------------------------------------------------------------
-/// Assignment operator. This makes a deep copy.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Assignment operator. This makes a deep copy.
+  //-----------------------------------------------------------------------
 
   AutoDerivative<T>& operator=(const AutoDerivative<T>& D)
   {
@@ -270,195 +271,218 @@ public:
     return *this;
   }
 
-//-----------------------------------------------------------------------
-/// Create deep copy.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Create deep copy.
+  //-----------------------------------------------------------------------
 
   AutoDerivative<T> copy() const
-  { return AutoDerivative<T>(value(), gradient().copy()); }
+  {
+    return AutoDerivative<T>(value(), gradient().copy());
+  }
 
-//-----------------------------------------------------------------------
-/// Convert to type T.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Convert to type T.
+  //-----------------------------------------------------------------------
 
-  const T& value() const {return val;}
-  T& value() {return val;}
+  const T& value() const { return val; }
+  T& value() { return val; }
 
-//-----------------------------------------------------------------------
-/// Gradient.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Gradient.
+  //-----------------------------------------------------------------------
 
   const blitz::Array<T, 1>& gradient() const { return grad; }
   blitz::Array<T, 1>& gradient() { return grad; }
 
-//-----------------------------------------------------------------------
-/// Number of variables in gradient.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of variables in gradient.
+  //-----------------------------------------------------------------------
 
-  int number_variable() const {return grad.rows();}
+  int number_variable() const { return grad.rows(); }
 
-//-----------------------------------------------------------------------
-/// Is this object a constant (with a gradient() all zeros)?
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Is this object a constant (with a gradient() all zeros)?
+  //-----------------------------------------------------------------------
 
   bool is_constant() const { return number_variable() == 0; }
 
-//-----------------------------------------------------------------------
-// Operators needed by boost to give all the arithmetic operators.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Operators needed by boost to give all the arithmetic operators.
+  //-----------------------------------------------------------------------
 
-  bool operator<(const AutoDerivative<T>& V) const {return val < V.val;}
-  bool operator<(const T& V) const {return val < V;}
-  bool operator==(const AutoDerivative<T>& V) const {return val == V.val;}
-  bool operator==(const T& V) const {return val == V;}
+  bool operator<(const AutoDerivative<T>& V) const { return val < V.val; }
+  bool operator<(const T& V) const { return val < V; }
+  bool operator==(const AutoDerivative<T>& V) const { return val == V.val; }
+  bool operator==(const T& V) const { return val == V; }
   AutoDerivative<T>& operator+=(const AutoDerivative<T>& V)
-  { 
-    val += V.val; 
+  {
+    val += V.val;
     // Handling for V or self actually being a constant, which means
     // we have a zero size gradient.
     if(!V.is_constant()) {
       if(!is_constant())
-	grad += V.grad; 
+        grad += V.grad;
       else
-	grad.reference(V.grad.copy());
+        grad.reference(V.grad.copy());
     }
     return *this;
   }
   AutoDerivative<T>& operator+=(const T& V)
-  { val += V; return *this;}
+  {
+    val += V;
+    return *this;
+  }
   AutoDerivative<T>& operator-=(const AutoDerivative<T>& V)
-  { val -= V.val; 
+  {
+    val -= V.val;
     // Handling for V or self actually being a constant, which means
     // we have a zero size gradient.
     if(!V.is_constant()) {
       if(!is_constant())
-	grad -= V.grad; 
+        grad -= V.grad;
       else {
-	grad.resize(V.grad.shape());
-	grad = -V.grad;
+        grad.resize(V.grad.shape());
+        grad = -V.grad;
       }
     }
     return *this;
   }
   AutoDerivative<T>& operator-=(const T& V)
-  { val -= V; return *this;}
+  {
+    val -= V;
+    return *this;
+  }
   AutoDerivative<T>& operator*=(const AutoDerivative<T>& V)
-  { 
+  {
     // Handling for V or self actually being a constant, which means
     // we have a zero size gradient.
     if(!V.is_constant()) {
       if(!is_constant())
-	grad = V.val * grad + val * V.grad; 
+        grad = V.val * grad + val * V.grad;
       else {
-	grad.reference(V.grad.copy());
-	grad *= val;
+        grad.reference(V.grad.copy());
+        grad *= val;
       }
     } else
-      grad *= V.val; 
-    val *= V.val; 
+      grad *= V.val;
+    val *= V.val;
     return *this;
   }
   AutoDerivative<T>& operator*=(const T& V)
-  { val *= V; grad *= V; return *this;}
+  {
+    val *= V;
+    grad *= V;
+    return *this;
+  }
   AutoDerivative<T>& operator/=(const AutoDerivative<T>& V)
-  { 
+  {
     // Handling for V or self actually being a constant, which means
     // we have a zero size gradient.
     if(!V.is_constant()) {
       if(!is_constant())
-	grad = 1 / V.val * grad - val / (V.val * V.val) * V.grad; 
+        grad = 1 / V.val * grad - val / (V.val * V.val) * V.grad;
       else {
-	grad.resize(V.grad.shape());
-	grad = - val / (V.val * V.val) * V.grad; 
+        grad.resize(V.grad.shape());
+        grad = -val / (V.val * V.val) * V.grad;
       }
     } else
-      grad /= V.val; 
-    val /= V.val; 
+      grad /= V.val;
+    val /= V.val;
     return *this;
   }
   AutoDerivative<T>& operator/=(const T& V)
-  { val /= V; grad /= V; return *this;}
-  void print(std::ostream& Os) const
-  { Os << "AutoDerivative\n"
-       << "  Value: " << val << "\n"
-       << "  Gradient:\n" << grad << "\n";
+  {
+    val /= V;
+    grad /= V;
+    return *this;
   }
-  friend AutoDerivative<T> operator+(const AutoDerivative<T>& X, 
-				     const AutoDerivative<T>& Y)
-  { AutoDerivative<T> r(X);
-    r+= Y;
+  void print(std::ostream& Os) const
+  {
+    Os << "AutoDerivative\n"
+       << "  Value: " << val << "\n"
+       << "  Gradient:\n"
+       << grad << "\n";
+  }
+  friend AutoDerivative<T> operator+(const AutoDerivative<T>& X,
+                                     const AutoDerivative<T>& Y)
+  {
+    AutoDerivative<T> r(X);
+    r += Y;
     return r;
   }
-  friend AutoDerivative<T> operator-(const AutoDerivative<T>& X, 
-				     const AutoDerivative<T>& Y)
-  { AutoDerivative<T> r(X);
+  friend AutoDerivative<T> operator-(const AutoDerivative<T>& X,
+                                     const AutoDerivative<T>& Y)
+  {
+    AutoDerivative<T> r(X);
     r -= Y;
     return r;
   }
   friend AutoDerivative<T> operator-(const AutoDerivative<T>& X)
-  { AutoDerivative<T> r(X);
+  {
+    AutoDerivative<T> r(X);
     r *= -1;
     return r;
   }
-  friend AutoDerivative<T> operator+(const AutoDerivative<T>& X)
-  { return X;}
-  friend AutoDerivative<T> operator*(const AutoDerivative<T>& X, 
-				     const AutoDerivative<T>& Y)
-  { AutoDerivative<T> r(X);
+  friend AutoDerivative<T> operator+(const AutoDerivative<T>& X) { return X; }
+  friend AutoDerivative<T> operator*(const AutoDerivative<T>& X,
+                                     const AutoDerivative<T>& Y)
+  {
+    AutoDerivative<T> r(X);
     r *= Y;
     return r;
   }
-  friend AutoDerivative<T> operator/(const AutoDerivative<T>& X, 
-				     const AutoDerivative<T>& Y)
-  { AutoDerivative<T> r(X);
+  friend AutoDerivative<T> operator/(const AutoDerivative<T>& X,
+                                     const AutoDerivative<T>& Y)
+  {
+    AutoDerivative<T> r(X);
     r /= Y;
     return r;
   }
-  friend AutoDerivative<T> operator+(const AutoDerivative<T>& X, 
-				     const T& Y)
-  { AutoDerivative<T> r(X);
-    r+= Y;
+  friend AutoDerivative<T> operator+(const AutoDerivative<T>& X, const T& Y)
+  {
+    AutoDerivative<T> r(X);
+    r += Y;
     return r;
   }
-  friend AutoDerivative<T> operator-(const AutoDerivative<T>& X, 
-				     const T& Y)
-  { AutoDerivative<T> r(X);
+  friend AutoDerivative<T> operator-(const AutoDerivative<T>& X, const T& Y)
+  {
+    AutoDerivative<T> r(X);
     r -= Y;
     return r;
   }
-  friend AutoDerivative<T> operator*(const AutoDerivative<T>& X, 
-				     const T& Y)
-  { AutoDerivative<T> r(X);
+  friend AutoDerivative<T> operator*(const AutoDerivative<T>& X, const T& Y)
+  {
+    AutoDerivative<T> r(X);
     r *= Y;
     return r;
   }
-  friend AutoDerivative<T> operator/(const AutoDerivative<T>& X, 
-				     const T& Y)
-  { AutoDerivative<T> r(X);
+  friend AutoDerivative<T> operator/(const AutoDerivative<T>& X, const T& Y)
+  {
+    AutoDerivative<T> r(X);
     r /= Y;
     return r;
   }
-  friend AutoDerivative<T> operator+(const T& X, 
-				     const AutoDerivative<T>& Y)
-  { AutoDerivative<T> r(Y);
-    r+= X;
+  friend AutoDerivative<T> operator+(const T& X, const AutoDerivative<T>& Y)
+  {
+    AutoDerivative<T> r(Y);
+    r += X;
     return r;
   }
-  friend AutoDerivative<T> operator-(const T& X, 
-				     const AutoDerivative<T>& Y)
-  { AutoDerivative<T> r(X);
+  friend AutoDerivative<T> operator-(const T& X, const AutoDerivative<T>& Y)
+  {
+    AutoDerivative<T> r(X);
     r -= Y;
     return r;
   }
-  friend AutoDerivative<T> operator*(const T& X, 
-				     const AutoDerivative<T>& Y)
-  { AutoDerivative<T> r(Y);
+  friend AutoDerivative<T> operator*(const T& X, const AutoDerivative<T>& Y)
+  {
+    AutoDerivative<T> r(Y);
     r *= X;
     return r;
   }
-  friend AutoDerivative<T> operator/(const T& X, 
-				     const AutoDerivative<T>& Y)
-  { AutoDerivative<T> r(X);
+  friend AutoDerivative<T> operator/(const T& X, const AutoDerivative<T>& Y)
+  {
+    AutoDerivative<T> r(X);
     r /= Y;
     return r;
   }
@@ -467,7 +491,7 @@ private:
   blitz::Array<T, 1> grad;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
 //-----------------------------------------------------------------------
@@ -475,8 +499,8 @@ private:
 /// an array of AutoDerivative.
 //-----------------------------------------------------------------------
 
-template<class T> inline blitz::Array<T, 2> jacobian
-(const blitz::Array<AutoDerivative<T>, 1>& Ad)
+template<class T>
+inline blitz::Array<T, 2> jacobian(const blitz::Array<AutoDerivative<T>, 1>& Ad)
 {
   int nvar = 0;
   BOOST_FOREACH(const AutoDerivative<T>& v, Ad)
@@ -488,15 +512,15 @@ template<class T> inline blitz::Array<T, 2> jacobian
   if(nvar > 0) {
     for(int i = 0; i < Ad.rows(); ++i)
       if(!Ad(i).is_constant())
-	res(i, blitz::Range::all()) = Ad(i).gradient();
+        res(i, blitz::Range::all()) = Ad(i).gradient();
       else
-	res(i, blitz::Range::all()) = 0;
+        res(i, blitz::Range::all()) = 0;
   }
   return res;
 }
 
-template<class T> inline blitz::Array<T, 3> jacobian
-(const blitz::Array<AutoDerivative<T>, 2>& Ad)
+template<class T>
+inline blitz::Array<T, 3> jacobian(const blitz::Array<AutoDerivative<T>, 2>& Ad)
 {
   int nvar = 0;
   BOOST_FOREACH(const AutoDerivative<T>& v, Ad)
@@ -508,16 +532,16 @@ template<class T> inline blitz::Array<T, 3> jacobian
   if(nvar > 0) {
     for(int i = 0; i < Ad.rows(); ++i)
       for(int j = 0; j < Ad.cols(); ++j)
-	if(!Ad(i, j).is_constant())
-	  res(i, j, blitz::Range::all()) = Ad(i, j).gradient();
-	else
-	  res(i, j, blitz::Range::all()) = 0;
+        if(!Ad(i, j).is_constant())
+          res(i, j, blitz::Range::all()) = Ad(i, j).gradient();
+        else
+          res(i, j, blitz::Range::all()) = 0;
   }
   return res;
 }
 
-template<class T> inline blitz::Array<T, 4> jacobian
-(const blitz::Array<AutoDerivative<T>, 3>& Ad)
+template<class T>
+inline blitz::Array<T, 4> jacobian(const blitz::Array<AutoDerivative<T>, 3>& Ad)
 {
   int nvar = 0;
   BOOST_FOREACH(const AutoDerivative<T>& v, Ad)
@@ -529,17 +553,17 @@ template<class T> inline blitz::Array<T, 4> jacobian
   if(nvar > 0) {
     for(int i = 0; i < Ad.rows(); ++i)
       for(int j = 0; j < Ad.cols(); ++j)
-	for(int k = 0; k < Ad.depth(); ++k)
-	  if(!Ad(i, j, k).is_constant())
-	    res(i, j, k, blitz::Range::all()) = Ad(i, j, k).gradient();
-	  else
-	    res(i, j, k, blitz::Range::all()) = 0;
+        for(int k = 0; k < Ad.depth(); ++k)
+          if(!Ad(i, j, k).is_constant())
+            res(i, j, k, blitz::Range::all()) = Ad(i, j, k).gradient();
+          else
+            res(i, j, k, blitz::Range::all()) = 0;
   }
   return res;
 }
 
-template<class T> inline blitz::Array<T, 5> jacobian
-(const blitz::Array<AutoDerivative<T>, 4>& Ad)
+template<class T>
+inline blitz::Array<T, 5> jacobian(const blitz::Array<AutoDerivative<T>, 4>& Ad)
 {
   int nvar = 0;
   BOOST_FOREACH(const AutoDerivative<T>& v, Ad)
@@ -547,17 +571,17 @@ template<class T> inline blitz::Array<T, 5> jacobian
       nvar = v.number_variable();
       break;
     }
-  blitz::Array<T, 5> res(Ad.rows(), Ad.cols(), Ad.depth(), 
-			 Ad.extent(blitz::fourthDim), nvar);
+  blitz::Array<T, 5> res(Ad.rows(), Ad.cols(), Ad.depth(),
+                         Ad.extent(blitz::fourthDim), nvar);
   if(nvar > 0) {
     for(int i = 0; i < Ad.rows(); ++i)
       for(int j = 0; j < Ad.cols(); ++j)
-	for(int k = 0; k < Ad.depth(); ++k)
-	  for(int m = 0; m < Ad.extent(blitz::fourthDim); ++m)
-	    if(!Ad(i, j, k, m).is_constant())
-	      res(i, j, k, m, blitz::Range::all()) = Ad(i, j, k, m).gradient();
-	    else
-	      res(i, j, k, m, blitz::Range::all()) = 0;
+        for(int k = 0; k < Ad.depth(); ++k)
+          for(int m = 0; m < Ad.extent(blitz::fourthDim); ++m)
+            if(!Ad(i, j, k, m).is_constant())
+              res(i, j, k, m, blitz::Range::all()) = Ad(i, j, k, m).gradient();
+            else
+              res(i, j, k, m, blitz::Range::all()) = 0;
   }
   return res;
 }
@@ -567,8 +591,9 @@ template<class T> inline blitz::Array<T, 5> jacobian
 /// a blitz::Array<AutoDerivative<double>, 1>
 //-----------------------------------------------------------------------
 
-inline blitz::Array<AutoDerivative<double>, 1> auto_derivative
-(const blitz::Array<double, 1>& Val, const blitz::Array<double, 2>& Jac)
+inline blitz::Array<AutoDerivative<double>, 1>
+auto_derivative(const blitz::Array<double, 1>& Val,
+                const blitz::Array<double, 2>& Jac)
 {
   blitz::Array<AutoDerivative<double>, 1> res(Val.shape());
   for(int i = 0; i < Val.rows(); ++i) {
@@ -579,8 +604,8 @@ inline blitz::Array<AutoDerivative<double>, 1> auto_derivative
   return res;
 }
 
-inline blitz::Array<AutoDerivative<double>, 1> auto_derivative
-(const blitz::Array<double, 1>& Val, int i_th, int nvars)
+inline blitz::Array<AutoDerivative<double>, 1>
+auto_derivative(const blitz::Array<double, 1>& Val, int i_th, int nvars)
 {
   blitz::Array<AutoDerivative<double>, 1> res(Val.shape());
   for(int i = 0; i < Val.rows(); ++i)
@@ -588,29 +613,31 @@ inline blitz::Array<AutoDerivative<double>, 1> auto_derivative
   return res;
 }
 
-inline blitz::Array<AutoDerivative<double>, 2> auto_derivative
-(const blitz::Array<double, 2>& Val, const blitz::Array<double, 3>& Jac)
+inline blitz::Array<AutoDerivative<double>, 2>
+auto_derivative(const blitz::Array<double, 2>& Val,
+                const blitz::Array<double, 3>& Jac)
 {
   blitz::Array<AutoDerivative<double>, 2> res(Val.shape());
   for(int i = 0; i < Val.rows(); ++i)
     for(int j = 0; j < Val.cols(); ++j) {
       res(i, j).value() = Val(i, j);
       if(Jac.depth() > 0)
-	res(i, j).gradient().reference(Jac(i, j, blitz::Range::all()));
+        res(i, j).gradient().reference(Jac(i, j, blitz::Range::all()));
     }
   return res;
 }
 
-inline blitz::Array<AutoDerivative<double>, 3> auto_derivative
-(const blitz::Array<double, 3>& Val, const blitz::Array<double, 4>& Jac)
+inline blitz::Array<AutoDerivative<double>, 3>
+auto_derivative(const blitz::Array<double, 3>& Val,
+                const blitz::Array<double, 4>& Jac)
 {
   blitz::Array<AutoDerivative<double>, 3> res(Val.shape());
   for(int i = 0; i < Val.rows(); ++i)
     for(int j = 0; j < Val.cols(); ++j)
       for(int k = 0; k < Val.extent(blitz::thirdDim); ++k) {
-	res(i, j, k).value() = Val(i, j, k);
-	if(Jac.extent(blitz::fourthDim) > 0)
-	  res(i, j, k).gradient().reference(Jac(i, j, k, blitz::Range::all()));
+        res(i, j, k).value() = Val(i, j, k);
+        if(Jac.extent(blitz::fourthDim) > 0)
+          res(i, j, k).gradient().reference(Jac(i, j, k, blitz::Range::all()));
       }
   return res;
 }
@@ -619,187 +646,209 @@ inline blitz::Array<AutoDerivative<double>, 3> auto_derivative
 //-----------------------------------------------------------------------
 /// Math functions.
 //-----------------------------------------------------------------------
-namespace std {			// Math functions are in std:: namespace.
+namespace std { // Math functions are in std:: namespace.
 
-inline GeoCal::AutoDerivative<double> 
+inline GeoCal::AutoDerivative<double>
 sqrt(const GeoCal::AutoDerivative<double>& x)
 {
   if(x.is_constant())
     return GeoCal::AutoDerivative<double>(::sqrt(x.value()));
   else
-    return GeoCal::AutoDerivative<double>(::sqrt(x.value()), 
-     blitz::Array<double, 1>(x.gradient() / (2*::sqrt(x.value())) ));
+    return GeoCal::AutoDerivative<double>(
+        ::sqrt(x.value()),
+        blitz::Array<double, 1>(x.gradient() / (2 * ::sqrt(x.value()))));
 }
 
-inline GeoCal::AutoDerivative<double> 
+inline GeoCal::AutoDerivative<double>
 log(const GeoCal::AutoDerivative<double>& x)
 {
   if(x.is_constant())
     return GeoCal::AutoDerivative<double>(::log(x.value()));
   else
-    return GeoCal::AutoDerivative<double>(::log(x.value()), 
-       blitz::Array<double, 1>(x.gradient() / x.value()));
+    return GeoCal::AutoDerivative<double>(
+        ::log(x.value()), blitz::Array<double, 1>(x.gradient() / x.value()));
 }
 
-inline GeoCal::AutoDerivative<double> 
+inline GeoCal::AutoDerivative<double>
 log10(const GeoCal::AutoDerivative<double>& x)
 {
   if(x.is_constant())
     return GeoCal::AutoDerivative<double>(::log10(x.value()));
   else
-    return GeoCal::AutoDerivative<double>(::log10(x.value()), 
-       blitz::Array<double, 1>(M_LOG10E * x.gradient() / x.value()));
+    return GeoCal::AutoDerivative<double>(
+        ::log10(x.value()),
+        blitz::Array<double, 1>(M_LOG10E * x.gradient() / x.value()));
 }
 
-inline GeoCal::AutoDerivative<double> 
+inline GeoCal::AutoDerivative<double>
 exp(const GeoCal::AutoDerivative<double>& x)
 {
   if(x.is_constant())
     return GeoCal::AutoDerivative<double>(::exp(x.value()));
-  else 
-    return GeoCal::AutoDerivative<double>(::exp(x.value()), 
-     blitz::Array<double, 1>(x.gradient() * ::exp(x.value())));
+  else
+    return GeoCal::AutoDerivative<double>(
+        ::exp(x.value()),
+        blitz::Array<double, 1>(x.gradient() * ::exp(x.value())));
 }
 
-inline GeoCal::AutoDerivative<double> 
+inline GeoCal::AutoDerivative<double>
 sin(const GeoCal::AutoDerivative<double>& x)
 {
   if(x.is_constant())
     return GeoCal::AutoDerivative<double>(::sin(x.value()));
   else {
-    return GeoCal::AutoDerivative<double>(::sin(x.value()),
-     blitz::Array<double, 1>(x.gradient() * ::cos(x.value()) ));
+    return GeoCal::AutoDerivative<double>(
+        ::sin(x.value()),
+        blitz::Array<double, 1>(x.gradient() * ::cos(x.value())));
   }
 }
 
-inline GeoCal::AutoDerivative<double> 
+inline GeoCal::AutoDerivative<double>
 asin(const GeoCal::AutoDerivative<double>& x)
 {
   if(x.value() < -1.0 || x.value() > 1.0) {
     GeoCal::Exception err_msg;
-    err_msg << "Value not within domain of arcsine: -1 <= x <= 1 where x = " << x.value();
+    err_msg << "Value not within domain of arcsine: -1 <= x <= 1 where x = "
+            << x.value();
     throw err_msg;
   }
-    
+
   if(x.is_constant())
     return GeoCal::AutoDerivative<double>(::asin(x.value()));
   else {
-    return GeoCal::AutoDerivative<double>(::asin(x.value()),
-     blitz::Array<double, 1>(x.gradient() / sqrt(1-x.value()*x.value()) ));
+    return GeoCal::AutoDerivative<double>(
+        ::asin(x.value()), blitz::Array<double, 1>(
+                               x.gradient() / sqrt(1 - x.value() * x.value())));
   }
 }
 
-inline GeoCal::AutoDerivative<double> 
+inline GeoCal::AutoDerivative<double>
 cos(const GeoCal::AutoDerivative<double>& x)
 {
   if(x.is_constant())
     return GeoCal::AutoDerivative<double>(::cos(x.value()));
   else {
-    return GeoCal::AutoDerivative<double>(::cos(x.value()),
-     blitz::Array<double, 1>(x.gradient() * (- ::sin(x.value())) ));
+    return GeoCal::AutoDerivative<double>(
+        ::cos(x.value()),
+        blitz::Array<double, 1>(x.gradient() * (-::sin(x.value()))));
   }
 }
 
-inline GeoCal::AutoDerivative<double> 
+inline GeoCal::AutoDerivative<double>
 acos(const GeoCal::AutoDerivative<double>& x)
 {
   if(x.value() < -1.0 || x.value() > 1.0) {
     GeoCal::Exception err_msg;
-    err_msg << "Value not within domain of arccosine: -1 <= x <= 1 where x = " << x.value();
+    err_msg << "Value not within domain of arccosine: -1 <= x <= 1 where x = "
+            << x.value();
     throw err_msg;
   }
-    
+
   if(x.is_constant())
     return GeoCal::AutoDerivative<double>(::acos(x.value()));
   else {
-    return GeoCal::AutoDerivative<double>(::acos(x.value()),
-     blitz::Array<double, 1>(-1.0 * x.gradient() / sqrt(1-x.value()*x.value()) ));
+    return GeoCal::AutoDerivative<double>(
+        ::acos(x.value()),
+        blitz::Array<double, 1>(-1.0 * x.gradient() /
+                                sqrt(1 - x.value() * x.value())));
   }
 }
 
-inline GeoCal::AutoDerivative<double> 
+inline GeoCal::AutoDerivative<double>
 tan(const GeoCal::AutoDerivative<double>& x)
 {
   if(x.is_constant())
     return GeoCal::AutoDerivative<double>(::tan(x.value()));
   else {
-    return GeoCal::AutoDerivative<double>(::tan(x.value()),
-     blitz::Array<double, 1>(x.gradient() / (::cos(x.value()) * ::cos(x.value())) ));
+    return GeoCal::AutoDerivative<double>(
+        ::tan(x.value()),
+        blitz::Array<double, 1>(x.gradient() /
+                                (::cos(x.value()) * ::cos(x.value()))));
   }
 }
 
-inline GeoCal::AutoDerivative<double> 
+inline GeoCal::AutoDerivative<double>
 atan(const GeoCal::AutoDerivative<double>& x)
-{   
+{
   if(x.is_constant())
     return GeoCal::AutoDerivative<double>(::atan(x.value()));
   else {
-    return GeoCal::AutoDerivative<double>(::atan(x.value()),
-     blitz::Array<double, 1>(x.gradient() / (x.value()*x.value() + 1) ));
+    return GeoCal::AutoDerivative<double>(
+        ::atan(x.value()),
+        blitz::Array<double, 1>(x.gradient() / (x.value() * x.value() + 1)));
   }
 }
 
-inline GeoCal::AutoDerivative<double> 
+inline GeoCal::AutoDerivative<double>
 atan2(const GeoCal::AutoDerivative<double>& y,
       const GeoCal::AutoDerivative<double>& x)
-{   
+{
   if(x.is_constant() && y.is_constant())
     return GeoCal::AutoDerivative<double>(::atan2(y.value(), x.value()));
   else {
-    return GeoCal::AutoDerivative<double>(::atan2(y.value(), x.value()),
-  blitz::Array<double, 1>((y.gradient() * x.value() - 
-			   x.gradient() * y.value())  / 
-			  (x.value()*x.value() +  y.value() * y.value()) ));
+    return GeoCal::AutoDerivative<double>(
+        ::atan2(y.value(), x.value()),
+        blitz::Array<double, 1>(
+            (y.gradient() * x.value() - x.gradient() * y.value()) /
+            (x.value() * x.value() + y.value() * y.value())));
   }
 }
 
-inline GeoCal::AutoDerivative<double> 
+inline GeoCal::AutoDerivative<double>
 pow(const GeoCal::AutoDerivative<double>& base, const double exponent)
-{   
+{
   if(base.is_constant())
     return GeoCal::AutoDerivative<double>(::pow(base.value(), exponent));
   else {
-    return GeoCal::AutoDerivative<double>(::pow(base.value(), exponent),
-      blitz::Array<double, 1>( base.gradient() * exponent * pow(base.value(), exponent - 1) ));
+    return GeoCal::AutoDerivative<double>(
+        ::pow(base.value(), exponent),
+        blitz::Array<double, 1>(base.gradient() * exponent *
+                                pow(base.value(), exponent - 1)));
   }
 }
 
-inline GeoCal::AutoDerivative<double> 
+inline GeoCal::AutoDerivative<double>
 pow(const double base, const GeoCal::AutoDerivative<double>& exponent)
-{   
+{
   if(exponent.is_constant())
     return GeoCal::AutoDerivative<double>(::pow(base, exponent.value()));
   else {
-    return GeoCal::AutoDerivative<double>(::pow(base, exponent.value()),
-       blitz::Array<double, 1>( exponent.gradient() * ::log(base) * ::pow(base, exponent.value()) ));
+    return GeoCal::AutoDerivative<double>(
+        ::pow(base, exponent.value()),
+        blitz::Array<double, 1>(exponent.gradient() * ::log(base) *
+                                ::pow(base, exponent.value())));
   }
 }
 
 }
-
 
 //-----------------------------------------------------------------------
 /// Apply value function to a blitz array.
 //-----------------------------------------------------------------------
 
 namespace blitz {
-  inline double value(const GeoCal::AutoDerivative<double>& Ad )
-  { return Ad.value(); }
-  BZ_DECLARE_FUNCTION_RET(value, double);
-  inline GeoCal::AutoDerivative<double> auto_derivative(double Ad) 
-  { return GeoCal::AutoDerivative<double>(Ad); }
-  BZ_DECLARE_FUNCTION_RET(auto_derivative, GeoCal::AutoDerivative<double>);
-  BZ_DECLARE_ARRAY_ET_SCALAR_FUNCS(GeoCal::AutoDerivative<double>)
-  BZ_DECLARE_ARRAY_ET_SCALAR_OPS(GeoCal::AutoDerivative<double>)
+inline double value(const GeoCal::AutoDerivative<double>& Ad)
+{
+  return Ad.value();
+}
+BZ_DECLARE_FUNCTION_RET(value, double);
+inline GeoCal::AutoDerivative<double> auto_derivative(double Ad)
+{
+  return GeoCal::AutoDerivative<double>(Ad);
+}
+BZ_DECLARE_FUNCTION_RET(auto_derivative, GeoCal::AutoDerivative<double>);
+BZ_DECLARE_ARRAY_ET_SCALAR_FUNCS(GeoCal::AutoDerivative<double>)
+BZ_DECLARE_ARRAY_ET_SCALAR_OPS(GeoCal::AutoDerivative<double>)
 
-inline GeoCal::AutoDerivative<double> 
+inline GeoCal::AutoDerivative<double>
 pow2(const GeoCal::AutoDerivative<double>& base)
-{   
+{
   if(base.is_constant())
     return GeoCal::AutoDerivative<double>(base.value() * base.value());
   else {
-    return GeoCal::AutoDerivative<double>(base.value() * base.value(),
-       blitz::Array<double, 1>( base.gradient() * 2 * base.value()));
+    return GeoCal::AutoDerivative<double>(
+        base.value() * base.value(),
+        blitz::Array<double, 1>(base.gradient() * 2 * base.value()));
   }
 }
 }

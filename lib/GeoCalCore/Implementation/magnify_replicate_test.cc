@@ -21,8 +21,8 @@ BOOST_AUTO_TEST_CASE(basic)
   for(int i = 0; i < ra->number_line(); ++i)
     for(int j = 0; j < ra->number_sample(); ++j)
       BOOST_CHECK_EQUAL((*ra)(i, j), (*data)(i / 2, j / 2));
-  Array<double, 2> rav = ra->read_double(0,0, ra->number_line(), 
-					 ra->number_sample());
+  Array<double, 2> rav =
+      ra->read_double(0, 0, ra->number_line(), ra->number_sample());
   for(int i = 0; i < ra->number_line(); ++i)
     for(int j = 0; j < ra->number_sample(); ++j)
       BOOST_CHECK_CLOSE(rav(i, j), (*data)(i / 2, j / 2), 1e-8);
@@ -37,20 +37,19 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_EQUAL(rasub.number_sample(), 8);
   for(int i = 0; i < rasub.number_line(); ++i)
     for(int j = 0; j < rasub.number_sample(); ++j) {
-      BOOST_CHECK_EQUAL(rasub(i, j), (*data)((i + 5) / 2, (j + 6) /2));
+      BOOST_CHECK_EQUAL(rasub(i, j), (*data)((i + 5) / 2, (j + 6) / 2));
     }
-  Array<double, 2> rasubv = rasub.read_double(0,0, rasub.number_line(), 
-					      rasub.number_sample());
+  Array<double, 2> rasubv =
+      rasub.read_double(0, 0, rasub.number_line(), rasub.number_sample());
   for(int i = 0; i < rasub.number_line(); ++i)
     for(int j = 0; j < rasub.number_sample(); ++j) {
-      BOOST_CHECK_CLOSE(rasubv(i, j), (*data)((i + 5) / 2, (j + 6) /2), 1e-8);
+      BOOST_CHECK_CLOSE(rasubv(i, j), (*data)((i + 5) / 2, (j + 6) / 2), 1e-8);
     }
   for(int i = 0; i < rasub.number_line(); ++i)
     for(int j = 0; j < rasub.number_sample(); ++j) {
       Array<double, 2> t = rasub.read_double(i, j, 1, 1);
-      BOOST_CHECK_CLOSE(t(0, 0), (*data)((i + 5) / 2, (j + 6) /2), 1e-8);
+      BOOST_CHECK_CLOSE(t(0, 0), (*data)((i + 5) / 2, (j + 6) / 2), 1e-8);
     }
-  
 }
 
 BOOST_AUTO_TEST_SUITE_END()

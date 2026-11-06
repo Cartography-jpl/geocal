@@ -3,7 +3,7 @@
 #include "printable.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   Dummy class for Jia.
 *******************************************************************/
 
@@ -13,31 +13,30 @@ public:
   virtual ~JiaSample() {}
   void jia_func() const;
 
-//-----------------------------------------------------------------------
-/// Sample "accessor" function, we'll put this in as a python
-/// attribute in swig.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Sample "accessor" function, we'll put this in as a python
+  /// attribute in swig.
+  //-----------------------------------------------------------------------
 
-  int blah() const {return blah_;}
+  int blah() const { return blah_; }
 
-//-----------------------------------------------------------------------
-/// Print to stream (all classes have this)
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print to stream (all classes have this)
+  //-----------------------------------------------------------------------
 
-  virtual void print(std::ostream& Os) const
-  { Os << "JiaSample"; }
+  virtual void print(std::ostream& Os) const { Os << "JiaSample"; }
 private:
   int blah_;
 
-//-----------------------------------------------------------------------
-/// Cookie cutter code for adding "serialization". This allows objects
-/// of this class to be stored to a file. Useful for pickle
-/// serialization in python, and also just for saving from C++.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Cookie cutter code for adding "serialization". This allows objects
+  /// of this class to be stored to a file. Useful for pickle
+  /// serialization in python, and also just for saving from C++.
+  //-----------------------------------------------------------------------
   JiaSample() {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 

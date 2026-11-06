@@ -6,24 +6,22 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void SrtmDemData::serialize(Archive & ar, const unsigned int version)
+void SrtmDemData::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(VicarCartLabMultifile);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(VicarCartLabMultifile);
 }
 
 template<class Archive>
-void SrtmLwmData::serialize(Archive & ar, const unsigned int version)
+void SrtmLwmData::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(VicarCartLabMultifile);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(VicarCartLabMultifile);
 }
 
 template<class Archive>
-void SrtmDem::serialize(Archive & ar, const unsigned int version)
+void SrtmDem::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo)
-    & GEOCAL_NVP(f);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo) & GEOCAL_NVP(f);
 }
-
 
 GEOCAL_IMPLEMENT(SrtmDemData);
 GEOCAL_IMPLEMENT(SrtmLwmData);
@@ -48,23 +46,14 @@ GEOCAL_IMPLEMENT(SrtmDem);
 /// read the entire file.
 //-----------------------------------------------------------------------
 
-SrtmDemData::SrtmDemData
-(const std::string& Dir,
- bool No_coverage_is_error,
- int Number_line_per_tile,
- int Number_sample_per_tile, 
- int Number_tile_each_file, 
- int Number_file,
- bool Favor_memory_mapped,
- bool Force_area_pixel
- )
-: VicarCartLabMultifile(Dir, "ELEV_ROOT", Number_line_per_tile,
-		       Number_sample_per_tile,
-		       Number_tile_each_file,
-		       Number_file,
-		       Favor_memory_mapped,
-		       No_coverage_is_error,
-		       0, Force_area_pixel)
+SrtmDemData::SrtmDemData(const std::string& Dir, bool No_coverage_is_error,
+                         int Number_line_per_tile, int Number_sample_per_tile,
+                         int Number_tile_each_file, int Number_file,
+                         bool Favor_memory_mapped, bool Force_area_pixel)
+  : VicarCartLabMultifile(Dir, "ELEV_ROOT", Number_line_per_tile,
+                          Number_sample_per_tile, Number_tile_each_file,
+                          Number_file, Favor_memory_mapped,
+                          No_coverage_is_error, 0, Force_area_pixel)
 {
   file_name_end = "_L2.hlf";
   // We read n0e100_L2.hlf. Note that for some odd reason, n0e100 is
@@ -73,15 +62,14 @@ SrtmDemData::SrtmDemData
   // we need to make sure to get the mapinfo right.
   lat_ref = 0, lon_ref = 100;
   int num_per_deg = 3600;
-  mi_ref = MapInfo(boost::shared_ptr<CoordinateConverter> 
- 		 (new GeodeticConverter()),
-		   lon_ref, lat_ref + 1, lon_ref + 1, lat_ref, num_per_deg, 
-		   num_per_deg);
-  mi_ref = mi_ref.subset(0,0,3601,3601);
+  mi_ref = MapInfo(
+      boost::shared_ptr<CoordinateConverter>(new GeodeticConverter()), lon_ref,
+      lat_ref + 1, lon_ref + 1, lat_ref, num_per_deg, num_per_deg);
+  mi_ref = mi_ref.subset(0, 0, 3601, 3601);
   file_spacing_number_line = 3600;
   file_spacing_number_sample = 3600;
   if(!force_area_pixel)
-    mi_ref = mi_ref.subset(-0.5,-0.5,3601,3601);
+    mi_ref = mi_ref.subset(-0.5, -0.5, 3601, 3601);
   init_loc_to_file();
 }
 
@@ -102,23 +90,14 @@ SrtmDemData::SrtmDemData
 /// read the entire file.
 //-----------------------------------------------------------------------
 
-SrtmLwmData::SrtmLwmData
-(const std::string& Dir,
- bool No_coverage_is_error,
- int Number_line_per_tile,
- int Number_sample_per_tile, 
- int Number_tile_each_file, 
- int Number_file,
- bool Favor_memory_mapped,
- bool Force_area_pixel
- )
-: VicarCartLabMultifile(Dir, "", Number_line_per_tile,
-		       Number_sample_per_tile,
-		       Number_tile_each_file,
-		       Number_file,
-		       Favor_memory_mapped,
-		       No_coverage_is_error,
-		       0, Force_area_pixel)
+SrtmLwmData::SrtmLwmData(const std::string& Dir, bool No_coverage_is_error,
+                         int Number_line_per_tile, int Number_sample_per_tile,
+                         int Number_tile_each_file, int Number_file,
+                         bool Favor_memory_mapped, bool Force_area_pixel)
+  : VicarCartLabMultifile(Dir, "", Number_line_per_tile, Number_sample_per_tile,
+                          Number_tile_each_file, Number_file,
+                          Favor_memory_mapped, No_coverage_is_error, 0,
+                          Force_area_pixel)
 {
   file_name_end = "_lwm_L2.img";
   // We read n0e100_L2.hlf. Note that for some odd reason, n0e100 is
@@ -127,29 +106,26 @@ SrtmLwmData::SrtmLwmData
   // we need to make sure to get the mapinfo right.
   lat_ref = 0, lon_ref = 100;
   int num_per_deg = 3600;
-  mi_ref = MapInfo(boost::shared_ptr<CoordinateConverter> 
- 		 (new GeodeticConverter()),
-		   lon_ref, lat_ref + 1, lon_ref + 1, lat_ref, num_per_deg, 
-		   num_per_deg);
-  mi_ref = mi_ref.subset(0,0,3601,3601);
+  mi_ref = MapInfo(
+      boost::shared_ptr<CoordinateConverter>(new GeodeticConverter()), lon_ref,
+      lat_ref + 1, lon_ref + 1, lat_ref, num_per_deg, num_per_deg);
+  mi_ref = mi_ref.subset(0, 0, 3601, 3601);
   file_spacing_number_line = 3600;
   file_spacing_number_sample = 3600;
   if(!force_area_pixel)
-    mi_ref = mi_ref.subset(-0.5,-0.5,3601,3601);
+    mi_ref = mi_ref.subset(-0.5, -0.5, 3601, 3601);
   init_loc_to_file();
 }
 
 //-----------------------------------------------------------------------
-/// Constructor. You can provide the directory where there data can be 
-/// found. If you leave this as a blank string, we use ${ELEV_ROOT} as 
+/// Constructor. You can provide the directory where there data can be
+/// found. If you leave this as a blank string, we use ${ELEV_ROOT} as
 /// the directory and ${ELEV_ROOT}/L2_dem_db.int as the file.
 //-----------------------------------------------------------------------
 
-SrtmDem::SrtmDem(const std::string& Dirbase,
-		 bool Outside_dem_is_error,
-		 const boost::shared_ptr<Datum>& D)
+SrtmDem::SrtmDem(const std::string& Dirbase, bool Outside_dem_is_error,
+                 const boost::shared_ptr<Datum>& D)
 {
   f.reset(new SrtmDemData(Dirbase, Outside_dem_is_error));
   initialize(D, f->map_info(), Outside_dem_is_error);
 }
-

@@ -1,5 +1,5 @@
 // This contains the top page documentation for use by doxygen.
-/****************************************************************//**
+/****************************************************************/ /**
 \mainpage GeoCal Documentation
 
 This code is used for geometric calibration and related tasks.

@@ -6,14 +6,14 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void SurfaceImageToImageMatch::serialize(Archive & ar, const unsigned int UNUSED(version))
+void SurfaceImageToImageMatch::serialize(Archive& ar,
+                                         const unsigned int UNUSED(version))
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageToImageMatch)
-    & GEOCAL_NVP(igc1) & GEOCAL_NVP(igc2)
-    & GEOCAL_NVP_(matcher) & GEOCAL_NVP_(map_project_on_demand)
-    & GEOCAL_NVP(simg1) & GEOCAL_NVP(simg2) & GEOCAL_NVP(pix_fact);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageToImageMatch) &
+      GEOCAL_NVP(igc1) & GEOCAL_NVP(igc2) & GEOCAL_NVP_(matcher) &
+      GEOCAL_NVP_(map_project_on_demand) & GEOCAL_NVP(simg1) &
+      GEOCAL_NVP(simg2) & GEOCAL_NVP(pix_fact);
 }
-
 
 GEOCAL_IMPLEMENT(SurfaceImageToImageMatch);
 #endif
@@ -30,13 +30,12 @@ GEOCAL_IMPLEMENT(SurfaceImageToImageMatch);
 /// IgcMapProjected for a discussion of this parameter.
 //-----------------------------------------------------------------------
 
-SurfaceImageToImageMatch::SurfaceImageToImageMatch
-  (const boost::shared_ptr<ImageGroundConnection>& Igc1, 
-   const boost::shared_ptr<ImageGroundConnection>& Igc2,
-   const MapInfo& Map_info,
-   const boost::shared_ptr<ImageMatcher>& Matcher,
-   int Grid_spacing)
-    : igc1(Igc1), igc2(Igc2), matcher_(Matcher), map_project_on_demand_(true)
+SurfaceImageToImageMatch::SurfaceImageToImageMatch(
+    const boost::shared_ptr<ImageGroundConnection>& Igc1,
+    const boost::shared_ptr<ImageGroundConnection>& Igc2,
+    const MapInfo& Map_info, const boost::shared_ptr<ImageMatcher>& Matcher,
+    int Grid_spacing)
+  : igc1(Igc1), igc2(Igc2), matcher_(Matcher), map_project_on_demand_(true)
 {
   MapInfo mi = igc1->cover(Map_info).map_union(igc2->cover(Map_info));
   simg1.reset(new IgcMapProjected(mi, igc1, Grid_spacing, -1, false));
@@ -47,15 +46,15 @@ SurfaceImageToImageMatch::SurfaceImageToImageMatch
 //-----------------------------------------------------------------------
 /// Constructor, where we supply the already map projected data.
 //-----------------------------------------------------------------------
-      
-SurfaceImageToImageMatch::SurfaceImageToImageMatch
-  (const boost::shared_ptr<ImageGroundConnection>& Igc1, 
-   const boost::shared_ptr<RasterImage>& Surface_image1,
-   const boost::shared_ptr<ImageGroundConnection>& Igc2,
-   const boost::shared_ptr<RasterImage>& Surface_image2,
-   const boost::shared_ptr<ImageMatcher>& Matcher)
-    : igc1(Igc1), igc2(Igc2), matcher_(Matcher), map_project_on_demand_(false),
-      simg1(Surface_image1), simg2(Surface_image2)
+
+SurfaceImageToImageMatch::SurfaceImageToImageMatch(
+    const boost::shared_ptr<ImageGroundConnection>& Igc1,
+    const boost::shared_ptr<RasterImage>& Surface_image1,
+    const boost::shared_ptr<ImageGroundConnection>& Igc2,
+    const boost::shared_ptr<RasterImage>& Surface_image2,
+    const boost::shared_ptr<ImageMatcher>& Matcher)
+  : igc1(Igc1), igc2(Igc2), matcher_(Matcher), map_project_on_demand_(false),
+    simg1(Surface_image1), simg2(Surface_image2)
 {
   pix_fact = simg1->map_info().resolution_meter() / igc1->resolution_meter();
 }
@@ -63,7 +62,7 @@ SurfaceImageToImageMatch::SurfaceImageToImageMatch
 //-----------------------------------------------------------------------
 /// Match point Ic1 in the first image with the second image. We
 /// return the location in the second image along with the uncertainty
-/// if Success is true, otherwise the match failed. 
+/// if Success is true, otherwise the match failed.
 ///
 /// Note that the line and sample sigma are only approximately
 /// calculated. We have the line and sample sigma on the surface, and
@@ -78,18 +77,17 @@ SurfaceImageToImageMatch::SurfaceImageToImageMatch
 /// parameters of a LsmMatcher).
 //-----------------------------------------------------------------------
 
-void SurfaceImageToImageMatch::match
-(const ImageCoordinate& Ic1, ImageCoordinate& Ic2,
- double& Line_sigma, double& Sample_sigma,
- bool& Success, int* Diagnostic) const
+void SurfaceImageToImageMatch::match(const ImageCoordinate& Ic1,
+                                     ImageCoordinate& Ic2, double& Line_sigma,
+                                     double& Sample_sigma, bool& Success,
+                                     int* Diagnostic) const
 {
   boost::shared_ptr<GroundCoordinate> gc = igc1->ground_coordinate(Ic1);
   ImageCoordinate sic1 = simg1->coordinate(*gc);
   ImageCoordinate sic2_guess = simg2->coordinate(*gc);
   ImageCoordinate sic2;
-  matcher_->match(*simg1, *simg2, sic1, 
-		  sic2_guess, sic2, Line_sigma, Sample_sigma, Success,
-		  Diagnostic);
+  matcher_->match(*simg1, *simg2, sic1, sic2_guess, sic2, Line_sigma,
+                  Sample_sigma, Success, Diagnostic);
   if(Success) {
     Line_sigma = std::max(Line_sigma, Sample_sigma) * pix_fact;
     Sample_sigma = Line_sigma;
@@ -109,18 +107,18 @@ void SurfaceImageToImageMatch::match
 /// doesn't hurt either).
 //-----------------------------------------------------------------------
 
-void SurfaceImageToImageMatch::match_surf
-(const GroundCoordinate& Gc, 
- ImageCoordinate& Ic1, ImageCoordinate& Ic2,
- double& Line_sigma, double& Sample_sigma,
- bool& Success, int* Diagnostic) const
+void SurfaceImageToImageMatch::match_surf(const GroundCoordinate& Gc,
+                                          ImageCoordinate& Ic1,
+                                          ImageCoordinate& Ic2,
+                                          double& Line_sigma,
+                                          double& Sample_sigma, bool& Success,
+                                          int* Diagnostic) const
 {
   ImageCoordinate sic1 = simg1->coordinate(Gc);
   ImageCoordinate sic2_guess = simg2->coordinate(Gc);
   ImageCoordinate sic2;
-  matcher_->match(*simg1, *simg2, sic1, 
-		  sic2_guess, sic2, Line_sigma, Sample_sigma, Success,
-		  Diagnostic);
+  matcher_->match(*simg1, *simg2, sic1, sic2_guess, sic2, Line_sigma,
+                  Sample_sigma, Success, Diagnostic);
   if(Success) {
     Line_sigma = std::max(Line_sigma, Sample_sigma) * pix_fact;
     Sample_sigma = Line_sigma;

@@ -7,18 +7,14 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void CcorrMatcher::serialize(Archive & ar, const unsigned int UNUSED(version))
+void CcorrMatcher::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(ImageMatcher);
   GEOCAL_BASE(CcorrMatcher, ImageMatcher);
-  ar & GEOCAL_NVP_(min_correlation)
-    & GEOCAL_NVP_(min_variance)
-    & GEOCAL_NVP_(target_number_line)
-    & GEOCAL_NVP_(target_number_sample)
-    & GEOCAL_NVP_(template_number_line)
-    & GEOCAL_NVP_(template_number_sample);
+  ar& GEOCAL_NVP_(min_correlation) & GEOCAL_NVP_(min_variance) &
+      GEOCAL_NVP_(target_number_line) & GEOCAL_NVP_(target_number_sample) &
+      GEOCAL_NVP_(template_number_line) & GEOCAL_NVP_(template_number_sample);
 }
-
 
 GEOCAL_IMPLEMENT(CcorrMatcher);
 #endif
@@ -28,13 +24,13 @@ GEOCAL_IMPLEMENT(CcorrMatcher);
 // well for other imagery.
 //-----------------------------------------------------------------------
 
-CcorrMatcher::CcorrMatcher(int Target_nline, int Target_nsamp, int
-	     Template_nline, int Template_nsamp, double Min_ccorr, 
-	     double Min_variance)
-: min_correlation_(Min_ccorr), min_variance_(Min_variance), 
-  target_number_line_(Target_nline), target_number_sample_(Target_nsamp),
-  template_number_line_(Template_nline), 
-  template_number_sample_(Template_nsamp)
+CcorrMatcher::CcorrMatcher(int Target_nline, int Target_nsamp,
+                           int Template_nline, int Template_nsamp,
+                           double Min_ccorr, double Min_variance)
+  : min_correlation_(Min_ccorr), min_variance_(Min_variance),
+    target_number_line_(Target_nline), target_number_sample_(Target_nsamp),
+    template_number_line_(Template_nline),
+    template_number_sample_(Template_nsamp)
 {
   range_min_check(Min_ccorr, 0.0);
   range_min_check(Min_variance, 0.0);
@@ -42,11 +38,10 @@ CcorrMatcher::CcorrMatcher(int Target_nline, int Target_nsamp, int
   range_min_check(Target_nsamp, 0);
   range_min_check(Template_nline, 0);
   range_min_check(Template_nsamp, 0);
-  if(Target_nline % 2 != 1 ||
-     Target_nsamp % 2 != 1 ||
-     Template_nline % 2 != 1 ||
-     Template_nsamp % 2 != 1)
-    throw Exception("Target and template window size needs to be and odd number of pixels");
+  if(Target_nline % 2 != 1 || Target_nsamp % 2 != 1 ||
+     Template_nline % 2 != 1 || Template_nsamp % 2 != 1)
+    throw Exception(
+        "Target and template window size needs to be and odd number of pixels");
   templ.resize(template_number_line(), template_number_sample());
   target.resize(target_number_line(), target_number_sample());
 }
@@ -65,77 +60,72 @@ CcorrMatcher::CcorrMatcher(int Target_nline, int Target_nsamp, int
 /// parameters of a LsmMatcher).
 //-----------------------------------------------------------------------
 
-void CcorrMatcher::match_mask
-(const RasterImage& Ref, 
- const ImageMask& Ref_mask,			 
- const RasterImage& New, 
- const ImageMask& New_mask,
- const ImageCoordinate& Ref_loc, 
- const ImageCoordinate& New_guess, 
- ImageCoordinate& New_res,
- double& Line_sigma, double& Sample_sigma,
- bool& Success, int* Diagnostic) const
+void CcorrMatcher::match_mask(const RasterImage& Ref, const ImageMask& Ref_mask,
+                              const RasterImage& New, const ImageMask& New_mask,
+                              const ImageCoordinate& Ref_loc,
+                              const ImageCoordinate& New_guess,
+                              ImageCoordinate& New_res, double& Line_sigma,
+                              double& Sample_sigma, bool& Success,
+                              int* Diagnostic) const
 {
-  Success = false;		// We'll change this once we succeed.
+  Success = false; // We'll change this once we succeed.
   int ref_line = int(Ref_loc.line) - (template_number_line() - 1) / 2;
   int ref_sample = int(Ref_loc.sample) - (template_number_sample() - 1) / 2;
   int new_line = int(New_guess.line) - (target_number_line() - 1) / 2;
   int new_sample = int(New_guess.sample) - (target_number_sample() - 1) / 2;
 
-//-----------------------------------------------------------------------
-// If we don't have enough data to fill the template or target window,
-// then we can't do image matching. This is not an error on the part
-// of the caller of this function, since they should not need to know
-// the template or target window size in order to know if Ref_loc or
-// New_guess is too close to the edge. Set Success flag to false,
-// and return.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // If we don't have enough data to fill the template or target window,
+  // then we can't do image matching. This is not an error on the part
+  // of the caller of this function, since they should not need to know
+  // the template or target window size in order to know if Ref_loc or
+  // New_guess is too close to the edge. Set Success flag to false,
+  // and return.
+  //-----------------------------------------------------------------------
 
-  if(ref_line                              < 0                   ||
-     ref_line + template_number_line()     >=Ref.number_line()   ||
-     ref_sample                            < 0                   ||
-     ref_sample + template_number_sample() >=Ref.number_sample() ||
-     new_line                              < 0                   ||
-     new_line + target_number_line()       >=New.number_line()   ||
-     new_sample                            < 0                   ||
-     new_sample + target_number_sample()   >=New.number_sample()) {
+  if(ref_line < 0 || ref_line + template_number_line() >= Ref.number_line() ||
+     ref_sample < 0 ||
+     ref_sample + template_number_sample() >= Ref.number_sample() ||
+     new_line < 0 || new_line + target_number_line() >= New.number_line() ||
+     new_sample < 0 ||
+     new_sample + target_number_sample() >= New.number_sample()) {
     if(Diagnostic)
       *Diagnostic = TOO_CLOSE_TO_IMAGE_EDGE;
     return;
   }
 
-//-----------------------------------------------------------------------
-// Check if any of the date we want to use is masked.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Check if any of the date we want to use is masked.
+  //-----------------------------------------------------------------------
 
   if(Ref_mask.area_any_masked(ref_line, ref_sample, template_number_line(),
-			      template_number_sample()) ||
+                              template_number_sample()) ||
      New_mask.area_any_masked(new_line, new_sample, target_number_line(),
-			      target_number_sample())) {
+                              target_number_sample())) {
     if(Diagnostic)
       *Diagnostic = IMAGE_MASKED;
     return;
   }
 
-//-----------------------------------------------------------------------
-// Otherwise, extract the template and target from the input imagery 
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Otherwise, extract the template and target from the input imagery
+  //-----------------------------------------------------------------------
 
   templ.resize(template_number_line(), template_number_sample());
   target.resize(target_number_line(), target_number_sample());
-  Ref.read_ptr(ref_line, ref_sample, template_number_line(), 
-	       template_number_sample(), templ.data());
-  New.read_ptr(new_line, new_sample, target_number_line(), 
-	       target_number_sample(), target.data());
+  Ref.read_ptr(ref_line, ref_sample, template_number_line(),
+               template_number_sample(), templ.data());
+  New.read_ptr(new_line, new_sample, target_number_line(),
+               target_number_sample(), target.data());
 
-//-----------------------------------------------------------------------
-// Get mean and variance, and check threshold.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  // Get mean and variance, and check threshold.
+  //-----------------------------------------------------------------------
 
   double template_mean = mean(templ);
-  double template_var = 
-    (sum(sqr(templ)) - templ.size() * template_mean * template_mean) / 
-    (templ.size() - 1);
+  double template_var =
+      (sum(sqr(templ)) - templ.size() * template_mean * template_mean) /
+      (templ.size() - 1);
   if(template_var < min_variance_) {
     if(Diagnostic)
       *Diagnostic = VARIANCE_TOO_LOW;
@@ -149,19 +139,19 @@ void CcorrMatcher::match_mask
       Range r2(j, j + templ.extent(1) - 1);
       Array<int, 2> tsub(target(r1, r2));
       double tmean = mean(tsub);
-      double tvar = 
-	(sum(sqr(tsub)) - tsub.size() * tmean * tmean) / (tsub.size() - 1);
+      double tvar =
+          (sum(sqr(tsub)) - tsub.size() * tmean * tmean) / (tsub.size() - 1);
       if(tvar < min_variance_)
-	continue;
-      double ccorr_covariance = 
-	(sum(tsub * templ) - tsub.size() * tmean * template_mean) / 
-	(tsub.size() - 1);
-      double correlation = fabs(ccorr_covariance) * ccorr_covariance /
-	(tvar * template_var);
+        continue;
+      double ccorr_covariance =
+          (sum(tsub * templ) - tsub.size() * tmean * template_mean) /
+          (tsub.size() - 1);
+      double correlation =
+          fabs(ccorr_covariance) * ccorr_covariance / (tvar * template_var);
       if(correlation > correlation_max) {
-	correlation_max = correlation;
-	imax = i;
-	jmax = j;
+        correlation_max = correlation;
+        imax = i;
+        jmax = j;
       }
     }
   if(correlation_max < min_correlation_) {
@@ -187,8 +177,8 @@ void CcorrMatcher::print(std::ostream& Os) const
   Os << "Cross correlation matcher:\n"
      << "  Minimum correlation: " << min_correlation_ << "\n"
      << "  Minimum variance:    " << min_variance_ << "\n"
-     << "  Target:              " << target_number_line_ << " X " 
+     << "  Target:              " << target_number_line_ << " X "
      << target_number_sample_ << "\n"
-     << "  Template:            " << template_number_line_ << " X " 
+     << "  Template:            " << template_number_line_ << " X "
      << template_number_sample_ << "\n";
 }

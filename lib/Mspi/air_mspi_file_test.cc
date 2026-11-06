@@ -18,21 +18,22 @@ BOOST_AUTO_TEST_CASE(basic)
   // Check that we handle being passed the permanent name and
   // returning it in canonical form.
   BOOST_CHECK_EQUAL(air_mspi_permanent_file_name("./foo.txt"),
-		    (cp / "foo.txt").string());
+                    (cp / "foo.txt").string());
   // Check that we handle being passed the local name and returning
   // the permanent name
-  BOOST_CHECK_EQUAL(air_mspi_permanent_file_name((t / cp / "./foo.txt").string()),
-		    (cp / "foo.txt").string());
+  BOOST_CHECK_EQUAL(
+      air_mspi_permanent_file_name((t / cp / "./foo.txt").string()),
+      (cp / "foo.txt").string());
   // Check that if file doesn't exist we return the permanent name
   BOOST_CHECK_EQUAL(air_mspi_local_file_name("./foo.txt"),
-		    (cp / "foo.txt").string());
+                    (cp / "foo.txt").string());
   boost::filesystem::create_directories(t / cp);
   std::ofstream f((t / cp / "foo.txt").string().c_str());
   f << "hi there\n";
   f.close();
   // Check that if file does exist we return the local file name
   BOOST_CHECK_EQUAL(air_mspi_local_file_name("./foo.txt"),
-		    (t / cp / "foo.txt").string());
+                    (t / cp / "foo.txt").string());
   // Clean up directory
   boost::filesystem::remove_all(t);
 }

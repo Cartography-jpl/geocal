@@ -5,7 +5,7 @@
 
 namespace GeoCal {
 
-/****************************************************************//**
+/****************************************************************/ /**
   This class does a "doughnut average" of an underlying RasterImage.
   This produces the average value of all the pixels in a given window
   size, excluding a smaller doughnut. We exclude all points that a
@@ -30,45 +30,46 @@ namespace GeoCal {
 
 class DoughnutAverage : public CalcRasterMultiBand {
 public:
-  DoughnutAverage(const boost::shared_ptr<RasterImageMultiBand>& Rimg, 
-		  int Window_size = 11, int Doughnut_size = 5,
-		  bool Allow_gore = true,
-		  int Number_tile_line = -1, int Number_tile_sample = -1,
-		  int Number_tile = 4);
+  DoughnutAverage(const boost::shared_ptr<RasterImageMultiBand>& Rimg,
+                  int Window_size = 11, int Doughnut_size = 5,
+                  bool Allow_gore = true, int Number_tile_line = -1,
+                  int Number_tile_sample = -1, int Number_tile = 4);
   virtual ~DoughnutAverage() {}
 
   blitz::Array<double, 2> cvdnorm(int band, int Lstart, int Sstart,
-				  int Number_line, int Number_sample) const;
-  blitz::Array<double, 2> pandif(int Lstart, int Sstart,
-				 int Number_line, int Number_sample) const;
+                                  int Number_line, int Number_sample) const;
+  blitz::Array<double, 2> pandif(int Lstart, int Sstart, int Number_line,
+                                 int Number_sample) const;
 
-//-----------------------------------------------------------------------
-/// The window size.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// The window size.
+  //-----------------------------------------------------------------------
 
-  int window_size() const {return whsize * 2 + 1;}
+  int window_size() const { return whsize * 2 + 1; }
 
-//-----------------------------------------------------------------------
-/// The doughnut size.
-//-----------------------------------------------------------------------
-  int doughnut_size() const {return dhsize * 2 + 1;}
+  //-----------------------------------------------------------------------
+  /// The doughnut size.
+  //-----------------------------------------------------------------------
+  int doughnut_size() const { return dhsize * 2 + 1; }
 
-//-----------------------------------------------------------------------
-/// If true, we allow gore in a window and just exclude it in the
-/// average. Otherwise we set a point to 0 if any point in the window
-/// is 0.
-//-----------------------------------------------------------------------
-  bool allow_gore() const {return allow_gore_;}
+  //-----------------------------------------------------------------------
+  /// If true, we allow gore in a window and just exclude it in the
+  /// average. Otherwise we set a point to 0 if any point in the window
+  /// is 0.
+  //-----------------------------------------------------------------------
+  bool allow_gore() const { return allow_gore_; }
 
-//-----------------------------------------------------------------------
-/// The underlying image
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// The underlying image
+  //-----------------------------------------------------------------------
 
   const boost::shared_ptr<RasterImageMultiBand>& underlying_image() const
-  { return rimg; }
+  {
+    return rimg;
+  }
   virtual void print(std::ostream& Os) const { Os << "DoughnutAverage"; }
 protected:
-  virtual void calc(int Lstart, int Sstart) const; 
+  virtual void calc(int Lstart, int Sstart) const;
   DoughnutAverage() {}
 private:
   boost::shared_ptr<RasterImageMultiBand> rimg;
@@ -85,49 +86,54 @@ private:
   mutable blitz::Array<double, 3> input_data;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
-class RasterImageWrapCvdNorm: public CalcRaster {
+class RasterImageWrapCvdNorm : public CalcRaster {
 public:
-  RasterImageWrapCvdNorm(const boost::shared_ptr<DoughnutAverage>& Davg, 
-			 int Band)
-    : CalcRaster(Davg->raster_image(0)), davg_(Davg), band_(Band) {}
+  RasterImageWrapCvdNorm(const boost::shared_ptr<DoughnutAverage>& Davg,
+                         int Band)
+    : CalcRaster(Davg->raster_image(0)), davg_(Davg), band_(Band)
+  {
+  }
   virtual ~RasterImageWrapCvdNorm() {};
-  int band() const { return band_;}
-  const boost::shared_ptr<DoughnutAverage>& davg() const { return davg_;}
-  virtual void print(std::ostream& Os) const
-  { Os << "RasterImageWrapCvdNorm"; }
+  int band() const { return band_; }
+  const boost::shared_ptr<DoughnutAverage>& davg() const { return davg_; }
+  virtual void print(std::ostream& Os) const { Os << "RasterImageWrapCvdNorm"; }
 protected:
-  virtual void calc(int Lstart, int Sstart) const 
-  { data = davg_->cvdnorm(band_, Lstart, Sstart, data.rows(), data.cols()); }
+  virtual void calc(int Lstart, int Sstart) const
+  {
+    data = davg_->cvdnorm(band_, Lstart, Sstart, data.rows(), data.cols());
+  }
   RasterImageWrapCvdNorm() {}
 private:
   boost::shared_ptr<DoughnutAverage> davg_;
   int band_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
-
+  void serialize(Archive& ar, const unsigned int version);
 };
 
-class RasterImageWrapPandif: public CalcRaster {
+class RasterImageWrapPandif : public CalcRaster {
 public:
   RasterImageWrapPandif(const boost::shared_ptr<DoughnutAverage>& Davg)
-    : CalcRaster(Davg->raster_image(0)), davg_(Davg) {}
+    : CalcRaster(Davg->raster_image(0)), davg_(Davg)
+  {
+  }
   virtual ~RasterImageWrapPandif() {};
-  const boost::shared_ptr<DoughnutAverage>& davg() const { return davg_;}
-  virtual void print(std::ostream& Os) const
-  { Os << "RasterImageWrapPandif"; }
+  const boost::shared_ptr<DoughnutAverage>& davg() const { return davg_; }
+  virtual void print(std::ostream& Os) const { Os << "RasterImageWrapPandif"; }
 protected:
-  virtual void calc(int Lstart, int Sstart) const 
-  {  data = davg_->pandif(Lstart, Sstart, data.rows(), data.cols()); }
+  virtual void calc(int Lstart, int Sstart) const
+  {
+    data = davg_->pandif(Lstart, Sstart, data.rows(), data.cols());
+  }
   RasterImageWrapPandif() {}
 private:
   boost::shared_ptr<DoughnutAverage> davg_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
 }
@@ -135,4 +141,3 @@ GEOCAL_EXPORT_KEY(DoughnutAverage);
 GEOCAL_EXPORT_KEY(RasterImageWrapCvdNorm);
 GEOCAL_EXPORT_KEY(RasterImageWrapPandif);
 #endif
-

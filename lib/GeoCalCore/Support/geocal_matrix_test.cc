@@ -1,5 +1,5 @@
 #include "unit_test_support.h"
-#include "geocal_matrix.h"    
+#include "geocal_matrix.h"
 
 using namespace GeoCal;
 
@@ -18,10 +18,9 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(y[0], 1.0 * 10 + 4 * 11 + 7 * 12, 1e-4);
   BOOST_CHECK_CLOSE(y[1], 2.0 * 10 + 5 * 11 + 8 * 12, 1e-4);
   BOOST_CHECK_CLOSE(y[2], 3.0 * 10 + 6 * 11 + 9 * 12, 1e-4);
-  boost::array<double, 3>  z = {{13, 14, 15}};
+  boost::array<double, 3> z = {{13, 14, 15}};
   BOOST_CHECK_CLOSE(dot(x, z), 10.0 * 13 + 11 * 14 + 12 * 15, 1e-4);
   BOOST_CHECK_CLOSE(norm(x), sqrt(10.0 * 10 + 11 * 11 + 12 * 12), 1e-4);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-

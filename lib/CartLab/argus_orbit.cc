@@ -20,25 +20,22 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void ArgusOrbitData::serialize(Archive & ar, const unsigned int version)
+void ArgusOrbitData::serialize(Archive& ar, const unsigned int version)
 {
-    ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(AircraftOrbitData);
-    ar & GEOCAL_NVP_(camera_number)
-      & GEOCAL_NVP_(file_name);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(AircraftOrbitData);
+  ar& GEOCAL_NVP_(camera_number) & GEOCAL_NVP_(file_name);
 }
 
 template<class Archive>
-void ArgusOrbit::save(Archive & ar, const unsigned int version) const
+void ArgusOrbit::save(Archive& ar, const unsigned int version) const
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
-    & GEOCAL_NVP(fname);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit) & GEOCAL_NVP(fname);
 }
 
 template<class Archive>
-void ArgusOrbit::load(Archive & ar, const unsigned int version)
+void ArgusOrbit::load(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
-    & GEOCAL_NVP(fname);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit) & GEOCAL_NVP(fname);
   init(fname);
 }
 
@@ -49,11 +46,8 @@ GEOCAL_IMPLEMENT(ArgusOrbitData);
 /// Tolerance in seconds for two orbit data records to be in the same "row"
 double ArgusOrbit::row_time_tolerance = 0.2;
 
-struct null_deleter
-{
-  void operator()(void const *) const
-  {
-  }
+struct null_deleter {
+  void operator()(void const*) const {}
 };
 
 //-----------------------------------------------------------------------
@@ -64,12 +58,10 @@ struct null_deleter
 //-----------------------------------------------------------------------
 
 void ArgusOrbitData::add_ortho_to_image(
-const boost::shared_ptr<RasterImage>& M1,
-const boost::shared_ptr<RasterImage>& M2,
-const boost::shared_ptr<RasterImage>& M3,
-const Camera& Cam,
-const Dem& D,
-int Border) const
+    const boost::shared_ptr<RasterImage>& M1,
+    const boost::shared_ptr<RasterImage>& M2,
+    const boost::shared_ptr<RasterImage>& M3, const Camera& Cam, const Dem& D,
+    int Border) const
 {
   // The OrbitMapProjected here has been replace with
   // IgcMapProject. We could change this function to use this, but we
@@ -77,18 +69,17 @@ int Border) const
   // anyways. For now, just throw an exception if this somehow gets
   // called.
   throw Exception("Not implemented");
- 
-  std::vector<boost::shared_ptr<GroundCoordinate> > fp =
-    footprint(Cam, D);
-  SubRasterImage m1out(M1,fp, Border);
-  SubRasterImage m2out(M2,fp, Border);
-  SubRasterImage m3out(M3,fp, Border);
-  std::vector<boost::shared_ptr<RasterImage> > img =
-    GdalRasterImage::read_all_bands(file_name());
+
+  std::vector<boost::shared_ptr<GroundCoordinate>> fp = footprint(Cam, D);
+  SubRasterImage m1out(M1, fp, Border);
+  SubRasterImage m2out(M2, fp, Border);
+  SubRasterImage m3out(M3, fp, Border);
+  std::vector<boost::shared_ptr<RasterImage>> img =
+      GdalRasterImage::read_all_bands(file_name());
   boost::shared_ptr<OrbitData> odp(const_cast<ArgusOrbitData*>(this),
-				   null_deleter());
-  boost::shared_ptr<Camera> camp(const_cast<Camera*>(&Cam),null_deleter());
-  boost::shared_ptr<Dem> demp(const_cast<Dem*>(&D),null_deleter());
+                                   null_deleter());
+  boost::shared_ptr<Camera> camp(const_cast<Camera*>(&Cam), null_deleter());
+  boost::shared_ptr<Dem> demp(const_cast<Dem*>(&D), null_deleter());
   // OrbitMapProjected m1(m1out.map_info(), odp, img[0], camp, demp);
   // OrbitMapProjected m2(m2out.map_info(), odp, img[1], camp, demp);
   // OrbitMapProjected m3(m3out.map_info(), odp, img[2], camp, demp);
@@ -118,10 +109,10 @@ int Border) const
 /// of all of the data involved.
 //-----------------------------------------------------------------------
 
-void ArgusOrbitData::save_ortho(const MapInfo& Mi, const Camera& Cam, 
-				const Dem& D, const std::string& Fname,
-				const std::string& Type, int Border,
-				int Grid_spacing) const
+void ArgusOrbitData::save_ortho(const MapInfo& Mi, const Camera& Cam,
+                                const Dem& D, const std::string& Fname,
+                                const std::string& Type, int Border,
+                                int Grid_spacing) const
 {
   // The OrbitMapProjected here has been replace with
   // IgcMapProject. We could change this function to use this, but we
@@ -131,19 +122,19 @@ void ArgusOrbitData::save_ortho(const MapInfo& Mi, const Camera& Cam,
   throw Exception("Not implemented");
 
   MapInfo misub = Mi.cover(footprint(Cam, D), Border);
-  std::vector<boost::shared_ptr<RasterImage> > img =
-    GdalRasterImage::read_all_bands(file_name());
+  std::vector<boost::shared_ptr<RasterImage>> img =
+      GdalRasterImage::read_all_bands(file_name());
   boost::shared_ptr<OrbitData> odp(const_cast<ArgusOrbitData*>(this),
-				   null_deleter());
-  boost::shared_ptr<Camera> camp(const_cast<Camera*>(&Cam),null_deleter());
-  boost::shared_ptr<Dem> demp(const_cast<Dem*>(&D),null_deleter());
+                                   null_deleter());
+  boost::shared_ptr<Camera> camp(const_cast<Camera*>(&Cam), null_deleter());
+  boost::shared_ptr<Dem> demp(const_cast<Dem*>(&D), null_deleter());
   // OrbitMapProjected m(misub, odp, img, camp, demp);
   // std::vector<boost::shared_ptr<RasterImage> > mres;
-  // mres.push_back(boost::shared_ptr<RasterImage>(new 
+  // mres.push_back(boost::shared_ptr<RasterImage>(new
   //        MemoryRasterImage(misub)));
-  // mres.push_back(boost::shared_ptr<RasterImage>(new 
+  // mres.push_back(boost::shared_ptr<RasterImage>(new
   //        MemoryRasterImage(misub)));
-  // mres.push_back(boost::shared_ptr<RasterImage>(new 
+  // mres.push_back(boost::shared_ptr<RasterImage>(new
   //        MemoryRasterImage(misub)));
   // if(Grid_spacing == 1)
   //   m.write_multiple(mres);
@@ -156,26 +147,23 @@ void ArgusOrbitData::save_ortho(const MapInfo& Mi, const Camera& Cam,
 /// Save file to given type.
 //-----------------------------------------------------------------------
 
-void ArgusOrbitData::save_to_file(const std::string& Fname, 
-			      const RasterImage& m1,
-			      const RasterImage& m2, 
-			      const RasterImage& m3, 
-			      const std::string& Type)
+void ArgusOrbitData::save_to_file(const std::string& Fname,
+                                  const RasterImage& m1, const RasterImage& m2,
+                                  const RasterImage& m3,
+                                  const std::string& Type)
 {
   if(Type == "img") {
     GdalRasterImage::save_to_erdas(Fname, m1, m2, m3);
   } else if(Type == "tif") {
     // Compressed output seems to require that we generate a in memory
     // copy first. This lets GDAL write this out in the order it wants.
-    GdalRasterImage::save(Fname, "GTiff", m1, m2, m3, 
-				GdalRasterImage::Byte, 
-				"PHOTOMETRIC=RGB COMPRESS=LZW", true);
+    GdalRasterImage::save(Fname, "GTiff", m1, m2, m3, GdalRasterImage::Byte,
+                          "PHOTOMETRIC=RGB COMPRESS=LZW", true);
   } else if(Type == "tifjpeg") {
     // Compressed output seems to require that we generate a in memory
     // copy first. This lets GDAL write this out in the order it wants.
-    GdalRasterImage::save(Fname, "GTiff", m1, m2, m3, 
-				GdalRasterImage::Byte, 
-				"PHOTOMETRIC=RGB TILED=YES COMPRESS=JPEG", true);
+    GdalRasterImage::save(Fname, "GTiff", m1, m2, m3, GdalRasterImage::Byte,
+                          "PHOTOMETRIC=RGB TILED=YES COMPRESS=JPEG", true);
   } else if(Type == "vicar") {
 #ifdef HAVE_VICAR_RTL
     VicarRasterImage v1(Fname + "_r.img", m1.map_info());
@@ -185,7 +173,9 @@ void ArgusOrbitData::save_to_file(const std::string& Fname,
     VicarRasterImage v3(Fname + "_b.img", m1.map_info());
     copy(m3, v3);
 #else
-    throw Exception("Wasn't compiled with support for VICAR RTL. If you need thsi functionality, install the VICAR RTL and rebuild GeoCal");
+    throw Exception(
+        "Wasn't compiled with support for VICAR RTL. If you need thsi "
+        "functionality, install the VICAR RTL and rebuild GeoCal");
 #endif
   } else {
     throw Exception("Unrecognized type. Should be img, tif or vicar");
@@ -200,14 +190,15 @@ void ArgusOrbitData::save_to_file(const std::string& Fname,
 boost::shared_ptr<GdalRasterImage> ArgusOrbitData::image(int band) const
 {
   if(gdal_data_.get())
-    return boost::shared_ptr<GdalRasterImage>(new GdalRasterImage(gdal_data_, band));
+    return boost::shared_ptr<GdalRasterImage>(
+        new GdalRasterImage(gdal_data_, band));
   boost::shared_ptr<GdalRasterImage> g(new GdalRasterImage(file_name(), band));
   gdal_data_ = g->gdal_data_base().data_set();
   return g;
 }
 
 //-----------------------------------------------------------------------
-/// Print to stream. 
+/// Print to stream.
 //-----------------------------------------------------------------------
 
 void ArgusOrbitData::print(std::ostream& Os) const
@@ -221,7 +212,6 @@ void ArgusOrbitData::print(std::ostream& Os) const
      << "  Pitch:    " << pitch() << " deg\n"
      << "  Heading:  " << heading() << " deg\n";
 }
-
 
 //-----------------------------------------------------------------------
 /// Open the given file and use it to provide Orbit information. This
@@ -243,14 +233,13 @@ void ArgusOrbit::init(const std::string& Fname)
   is.exceptions(std::ifstream::failbit | std::ifstream::badbit);
   std::string ln;
   std::string ln2;
-  is >> ln;			// Skip first line, which is a header
+  is >> ln; // Skip first line, which is a header
   int ln_n = 1;
-  is >> ln >> ln2 >> std::ws;	// Epoch
+  is >> ln >> ln2 >> std::ws; // Epoch
   Time epoch = Time::parse_time(ln + " " + ln2);
   ln_n += 1;
   boost::array<double, 3> vel = {{0.0, 0.0, 0.0}};
-  typedef std::multimap<Time, boost::shared_ptr<ArgusOrbitData> > 
-  time_data_map;
+  typedef std::multimap<Time, boost::shared_ptr<ArgusOrbitData>> time_data_map;
 
   /// Orbit data, indexed by the Time. This is a multimap because it
   /// is entirely possible to have multiple entries in the navigation
@@ -265,30 +254,29 @@ void ArgusOrbit::init(const std::string& Fname)
     boost::algorithm::split(ln_s, ln, boost::algorithm::is_any_of(","));
     if(ln_s.size() != 9) {
       Exception e;
-      e << "Trouble reading the ArgusOrbit file " << Fname 
-	<< " at line number " << ln_n;
+      e << "Trouble reading the ArgusOrbit file " << Fname << " at line number "
+        << ln_n;
       throw e;
-    }	
+    }
     std::string fname = ln_s[0];
     // cam_index is a name line "CAM01"
     boost::smatch m;
     if(!boost::regex_match(ln_s[1], m, boost::regex("\\D*(\\d+).*"))) {
       Exception e;
-      e << "Trouble reading the ArgusOrbit file " << Fname 
-	<< " at line number " << ln_n << ", trouble parsing camera name";
+      e << "Trouble reading the ArgusOrbit file " << Fname << " at line number "
+        << ln_n << ", trouble parsing camera name";
       throw e;
     }
     int cam_index = boost::lexical_cast<int>(m[1]);
     double toffset = boost::lexical_cast<double>(ln_s[2]);
     Geodetic pos(boost::lexical_cast<double>(ln_s[3]),
-	       boost::lexical_cast<double>(ln_s[4]),
-	       boost::lexical_cast<double>(ln_s[5]));
+                 boost::lexical_cast<double>(ln_s[4]),
+                 boost::lexical_cast<double>(ln_s[5]));
     double roll = boost::lexical_cast<double>(ln_s[6]);
     double pitch = boost::lexical_cast<double>(ln_s[7]);
     double heading = boost::lexical_cast<double>(ln_s[8]);
-    boost::shared_ptr<ArgusOrbitData> 
-      od(new ArgusOrbitData(epoch + toffset, fname, cam_index, pos, vel,
-			    roll, pitch, heading));
+    boost::shared_ptr<ArgusOrbitData> od(new ArgusOrbitData(
+        epoch + toffset, fname, cam_index, pos, vel, roll, pitch, heading));
     time_data.insert(std::make_pair(od->time(), od));
     orbit_data_map[od->time()] = od;
   }
@@ -308,16 +296,18 @@ void ArgusOrbit::init(const std::string& Fname)
     // insert the ArgusOrbitData at the entry rown, camera number. We
     // check to see if there was already an entry for this row and
     // camera, if so we print a warning message.
-    if(!row_data.insert(std::make_pair(std::make_pair(rown, 
-       vt.second->camera_number()), vt.second)).second) {
-      std::cerr <<"Warning: While reading the ArgusOrbit file " << Fname 
-		<< "\n "
-		<< "We found two records for camera number " 
-		<< vt.second->camera_number() 
-		<< " that are near the time offset " 
-		<< vt.second->time() - epoch << "\n"
-		<< "Occurred at the image file " << vt.second->file_name()
-		<< ". Using the second file, and throwing away the first\n";
+    if(!row_data
+            .insert(std::make_pair(
+                std::make_pair(rown, vt.second->camera_number()), vt.second))
+            .second) {
+      std::cerr << "Warning: While reading the ArgusOrbit file " << Fname
+                << "\n "
+                << "We found two records for camera number "
+                << vt.second->camera_number()
+                << " that are near the time offset "
+                << vt.second->time() - epoch << "\n"
+                << "Occurred at the image file " << vt.second->file_name()
+                << ". Using the second file, and throwing away the first\n";
     }
   }
   number_row_ = rown + 1;
@@ -325,7 +315,7 @@ void ArgusOrbit::init(const std::string& Fname)
 }
 
 //-----------------------------------------------------------------------
-/// Print to stream. 
+/// Print to stream.
 //-----------------------------------------------------------------------
 
 void ArgusOrbit::print(std::ostream& Os) const
@@ -344,9 +334,8 @@ void ArgusOrbit::print(std::ostream& Os) const
 
 double ArgusOrbit::focal_length(int camera_num) const
 {
-  for(int i = 0; i < number_row(); ++i) 
-    if(nav(i, camera_num).get() &&
-       nav(i, camera_num)->file_name() != "")
+  for(int i = 0; i < number_row(); ++i)
+    if(nav(i, camera_num).get() && nav(i, camera_num)->file_name() != "")
       return nav(i, camera_num)->image()->metadata<double>("EXIF_FocalLength");
   return -1;
 }
@@ -356,8 +345,7 @@ double ArgusOrbit::focal_length(int camera_num) const
 /// don't have any data there return a null pointer.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<ArgusOrbitData> 
-ArgusOrbit::nav(int row, int camera_num) const
+boost::shared_ptr<ArgusOrbitData> ArgusOrbit::nav(int row, int camera_num) const
 {
   row_map::const_iterator i = row_data.find(std::make_pair(row, camera_num));
   if(i == row_data.end())
@@ -371,28 +359,23 @@ ArgusOrbit::nav(int row, int camera_num) const
 /// We save this to the given file, with the given Type.
 //-----------------------------------------------------------------------
 
-void ArgusOrbitData::mosaic(const 
-			    std::vector<boost::shared_ptr<ArgusOrbitData> > &Od,
-			    const std::vector<boost::shared_ptr<Camera> >& Cam,
-			    const Dem& D,
-			    const MapInfo& Mi, const std::string& Fname,
-			    const std::string& Type,
-			    int Border)
+void ArgusOrbitData::mosaic(
+    const std::vector<boost::shared_ptr<ArgusOrbitData>>& Od,
+    const std::vector<boost::shared_ptr<Camera>>& Cam, const Dem& D,
+    const MapInfo& Mi, const std::string& Fname, const std::string& Type,
+    int Border)
 {
   boost::shared_ptr<MemoryRasterImage> m1(new MemoryRasterImage(Mi));
   boost::shared_ptr<MemoryRasterImage> m2(new MemoryRasterImage(Mi));
   boost::shared_ptr<MemoryRasterImage> m3(new MemoryRasterImage(Mi));
-  std::fill(m1->data().data(), m1->data().data() + m1->data().numElements(), 
-	    0);
-  std::fill(m2->data().data(), m2->data().data() + m2->data().numElements(), 
-	    0);
-  std::fill(m3->data().data(), m3->data().data() + m3->data().numElements(), 
-	    0);
+  std::fill(m1->data().data(), m1->data().data() + m1->data().numElements(), 0);
+  std::fill(m2->data().data(), m2->data().data() + m2->data().numElements(), 0);
+  std::fill(m3->data().data(), m3->data().data() + m3->data().numElements(), 0);
   BOOST_FOREACH(const boost::shared_ptr<ArgusOrbitData>& odv, Od) {
     std::cerr << "  Processing " << odv->file_name() << "\n";
     try {
-      odv->add_ortho_to_image(m1, m2, m3, *Cam[odv->camera_number() - 1],
-			      D, Border);
+      odv->add_ortho_to_image(m1, m2, m3, *Cam[odv->camera_number() - 1], D,
+                              Border);
     } catch(const NoCoverage& E) {
       std::cerr << "  Skipping file, it has no coverage with MapInfo\n";
     }

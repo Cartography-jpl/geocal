@@ -13,14 +13,14 @@ using namespace GeoCal;
 
 std::vector<std::string> GdalBase::file_names() const
 {
-// This uses newer features of GDAL than we want to depend on.
-//   GDALDataset& ds = const_cast<GDALDataset&>(*data_set());
-//   char **flist =  ds.GetFileList();
-//   std::vector<std::string> res;
-//   for(char **f = flist; f != 0; ++f)
-//     res.push_back(std::string(*f));
-//   CSLDestroy(flist);
-//   return res;
+  // This uses newer features of GDAL than we want to depend on.
+  //   GDALDataset& ds = const_cast<GDALDataset&>(*data_set());
+  //   char **flist =  ds.GetFileList();
+  //   std::vector<std::string> res;
+  //   for(char **f = flist; f != 0; ++f)
+  //     res.push_back(std::string(*f));
+  //   CSLDestroy(flist);
+  //   return res;
   return fnames_;
 }
 
@@ -28,7 +28,8 @@ std::vector<std::string> GdalBase::file_names() const
 /// Get a list of metadata keys for a given domain.
 //-----------------------------------------------------------------------
 
-std::vector<std::string> GdalBase::metadata_list(const std::string& Domain) const
+std::vector<std::string>
+GdalBase::metadata_list(const std::string& Domain) const
 {
   if(is_closed())
     throw Exception("File has already been closed");
@@ -40,17 +41,17 @@ std::vector<std::string> GdalBase::metadata_list(const std::string& Domain) cons
       // Skip value that end in "=", this is metadata with no actual
       // value.
       if(*t.rbegin() != '=')
-	res.push_back(t.substr(0, t.find("=")));
+        res.push_back(t.substr(0, t.find("=")));
     }
   }
   return res;
 }
 
-  //-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 /// Print to stream.
 //-----------------------------------------------------------------------
 
-void GdalBase::print(std::ostream& Os) const 
+void GdalBase::print(std::ostream& Os) const
 {
   Os << "Gdal file, files (";
   std::vector<std::string> fn = file_names();
@@ -69,7 +70,8 @@ void GdalBase::print(std::ostream& Os) const
 std::string GdalBase::linear_unit_name() const
 {
   if(!has_map_info())
-    throw Exception("Attempt to read map_info() data from a GDAL file without map_info()");
+    throw Exception(
+        "Attempt to read map_info() data from a GDAL file without map_info()");
   OGRSpatialReference ogr(data_set_->GetProjectionRef());
   const char* nm;
   ogr.GetLinearUnits(&nm);
@@ -81,41 +83,43 @@ std::string GdalBase::linear_unit_name() const
 /// linear distance by to get meters.
 //-----------------------------------------------------------------------
 
-double GdalBase::linear_unit_scale() const 
-{   
+double GdalBase::linear_unit_scale() const
+{
   if(!has_map_info())
-    throw Exception("Attempt to read map_info() data from a GDAL file without map_info()");
+    throw Exception(
+        "Attempt to read map_info() data from a GDAL file without map_info()");
   OGRSpatialReference ogr(data_set_->GetProjectionRef());
-  return ogr.GetLinearUnits(); 
+  return ogr.GetLinearUnits();
 }
 
 //-----------------------------------------------------------------------
 /// Read the MapInfo for the file. An exception is thrown if there
 /// isn't map projection information in the file or if it is an
-/// unsupported map projection. 
+/// unsupported map projection.
 //-----------------------------------------------------------------------
 
 MapInfo GdalBase::map_info() const
 {
   if(!has_map_info())
-    throw Exception("Attempt to read map_info() data from a GDAL file without map_info()");
+    throw Exception(
+        "Attempt to read map_info() data from a GDAL file without map_info()");
   // Read in the coordinate system. Because it is so common, we handle
   // a Geographic coordinate system based on WGS84 as special and use
-  // the GeodeticConverter. Otherwise, we use a more generic 
+  // the GeodeticConverter. Otherwise, we use a more generic
   // OgrCoordinateConverter.
   boost::shared_ptr<CoordinateConverter> coor_conv;
-  boost::shared_ptr<OGRSpatialReference> 
-    ogr(new OGRSpatialReference(data_set_->GetProjectionRef()));
-#if(GDAL_VERSION_MAJOR >= 3)
+  boost::shared_ptr<OGRSpatialReference> ogr(
+      new OGRSpatialReference(data_set_->GetProjectionRef()));
+#if (GDAL_VERSION_MAJOR >= 3)
   ogr->SetAxisMappingStrategy(OAMS_TRADITIONAL_GIS_ORDER);
-#endif  
+#endif
   OGRSpatialReference sr_wgs84;
   int status = sr_wgs84.SetWellKnownGeogCS("WGS84");
   if(status != OGRERR_NONE)
     throw Exception("Call to SetWellKnownGeogCS failed");
-#if(GDAL_VERSION_MAJOR >= 3)
+#if (GDAL_VERSION_MAJOR >= 3)
   sr_wgs84.SetAxisMappingStrategy(OAMS_TRADITIONAL_GIS_ORDER);
-#endif  
+#endif
   // Treat WGS-84 as special
   if(sr_wgs84.IsSame(ogr.get()))
     coor_conv.reset(new GeodeticConverter());
@@ -125,18 +129,18 @@ MapInfo GdalBase::map_info() const
     if(nm.size() > 4 && nm.substr(0, 4) == "GCS_") {
       std::string pname = nm.substr(4);
       try {
-	int naif_code = SpiceHelper::name_to_body(pname);
-	coor_conv.reset(new PlanetocentricConverter(naif_code));
+        int naif_code = SpiceHelper::name_to_body(pname);
+        coor_conv.reset(new PlanetocentricConverter(naif_code));
       } catch(const Exception& e) {
-	// Don't worry about exceptions, we just fall through to using
-	// Ogr
+        // Don't worry about exceptions, we just fall through to using
+        // Ogr
       }
     }
   }
   // Then fall back to a generic Ogr
   if(!coor_conv)
-    coor_conv.reset(new OgrCoordinateConverter(boost::shared_ptr<OgrWrapper>
-						 (new OgrWrapper(ogr))));
+    coor_conv.reset(new OgrCoordinateConverter(
+        boost::shared_ptr<OgrWrapper>(new OgrWrapper(ogr))));
 
   // Note that Geotiff there are two ways the parameters are
   // specified, point or area. GDAL already handles this, so we don't
@@ -145,11 +149,11 @@ MapInfo GdalBase::map_info() const
 
   blitz::Array<double, 1> param(6);
   status = data_set_->GetGeoTransform(param.data());
-  if(status ==CE_Failure)
+  if(status == CE_Failure)
     throw Exception("Call to GetGeoTransform failed");
-  boost::array<index, 2> size = 
-    {{const_cast<GDALRasterBand&>(raster_band()).GetYSize(),
-      const_cast<GDALRasterBand&>(raster_band()).GetXSize()}};
+  boost::array<index, 2> size = {
+      {const_cast<GDALRasterBand&>(raster_band()).GetYSize(),
+       const_cast<GDALRasterBand&>(raster_band()).GetXSize()}};
   // Now, read if the data is point or area. Note that other than the
   // metadata information the mapinfo is the same (so same param and
   // size). But we need to record information about if the original
@@ -169,30 +173,34 @@ MapInfo GdalBase::map_info() const
 void GeoCal::gdal_map_info(GDALDataset& D, const MapInfo& M)
 {
   if(M.number_x_pixel() != D.GetRasterXSize())
-    throw Exception("Map info number_x_pixel doesn't match the number of samples");
+    throw Exception(
+        "Map info number_x_pixel doesn't match the number of samples");
   if(M.number_y_pixel() != D.GetRasterYSize())
-    throw Exception("Map info number_y_pixel doesn't match the number of lines");
+    throw Exception(
+        "Map info number_y_pixel doesn't match the number of lines");
   OGRSpatialReference ogr;
   if(dynamic_cast<const GeodeticConverter*>(&M.coordinate_converter())) {
     int status = ogr.SetWellKnownGeogCS("WGS84");
     if(status != OGRERR_NONE)
       throw Exception("Call to SetWellKnownGeogCS failed");
-  } else if(dynamic_cast<const Geodetic360Converter*>(&M.coordinate_converter())) {
+  } else if(dynamic_cast<const Geodetic360Converter*>(
+                &M.coordinate_converter())) {
     int status = ogr.SetWellKnownGeogCS("WGS84");
     if(status != OGRERR_NONE)
       throw Exception("Call to SetWellKnownGeogCS failed");
-  } else if(const PlanetocentricConverter* conv = dynamic_cast<const PlanetocentricConverter*>(&M.coordinate_converter())) {
+  } else if(const PlanetocentricConverter* conv =
+                dynamic_cast<const PlanetocentricConverter*>(
+                    &M.coordinate_converter())) {
     std::string name = PlanetConstant::name(conv->naif_code());
     std::string gcs_name = "GCS_" + name;
     std::string datum_name = "D_" + name;
     std::string pcs_name = "Equirectangular " + name;
     // Not sure how we indicate planetocentric instead of planetodetic
-    int status = ogr.SetGeogCS(gcs_name.c_str(), datum_name.c_str(),
-			       name.c_str(),
-			       PlanetConstant::a(conv->naif_code()),
-			       PlanetConstant::flattening(conv->naif_code()),
-			       "Reference_Meridian");
-    if(status ==CE_Failure)
+    int status = ogr.SetGeogCS(
+        gcs_name.c_str(), datum_name.c_str(), name.c_str(),
+        PlanetConstant::a(conv->naif_code()),
+        PlanetConstant::flattening(conv->naif_code()), "Reference_Meridian");
+    if(status == CE_Failure)
       throw Exception("SetGeogCS failed");
     // status = ogr.setProjCs(pcs_name);
     // if(status ==CE_Failure)
@@ -218,7 +226,8 @@ void GeoCal::gdal_map_info(GDALDataset& D, const MapInfo& M)
     // status = ogr.SetTargetLinearUnits("PROJCS", "SRS_UL_METER", 1.0
     //std::cerr << "Warning, skipping Planetocentric map info writing because we don't currently support this.";
   } else if(const OgrCoordinateConverter* ogrconv =
-      dynamic_cast<const OgrCoordinateConverter*>(&M.coordinate_converter()))
+                dynamic_cast<const OgrCoordinateConverter*>(
+                    &M.coordinate_converter()))
     ogr = ogrconv->ogr().ogr();
   else
     throw Exception("Unrecognized coordinate converter in MapInfo");
@@ -226,16 +235,15 @@ void GeoCal::gdal_map_info(GDALDataset& D, const MapInfo& M)
   ogr.exportToWkt(&d);
   int status = D.SetProjection(d);
   CPLFree(d);
-  if(status ==CE_Failure)
+  if(status == CE_Failure)
     throw Exception("SetProjection failed");
   status = D.SetGeoTransform(M.transform().data());
-  if(status ==CE_Failure)
+  if(status == CE_Failure)
     throw Exception("SetGeoTransform failed");
   // Set pixel is point/area for data.
   if(M.is_point())
     D.SetMetadataItem("AREA_OR_POINT", "Point", "");
 }
-
 
 //-----------------------------------------------------------------------
 /// Register GDAL drivers once. Not normally directly called by the
@@ -271,9 +279,9 @@ void GdalRegister::gdal_register()
 /// passed as single strings, with different values seperated by " ".
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<GDALDataset> GeoCal::gdal_openex(const std::string& Fname,
-    bool Update, const std::string& Allowed_drivers, const std::string& Open_options,
-    const std::string& Sibling_files)
+boost::shared_ptr<GDALDataset> GeoCal::gdal_openex(
+    const std::string& Fname, bool Update, const std::string& Allowed_drivers,
+    const std::string& Open_options, const std::string& Sibling_files)
 {
   size_t start = 0;
   std::vector<std::string> opt1_str;
@@ -284,7 +292,7 @@ boost::shared_ptr<GDALDataset> GeoCal::gdal_openex(const std::string& Fname,
       opt1_str.push_back(options1.substr(start, i - start));
       opt1.push_back(const_cast<char*>(opt1_str.back().c_str()));
       while(options1[i] == ' ' && i < options1.length())
-	++i;
+        ++i;
       start = i;
     }
   if(start + 1 < options1.length()) {
@@ -292,7 +300,7 @@ boost::shared_ptr<GDALDataset> GeoCal::gdal_openex(const std::string& Fname,
     opt1.push_back(const_cast<char*>(opt1_str.back().c_str()));
   }
   opt1.push_back(0);
-  
+
   start = 0;
   std::vector<std::string> opt2_str;
   std::vector<char*> opt2;
@@ -302,7 +310,7 @@ boost::shared_ptr<GDALDataset> GeoCal::gdal_openex(const std::string& Fname,
       opt2_str.push_back(options2.substr(start, i - start));
       opt2.push_back(const_cast<char*>(opt2_str.back().c_str()));
       while(options2[i] == ' ' && i < options2.length())
-	++i;
+        ++i;
       start = i;
     }
   if(start + 1 < options2.length()) {
@@ -320,7 +328,7 @@ boost::shared_ptr<GDALDataset> GeoCal::gdal_openex(const std::string& Fname,
       opt3_str.push_back(options3.substr(start, i - start));
       opt3.push_back(const_cast<char*>(opt3_str.back().c_str()));
       while(options3[i] == ' ' && i < options3.length())
-	++i;
+        ++i;
       start = i;
     }
   if(start + 3 < options3.length()) {
@@ -328,7 +336,9 @@ boost::shared_ptr<GDALDataset> GeoCal::gdal_openex(const std::string& Fname,
     opt3.push_back(const_cast<char*>(opt3_str.back().c_str()));
   }
   opt3.push_back(0);
-  boost::shared_ptr<GDALDataset> data_set((GDALDataset *) GDALOpenEx(Fname.c_str(), (Update ? GA_Update : GA_ReadOnly), &(*opt1.begin()), &(*opt2.begin()), &(*opt3.begin())));
+  boost::shared_ptr<GDALDataset> data_set((GDALDataset*)GDALOpenEx(
+      Fname.c_str(), (Update ? GA_Update : GA_ReadOnly), &(*opt1.begin()),
+      &(*opt2.begin()), &(*opt3.begin())));
   if(!data_set.get())
     throw Exception("Trouble opening file " + Fname);
   return data_set;
@@ -342,7 +352,8 @@ boost::shared_ptr<GDALDataset> GeoCal::gdal_openex(const std::string& Fname,
 GDALDataType GeoCal::gdal_band_type(const std::string& Fname, int Band_id)
 {
   GdalRegister::gdal_register();
-  boost::scoped_ptr<GDALDataset> data_set((GDALDataset *) GDALOpen(Fname.c_str(), GA_ReadOnly ));
+  boost::scoped_ptr<GDALDataset> data_set(
+      (GDALDataset*)GDALOpen(Fname.c_str(), GA_ReadOnly));
   if(!data_set.get()) {
     Exception e;
     e << "Opening GDAL file " << Fname << " to get band type failed";
@@ -360,7 +371,8 @@ GDALDataType GeoCal::gdal_band_type(const std::string& Fname, int Band_id)
 std::string GeoCal::gdal_driver_name(const std::string& Fname)
 {
   GdalRegister::gdal_register();
-  boost::scoped_ptr<GDALDataset> data_set((GDALDataset *) GDALOpen(Fname.c_str(), GA_ReadOnly ));
+  boost::scoped_ptr<GDALDataset> data_set(
+      (GDALDataset*)GDALOpen(Fname.c_str(), GA_ReadOnly));
   if(!data_set.get()) {
     Exception e;
     e << "Opening GDAL file " << Fname << " to get driver type failed";
@@ -378,26 +390,27 @@ std::string GeoCal::gdal_driver_name(const std::string& Fname)
 bool GeoCal::gdal_has_map_info(const std::string& Fname)
 {
   GdalRegister::gdal_register();
-  boost::scoped_ptr<GDALDataset> data_set((GDALDataset *) GDALOpen(Fname.c_str(), GA_ReadOnly ));
+  boost::scoped_ptr<GDALDataset> data_set(
+      (GDALDataset*)GDALOpen(Fname.c_str(), GA_ReadOnly));
   if(!data_set.get()) {
     Exception e;
     e << "Opening GDAL file " << Fname << " to get map info failed";
     throw e;
   }
   if(!data_set->GetProjectionRef() ||
-     std::string(data_set->GetProjectionRef()) =="")
+     std::string(data_set->GetProjectionRef()) == "")
     return false;
   double param[6];
-  if(data_set->GetGeoTransform(param) ==CE_Failure)
+  if(data_set->GetGeoTransform(param) == CE_Failure)
     return false;
-  // Sometimes we have some map info, but not enough to set up the 
+  // Sometimes we have some map info, but not enough to set up the
   // full map (for example, a projection of "unknown" type). In that
   // case, say we don't have map info.
-       //  try {
-    boost::shared_ptr<OGRSpatialReference> 
-      ogr(new OGRSpatialReference(data_set->GetProjectionRef()));
-    boost::shared_ptr<OgrWrapper> ogr_wrap(new OgrWrapper(ogr));
-    return true;
+  //  try {
+  boost::shared_ptr<OGRSpatialReference> ogr(
+      new OGRSpatialReference(data_set->GetProjectionRef()));
+  boost::shared_ptr<OgrWrapper> ogr_wrap(new OgrWrapper(ogr));
+  return true;
   // } catch(...) {
   // }
   return false;
@@ -411,17 +424,17 @@ bool GeoCal::gdal_has_map_info(const std::string& Fname)
 bool GdalBase::has_map_info() const
 {
   if(!data_set_->GetProjectionRef() ||
-     std::string(data_set_->GetProjectionRef()) =="")
+     std::string(data_set_->GetProjectionRef()) == "")
     return false;
   double param[6];
-  if(data_set_->GetGeoTransform(param) ==CE_Failure)
+  if(data_set_->GetGeoTransform(param) == CE_Failure)
     return false;
-  // Sometimes we have some map info, but not enough to set up the 
+  // Sometimes we have some map info, but not enough to set up the
   // full map (for example, a projection of "unknown" type). In that
   // case, say we don't have map info.
   try {
-    boost::shared_ptr<OGRSpatialReference> 
-      ogr(new OGRSpatialReference(data_set_->GetProjectionRef()));
+    boost::shared_ptr<OGRSpatialReference> ogr(
+        new OGRSpatialReference(data_set_->GetProjectionRef()));
     boost::shared_ptr<OgrWrapper> ogr_wrap(new OgrWrapper(ogr));
     return true;
   } catch(...) {
@@ -433,21 +446,21 @@ bool GdalBase::has_map_info() const
 /// \ingroup Gdal
 /// Utility to create a new file. This is a thin wrapper around
 /// the GDAL library that gets the requested driver and creates the
-/// file with the given options. 
+/// file with the given options.
 ///
 /// Because the option interface of GDAL is a bit awkward to use, we
 /// supply an interface that takes a single string, with the options
 /// separated by " ", so for example for a TIFF file we might have
 /// "TILED=YES BLOCKXSIZE=1024 BLOCKYSIZE=1024"
 //-----------------------------------------------------------------------
-boost::shared_ptr<GDALDataset> 
-GeoCal::gdal_create_dataset(const std::string& Fname, 
-			    const std::string& Driver_name, int Number_line, 
-			    int Number_sample, int Number_band,
-			    GDALDataType Dt, const std::string& Options)
+boost::shared_ptr<GDALDataset>
+GeoCal::gdal_create_dataset(const std::string& Fname,
+                            const std::string& Driver_name, int Number_line,
+                            int Number_sample, int Number_band, GDALDataType Dt,
+                            const std::string& Options)
 {
   GdalRegister::gdal_register();
-  GDALDriver* driver = (GDALDriver*) GDALGetDriverByName(Driver_name.c_str());
+  GDALDriver* driver = (GDALDriver*)GDALGetDriverByName(Driver_name.c_str());
   if(!driver)
     throw Exception("Can't find GDAL driver " + Driver_name);
   std::vector<std::string> opt_str;
@@ -459,7 +472,7 @@ GeoCal::gdal_create_dataset(const std::string& Fname,
       opt_str.push_back(options.substr(start, i - start));
       opt.push_back(const_cast<char*>(opt_str.back().c_str()));
       while(options[i] == ' ' && i < options.length())
-	++i;
+        ++i;
       start = i;
     }
   if(start + 1 < options.length()) {
@@ -468,8 +481,8 @@ GeoCal::gdal_create_dataset(const std::string& Fname,
   }
   opt.push_back(0);
   boost::shared_ptr<GDALDataset> data_set(
-		    driver->Create(Fname.c_str(), Number_sample,
-		    Number_line, Number_band, Dt, &(*opt.begin())));
+      driver->Create(Fname.c_str(), Number_sample, Number_line, Number_band, Dt,
+                     &(*opt.begin())));
   if(!data_set.get()) {
     Exception e;
     e << "Creating GDAL file " << Fname << " failed";
@@ -482,7 +495,7 @@ GeoCal::gdal_create_dataset(const std::string& Fname,
 /// \ingroup Gdal
 /// Utility to create a new file. This is a thin wrapper around
 /// the GDAL library that gets the requested driver and creates the
-/// file with the given options. 
+/// file with the given options.
 ///
 /// This uses the "CreateCopy" command rather than "Create", and takes
 /// an existing GDALDataset. There are some drivers that only have
@@ -499,15 +512,14 @@ GeoCal::gdal_create_dataset(const std::string& Fname,
 /// separated by " ", so for example for a TIFF file we might have
 /// "TILED=YES BLOCKXSIZE=1024 BLOCKYSIZE=1024"
 //-----------------------------------------------------------------------
-boost::shared_ptr<GDALDataset> 
-GeoCal::gdal_create_copy(const std::string& Fname, 
-			 const std::string& Driver_name, 
-			 const GDALDataset& Source_dataset,
-			 const std::string& Options,
-			 bool Log_progress)
+boost::shared_ptr<GDALDataset>
+GeoCal::gdal_create_copy(const std::string& Fname,
+                         const std::string& Driver_name,
+                         const GDALDataset& Source_dataset,
+                         const std::string& Options, bool Log_progress)
 {
   GdalRegister::gdal_register();
-  GDALDriver* driver = (GDALDriver*) GDALGetDriverByName(Driver_name.c_str());
+  GDALDriver* driver = (GDALDriver*)GDALGetDriverByName(Driver_name.c_str());
   if(!driver)
     throw Exception("Can't find GDAL driver " + Driver_name);
   std::vector<std::string> opt_str;
@@ -519,7 +531,7 @@ GeoCal::gdal_create_copy(const std::string& Fname,
       opt_str.push_back(options.substr(start, i - start));
       opt.push_back(const_cast<char*>(opt_str.back().c_str()));
       while(options[i] == ' ' && i < options.length())
-	++i;
+        ++i;
       start = i;
     }
   if(start + 1 < options.length()) {
@@ -530,10 +542,9 @@ GeoCal::gdal_create_copy(const std::string& Fname,
   GDALProgressFunc progress = GDALDummyProgress;
   if(Log_progress)
     progress = GDALTermProgress;
-  boost::shared_ptr<GDALDataset> 
-    data_set(driver->CreateCopy(Fname.c_str(), 
-				const_cast<GDALDataset*>(&Source_dataset),
-				0, &(*opt.begin()), progress, 0));
+  boost::shared_ptr<GDALDataset> data_set(driver->CreateCopy(
+      Fname.c_str(), const_cast<GDALDataset*>(&Source_dataset), 0,
+      &(*opt.begin()), progress, 0));
   if(!data_set.get()) {
     Exception e;
     e << "CreatCopy for GDAL file " << Fname << " failed";
@@ -544,7 +555,7 @@ GeoCal::gdal_create_copy(const std::string& Fname,
 
 //-----------------------------------------------------------------------
 /// \ingroup Gdal
-/// Utility to create a new Erdas file. 
+/// Utility to create a new Erdas file.
 ///
 /// This is similar to gdal_create_copy, except we also create the
 /// statistics and image pyramid used by Erdas to view a file. Note
@@ -558,29 +569,28 @@ GeoCal::gdal_create_copy(const std::string& Fname,
 /// calculate an image pyramid, 3) store the data compressed.  If you
 /// don't want these additional features, you shouldn't call this
 /// function - instead just call gdal_create_dataset or
-/// gdal_create_copy. 
+/// gdal_create_copy.
 //-----------------------------------------------------------------------
-boost::shared_ptr<GDALDataset> 
-GeoCal::gdal_create_erdas(const std::string& Fname, 
-			  const GDALDataset& Source_dataset,
-			  bool Log_progress)
+boost::shared_ptr<GDALDataset>
+GeoCal::gdal_create_erdas(const std::string& Fname,
+                          const GDALDataset& Source_dataset, bool Log_progress)
 {
-  boost::shared_ptr<GDALDataset> d = 
-    gdal_create_copy(Fname.c_str(), "hfa", Source_dataset,
-		     "STATISTICS=YES COMPRESSED=YES", Log_progress);
+  boost::shared_ptr<GDALDataset> d =
+      gdal_create_copy(Fname.c_str(), "hfa", Source_dataset,
+                       "STATISTICS=YES COMPRESSED=YES", Log_progress);
   int xblocksize, yblocksize;
   d->GetRasterBand(1)->GetBlockSize(&xblocksize, &yblocksize);
   // Erdas wants image pyramids down to a single block
   std::vector<int> olist;
-  for(int i = 2; 
-      d->GetRasterXSize() / i > xblocksize && 
-	d->GetRasterYSize() / i > yblocksize; i *= 2)
+  for(int i = 2; d->GetRasterXSize() / i > xblocksize &&
+                 d->GetRasterYSize() / i > yblocksize;
+      i *= 2)
     olist.push_back(i);
   GDALProgressFunc progress = GDALDummyProgress;
   if(Log_progress)
     progress = GDALTermProgress;
-  d->BuildOverviews("NEAREST", olist.size(), &(*olist.begin()), 0, 0, 
-		    progress, 0);
+  d->BuildOverviews("NEAREST", olist.size(), &(*olist.begin()), 0, 0, progress,
+                    0);
   return d;
 }
 
@@ -592,7 +602,8 @@ GeoCal::gdal_create_erdas(const std::string& Fname,
 Rpc GeoCal::gdal_rpc(const std::string& Fname)
 {
   GdalRegister::gdal_register();
-  boost::scoped_ptr<GDALDataset> data_set((GDALDataset *) GDALOpen(Fname.c_str(), GA_ReadOnly ));
+  boost::scoped_ptr<GDALDataset> data_set(
+      (GDALDataset*)GDALOpen(Fname.c_str(), GA_ReadOnly));
   if(!data_set.get()) {
     Exception e;
     e << "Opening GDAL file " << Fname << " to get RPC failed";
@@ -622,81 +633,80 @@ bool GeoCal::gdal_has_rpc(const GDALDataset& D)
 
 Rpc GeoCal::gdal_rpc(const GDALDataset& D)
 {
-    Rpc res;
-    if(const_cast<GDALDataset&>(D).GetMetadataItem("NITF_CETAG")) {
-      if(gdal_metadata<std::string>(D, "NITF_CETAG") =="RPC00A")
-	res.rpc_type = Rpc::RPC_A;
-      else if(gdal_metadata<std::string>(D, "NITF_CETAG") =="RPC00B")
-	res.rpc_type = Rpc::RPC_B;
-      else
-	throw Exception("Unrecognized NITF_CETAG value of '" + 
-			gdal_metadata<std::string>(D, "NITF_CETAG") + "'");
-    } else
+  Rpc res;
+  if(const_cast<GDALDataset&>(D).GetMetadataItem("NITF_CETAG")) {
+    if(gdal_metadata<std::string>(D, "NITF_CETAG") == "RPC00A")
+      res.rpc_type = Rpc::RPC_A;
+    else if(gdal_metadata<std::string>(D, "NITF_CETAG") == "RPC00B")
       res.rpc_type = Rpc::RPC_B;
+    else
+      throw Exception("Unrecognized NITF_CETAG value of '" +
+                      gdal_metadata<std::string>(D, "NITF_CETAG") + "'");
+  } else
+    res.rpc_type = Rpc::RPC_B;
 
-    // There are a few ways that the RPC might be encoded in the File.
-    // Check first to see which way works with this data.
-    if(const_cast<GDALDataset&>(D).GetMetadataItem("RPC_HEIGHT_OFF", "")) {
-      if(const_cast<GDALDataset&>(D).GetMetadataItem("RPC_ERR_BIAS", ""))
-	res.error_bias = gdal_metadata<double>(D, "RPC_ERR_BIAS");
-      else
-	res.error_bias = 0.0;
-      if(const_cast<GDALDataset&>(D).GetMetadataItem("RPC_ERR_BAND", ""))
-	res.error_random = gdal_metadata<double>(D, "RPC_ERR_RAND");
-      else
-	res.error_random = 0.0;
-      res.height_offset = gdal_metadata<double>(D, "RPC_HEIGHT_OFF");
-      res.height_scale = gdal_metadata<double>(D, "RPC_HEIGHT_SCALE");
-      res.latitude_offset = gdal_metadata<double>(D, "RPC_LAT_OFF");
-      res.latitude_scale = gdal_metadata<double>(D, "RPC_LAT_SCALE");
-      res.longitude_offset = gdal_metadata<double>(D, "RPC_LONG_OFF");
-      res.longitude_scale = gdal_metadata<double>(D, "RPC_LONG_SCALE");
-      res.line_offset = gdal_metadata<double>(D, "RPC_LINE_OFF");
-      res.line_scale = gdal_metadata<double>(D, "RPC_LINE_SCALE");
-      res.sample_offset = gdal_metadata<double>(D, "RPC_SAMP_OFF");
-      res.sample_scale = gdal_metadata<double>(D, "RPC_SAMP_SCALE");
-      res.line_numerator = 
-	gdal_metadata<boost::array<double, 20> >(D, "RPC_LINE_NUM_COEFF");
-      res.line_denominator = 
-	gdal_metadata<boost::array<double, 20> >(D, "RPC_LINE_DEN_COEFF");
-      res.sample_numerator = 
-	gdal_metadata<boost::array<double, 20> >(D, "RPC_SAMP_NUM_COEFF");
-      res.sample_denominator = 
-	gdal_metadata<boost::array<double, 20> >(D, "RPC_SAMP_DEN_COEFF");
-    } else if(const_cast<GDALDataset&>(D).GetMetadataItem("HEIGHT_OFF", 
-							  "RPC")) {
-      if(const_cast<GDALDataset&>(D).GetMetadataItem("ERR_BIAS", "RPC"))
-	res.error_bias = gdal_metadata<double>(D, "ERR_BIAS", "RPC");
-      else
-	res.error_bias = 0.0;
-      if(const_cast<GDALDataset&>(D).GetMetadataItem("ERR_BAND", "RPC"))
-	res.error_random = gdal_metadata<double>(D, "ERR_BIAS", "RPC");
-      else
-	res.error_random = 0.0;
-      res.height_offset = gdal_metadata<double>(D, "HEIGHT_OFF", "RPC");
-      res.height_scale = gdal_metadata<double>(D, "HEIGHT_SCALE", "RPC");
-      res.latitude_offset = gdal_metadata<double>(D, "LAT_OFF", "RPC");
-      res.latitude_scale = gdal_metadata<double>(D, "LAT_SCALE", "RPC");
-      res.longitude_offset = gdal_metadata<double>(D, "LONG_OFF", "RPC");
-      res.longitude_scale = gdal_metadata<double>(D, "LONG_SCALE", "RPC");
-      res.line_offset = gdal_metadata<double>(D, "LINE_OFF", "RPC");
-      res.line_scale = gdal_metadata<double>(D, "LINE_SCALE", "RPC");
-      res.sample_offset = gdal_metadata<double>(D, "SAMP_OFF", "RPC");
-      res.sample_scale = gdal_metadata<double>(D, "SAMP_SCALE", "RPC");
-      res.line_numerator = 
-	gdal_metadata<boost::array<double, 20> >(D, "LINE_NUM_COEFF", "RPC");
-      res.line_denominator = 
-	gdal_metadata<boost::array<double, 20> >(D, "LINE_DEN_COEFF", "RPC");
-      res.sample_numerator = 
-	gdal_metadata<boost::array<double, 20> >(D, "SAMP_NUM_COEFF", "RPC");
-      res.sample_denominator = 
-	gdal_metadata<boost::array<double, 20> >(D, "SAMP_DEN_COEFF", "RPC");
-      if(const_cast<GDALDataset&>(D).GetMetadataItem("NAIF_CODE", ""))
-	res.naif_code(gdal_metadata<int>(D, "NAIF_CODE"));
-    } else {
-      throw MetadataMissing("Does not appear to be any RPC metadata in file");
-    }
-    return res;
+  // There are a few ways that the RPC might be encoded in the File.
+  // Check first to see which way works with this data.
+  if(const_cast<GDALDataset&>(D).GetMetadataItem("RPC_HEIGHT_OFF", "")) {
+    if(const_cast<GDALDataset&>(D).GetMetadataItem("RPC_ERR_BIAS", ""))
+      res.error_bias = gdal_metadata<double>(D, "RPC_ERR_BIAS");
+    else
+      res.error_bias = 0.0;
+    if(const_cast<GDALDataset&>(D).GetMetadataItem("RPC_ERR_BAND", ""))
+      res.error_random = gdal_metadata<double>(D, "RPC_ERR_RAND");
+    else
+      res.error_random = 0.0;
+    res.height_offset = gdal_metadata<double>(D, "RPC_HEIGHT_OFF");
+    res.height_scale = gdal_metadata<double>(D, "RPC_HEIGHT_SCALE");
+    res.latitude_offset = gdal_metadata<double>(D, "RPC_LAT_OFF");
+    res.latitude_scale = gdal_metadata<double>(D, "RPC_LAT_SCALE");
+    res.longitude_offset = gdal_metadata<double>(D, "RPC_LONG_OFF");
+    res.longitude_scale = gdal_metadata<double>(D, "RPC_LONG_SCALE");
+    res.line_offset = gdal_metadata<double>(D, "RPC_LINE_OFF");
+    res.line_scale = gdal_metadata<double>(D, "RPC_LINE_SCALE");
+    res.sample_offset = gdal_metadata<double>(D, "RPC_SAMP_OFF");
+    res.sample_scale = gdal_metadata<double>(D, "RPC_SAMP_SCALE");
+    res.line_numerator =
+        gdal_metadata<boost::array<double, 20>>(D, "RPC_LINE_NUM_COEFF");
+    res.line_denominator =
+        gdal_metadata<boost::array<double, 20>>(D, "RPC_LINE_DEN_COEFF");
+    res.sample_numerator =
+        gdal_metadata<boost::array<double, 20>>(D, "RPC_SAMP_NUM_COEFF");
+    res.sample_denominator =
+        gdal_metadata<boost::array<double, 20>>(D, "RPC_SAMP_DEN_COEFF");
+  } else if(const_cast<GDALDataset&>(D).GetMetadataItem("HEIGHT_OFF", "RPC")) {
+    if(const_cast<GDALDataset&>(D).GetMetadataItem("ERR_BIAS", "RPC"))
+      res.error_bias = gdal_metadata<double>(D, "ERR_BIAS", "RPC");
+    else
+      res.error_bias = 0.0;
+    if(const_cast<GDALDataset&>(D).GetMetadataItem("ERR_BAND", "RPC"))
+      res.error_random = gdal_metadata<double>(D, "ERR_BIAS", "RPC");
+    else
+      res.error_random = 0.0;
+    res.height_offset = gdal_metadata<double>(D, "HEIGHT_OFF", "RPC");
+    res.height_scale = gdal_metadata<double>(D, "HEIGHT_SCALE", "RPC");
+    res.latitude_offset = gdal_metadata<double>(D, "LAT_OFF", "RPC");
+    res.latitude_scale = gdal_metadata<double>(D, "LAT_SCALE", "RPC");
+    res.longitude_offset = gdal_metadata<double>(D, "LONG_OFF", "RPC");
+    res.longitude_scale = gdal_metadata<double>(D, "LONG_SCALE", "RPC");
+    res.line_offset = gdal_metadata<double>(D, "LINE_OFF", "RPC");
+    res.line_scale = gdal_metadata<double>(D, "LINE_SCALE", "RPC");
+    res.sample_offset = gdal_metadata<double>(D, "SAMP_OFF", "RPC");
+    res.sample_scale = gdal_metadata<double>(D, "SAMP_SCALE", "RPC");
+    res.line_numerator =
+        gdal_metadata<boost::array<double, 20>>(D, "LINE_NUM_COEFF", "RPC");
+    res.line_denominator =
+        gdal_metadata<boost::array<double, 20>>(D, "LINE_DEN_COEFF", "RPC");
+    res.sample_numerator =
+        gdal_metadata<boost::array<double, 20>>(D, "SAMP_NUM_COEFF", "RPC");
+    res.sample_denominator =
+        gdal_metadata<boost::array<double, 20>>(D, "SAMP_DEN_COEFF", "RPC");
+    if(const_cast<GDALDataset&>(D).GetMetadataItem("NAIF_CODE", ""))
+      res.naif_code(gdal_metadata<int>(D, "NAIF_CODE"));
+  } else {
+    throw MetadataMissing("Does not appear to be any RPC metadata in file");
+  }
+  return res;
 }
 
 // Couple of helper routines for formating rpc labels
@@ -732,7 +742,8 @@ void GeoCal::gdal_rpc(GDALDataset& D, const Rpc& R)
   if(R.coordinate_converter)
     naif_code = R.coordinate_converter->naif_code();
   if(naif_code != CoordinateConverter::EARTH_NAIF_CODE)
-    D.SetMetadataItem("NAIF_CODE", boost::lexical_cast<std::string>(naif_code).c_str());
+    D.SetMetadataItem("NAIF_CODE",
+                      boost::lexical_cast<std::string>(naif_code).c_str());
   D.SetMetadataItem("ERR_BIAS", to_s1(R.error_bias).c_str(), "RPC");
   D.SetMetadataItem("ERR_RAND", to_s1(R.error_random).c_str(), "RPC");
   D.SetMetadataItem("HEIGHT_OFF", to_s1(R.height_offset).c_str(), "RPC");
@@ -770,16 +781,13 @@ void GeoCal::gdal_rpc(GDALDataset& D, const Rpc& R)
   // by finding the corners at the height offset of the RPC.
   SimpleDem d(R.height_offset);
   boost::shared_ptr<GroundCoordinate> g1 =
-    R.ground_coordinate(ImageCoordinate(-0.5, -0.5), d);
+      R.ground_coordinate(ImageCoordinate(-0.5, -0.5), d);
   boost::shared_ptr<GroundCoordinate> g2 =
-    R.ground_coordinate(ImageCoordinate(-0.5, 
-					    D.GetRasterXSize() - 0.5), d);
-  boost::shared_ptr<GroundCoordinate> g3 =
-    R.ground_coordinate(ImageCoordinate(D.GetRasterYSize() - 0.5, 
-					D.GetRasterXSize() - 0.5), d);
+      R.ground_coordinate(ImageCoordinate(-0.5, D.GetRasterXSize() - 0.5), d);
+  boost::shared_ptr<GroundCoordinate> g3 = R.ground_coordinate(
+      ImageCoordinate(D.GetRasterYSize() - 0.5, D.GetRasterXSize() - 0.5), d);
   boost::shared_ptr<GroundCoordinate> g4 =
-    R.ground_coordinate(ImageCoordinate(D.GetRasterYSize() - 0.5, 
-					    -0.5), d);
+      R.ground_coordinate(ImageCoordinate(D.GetRasterYSize() - 0.5, -0.5), d);
   D.SetMetadataItem("NITF_CORNERLAT1", to_s2(g1->latitude()).c_str());
   D.SetMetadataItem("NITF_CORNERLON1", to_s2(g1->longitude()).c_str());
   D.SetMetadataItem("NITF_CORNERLAT2", to_s2(g2->latitude()).c_str());

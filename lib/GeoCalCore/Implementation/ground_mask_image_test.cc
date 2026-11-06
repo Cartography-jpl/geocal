@@ -14,15 +14,15 @@ BOOST_AUTO_TEST_CASE(basic_test)
   // rather large water mask file in the unit tests. But we do want to
   // test out this functionality at least the first time
 #ifdef FALSE
-  boost::shared_ptr<RasterImage> 
-  lw(new VicarLiteMapProjectedImage("/Users/smyth/AlStuff/world_30as_lwm.img"));
+  boost::shared_ptr<RasterImage> lw(new VicarLiteMapProjectedImage(
+      "/Users/smyth/AlStuff/world_30as_lwm.img"));
   GroundMaskImage mi(lw);
   // Looking through the data, we find 1000, 10573 is land, with
   // points to the left and below water.
   BOOST_CHECK(!mi.mask(Geodetic(81.6667, -91.8333)));
   BOOST_CHECK(mi.mask(Geodetic(81.6583, -91.8917)));
-  BOOST_CHECK(mi.region_masked(Geodetic(81.6583, -91.8917), 
-			       Geodetic(81.6667, -91.8333)));
+  BOOST_CHECK(mi.region_masked(Geodetic(81.6583, -91.8917),
+                               Geodetic(81.6667, -91.8333)));
 #endif
 }
 

@@ -8,8 +8,8 @@ BOOST_FIXTURE_TEST_SUITE(geocal_static_sort, GlobalFixture)
 
 bool is_sorted(const std::vector<double>& d)
 {
-  for(int i = 0; i < (int) d.size()-1; ++i)
-    if(d[i] > d[i+1])
+  for(int i = 0; i < (int)d.size() - 1; ++i)
+    if(d[i] > d[i + 1])
       return false;
   return true;
 }
@@ -25,7 +25,7 @@ BOOST_AUTO_TEST_CASE(basic)
     std::shuffle(v.begin(), v.end(), rnd);
     // Might just be sorted by luck - force to be out of order
     if(is_sorted(v))
-      std::swap(v[0],v[1]);
+      std::swap(v[0], v[1]);
     BOOST_CHECK(!is_sorted(v));
     static_sort(v);
     BOOST_CHECK(is_sorted(v));
@@ -33,4 +33,3 @@ BOOST_AUTO_TEST_CASE(basic)
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-

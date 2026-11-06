@@ -5,22 +5,22 @@
 #include <sstream>
 #include <cstdlib>
 #include <boost/regex.hpp>
-#include <boost/exception/diagnostic_information.hpp> 
+#include <boost/exception/diagnostic_information.hpp>
 using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void PosExportOrbit::save(Archive & ar, const unsigned int version) const
+void PosExportOrbit::save(Archive& ar, const unsigned int version) const
 {
   GEOCAL_GENERIC_BASE(PosExportOrbit);
-  ar & GEOCAL_NVP(fname) & GEOCAL_NVP_(file_epoch);
+  ar& GEOCAL_NVP(fname) & GEOCAL_NVP_(file_epoch);
 }
 
 template<class Archive>
-void PosExportOrbit::load(Archive & ar, const unsigned int version)
+void PosExportOrbit::load(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(PosExportOrbit);
-  ar & GEOCAL_NVP(fname) & GEOCAL_NVP_(file_epoch);
+  ar& GEOCAL_NVP(fname) & GEOCAL_NVP_(file_epoch);
   init(fname, file_epoch_);
 }
 
@@ -53,8 +53,8 @@ void PosExportOrbit::init(const std::string& Fname, const Time& Epoch)
     getline(in, ln);
     if(boost::regex_search(ln, boost::regex("\\d")) &&
        !(boost::regex_search(ln, boost::regex("[[:alpha:]]"))))
-    first_line = boost::regex_search(ln, boost::regex("\\d")) &&
-      !(boost::regex_search(ln, boost::regex("[[:alpha:]]")));
+      first_line = boost::regex_search(ln, boost::regex("\\d")) &&
+                   !(boost::regex_search(ln, boost::regex("[[:alpha:]]")));
   }
   Geodetic last_point;
   Time last_tm;
@@ -73,7 +73,7 @@ void PosExportOrbit::init(const std::string& Fname, const Time& Epoch)
 //-----------------------------------------------------------------------
 
 void PosExportOrbit::process_line(const Time& Epoch, const std::string& ln,
-				  Geodetic& Last_pt, Time& Last_tm)
+                                  Geodetic& Last_pt, Time& Last_tm)
 {
   double tm, lat, lon, h, roll, pitch, heading;
   double trash __attribute__((unused));
@@ -86,7 +86,7 @@ void PosExportOrbit::process_line(const Time& Epoch, const std::string& ln,
   // std::istringstream in(ln);
   // in.exceptions(std::ios_base::badbit|std::ios_base::failbit|
   // 		std::ios_base::eofbit);
-  // in >> tm >> trash >> trash >> trash >> trash >> lat >> lon >> h >> roll 
+  // in >> tm >> trash >> trash >> trash >> trash >> lat >> lon >> h >> roll
   //    >> pitch >> heading;
 
   char* sptr = const_cast<char*>(ln.c_str());
@@ -103,14 +103,14 @@ void PosExportOrbit::process_line(const Time& Epoch, const std::string& ln,
   heading = strtod(sptr, &sptr);
   Time t = Epoch + tm;
   if(orbit_data_map.size() == 0) {
-    boost::array<double, 3> vel = {{0.0,0.0,0.0}};
-    orbit_data_map[t] = boost::shared_ptr<QuaternionOrbitData>
-      (new AircraftOrbitData(t, Geodetic(lat, lon, h), vel, roll, pitch, 
-			     heading));
+    boost::array<double, 3> vel = {{0.0, 0.0, 0.0}};
+    orbit_data_map[t] =
+        boost::shared_ptr<QuaternionOrbitData>(new AircraftOrbitData(
+            t, Geodetic(lat, lon, h), vel, roll, pitch, heading));
   } else
-    orbit_data_map[t] = boost::shared_ptr<QuaternionOrbitData>
-      (new AircraftOrbitData(t, Geodetic(lat, lon, h), Last_tm, Last_pt, 
-			     roll, pitch, heading));
+    orbit_data_map[t] =
+        boost::shared_ptr<QuaternionOrbitData>(new AircraftOrbitData(
+            t, Geodetic(lat, lon, h), Last_tm, Last_pt, roll, pitch, heading));
   Last_tm = t;
   Last_pt = Geodetic(lat, lon, h);
 }
@@ -121,7 +121,7 @@ void PosExportOrbit::process_line(const Time& Epoch, const std::string& ln,
 /// the given time.
 //-----------------------------------------------------------------------
 
-const AircraftOrbitData& 
+const AircraftOrbitData&
 PosExportOrbit::aircraft_orbit_data(const Time& T) const
 {
   range_check(T, min_time(), max_time());
@@ -138,4 +138,3 @@ PosExportOrbit::aircraft_orbit_data(const Time& T) const
   }
   return *(dynamic_cast<const AircraftOrbitData*>(i->second.get()));
 }
-

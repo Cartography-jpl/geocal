@@ -26,8 +26,7 @@ ThreadPool& ThreadPool::thread_pool()
 /// Constructor, create a thread pool with the given number of workers
 //-----------------------------------------------------------------------
 
-ThreadPool::ThreadPool(int Number_thread)
-  : number_thread_(Number_thread)
+ThreadPool::ThreadPool(int Number_thread) : number_thread_(Number_thread)
 {
 }
 
@@ -39,11 +38,13 @@ ThreadPool::ThreadPool(int Number_thread)
 void ThreadPool::number_thread(int V)
 {
   if(in_task)
-    throw Exception("ThreadPool::number_thread can't be changed from inside a ThreadPool task");
+    throw Exception("ThreadPool::number_thread can't be changed from inside a "
+                    "ThreadPool task");
   range_min_check(V, 1);
   std::lock_guard<std::mutex> lock(tpool_mutex);
   if(owner != std::thread::id())
-    throw Exception("ThreadPool::number_thread can't be changed while the ThreadPool has tasks that haven't been waited for");
+    throw Exception("ThreadPool::number_thread can't be changed while the "
+                    "ThreadPool has tasks that haven't been waited for");
   number_thread_ = V;
   // Any existing pool is replaced with one of the new size when it is
   // next needed.
@@ -59,12 +60,14 @@ void ThreadPool::number_thread(int V)
 void ThreadPool::check_caller()
 {
   if(in_task)
-    throw Exception("ThreadPool used from inside a ThreadPool task, which isn't supported");
+    throw Exception(
+        "ThreadPool used from inside a ThreadPool task, which isn't supported");
   std::lock_guard<std::mutex> lock(tpool_mutex);
   if(owner == std::thread::id())
     owner = std::this_thread::get_id();
   else if(owner != std::this_thread::get_id())
-    throw Exception("ThreadPool is already being used by another thread, which isn't supported");
+    throw Exception("ThreadPool is already being used by another thread, which "
+                    "isn't supported");
 }
 
 //-----------------------------------------------------------------------

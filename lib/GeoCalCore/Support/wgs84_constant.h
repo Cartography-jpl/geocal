@@ -5,7 +5,7 @@ namespace GeoCal {
 /// This contains various constants that describe the wgs84 ellipsoid.
 //-----------------------------------------------------------------------
 
-  namespace Constant {
+namespace Constant {
 //-----------------------------------------------------------------------
 /// Equatorial radius in meters.
 //-----------------------------------------------------------------------
@@ -14,13 +14,13 @@ const double wgs84_a = 6378137.0000;
 //-----------------------------------------------------------------------
 /// Polar radius in meters.
 //-----------------------------------------------------------------------
-const double wgs84_b = 6356752.3142450; 
+const double wgs84_b = 6356752.3142450;
 
 //-----------------------------------------------------------------------
 /// Eccentricity squared. From CRC.
 //-----------------------------------------------------------------------
-const double wgs84_esq = (wgs84_a * wgs84_a - wgs84_b * wgs84_b) / 
-                         (wgs84_a * wgs84_a);
-  }
+const double wgs84_esq =
+    (wgs84_a * wgs84_a - wgs84_b * wgs84_b) / (wgs84_a * wgs84_a);
+}
 }
 #endif

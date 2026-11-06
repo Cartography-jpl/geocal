@@ -17,13 +17,13 @@ BOOST_AUTO_TEST_CASE(basic_test)
   if(!VicarFile::vicar_available())
     return;
   try {
-      TrexDem d;
-      // Compared with google earth, using a datum undulation of
-      // -33.3435.
-      // Google Earth is 926 m. Add undulation to get
-      // 892.6565. Google earth is height above sea level
-      BOOST_CHECK_CLOSE(d.height_reference_surface(Geodetic(34.2,-118.03)),
-			891.6565, 1e-4);
+    TrexDem d;
+    // Compared with google earth, using a datum undulation of
+    // -33.3435.
+    // Google Earth is 926 m. Add undulation to get
+    // 892.6565. Google earth is height above sea level
+    BOOST_CHECK_CLOSE(d.height_reference_surface(Geodetic(34.2, -118.03)),
+                      891.6565, 1e-4);
   } catch(const Exception&) {
     BOOST_WARN_MESSAGE(false, "Skipping TrexDem test, data wasn't found");
     // Don't worry if we can't find the data.
@@ -34,13 +34,13 @@ BOOST_AUTO_TEST_CASE(gdal_test)
 {
 
   try {
-      GdalTrexDem d;
-      // Compared with google earth, using a datum undulation of
-      // -33.3435.
-      // Google Earth is 926 m. Add undulation to get
-      // 892.6565. Google earth is height above sea level
-      BOOST_CHECK_CLOSE(d.height_reference_surface(Geodetic(34.2,-118.03)),
-			891.6565, 1e-4);
+    GdalTrexDem d;
+    // Compared with google earth, using a datum undulation of
+    // -33.3435.
+    // Google Earth is 926 m. Add undulation to get
+    // 892.6565. Google earth is height above sea level
+    BOOST_CHECK_CLOSE(d.height_reference_surface(Geodetic(34.2, -118.03)),
+                      891.6565, 1e-4);
   } catch(const Exception&) {
     BOOST_WARN_MESSAGE(false, "Skipping TrexDem test, data wasn't found");
     // Don't worry if we can't find the data.
@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(lwm_test)
   try {
     // Not working yet. We'll come back to this
     TrexLwmData d;
-    std::cerr << d.coordinate(Geodetic(34.2,-118.03)) << "\n";
+    std::cerr << d.coordinate(Geodetic(34.2, -118.03)) << "\n";
     std::cerr << d(448200, 557730) << "\n";
   } catch(const Exception&) {
     BOOST_WARN_MESSAGE(false, "Skipping TrexLwmData test, data wasn't found");
@@ -70,20 +70,19 @@ BOOST_AUTO_TEST_CASE(serialization)
   boost::shared_ptr<Dem> dem;
   try {
     dem.reset(new TrexDem());
-    dem->height_reference_surface(Geodetic(34.2,-118.03));
+    dem->height_reference_surface(Geodetic(34.2, -118.03));
   } catch(const Exception&) {
     // Don't worry if we can't find the data, just skip test.
     BOOST_WARN_MESSAGE(false, "Skipping TrexDem test, data wasn't found");
     return;
-  } 
+  }
   std::string d = serialize_write_string(dem);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<TrexDem> demr = 
-    serialize_read_string<TrexDem>(d);
+  boost::shared_ptr<TrexDem> demr = serialize_read_string<TrexDem>(d);
 
-  BOOST_CHECK_CLOSE(demr->height_reference_surface(Geodetic(34.2,-118.03)),
-		    891.6565, 1e-4);
+  BOOST_CHECK_CLOSE(demr->height_reference_surface(Geodetic(34.2, -118.03)),
+                    891.6565, 1e-4);
 }
 
 BOOST_AUTO_TEST_CASE(gdal_serialization)
@@ -93,22 +92,19 @@ BOOST_AUTO_TEST_CASE(gdal_serialization)
   boost::shared_ptr<Dem> dem;
   try {
     dem.reset(new GdalTrexDem());
-    dem->height_reference_surface(Geodetic(34.2,-118.03));
+    dem->height_reference_surface(Geodetic(34.2, -118.03));
   } catch(const Exception&) {
     // Don't worry if we can't find the data, just skip test.
     BOOST_WARN_MESSAGE(false, "Skipping TrexDem test, data wasn't found");
     return;
-  } 
+  }
   std::string d = serialize_write_string(dem);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<GdalTrexDem> demr = 
-    serialize_read_string<GdalTrexDem>(d);
+  boost::shared_ptr<GdalTrexDem> demr = serialize_read_string<GdalTrexDem>(d);
 
-  BOOST_CHECK_CLOSE(demr->height_reference_surface(Geodetic(34.2,-118.03)),
-		    891.6565, 1e-4);
+  BOOST_CHECK_CLOSE(demr->height_reference_surface(Geodetic(34.2, -118.03)),
+                    891.6565, 1e-4);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-
-

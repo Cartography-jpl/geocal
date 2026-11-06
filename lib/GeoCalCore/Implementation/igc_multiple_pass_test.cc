@@ -7,35 +7,35 @@ using namespace GeoCal;
 
 class IgcMultiplePassFixture : public GlobalFixture {
 public:
-  IgcMultiplePassFixture() 
+  IgcMultiplePassFixture()
   {
-    boost::shared_ptr<Dem> dem
-      (new VicarLiteDem(stereo_test_data_dir() + "nevada_elv_aoi.img"));
-    boost::shared_ptr<RasterImage> img1
-      (new VicarLiteRasterImage(stereo_test_data_dir() + "10MAY21-1.img"));
-    boost::shared_ptr<RasterImage> img2
-      (new VicarLiteRasterImage(stereo_test_data_dir() + "10MAY21-2.img"));
-    boost::shared_ptr<RasterImage> img3
-      (new VicarLiteRasterImage(stereo_test_data_dir() + "10MAY21-3.img"));
-    boost::shared_ptr<RpcImageGroundConnection> igc1
-      (new RpcImageGroundConnection(img1->rpc(), dem, img1, "Image 1"));
+    boost::shared_ptr<Dem> dem(
+        new VicarLiteDem(stereo_test_data_dir() + "nevada_elv_aoi.img"));
+    boost::shared_ptr<RasterImage> img1(
+        new VicarLiteRasterImage(stereo_test_data_dir() + "10MAY21-1.img"));
+    boost::shared_ptr<RasterImage> img2(
+        new VicarLiteRasterImage(stereo_test_data_dir() + "10MAY21-2.img"));
+    boost::shared_ptr<RasterImage> img3(
+        new VicarLiteRasterImage(stereo_test_data_dir() + "10MAY21-3.img"));
+    boost::shared_ptr<RpcImageGroundConnection> igc1(
+        new RpcImageGroundConnection(img1->rpc(), dem, img1, "Image 1"));
     igc1->rpc().fit_line_numerator[0] = true;
     igc1->rpc().fit_line_numerator[1] = true;
     igc1->rpc().fit_sample_numerator[0] = true;
     igc1->rpc().fit_sample_numerator[1] = true;
-    boost::shared_ptr<RpcImageGroundConnection> igc2
-      (new RpcImageGroundConnection(img2->rpc(), dem, img2, "Image 2"));
+    boost::shared_ptr<RpcImageGroundConnection> igc2(
+        new RpcImageGroundConnection(img2->rpc(), dem, img2, "Image 2"));
     igc2->rpc().fit_line_numerator[0] = true;
     igc2->rpc().fit_line_numerator[1] = true;
     igc2->rpc().fit_sample_numerator[0] = true;
     igc2->rpc().fit_sample_numerator[1] = true;
-    boost::shared_ptr<RpcImageGroundConnection> igc3
-      (new RpcImageGroundConnection(img3->rpc(), dem, img3, "Image 3"));
+    boost::shared_ptr<RpcImageGroundConnection> igc3(
+        new RpcImageGroundConnection(img3->rpc(), dem, img3, "Image 3"));
     igc3->rpc().fit_line_numerator[0] = true;
     igc3->rpc().fit_line_numerator[1] = true;
     igc3->rpc().fit_sample_numerator[0] = true;
     igc3->rpc().fit_sample_numerator[1] = true;
-    std::vector<boost::shared_ptr<ImageGroundConnection> > igcv;
+    std::vector<boost::shared_ptr<ImageGroundConnection>> igcv;
     igcv.push_back(igc1);
     igcv.push_back(igc2);
     igcarr1.reset(new IgcArray(igcv));
@@ -68,12 +68,12 @@ BOOST_AUTO_TEST_CASE(serialization)
   std::string d = serialize_write_string(igccol);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<IgcMultiplePass> igccolr = 
-    serialize_read_string<IgcMultiplePass>(d);
+  boost::shared_ptr<IgcMultiplePass> igccolr =
+      serialize_read_string<IgcMultiplePass>(d);
   ImageCoordinate ic(100, 200);
-  BOOST_CHECK(igccolr->image_coordinate(0, *igccol->ground_coordinate(0, ic)) == ic);
+  BOOST_CHECK(igccolr->image_coordinate(0, *igccol->ground_coordinate(0, ic)) ==
+              ic);
   BOOST_CHECK_MATRIX_CLOSE(igccol->parameter(), igccolr->parameter());
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-

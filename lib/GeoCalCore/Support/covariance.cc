@@ -4,12 +4,12 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 
-template<class Archive> 
+template<class Archive>
 void Covariance::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(Covariance)
-  ar & GEOCAL_NVP(sum1) & GEOCAL_NVP(sum2) & GEOCAL_NVP(sum_product)
-    & GEOCAL_NVP_(count);
+  ar& GEOCAL_NVP(sum1) & GEOCAL_NVP(sum2) & GEOCAL_NVP(sum_product) &
+      GEOCAL_NVP_(count);
 }
 
 GEOCAL_IMPLEMENT(Covariance);
@@ -24,6 +24,6 @@ void Covariance::print(std::ostream& os) const
   os << "Covariance:\n"
      << "  Covariance: " << covariance() << "\n"
      << "  Count:      " << count() << "\n"
-     << "  Mean 1:     "  << mean1() << "\n"
-     << "  Mean 2:     "  << mean2() << "\n";
+     << "  Mean 1:     " << mean1() << "\n"
+     << "  Mean 2:     " << mean2() << "\n";
 }

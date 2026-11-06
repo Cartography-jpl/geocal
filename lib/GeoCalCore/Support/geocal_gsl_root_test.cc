@@ -40,36 +40,43 @@ public:
   blitz::Array<double, 2> df(const blitz::Array<double, 1>& X) const
   {
     blitz::Array<double, 2> res(2, 2);
-    res = a,              0,
-         -2 * b * X(0),   b;
+    res = a, 0, -2 * b * X(0), b;
     return res;
   }
 private:
   double a, b;
 };
 
-class Test: public DFunctor {
+class Test : public DFunctor {
 public:
   Test() {}
-  virtual	   ~Test() {}
-  virtual double   operator()(const double& x) const
-  { return (cos(x) - x) * (cos(x) - x) - 2; }
+  virtual ~Test() {}
+  virtual double operator()(const double& x) const
+  {
+    return (cos(x) - x) * (cos(x) - x) - 2;
+  }
 };
 
-class Test2: public DFunctorWithDerivative {
+class Test2 : public DFunctorWithDerivative {
 public:
   Test2(double a, double b) : a_(a, 0, 2), b_(b, 1, 2) {}
-  virtual	   ~Test2() {}
-  virtual double   operator()(const double& x) const
-  { return f_with_derivative(x).value(); }
+  virtual ~Test2() {}
+  virtual double operator()(const double& x) const
+  {
+    return f_with_derivative(x).value();
+  }
   virtual AutoDerivative<double> f_with_derivative(double x) const
-  { return (std::cos(a_ * x) - a_ * b_ * x) * (std::cos(b_ * x) - x) - 2 * a_ * a_; }
+  {
+    return (std::cos(a_ * x) - a_ * b_ * x) * (std::cos(b_ * x) - x) -
+           2 * a_ * a_;
+  }
   virtual double df(double X) const
-  { 
+  {
     AutoDerivative<double> x(X, 0, 1);
     AutoDerivative<double> y =
-      (std::cos(a_.value() * x) - a_.value() * b_.value() * x) * 
-      (std::cos(b_.value() * x) - x) - 2 * a_.value() * a_.value(); 
+        (std::cos(a_.value() * x) - a_.value() * b_.value() * x) *
+            (std::cos(b_.value() * x) - x) -
+        2 * a_.value() * a_.value();
     return y.gradient()(0);
   }
   void a(double A) { a_ = AutoDerivative<double>(A, 0, 2); }
@@ -130,23 +137,25 @@ BOOST_AUTO_TEST_CASE(derivative_calc)
 class Ftest : public DFunctor {
 public:
   Ftest() {}
-  virtual	   ~Ftest() {}
-  virtual double   operator()(const double& X) const
-  { return (X - 1) * (X - 1.5) * (X - 3) * (X - 5) * (X - 6); }
+  virtual ~Ftest() {}
+  virtual double operator()(const double& X) const
+  {
+    return (X - 1) * (X - 1.5) * (X - 3) * (X - 5) * (X - 6);
+  }
 };
 
 BOOST_AUTO_TEST_CASE(root_list)
 {
   Ftest f;
   std::vector<double> res = GeoCal::root_list(f, 0, 7, 0.25);
-  BOOST_CHECK_EQUAL(res.size(), (std::vector<double>::size_type) 5);
+  BOOST_CHECK_EQUAL(res.size(), (std::vector<double>::size_type)5);
   BOOST_CHECK_CLOSE(res[0], 1.0, 1e-4);
   BOOST_CHECK_CLOSE(res[1], 1.5, 1e-4);
   BOOST_CHECK_CLOSE(res[2], 3.0, 1e-4);
   BOOST_CHECK_CLOSE(res[3], 5.0, 1e-4);
   BOOST_CHECK_CLOSE(res[4], 6.0, 1e-4);
   res = GeoCal::root_list(f, 0, 5.5, 0.25);
-  BOOST_CHECK_EQUAL(res.size(), (std::vector<double>::size_type) 4);
+  BOOST_CHECK_EQUAL(res.size(), (std::vector<double>::size_type)4);
   BOOST_CHECK_CLOSE(res[0], 1.0, 1e-4);
   BOOST_CHECK_CLOSE(res[1], 1.5, 1e-4);
   BOOST_CHECK_CLOSE(res[2], 3.0, 1e-4);

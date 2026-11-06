@@ -2,12 +2,12 @@
 #define IMAGE_COORDINATE_H
 #include "printable.h"
 #include "auto_derivative.h"
-#include <iostream>		// Definition of ostream.
+#include <iostream> // Definition of ostream.
 
 namespace GeoCal {
-  class VicarImageCoordinate;
+class VicarImageCoordinate;
 
-/****************************************************************//**
+/****************************************************************/ /**
     This describes an image coordinate.
 
     We also define the print operator <<, and equality operator ==.
@@ -22,42 +22,42 @@ namespace GeoCal {
 
 class ImageCoordinate : public Printable<ImageCoordinate> {
 public:
-//-----------------------------------------------------------------------
-/// Constructor
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor
+  //-----------------------------------------------------------------------
 
   ImageCoordinate(double Line, double Sample) : line(Line), sample(Sample) {}
 
-//-----------------------------------------------------------------------
-/// Convert from VicarImageCoordinate.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Convert from VicarImageCoordinate.
+  //-----------------------------------------------------------------------
 
   ImageCoordinate(const VicarImageCoordinate& Vic);
 
-//-----------------------------------------------------------------------
-/// Default constructor, line and sample aren't initialized.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Default constructor, line and sample aren't initialized.
+  //-----------------------------------------------------------------------
 
   ImageCoordinate() {}
 
   virtual ~ImageCoordinate() {}
 
-//-----------------------------------------------------------------------
-///  Line number of image coordinate.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  ///  Line number of image coordinate.
+  //-----------------------------------------------------------------------
 
   double line;
 
-//-----------------------------------------------------------------------
-/// Sample number of image coordinate.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Sample number of image coordinate.
+  //-----------------------------------------------------------------------
 
   double sample;
   void print(std::ostream& Os) const;
 private:
   friend class boost::serialization::access;
-   template<class Archive>
-   void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void serialize(Archive& ar, const unsigned int version);
 };
 
 bool operator==(const ImageCoordinate& C1, const ImageCoordinate& C2);
@@ -70,9 +70,11 @@ bool operator==(const ImageCoordinate& C1, const ImageCoordinate& C2);
 //-----------------------------------------------------------------------
 
 inline bool operator!=(const ImageCoordinate& C1, const ImageCoordinate& C2)
-{ return !(C1 ==C2);}
+{
+  return !(C1 == C2);
+}
 
-/****************************************************************//**
+/****************************************************************/ /**
     VICAR programs use a different convention than our
     ImageCoordinate. Instead of the upper left hand corner of the
     bounding box being (-0.5,-0.5), VICAR uses a 1-based convention
@@ -84,41 +86,43 @@ inline bool operator!=(const ImageCoordinate& C1, const ImageCoordinate& C2)
 
 class VicarImageCoordinate : public Printable<VicarImageCoordinate> {
 public:
-//-----------------------------------------------------------------------
-/// Constructor
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor
+  //-----------------------------------------------------------------------
 
-  VicarImageCoordinate(double Line, double Sample) : line(Line), sample(Sample) {}
+  VicarImageCoordinate(double Line, double Sample) : line(Line), sample(Sample)
+  {
+  }
 
-//-----------------------------------------------------------------------
-/// Convert from ImageCoordinate.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Convert from ImageCoordinate.
+  //-----------------------------------------------------------------------
 
   VicarImageCoordinate(const ImageCoordinate& Ic);
 
-//-----------------------------------------------------------------------
-/// Default constructor, line and sample aren't initialized.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Default constructor, line and sample aren't initialized.
+  //-----------------------------------------------------------------------
 
   VicarImageCoordinate() {}
 
   virtual ~VicarImageCoordinate() {}
-//-----------------------------------------------------------------------
-///  Line number of image coordinate.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  ///  Line number of image coordinate.
+  //-----------------------------------------------------------------------
 
   double line;
 
-//-----------------------------------------------------------------------
-/// Sample number of image coordinate.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Sample number of image coordinate.
+  //-----------------------------------------------------------------------
 
   double sample;
   void print(std::ostream& Os) const;
 private:
   friend class boost::serialization::access;
-   template<class Archive>
-   void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void serialize(Archive& ar, const unsigned int version);
 };
 
 bool operator==(const VicarImageCoordinate& C1, const VicarImageCoordinate& C2);
@@ -130,62 +134,73 @@ bool operator==(const VicarImageCoordinate& C1, const VicarImageCoordinate& C2);
 /// other than we consider the VicarImageCoordinates as equal.
 //-----------------------------------------------------------------------
 
-inline bool operator!=(const VicarImageCoordinate& C1, const VicarImageCoordinate& C2)
-{ return !(C1 ==C2);}
-
+inline bool operator!=(const VicarImageCoordinate& C1,
+                       const VicarImageCoordinate& C2)
+{
+  return !(C1 == C2);
+}
 
 inline ImageCoordinate::ImageCoordinate(const VicarImageCoordinate& Vic)
-  : line(Vic.line - 1), sample(Vic.sample - 1) {}
+  : line(Vic.line - 1), sample(Vic.sample - 1)
+{
+}
 
 inline VicarImageCoordinate::VicarImageCoordinate(const ImageCoordinate& Ic)
-  : line(Ic.line + 1), sample(Ic.sample + 1) {}
+  : line(Ic.line + 1), sample(Ic.sample + 1)
+{
+}
 
-/****************************************************************//**
+/****************************************************************/ /**
     This describes an image coordinate, including the gradient of the 
     line and sample.
 *******************************************************************/
 
-class ImageCoordinateWithDerivative : public Printable<ImageCoordinateWithDerivative> {
+class ImageCoordinateWithDerivative
+  : public Printable<ImageCoordinateWithDerivative> {
 public:
-//-----------------------------------------------------------------------
-/// Constructor
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor
+  //-----------------------------------------------------------------------
 
-  ImageCoordinateWithDerivative(const AutoDerivative<double>& Line, 
-				const AutoDerivative<double>& Sample) 
-  : line(Line), sample(Sample) {}
+  ImageCoordinateWithDerivative(const AutoDerivative<double>& Line,
+                                const AutoDerivative<double>& Sample)
+    : line(Line), sample(Sample)
+  {
+  }
 
-//-----------------------------------------------------------------------
-/// Default constructor, line and sample aren't initialized.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Default constructor, line and sample aren't initialized.
+  //-----------------------------------------------------------------------
 
   ImageCoordinateWithDerivative() {}
 
   virtual ~ImageCoordinateWithDerivative() {}
 
-//-----------------------------------------------------------------------
-///  Line number of image coordinate.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  ///  Line number of image coordinate.
+  //-----------------------------------------------------------------------
 
   AutoDerivative<double> line;
 
-//-----------------------------------------------------------------------
-/// Sample number of image coordinate.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Sample number of image coordinate.
+  //-----------------------------------------------------------------------
 
   AutoDerivative<double> sample;
 
-//-----------------------------------------------------------------------
-/// Strip off derivative information and return ImageCoordinate.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Strip off derivative information and return ImageCoordinate.
+  //-----------------------------------------------------------------------
   ImageCoordinate value() const
-  { return ImageCoordinate(line.value(), sample.value()); }
+  {
+    return ImageCoordinate(line.value(), sample.value());
+  }
 
   void print(std::ostream& Os) const;
 private:
   friend class boost::serialization::access;
-   template<class Archive>
-   void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void serialize(Archive& ar, const unsigned int version);
 };
 
 }

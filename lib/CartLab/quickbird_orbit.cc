@@ -8,39 +8,39 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void QuickBirdOrbit::serialize(Archive & ar, const unsigned int version)
+void QuickBirdOrbit::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
-    & GEOCAL_NVP(eph) & GEOCAL_NVP(att);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit) & GEOCAL_NVP(eph) &
+      GEOCAL_NVP(att);
 }
 
 template<class Archive>
-void QuickBirdEphemeris::save(Archive & ar, const unsigned int version) const
+void QuickBirdEphemeris::save(Archive& ar, const unsigned int version) const
 {
   GEOCAL_GENERIC_BASE(QuickBirdEphemeris);
-  ar & GEOCAL_NVP(fname);
+  ar& GEOCAL_NVP(fname);
 }
 
 template<class Archive>
-void QuickBirdEphemeris::load(Archive & ar, const unsigned int version)
+void QuickBirdEphemeris::load(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(QuickBirdEphemeris);
-  ar & GEOCAL_NVP(fname);
+  ar& GEOCAL_NVP(fname);
   init(fname);
 }
 
 template<class Archive>
-void QuickBirdAttitude::save(Archive & ar, const unsigned int version) const
+void QuickBirdAttitude::save(Archive& ar, const unsigned int version) const
 {
   GEOCAL_GENERIC_BASE(QuickBirdAttitude);
-  ar & GEOCAL_NVP(fname);
+  ar& GEOCAL_NVP(fname);
 }
 
 template<class Archive>
-void QuickBirdAttitude::load(Archive & ar, const unsigned int version)
+void QuickBirdAttitude::load(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(QuickBirdAttitude);
-  ar & GEOCAL_NVP(fname);
+  ar& GEOCAL_NVP(fname);
   init(fname);
 }
 
@@ -48,7 +48,6 @@ GEOCAL_IMPLEMENT(QuickBirdOrbit);
 GEOCAL_SPLIT_IMPLEMENT(QuickBirdAttitude);
 GEOCAL_SPLIT_IMPLEMENT(QuickBirdEphemeris);
 #endif
-
 
 //-----------------------------------------------------------------------
 /// Print to a stream.
@@ -83,7 +82,7 @@ void QuickBirdAttitude::print(std::ostream& Os) const
 //-----------------------------------------------------------------------
 
 QuickBirdOrbit::QuickBirdOrbit(const std::string& Ephemeris_file,
-			       const std::string& Attitude_file)
+                               const std::string& Attitude_file)
 {
   eph.reset(new QuickBirdEphemeris(Ephemeris_file));
   std::string atf = Attitude_file;
@@ -95,8 +94,8 @@ QuickBirdOrbit::QuickBirdOrbit(const std::string& Ephemeris_file,
   }
   att.reset(new QuickBirdAttitude(atf));
   min_tm = std::max(eph->min_time(), att->min_time());
-  max_tm = std::min(eph->max_time() - eph->time_spacing(), 
-		    att->max_time() - att->time_spacing());
+  max_tm = std::min(eph->max_time() - eph->time_spacing(),
+                    att->max_time() - att->time_spacing());
 }
 
 //-----------------------------------------------------------------------
@@ -108,9 +107,9 @@ boost::shared_ptr<OrbitData> QuickBirdOrbit::orbit_data(Time T) const
 {
   range_check(T, min_time(), max_time());
 
-// Interpolate position.
+  // Interpolate position.
 
-  int i = (int) floor((T - eph->min_time()) / eph->time_spacing());
+  int i = (int)floor((T - eph->min_time()) / eph->time_spacing());
   double toffset = T - (eph->min_time() + i * eph->time_spacing());
   boost::array<double, 3> p1, v1, p2, v2, pres, vres;
   const boost::array<double, 12>& e1 = eph->ephemeris()[i];
@@ -131,9 +130,9 @@ boost::shared_ptr<OrbitData> QuickBirdOrbit::orbit_data(Time T) const
   Ecr e(pres[0], pres[1], pres[2]);
   boost::array<double, 3> vel = {{vres[0], vres[1], vres[2]}};
 
-// Interpolate quaternion.
+  // Interpolate quaternion.
 
-  i = (int) floor((T - att->min_time()) / att->time_spacing());
+  i = (int)floor((T - att->min_time()) / att->time_spacing());
   toffset = T - (att->min_time() + i * att->time_spacing());
 
   // Note that there are a few different conventions about the
@@ -148,22 +147,22 @@ boost::shared_ptr<OrbitData> QuickBirdOrbit::orbit_data(Time T) const
   const boost::array<double, 14>& a2 = att->attitude()[i + 1];
   boost::math::quaternion<double> q1(a1[3], a1[0], a1[1], a1[2]);
   boost::math::quaternion<double> q2(a2[3], a2[0], a2[1], a2[2]);
-  boost::math::quaternion<double> sc_to_cf = interpolate(q1, q2, toffset, 
- 							 att->time_spacing());
-  return boost::shared_ptr<OrbitData>(new 
-     QuaternionOrbitData(T, e.convert_to_cf(), vel, sc_to_cf));
+  boost::math::quaternion<double> sc_to_cf =
+      interpolate(q1, q2, toffset, att->time_spacing());
+  return boost::shared_ptr<OrbitData>(
+      new QuaternionOrbitData(T, e.convert_to_cf(), vel, sc_to_cf));
 }
 
-boost::shared_ptr<OrbitData> 
+boost::shared_ptr<OrbitData>
 QuickBirdOrbit::orbit_data(const TimeWithDerivative& T) const
 {
   range_check(T.value(), min_time(), max_time());
 
-// Interpolate position.
+  // Interpolate position.
 
-  int i = (int) floor((T.value() - eph->min_time()) / eph->time_spacing());
-  AutoDerivative<double> toffset = 
-    T - (eph->min_time() + i * eph->time_spacing());
+  int i = (int)floor((T.value() - eph->min_time()) / eph->time_spacing());
+  AutoDerivative<double> toffset =
+      T - (eph->min_time() + i * eph->time_spacing());
   boost::array<AutoDerivative<double>, 3> p1, v1, p2, v2, pres, vres;
   const boost::array<double, 12>& e1 = eph->ephemeris()[i];
   const boost::array<double, 12>& e2 = eph->ephemeris()[i + 1];
@@ -183,9 +182,9 @@ QuickBirdOrbit::orbit_data(const TimeWithDerivative& T) const
   Ecr e(pres[0].value(), pres[1].value(), pres[2].value());
   boost::array<AutoDerivative<double>, 3> vel = {{vres[0], vres[1], vres[2]}};
 
-// Interpolate quaternion.
+  // Interpolate quaternion.
 
-  i = (int) floor((T.value() - att->min_time()) / att->time_spacing());
+  i = (int)floor((T.value() - att->min_time()) / att->time_spacing());
   toffset = T - (att->min_time() + i * att->time_spacing());
 
   // Note that there are a few different conventions about the
@@ -198,14 +197,14 @@ QuickBirdOrbit::orbit_data(const TimeWithDerivative& T) const
 
   const boost::array<double, 14>& a1 = att->attitude()[i];
   const boost::array<double, 14>& a2 = att->attitude()[i + 1];
-  boost::math::quaternion<AutoDerivative<double> > 
-    q1(a1[3], a1[0], a1[1], a1[2]);
-  boost::math::quaternion<AutoDerivative<double> > 
-    q2(a2[3], a2[0], a2[1], a2[2]);
-  boost::math::quaternion<AutoDerivative<double> > sc_to_cf = 
-    interpolate(q1, q2, toffset, att->time_spacing());
-  return boost::shared_ptr<OrbitData>(new 
-      QuaternionOrbitData(T, e.convert_to_cf(), pres, vel, sc_to_cf));
+  boost::math::quaternion<AutoDerivative<double>> q1(a1[3], a1[0], a1[1],
+                                                     a1[2]);
+  boost::math::quaternion<AutoDerivative<double>> q2(a2[3], a2[0], a2[1],
+                                                     a2[2]);
+  boost::math::quaternion<AutoDerivative<double>> sc_to_cf =
+      interpolate(q1, q2, toffset, att->time_spacing());
+  return boost::shared_ptr<OrbitData>(
+      new QuaternionOrbitData(T, e.convert_to_cf(), pres, vel, sc_to_cf));
 }
 
 //-----------------------------------------------------------------------
@@ -216,5 +215,3 @@ void QuickBirdOrbit::print(std::ostream& Os) const
 {
   Os << "Quickbird orbit, with files:\n" << *eph << *att;
 }
-
-

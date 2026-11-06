@@ -8,7 +8,8 @@ BOOST_FIXTURE_TEST_SUITE(auto_derivative, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(basic_test)
 {
-  double xv = 2; double yv = 3;
+  double xv = 2;
+  double yv = 3;
   AutoDerivative<double> x(xv, 0, 2);
   AutoDerivative<double> y(yv, 1, 2);
   AutoDerivative<double> z;
@@ -24,22 +25,22 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_CLOSE(z.value(), -(2 * xv + yv), 1e-8);
   grad = -2, -1;
   BOOST_CHECK_MATRIX_CLOSE(z.gradient(), grad);
-  
+
   z = x * x + x / (x * x + 1);
   BOOST_CHECK_CLOSE(z.value(), xv * xv + xv / (xv * xv + 1), 1e-8);
-  grad(0) = 2 * xv + 1 / (xv * xv + 1) - xv / ((xv * xv + 1) * (xv * xv + 1)) 
-    * (2 * xv);
+  grad(0) = 2 * xv + 1 / (xv * xv + 1) -
+            xv / ((xv * xv + 1) * (xv * xv + 1)) * (2 * xv);
   grad(1) = 0;
   BOOST_CHECK_MATRIX_CLOSE(z.gradient(), grad);
 }
 
 BOOST_AUTO_TEST_CASE(math_function)
 {
-  AutoDerivative<double> x(5,0,1);
+  AutoDerivative<double> x(5, 0, 1);
   AutoDerivative<double> r;
   r = sqrt(x * x);
   BOOST_CHECK_CLOSE(r.value(), sqrt(5.0 * 5.0), 1e-8);
-  BOOST_CHECK_CLOSE(r.gradient()(0), 2 * 5.0 / (2 * sqrt(5.0*5.0)), 1e-8); 
+  BOOST_CHECK_CLOSE(r.gradient()(0), 2 * 5.0 / (2 * sqrt(5.0 * 5.0)), 1e-8);
   r = log(x * x * x);
   BOOST_CHECK_CLOSE(r.value(), log(5.0 * 5.0 * 5.0), 1e-8);
   BOOST_CHECK_CLOSE(r.gradient()(0), 3 / 5.0, 1e-8);
@@ -48,44 +49,47 @@ BOOST_AUTO_TEST_CASE(math_function)
   BOOST_CHECK_CLOSE(r.gradient()(0), 3 / 5.0 * M_LOG10E, 1e-8);
   r = exp(x * x);
   BOOST_CHECK_CLOSE(r.value(), exp(5.0 * 5.0), 1e-8);
-  BOOST_CHECK_CLOSE(r.gradient()(0), 2 * 5.0 * r.value(), 1e-8); 
+  BOOST_CHECK_CLOSE(r.gradient()(0), 2 * 5.0 * r.value(), 1e-8);
 
   // Use something within the range of these functions
-  AutoDerivative<double> y(0.5,0,1);
+  AutoDerivative<double> y(0.5, 0, 1);
 
-  r = sin(y*y);
+  r = sin(y * y);
   BOOST_CHECK_CLOSE(r.value(), sin(0.5 * 0.5), 1e-8);
-  BOOST_CHECK_CLOSE(r.gradient()(0), 2 * 0.5 * cos(0.5*0.5), 1e-8); 
+  BOOST_CHECK_CLOSE(r.gradient()(0), 2 * 0.5 * cos(0.5 * 0.5), 1e-8);
 
-  r = asin(y*y);
+  r = asin(y * y);
   BOOST_CHECK_CLOSE(r.value(), asin(0.5 * 0.5), 1e-8);
-  BOOST_CHECK_CLOSE(r.gradient()(0), 2 * 0.5 / sqrt(1-0.5*0.5*0.5*0.5), 1e-8); 
+  BOOST_CHECK_CLOSE(r.gradient()(0), 2 * 0.5 / sqrt(1 - 0.5 * 0.5 * 0.5 * 0.5),
+                    1e-8);
 
-  r = cos(y*y);
+  r = cos(y * y);
   BOOST_CHECK_CLOSE(r.value(), cos(0.5 * 0.5), 1e-8);
-  BOOST_CHECK_CLOSE(r.gradient()(0), -2 * 0.5 * sin(0.5*0.5), 1e-8); 
+  BOOST_CHECK_CLOSE(r.gradient()(0), -2 * 0.5 * sin(0.5 * 0.5), 1e-8);
 
-  r = acos(y*y);
+  r = acos(y * y);
   BOOST_CHECK_CLOSE(r.value(), acos(0.5 * 0.5), 1e-8);
-  BOOST_CHECK_CLOSE(r.gradient()(0), -2 * 0.5 / sqrt(1-0.5*0.5*0.5*0.5), 1e-8); 
+  BOOST_CHECK_CLOSE(r.gradient()(0), -2 * 0.5 / sqrt(1 - 0.5 * 0.5 * 0.5 * 0.5),
+                    1e-8);
 
-  r = tan(y*y);
+  r = tan(y * y);
   BOOST_CHECK_CLOSE(r.value(), tan(0.5 * 0.5), 1e-8);
-  BOOST_CHECK_CLOSE(r.gradient()(0), 2 * 0.5 / (cos(0.5*0.5)*cos(0.5*0.5)), 1e-8); 
+  BOOST_CHECK_CLOSE(r.gradient()(0),
+                    2 * 0.5 / (cos(0.5 * 0.5) * cos(0.5 * 0.5)), 1e-8);
 
-  r = atan(y*y);
+  r = atan(y * y);
   BOOST_CHECK_CLOSE(r.value(), atan(0.5 * 0.5), 1e-8);
-  BOOST_CHECK_CLOSE(r.gradient()(0), 2 * 0.5 / (0.5*0.5*0.5*0.5 + 1), 1e-8); 
+  BOOST_CHECK_CLOSE(r.gradient()(0), 2 * 0.5 / (0.5 * 0.5 * 0.5 * 0.5 + 1),
+                    1e-8);
 
-  r = pow(y*y,2);
+  r = pow(y * y, 2);
   BOOST_CHECK_CLOSE(r.value(), pow(0.5 * 0.5, 2), 1e-8);
-  BOOST_CHECK_CLOSE(r.gradient()(0), 2 * 0.5 * 2 * pow(0.5*0.5, 1), 1e-8); 
-  
-  r = y*y*y*y;
-  AutoDerivative<double> r2 = pow(y,4);
-  BOOST_CHECK_CLOSE(r.value(), r2.value(), 1e-8);
-  BOOST_CHECK_CLOSE(r.gradient()(0), r2.gradient()(0), 1e-8); 
+  BOOST_CHECK_CLOSE(r.gradient()(0), 2 * 0.5 * 2 * pow(0.5 * 0.5, 1), 1e-8);
 
+  r = y * y * y * y;
+  AutoDerivative<double> r2 = pow(y, 4);
+  BOOST_CHECK_CLOSE(r.value(), r2.value(), 1e-8);
+  BOOST_CHECK_CLOSE(r.gradient()(0), r2.gradient()(0), 1e-8);
 }
 
 template<class T> T f(const T& X, const T& Y)
@@ -134,25 +138,24 @@ BOOST_AUTO_TEST_CASE(array_assignment)
   b = 1, 2;
   a = 2;
   a = a + b;
-  a = cast<AutoDerivative<double> >(b);
+  a = cast<AutoDerivative<double>>(b);
 }
 
 BOOST_AUTO_TEST_CASE(serialize)
 {
   if(!have_serialize_supported())
     return;
-  boost::shared_ptr<AutoDerivative<double> > 
-    x(new AutoDerivative<double>(3, 0, 2));
+  boost::shared_ptr<AutoDerivative<double>> x(
+      new AutoDerivative<double>(3, 0, 2));
   std::string d = serialize_write_string(x);
   if(false)
     // Can dump to screen, if we want to see the text
     std::cerr << d;
-  boost::shared_ptr<AutoDerivative<double> > xr =
-    serialize_read_string<AutoDerivative<double> >(d);
+  boost::shared_ptr<AutoDerivative<double>> xr =
+      serialize_read_string<AutoDerivative<double>>(d);
   BOOST_CHECK_CLOSE(xr->value(), x->value(), 1e-8);
   BOOST_CHECK_EQUAL(xr->number_variable(), x->number_variable());
   BOOST_CHECK_MATRIX_CLOSE(xr->gradient(), x->gradient());
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-

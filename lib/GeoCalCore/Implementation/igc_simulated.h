@@ -3,7 +3,7 @@
 #include "image_ground_connection.h"
 #include "calc_raster.h"
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This is a RasterImage that is a simulated based on an underlying 
   map projected image. For each point in the image of an
   ImageGroundConnection, we calculate where that point appears on the
@@ -40,22 +40,20 @@ namespace GeoCal {
 class IgcSimulated : public CalcRaster {
 public:
   IgcSimulated(const boost::shared_ptr<ImageGroundConnection>& Igc,
-	       const boost::shared_ptr<RasterImage>& Map_projected_image, 
-	       int Avg_fact = -1,
-	       bool Read_into_memory = true,
-	       int Number_tile_line = -1,
-	       int Number_tile_sample = -1,
-	       double Fill_value = 0.0
-	       );
+               const boost::shared_ptr<RasterImage>& Map_projected_image,
+               int Avg_fact = -1, bool Read_into_memory = true,
+               int Number_tile_line = -1, int Number_tile_sample = -1,
+               double Fill_value = 0.0);
   virtual ~IgcSimulated() {}
   virtual void print(std::ostream& Os) const;
-  const boost::shared_ptr<ImageGroundConnection>& igc() const
-  { return igc_; }
+  const boost::shared_ptr<ImageGroundConnection>& igc() const { return igc_; }
   int avg_factor() const { return avg_factor_; }
   bool read_into_memory() const { return read_into_memory_; }
-  double fill_value() const {return fill_value_;}
+  double fill_value() const { return fill_value_; }
   const boost::shared_ptr<RasterImage>& map_projected_image() const
-  { return img_; }
+  {
+    return img_;
+  }
 protected:
   virtual void calc(int Lstart, int Sstart) const;
 private:

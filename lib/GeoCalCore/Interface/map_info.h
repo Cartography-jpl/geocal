@@ -9,7 +9,7 @@
 #include <vector>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This contains information describing a map.
 
   This class is used to treat map projection information the same,
@@ -40,244 +40,246 @@ namespace GeoCal {
 
 class MapInfo : public Printable<MapInfo> {
 public:
-//-----------------------------------------------------------------------
-/// Default constructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Default constructor.
+  //-----------------------------------------------------------------------
 
-  MapInfo() : is_point_(false),
-	      resolution_x_(-1), resolution_y_(-1), param(6) {}
+  MapInfo() : is_point_(false), resolution_x_(-1), resolution_y_(-1), param(6)
+  {
+  }
   MapInfo(const MapInfo& Mi)
     : conv_(Mi.conv_), is_point_(Mi.is_point_),
-      number_x_pixel_(Mi.number_x_pixel_),
-      number_y_pixel_(Mi.number_y_pixel_),
+      number_x_pixel_(Mi.number_x_pixel_), number_y_pixel_(Mi.number_y_pixel_),
       resolution_x_(Mi.resolution_x_), resolution_y_(Mi.resolution_y_),
-      param(Mi.param.copy()) {}
+      param(Mi.param.copy())
+  {
+  }
 
-  MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv, double Ulc_x, 
-	  double Ulc_y, double Lrc_x, double Lrc_y, int Number_x_pixel, 
-	  int Number_y_pixel, bool Is_point=false);
-  MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv, 
-	  const blitz::Array<double, 1>& Param,
-	  int Number_x_pixel, 
-	  int Number_y_pixel, bool Is_point=false);
+  MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv, double Ulc_x,
+          double Ulc_y, double Lrc_x, double Lrc_y, int Number_x_pixel,
+          int Number_y_pixel, bool Is_point = false);
+  MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv,
+          const blitz::Array<double, 1>& Param, int Number_x_pixel,
+          int Number_y_pixel, bool Is_point = false);
 
-//-----------------------------------------------------------------------
-/// Coordinate converter used by map projection.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Coordinate converter used by map projection.
+  //-----------------------------------------------------------------------
 
-  const CoordinateConverter& coordinate_converter() const 
-  {return *conv_; }
+  const CoordinateConverter& coordinate_converter() const { return *conv_; }
 
   void change_to_geodetic360();
   void change_to_geodetic();
 
-//-----------------------------------------------------------------------
-/// Simple test to see if we are Geodetic360, sometimes class need
-/// special handling for this
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Simple test to see if we are Geodetic360, sometimes class need
+  /// special handling for this
+  //-----------------------------------------------------------------------
 
-  bool is_geodetic_360() const { return bool(boost::dynamic_pointer_cast<Geodetic360Converter>(conv_)); }
-  
-//-----------------------------------------------------------------------
-/// Pointer to Coordinate converter used by map projection.
-//-----------------------------------------------------------------------
+  bool is_geodetic_360() const
+  {
+    return bool(boost::dynamic_pointer_cast<Geodetic360Converter>(conv_));
+  }
 
-  const boost::shared_ptr<CoordinateConverter>& 
-  coordinate_converter_ptr() const 
-  {return conv_; }
+  //-----------------------------------------------------------------------
+  /// Pointer to Coordinate converter used by map projection.
+  //-----------------------------------------------------------------------
 
+  const boost::shared_ptr<CoordinateConverter>& coordinate_converter_ptr() const
+  {
+    return conv_;
+  }
 
-  void coordinate(const GroundCoordinate& Gc, double& Pixel_x_index, 
-		  double& Pixel_y_index) const;
-  void coordinate(const Geodetic& Gc, double& Pixel_x_index, 
-		  double& Pixel_y_index) const;
-  boost::shared_ptr<GroundCoordinate> ground_coordinate(double Pixel_x_index, 
-  	           double Pixel_y_index, const Dem& D) const;
-  boost::shared_ptr<GroundCoordinate> 
+  void coordinate(const GroundCoordinate& Gc, double& Pixel_x_index,
+                  double& Pixel_y_index) const;
+  void coordinate(const Geodetic& Gc, double& Pixel_x_index,
+                  double& Pixel_y_index) const;
+  boost::shared_ptr<GroundCoordinate> ground_coordinate(double Pixel_x_index,
+                                                        double Pixel_y_index,
+                                                        const Dem& D) const;
+  boost::shared_ptr<GroundCoordinate>
   ground_coordinate(double Pixel_x_index, double Pixel_y_index) const;
 
-  MapInfo cover(const std::vector<boost::shared_ptr<GroundCoordinate> >& Pt,
-		int boundary = 0) const;
+  MapInfo cover(const std::vector<boost::shared_ptr<GroundCoordinate>>& Pt,
+                int boundary = 0) const;
 
   MapInfo intersection(const MapInfo& Mi) const;
   MapInfo map_union(const MapInfo& Mi) const;
 
-//-----------------------------------------------------------------------
-/// True if we should interpret pixel as a point. Note that this
-/// doesn't change the coordinate calculation at all, (-0.5,-0.5) is
-/// still the coordinate of the area covered by the pixel.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// True if we should interpret pixel as a point. Note that this
+  /// doesn't change the coordinate calculation at all, (-0.5,-0.5) is
+  /// still the coordinate of the area covered by the pixel.
+  //-----------------------------------------------------------------------
 
-  bool is_point() const { return is_point_;}
-  
-//-----------------------------------------------------------------------
-/// Convert pixel index to pixel coordinate.
-//-----------------------------------------------------------------------
+  bool is_point() const { return is_point_; }
+
+  //-----------------------------------------------------------------------
+  /// Convert pixel index to pixel coordinate.
+  //-----------------------------------------------------------------------
 
   void index_to_coordinate(double Pixel_x_index, double Pixel_y_index,
-	   double& Pixel_x_coordinate, double& Pixel_y_coordinate) const
+                           double& Pixel_x_coordinate,
+                           double& Pixel_y_coordinate) const
   {
-    Pixel_x_coordinate = param(0) + (Pixel_x_index + 0.5) * param(1) + 
-      (Pixel_y_index + 0.5) * param(2);
-    Pixel_y_coordinate = param(3) + (Pixel_x_index + 0.5) * param(4) + 
-      (Pixel_y_index + 0.5) * param(5);
+    Pixel_x_coordinate = param(0) + (Pixel_x_index + 0.5) * param(1) +
+                         (Pixel_y_index + 0.5) * param(2);
+    Pixel_y_coordinate = param(3) + (Pixel_x_index + 0.5) * param(4) +
+                         (Pixel_y_index + 0.5) * param(5);
   }
 
   void index_to_coordinate(const blitz::Array<double, 1>& Pixel_x_index,
-			   const blitz::Array<double, 1>& Pixel_y_index,
-			   blitz::Array<double, 1>& Pixel_x_coordinate,
-			   blitz::Array<double, 1>& Pixel_y_coordinate) const
+                           const blitz::Array<double, 1>& Pixel_y_index,
+                           blitz::Array<double, 1>& Pixel_x_coordinate,
+                           blitz::Array<double, 1>& Pixel_y_coordinate) const
   {
     Pixel_x_coordinate.resize(Pixel_x_index.shape());
     Pixel_y_coordinate.resize(Pixel_x_index.shape());
-    Pixel_x_coordinate = param(0) + (Pixel_x_index + 0.5) * param(1) + 
-      (Pixel_y_index + 0.5) * param(2);
-    Pixel_y_coordinate = param(3) + (Pixel_x_index + 0.5) * param(4) + 
-      (Pixel_y_index + 0.5) * param(5);
+    Pixel_x_coordinate = param(0) + (Pixel_x_index + 0.5) * param(1) +
+                         (Pixel_y_index + 0.5) * param(2);
+    Pixel_y_coordinate = param(3) + (Pixel_x_index + 0.5) * param(4) +
+                         (Pixel_y_index + 0.5) * param(5);
   }
   void index_to_coordinate(const blitz::Array<double, 2>& Pixel_x_index,
-			   const blitz::Array<double, 2>& Pixel_y_index,
-			   blitz::Array<double, 2>& Pixel_x_coordinate,
-			   blitz::Array<double, 2>& Pixel_y_coordinate) const
+                           const blitz::Array<double, 2>& Pixel_y_index,
+                           blitz::Array<double, 2>& Pixel_x_coordinate,
+                           blitz::Array<double, 2>& Pixel_y_coordinate) const
   {
     Pixel_x_coordinate.resize(Pixel_x_index.shape());
     Pixel_y_coordinate.resize(Pixel_x_index.shape());
-    Pixel_x_coordinate = param(0) + (Pixel_x_index + 0.5) * param(1) + 
-      (Pixel_y_index + 0.5) * param(2);
-    Pixel_y_coordinate = param(3) + (Pixel_x_index + 0.5) * param(4) + 
-      (Pixel_y_index + 0.5) * param(5);
+    Pixel_x_coordinate = param(0) + (Pixel_x_index + 0.5) * param(1) +
+                         (Pixel_y_index + 0.5) * param(2);
+    Pixel_y_coordinate = param(3) + (Pixel_x_index + 0.5) * param(4) +
+                         (Pixel_y_index + 0.5) * param(5);
   }
 
-//-----------------------------------------------------------------------
-/// Convert pixel coordinate to pixel index.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Convert pixel coordinate to pixel index.
+  //-----------------------------------------------------------------------
 
   void coordinate_to_index(double Pixel_x_coordinate, double Pixel_y_coordinate,
-			   double& Pixel_x_index, double& Pixel_y_index) const
+                           double& Pixel_x_index, double& Pixel_y_index) const
   {
-    Pixel_x_index = (param(5) * (Pixel_x_coordinate - param(0)) - 
-		     param(2) * (Pixel_y_coordinate - param(3))) / 
-      (param(5) * param(1) - param(2) * param(4)) - 0.5;
-    Pixel_y_index = (param(4) * (Pixel_x_coordinate - param(0)) - 
-		     param(1) * (Pixel_y_coordinate - param(3))) / 
-      (param(4) * param(2) - param(1) * param(5)) - 0.5;
+    Pixel_x_index = (param(5) * (Pixel_x_coordinate - param(0)) -
+                     param(2) * (Pixel_y_coordinate - param(3))) /
+                        (param(5) * param(1) - param(2) * param(4)) -
+                    0.5;
+    Pixel_y_index = (param(4) * (Pixel_x_coordinate - param(0)) -
+                     param(1) * (Pixel_y_coordinate - param(3))) /
+                        (param(4) * param(2) - param(1) * param(5)) -
+                    0.5;
   }
-  void coordinate_to_index(const blitz::Array<double,1>& Pixel_x_coordinate,
-			   const blitz::Array<double,1>& Pixel_y_coordinate,
-			   blitz::Array<double,1>& Pixel_x_index,
-			   blitz::Array<double,1>& Pixel_y_index) const
-  {
-    Pixel_x_index.resize(Pixel_x_coordinate.shape());
-    Pixel_y_index.resize(Pixel_y_coordinate.shape());
-    Pixel_x_index = (param(5) * (Pixel_x_coordinate - param(0)) - 
-		     param(2) * (Pixel_y_coordinate - param(3))) / 
-      (param(5) * param(1) - param(2) * param(4)) - 0.5;
-    Pixel_y_index = (param(4) * (Pixel_x_coordinate - param(0)) - 
-		     param(1) * (Pixel_y_coordinate - param(3))) / 
-      (param(4) * param(2) - param(1) * param(5)) - 0.5;
-  }
-  void coordinate_to_index(const blitz::Array<double,2>& Pixel_x_coordinate,
-			   const blitz::Array<double,2>& Pixel_y_coordinate,
-			   blitz::Array<double,2>& Pixel_x_index,
-			   blitz::Array<double,2>& Pixel_y_index) const
+  void coordinate_to_index(const blitz::Array<double, 1>& Pixel_x_coordinate,
+                           const blitz::Array<double, 1>& Pixel_y_coordinate,
+                           blitz::Array<double, 1>& Pixel_x_index,
+                           blitz::Array<double, 1>& Pixel_y_index) const
   {
     Pixel_x_index.resize(Pixel_x_coordinate.shape());
     Pixel_y_index.resize(Pixel_y_coordinate.shape());
-    Pixel_x_index = (param(5) * (Pixel_x_coordinate - param(0)) - 
-		     param(2) * (Pixel_y_coordinate - param(3))) / 
-      (param(5) * param(1) - param(2) * param(4)) - 0.5;
-    Pixel_y_index = (param(4) * (Pixel_x_coordinate - param(0)) - 
-		     param(1) * (Pixel_y_coordinate - param(3))) / 
-      (param(4) * param(2) - param(1) * param(5)) - 0.5;
+    Pixel_x_index = (param(5) * (Pixel_x_coordinate - param(0)) -
+                     param(2) * (Pixel_y_coordinate - param(3))) /
+                        (param(5) * param(1) - param(2) * param(4)) -
+                    0.5;
+    Pixel_y_index = (param(4) * (Pixel_x_coordinate - param(0)) -
+                     param(1) * (Pixel_y_coordinate - param(3))) /
+                        (param(4) * param(2) - param(1) * param(5)) -
+                    0.5;
   }
-
-//-----------------------------------------------------------------------
-/// X of lower right corner. Note that this is for the outer edge of
-/// the pixel, not the center (i.e., for the bounding box).
-//-----------------------------------------------------------------------
-
-  double lrc_x() const 
+  void coordinate_to_index(const blitz::Array<double, 2>& Pixel_x_coordinate,
+                           const blitz::Array<double, 2>& Pixel_y_coordinate,
+                           blitz::Array<double, 2>& Pixel_x_index,
+                           blitz::Array<double, 2>& Pixel_y_index) const
   {
-    return param(0) + number_x_pixel() * param(1) +
-      number_y_pixel() * param(2);
+    Pixel_x_index.resize(Pixel_x_coordinate.shape());
+    Pixel_y_index.resize(Pixel_y_coordinate.shape());
+    Pixel_x_index = (param(5) * (Pixel_x_coordinate - param(0)) -
+                     param(2) * (Pixel_y_coordinate - param(3))) /
+                        (param(5) * param(1) - param(2) * param(4)) -
+                    0.5;
+    Pixel_y_index = (param(4) * (Pixel_x_coordinate - param(0)) -
+                     param(1) * (Pixel_y_coordinate - param(3))) /
+                        (param(4) * param(2) - param(1) * param(5)) -
+                    0.5;
   }
 
-//-----------------------------------------------------------------------
-/// Y of lower right corner. Note that this is for the outer edge of
-/// the pixel, not the center (i.e., for the bounding box).
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// X of lower right corner. Note that this is for the outer edge of
+  /// the pixel, not the center (i.e., for the bounding box).
+  //-----------------------------------------------------------------------
+
+  double lrc_x() const
+  {
+    return param(0) + number_x_pixel() * param(1) + number_y_pixel() * param(2);
+  }
+
+  //-----------------------------------------------------------------------
+  /// Y of lower right corner. Note that this is for the outer edge of
+  /// the pixel, not the center (i.e., for the bounding box).
+  //-----------------------------------------------------------------------
 
   double lrc_y() const
   {
-    return param(3) + number_x_pixel() * param(4) +
-      number_y_pixel() * param(5);
+    return param(3) + number_x_pixel() * param(4) + number_y_pixel() * param(5);
   }
 
-//-----------------------------------------------------------------------
-/// Number of pixels in X direction.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of pixels in X direction.
+  //-----------------------------------------------------------------------
 
-  int number_x_pixel() const {return number_x_pixel_; }
+  int number_x_pixel() const { return number_x_pixel_; }
 
-//-----------------------------------------------------------------------
-/// Number of pixels in Y direction.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of pixels in Y direction.
+  //-----------------------------------------------------------------------
 
-  int number_y_pixel() const {return number_y_pixel_; }
+  int number_y_pixel() const { return number_y_pixel_; }
 
   double resolution_meter() const;
   double resolution_x() const;
   double resolution_y() const;
 
   MapInfo subset(int x_index, int y_index, int nx_pixel, int ny_pixel) const;
-  MapInfo subset(double x_index, double y_index, 
-		 int nx_pixel, int ny_pixel) const;
-  MapInfo scale(double Number_x_per_pixel, double Number_y_per_pixel) 
-    const;
+  MapInfo subset(double x_index, double y_index, int nx_pixel,
+                 int ny_pixel) const;
+  MapInfo scale(double Number_x_per_pixel, double Number_y_per_pixel) const;
 
-//-----------------------------------------------------------------------
-/// X of upper left corner. Note that this is for the outer edge of
-/// the pixel, not the center (i.e., for the bounding box).
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// X of upper left corner. Note that this is for the outer edge of
+  /// the pixel, not the center (i.e., for the bounding box).
+  //-----------------------------------------------------------------------
 
-  double ulc_x() const 
-  {
-    return param(0);
-  }
+  double ulc_x() const { return param(0); }
 
-//-----------------------------------------------------------------------
-/// Y of upper left corner. Note that this is for the outer edge of
-/// the pixel, not the center (i.e., for the bounding box).
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Y of upper left corner. Note that this is for the outer edge of
+  /// the pixel, not the center (i.e., for the bounding box).
+  //-----------------------------------------------------------------------
 
-  double ulc_y() const 
-  {
-    return param(3);
-  }
+  double ulc_y() const { return param(3); }
 
-//-----------------------------------------------------------------------
-/// This is the affine geometric transformation used by the
-/// MapInfo. You don't normally use this directly, but it is useful
-/// when writing out file metadata, e.g., with Gdal SetGeoTransform.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// This is the affine geometric transformation used by the
+  /// MapInfo. You don't normally use this directly, but it is useful
+  /// when writing out file metadata, e.g., with Gdal SetGeoTransform.
+  //-----------------------------------------------------------------------
 
-  blitz::Array<double, 1> transform() const {return param; }
-  
+  blitz::Array<double, 1> transform() const { return param; }
+
   void print(std::ostream& Os) const;
 private:
   boost::shared_ptr<CoordinateConverter> conv_; ///< Coordinate
-						///converter for map
-						///projection.
-  bool is_point_;		///< True if pixel should be
-                                /// interpreted as a point
-  int number_x_pixel_;          ///< Number of X pixels in image
-  int number_y_pixel_;		///< Number of Y pixels in image
+                                                ///converter for map
+                                                ///projection.
+  bool is_point_;                               ///< True if pixel should be
+                                                /// interpreted as a point
+  int number_x_pixel_;                          ///< Number of X pixels in image
+  int number_y_pixel_;                          ///< Number of Y pixels in image
   mutable double resolution_x_, resolution_y_;
   blitz::Array<double, 1> param; ///< Affine parameters.
   void latitude_range_correct();
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 GEOCAL_EXPORT_KEY(MapInfo);

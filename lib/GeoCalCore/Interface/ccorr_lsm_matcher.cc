@@ -5,15 +5,13 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void CcorrLsmMatcher::serialize(Archive & ar, const unsigned int UNUSED(version))
+void CcorrLsmMatcher::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(ImageMatcher);
   GEOCAL_BASE(CcorrLsmMatcher, ImageMatcher);
-  ar & GEOCAL_NVP_(accept_ccorr_only)
-    & GEOCAL_NVP_(ccorr_matcher)
-    & GEOCAL_NVP_(lsm_matcher);
+  ar& GEOCAL_NVP_(accept_ccorr_only) & GEOCAL_NVP_(ccorr_matcher) &
+      GEOCAL_NVP_(lsm_matcher);
 }
-
 
 GEOCAL_IMPLEMENT(CcorrLsmMatcher);
 #endif
@@ -33,31 +31,27 @@ GEOCAL_IMPLEMENT(CcorrLsmMatcher);
 /// Diagnostic returned by the CcorrMatcher or the LsmMatcher.
 //-----------------------------------------------------------------------
 
-void CcorrLsmMatcher::match_mask
-(const RasterImage& Ref, 
- const ImageMask& Ref_mask,
- const RasterImage& New, 
- const ImageMask& New_mask,
- const ImageCoordinate& Ref_loc, const
- ImageCoordinate& New_guess, 
- ImageCoordinate& New_res,
- double& Line_sigma, double& Sample_sigma,
- bool& Success, int* Diagnostic) const
+void CcorrLsmMatcher::match_mask(
+    const RasterImage& Ref, const ImageMask& Ref_mask, const RasterImage& New,
+    const ImageMask& New_mask, const ImageCoordinate& Ref_loc,
+    const ImageCoordinate& New_guess, ImageCoordinate& New_res,
+    double& Line_sigma, double& Sample_sigma, bool& Success,
+    int* Diagnostic) const
 {
   ImageCoordinate t;
   double ls, ss;
-  ccorr_matcher().match_mask(Ref, Ref_mask, New, New_mask, Ref_loc, New_guess, 
-			t, ls, ss, Success, Diagnostic);
+  ccorr_matcher().match_mask(Ref, Ref_mask, New, New_mask, Ref_loc, New_guess,
+                             t, ls, ss, Success, Diagnostic);
   if(Success) {
-    lsm_matcher().match_mask(Ref, Ref_mask, New, New_mask, Ref_loc, t, New_res, 
-			Line_sigma, Sample_sigma, Success, Diagnostic);
+    lsm_matcher().match_mask(Ref, Ref_mask, New, New_mask, Ref_loc, t, New_res,
+                             Line_sigma, Sample_sigma, Success, Diagnostic);
     if(!Success && accept_ccorr_only_) {
       New_res = t;
       Line_sigma = ls;
       Sample_sigma = ss;
       Success = true;
     }
-  }  
+  }
 }
 
 //-----------------------------------------------------------------------
@@ -68,7 +62,7 @@ void CcorrLsmMatcher::print(std::ostream& Os) const
 {
   OstreamPad opad(Os, "    ");
   Os << "Cross correlation + least squares matcher:\n"
-     << "  Accept Ccorr only: " << (accept_ccorr_only_ ? "true" : "false") 
+     << "  Accept Ccorr only: " << (accept_ccorr_only_ ? "true" : "false")
      << "\n"
      << "  Cross correlation matcher: \n";
   opad << *ccorr_matcher_;

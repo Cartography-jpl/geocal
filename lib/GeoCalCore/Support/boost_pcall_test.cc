@@ -14,7 +14,7 @@ BOOST_AUTO_TEST_CASE(round_trip)
   // size, to make sure we handle all the data.
   std::string in;
   for(int i = 0; i < 1000000; ++i)
-    in += (char) (i % 256);
+    in += (char)(i % 256);
   std::string out;
   boost_pcall_run("cat", &in, &out);
   BOOST_CHECK(in == out);
@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE(failure)
   BOOST_CHECK_THROW(boost_pcall_run("false", 0, &out), Exception);
   BOOST_CHECK_THROW(boost_pcall_run("", 0, &out), Exception);
   BOOST_CHECK_THROW(boost_pcall_run("not_a_real_program_xyz", 0, &out),
-		    Exception);
+                    Exception);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -18,17 +18,17 @@ BOOST_AUTO_TEST_CASE(basic_test)
   ImageCoordinate new_res;
   double line_sigma, sample_sigma;
   bool success;
-  m.match(ref_img, new_img, ref_ic, 
-	  ImageCoordinate(new_ic.line + 5, new_ic.sample - 4), new_res,
-	  line_sigma, sample_sigma, success);
+  m.match(ref_img, new_img, ref_ic,
+          ImageCoordinate(new_ic.line + 5, new_ic.sample - 4), new_res,
+          line_sigma, sample_sigma, success);
   BOOST_CHECK(fabs(new_res.line - new_ic.line) < 1);
   BOOST_CHECK(fabs(new_res.sample - new_ic.sample) < 1);
   BOOST_CHECK(success);
   BOOST_CHECK_CLOSE(line_sigma, 0.5, 1e-4);
   BOOST_CHECK_CLOSE(sample_sigma, 0.5, 1e-4);
-  m.match(ref_img, new_img, ref_ic, 
-	  ImageCoordinate(new_ic.line + 11, new_ic.sample - 4), new_res,
-	  line_sigma, sample_sigma, success);
+  m.match(ref_img, new_img, ref_ic,
+          ImageCoordinate(new_ic.line + 11, new_ic.sample - 4), new_res,
+          line_sigma, sample_sigma, success);
   BOOST_CHECK(!success);
 }
 
@@ -49,17 +49,17 @@ BOOST_AUTO_TEST_CASE(serialization)
   ImageCoordinate new_res;
   double line_sigma, sample_sigma;
   bool success;
-  mr->match(ref_img, new_img, ref_ic, 
-	  ImageCoordinate(new_ic.line + 5, new_ic.sample - 4), new_res,
-	  line_sigma, sample_sigma, success);
+  mr->match(ref_img, new_img, ref_ic,
+            ImageCoordinate(new_ic.line + 5, new_ic.sample - 4), new_res,
+            line_sigma, sample_sigma, success);
   BOOST_CHECK(fabs(new_res.line - new_ic.line) < 1);
   BOOST_CHECK(fabs(new_res.sample - new_ic.sample) < 1);
   BOOST_CHECK(success);
   BOOST_CHECK_CLOSE(line_sigma, 0.5, 1e-4);
   BOOST_CHECK_CLOSE(sample_sigma, 0.5, 1e-4);
-  mr->match(ref_img, new_img, ref_ic, 
-	  ImageCoordinate(new_ic.line + 11, new_ic.sample - 4), new_res,
-	  line_sigma, sample_sigma, success);
+  mr->match(ref_img, new_img, ref_ic,
+            ImageCoordinate(new_ic.line + 11, new_ic.sample - 4), new_res,
+            line_sigma, sample_sigma, success);
   BOOST_CHECK(!success);
 }
 

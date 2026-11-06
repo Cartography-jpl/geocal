@@ -6,21 +6,21 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void DatumGeoid96::save(Archive & ar, const unsigned int version) const
+void DatumGeoid96::save(Archive& ar, const unsigned int version) const
 {
   GEOCAL_GENERIC_BASE(Datum);
   GEOCAL_BASE(DatumGeoid96, Datum);
   std::string fname = file_name();
-  ar & GEOCAL_NVP(fname);
+  ar& GEOCAL_NVP(fname);
 }
 
 template<class Archive>
-void DatumGeoid96::load(Archive & ar, const unsigned int version)
+void DatumGeoid96::load(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(Datum);
   GEOCAL_BASE(DatumGeoid96, Datum);
   std::string fname;
-  ar & GEOCAL_NVP(fname);
+  ar& GEOCAL_NVP(fname);
   data.reset(new VicarRasterImage(fname));
 }
 
@@ -38,7 +38,8 @@ DatumGeoid96::DatumGeoid96(const std::string& Fname)
   if(fname == "") {
     char* t = getenv("AFIDS_VDEV_DATA");
     if(!t)
-      throw Exception("Need to either pass in the EGM96 file name or set the environment variable AFIDS_VDEV_DATA");
+      throw Exception("Need to either pass in the EGM96 file name or set the "
+                      "environment variable AFIDS_VDEV_DATA");
     fname = t + std::string("/EGM96_20_x100.HLF");
   }
   data.reset(new VicarRasterImage(fname));
@@ -85,5 +86,3 @@ void DatumGeoid96::print(std::ostream& Os) const
   Os << "Geoid 96 Datum\n"
      << "  File: " << file_name() << "\n";
 }
-
-

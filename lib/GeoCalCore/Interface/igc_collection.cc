@@ -4,7 +4,8 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void IgcCollection::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
+void IgcCollection::serialize(Archive& UNUSED(ar),
+                              const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(IgcCollection);
   GEOCAL_GENERIC_BASE(WithParameter);
@@ -19,11 +20,10 @@ GEOCAL_IMPLEMENT(IgcCollection);
 /// parameters, calculated by taking a finite difference.
 //-----------------------------------------------------------------------
 
-blitz::Array<double, 2> 
-IgcCollection::image_coordinate_jac_parm_fd
-(int Image_index, const CartesianFixed& Gc,
- const blitz::Array<double, 1>& Pstep) const
-{ 
+blitz::Array<double, 2> IgcCollection::image_coordinate_jac_parm_fd(
+    int Image_index, const CartesianFixed& Gc,
+    const blitz::Array<double, 1>& Pstep) const
+{
   blitz::Array<double, 1> p0 = parameter_subset();
   if(p0.rows() != Pstep.rows())
     throw Exception("Pstep needs to be the size of parameter_subset");

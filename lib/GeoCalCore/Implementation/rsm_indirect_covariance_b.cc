@@ -12,32 +12,28 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RsmBSubgroup::serialize(Archive & ar, const unsigned int version)
+void RsmBSubgroup::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(RsmBSubgroup);
-  ar & GEOCAL_NVP_(cov)
-    & GEOCAL_NVP_(time_correlation)
-    & GEOCAL_NVP_(time_correlation_domain_flag);
+  ar& GEOCAL_NVP_(cov) & GEOCAL_NVP_(time_correlation) &
+      GEOCAL_NVP_(time_correlation_domain_flag);
 }
 
 template<class Archive>
-void RsmBUnmodeledCovariance::serialize(Archive & ar, const unsigned int version)
+void RsmBUnmodeledCovariance::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(RsmBUnmodeledCovariance);
-  ar & GEOCAL_NVP_(cov)
-    & GEOCAL_NVP_(row_time_correlation)
-    & GEOCAL_NVP_(col_time_correlation);
+  ar& GEOCAL_NVP_(cov) & GEOCAL_NVP_(row_time_correlation) &
+      GEOCAL_NVP_(col_time_correlation);
 }
 
 template<class Archive>
-void RsmIndirectCovarianceB::serialize(Archive & ar, const unsigned int version)
+void RsmIndirectCovarianceB::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RsmIndirectCovariance)
-    & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RsmBParameterDesc)
-    & GEOCAL_NVP(cvdate)
-    & GEOCAL_NVP_(subgroup)
-    & GEOCAL_NVP_(m)
-    & GEOCAL_NVP_(ucov);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(RsmIndirectCovariance) &
+      BOOST_SERIALIZATION_BASE_OBJECT_NVP(RsmBParameterDesc) &
+      GEOCAL_NVP(cvdate) & GEOCAL_NVP_(subgroup) & GEOCAL_NVP_(m) &
+      GEOCAL_NVP_(ucov);
 }
 
 GEOCAL_IMPLEMENT(RsmBSubgroup);
@@ -68,7 +64,7 @@ std::string RsmIndirectCovarianceB::tre_string() const
   res += (has_unmodeled_error_covariance() ? "Y" : "N");
   if(has_indirect_error_covariance()) {
     res += str_check_size(numint % number_original_parameter(), 2);
-    int num_subgroup = (int) subgroup_.size();
+    int num_subgroup = (int)subgroup_.size();
     res += str_check_size(numint % num_subgroup, 2);
     res += str_check_size(date % cvdate, 8);
     res += rsm_b_parm_tre_string();
@@ -76,7 +72,7 @@ std::string RsmIndirectCovarianceB::tre_string() const
       res += subgroup_[i]->tre_string();
     for(int i = 0; i < m_.rows(); ++i)
       for(int j = 0; j < m_.cols(); ++j)
-	res += str_check_size(num % m_(i,j), 21);
+        res += str_check_size(num % m_(i, j), 21);
   }
   if(has_unmodeled_error_covariance()) {
     res += ucov_->tre_string();
@@ -118,7 +114,7 @@ RsmIndirectCovarianceB::read_tre_string(const std::string& Tre_in)
     res->m_.resize(res->number_parameter(), res->number_original_parameter());
     for(int i = 0; i < res->m_.rows(); ++i)
       for(int j = 0; j < res->m_.cols(); ++j)
-	res->m_(i,j) = read_size<double>(in, 21);
+        res->m_(i, j) = read_size<double>(in, 21);
   }
   if(incluc == "Y") {
     res->ucov_ = boost::make_shared<RsmBUnmodeledCovariance>();
@@ -144,12 +140,13 @@ void RsmIndirectCovarianceB::check_consistent() const
     if(m_.rows() != number_parameter() ||
        m_.cols() != number_original_parameter()) {
       Exception e;
-      e << "mapping_matrix needs to be number_parameter x number_original_parameter\n"
-	<< "   number_parameter:          " << number_parameter() << "\n"
-	<< "   number_original_parameter: " << number_original_parameter()
-	<< "\n"
-	<< "   mapping_matrix:            " << m_.rows() << " x "
-	<< m_.cols() << "\n";
+      e << "mapping_matrix needs to be number_parameter x "
+           "number_original_parameter\n"
+        << "   number_parameter:          " << number_parameter() << "\n"
+        << "   number_original_parameter: " << number_original_parameter()
+        << "\n"
+        << "   mapping_matrix:            " << m_.rows() << " x " << m_.cols()
+        << "\n";
       throw e;
     }
   }
@@ -161,29 +158,26 @@ void RsmIndirectCovarianceB::check_consistent() const
 /// Rsm_support_data_edition to match that of the given Rsm_id.
 //-----------------------------------------------------------------------
 
-RsmIndirectCovarianceB::RsmIndirectCovarianceB
-(const ImageGroundConnection& Igc,
- double H_min, double H_max,
- const RsmId& Rsm_id,
- const std::string& Triangulation_id)
+RsmIndirectCovarianceB::RsmIndirectCovarianceB(
+    const ImageGroundConnection& Igc, double H_min, double H_max,
+    const RsmId& Rsm_id, const std::string& Triangulation_id)
   : RsmBParameterDesc(Igc, H_min, H_max),
     RsmIndirectCovariance(Rsm_id.image_identifier(),
-			  Rsm_id.rsm_support_data_edition(),
-			  Triangulation_id),
+                          Rsm_id.rsm_support_data_edition(), Triangulation_id),
     cvdate("20200707")
 {
 }
 
 RsmIndirectCovarianceB::RsmIndirectCovarianceB(const RsmIndirectCovarianceB& V)
   : RsmIndirectCovariance(V.image_identifier(), V.rsm_support_data_edition(),
-			  V.triangulation_id()),
-    cvdate(V.covariance_version_date()),
-    m_(V.mapping_matrix().copy())
+                          V.triangulation_id()),
+    cvdate(V.covariance_version_date()), m_(V.mapping_matrix().copy())
 {
   for(auto i : V.subgroup())
     add_subgroup(boost::make_shared<RsmBSubgroup>(*i));
   if(V.has_unmodeled_error_covariance())
-    ucov_ = boost::make_shared<RsmBUnmodeledCovariance>(*V.unmodeled_covariance());
+    ucov_ =
+        boost::make_shared<RsmBUnmodeledCovariance>(*V.unmodeled_covariance());
 }
 
 int RsmIndirectCovarianceB::number_original_parameter() const
@@ -236,7 +230,7 @@ void RsmIndirectCovarianceB::print(std::ostream& Os) const
 /// If this field is 0, the time correlation applies to all time
 /// intervals, both within and between images. The associated errors
 /// in the original adjustable parameters are “image element errors”.
-/// 
+///
 /// If this field is 1, the time correlation applies to time intervals
 /// between images only. Time correlation for time intervals within an
 /// image is defined 100% positively correlated. The associated errors
@@ -255,15 +249,13 @@ void RsmIndirectCovarianceB::print(std::ostream& Os) const
 /// parameter). Note that is a little clumsy, I had considered
 /// separate classes for these. But there is only 2 types (no other
 /// types can fit into the TRE) and they really only differ in the
-/// parameters we use to describe them. So for now we use this model. 
+/// parameters we use to describe them. So for now we use this model.
 //-----------------------------------------------------------------------
 
-RsmBSubgroup::RsmBSubgroup
-(const blitz::Array<double, 2> Cov,
- int Time_correlation_domain_flag,
- const blitz::Array<double, 2> Time_correlation)
-  : cov_(Cov.copy()),
-    time_correlation_(Time_correlation.copy()),
+RsmBSubgroup::RsmBSubgroup(const blitz::Array<double, 2> Cov,
+                           int Time_correlation_domain_flag,
+                           const blitz::Array<double, 2> Time_correlation)
+  : cov_(Cov.copy()), time_correlation_(Time_correlation.copy()),
     time_correlation_domain_flag_(Time_correlation_domain_flag)
 {
   if(Cov.rows() != Cov.cols())
@@ -278,12 +270,10 @@ RsmBSubgroup::RsmBSubgroup
   }
 }
 
-RsmBSubgroup::RsmBSubgroup
-(const blitz::Array<double, 2> Cov,
- int Time_correlation_domain_flag,
- double A, double alpha, double beta, double T)
-  : cov_(Cov.copy()),
-    time_correlation_(1, 4),
+RsmBSubgroup::RsmBSubgroup(const blitz::Array<double, 2> Cov,
+                           int Time_correlation_domain_flag, double A,
+                           double alpha, double beta, double T)
+  : cov_(Cov.copy()), time_correlation_(1, 4),
     time_correlation_domain_flag_(Time_correlation_domain_flag)
 {
   if(Cov.rows() != Cov.cols())
@@ -292,25 +282,26 @@ RsmBSubgroup::RsmBSubgroup
   time_correlation_ = A, alpha, beta, T;
 }
 
-RsmBUnmodeledCovariance::RsmBUnmodeledCovariance
-(const blitz::Array<double, 2> Cov,
- const blitz::Array<double, 2> Row_time_correlation,
- const blitz::Array<double, 2> Col_time_correlation)
-  : cov_(Cov.copy()),
-    row_time_correlation_(Row_time_correlation.copy()),
+RsmBUnmodeledCovariance::RsmBUnmodeledCovariance(
+    const blitz::Array<double, 2> Cov,
+    const blitz::Array<double, 2> Row_time_correlation,
+    const blitz::Array<double, 2> Col_time_correlation)
+  : cov_(Cov.copy()), row_time_correlation_(Row_time_correlation.copy()),
     col_time_correlation_(Col_time_correlation.copy())
 {
   if(Cov.rows() != Cov.cols())
     throw Exception("Cov needs to be square");
   if(!(row_time_correlation_.cols() == 2 ||
-       (row_time_correlation_.rows() == 1 && row_time_correlation_.cols() == 4))) {
+       (row_time_correlation_.rows() == 1 &&
+        row_time_correlation_.cols() == 4))) {
     Exception e;
     e << "Time_correlation must be nseg x 2 (for piecewise linear model)"
       << "or 1 x 4 (for CSM model";
     throw e;
   }
   if(!(col_time_correlation_.cols() == 2 ||
-       (col_time_correlation_.rows() == 1 && col_time_correlation_.cols() == 4))) {
+       (col_time_correlation_.rows() == 1 &&
+        col_time_correlation_.cols() == 4))) {
     Exception e;
     e << "Time_correlation must be nseg x 2 (for piecewise linear model)"
       << "or 1 x 4 (for CSM model";
@@ -320,13 +311,11 @@ RsmBUnmodeledCovariance::RsmBUnmodeledCovariance
     throw Exception("row and col need to be the same kind of time correlation");
 }
 
-RsmBUnmodeledCovariance::RsmBUnmodeledCovariance
-(const blitz::Array<double, 2> Cov,
- double Row_A, double Row_alpha, double Row_beta, double Row_T,
- double Col_A, double Col_alpha, double Col_beta, double Col_T)
-: cov_(Cov.copy()),
-  row_time_correlation_(1, 4),
-  col_time_correlation_(1, 4)
+RsmBUnmodeledCovariance::RsmBUnmodeledCovariance(
+    const blitz::Array<double, 2> Cov, double Row_A, double Row_alpha,
+    double Row_beta, double Row_T, double Col_A, double Col_alpha,
+    double Col_beta, double Col_T)
+  : cov_(Cov.copy()), row_time_correlation_(1, 4), col_time_correlation_(1, 4)
 {
   if(Cov.rows() != Cov.cols())
     throw Exception("Cov needs to be square");
@@ -374,7 +363,7 @@ void RsmBSubgroup::read_tre_string(std::istream& In)
       time_correlation_(i, 1) = read_size<double>(In, 21);
     }
   } else {
-    time_correlation_.resize(1,4);
+    time_correlation_.resize(1, 4);
     for(int i = 0; i < 4; ++i)
       time_correlation_(0, i) = read_size<double>(In, 21);
   }
@@ -430,10 +419,10 @@ void RsmBUnmodeledCovariance::read_tre_string(std::istream& In)
       col_time_correlation_(i, 1) = read_size<double>(In, 21);
     }
   } else {
-    row_time_correlation_.resize(1,4);
+    row_time_correlation_.resize(1, 4);
     for(int i = 0; i < 4; ++i)
       row_time_correlation_(0, i) = read_size<double>(In, 21);
-    col_time_correlation_.resize(1,4);
+    col_time_correlation_.resize(1, 4);
     for(int i = 0; i < 4; ++i)
       col_time_correlation_(0, i) = read_size<double>(In, 21);
   }
@@ -443,20 +432,20 @@ void RsmBSubgroup::print(std::ostream& Os) const
 {
   OstreamPad opad(Os, "    ");
   Os << "RsmBSubgroup:\n"
-     << "  Time correlation domain flag: "
-     << time_correlation_domain_flag() << "\n"
+     << "  Time correlation domain flag: " << time_correlation_domain_flag()
+     << "\n"
      << "  Covariance: \n";
   opad << covariance() << "\n";
   opad.strict_sync();
   Os << "  Time correlation:\n";
   if(is_csm_correlation()) {
-    Os << "     A:     " << time_correlation_(0,0) << "\n"
-       << "     alpha: " << time_correlation_(0,1) << "\n"
-       << "     beta:  " << time_correlation_(0,2) << "\n"
-       << "     T:     " << time_correlation_(0,3) << "\n";
+    Os << "     A:     " << time_correlation_(0, 0) << "\n"
+       << "     alpha: " << time_correlation_(0, 1) << "\n"
+       << "     beta:  " << time_correlation_(0, 2) << "\n"
+       << "     T:     " << time_correlation_(0, 3) << "\n";
   } else {
     opad << time_correlation_ << "\n";
-  opad.strict_sync();
+    opad.strict_sync();
   }
 }
 
@@ -469,19 +458,17 @@ void RsmBUnmodeledCovariance::print(std::ostream& Os) const
   opad.strict_sync();
   Os << "  Time correlation:\n";
   if(is_csm_correlation()) {
-    Os << "     Row A:     " << row_time_correlation_(0,0) << "\n"
-       << "     Row alpha: " << row_time_correlation_(0,1) << "\n"
-       << "     Row beta:  " << row_time_correlation_(0,2) << "\n"
-       << "     Row T:     " << row_time_correlation_(0,3) << "\n"
-       << "     Col A:     " << col_time_correlation_(0,0) << "\n"
-       << "     Col alpha: " << col_time_correlation_(0,1) << "\n"
-       << "     Col beta:  " << col_time_correlation_(0,2) << "\n"
-       << "     Col T:     " << col_time_correlation_(0,3) << "\n";
+    Os << "     Row A:     " << row_time_correlation_(0, 0) << "\n"
+       << "     Row alpha: " << row_time_correlation_(0, 1) << "\n"
+       << "     Row beta:  " << row_time_correlation_(0, 2) << "\n"
+       << "     Row T:     " << row_time_correlation_(0, 3) << "\n"
+       << "     Col A:     " << col_time_correlation_(0, 0) << "\n"
+       << "     Col alpha: " << col_time_correlation_(0, 1) << "\n"
+       << "     Col beta:  " << col_time_correlation_(0, 2) << "\n"
+       << "     Col T:     " << col_time_correlation_(0, 3) << "\n";
   } else {
     opad << row_time_correlation_ << "\n";
     opad << col_time_correlation_ << "\n";
     opad.strict_sync();
   }
 }
-
-

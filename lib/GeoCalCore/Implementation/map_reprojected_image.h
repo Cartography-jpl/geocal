@@ -3,7 +3,7 @@
 #include "raster_image_variable.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This is a RasterImage that has been resampled to a different
   map projection and/or a different resolution.
 
@@ -34,28 +34,31 @@ namespace GeoCal {
 class MapReprojectedImage : public RasterImageVariable {
 public:
   MapReprojectedImage(const boost::shared_ptr<RasterImage> Img_in,
-		      const MapInfo& Mi, int Line_avg = -1, int Sample_avg = -1);
+                      const MapInfo& Mi, int Line_avg = -1,
+                      int Sample_avg = -1);
 
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~MapReprojectedImage() {}
 
   virtual int unchecked_read(int Line, int Sample) const
-  { return (int) unchecked_read_double(Line, Sample); }
+  {
+    return (int)unchecked_read_double(Line, Sample);
+  }
   virtual double unchecked_read_double(int Line, int Sample) const;
-  virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
-			int Number_sample, int* Res) const;
+  virtual void read_ptr(int Lstart, int Sstart, int Number_line,
+                        int Number_sample, int* Res) const;
   virtual void unchecked_write(int Line, int Sample, int Val);
   virtual void unchecked_write(int Line, int Sample, double Val);
 
   virtual void print(std::ostream& Os) const;
-  boost::shared_ptr<RasterImage> raw_image_ptr() const {return img;}
+  boost::shared_ptr<RasterImage> raw_image_ptr() const { return img; }
 private:
   boost::shared_ptr<RasterImage> img;
-                               ///< Underlying data, possibly averaged
-                               ///using RasterAveraged.
+  ///< Underlying data, possibly averaged
+  ///using RasterAveraged.
 };
 
 }

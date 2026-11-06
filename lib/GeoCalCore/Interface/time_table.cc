@@ -8,7 +8,8 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void TimeTable::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
+void TimeTable::serialize(Archive& UNUSED(ar),
+                          const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(TimeTable);
   GEOCAL_GENERIC_BASE(WithParameter);
@@ -16,34 +17,34 @@ void TimeTable::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(versio
 }
 
 template<class Archive>
-void ConstantSpacingTimeTable::serialize(Archive & ar, const unsigned int UNUSED(version))
+void ConstantSpacingTimeTable::serialize(Archive& ar,
+                                         const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(TimeTable);
   GEOCAL_BASE(ConstantSpacingTimeTable, TimeTable);
   // We renamed min_t to t_min_line when we added support for negative
   // time spacing. Not worth updating the serialization, so we just
   // use the old name when saving.
-  ar & GEOCAL_NVP2("min_t", t_min_line) & GEOCAL_NVP(max_l)
-    & GEOCAL_NVP(tspace);
+  ar& GEOCAL_NVP2("min_t", t_min_line) & GEOCAL_NVP(max_l) & GEOCAL_NVP(tspace);
 }
 
 template<class Archive>
-void ConstantSpacingFrameletTimeTable::serialize(Archive & ar, const unsigned int UNUSED(version))
+void ConstantSpacingFrameletTimeTable::serialize(
+    Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(TimeTable);
   GEOCAL_BASE(ConstantSpacingFrameletTimeTable, TimeTable);
-  ar & GEOCAL_NVP(t_min_line) & GEOCAL_NVP(max_l)
-    & GEOCAL_NVP_(framelet_size)
-    & GEOCAL_NVP(tspace);
+  ar& GEOCAL_NVP(t_min_line) & GEOCAL_NVP(max_l) & GEOCAL_NVP_(framelet_size) &
+      GEOCAL_NVP(tspace);
 }
 
 template<class Archive>
-void MeasuredTimeTable::serialize(Archive & ar, const unsigned int UNUSED(version))
+void MeasuredTimeTable::serialize(Archive& ar,
+                                  const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(TimeTable);
   GEOCAL_BASE(MeasuredTimeTable, TimeTable);
-  ar & GEOCAL_NVP_(min_line)
-    & GEOCAL_NVP(tlist);
+  ar& GEOCAL_NVP_(min_line) & GEOCAL_NVP(tlist);
 }
 
 GEOCAL_IMPLEMENT(TimeTable);
@@ -56,7 +57,7 @@ GEOCAL_IMPLEMENT(MeasuredTimeTable);
 /// Sometimes we want to know the acquisition times around a
 /// particular time. For a simple pushbroom camera, this is just the
 /// times for an integral image coordinates around that time. But this
-/// can be a little more complicated, e.g, ConstantSpacingFrameletTimeTable  
+/// can be a little more complicated, e.g, ConstantSpacingFrameletTimeTable
 /// it would be the framelet times surround the given time. This is
 /// returned as the time for the smaller image line index first, and
 /// the time of the larger line index second (so for a time table
@@ -65,7 +66,7 @@ GEOCAL_IMPLEMENT(MeasuredTimeTable);
 //-----------------------------------------------------------------------
 
 void TimeTable::time_acquisition(const Time& T, const FrameCoordinate& Fc,
-			    Time& T1, Time& T2) const
+                                 Time& T1, Time& T2) const
 {
   // This default implementation should work for a good number of Time
   // tables. Derived class should override this if this isn't
@@ -86,43 +87,43 @@ void TimeTable::time_acquisition(const Time& T, const FrameCoordinate& Fc,
 /// a little sloppy.
 /// Note Time_space can be negative, and Time_max_line < Time_min_line
 //-----------------------------------------------------------------------
-  
-ConstantSpacingTimeTable::ConstantSpacingTimeTable(Time Time_min_line, 
-	   Time Time_max_line, double Time_space)
-: t_min_line(Time_min_line),
-  tspace(Time_space)
+
+ConstantSpacingTimeTable::ConstantSpacingTimeTable(Time Time_min_line,
+                                                   Time Time_max_line,
+                                                   double Time_space)
+  : t_min_line(Time_min_line), tspace(Time_space)
 {
   if(Time_space > 0)
     range_min_check(Time_max_line, Time_min_line);
   else
     range_min_check(Time_min_line, Time_max_line);
-  max_l = (int) round((Time_max_line - Time_min_line) / tspace);
+  max_l = (int)round((Time_max_line - Time_min_line) / tspace);
 }
 
 //-----------------------------------------------------------------------
 /// Convert from Time and FrameCoordinate to ImageCoordinate.
 //-----------------------------------------------------------------------
 
-ImageCoordinate ConstantSpacingTimeTable::image_coordinate(Time T, 
-const FrameCoordinate& F) const
+ImageCoordinate
+ConstantSpacingTimeTable::image_coordinate(Time T,
+                                           const FrameCoordinate& F) const
 {
   range_check_inclusive(T, min_time(), max_time());
-  double line = (T  - t_min_line) / tspace + F.line;
+  double line = (T - t_min_line) / tspace + F.line;
   return ImageCoordinate(line, F.sample);
 }
 
 //-----------------------------------------------------------------------
-/// Convert from TimeWithDerivative and FrameCoordinateWithDerivative 
+/// Convert from TimeWithDerivative and FrameCoordinateWithDerivative
 /// to ImageCoordinateWithDerivative.
 //-----------------------------------------------------------------------
 
-ImageCoordinateWithDerivative 
-ConstantSpacingTimeTable::image_coordinate_with_derivative
-(const TimeWithDerivative& T, 
- const FrameCoordinateWithDerivative& F) const
+ImageCoordinateWithDerivative
+ConstantSpacingTimeTable::image_coordinate_with_derivative(
+    const TimeWithDerivative& T, const FrameCoordinateWithDerivative& F) const
 {
   range_check_inclusive(T.value(), min_time(), max_time());
-  AutoDerivative<double> line = (T  - t_min_line) / tspace + F.line;
+  AutoDerivative<double> line = (T - t_min_line) / tspace + F.line;
   return ImageCoordinateWithDerivative(line, F.sample);
 }
 
@@ -130,28 +131,27 @@ ConstantSpacingTimeTable::image_coordinate_with_derivative
 /// Convert from ImageCoordinate to Time and FrameCoordinate.
 //-----------------------------------------------------------------------
 
-void ConstantSpacingTimeTable::time(const ImageCoordinate& Ic, Time& T, 
-				    FrameCoordinate& F) const
+void ConstantSpacingTimeTable::time(const ImageCoordinate& Ic, Time& T,
+                                    FrameCoordinate& F) const
 {
   // We add a border of 1 line to handle edge cases.
-  range_check_inclusive(Ic.line, (double) min_line() - 1.0,
-			(double) max_line() + 1.0);
+  range_check_inclusive(Ic.line, (double)min_line() - 1.0,
+                        (double)max_line() + 1.0);
   T = t_min_line + Ic.line * tspace;
   F = FrameCoordinate(0, Ic.sample);
 }
 
-
 //-----------------------------------------------------------------------
-/// Convert from ImageCoordinateWithDerivative to TimeWithDerivative 
+/// Convert from ImageCoordinateWithDerivative to TimeWithDerivative
 /// and FrameCoordinateWithDerivative.
 //-----------------------------------------------------------------------
 
-void ConstantSpacingTimeTable::time_with_derivative
-(const ImageCoordinateWithDerivative& Ic, TimeWithDerivative& T, 
- FrameCoordinateWithDerivative& F) const
+void ConstantSpacingTimeTable::time_with_derivative(
+    const ImageCoordinateWithDerivative& Ic, TimeWithDerivative& T,
+    FrameCoordinateWithDerivative& F) const
 {
-  range_check_inclusive(Ic.line.value(), (double) min_line() - 1.0,
-			(double) max_line() + 1.0);
+  range_check_inclusive(Ic.line.value(), (double)min_line() - 1.0,
+                        (double)max_line() + 1.0);
   T = TimeWithDerivative(t_min_line) + Ic.line * tspace;
   F = FrameCoordinateWithDerivative(0, Ic.sample);
 }
@@ -178,46 +178,45 @@ void ConstantSpacingTimeTable::print(std::ostream& Os) const
 /// a little sloppy.
 /// Note Time_space can be negative, and Time_max_line < Time_min_line
 //-----------------------------------------------------------------------
-  
-ConstantSpacingFrameletTimeTable::ConstantSpacingFrameletTimeTable
-(Time Time_min_line, 
- Time Time_max_line, int Framelet_size, double Time_space)
-: t_min_line(Time_min_line),
-  framelet_size_(Framelet_size),
-  tspace(Time_space)
+
+ConstantSpacingFrameletTimeTable::ConstantSpacingFrameletTimeTable(
+    Time Time_min_line, Time Time_max_line, int Framelet_size,
+    double Time_space)
+  : t_min_line(Time_min_line), framelet_size_(Framelet_size), tspace(Time_space)
 {
   if(Time_space > 0)
     range_min_check(Time_max_line, Time_min_line);
   else
     range_min_check(Time_min_line, Time_max_line);
-  max_l = ((int) round((Time_max_line - Time_min_line) / tspace)) * framelet_size_ - 1;
+  max_l =
+      ((int)round((Time_max_line - Time_min_line) / tspace)) * framelet_size_ -
+      1;
 }
 
 //-----------------------------------------------------------------------
 /// Convert from Time and FrameCoordinate to ImageCoordinate.
 //-----------------------------------------------------------------------
 
-ImageCoordinate ConstantSpacingFrameletTimeTable::image_coordinate(Time T, 
-const FrameCoordinate& F) const
+ImageCoordinate ConstantSpacingFrameletTimeTable::image_coordinate(
+    Time T, const FrameCoordinate& F) const
 {
   range_check_inclusive(T, min_time(), max_time());
-  double line = (T  - t_min_line) / tspace * framelet_size_ + F.line;
+  double line = (T - t_min_line) / tspace * framelet_size_ + F.line;
   return ImageCoordinate(line, F.sample);
 }
 
 //-----------------------------------------------------------------------
-/// Convert from TimeWithDerivative and FrameCoordinateWithDerivative 
+/// Convert from TimeWithDerivative and FrameCoordinateWithDerivative
 /// to ImageCoordinateWithDerivative.
 //-----------------------------------------------------------------------
 
-ImageCoordinateWithDerivative 
-ConstantSpacingFrameletTimeTable::image_coordinate_with_derivative
-(const TimeWithDerivative& T, 
- const FrameCoordinateWithDerivative& F) const
+ImageCoordinateWithDerivative
+ConstantSpacingFrameletTimeTable::image_coordinate_with_derivative(
+    const TimeWithDerivative& T, const FrameCoordinateWithDerivative& F) const
 {
   range_check_inclusive(T.value(), min_time(), max_time());
-  AutoDerivative<double> line = (T  - t_min_line) / tspace * framelet_size_ +
-    F.line;
+  AutoDerivative<double> line =
+      (T - t_min_line) / tspace * framelet_size_ + F.line;
   return ImageCoordinateWithDerivative(line, F.sample);
 }
 
@@ -225,37 +224,37 @@ ConstantSpacingFrameletTimeTable::image_coordinate_with_derivative
 /// Convert from ImageCoordinate to Time and FrameCoordinate.
 //-----------------------------------------------------------------------
 
-void ConstantSpacingFrameletTimeTable::time(const ImageCoordinate& Ic, Time& T, 
-				    FrameCoordinate& F) const
+void ConstantSpacingFrameletTimeTable::time(const ImageCoordinate& Ic, Time& T,
+                                            FrameCoordinate& F) const
 {
   // We add a border of 1 line to handle edge cases.
-  range_check_inclusive(Ic.line, (double) min_line() - framelet_size_,
-			(double) max_line() + framelet_size_);
+  range_check_inclusive(Ic.line, (double)min_line() - framelet_size_,
+                        (double)max_line() + framelet_size_);
   // Plus 0.5 to handle border, so -0.02 goes with time for line 0,
   // not for line -14.
-  T = t_min_line + floor((Ic.line+0.5) / framelet_size_) * tspace;
-  F = FrameCoordinate(Ic.line -
-		      floor((Ic.line+0.5) / framelet_size_) * framelet_size_,
-		      Ic.sample);
+  T = t_min_line + floor((Ic.line + 0.5) / framelet_size_) * tspace;
+  F = FrameCoordinate(Ic.line - floor((Ic.line + 0.5) / framelet_size_) *
+                                    framelet_size_,
+                      Ic.sample);
 }
 
-
 //-----------------------------------------------------------------------
-/// Convert from ImageCoordinateWithDerivative to TimeWithDerivative 
+/// Convert from ImageCoordinateWithDerivative to TimeWithDerivative
 /// and FrameCoordinateWithDerivative.
 //-----------------------------------------------------------------------
 
-void ConstantSpacingFrameletTimeTable::time_with_derivative
-(const ImageCoordinateWithDerivative& Ic, TimeWithDerivative& T, 
- FrameCoordinateWithDerivative& F) const
+void ConstantSpacingFrameletTimeTable::time_with_derivative(
+    const ImageCoordinateWithDerivative& Ic, TimeWithDerivative& T,
+    FrameCoordinateWithDerivative& F) const
 {
-  range_check_inclusive(Ic.line.value(), (double) min_line() - framelet_size_,
-			(double) max_line() + framelet_size_);
+  range_check_inclusive(Ic.line.value(), (double)min_line() - framelet_size_,
+                        (double)max_line() + framelet_size_);
   T = TimeWithDerivative(t_min_line) +
-    floor((Ic.line.value()+0.5) / framelet_size_) * tspace;
-  F = FrameCoordinateWithDerivative(Ic.line -
-	    floor((Ic.line.value()+0.5) / framelet_size_) * framelet_size_,
-	    Ic.sample);
+      floor((Ic.line.value() + 0.5) / framelet_size_) * tspace;
+  F = FrameCoordinateWithDerivative(
+      Ic.line -
+          floor((Ic.line.value() + 0.5) / framelet_size_) * framelet_size_,
+      Ic.sample);
 }
 
 //-----------------------------------------------------------------------
@@ -273,7 +272,6 @@ void ConstantSpacingFrameletTimeTable::print(std::ostream& Os) const
      << "  Framelet size: " << framelet_size() << "\n";
 }
 
-
 //-----------------------------------------------------------------------
 /// Constructor.
 /// This gives the time for every line. This list should be strictly
@@ -287,11 +285,10 @@ void ConstantSpacingFrameletTimeTable::print(std::ostream& Os) const
 //-----------------------------------------------------------------------
 
 MeasuredTimeTable::MeasuredTimeTable(const std::vector<Time>& Time_list,
-		    int Min_line)
-: min_line_(Min_line),
-  tlist(Time_list)
+                                     int Min_line)
+  : min_line_(Min_line), tlist(Time_list)
 {
-  for(int i = 0; i < (int) tlist.size() - 1; ++i) {
+  for(int i = 0; i < (int)tlist.size() - 1; ++i) {
     if(tlist[i + 1] <= tlist[i])
       throw Exception("Time_list needs to be strictly ordered");
   }
@@ -299,7 +296,7 @@ MeasuredTimeTable::MeasuredTimeTable(const std::vector<Time>& Time_list,
   Time tlist_pad = tlist[0] - (tlist[1] - tlist[0]);
   tlist.insert(tlist.begin(), tlist_pad);
   auto i = tlist.size() - 1;
-  Time tlist_pad2 = tlist[i] + (tlist[i] - tlist[i-1]);
+  Time tlist_pad2 = tlist[i] + (tlist[i] - tlist[i - 1]);
   tlist.push_back(tlist_pad2);
 }
 
@@ -307,18 +304,18 @@ MeasuredTimeTable::MeasuredTimeTable(const std::vector<Time>& Time_list,
 /// Convert from Time and FrameCoordinate to ImageCoordinate.
 //-----------------------------------------------------------------------
 
-ImageCoordinate MeasuredTimeTable::image_coordinate(Time T, 
-const FrameCoordinate& F) const
+ImageCoordinate
+MeasuredTimeTable::image_coordinate(Time T, const FrameCoordinate& F) const
 {
   range_check_inclusive(T, min_time(), max_time());
-  int i = (int)(std::lower_bound(tlist.begin(), tlist.end(), T)
-		- tlist.begin());
+  int i =
+      (int)(std::lower_bound(tlist.begin(), tlist.end(), T) - tlist.begin());
   double line;
   if(i == 0)
     line = min_line_ - 1;
   else {
-    line = (T - tlist[i - 1]) / (tlist[i] - tlist[i - 1]) + (i - 1) + 
-      min_line_ - 1;
+    line = (T - tlist[i - 1]) / (tlist[i] - tlist[i - 1]) + (i - 1) +
+           min_line_ - 1;
   }
   return ImageCoordinate(line, F.sample);
 }
@@ -328,20 +325,19 @@ const FrameCoordinate& F) const
 /// to ImageCoordinateWithDerivative.
 //-----------------------------------------------------------------------
 
-ImageCoordinateWithDerivative 
-MeasuredTimeTable::image_coordinate_with_derivative
-(const TimeWithDerivative& T, 
-const FrameCoordinateWithDerivative& F) const
+ImageCoordinateWithDerivative
+MeasuredTimeTable::image_coordinate_with_derivative(
+    const TimeWithDerivative& T, const FrameCoordinateWithDerivative& F) const
 {
   range_check_inclusive(T.value(), min_time(), max_time());
-  int i = (int)(std::lower_bound(tlist.begin(), tlist.end(), T.value())
-		- tlist.begin());
+  int i = (int)(std::lower_bound(tlist.begin(), tlist.end(), T.value()) -
+                tlist.begin());
   AutoDerivative<double> line;
   if(i == 0)
     line = min_line_ - 1;
   else {
-    line = (T - tlist[i - 1]) / (tlist[i] - tlist[i - 1]) + (i - 1) + 
-      min_line_ - 1;
+    line = (T - tlist[i - 1]) / (tlist[i] - tlist[i - 1]) + (i - 1) +
+           min_line_ - 1;
   }
   return ImageCoordinateWithDerivative(line, F.sample);
 }
@@ -350,12 +346,12 @@ const FrameCoordinateWithDerivative& F) const
 /// Convert from ImageCoordinate to Time and FrameCoordinate.
 //-----------------------------------------------------------------------
 
-void MeasuredTimeTable::time(const ImageCoordinate& Ic, Time& T, 
-			     FrameCoordinate& F) const
+void MeasuredTimeTable::time(const ImageCoordinate& Ic, Time& T,
+                             FrameCoordinate& F) const
 {
-  range_check_inclusive(Ic.line, (double) min_line() - 1.0,
-			(double) max_line() + 1.0);
-  int i = (int) floor(Ic.line);
+  range_check_inclusive(Ic.line, (double)min_line() - 1.0,
+                        (double)max_line() + 1.0);
+  int i = (int)floor(Ic.line);
   int j = i - (min_line_ - 1);
   T = tlist[j] + (tlist[j + 1] - tlist[j]) * (Ic.line - i);
   F = FrameCoordinate(0, Ic.sample);
@@ -366,13 +362,13 @@ void MeasuredTimeTable::time(const ImageCoordinate& Ic, Time& T,
 /// and FrameCoordinateWithDerivative.
 //-----------------------------------------------------------------------
 
-void MeasuredTimeTable::time_with_derivative
-(const ImageCoordinateWithDerivative& Ic, TimeWithDerivative& T, 
- FrameCoordinateWithDerivative& F) const
+void MeasuredTimeTable::time_with_derivative(
+    const ImageCoordinateWithDerivative& Ic, TimeWithDerivative& T,
+    FrameCoordinateWithDerivative& F) const
 {
-  range_check_inclusive(Ic.line.value(), (double) min_line() - 1.0,
-			(double) max_line() + 1.0);
-  int i = (int) floor(Ic.line.value());
+  range_check_inclusive(Ic.line.value(), (double)min_line() - 1.0,
+                        (double)max_line() + 1.0);
+  int i = (int)floor(Ic.line.value());
   int j = i - (min_line_ - 1);
   T = TimeWithDerivative(tlist[j]) + (tlist[j + 1] - tlist[j]) * (Ic.line - i);
   F = FrameCoordinateWithDerivative(0, Ic.sample);
@@ -392,8 +388,8 @@ void MeasuredTimeTable::print(std::ostream& Os) const
 }
 
 // See base class for description
-void ConstantSpacingFrameletTimeTable::time_acquisition
-(const Time& T, const FrameCoordinate& Fc, Time& T1, Time& T2) const
+void ConstantSpacingFrameletTimeTable::time_acquisition(
+    const Time& T, const FrameCoordinate& Fc, Time& T1, Time& T2) const
 {
   ImageCoordinate ic = image_coordinate(T, Fc);
   ic.line = floor(ic.line / framelet_size_) * framelet_size_;

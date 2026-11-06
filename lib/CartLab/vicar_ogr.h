@@ -7,7 +7,7 @@
 #include <map>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This class is really part of VicarFile, but because of the
   complication in this software we separate this out into its own
   class. This class handles the reading and writing of the GeoTIFF map

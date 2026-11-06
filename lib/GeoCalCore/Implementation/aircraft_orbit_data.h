@@ -4,7 +4,7 @@
 #include "geodetic.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This is a single navigation file record for aircraft data. This was
   originally written for data as reported by Applanix ephemeris and
   attitude, but it is likely to be useful for other INU untis. 
@@ -26,87 +26,81 @@ public:
   /// indicate this.
   enum VerticalDefinition { GEODETIC_VERTICAL, GEOCENTRIC_VERTICAL };
 
-//-----------------------------------------------------------------------
-/// Constructor
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor
+  //-----------------------------------------------------------------------
 
-  AircraftOrbitData(const Time& Tm,
-		    const GroundCoordinate& Position, 
-		    const boost::array<double, 3>& Vel_fixed,
-		    double Roll, double Pitch,
-		    double Heading,
-		    VerticalDefinition V = GEODETIC_VERTICAL)
+  AircraftOrbitData(const Time& Tm, const GroundCoordinate& Position,
+                    const boost::array<double, 3>& Vel_fixed, double Roll,
+                    double Pitch, double Heading,
+                    VerticalDefinition V = GEODETIC_VERTICAL)
   {
     initialize(Tm, Position, Vel_fixed, Roll, Pitch, Heading, V);
   }
-  AircraftOrbitData(const Time& Tm,
-		    const GroundCoordinate& Position, 
-		    const Time& Tm2,
-		    const GroundCoordinate& Position2, 
-		    double Roll, double Pitch,
-		    double Heading,
-		    VerticalDefinition V = GEODETIC_VERTICAL);
+  AircraftOrbitData(const Time& Tm, const GroundCoordinate& Position,
+                    const Time& Tm2, const GroundCoordinate& Position2,
+                    double Roll, double Pitch, double Heading,
+                    VerticalDefinition V = GEODETIC_VERTICAL);
   AircraftOrbitData(const QuaternionOrbitData& Od,
-		    VerticalDefinition V = GEODETIC_VERTICAL);
+                    VerticalDefinition V = GEODETIC_VERTICAL);
 
-
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~AircraftOrbitData() {}
   virtual void print(std::ostream& Os) const;
 
-//-----------------------------------------------------------------------
-/// Position of aircraft.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Position of aircraft.
+  //-----------------------------------------------------------------------
 
   const Geodetic& position_geodetic() const { return position_geodetic_; }
 
-//-----------------------------------------------------------------------
-/// Roll, in degrees
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Roll, in degrees
+  //-----------------------------------------------------------------------
 
-  double roll() const {return roll_;}
+  double roll() const { return roll_; }
 
-//-----------------------------------------------------------------------
-/// Pitch, in degrees
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Pitch, in degrees
+  //-----------------------------------------------------------------------
 
-  double pitch() const {return pitch_;}
+  double pitch() const { return pitch_; }
 
-//-----------------------------------------------------------------------
-/// Heading, in degrees
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Heading, in degrees
+  //-----------------------------------------------------------------------
 
-  double heading() const {return heading_;}
+  double heading() const { return heading_; }
 
   boost::math::quaternion<double> local_north_to_ecr() const;
   boost::math::quaternion<double> body_to_local_north() const;
-  
-//-----------------------------------------------------------------------
-/// Vertical direction yaw, pitch, and heading are defined relative
-/// to.
-/// I'm pretty sure this should be GEODETIC_VERTICAL in most cases,
-/// but we allow this to be different.
-//-----------------------------------------------------------------------
 
-  VerticalDefinition vertical_definition() const {return vertical_definition_;}
+  //-----------------------------------------------------------------------
+  /// Vertical direction yaw, pitch, and heading are defined relative
+  /// to.
+  /// I'm pretty sure this should be GEODETIC_VERTICAL in most cases,
+  /// but we allow this to be different.
+  //-----------------------------------------------------------------------
+
+  VerticalDefinition vertical_definition() const
+  {
+    return vertical_definition_;
+  }
 protected:
   AircraftOrbitData() {}
-  void initialize(const Time& Tm,
-		  const Geodetic& Position, 
-		  const boost::array<double, 3>& Vel_fixed,
-		  double Roll, double Pitch,
-		  double Heading,
-		  VerticalDefinition V);
+  void initialize(const Time& Tm, const Geodetic& Position,
+                  const boost::array<double, 3>& Vel_fixed, double Roll,
+                  double Pitch, double Heading, VerticalDefinition V);
 private:
   double roll_, pitch_, heading_;
   VerticalDefinition vertical_definition_;
   Geodetic position_geodetic_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 

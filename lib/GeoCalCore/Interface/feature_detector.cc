@@ -8,15 +8,15 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void InterestPoint::serialize(Archive & ar, const unsigned int UNUSED(version))
+void InterestPoint::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(InterestPoint);
-  ar & GEOCAL_NVP(image_coordinate)
-    & GEOCAL_NVP(weight);
+  ar& GEOCAL_NVP(image_coordinate) & GEOCAL_NVP(weight);
 }
 
 template<class Archive>
-void FeatureDetector::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
+void FeatureDetector::serialize(Archive& UNUSED(ar),
+                                const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(FeatureDetector);
 }
@@ -31,10 +31,8 @@ GEOCAL_IMPLEMENT(FeatureDetector);
 
 void InterestPoint::print(std::ostream& Os) const
 {
-  Os << "Interest Point: " << image_coordinate 
-     << " Weight: " << weight;
+  Os << "Interest Point: " << image_coordinate << " Weight: " << weight;
 }
-
 
 //-----------------------------------------------------------------------
 /// Determine the a Image Coordinate for a single point. We pull this
@@ -46,15 +44,15 @@ void InterestPoint::print(std::ostream& Os) const
 /// masked). If we don't then a null pointer is returned.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<ImageCoordinate> FeatureDetector::ip_grid
-(const RasterImage& Img, const GroundMask* M,
- int i, int j, int Number_grid_line, int Number_grid_sample,
- int Border) const
+boost::shared_ptr<ImageCoordinate>
+FeatureDetector::ip_grid(const RasterImage& Img, const GroundMask* M, int i,
+                         int j, int Number_grid_line, int Number_grid_sample,
+                         int Border) const
 {
-  int lspace = (int) round((Img.number_line() - 2.0 * Border) / 
-			   Number_grid_line);
-  int sspace = (int) round((Img.number_sample() - 2.0 * Border) / 
-			   Number_grid_sample);
+  int lspace =
+      (int)round((Img.number_line() - 2.0 * Border) / Number_grid_line);
+  int sspace =
+      (int)round((Img.number_sample() - 2.0 * Border) / Number_grid_sample);
   int sline = Border + lspace * i;
   int ssamp = Border + sspace * j;
   int eline = sline + lspace;
@@ -63,22 +61,21 @@ boost::shared_ptr<ImageCoordinate> FeatureDetector::ip_grid
     eline = Img.number_line() - Border;
   if(esamp > Img.number_sample() - Border)
     esamp = Img.number_sample() - Border;
-  if(M &&
-     M->region_masked(*Img.ground_coordinate(ImageCoordinate(sline, ssamp)),
-      *Img.ground_coordinate(ImageCoordinate(eline - 1, esamp - 1))))
+  if(M && M->region_masked(
+              *Img.ground_coordinate(ImageCoordinate(sline, ssamp)),
+              *Img.ground_coordinate(ImageCoordinate(eline - 1, esamp - 1))))
     return boost::shared_ptr<ImageCoordinate>();
-  SubRasterImage sub_img(const_pointer(Img),
-			 sline, ssamp, eline - sline, esamp - ssamp);
+  SubRasterImage sub_img(const_pointer(Img), sline, ssamp, eline - sline,
+                         esamp - ssamp);
   std::vector<InterestPoint> ip_list = interest_point_detect(sub_img);
   std::sort(ip_list.begin(), ip_list.end());
-  for(int i = ((int) ip_list.size()) - 1; i >= 0; --i) {
+  for(int i = ((int)ip_list.size()) - 1; i >= 0; --i) {
     ImageCoordinate best_point = ip_list[i].image_coordinate;
     best_point.line += sline;
     best_point.sample += ssamp;
-    if(!M ||
-       !M->mask(*Img.ground_coordinate(best_point)))
-      return 
-	boost::shared_ptr<ImageCoordinate>(new ImageCoordinate(best_point));
+    if(!M || !M->mask(*Img.ground_coordinate(best_point)))
+      return boost::shared_ptr<ImageCoordinate>(
+          new ImageCoordinate(best_point));
   }
   return boost::shared_ptr<ImageCoordinate>();
 }
@@ -91,23 +88,23 @@ boost::shared_ptr<ImageCoordinate> FeatureDetector::ip_grid
 /// interest point. Since these points are typically used for image
 /// matching, which can't be done too close to the edge of the image,
 /// an optional border to exclude can be supplied. None of the points
-/// returned will be within the border of the edge of the image. 
+/// returned will be within the border of the edge of the image.
 ///
 /// We exclude points that are marked by the GroundMask.
 //-----------------------------------------------------------------------
 
-std::vector<ImageCoordinate> 
+std::vector<ImageCoordinate>
 FeatureDetector::interest_point_grid(const RasterImage& Img,
-     const GroundMask& M,
-     int Number_grid_line, int Number_grid_sample, int Border) const
+                                     const GroundMask& M, int Number_grid_line,
+                                     int Number_grid_sample, int Border) const
 {
   std::vector<ImageCoordinate> res;
   for(int i = 0; i < Number_grid_line; ++i)
     for(int j = 0; j < Number_grid_sample; ++j) {
-      boost::shared_ptr<ImageCoordinate> r = 
-	ip_grid(Img, &M, i, j, Number_grid_line, Number_grid_sample, Border);
+      boost::shared_ptr<ImageCoordinate> r =
+          ip_grid(Img, &M, i, j, Number_grid_line, Number_grid_sample, Border);
       if(r)
-	res.push_back(*r);
+        res.push_back(*r);
     }
   return res;
 }
@@ -116,18 +113,18 @@ FeatureDetector::interest_point_grid(const RasterImage& Img,
 /// Variation of interest_point_grid that does not use as GroundMask.
 //-----------------------------------------------------------------------
 
-std::vector<ImageCoordinate> 
+std::vector<ImageCoordinate>
 FeatureDetector::interest_point_grid(const RasterImage& Img,
-     int Number_grid_line, int Number_grid_sample, int Border) const
+                                     int Number_grid_line,
+                                     int Number_grid_sample, int Border) const
 {
   std::vector<ImageCoordinate> res;
   for(int i = 0; i < Number_grid_line; ++i)
     for(int j = 0; j < Number_grid_sample; ++j) {
-      boost::shared_ptr<ImageCoordinate> r = 
-	ip_grid(Img, 0, i, j, Number_grid_line, 
-		Number_grid_sample, Border);
+      boost::shared_ptr<ImageCoordinate> r =
+          ip_grid(Img, 0, i, j, Number_grid_line, Number_grid_sample, Border);
       if(r)
-	res.push_back(*r);
+        res.push_back(*r);
     }
   return res;
 }
@@ -140,12 +137,9 @@ FeatureDetector::interest_point_grid(const RasterImage& Img,
 /// processing in parallel.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<ImageCoordinate>
-FeatureDetector::interest_point_grid_ptr
-(const RasterImage& Img,
- const GroundMask& M, int i, int j,
- int Number_grid_line, int Number_grid_sample, 
- int Border) const
+boost::shared_ptr<ImageCoordinate> FeatureDetector::interest_point_grid_ptr(
+    const RasterImage& Img, const GroundMask& M, int i, int j,
+    int Number_grid_line, int Number_grid_sample, int Border) const
 {
   range_check(i, 0, Number_grid_line);
   range_check(j, 0, Number_grid_sample);
@@ -160,10 +154,9 @@ FeatureDetector::interest_point_grid_ptr
 /// processing in parallel.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<ImageCoordinate>
-FeatureDetector::interest_point_grid_ptr
-(const RasterImage& Img, int i, int j,
- int Number_grid_line, int Number_grid_sample, int Border) const
+boost::shared_ptr<ImageCoordinate> FeatureDetector::interest_point_grid_ptr(
+    const RasterImage& Img, int i, int j, int Number_grid_line,
+    int Number_grid_sample, int Border) const
 {
   range_check(i, 0, Number_grid_line);
   range_check(j, 0, Number_grid_sample);

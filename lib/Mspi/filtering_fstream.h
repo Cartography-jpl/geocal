@@ -4,7 +4,7 @@
 #include <boost/iostreams/filtering_stream.hpp>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
    This allows filtering stream to created on top of an 
    underlying ofstream. See boost::iostream documentation for details
    on how to create these. This class is intended to be used as a base
@@ -15,30 +15,31 @@ class FilteringOstream : public std::ostream {
 public:
   virtual ~FilteringOstream() {}
 protected:
+  //-----------------------------------------------------------------------
+  /// Constructor. This opens the given file and sets up the stream
+  /// buffer, but nothing is placed in the filter. The derived class should
+  /// set up the streambuf.
+  //-----------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
-/// Constructor. This opens the given file and sets up the stream
-/// buffer, but nothing is placed in the filter. The derived class should
-/// set up the streambuf.
-//-----------------------------------------------------------------------
+  FilteringOstream(const std::string& Fname)
+    : std::ostream(&sb), f(Fname.c_str())
+  {
+  }
 
-  FilteringOstream(const std::string& Fname) 
-    : std::ostream(&sb), f(Fname.c_str()) {}
-
-//-----------------------------------------------------------------------
-/// Underlying ofstream.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Underlying ofstream.
+  //-----------------------------------------------------------------------
 
   std::ofstream f;
 
-//-----------------------------------------------------------------------
-/// Filtering streambuf.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Filtering streambuf.
+  //-----------------------------------------------------------------------
 
   boost::iostreams::filtering_ostreambuf sb;
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
    This allows filtering stream to created on top of an 
    underlying ifstream. See boost::iostream documentation for details
    on how to create these. This class is intended to be used as a base
@@ -49,25 +50,26 @@ class FilteringIstream : public std::istream {
 public:
   virtual ~FilteringIstream() {}
 protected:
+  //-----------------------------------------------------------------------
+  /// Constructor. This opens the given file and sets up the stream
+  /// buffer, but nothing is placed in the filter. The derived class should
+  /// set up the streambuf.
+  //-----------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
-/// Constructor. This opens the given file and sets up the stream
-/// buffer, but nothing is placed in the filter. The derived class should
-/// set up the streambuf.
-//-----------------------------------------------------------------------
+  FilteringIstream(const std::string& Fname)
+    : std::istream(&sb), f(Fname.c_str())
+  {
+  }
 
-  FilteringIstream(const std::string& Fname) 
-    : std::istream(&sb), f(Fname.c_str()) {}
-
-//-----------------------------------------------------------------------
-/// Underlying ifstream.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Underlying ifstream.
+  //-----------------------------------------------------------------------
 
   std::ifstream f;
 
-//-----------------------------------------------------------------------
-/// Filtering streambuf.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Filtering streambuf.
+  //-----------------------------------------------------------------------
 
   boost::iostreams::filtering_istreambuf sb;
 };

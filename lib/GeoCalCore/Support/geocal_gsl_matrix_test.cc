@@ -8,13 +8,11 @@ BOOST_FIXTURE_TEST_SUITE(geocal_gsl_matrix, GlobalFixture)
 BOOST_AUTO_TEST_CASE(basic_test)
 {
   blitz::Array<double, 2> t1(2, 3);
-  t1 = 
-    1, 2, 3,
-    5, 5, 6;
+  t1 = 1, 2, 3, 5, 5, 6;
   GslMatrix m1(t1);
   BOOST_CHECK(blitz::all(fabs(m1.blitz_array() - t1) < 1e-8));
-  BOOST_CHECK_EQUAL(m1.gsl()->size1, (size_t) 2);
-  BOOST_CHECK_EQUAL(m1.gsl()->size2, (size_t) 3);
+  BOOST_CHECK_EQUAL(m1.gsl()->size1, (size_t)2);
+  BOOST_CHECK_EQUAL(m1.gsl()->size2, (size_t)3);
   for(int i = 0; i < t1.extent(0); ++i)
     for(int j = 0; j < t1.extent(1); ++j)
       BOOST_CHECK_CLOSE(gsl_matrix_get(m1.gsl(), i, j), t1(i, j), 1e-4);
@@ -24,8 +22,8 @@ BOOST_AUTO_TEST_CASE(basic_test)
   GslMatrix m2(t2);
   m2.blitz_array() = t1;
   BOOST_CHECK(blitz::all(fabs(m2.blitz_array() - t1) < 1e-8));
-  BOOST_CHECK_EQUAL(m2.gsl()->size1, (size_t) 2);
-  BOOST_CHECK_EQUAL(m2.gsl()->size2, (size_t) 3);
+  BOOST_CHECK_EQUAL(m2.gsl()->size1, (size_t)2);
+  BOOST_CHECK_EQUAL(m2.gsl()->size2, (size_t)3);
   for(int i = 0; i < t1.extent(0); ++i)
     for(int j = 0; j < t1.extent(1); ++j)
       BOOST_CHECK_CLOSE(gsl_matrix_get(m2.gsl(), i, j), t1(i, j), 1e-4);
@@ -37,7 +35,7 @@ BOOST_AUTO_TEST_CASE(geocal_gsl_vector)
   t1 = 1, 2, 3;
   GslVector m1(t1);
   BOOST_CHECK(blitz::all(fabs(m1.blitz_array() - t1) < 1e-8));
-  BOOST_CHECK_EQUAL(m1.gsl()->size, (size_t) 3);
+  BOOST_CHECK_EQUAL(m1.gsl()->size, (size_t)3);
   for(int i = 0; i < t1.extent(0); ++i)
     BOOST_CHECK_CLOSE(gsl_vector_get(m1.gsl(), i), t1(i), 1e-4);
   gsl_vector_set(m1.gsl(), 1, 3.0);
@@ -46,7 +44,7 @@ BOOST_AUTO_TEST_CASE(geocal_gsl_vector)
   GslVector m2(t2);
   m2.blitz_array() = t1;
   BOOST_CHECK(blitz::all(fabs(m2.blitz_array() - t1) < 1e-8));
-  BOOST_CHECK_EQUAL(m2.gsl()->size, (size_t) 3);
+  BOOST_CHECK_EQUAL(m2.gsl()->size, (size_t)3);
   for(int i = 0; i < t1.extent(0); ++i)
     BOOST_CHECK_CLOSE(gsl_vector_get(m2.gsl(), i), t1(i), 1e-4);
 }

@@ -4,7 +4,7 @@
 #include <cmath>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This calculates refraction. The algorithm used was take from the 
   SDP toolkit. The original code was written by Peter Noerdlinger as
   the SDP toolkit function PGS_CSC_SpaceRefract. The algorithm is
@@ -24,60 +24,65 @@ namespace GeoCal {
 *******************************************************************/
 class RefractionSdp : public Refraction {
 public:
-  RefractionSdp(double Altitude, double Latitude, 
-	     double Index_refraction_surface = -1);
+  RefractionSdp(double Altitude, double Latitude,
+                double Index_refraction_surface = -1);
   virtual ~RefractionSdp() {}
 
-//-----------------------------------------------------------------------
-/// Altitude of reference point, in meters.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Altitude of reference point, in meters.
+  //-----------------------------------------------------------------------
 
-  double altitude() const { return alt;}
+  double altitude() const { return alt; }
 
-//-----------------------------------------------------------------------
-/// Latitude of reference point, in degrees.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Latitude of reference point, in degrees.
+  //-----------------------------------------------------------------------
 
-  double latitude() const {return lat;}
+  double latitude() const { return lat; }
 
-//-----------------------------------------------------------------------
-/// Return the current index of refraction at the surface.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return the current index of refraction at the surface.
+  //-----------------------------------------------------------------------
 
-  double index_refraction_surface() const {return index_ref;}
+  double index_refraction_surface() const { return index_ref; }
 
-//-----------------------------------------------------------------------
-/// Set the index of refraction.
-//-----------------------------------------------------------------------
-  
+  //-----------------------------------------------------------------------
+  /// Set the index of refraction.
+  //-----------------------------------------------------------------------
+
   void index_refraction_surface(double Index_refraction_surface)
-  { index_ref = Index_refraction_surface; }
+  {
+    index_ref = Index_refraction_surface;
+  }
 
-//-----------------------------------------------------------------------
-/// Surface zenith angle in radians, given the space zenith angles.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Surface zenith angle in radians, given the space zenith angles.
+  //-----------------------------------------------------------------------
 
   double surface_zenith(double Space_zenith) const
-  { return asin(sin(Space_zenith) / index_ref); }
+  {
+    return asin(sin(Space_zenith) / index_ref);
+  }
 
   double displacement(double Space_zenith) const;
   virtual CartesianFixedLookVector
   refraction_apply(const GroundCoordinate& Spacecraft_pos,
-  		   const GroundCoordinate& Gc_no_refraction) const;
+                   const GroundCoordinate& Gc_no_refraction) const;
   virtual CartesianFixedLookVector
   refraction_reverse(const GroundCoordinate& Spacecraft_pos,
-  		     const GroundCoordinate& Gc_with_refraction) const;
+                     const GroundCoordinate& Gc_with_refraction) const;
 
-//-----------------------------------------------------------------------
-/// Print to a stream.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print to a stream.
+  //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const
-  { Os << "RefractionSdp\n"
+  {
+    Os << "RefractionSdp\n"
        << "  Altitude: " << altitude() << " m\n"
        << "  Latitude: " << latitude() << " deg\n"
-       << "  Index refraction at surface: "
-       << index_refraction_surface() << "\n";
+       << "  Index refraction at surface: " << index_refraction_surface()
+       << "\n";
   }
 protected:
   RefractionSdp() {}
@@ -86,7 +91,7 @@ private:
   double k1, k2, dens_fac;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 

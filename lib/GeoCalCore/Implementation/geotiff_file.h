@@ -11,7 +11,7 @@ struct TIFF;
 struct GTIF;
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   Provide direct access to a GeoTiff file. Note that this is a
   pretty low level class, you almost certainly don't want to be
   using this but instead want something like a GdalRasterImage. But
@@ -40,7 +40,7 @@ namespace GeoCal {
   for now just leave in place since we already have that.
 *******************************************************************/
 
-class GeotiffFile: public boost::noncopyable, public Printable<GeotiffFile>  {
+class GeotiffFile : public boost::noncopyable, public Printable<GeotiffFile> {
 public:
   typedef unsigned short geocode_t;
   // Note that all of these hard coded values are actually registered in
@@ -99,29 +99,29 @@ public:
     VerticalUnitsGeoKey = 4099
   } geokey_t;
   typedef enum {
-    TYPE_BYTE=1,
-    TYPE_SHORT=2,
-    TYPE_LONG=3,
-    TYPE_RATIONAL=4,
-    TYPE_ASCII=5,
-    TYPE_FLOAT=6,
-    TYPE_DOUBLE=7,
-    TYPE_SBYTE=8,
-    TYPE_SSHORT=9,
-    TYPE_SLONG=10,
-    TYPE_UNKNOWN=11
+    TYPE_BYTE = 1,
+    TYPE_SHORT = 2,
+    TYPE_LONG = 3,
+    TYPE_RATIONAL = 4,
+    TYPE_ASCII = 5,
+    TYPE_FLOAT = 6,
+    TYPE_DOUBLE = 7,
+    TYPE_SBYTE = 8,
+    TYPE_SSHORT = 9,
+    TYPE_SLONG = 10,
+    TYPE_UNKNOWN = 11
   } tagtype_t;
   typedef enum {
-    TIFFTAG_GEOPIXELSCALE=33550,
-    TIFFTAG_GEOTIEPOINTS=33922,
-    TIFFTAG_GEOTRANSMATRIX=34264,
-    TIFFTAG_IMAGEWIDTH=256,
-    TIFFTAG_IMAGELENGTH=257,
-    TIFFTAG_COMPRESSION=259,
-    TIFFTAG_PLANARCONFIG=284,
-    TIFFTAG_PHOTOMETRIC=262,
-    TIFFTAG_BITSPERSAMPLE=258,
-    TIFFTAG_SAMPLESPERPIXEL=277
+    TIFFTAG_GEOPIXELSCALE = 33550,
+    TIFFTAG_GEOTIEPOINTS = 33922,
+    TIFFTAG_GEOTRANSMATRIX = 34264,
+    TIFFTAG_IMAGEWIDTH = 256,
+    TIFFTAG_IMAGELENGTH = 257,
+    TIFFTAG_COMPRESSION = 259,
+    TIFFTAG_PLANARCONFIG = 284,
+    TIFFTAG_PHOTOMETRIC = 262,
+    TIFFTAG_BITSPERSAMPLE = 258,
+    TIFFTAG_SAMPLESPERPIXEL = 277
   } tiftag_t;
   typedef enum {
     PHOTOMETRIC_MINISBLACK = 1,
@@ -130,11 +130,11 @@ public:
   } tiftagval_t;
   typedef uint32_t ttag_t;
 
-//-----------------------------------------------------------------------
-/// Open given file name with the given mode. Mode should be "r",
-/// "w", or "a".
-//-----------------------------------------------------------------------
-  
+  //-----------------------------------------------------------------------
+  /// Open given file name with the given mode. Mode should be "r",
+  /// "w", or "a".
+  //-----------------------------------------------------------------------
+
   GeotiffFile(const std::string& Fname, const std::string& Mode)
     : fname_(Fname), mode_(Mode), tif(0), gtif(0)
   {
@@ -142,24 +142,25 @@ public:
   }
   virtual ~GeotiffFile();
 
-//-----------------------------------------------------------------------
-/// Return the file name we have open.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return the file name we have open.
+  //-----------------------------------------------------------------------
 
-  const std::string& file_name() const {return fname_;}
+  const std::string& file_name() const { return fname_; }
 
-//-----------------------------------------------------------------------
-/// Return mode the file was opened with.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return mode the file was opened with.
+  //-----------------------------------------------------------------------
 
-  const std::string& mode() const {return mode_;}
-  
-//-----------------------------------------------------------------------
-/// Print to stream.
-//-----------------------------------------------------------------------
+  const std::string& mode() const { return mode_; }
 
-  virtual void print(std::ostream& Os) const 
-  { Os << "Geotiff File (low level  class) \n" 
+  //-----------------------------------------------------------------------
+  /// Print to stream.
+  //-----------------------------------------------------------------------
+
+  virtual void print(std::ostream& Os) const
+  {
+    Os << "Geotiff File (low level  class) \n"
        << "  File: " << file_name() << "\n"
        << "  Mode: " << mode() << "\n";
   }
@@ -184,16 +185,15 @@ public:
 private:
   void init();
   std::string fname_, mode_;
-  TIFF *tif;
-  GTIF *gtif;
+  TIFF* tif;
+  GTIF* gtif;
   GeotiffFile() : tif(0), gtif(0) {}
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
   template<class Archive>
-  void save(Archive & ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive & ar, const unsigned int version);
+  void save(Archive& ar, const unsigned int version) const;
+  template<class Archive> void load(Archive& ar, const unsigned int version);
 
   // Temporary
   friend class VicarOgr;

@@ -9,10 +9,10 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void GroundMspiIgc::serialize(Archive & ar, const unsigned int version)
+void GroundMspiIgc::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(IpiImageGroundConnection)
-    & GEOCAL_NVP(mspi_cam);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(IpiImageGroundConnection) &
+      GEOCAL_NVP(mspi_cam);
 }
 
 GEOCAL_IMPLEMENT(GroundMspiIgc);
@@ -23,45 +23,42 @@ GEOCAL_IMPLEMENT(GroundMspiIgc);
 /// per second.
 //-----------------------------------------------------------------------
 
-GroundMspiIgc::GroundMspiIgc
-(const Time& Start_time,
- boost::shared_ptr<GroundCoordinate>& Pos,
- double Azimuth,
- double Start_elevation_angle,
- double Rotation_rate,
- const std::vector<Time>& Time_tag,
- const std::string& Camera_config, int Band)
+GroundMspiIgc::GroundMspiIgc(const Time& Start_time,
+                             boost::shared_ptr<GroundCoordinate>& Pos,
+                             double Azimuth, double Start_elevation_angle,
+                             double Rotation_rate,
+                             const std::vector<Time>& Time_tag,
+                             const std::string& Camera_config, int Band)
 {
-  boost::shared_ptr<Orbit> orb(new GroundMspiOrbit(Start_time, Pos, Azimuth, 
-		  Start_elevation_angle, Rotation_rate));
+  boost::shared_ptr<Orbit> orb(new GroundMspiOrbit(
+      Start_time, Pos, Azimuth, Start_elevation_angle, Rotation_rate));
   boost::shared_ptr<TimeTable> tt(new MeasuredTimeTable(Time_tag));
   mspi_cam.reset(new MspiCamera(Camera_config));
   // I don't think we actually want IPI here, but go ahead and
   // set that up now and we can come back to fix this later.
-  boost::shared_ptr<Ipi> ipi(new Ipi(orb, mspi_cam, Band, tt->min_time(),
-				     tt->max_time(), tt));
+  boost::shared_ptr<Ipi> ipi(
+      new Ipi(orb, mspi_cam, Band, tt->min_time(), tt->max_time(), tt));
   boost::shared_ptr<Dem> dem(new SimpleDem());
   boost::shared_ptr<RasterImage> dummy_img;
   initialize(ipi, dem, dummy_img);
 }
 
-GroundMspiIgc::GroundMspiIgc
-(const Time& Start_time,
- boost::shared_ptr<GroundCoordinate>& Pos,
- double Azimuth,
- double Start_elevation_angle,
- double Rotation_rate,
- const std::vector<Time>& Time_tag,
- const boost::shared_ptr<QuaternionCamera>& Cam, int Band)
+GroundMspiIgc::GroundMspiIgc(const Time& Start_time,
+                             boost::shared_ptr<GroundCoordinate>& Pos,
+                             double Azimuth, double Start_elevation_angle,
+                             double Rotation_rate,
+                             const std::vector<Time>& Time_tag,
+                             const boost::shared_ptr<QuaternionCamera>& Cam,
+                             int Band)
   : mspi_cam(Cam)
 {
-  boost::shared_ptr<Orbit> orb(new GroundMspiOrbit(Start_time, Pos, Azimuth, 
-		  Start_elevation_angle, Rotation_rate));
+  boost::shared_ptr<Orbit> orb(new GroundMspiOrbit(
+      Start_time, Pos, Azimuth, Start_elevation_angle, Rotation_rate));
   boost::shared_ptr<TimeTable> tt(new MeasuredTimeTable(Time_tag));
   // I don't think we actually want IPI here, but go ahead and
   // set that up now and we can come back to fix this later.
-  boost::shared_ptr<Ipi> ipi(new Ipi(orb, Cam, Band, tt->min_time(),
-				     tt->max_time(), tt));
+  boost::shared_ptr<Ipi> ipi(
+      new Ipi(orb, Cam, Band, tt->min_time(), tt->max_time(), tt));
   boost::shared_ptr<Dem> dem(new SimpleDem());
   boost::shared_ptr<RasterImage> dummy_img;
   initialize(ipi, dem, dummy_img);
@@ -74,8 +71,7 @@ GroundMspiIgc::GroundMspiIgc
 DcsLookVector GroundMspiIgc::solar_look(int Line_number) const
 {
   Time t = pixel_time(ImageCoordinate(Line_number, 0));
-  CartesianFixedLookVector lv = 
-    CartesianFixedLookVector::solar_look_vector(t);
+  CartesianFixedLookVector lv = CartesianFixedLookVector::solar_look_vector(t);
   return mspi_cam->dcs_look_vector(ipi()->orbit()->sc_look_vector(t, lv));
 }
 
@@ -86,8 +82,8 @@ DcsLookVector GroundMspiIgc::solar_look(int Line_number) const
 DcsLookVector GroundMspiIgc::normal_look(int Line_number) const
 {
   Time t = pixel_time(ImageCoordinate(Line_number, 0));
-  CartesianFixedLookVector lv = 
-    LnLookVector(0,0,1).to_cf(*ipi()->orbit()->position_cf(t));
+  CartesianFixedLookVector lv =
+      LnLookVector(0, 0, 1).to_cf(*ipi()->orbit()->position_cf(t));
   return mspi_cam->dcs_look_vector(ipi()->orbit()->sc_look_vector(t, lv));
 }
 
@@ -97,7 +93,6 @@ DcsLookVector GroundMspiIgc::normal_look(int Line_number) const
 
 DcsLookVector GroundMspiIgc::pixel_look(int Sample_number) const
 {
-  return mspi_cam->dcs_look_vector(FrameCoordinate(0, Sample_number), 
-				   ipi()->band());
+  return mspi_cam->dcs_look_vector(FrameCoordinate(0, Sample_number),
+                                   ipi()->band());
 }
-

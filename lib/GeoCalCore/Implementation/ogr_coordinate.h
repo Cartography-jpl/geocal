@@ -3,15 +3,15 @@
 #include "ground_coordinate.h"
 #include "coordinate_converter.h"
 #include "geodetic.h"
-#include <ogr_spatialref.h>	
+#include <ogr_spatialref.h>
 #include <boost/shared_ptr.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <boost/utility.hpp>
 
 namespace GeoCal {
-  class Planetocentric;
-  
-/****************************************************************//**
+class Planetocentric;
+
+/****************************************************************/ /**
   This is a wrapper around the OGRSpatialReference class. We hold onto
   a OGRSpatialReference class and a transformation from that
   coordinate system to the Geodetic coordinate system. This class
@@ -44,78 +44,86 @@ namespace GeoCal {
   much of a need for that.
 *******************************************************************/
 
-class OgrWrapper : public boost::noncopyable,
-	           public Printable<OgrWrapper>  {
+class OgrWrapper : public boost::noncopyable, public Printable<OgrWrapper> {
 public:
   OgrWrapper(const std::string& Wkt, bool Use_traditional_gis_order = true);
   OgrWrapper(const boost::shared_ptr<OGRSpatialReference>& Ogr);
-  static boost::shared_ptr<OgrWrapper> from_epsg(int Epsg_id,
-	 bool Use_traditional_gis_order = true);
-  static boost::shared_ptr<OgrWrapper> 
+  static boost::shared_ptr<OgrWrapper>
+  from_epsg(int Epsg_id, bool Use_traditional_gis_order = true);
+  static boost::shared_ptr<OgrWrapper>
   from_proj4(const std::string& Proj4_string,
-	     bool Use_traditional_gis_order = true);
-  static void add_spatial_reference(const std::string& Name,
-				    int Naif_code,
-				    boost::shared_ptr<OGRSpatialReference>& Geodetic_or_planetocentric,
-				    boost::shared_ptr<OGRSpatialReference>& Cf);
-  static void add_spatial_reference(const std::string& Name,
-				    int Naif_code,
-				    const std::string& Wkt_planet_centric);
+             bool Use_traditional_gis_order = true);
+  static void add_spatial_reference(
+      const std::string& Name, int Naif_code,
+      boost::shared_ptr<OGRSpatialReference>& Geodetic_or_planetocentric,
+      boost::shared_ptr<OGRSpatialReference>& Cf);
+  static void add_spatial_reference(const std::string& Name, int Naif_code,
+                                    const std::string& Wkt_planet_centric);
   virtual ~OgrWrapper();
 
-//-----------------------------------------------------------------------
-/// Return underlying OGRSpatialReference.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return underlying OGRSpatialReference.
+  //-----------------------------------------------------------------------
 
-  const OGRSpatialReference& ogr() const { return *ogr_;}
-  const boost::shared_ptr<OGRSpatialReference>& ogr_ptr() const { return ogr_;}
+  const OGRSpatialReference& ogr() const { return *ogr_; }
+  const boost::shared_ptr<OGRSpatialReference>& ogr_ptr() const { return ogr_; }
 
-//-----------------------------------------------------------------------
-/// Return transformation that takes us from our coordinate system to
-/// Geodetic/Planetocentric.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return transformation that takes us from our coordinate system to
+  /// Geodetic/Planetocentric.
+  //-----------------------------------------------------------------------
 
-  const OGRCoordinateTransformation* transform() const {return ogr_transform_;}
+  const OGRCoordinateTransformation* transform() const
+  {
+    return ogr_transform_;
+  }
 
-//-----------------------------------------------------------------------
-/// Return inverse of transform(). This goes from
-/// Geodetic/Planetocentric to our coordinate system. 
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return inverse of transform(). This goes from
+  /// Geodetic/Planetocentric to our coordinate system.
+  //-----------------------------------------------------------------------
 
-  const OGRCoordinateTransformation* inverse_transform() const 
-  {return ogr_inverse_transform_;}
+  const OGRCoordinateTransformation* inverse_transform() const
+  {
+    return ogr_inverse_transform_;
+  }
 
-//-----------------------------------------------------------------------
-/// Return transformation that takes us from our coordinate system to
-/// CartesianFixed. Is null for other planets.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return transformation that takes us from our coordinate system to
+  /// CartesianFixed. Is null for other planets.
+  //-----------------------------------------------------------------------
 
   const OGRCoordinateTransformation* cf_transform() const
-  {return ogr_cf_transform_;}
+  {
+    return ogr_cf_transform_;
+  }
 
-//-----------------------------------------------------------------------
-/// Return inverse of cf_transform(). This goes from CartesianFixed to our
-/// coordinate system. Is null for other planets
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return inverse of cf_transform(). This goes from CartesianFixed to our
+  /// coordinate system. Is null for other planets
+  //-----------------------------------------------------------------------
 
-  const OGRCoordinateTransformation* cf_inverse_transform() const 
-  {return ogr_cf_inverse_transform_;}
+  const OGRCoordinateTransformation* cf_inverse_transform() const
+  {
+    return ogr_cf_inverse_transform_;
+  }
 
   std::string pretty_wkt() const;
   std::string wkt() const;
-  void print(std::ostream& Os) const;  
+  void print(std::ostream& Os) const;
   std::string projected_cs_type_geo_key() const;
   std::string pcs_citation_geo_key() const;
   std::string geogcs_name() const;
   std::string geoccs_name() const;
   bool use_traditional_gis_order() const;
 
-  blitz::Array<double, 2> lat_lon_coordinate_convert(const blitz::Array<double, 1>& Lat,
-						     const blitz::Array<double, 1>& Lon) const;
+  blitz::Array<double, 2>
+  lat_lon_coordinate_convert(const blitz::Array<double, 1>& Lat,
+                             const blitz::Array<double, 1>& Lon) const;
 
-//-----------------------------------------------------------------------
-/// Return the NAIF code for the planet this coordinate is for.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return the NAIF code for the planet this coordinate is for.
+  //-----------------------------------------------------------------------
 
   int naif_code() const { return naif_code_; }
 protected:
@@ -124,7 +132,7 @@ private:
   void init(const boost::shared_ptr<OGRSpatialReference>& Ogr);
   void init(const std::string& Wkt, bool use_traditional_gis_order);
   static void handle_gis_order(OGRSpatialReference& Ogr,
-			bool Use_traditional_gis_order);
+                               bool Use_traditional_gis_order);
   boost::shared_ptr<OGRSpatialReference> ogr_;
   OGRCoordinateTransformation* ogr_transform_;
   OGRCoordinateTransformation* ogr_inverse_transform_;
@@ -134,17 +142,16 @@ private:
   static void init_naif();
   static bool init_naif_done;
   static std::map<std::string, int> name_to_naif;
-  static std::map<int, boost::shared_ptr<OGRSpatialReference> > naif_to_g_or_pc;
-  static std::map<int, boost::shared_ptr<OGRSpatialReference> > naif_to_cf;
+  static std::map<int, boost::shared_ptr<OGRSpatialReference>> naif_to_g_or_pc;
+  static std::map<int, boost::shared_ptr<OGRSpatialReference>> naif_to_cf;
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive& Ar, const unsigned int version);
+  template<class Archive> void load(Archive& Ar, const unsigned int version);
   GEOCAL_SPLIT_MEMBER();
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   This is a ground coordinate, implemented by the OGRSpatialReference
   class supplied with GDAL. This class is particularly useful for
   working with GdalMapProjectedImage or VicarMapProjectedImage. The
@@ -162,69 +169,68 @@ private:
 
 class OgrCoordinate : public GroundCoordinate {
 public:
-//-----------------------------------------------------------------------
-/// Constructor. X, Y, and Z are in whatever coordinates Ogr are in.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor. X, Y, and Z are in whatever coordinates Ogr are in.
+  //-----------------------------------------------------------------------
 
-  OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
-		double x, double y, double z)
+  OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr, double x, double y,
+                double z)
     : x(x), y(y), z(z), ogr_(Ogr)
-  {}
+  {
+  }
+  OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr, const Geodetic& G);
   OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
-		const Geodetic& G);
+                const Planetocentric& G);
   OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
-		const Planetocentric& G);
-  OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
-		const GroundCoordinate& G);
+                const GroundCoordinate& G);
 
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~OgrCoordinate() {}
 
   virtual double latitude() const;
   virtual double longitude() const;
   virtual double height_reference_surface() const;
-  virtual void lat_lon_height(double& Latitude, double& Longitude, 
-			      double& Height_reference_surface) const;
+  virtual void lat_lon_height(double& Latitude, double& Longitude,
+                              double& Height_reference_surface) const;
   std::string to_proj4() const;
 
-//-----------------------------------------------------------------------
-/// Convert to CartesianFixed.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Convert to CartesianFixed.
+  //-----------------------------------------------------------------------
 
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
   virtual void print(std::ostream& Os) const;
 
-//-----------------------------------------------------------------------
-/// Underlying OgrWrapper
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Underlying OgrWrapper
+  //-----------------------------------------------------------------------
 
-  const OgrWrapper& ogr() const { return *ogr_;}
+  const OgrWrapper& ogr() const { return *ogr_; }
 
-//-----------------------------------------------------------------------
-/// Underlying OgrWrapper
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Underlying OgrWrapper
+  //-----------------------------------------------------------------------
 
-  const boost::shared_ptr<OgrWrapper>& ogr_ptr() const 
-  { return ogr_;}
+  const boost::shared_ptr<OgrWrapper>& ogr_ptr() const { return ogr_; }
 
-//-----------------------------------------------------------------------
-/// X coordinate, in coordinate system given by ogr.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// X coordinate, in coordinate system given by ogr.
+  //-----------------------------------------------------------------------
 
   double x;
 
-//-----------------------------------------------------------------------
-/// Y coordinate, in coordinate system given by ogr.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Y coordinate, in coordinate system given by ogr.
+  //-----------------------------------------------------------------------
 
   double y;
 
-//-----------------------------------------------------------------------
-/// Z coordinate, in coordinate system given by ogr.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Z coordinate, in coordinate system given by ogr.
+  //-----------------------------------------------------------------------
 
   double z;
 
@@ -238,10 +244,10 @@ private:
   boost::shared_ptr<OgrWrapper> ogr_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   This is a CoordinateConverter for working with OgrCoordinates.
 
   See note in OgrWrap about axis order.
@@ -249,53 +255,51 @@ private:
 
 class OgrCoordinateConverter : public CoordinateConverter {
 public:
-//-----------------------------------------------------------------------
-/// Constructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Constructor.
+  //-----------------------------------------------------------------------
 
-  OgrCoordinateConverter(const boost::shared_ptr<OgrWrapper> Ogr)
-    : ogr_(Ogr) {}
+  OgrCoordinateConverter(const boost::shared_ptr<OgrWrapper> Ogr) : ogr_(Ogr) {}
 
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~OgrCoordinateConverter() {}
 
   virtual bool is_same(const CoordinateConverter& Conv) const;
 
-//-----------------------------------------------------------------------
-/// Underlying OgrWrapper
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Underlying OgrWrapper
+  //-----------------------------------------------------------------------
 
-  const OgrWrapper& ogr() const { return *ogr_;}
+  const OgrWrapper& ogr() const { return *ogr_; }
 
-//-----------------------------------------------------------------------
-/// Underlying OgrWrapper
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Underlying OgrWrapper
+  //-----------------------------------------------------------------------
 
-  const boost::shared_ptr<OgrWrapper>& ogr_ptr() const 
-  { return ogr_;}
+  const boost::shared_ptr<OgrWrapper>& ogr_ptr() const { return ogr_; }
 
-//-----------------------------------------------------------------------
-/// Create a OgrCoordinate. X, Y, and Height are in whatever X, Y,
-/// and Z are for the underlying OgrWrapper projection.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Create a OgrCoordinate. X, Y, and Height are in whatever X, Y,
+  /// and Z are for the underlying OgrWrapper projection.
+  //-----------------------------------------------------------------------
 
   virtual boost::shared_ptr<GroundCoordinate>
-    convert_from_coordinate(double X, double Y, double Height = 0) const
+  convert_from_coordinate(double X, double Y, double Height = 0) const
   {
-    return boost::shared_ptr<GroundCoordinate>(new 
-		       OgrCoordinate(ogr_, X, Y, Height));
+    return boost::shared_ptr<GroundCoordinate>(
+        new OgrCoordinate(ogr_, X, Y, Height));
   }
 
-//-----------------------------------------------------------------------
-/// Convert to OgrCoordinate. X, Y and Height are in whatever X, Y and
-/// Z are for the underlying OgrWrapper.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Convert to OgrCoordinate. X, Y and Height are in whatever X, Y and
+  /// Z are for the underlying OgrWrapper.
+  //-----------------------------------------------------------------------
 
-  virtual void convert_to_coordinate(const GroundCoordinate& Gc, double& X, 
-			       double& Y, double& Height) const
+  virtual void convert_to_coordinate(const GroundCoordinate& Gc, double& X,
+                                     double& Y, double& Height) const
   {
     // Handle special case of GroundCoordinate already being in the
     // same coordinate system as ogr_. This is pretty common usage, so it is
@@ -308,29 +312,28 @@ public:
       return;
     }
     OgrCoordinate c(ogr_, Gc);
-    X = c.x; 
-    Y = c.y; 
+    X = c.x;
+    Y = c.y;
     Height = c.z;
   }
-  virtual void convert_to_coordinate(const Geodetic& Gc, double& X, 
-			       double& Y, double& Height) const
+  virtual void convert_to_coordinate(const Geodetic& Gc, double& X, double& Y,
+                                     double& Height) const
   {
     OgrCoordinate c(ogr_, Gc);
-    X = c.x; 
-    Y = c.y; 
+    X = c.x;
+    Y = c.y;
     Height = c.z;
   }
 
   virtual void print(std::ostream& Os) const;
-  static boost::shared_ptr<OgrCoordinateConverter>
-  utm_converter(int Zone);
+  static boost::shared_ptr<OgrCoordinateConverter> utm_converter(int Zone);
 protected:
   OgrCoordinateConverter() {}
 private:
   boost::shared_ptr<OgrWrapper> ogr_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
 }

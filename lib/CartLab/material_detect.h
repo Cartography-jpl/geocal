@@ -5,7 +5,7 @@
 
 namespace GeoCal {
 
-/****************************************************************//**
+/****************************************************************/ /**
   This class is used to do change detection and identify the material
   for pixels that have changed.
 
@@ -38,21 +38,21 @@ namespace GeoCal {
 class MaterialDetect : public CalcRaster {
 public:
   MaterialDetect(const boost::shared_ptr<RasterImage>& Pan_data,
-		 const boost::shared_ptr<RasterImage>& Pan_diff,
-		 const boost::shared_ptr<RasterImageMultiBand>& Mulspect,
-		 const blitz::Array<double, 1>& Pan_diff_threshold,
-		 const blitz::Array<double, 1>& Spectral_diff_threshold,
-		 const blitz::Array<int, 1>& Class_priority,
-		 const std::string& Ibis_fname,
-		 double Pan_shadow_threshold);
+                 const boost::shared_ptr<RasterImage>& Pan_diff,
+                 const boost::shared_ptr<RasterImageMultiBand>& Mulspect,
+                 const blitz::Array<double, 1>& Pan_diff_threshold,
+                 const blitz::Array<double, 1>& Spectral_diff_threshold,
+                 const blitz::Array<int, 1>& Class_priority,
+                 const std::string& Ibis_fname, double Pan_shadow_threshold);
   virtual ~MaterialDetect() {}
   boost::shared_ptr<RasterImage> closest_material_raster_image() const;
   boost::shared_ptr<RasterImageMultiBand> material_raster_image() const;
   boost::shared_ptr<RasterImage> material_raster_image(int Class_id) const;
-  blitz::Array<double, 2> closest_material_dif(int Lstart, int Sstart, int Number_line,
-					       int Number_sample) const;
+  blitz::Array<double, 2> closest_material_dif(int Lstart, int Sstart,
+                                               int Number_line,
+                                               int Number_sample) const;
   blitz::Array<double, 2> material_dif(int Lstart, int Sstart, int Number_line,
-				       int Number_sample, int Class_id) const;
+                                       int Number_sample, int Class_id) const;
 
   struct MaterialClass {
     std::vector<int> first_ratio_band;
@@ -64,7 +64,7 @@ public:
     double pdiff_thresh, sdiff_thresh;
   };
 protected:
-  virtual void calc(int Lstart, int Sstart) const; 
+  virtual void calc(int Lstart, int Sstart) const;
 private:
   boost::shared_ptr<RasterImage> pan_data;
   boost::shared_ptr<RasterImage> pan_diff;

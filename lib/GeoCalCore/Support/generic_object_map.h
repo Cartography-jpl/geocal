@@ -11,7 +11,7 @@
 
 namespace GeoCal {
 
-/****************************************************************//**
+/****************************************************************/ /**
   Boost serialization only maintains pointers for a single object
   being serialized. So for example we may have object 'a' and object
   'b'. Object 'b' contains a pointer to object 'a'. If we serialize
@@ -29,22 +29,22 @@ namespace GeoCal {
   This serves much the same purpose as "shelve" does for "pickle" in
   python.
 *******************************************************************/
-class GenericObjectMap : public Printable<GenericObjectMap>,
-			 public std::map<std::string,
-					 boost::shared_ptr<GenericObject> >{
+class GenericObjectMap
+  : public Printable<GenericObjectMap>,
+    public std::map<std::string, boost::shared_ptr<GenericObject>> {
 public:
   GenericObjectMap() {}
   virtual ~GenericObjectMap() {}
 
-//-----------------------------------------------------------------------
-/// Print description of object.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print description of object.
+  //-----------------------------------------------------------------------
 
-  virtual void print(std::ostream& Os) const {Os << "GenericObjectMap";}
+  virtual void print(std::ostream& Os) const { Os << "GenericObjectMap"; }
 
-//-----------------------------------------------------------------------
-/// List of keys, for python
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// List of keys, for python
+  //-----------------------------------------------------------------------
 
   std::vector<std::string> keys() const
   {
@@ -52,43 +52,45 @@ public:
     boost::copy(*this | boost::adaptors::map_keys, std::back_inserter(r));
     return r;
   }
-  
-//-----------------------------------------------------------------------
-/// Save object - this is something more easy to call from python.
-//-----------------------------------------------------------------------
-  
+
+  //-----------------------------------------------------------------------
+  /// Save object - this is something more easy to call from python.
+  //-----------------------------------------------------------------------
+
   void set_generic(const std::string& Key,
-		   const boost::shared_ptr<GenericObject>& V)
-  { (*this)[Key] = V; }
-  
-//-----------------------------------------------------------------------
-/// Return object if we have one, or a null pointer if there is no
-/// value in the map.
-//-----------------------------------------------------------------------
-  
+                   const boost::shared_ptr<GenericObject>& V)
+  {
+    (*this)[Key] = V;
+  }
+
+  //-----------------------------------------------------------------------
+  /// Return object if we have one, or a null pointer if there is no
+  /// value in the map.
+  //-----------------------------------------------------------------------
+
   boost::shared_ptr<GenericObject> get_generic(const std::string& Key) const
   {
-    std::map<std::string, boost::shared_ptr<GenericObject> >::const_iterator
-      i = find(Key);
+    std::map<std::string, boost::shared_ptr<GenericObject>>::const_iterator i =
+        find(Key);
     if(i != end())
       return i->second;
     return boost::shared_ptr<GenericObject>();
   }
 
-//-----------------------------------------------------------------------
-/// Return object if we have one, or a null pointer if there is no
-/// value in the map or it doesn't match type
-//-----------------------------------------------------------------------
-  
-  template<class T> inline boost::shared_ptr<T> get(const std::string& Key)
-    const
+  //-----------------------------------------------------------------------
+  /// Return object if we have one, or a null pointer if there is no
+  /// value in the map or it doesn't match type
+  //-----------------------------------------------------------------------
+
+  template<class T>
+  inline boost::shared_ptr<T> get(const std::string& Key) const
   {
     return boost::dynamic_pointer_cast<T>(get_generic(Key));
   }
 
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 }
 

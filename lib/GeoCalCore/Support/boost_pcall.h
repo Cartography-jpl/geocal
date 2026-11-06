@@ -29,8 +29,8 @@ namespace GeoCal {
 ///
 /// This uses boost process v2 (available in boost 1.80 and later).
 //-----------------------------------------------------------------------
-inline void boost_pcall_run(const std::string& Command,
-			    const std::string* In, std::string* Out)
+inline void boost_pcall_run(const std::string& Command, const std::string* In,
+                            std::string* Out)
 {
   namespace bp = boost::process::v2;
   namespace asio = boost::asio;
@@ -53,10 +53,10 @@ inline void boost_pcall_run(const std::string& Command,
   asio::readable_pipe pout(ctx);
   // Note the process_stdio needs to be constructed in place with the pipes,
   // moving or assigning one closes the child end of the pipes.
-  bp::process c = In ?
-    (Out ? bp::process(ctx, exec, args, bp::process_stdio{pin, pout, {}}) :
-     bp::process(ctx, exec, args, bp::process_stdio{pin, {}, {}})) :
-    bp::process(ctx, exec, args, bp::process_stdio{{}, pout, {}});
+  bp::process c =
+      In ? (Out ? bp::process(ctx, exec, args, bp::process_stdio{pin, pout, {}})
+                : bp::process(ctx, exec, args, bp::process_stdio{pin, {}, {}}))
+         : bp::process(ctx, exec, args, bp::process_stdio{{}, pout, {}});
   // We need to write stdin and read stdout at the same time. If we write
   // all of stdin first, the process can block writing to a full stdout
   // pipe while we are blocked writing to a full stdin pipe (a deadlock for
@@ -64,27 +64,27 @@ inline void boost_pcall_run(const std::string& Command,
   boost::system::error_code write_ec, read_ec;
   if(In)
     asio::async_write(pin, asio::buffer(*In),
-		      [&](const boost::system::error_code& ec, std::size_t) {
-			write_ec = ec;
-			// Our various programs wait for stdin to have a EOF
-			// before running (since data is binary, no other marker).
-			// So explicitly close the pipe here.
-			pin.close();
-		      });
+                      [&](const boost::system::error_code& ec, std::size_t) {
+                        write_ec = ec;
+                        // Our various programs wait for stdin to have a EOF
+                        // before running (since data is binary, no other marker).
+                        // So explicitly close the pipe here.
+                        pin.close();
+                      });
   if(Out)
     // This sucks up all the data the process writes out until it
     // finishes and stdout gets an EOF when it is closed.
     asio::async_read(pout, asio::dynamic_buffer(*Out),
-		     [&](const boost::system::error_code& ec, std::size_t) {
-		       read_ec = ec;
-		     });
+                     [&](const boost::system::error_code& ec, std::size_t) {
+                       read_ec = ec;
+                     });
   ctx.run();
   if(write_ec)
     throw Exception("Trouble writing input in boost_pcall: " +
-		    write_ec.message());
+                    write_ec.message());
   if(read_ec && read_ec != asio::error::eof)
     throw Exception("Trouble reading output in boost_pcall: " +
-		    read_ec.message());
+                    read_ec.message());
   c.wait();
   if(c.exit_code() != 0) {
     Exception e;
@@ -103,7 +103,7 @@ inline void boost_pcall_run(const std::string& Command,
 //-----------------------------------------------------------------------
 template<class In, class Out>
 boost::shared_ptr<Out> boost_pcall(const std::string& Command,
-				   const boost::shared_ptr<In>& Din)
+                                   const boost::shared_ptr<In>& Din)
 {
   std::string data = serialize_write_binary(Din);
   std::string res;
@@ -118,13 +118,13 @@ boost::shared_ptr<Out> boost_pcall(const std::string& Command)
   boost_pcall_run(Command, 0, &res);
   return serialize_read_binary_string<Out>(res);
 }
-  
+
 template<class In>
 void boost_pcall_noret(const std::string& Command,
-		       const boost::shared_ptr<In>& Din)
+                       const boost::shared_ptr<In>& Din)
 {
   std::string data = serialize_write_binary(Din);
   boost_pcall_run(Command, &data, 0);
 }
-  
+
 }

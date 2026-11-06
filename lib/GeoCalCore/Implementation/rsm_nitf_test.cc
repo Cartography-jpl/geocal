@@ -22,8 +22,8 @@ BOOST_AUTO_TEST_CASE(basic_test)
   if(boost::process::v2::environment::find_executable("boost_nitf_rsm").empty())
     return;
   rsm_write_nitf("test_out/rsm_out.ntf", rsm);
-  boost::shared_ptr<Rsm> rsmr = rsm_read_nitf("test_out/rsm_out.ntf",
-					      Ecr::EARTH_NAIF_CODE);
+  boost::shared_ptr<Rsm> rsmr =
+      rsm_read_nitf("test_out/rsm_out.ntf", Ecr::EARTH_NAIF_CODE);
   // std::cerr << *rsmr << "\n";
 }
 

@@ -41,7 +41,7 @@ BOOST_AUTO_TEST_CASE(serialization)
   if(false)
     std::cerr << d;
   boost::shared_ptr<QuickBirdCamera> camr =
-    serialize_read_string<QuickBirdCamera>(d);
+      serialize_read_string<QuickBirdCamera>(d);
   FrameCoordinate f2 = camr->frame_coordinate(sl, 0);
   FrameCoordinate f3 = cam->frame_coordinate(sl, 0);
   BOOST_CHECK_CLOSE(f2.line, f1.line, 1e-4);

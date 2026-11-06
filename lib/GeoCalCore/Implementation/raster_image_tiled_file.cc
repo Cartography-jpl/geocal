@@ -5,25 +5,21 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RasterImageTiledFile::save(Archive & ar, const unsigned int version) const
+void RasterImageTiledFile::save(Archive& ar, const unsigned int version) const
 {
   GEOCAL_GENERIC_BASE(RasterImage);
   GEOCAL_BASE(RasterImageVariable, RasterImage);
   GEOCAL_BASE(RasterImageTiledFile, RasterImageVariable);
-  ar & GEOCAL_NVP_(data)
-    & GEOCAL_NVP_(map_info)
-    & GEOCAL_NVP_(rpc);
+  ar& GEOCAL_NVP_(data) & GEOCAL_NVP_(map_info) & GEOCAL_NVP_(rpc);
 }
 
 template<class Archive>
-void RasterImageTiledFile::load(Archive & ar, const unsigned int version)
+void RasterImageTiledFile::load(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(RasterImage);
   GEOCAL_BASE(RasterImageVariable, RasterImage);
   GEOCAL_BASE(RasterImageTiledFile, RasterImageVariable);
-  ar & GEOCAL_NVP_(data)
-    & GEOCAL_NVP_(map_info)
-    & GEOCAL_NVP_(rpc);
+  ar& GEOCAL_NVP_(data) & GEOCAL_NVP_(map_info) & GEOCAL_NVP_(rpc);
   initialize(data_);
 }
 

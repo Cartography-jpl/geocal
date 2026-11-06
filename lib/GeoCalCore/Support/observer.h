@@ -10,7 +10,7 @@
 #include <iostream>
 namespace GeoCal {
 template<class T> class Observable;
-/****************************************************************//**
+/****************************************************************/ /**
   Simple Mixin to be and Observer of another object of class T. We get
   notified when the other object is updated.
 
@@ -28,29 +28,27 @@ template<class T> class Observable;
 *******************************************************************/
 template<class T> class Observer : public virtual GenericObject {
 public:
-  Observer() {
-    this_obj = to_ptr(*this);
-  }
+  Observer() { this_obj = to_ptr(*this); }
   virtual ~Observer() {}
 
-//-----------------------------------------------------------------------
-/// Called when the Observed object is updated.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Called when the Observed object is updated.
+  //-----------------------------------------------------------------------
 
   virtual void notify_update(const T& UNUSED(Observed_object)) {};
 
-//-----------------------------------------------------------------------
-/// Called when an object is added to an Observable. Default is to 
-/// do nothing.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Called when an object is added to an Observable. Default is to
+  /// do nothing.
+  //-----------------------------------------------------------------------
 
   virtual void notify_add(T& UNUSED(Observed_object)) {}
   virtual void notify_add() {}
 
-//-----------------------------------------------------------------------
-/// Called when an object is removed from an Observable. Default is to 
-/// do nothing.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Called when an object is removed from an Observable. Default is to
+  /// do nothing.
+  //-----------------------------------------------------------------------
 
   virtual void notify_remove(T& UNUSED(Observed_object)) {}
   virtual void notify_remove() {}
@@ -62,7 +60,7 @@ private:
   friend class Observable<T>;
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   Mixin for a class that allows other classes to observe it
   state. When the object state has been updated, the class should
   call notify_update.
@@ -92,70 +90,74 @@ template<class T> class Observable : public virtual GenericObject {
 public:
   virtual ~Observable() {}
 
-//-----------------------------------------------------------------------
-/// Add an observer 
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Add an observer
+  //-----------------------------------------------------------------------
 
   virtual void add_observer(Observer<T>& Obs) = 0;
 
-//-----------------------------------------------------------------------
-/// Add an observer and keep a reference to it. See the discussion in
-/// the Observer class description for details.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Add an observer and keep a reference to it. See the discussion in
+  /// the Observer class description for details.
+  //-----------------------------------------------------------------------
 
-  void add_observer_and_keep_reference
-  (boost::shared_ptr<Observer<T> >& Obs) 
-  { ref_list.push_back(Obs); add_observer(*Obs); }
+  void add_observer_and_keep_reference(boost::shared_ptr<Observer<T>>& Obs)
+  {
+    ref_list.push_back(Obs);
+    add_observer(*Obs);
+  }
 
-//-----------------------------------------------------------------------
-/// Remove an observer 
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Remove an observer
+  //-----------------------------------------------------------------------
 
   virtual void remove_observer(Observer<T>& Obs) = 0;
 protected:
-//-----------------------------------------------------------------------
-/// Function to call to notify Observers of a state change. The object
-/// should pass itself to this function, so it can be passed to the
-/// Observers. 
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Function to call to notify Observers of a state change. The object
+  /// should pass itself to this function, so it can be passed to the
+  /// Observers.
+  //-----------------------------------------------------------------------
   void notify_update_do(const T& Self)
   {
     clean_dead_ptr();
-    BOOST_FOREACH(boost::weak_ptr<Observer<T> >& t, olist) {
-      boost::shared_ptr<Observer<T> > t2 = t.lock();
+    BOOST_FOREACH(boost::weak_ptr<Observer<T>>& t, olist) {
+      boost::shared_ptr<Observer<T>> t2 = t.lock();
       if(t2)
         t2->notify_update(Self);
     }
   }
 
-//-----------------------------------------------------------------------
-/// Add an observer 
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Add an observer
+  //-----------------------------------------------------------------------
 
   void add_observer_do(Observer<T>& Obs, T& t)
   {
-    olist.push_back(boost::weak_ptr<Observer<T> >(Obs.this_obj));
+    olist.push_back(boost::weak_ptr<Observer<T>>(Obs.this_obj));
     Obs.notify_add(t);
     Obs.notify_add();
   }
 
   void add_observer_do(Observer<T>& Obs)
   {
-    olist.push_back(boost::weak_ptr<Observer<T> >(Obs.this_obj));
+    olist.push_back(boost::weak_ptr<Observer<T>>(Obs.this_obj));
     Obs.notify_add();
   }
 
   class PointerEqual {
   public:
     PointerEqual(Observer<T>* t) : t_(t) {}
-    bool operator()(const boost::weak_ptr<Observer<T> >& w)
-    { return w.lock().get() == t_; }
+    bool operator()(const boost::weak_ptr<Observer<T>>& w)
+    {
+      return w.lock().get() == t_;
+    }
     Observer<T>* t_;
   };
 
-//-----------------------------------------------------------------------
-/// Remove an observer 
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Remove an observer
+  //-----------------------------------------------------------------------
 
   void remove_observer_do(Observer<T>& Obs, T& t)
   {
@@ -174,19 +176,21 @@ protected:
 
   class PointerDead {
   public:
-    bool operator()(const boost::weak_ptr<Observer<T> >& w)
-    { return w.expired(); }
+    bool operator()(const boost::weak_ptr<Observer<T>>& w)
+    {
+      return w.expired();
+    }
   };
-//-----------------------------------------------------------------------
-/// Remove any dead pointers.
-//-----------------------------------------------------------------------
-  void clean_dead_ptr() {
+  //-----------------------------------------------------------------------
+  /// Remove any dead pointers.
+  //-----------------------------------------------------------------------
+  void clean_dead_ptr()
+  {
     PointerDead p;
     olist.remove_if(p);
   }
-  std::list<boost::weak_ptr<Observer<T> > > olist;
-  std::vector<boost::shared_ptr<Observer<T> > > ref_list;
-};  
+  std::list<boost::weak_ptr<Observer<T>>> olist;
+  std::vector<boost::shared_ptr<Observer<T>>> ref_list;
+};
 }
 #endif
-

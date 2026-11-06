@@ -153,6 +153,12 @@ The division between Support/Interface/Implementation is somewhat loose - it's m
 
 ### C++
 
+- Formatted with clang-format: `.clang-format` at the top of the source tree (the same file as
+  swig-rules-skeleton's; clang-format 22, pinned in the pixi env). `make format` formats `lib/`,
+  `make format-check` checks it, `make lint` runs clang-tidy with the checks in `.clang-tidy`.
+  Format what you change. `.clang-format-ignore` excludes the generated wrappers (`bindings/`) and
+  vendored code (`thirdparty/`, `boost_fix/`, `lib/GeoCalCore/Support/boost/`). `.i` files aren't
+  formatted by clang-format.
 - Boost Test framework for unit tests
 - Use `operator<<` for printing (automatically wrapped to Python `__str__`)
 - Prefer Boost smart pointers (mapped to Python through SWIG)

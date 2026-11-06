@@ -5,7 +5,7 @@
 
 namespace GeoCal {
 
-/****************************************************************//**
+/****************************************************************/ /**
   This is a Mixin for classes that can be printed. 
   
   There are two different functions we want to use for printing. For
@@ -23,10 +23,10 @@ namespace GeoCal {
 
 template<class T> class Printable : public virtual GenericObject {
 public:
-//-----------------------------------------------------------------------
-/// Print to string. This is primarily useful for SWIG wrappers to
-/// this class, e.g. a to_s method in ruby.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Print to string. This is primarily useful for SWIG wrappers to
+  /// this class, e.g. a to_s method in ruby.
+  //-----------------------------------------------------------------------
 
   std::string print_to_string() const
   {
@@ -41,15 +41,15 @@ public:
     std::string buf("blah");
     buf.reserve(1000);
     std::ostringstream os(buf);
-    ((T*) this)->print_wrapper(os);
+    ((T*)this)->print_wrapper(os);
     return os.str();
   }
 
-//-----------------------------------------------------------------------
-/// Alternative to print, this works better with python. If this
-/// is an empty string we fall back to print - so C++ classes work
-/// without change but python can intercept this by overriding desc.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Alternative to print, this works better with python. If this
+  /// is an empty string we fall back to print - so C++ classes work
+  /// without change but python can intercept this by overriding desc.
+  //-----------------------------------------------------------------------
 
   virtual std::string desc() const { return ""; }
 
@@ -59,15 +59,18 @@ public:
     if(d != "")
       Os << d;
     else
-      ((T*) this)->print(Os);
+      ((T*)this)->print(Os);
   }
-  
-//-----------------------------------------------------------------------
-/// Print to stream.
-//-----------------------------------------------------------------------
+
+  //-----------------------------------------------------------------------
+  /// Print to stream.
+  //-----------------------------------------------------------------------
 
   friend std::ostream& operator<<(std::ostream& Os, const T& P)
-  { P.print_wrapper(Os); return Os;}
+  {
+    P.print_wrapper(Os);
+    return Os;
+  }
 };
 
 }

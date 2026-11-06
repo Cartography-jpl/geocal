@@ -19,8 +19,8 @@ BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported())
     return;
-  boost::shared_ptr<MspiGimbal> gim(new MspiGimbal(test_data_dir() + 
-		    "AIRMSPI_CONFIG_CAMERA_MODEL_0003.config"));
+  boost::shared_ptr<MspiGimbal> gim(new MspiGimbal(
+      test_data_dir() + "AIRMSPI_CONFIG_CAMERA_MODEL_0003.config"));
   std::string d = serialize_write_string(gim);
   if(false)
     std::cerr << d;

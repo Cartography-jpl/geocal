@@ -5,17 +5,19 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void GroundMask::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
+void GroundMask::serialize(Archive& UNUSED(ar),
+                           const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GroundMask);
 }
 
 template<class Archive>
-void CombinedGroundMask::serialize(Archive & ar, const unsigned int UNUSED(version))
+void CombinedGroundMask::serialize(Archive& ar,
+                                   const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GroundMask);
   GEOCAL_BASE(CombinedGroundMask, GroundMask);
-  ar & GEOCAL_NVP(mask_list);
+  ar& GEOCAL_NVP(mask_list);
 }
 
 GEOCAL_IMPLEMENT(GroundMask);
@@ -42,8 +44,8 @@ bool CombinedGroundMask::mask(const GroundCoordinate& Gc) const
 /// the comments of GroundMask for detailed discussion of the check.
 //-----------------------------------------------------------------------
 
-bool CombinedGroundMask::region_masked(const GroundCoordinate& Ulc, 
-				const GroundCoordinate& Lrc) const
+bool CombinedGroundMask::region_masked(const GroundCoordinate& Ulc,
+                                       const GroundCoordinate& Lrc) const
 {
   BOOST_FOREACH(boost::shared_ptr<GroundMask> m, mask_list) {
     if(m->region_masked(Ulc, Lrc))
@@ -58,7 +60,7 @@ bool CombinedGroundMask::region_masked(const GroundCoordinate& Ulc,
 
 void CombinedGroundMask::print(std::ostream& Os) const
 {
-  if(mask_list.size() ==0)
+  if(mask_list.size() == 0)
     Os << "Empty CombinedGroundMask\n";
   else {
     Os << "CombinedGroundMask: \n";

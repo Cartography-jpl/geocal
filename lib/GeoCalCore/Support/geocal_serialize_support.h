@@ -24,22 +24,24 @@
 
 // Do this a lot, so give a shortcut for this
 #define GEOCAL_NVP(x) BOOST_SERIALIZATION_NVP(x)
-#define GEOCAL_NVP_(x) boost::serialization::make_nvp(BOOST_PP_STRINGIZE(x), x ## _)
+#define GEOCAL_NVP_(x)                                                         \
+  boost::serialization::make_nvp(BOOST_PP_STRINGIZE(x), x##_)
 #define GEOCAL_NVP2(x, y) boost::serialization::make_nvp(x, y)
-#define GEOCAL_IMPLEMENT(NAME) \
-BOOST_CLASS_EXPORT_IMPLEMENT(GeoCal::NAME); \
-template void NAME::serialize(boost::archive::polymorphic_oarchive& ar, \
-				    const unsigned int version); \
-template void NAME::serialize(boost::archive::polymorphic_iarchive& ar, \
-				    const unsigned int version);
-#define GEOCAL_SPLIT_IMPLEMENT(NAME) \
-BOOST_CLASS_EXPORT_IMPLEMENT(GeoCal::NAME); \
-template void NAME::save(boost::archive::polymorphic_oarchive& ar, \
-				    const unsigned int version) const; \
-template void NAME::load(boost::archive::polymorphic_iarchive& ar, \
-				    const unsigned int version);
+#define GEOCAL_IMPLEMENT(NAME)                                                 \
+  BOOST_CLASS_EXPORT_IMPLEMENT(GeoCal::NAME);                                  \
+  template void NAME::serialize(boost::archive::polymorphic_oarchive& ar,      \
+                                const unsigned int version);                   \
+  template void NAME::serialize(boost::archive::polymorphic_iarchive& ar,      \
+                                const unsigned int version);
+#define GEOCAL_SPLIT_IMPLEMENT(NAME)                                           \
+  BOOST_CLASS_EXPORT_IMPLEMENT(GeoCal::NAME);                                  \
+  template void NAME::save(boost::archive::polymorphic_oarchive& ar,           \
+                           const unsigned int version) const;                  \
+  template void NAME::load(boost::archive::polymorphic_iarchive& ar,           \
+                           const unsigned int version);
 
-#define GEOCAL_BASE(NAME,BASE) boost::serialization::void_cast_register<GeoCal::NAME, GeoCal::BASE>();
+#define GEOCAL_BASE(NAME, BASE)                                                \
+  boost::serialization::void_cast_register<GeoCal::NAME, GeoCal::BASE>();
 #define GEOCAL_GENERIC_BASE(NAME) GEOCAL_BASE(NAME, GenericObject);
 
 using boost::archive::polymorphic_iarchive;

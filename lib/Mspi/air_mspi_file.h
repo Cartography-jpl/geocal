@@ -13,9 +13,9 @@ namespace GeoCal {
 /// function. This can go away in the future when boost 1.61 isn't
 /// so new.
 //-----------------------------------------------------------------------
-  
-  boost::filesystem::path lexically_normal(const boost::filesystem::path& p);
-  std::string air_mspi_permanent_file_name(const std::string& Fname);
-  std::string air_mspi_local_file_name(const std::string& Fname);
+
+boost::filesystem::path lexically_normal(const boost::filesystem::path& p);
+std::string air_mspi_permanent_file_name(const std::string& Fname);
+std::string air_mspi_local_file_name(const std::string& Fname);
 }
 #endif

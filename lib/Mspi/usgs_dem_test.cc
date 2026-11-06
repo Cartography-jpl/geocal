@@ -11,7 +11,8 @@ BOOST_FIXTURE_TEST_SUITE(usgs_dem, GlobalFixture)
 BOOST_AUTO_TEST_CASE(usgs_dem_data)
 {
   UsgsDemData usgs_data(test_data_dir() + "usgs_dem", false);
-  double val = usgs_data.interpolate(usgs_data.coordinate(Geodetic(43.5, -68.5)));
+  double val =
+      usgs_data.interpolate(usgs_data.coordinate(Geodetic(43.5, -68.5)));
   BOOST_CHECK_CLOSE(val, 0.0, 1e-4);
 }
 
@@ -25,15 +26,16 @@ BOOST_AUTO_TEST_CASE(usgs_dem_data_real_database)
     double longitude = -119.263411;
     double lat = (latitude + (1.0 / 10800.0));
     double lon = (longitude + (.5 / 10800.0));
-    boost::shared_ptr<GroundCoordinate> gc
-      (usgs_data.map_info().coordinate_converter().
-       convert_from_coordinate(lon, lat));
-    
+    boost::shared_ptr<GroundCoordinate> gc(
+        usgs_data.map_info().coordinate_converter().convert_from_coordinate(
+            lon, lat));
+
     // The old unit test value is 1454, which I verified using
     //gdallocationinfo is *wrong*. Not sure where this value came
     //from, but the following value appears to be correct.
     // BOOST_CHECK_CLOSE(usgs_data.interpolate(usgs_data.coordinate(*gc)), 1454)
-    BOOST_CHECK_CLOSE(usgs_data.interpolate(usgs_data.coordinate(*gc)), 1450.25, 1e-2);
+    BOOST_CHECK_CLOSE(usgs_data.interpolate(usgs_data.coordinate(*gc)), 1450.25,
+                      1e-2);
   }
 }
 
@@ -43,8 +45,8 @@ BOOST_AUTO_TEST_CASE(usgs_dem)
   // SimpleDatum.
   boost::shared_ptr<Datum> datum(new SimpleDatum(10.0));
   UsgsDem d(test_data_dir() + "usgs_dem", false, datum);
-  BOOST_CHECK_CLOSE(d.height_reference_surface(Geodetic(43.5, -68.5)),
-		    10, 1e-4);
+  BOOST_CHECK_CLOSE(d.height_reference_surface(Geodetic(43.5, -68.5)), 10,
+                    1e-4);
 }
 
 BOOST_AUTO_TEST_CASE(serialization_usgs_dem_data)
@@ -52,14 +54,15 @@ BOOST_AUTO_TEST_CASE(serialization_usgs_dem_data)
   if(!have_serialize_supported())
     return;
 
-  boost::shared_ptr<UsgsDemData> usgs_data
-    (new UsgsDemData(test_data_dir() + "usgs_dem", false));
+  boost::shared_ptr<UsgsDemData> usgs_data(
+      new UsgsDemData(test_data_dir() + "usgs_dem", false));
   std::string d = serialize_write_string(usgs_data);
   if(false)
     std::cerr << d;
   boost::shared_ptr<UsgsDemData> usgs_datar =
-    serialize_read_string<UsgsDemData>(d);
-  double val = usgs_datar->interpolate(usgs_datar->coordinate(Geodetic(43.5, -68.5)));
+      serialize_read_string<UsgsDemData>(d);
+  double val =
+      usgs_datar->interpolate(usgs_datar->coordinate(Geodetic(43.5, -68.5)));
   BOOST_CHECK_CLOSE(val, 0.0, 1e-4);
 }
 
@@ -70,17 +73,15 @@ BOOST_AUTO_TEST_CASE(serialization)
     return;
 
   boost::shared_ptr<Datum> datum(new SimpleDatum(10.0));
-  boost::shared_ptr<Dem> dem(new UsgsDem(test_data_dir() + "usgs_dem", false, 
-				       datum));
+  boost::shared_ptr<Dem> dem(
+      new UsgsDem(test_data_dir() + "usgs_dem", false, datum));
   std::string d = serialize_write_string(dem);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<Dem> demr =
-    serialize_read_string<Dem>(d);
-  BOOST_CHECK_CLOSE(demr->height_reference_surface(Geodetic(43.5, -68.5)),
-		    10, 1e-4);
+  boost::shared_ptr<Dem> demr = serialize_read_string<Dem>(d);
+  BOOST_CHECK_CLOSE(demr->height_reference_surface(Geodetic(43.5, -68.5)), 10,
+                    1e-4);
 }
-
 
 BOOST_AUTO_TEST_CASE(usgs_dem_real_database)
 {
@@ -96,8 +97,8 @@ BOOST_AUTO_TEST_CASE(usgs_dem_real_database)
   double longitude = -119.263411;
   double lat = (latitude + (1.0 / 10800.0));
   double lon = (longitude + (.5 / 10800.0));
-  BOOST_CHECK_CLOSE(d.height_reference_surface(Geodetic(lat, lon)),
-		    1460.255, 1e-2);
+  BOOST_CHECK_CLOSE(d.height_reference_surface(Geodetic(lat, lon)), 1460.255,
+                    1e-2);
 }
 
 BOOST_AUTO_TEST_CASE(create_subset_file)
@@ -107,7 +108,7 @@ BOOST_AUTO_TEST_CASE(create_subset_file)
   if(!boost::filesystem::is_directory("/bigdata/bank/anc/DEM/USA10M/database"))
     return;
   UsgsDemData d("/bigdata/bank/anc/DEM/USA10M/database");
-  std::vector<boost::shared_ptr<GroundCoordinate> > pt;
+  std::vector<boost::shared_ptr<GroundCoordinate>> pt;
   pt.push_back(boost::shared_ptr<GroundCoordinate>(new Geodetic(40.5, -110.5)));
   pt.push_back(boost::shared_ptr<GroundCoordinate>(new Geodetic(37.5, -106.7)));
   d.create_subset_file("test_dem.tif", "gtiff", pt);
@@ -118,7 +119,7 @@ BOOST_AUTO_TEST_CASE(create_subset_file)
   GdalDem dcreated("test_dem.tif", datum);
   Geodetic g(38, -108);
   BOOST_CHECK_CLOSE(dtrue.height_reference_surface(g),
-		    dcreated.height_reference_surface(g), 1e-4);
+                    dcreated.height_reference_surface(g), 1e-4);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

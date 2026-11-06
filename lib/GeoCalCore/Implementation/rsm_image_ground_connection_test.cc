@@ -12,19 +12,18 @@ BOOST_AUTO_TEST_CASE(basic)
 {
   boost::shared_ptr<Dem> dem = boost::make_shared<SimpleDem>(1017);
   boost::shared_ptr<RasterImage> img =
-    boost::make_shared<MemoryRasterImage>(100, 300, 0);
+      boost::make_shared<MemoryRasterImage>(100, 300, 0);
   boost::shared_ptr<Rsm> rsm = boost::make_shared<Rsm>(rp_from_rpc, cconv);
   RsmImageGroundConnection ig(rsm, dem, img);
   ImageCoordinate ic_expect(5729.22, 27561.36);
   Geodetic g(35.8399968, 45.0770183, 1017);
   BOOST_CHECK_EQUAL(ig.image_coordinate(g), ic_expect);
   BOOST_CHECK_CLOSE(ig.resolution_meter(ic_expect), 0.79234757774130682, 1e-4);
-  boost::shared_ptr<GroundCoordinate> gcalc = 
-    ig.ground_coordinate(ic_expect);
+  boost::shared_ptr<GroundCoordinate> gcalc = ig.ground_coordinate(ic_expect);
   BOOST_CHECK(distance(*gcalc, g) < 0.1);
-  boost::shared_ptr<GroundCoordinate> gcalc2 = 
-    ig.ground_coordinate_approx_height(ic_expect, 
-				       g.height_reference_surface());
+  boost::shared_ptr<GroundCoordinate> gcalc2 =
+      ig.ground_coordinate_approx_height(ic_expect,
+                                         g.height_reference_surface());
   BOOST_CHECK(distance(*gcalc2, g) < 0.1);
   Ecr ecr(g);
   blitz::Array<double, 2> jac = ig.image_coordinate_jac_cf(ecr);
@@ -46,20 +45,20 @@ BOOST_AUTO_TEST_CASE(serialize)
     return;
   boost::shared_ptr<Dem> dem = boost::make_shared<SimpleDem>(1017);
   boost::shared_ptr<RasterImage> img =
-    boost::make_shared<MemoryRasterImage>(100, 300, 0);
+      boost::make_shared<MemoryRasterImage>(100, 300, 0);
   boost::shared_ptr<Rsm> rsm = boost::make_shared<Rsm>(rp_from_rpc, cconv);
   boost::shared_ptr<RsmImageGroundConnection> ig =
-    boost::make_shared<RsmImageGroundConnection>(rsm, dem, img);
+      boost::make_shared<RsmImageGroundConnection>(rsm, dem, img);
   std::string d = serialize_write_string(ig);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<RsmImageGroundConnection> igr = 
-    serialize_read_string<RsmImageGroundConnection>(d);
+  boost::shared_ptr<RsmImageGroundConnection> igr =
+      serialize_read_string<RsmImageGroundConnection>(d);
   ImageCoordinate ic_expect(5729.22, 27561.36);
   Geodetic g(35.8399968, 45.0770183, 1017);
   BOOST_CHECK_EQUAL(igr->image_coordinate(g), ic_expect);
-  BOOST_CHECK_CLOSE(igr->resolution_meter(ic_expect), 0.79234757774130682, 1e-4);
+  BOOST_CHECK_CLOSE(igr->resolution_meter(ic_expect), 0.79234757774130682,
+                    1e-4);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-

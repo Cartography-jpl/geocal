@@ -3,31 +3,30 @@
 #include "raster_image_variable.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This is a simple implementation of a RasterImage, where the data is 
   just a constant fixed value.
 *******************************************************************/
 
 class ConstantRasterImage : public RasterImageVariable {
 public:
-//-----------------------------------------------------------------------
-/// Construct a ConstantRasterImage of the given size.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Construct a ConstantRasterImage of the given size.
+  //-----------------------------------------------------------------------
 
   ConstantRasterImage(int Number_line, int Number_sample, int Value)
-    : RasterImageVariable(Number_line, Number_sample),
-      data_(Value)
-    {
-    }
+    : RasterImageVariable(Number_line, Number_sample), data_(Value)
+  {
+  }
 
-//-----------------------------------------------------------------------
-/// Construct a MemoryRasterImage of the given MapInfo.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Construct a MemoryRasterImage of the given MapInfo.
+  //-----------------------------------------------------------------------
 
   ConstantRasterImage(const MapInfo& Mi, int Value)
-    : RasterImageVariable(Mi),
-      data_(Value)
-  { }
+    : RasterImageVariable(Mi), data_(Value)
+  {
+  }
 
   virtual ~ConstantRasterImage() {}
 
@@ -35,39 +34,42 @@ public:
   {
     return data_;
   }
-  virtual double unchecked_read_double(int UNUSED(Line), int UNUSED(Sample)) const
+  virtual double unchecked_read_double(int UNUSED(Line),
+                                       int UNUSED(Sample)) const
   {
-    return (double) data_;
+    return (double)data_;
   }
-  virtual void read_ptr(int Lstart, int Sstart, int Number_line, 
-			int Number_sample, int* Res) const
+  virtual void read_ptr(int Lstart, int Sstart, int Number_line,
+                        int Number_sample, int* Res) const
   {
     range_check(Lstart, 0, number_line() - (Number_line - 1));
     range_check(Sstart, 0, number_sample() - (Number_sample - 1));
     for(int i = Lstart; i < Lstart + Number_line; ++i)
       for(int j = Sstart; j < Sstart + Number_sample; ++j, ++Res)
-	*Res = data_;
+        *Res = data_;
   }
-  virtual void unchecked_write(int UNUSED(Line), int UNUSED(Sample), int UNUSED(Val))
+  virtual void unchecked_write(int UNUSED(Line), int UNUSED(Sample),
+                               int UNUSED(Val))
   {
     throw Exception("Not implemented");
   }
-  virtual void unchecked_write(int UNUSED(Line), int UNUSED(Sample), double UNUSED(Val))
+  virtual void unchecked_write(int UNUSED(Line), int UNUSED(Sample),
+                               double UNUSED(Val))
   {
     throw Exception("Not implemented");
   }
   virtual void print(std::ostream& Os) const
   {
-    Os << "RasterImage of " << number_line() << " x " << number_sample() 
+    Os << "RasterImage of " << number_line() << " x " << number_sample()
        << " constant value of " << data_ << "\n";
   }
 protected:
   ConstantRasterImage() {}
 private:
-  int data_;			    /// <Underlying data.
+  int data_; /// <Underlying data.
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
 }

@@ -20,18 +20,19 @@ class RsmFixture : public RpcFixture {
 public:
   RsmFixture()
   {
-    rp_from_rpc = boost::make_shared<RsmRationalPolynomial>(3,3,3,3,3,3,3,3);
+    rp_from_rpc =
+        boost::make_shared<RsmRationalPolynomial>(3, 3, 3, 3, 3, 3, 3, 3);
     rp_from_rpc->set_rpc_coeff(rpc);
     boost::shared_ptr<MemoryRasterImage> image =
-      boost::make_shared<MemoryRasterImage>(rpc.line_offset * 2,
-					    rpc.sample_offset * 2, 0);
-    igc = boost::make_shared<RpcImageGroundConnection>
-      (rpc, boost::make_shared<SimpleDem>(), image);
+        boost::make_shared<MemoryRasterImage>(rpc.line_offset * 2,
+                                              rpc.sample_offset * 2, 0);
+    igc = boost::make_shared<RpcImageGroundConnection>(
+        rpc, boost::make_shared<SimpleDem>(), image);
     cconv = boost::make_shared<GeodeticConverter>();
     rsm = boost::make_shared<Rsm>(rp_from_rpc, cconv);
     rsm->fill_in_ground_domain_vertex(*igc,
-				      rpc.height_offset - rpc.height_scale,
-				      rpc.height_offset + rpc.height_scale);
+                                      rpc.height_offset - rpc.height_scale,
+                                      rpc.height_offset + rpc.height_scale);
   }
   boost::shared_ptr<CoordinateConverter> cconv;
   boost::shared_ptr<RsmRationalPolynomial> rp_from_rpc;
@@ -53,11 +54,11 @@ public:
     rp_from_rpc->fit(*igc, *cconv, hmin, hmax, lmin, lmax, smin, smax);
     rsm = boost::make_shared<Rsm>(rp_from_rpc, cconv);
     rsm->fill_in_ground_domain_vertex(*igc,
-				      rpc.height_offset - rpc.height_scale,
-				      rpc.height_offset + rpc.height_scale);
+                                      rpc.height_offset - rpc.height_scale,
+                                      rpc.height_offset + rpc.height_scale);
   }
 };
-  
+
 class RsmLowOrderPolynomialFixture : public RsmFixture {
 public:
   RsmLowOrderPolynomialFixture()
@@ -78,7 +79,7 @@ class RsmGridFixture : public RsmFixture {
 public:
   RsmGridFixture()
   {
-    rg_from_rpc = boost::make_shared<RsmGrid>(40,40,4, false, 7,7);
+    rg_from_rpc = boost::make_shared<RsmGrid>(40, 40, 4, false, 7, 7);
     double hmin = rpc.height_offset - rpc.height_scale;
     double hmax = rpc.height_offset + rpc.height_scale;
     double lmin = 0;

@@ -9,12 +9,12 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void MspiGimbal::serialize(Archive & ar, const unsigned int version)
+void MspiGimbal::serialize(Archive& ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(WithParameter);
   GEOCAL_BASE(MspiGimbal, WithParameter);
-  ar & GEOCAL_NVP_(epsilon) & GEOCAL_NVP_(psi) & GEOCAL_NVP_(theta)
-    & GEOCAL_NVP_(parameter_mask);
+  ar& GEOCAL_NVP_(epsilon) & GEOCAL_NVP_(psi) & GEOCAL_NVP_(theta) &
+      GEOCAL_NVP_(parameter_mask);
 }
 
 GEOCAL_IMPLEMENT(MspiGimbal);
@@ -25,7 +25,7 @@ GEOCAL_IMPLEMENT(MspiGimbal);
 //-----------------------------------------------------------------------
 
 void MspiGimbal::read_config_file(const std::string& File_name,
-				  const std::string& Extra_config_file)
+                                  const std::string& Extra_config_file)
 {
   MspiConfigFile c(File_name);
   if(Extra_config_file != "")
@@ -48,14 +48,15 @@ void MspiGimbal::read_config_file(const std::string& File_name,
 /// matches what AirMSPI navigation data is stored as.
 //-----------------------------------------------------------------------
 
-boost::math::quaternion<AutoDerivative<double> >  
-MspiGimbal::station_to_sc_with_derivative(const AutoDerivative<double>& Gimbal_pos) const
+boost::math::quaternion<AutoDerivative<double>>
+MspiGimbal::station_to_sc_with_derivative(
+    const AutoDerivative<double>& Gimbal_pos) const
 {
   fill_in_cache();
   return m_with_der * quat_rot("y", Gimbal_pos);
 }
 
-boost::math::quaternion<double>  
+boost::math::quaternion<double>
 MspiGimbal::station_to_sc(double Gimbal_pos) const
 {
   fill_in_cache();
@@ -65,13 +66,12 @@ MspiGimbal::station_to_sc(double Gimbal_pos) const
 void MspiGimbal::fill_in_cache() const
 {
   if(!cache_valid) {
-  // Portion of quaternion that is constant.
-  // Negative sign is because these are passive rotations 
-  // (the quaternion definition is active)
-    m_with_der = quat_rot("zyx", 
-			  -epsilon_ * Constant::deg_to_rad, 
-			  -psi_ * Constant::deg_to_rad, 
-			  -theta_ * Constant::deg_to_rad);
+    // Portion of quaternion that is constant.
+    // Negative sign is because these are passive rotations
+    // (the quaternion definition is active)
+    m_with_der =
+        quat_rot("zyx", -epsilon_ * Constant::deg_to_rad,
+                 -psi_ * Constant::deg_to_rad, -theta_ * Constant::deg_to_rad);
     normalize(m_with_der);
     m = value(m_with_der);
     normalize(m);
@@ -110,7 +110,7 @@ std::vector<std::string> MspiGimbal::parameter_name() const
 }
 
 // See base class for description
-void MspiGimbal::parameter_mask(const blitz::Array<bool, 1>& Pm) 
+void MspiGimbal::parameter_mask(const blitz::Array<bool, 1>& Pm)
 {
   if(Pm.rows() != parameter_mask_.rows())
     throw Exception("Parameter mask must have a size of exactly 3");

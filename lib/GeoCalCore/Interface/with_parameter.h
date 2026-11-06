@@ -6,29 +6,29 @@
 #include <boost/shared_ptr.hpp>
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   It is common for a class to have some set of parameters that 
   control behavior, which we may then fit with something like the
   SBA. It can also be useful for only a subset of those parameter to
   be active. This mixin class supplies this functionality.
 *******************************************************************/
-class WithParameter: public virtual GenericObject {
+class WithParameter : public virtual GenericObject {
 public:
   virtual ~WithParameter() {}
 
-//-----------------------------------------------------------------------
-/// Return the parameters. 
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return the parameters.
+  //-----------------------------------------------------------------------
 
   virtual blitz::Array<double, 1> parameter() const
   { // Default is to return parameter_with_derivative and strip off
     // the jacobian.
-    return parameter_with_derivative().value(); 
+    return parameter_with_derivative().value();
   }
 
-//-----------------------------------------------------------------------
-/// Set the value of the parameters.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Set the value of the parameters.
+  //-----------------------------------------------------------------------
 
   virtual void parameter(const blitz::Array<double, 1>& Parm)
   {
@@ -37,30 +37,30 @@ public:
     parameter_with_derivative(Parm);
   }
 
-//-----------------------------------------------------------------------
-/// Return parameters, including derivatives. The derivatives can be
-/// with respect to whatever variables you like, this class just
-/// handles propagating the derivatives.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return parameters, including derivatives. The derivatives can be
+  /// with respect to whatever variables you like, this class just
+  /// handles propagating the derivatives.
+  //-----------------------------------------------------------------------
 
   virtual ArrayAd<double, 1> parameter_with_derivative() const
   { // Default is no parameters.
-    return blitz::Array<double, 1>(0); 
+    return blitz::Array<double, 1>(0);
   }
 
-//-----------------------------------------------------------------------
-/// Set the value of the parameters, including derivatives of the
-/// parameter. Useful for doing Jacobian calculations.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Set the value of the parameters, including derivatives of the
+  /// parameter. Useful for doing Jacobian calculations.
+  //-----------------------------------------------------------------------
 
   virtual void parameter_with_derivative(const ArrayAd<double, 1>& UNUSED(Parm))
-   {
-     // Default is do nothing
-   }
+  {
+    // Default is do nothing
+  }
 
-//-----------------------------------------------------------------------
-/// Descriptive name of each parameter.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Descriptive name of each parameter.
+  //-----------------------------------------------------------------------
 
   virtual std::vector<std::string> parameter_name() const
   {
@@ -70,12 +70,12 @@ public:
     return res;
   }
 
-//-----------------------------------------------------------------------
-/// Return the parameter subset mask, where "true" means include the
-/// parameter and "false" means don't.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Return the parameter subset mask, where "true" means include the
+  /// parameter and "false" means don't.
+  //-----------------------------------------------------------------------
 
-  virtual blitz::Array<bool, 1> parameter_mask() const 
+  virtual blitz::Array<bool, 1> parameter_mask() const
   {
     // Default is to just return all Trues. Derived classes can
     // override this.
@@ -92,10 +92,10 @@ public:
 private:
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   It is common for a class WithParameter to be made up of subobjects
   an just string them together (e.g., a OrbitDataImageGroundConnection 
   where the orbit and camera each have parameters). This handles this 
@@ -107,7 +107,9 @@ public:
   WithParameterNested() {}
   virtual ~WithParameterNested() {}
   void add_object(const boost::shared_ptr<WithParameter>& Obj)
-  { obj_list.push_back(Obj); }
+  {
+    obj_list.push_back(Obj);
+  }
   void clear_object() { obj_list.resize(0); }
   virtual blitz::Array<double, 1> parameter() const;
   virtual void parameter(const blitz::Array<double, 1>& Parm);
@@ -116,15 +118,15 @@ public:
   virtual std::vector<std::string> parameter_name() const;
   virtual blitz::Array<bool, 1> parameter_mask() const;
 private:
-  std::vector<boost::shared_ptr<WithParameter> > obj_list;
+  std::vector<boost::shared_ptr<WithParameter>> obj_list;
   int total_size() const;
   int max_num_var() const;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   Another issues that arises (in particular when having IgcCollection
   across multiple orbits, e.g. camera calibration for
   EcostressIgcCollection) is to have multiple objects that should all
@@ -145,16 +147,15 @@ public:
   virtual blitz::Array<bool, 1> parameter_mask() const;
   virtual void parameter_mask(const blitz::Array<bool, 1>& M);
 private:
-  std::vector<boost::shared_ptr<WithParameter> > obj_list;
+  std::vector<boost::shared_ptr<WithParameter>> obj_list;
   blitz::Array<bool, 1> parameter_mask_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
-  
+
 }
 GEOCAL_EXPORT_KEY(WithParameter);
 GEOCAL_EXPORT_KEY(WithParameterNested);
 GEOCAL_EXPORT_KEY(WithParameterShare);
 #endif
-

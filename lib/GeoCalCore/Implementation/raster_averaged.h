@@ -5,7 +5,7 @@
 #include "image_ground_connection.h"
 
 namespace GeoCal {
-/****************************************************************//**
+/****************************************************************/ /**
   This averages a higher resolution RasterImage into a lower
   resolution one.
 
@@ -26,48 +26,49 @@ namespace GeoCal {
 class RasterAveraged : public CalcRaster {
 public:
   RasterAveraged(const boost::shared_ptr<RasterImage>& Data,
-		 int Number_line_per_pixel, 
-		 int Number_sample_per_pixel,
-		 bool Ignore_zero = false);
+                 int Number_line_per_pixel, int Number_sample_per_pixel,
+                 bool Ignore_zero = false);
 
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~RasterAveraged() {}
 
-//-----------------------------------------------------------------------
-/// High resolution image that this object is based on.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// High resolution image that this object is based on.
+  //-----------------------------------------------------------------------
 
-  const RasterImage& high_resolution_image() const {return *raw_data_; }
+  const RasterImage& high_resolution_image() const { return *raw_data_; }
 
-//-----------------------------------------------------------------------
-/// Pointer to high resolution image that this object is based on.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Pointer to high resolution image that this object is based on.
+  //-----------------------------------------------------------------------
 
-  const boost::shared_ptr<RasterImage>& high_resolution_image_ptr() const 
-  {return raw_data_; }
+  const boost::shared_ptr<RasterImage>& high_resolution_image_ptr() const
+  {
+    return raw_data_;
+  }
 
-//-----------------------------------------------------------------------
-/// Number of lines of high resolution data per pixel of this lower
-/// resolution RasterImage.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of lines of high resolution data per pixel of this lower
+  /// resolution RasterImage.
+  //-----------------------------------------------------------------------
 
-  int number_line_per_pixel() const {return number_line_per_pixel_;}
+  int number_line_per_pixel() const { return number_line_per_pixel_; }
 
-//-----------------------------------------------------------------------
-/// Number of samples of high resolution data per pixel of this lower
-/// resolution RasterImage.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of samples of high resolution data per pixel of this lower
+  /// resolution RasterImage.
+  //-----------------------------------------------------------------------
 
-  int number_sample_per_pixel() const {return number_sample_per_pixel_;}
+  int number_sample_per_pixel() const { return number_sample_per_pixel_; }
 
-//-----------------------------------------------------------------------
-/// If true, we ignore zeros when calculating the average.
-//-----------------------------------------------------------------------
-  
-  bool ignore_zero() const {return ignore_zero_;}
+  //-----------------------------------------------------------------------
+  /// If true, we ignore zeros when calculating the average.
+  //-----------------------------------------------------------------------
+
+  bool ignore_zero() const { return ignore_zero_; }
   virtual void print(std::ostream& Os) const;
 protected:
   virtual void calc(int Lstart, int Sstart) const;
@@ -79,10 +80,10 @@ private:
   int number_sample_per_pixel_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   This averages a higher resolution RasterImageMultiBand into a lower
   resolution one.
 
@@ -103,49 +104,54 @@ private:
 class RasterAveragedMultiBand : public CalcRasterMultiBand {
 public:
   RasterAveragedMultiBand(const boost::shared_ptr<RasterImageMultiBand>& Data,
-		 int Number_line_per_pixel, 
-		 int Number_sample_per_pixel,
-		 bool Ignore_zero = false);
+                          int Number_line_per_pixel,
+                          int Number_sample_per_pixel,
+                          bool Ignore_zero = false);
 
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~RasterAveragedMultiBand() {}
 
-//-----------------------------------------------------------------------
-/// High resolution image that this object is based on.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// High resolution image that this object is based on.
+  //-----------------------------------------------------------------------
 
-  const RasterImageMultiBand& high_resolution_image() 
-    const {return *raw_data_; }
+  const RasterImageMultiBand& high_resolution_image() const
+  {
+    return *raw_data_;
+  }
 
-//-----------------------------------------------------------------------
-/// Pointer to high resolution image that this object is based on.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Pointer to high resolution image that this object is based on.
+  //-----------------------------------------------------------------------
 
-  const boost::shared_ptr<RasterImageMultiBand>& high_resolution_image_ptr() 
-    const {return raw_data_; }
+  const boost::shared_ptr<RasterImageMultiBand>&
+  high_resolution_image_ptr() const
+  {
+    return raw_data_;
+  }
 
-//-----------------------------------------------------------------------
-/// Number of lines of high resolution data per pixel of this lower
-/// resolution RasterImage.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of lines of high resolution data per pixel of this lower
+  /// resolution RasterImage.
+  //-----------------------------------------------------------------------
 
-  int number_line_per_pixel() const {return number_line_per_pixel_;}
+  int number_line_per_pixel() const { return number_line_per_pixel_; }
 
-//-----------------------------------------------------------------------
-/// Number of samples of high resolution data per pixel of this lower
-/// resolution RasterImage.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of samples of high resolution data per pixel of this lower
+  /// resolution RasterImage.
+  //-----------------------------------------------------------------------
 
-  int number_sample_per_pixel() const {return number_sample_per_pixel_;}
+  int number_sample_per_pixel() const { return number_sample_per_pixel_; }
 
-//-----------------------------------------------------------------------
-/// If true, we ignore zeros when calculating the average.
-//-----------------------------------------------------------------------
-  
-  bool ignore_zero() const {return ignore_zero_;}
+  //-----------------------------------------------------------------------
+  /// If true, we ignore zeros when calculating the average.
+  //-----------------------------------------------------------------------
+
+  bool ignore_zero() const { return ignore_zero_; }
   virtual void print(std::ostream& Os) const;
 protected:
   virtual void calc(int Lstart, int Sstart) const;
@@ -157,10 +163,10 @@ private:
   int number_sample_per_pixel_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   Take an existing image mask, and averages it like RasterAveraged.
   We mask a point if any of the points that make it up are masked.
   This does the calculation on fly.
@@ -169,48 +175,50 @@ private:
 class ImageMaskAveraged : public ImageMask {
 public:
   ImageMaskAveraged(const boost::shared_ptr<ImageMask>& Data,
-		    int Number_line_per_pixel,
-		    int Number_sample_per_pixel)
+                    int Number_line_per_pixel, int Number_sample_per_pixel)
     : data_(Data), number_line_per_pixel_(Number_line_per_pixel),
-      number_sample_per_pixel_(Number_sample_per_pixel) { }
+      number_sample_per_pixel_(Number_sample_per_pixel)
+  {
+  }
 
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Destructor.
+  //-----------------------------------------------------------------------
 
   virtual ~ImageMaskAveraged() {}
 
-//-----------------------------------------------------------------------
-/// High resolution image mask that this object is based on.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// High resolution image mask that this object is based on.
+  //-----------------------------------------------------------------------
 
-  const ImageMask& high_resolution_image_mask() const {return *data_; }
+  const ImageMask& high_resolution_image_mask() const { return *data_; }
 
-//-----------------------------------------------------------------------
-/// Pointer to high resolution image mask that this object is based on.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Pointer to high resolution image mask that this object is based on.
+  //-----------------------------------------------------------------------
 
-  const boost::shared_ptr<ImageMask>& high_resolution_image_mask_ptr() const 
-  {return data_; }
+  const boost::shared_ptr<ImageMask>& high_resolution_image_mask_ptr() const
+  {
+    return data_;
+  }
 
-//-----------------------------------------------------------------------
-/// Number of lines of high resolution data per pixel of this lower
-/// resolution ImageMatch
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of lines of high resolution data per pixel of this lower
+  /// resolution ImageMatch
+  //-----------------------------------------------------------------------
 
-  int number_line_per_pixel() const {return number_line_per_pixel_;}
+  int number_line_per_pixel() const { return number_line_per_pixel_; }
 
-//-----------------------------------------------------------------------
-/// Number of samples of high resolution data per pixel of this lower
-/// resolution ImageMask
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of samples of high resolution data per pixel of this lower
+  /// resolution ImageMask
+  //-----------------------------------------------------------------------
 
-  int number_sample_per_pixel() const {return number_sample_per_pixel_;}
-
+  int number_sample_per_pixel() const { return number_sample_per_pixel_; }
 
   virtual bool mask(int Line, int Sample) const;
   virtual bool area_any_masked(int Line, int Sample, int Number_line,
-			       int Number_sample) const;
+                               int Number_sample) const;
   virtual void print(std::ostream& Os) const;
 protected:
   ImageMaskAveraged() {}
@@ -220,10 +228,10 @@ private:
   int number_sample_per_pixel_;
   friend class boost::serialization::access;
   template<class Archive>
-  void serialize(Archive & ar, const unsigned int version);
+  void serialize(Archive& ar, const unsigned int version);
 };
 
-/****************************************************************//**
+/****************************************************************/ /**
   This takes an existing ImageGroundConnection and it averages the
   raster image, accounting for this in the ground/image
   calculation. You can either have the image averaged on the fly, or
@@ -232,112 +240,123 @@ private:
 
 class AveragedImageGroundConnection : public virtual ImageGroundConnection {
 public:
-  AveragedImageGroundConnection
-  (const boost::shared_ptr<ImageGroundConnection> Igc,
-   int Number_line_per_pixel, 
-   int Number_sample_per_pixel,
-   bool In_memory = false,
-   bool Ignore_zero = false);
+  AveragedImageGroundConnection(
+      const boost::shared_ptr<ImageGroundConnection> Igc,
+      int Number_line_per_pixel, int Number_sample_per_pixel,
+      bool In_memory = false, bool Ignore_zero = false);
 
   virtual ~AveragedImageGroundConnection() {}
 
-//-----------------------------------------------------------------------
-/// Number of lines of high resolution data per pixel of this lower
-/// resolution RasterImage.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of lines of high resolution data per pixel of this lower
+  /// resolution RasterImage.
+  //-----------------------------------------------------------------------
 
-  int number_line_per_pixel() const {return number_line_per_pixel_;}
+  int number_line_per_pixel() const { return number_line_per_pixel_; }
 
-//-----------------------------------------------------------------------
-/// Number of samples of high resolution data per pixel of this lower
-/// resolution RasterImage.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// Number of samples of high resolution data per pixel of this lower
+  /// resolution RasterImage.
+  //-----------------------------------------------------------------------
 
-  int number_sample_per_pixel() const {return number_sample_per_pixel_;}
+  int number_sample_per_pixel() const { return number_sample_per_pixel_; }
 
-//-----------------------------------------------------------------------
-/// If true, we ignore zeros when calculating the average.
-//-----------------------------------------------------------------------
-  
-  bool ignore_zero() const {return ignore_zero_;}
+  //-----------------------------------------------------------------------
+  /// If true, we ignore zeros when calculating the average.
+  //-----------------------------------------------------------------------
 
-//-----------------------------------------------------------------------
-/// If true, calculation done once and is in memory.
-//-----------------------------------------------------------------------
-  
-  bool in_memory() const {return in_memory_;}
+  bool ignore_zero() const { return ignore_zero_; }
 
-//-----------------------------------------------------------------------
-/// Underlying ImageGroundConnection.
-//-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
+  /// If true, calculation done once and is in memory.
+  //-----------------------------------------------------------------------
 
-  boost::shared_ptr<ImageGroundConnection> original_image_ground_connection()
-    const {return ig_;}
+  bool in_memory() const { return in_memory_; }
+
+  //-----------------------------------------------------------------------
+  /// Underlying ImageGroundConnection.
+  //-----------------------------------------------------------------------
+
+  boost::shared_ptr<ImageGroundConnection>
+  original_image_ground_connection() const
+  {
+    return ig_;
+  }
   virtual void print(std::ostream& Os) const;
 
-  virtual blitz::Array<double, 1> parameter() const 
-  { return ig_->parameter(); }
+  virtual blitz::Array<double, 1> parameter() const { return ig_->parameter(); }
   virtual void parameter(const blitz::Array<double, 1>& Parm)
-  { ig_->parameter(Parm); }
+  {
+    ig_->parameter(Parm);
+  }
   virtual ArrayAd<double, 1> parameter_with_derivative() const
-  { return ig_->parameter_with_derivative(); }
+  {
+    return ig_->parameter_with_derivative();
+  }
   virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
-  { return ig_->parameter_with_derivative(Parm); }
+  {
+    return ig_->parameter_with_derivative(Parm);
+  }
   virtual std::vector<std::string> parameter_name() const
-  { return ig_->parameter_name(); }
+  {
+    return ig_->parameter_name();
+  }
   virtual blitz::Array<bool, 1> parameter_mask() const
-  { return ig_->parameter_mask(); }
+  {
+    return ig_->parameter_mask();
+  }
 
-  virtual void
-  cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& Lv,
-		 boost::shared_ptr<CartesianFixed>& P) const
+  virtual void cf_look_vector(const ImageCoordinate& Ic,
+                              CartesianFixedLookVector& Lv,
+                              boost::shared_ptr<CartesianFixed>& P) const
   {
     ImageCoordinate ic2((Ic.line + 0.5) * number_line_per_pixel_ - 0.5,
-			(Ic.sample + 0.5) * number_sample_per_pixel_ - 0.5);
-    return ig_->cf_look_vector(ic2, Lv, P); 
+                        (Ic.sample + 0.5) * number_sample_per_pixel_ - 0.5);
+    return ig_->cf_look_vector(ic2, Lv, P);
   }
-  virtual boost::shared_ptr<GroundCoordinate> 
+  virtual boost::shared_ptr<GroundCoordinate>
   ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const
-  { 
+  {
     ImageCoordinate ic2((Ic.line + 0.5) * number_line_per_pixel_ - 0.5,
-			(Ic.sample + 0.5) * number_sample_per_pixel_ - 0.5);
-    return ig_->ground_coordinate_dem(ic2, D); 
+                        (Ic.sample + 0.5) * number_sample_per_pixel_ - 0.5);
+    return ig_->ground_coordinate_dem(ic2, D);
   }
-  virtual boost::shared_ptr<GroundCoordinate> 
+  virtual boost::shared_ptr<GroundCoordinate>
   ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
-  { 
+  {
     ImageCoordinate ic2((Ic.line + 0.5) * number_line_per_pixel_ - 0.5,
-			(Ic.sample + 0.5) * number_sample_per_pixel_ - 0.5);
-    return ig_->ground_coordinate_approx_height(ic2, H); 
+                        (Ic.sample + 0.5) * number_sample_per_pixel_ - 0.5);
+    return ig_->ground_coordinate_approx_height(ic2, H);
   }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) const
   {
     ImageCoordinate ic = ig_->image_coordinate(Gc);
-    ic.line = (ic.line + 0.5)  /  number_line_per_pixel_ - 0.5;
+    ic.line = (ic.line + 0.5) / number_line_per_pixel_ - 0.5;
     ic.sample = (ic.sample + 0.5) / number_sample_per_pixel_ - 0.5;
     return ic;
   }
   virtual void image_coordinate_with_status(const GroundCoordinate& Gc,
-					    ImageCoordinate& Res,
-					    bool& Success) const
+                                            ImageCoordinate& Res,
+                                            bool& Success) const
   {
     ig_->image_coordinate_with_status(Gc, Res, Success);
     if(Success) {
-      Res.line = (Res.line + 0.5)  /  number_line_per_pixel_ - 0.5;
+      Res.line = (Res.line + 0.5) / number_line_per_pixel_ - 0.5;
       Res.sample = (Res.sample + 0.5) / number_sample_per_pixel_ - 0.5;
     }
   }
-  virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) const
-  { 
-    blitz::Array<double, 2> res = ig_->image_coordinate_jac_cf(Gc); 
+  virtual blitz::Array<double, 2>
+  image_coordinate_jac_cf(const CartesianFixed& Gc) const
+  {
+    blitz::Array<double, 2> res = ig_->image_coordinate_jac_cf(Gc);
     res(0) /= number_line_per_pixel_;
     res(1) /= number_sample_per_pixel_;
     return res;
   }
-  virtual blitz::Array<double, 2> 
+  virtual blitz::Array<double, 2>
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const
-  { 
-    blitz::Array<double, 2> res = ig_->image_coordinate_jac_parm(Gc); 
+  {
+    blitz::Array<double, 2> res = ig_->image_coordinate_jac_parm(Gc);
     res(0) /= number_line_per_pixel_;
     res(1) /= number_sample_per_pixel_;
     return res;
@@ -354,8 +373,7 @@ private:
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;
-  template<class Archive>
-  void load(Archive& Ar, const unsigned int version);
+  template<class Archive> void load(Archive& Ar, const unsigned int version);
   GEOCAL_SPLIT_MEMBER();
 };
 }
@@ -365,4 +383,3 @@ GEOCAL_EXPORT_KEY(RasterAveragedMultiBand);
 GEOCAL_EXPORT_KEY(ImageMaskAveraged);
 GEOCAL_EXPORT_KEY(AveragedImageGroundConnection);
 #endif
-

@@ -6,37 +6,34 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void TrexDemData::serialize(Archive & ar, const unsigned int version)
+void TrexDemData::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(VicarCartLabMultifile);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(VicarCartLabMultifile);
 }
 
 template<class Archive>
-void GdalTrexDemData::serialize(Archive & ar, const unsigned int version)
+void GdalTrexDemData::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GdalCartLabMultifile);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(GdalCartLabMultifile);
 }
 
 template<class Archive>
-void TrexLwmData::serialize(Archive & ar, const unsigned int version)
+void TrexLwmData::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(VicarCartLabMultifile);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(VicarCartLabMultifile);
 }
 
 template<class Archive>
-void TrexDem::serialize(Archive & ar, const unsigned int version)
+void TrexDem::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo)
-    & GEOCAL_NVP(f);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo) & GEOCAL_NVP(f);
 }
 
 template<class Archive>
-void GdalTrexDem::serialize(Archive & ar, const unsigned int version)
+void GdalTrexDem::serialize(Archive& ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo)
-    & GEOCAL_NVP(f);
+  ar& BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo) & GEOCAL_NVP(f);
 }
-
 
 GEOCAL_IMPLEMENT(TrexDemData);
 GEOCAL_IMPLEMENT(TrexLwmData);
@@ -63,22 +60,14 @@ GEOCAL_IMPLEMENT(GdalTrexDem);
 /// read the entire file.
 //-----------------------------------------------------------------------
 
-TrexDemData::TrexDemData
-(const std::string& Dir,
- bool No_coverage_is_error,
- int Number_line_per_tile,
- int Number_sample_per_tile, 
- int Number_tile_each_file, 
- int Number_file,
- bool Favor_memory_mapped
- )
-: VicarCartLabMultifile(Dir, "TREX_DATA", Number_line_per_tile,
-		       Number_sample_per_tile,
-		       Number_tile_each_file,
-		       Number_file,
-		       Favor_memory_mapped,
-		       No_coverage_is_error,
-		       0)
+TrexDemData::TrexDemData(const std::string& Dir, bool No_coverage_is_error,
+                         int Number_line_per_tile, int Number_sample_per_tile,
+                         int Number_tile_each_file, int Number_file,
+                         bool Favor_memory_mapped)
+  : VicarCartLabMultifile(Dir, "TREX_DATA", Number_line_per_tile,
+                          Number_sample_per_tile, Number_tile_each_file,
+                          Number_file, Favor_memory_mapped,
+                          No_coverage_is_error, 0)
 {
   file_name_end = "_L3.hlf";
   // We read n0e100_L3.hlf. Note that for some odd reason, n0e100 is
@@ -87,11 +76,10 @@ TrexDemData::TrexDemData
   // we need to make sure to get the mapinfo right.
   lat_ref = 0, lon_ref = 100;
   int num_per_deg = 9000;
-  mi_ref = MapInfo(boost::shared_ptr<CoordinateConverter> 
- 		 (new GeodeticConverter()),
-		   lon_ref, lat_ref + 1, lon_ref + 1, lat_ref, num_per_deg, 
-		   num_per_deg);
-  mi_ref = mi_ref.subset(-0.5,-0.5,9001,9001);
+  mi_ref = MapInfo(
+      boost::shared_ptr<CoordinateConverter>(new GeodeticConverter()), lon_ref,
+      lat_ref + 1, lon_ref + 1, lat_ref, num_per_deg, num_per_deg);
+  mi_ref = mi_ref.subset(-0.5, -0.5, 9001, 9001);
   init_loc_to_file();
 }
 
@@ -113,20 +101,14 @@ TrexDemData::TrexDemData
 /// read the entire file.
 //-----------------------------------------------------------------------
 
-GdalTrexDemData::GdalTrexDemData
-(const std::string& Dir,
- bool No_coverage_is_error,
- int Number_line_per_tile,
- int Number_sample_per_tile, 
- int Number_tile_each_file, 
- int Number_file
- )
-: GdalCartLabMultifile(Dir, "TREX_DATA", Number_line_per_tile,
-		       Number_sample_per_tile,
-		       Number_tile_each_file,
-		       Number_file,
-		       No_coverage_is_error,
-		       0)
+GdalTrexDemData::GdalTrexDemData(const std::string& Dir,
+                                 bool No_coverage_is_error,
+                                 int Number_line_per_tile,
+                                 int Number_sample_per_tile,
+                                 int Number_tile_each_file, int Number_file)
+  : GdalCartLabMultifile(Dir, "TREX_DATA", Number_line_per_tile,
+                         Number_sample_per_tile, Number_tile_each_file,
+                         Number_file, No_coverage_is_error, 0)
 {
   file_name_end = "_L3.tif";
   // We read n0e100_L3.tif. Note that for some odd reason, n0e100 is
@@ -135,11 +117,10 @@ GdalTrexDemData::GdalTrexDemData
   // we need to make sure to get the mapinfo right.
   lat_ref = 0, lon_ref = 100;
   int num_per_deg = 9000;
-  mi_ref = MapInfo(boost::shared_ptr<CoordinateConverter> 
- 		 (new GeodeticConverter()),
-		   lon_ref, lat_ref + 1, lon_ref + 1, lat_ref, num_per_deg, 
-		   num_per_deg);
-  mi_ref = mi_ref.subset(-0.5,-0.5,9001,9001);
+  mi_ref = MapInfo(
+      boost::shared_ptr<CoordinateConverter>(new GeodeticConverter()), lon_ref,
+      lat_ref + 1, lon_ref + 1, lat_ref, num_per_deg, num_per_deg);
+  mi_ref = mi_ref.subset(-0.5, -0.5, 9001, 9001);
   file_spacing_number_line = 9000;
   file_spacing_number_sample = 9000;
   init_loc_to_file();
@@ -163,22 +144,14 @@ GdalTrexDemData::GdalTrexDemData
 /// read the entire file.
 //-----------------------------------------------------------------------
 
-TrexLwmData::TrexLwmData
-(const std::string& Dir,
- bool No_coverage_is_error,
- int Number_line_per_tile,
- int Number_sample_per_tile, 
- int Number_tile_each_file, 
- int Number_file,
- bool Favor_memory_mapped
- )
-: VicarCartLabMultifile(Dir, "TREX_LWM_DATA", Number_line_per_tile,
-		       Number_sample_per_tile,
-		       Number_tile_each_file,
-		       Number_file,
-		       Favor_memory_mapped,
-		       No_coverage_is_error,
-		       0)
+TrexLwmData::TrexLwmData(const std::string& Dir, bool No_coverage_is_error,
+                         int Number_line_per_tile, int Number_sample_per_tile,
+                         int Number_tile_each_file, int Number_file,
+                         bool Favor_memory_mapped)
+  : VicarCartLabMultifile(Dir, "TREX_LWM_DATA", Number_line_per_tile,
+                          Number_sample_per_tile, Number_tile_each_file,
+                          Number_file, Favor_memory_mapped,
+                          No_coverage_is_error, 0)
 {
   file_name_end = "_lwm_L3.img";
   // We read n0e100_L3.hlf. Note that for some odd reason, n0e100 is
@@ -187,41 +160,37 @@ TrexLwmData::TrexLwmData
   // we need to make sure to get the mapinfo right.
   lat_ref = 0, lon_ref = 100;
   int num_per_deg = 9000;
-  mi_ref = MapInfo(boost::shared_ptr<CoordinateConverter> 
- 		 (new GeodeticConverter()),
-		   lon_ref, lat_ref + 1, lon_ref + 1, lat_ref, num_per_deg, 
-		   num_per_deg);
-  mi_ref = mi_ref.subset(-0.5,-0.5,9001,9001);
+  mi_ref = MapInfo(
+      boost::shared_ptr<CoordinateConverter>(new GeodeticConverter()), lon_ref,
+      lat_ref + 1, lon_ref + 1, lat_ref, num_per_deg, num_per_deg);
+  mi_ref = mi_ref.subset(-0.5, -0.5, 9001, 9001);
   file_spacing_number_line = 9000;
   file_spacing_number_sample = 9000;
   init_loc_to_file();
 }
 
 //-----------------------------------------------------------------------
-/// Constructor. You can provide the directory where there data can be 
+/// Constructor. You can provide the directory where there data can be
 /// found. If you leave this as a blank string, we use the
 /// environment variable TREX_DATA.
 //-----------------------------------------------------------------------
 
-TrexDem::TrexDem(const std::string& Dirbase,
-		 bool Outside_dem_is_error,
-		 const boost::shared_ptr<Datum>& D)
+TrexDem::TrexDem(const std::string& Dirbase, bool Outside_dem_is_error,
+                 const boost::shared_ptr<Datum>& D)
 {
   f.reset(new TrexDemData(Dirbase, Outside_dem_is_error));
   initialize(D, f->map_info(), Outside_dem_is_error);
 }
 
 //-----------------------------------------------------------------------
-/// Constructor. You can provide the directory where there data can be 
+/// Constructor. You can provide the directory where there data can be
 /// found. If you leave this as a blank string, we use the
 /// environment variable TREX_DATA.
 //-----------------------------------------------------------------------
 
-GdalTrexDem::GdalTrexDem(const std::string& Dirbase,
-		 bool Outside_dem_is_error,
-		 const boost::shared_ptr<Datum>& D)
+GdalTrexDem::GdalTrexDem(const std::string& Dirbase, bool Outside_dem_is_error,
+                         const boost::shared_ptr<Datum>& D)
 {
   f.reset(new GdalTrexDemData(Dirbase, Outside_dem_is_error));
   initialize(D, f->map_info(), Outside_dem_is_error);
 }
-

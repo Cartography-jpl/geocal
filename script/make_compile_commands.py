@@ -12,8 +12,9 @@ swig-rules-skeleton and geocal.
 
 --clangd adds the flags the conda clang needs to parse code built with the
 conda gcc (the same ones script/run_clang_tidy.sh passes): the conda gcc
-install and sysroot, the gcc builtin headers, and a shim for blitz's
-missing llvm config (written to clangd_shim/ in the build directory). Use
+install and sysroot, and a shim for blitz's missing llvm config (written to
+clangd_shim/ in the build directory). clang's builtin headers come from the
+"clang-22" conda package. Use
 this for clangd (an editor or the Claude Code clangd plugin), and link the
 file into the source tree so clangd finds it:
 
@@ -28,6 +29,10 @@ import shlex
 import subprocess
 import glob
 import sys
+
+# gcc-only options that clang rejects with "unknown argument" (conda's debug
+# flags have -fvar-tracking-assignments). Add more here if they show up.
+GCC_ONLY = re.compile(r"^-f(no-)?var-tracking.*$")
 
 args_in = sys.argv[1:]
 clangd = "--clangd" in args_in
@@ -47,8 +52,6 @@ if clangd:
     extra = [
         f"--gcc-install-dir={gccdir}",
         f"--sysroot={prefix}/x86_64-conda-linux-gnu/sysroot",
-        f"-isystem{gccdir}/include",
-        f"-isystem{gccdir}/include-fixed",
         f"-isystem{shim}",
     ]
 out = subprocess.run(
@@ -87,6 +90,9 @@ for line in out.splitlines():
         elif a in ("-MT", "-MF", "-o"):
             skip = 1
         elif a in ("-MD", "-MP"):
+            pass
+        elif GCC_ONLY.match(a):
+            # gcc options clang doesn't know; clang refuses the whole file.
             pass
         else:
             keep.append(a)

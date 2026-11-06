@@ -644,7 +644,8 @@ unchanged, apart from the C++20 requirement; Phases 5–6 are the API break.
    * define `-DSWIG_HAVE_BOOST_SERIALIZATION` only when serialization is on;
    * don't require `libboost_serialization` in `ac_boost.m4`.
 7. Optional: automake parallel tests (`parallel_test_execution_plan.md`).
-8. Add `.git-blame-ignore-revs` for the mass-edit commits.
+8. ~~Add `.git-blame-ignore-revs` for the mass-edit commits.~~ Not done
+   (maintainer, 2026-11-05: the 2.0 branch changes a lot anyway).
 
 ### Phase 1: C++20 switch, cleanup and hygiene
 1. **Require C++20** (§7.4). The change is a single line, but `config/m4`
@@ -672,8 +673,11 @@ unchanged, apart from the C++20 requirement; Phases 5–6 are the API break.
    (the same file as swig-rules-skeleton's), `.clang-format-ignore`,
    `make format` / `make format-check`, and `make lint` (clang-tidy with
    `.clang-tidy`). The one-time reformat of `lib/` was done 2026-11-05; commit
-   it on its own (and the one regenerated wrapper) and add it to
-   `.git-blame-ignore-revs`. New and changed C++ is formatted with
+   it on its own (and the one regenerated wrapper); no
+   `.git-blame-ignore-revs` (maintainer, 2026-11-05). `make lint` currently
+   reports 2,016 findings in 273 files (the §8 clang-tidy cleanup still to do;
+   counts in the skeleton plan). New and changed C++ is
+   formatted with
    `make format`.
 
 ### Phase 2: Small library swaps that are not in the API
@@ -1162,8 +1166,9 @@ Measured on `lib/` (652 files, 106k lines, generated wrappers and
   218 passed, 118 skipped. The maintainer's reasoning: like `ruff format`,
   there are things one would do differently, but a standard tool plus all
   code conforming to it counts for a lot.
-* Each check is its own commit, and so is each wrapper regeneration. Add the
-  commits to `.git-blame-ignore-revs`.
+* Each check is its own commit, and so is each wrapper regeneration. (No
+  `.git-blame-ignore-revs`: maintainer, 2026-11-05, the branch changes a lot
+  anyway.)
 
 ---
 

@@ -190,6 +190,17 @@ To create a new project that extends GeoCal (e.g., adding instrument-specific ca
 
 Check `hostname` to see which machine you are on. Most work happens on JPL machines; the notes above assume those.
 
+Paths differ between `rifle` (JPL) and `frenchpeas` (home). Check `hostname`, or just check which path exists, since
+only one is valid on each machine. Paths in `claude_documents/` were mostly written on rifle; on frenchpeas, use the
+matching path from this table.
+
+| | rifle | frenchpeas |
+|---|---|---|
+| geocal source | `/ssdata/smyth/geocal-repo` (also `/home/smyth/Local/geocal-repo`) | `/data2/smythdata/geocal-repo` |
+| geocal build + pixi env | `/ldata/smyth/geocal-build/build-pixi` | `/data2/smythdata/geocal-build/build-pixi` |
+| swig-rules-skeleton (modernization rehearsal) | `/home/smyth/Local/swig-rules-skeleton` | `/data2/smythdata/swig-rules-skeleton` |
+| framework | `/home/smyth/Local/framework` | `/data2/smythdata/framework` |
+
 ### frenchpeas (Mike's home machine)
 
 - Gentoo Linux, AMD Ryzen 5 3600X: 12 threads, so use `-j 12` rather than `-j 20`.

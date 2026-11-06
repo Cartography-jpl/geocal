@@ -3,7 +3,8 @@
 **Date:** 2026-10-22 (revised the same day after maintainer feedback)
 **Status:** Planning only. Nothing has been implemented in geocal.
 **Where the work starts (2026-10-23):** every step is first rehearsed in the small `swig-rules-skeleton` repository
-(`/home/smyth/Local/swig-rules-skeleton`, branch `modernize`), following
+(`/home/smyth/Local/swig-rules-skeleton` on rifle, `/data2/smythdata/swig-rules-skeleton` on frenchpeas; branch
+`modernize`), following
 `claude_notes/implementation_plan.md` there (its §0 has the status and next step). geocal work begins once the skeleton
 has worked out the problems.
 **Scope:** The C++ library (`lib/`), its build system, and the third-party C++
@@ -544,8 +545,8 @@ the 2.0 API break. Two points connect it to the rest of this plan:
 * **nanobind probe results that affect geocal (2026-10-23).** Throwaway
   modules mimicking geocal's class patterns, nanobind 3.1.0. Full results and
   the test plan are in the skeleton plan
-  (`/home/smyth/Local/swig-rules-skeleton/claude_notes/implementation_plan.md`
-  §2.1), which works all of this out on the small repository first.
+  (`<skeleton>/claude_notes/implementation_plan.md` §2.1; the skeleton path for
+  each machine is in `CLAUDE.md` "Machine-Specific Notes"), which works all of this out on the small repository first.
   * *Autotools build works:* plain `g++` with nanobind's `src/nb_combined.cpp`,
     no CMake, no `libpython` link.
   * *Virtual inheritance stays.* geocal has real diamonds
@@ -667,9 +668,11 @@ unchanged, apart from the C++20 requirement; Phases 5–6 are the API break.
    * a format-string `Exception` constructor (§7.1 item 1);
    * a generic `std::formatter` for `Printable<T>`;
    * `static_cast` instead of the C-style casts in `Printable`.
-7. **clang-format** decision and one-time reformat, if adopted (§8.5), after
-   the clang-tidy passes and before the `std::shared_ptr` mass edit (skeleton
-   S1.6 trials the config first).
+7. **Formatting cleanup by AI, no clang-format** (decided 2026-11-05, §8.5):
+   one commit that makes the formatting consistent (majority form of each
+   construct), after the clang-tidy passes and before the `std::shared_ptr`
+   mass edit, and the regenerated wrappers in a second commit. How: skeleton
+   plan §5a and its `claude_notes/style_cleanup.py`.
 
 ### Phase 2: Small library swaps that are not in the API
 1. **libsdbx → Boost.Geometry R-tree** (§3.6).
@@ -1091,8 +1094,8 @@ Unnamed parameters in virtual overrides are normal.
 * No signature-changing checks (`modernize-pass-by-value`,
   `use-trailing-return-type`, `use-nodiscard`). They change what SWIG and
   downstream code see, causing churn for little gain.
-* No codebase-wide reformat unless the maintainers choose to do it (§5
-  Phase 1 / `.clang-format`).
+* No codebase-wide reformat by a tool. The formatting cleanup is done by AI
+  (§5 Phase 1 item 7, §8.5).
 
 ### 8.5 clang-format: measured impact (2026-10-23, clang-format 21.1.8)
 
@@ -1137,10 +1140,28 @@ Measured on `lib/` (652 files, 106k lines, generated wrappers and
   * (b) format only changed lines (`git clang-format`), so the style converges
     slowly and the code is mixed for a long time;
   * (c) whitespace cleanup only.
-* **Recommendation:** (a), timed with the 2.0 break: after the clang-tidy
-  passes, before the `std::shared_ptr` mass edit. Try the config on the
-  skeleton first (S1) and review a few geocal files formatted with it
+* **Recommendation (superseded):** (a), timed with the 2.0 break: after the
+  clang-tidy passes, before the `std::shared_ptr` mass edit. Try the config on
+  the skeleton first (S1) and review a few geocal files formatted with it
   before deciding. `.i` files are not formatted by clang-format.
+* **Decided (maintainer, 2026-11-05): no clang-format**, in geocal, framework
+  or the skeleton. The skeleton trial (S1.6) confirmed the problems above and
+  found another: the config's `Standard: c++03` misparses C++20 (`requires`,
+  `consteval`), so it would need `c++20`, which also rewrites every `> >`.
+  The diff wasn't judged worth it. Instead an AI session makes the formatting
+  consistent once, when geocal is modernized, and keeps to it afterwards:
+  * majority rule per construct (measure the counts first; no new style
+    decisions), done as a reviewable script adapted from the skeleton's
+    `claude_notes/style_cleanup.py`;
+  * tabs → spaces with 8-column stops (keeps the alignment), trailing
+    whitespace removed;
+  * not touched: `thirdparty/`, vendored and upstream-copied code,
+    generated wrappers (regenerate them), the `ar & X & Y` serialization
+    chains, function-signature layout and `{ body }` placement;
+  * decide `Archive & ar` (geocal's majority, 583 : 33) vs the skeleton's
+    `Archive& ar`;
+  * review with `git diff -b` / `-w`, then the full build and tests.
+  Full notes: skeleton plan §5a.
 * Each check is its own commit, and so is each wrapper regeneration. Add the
   commits to `.git-blame-ignore-revs`.
 
@@ -1208,7 +1229,8 @@ Measured on `lib/` (652 files, 106k lines, generated wrappers and
    producer of persisted archives, and they are embedded in HDF5 files.
    Revisit when the serialization work starts (before Phases 4–5).
 2. **When to cut `maintain_1.28`.**
-3. **clang-format** adoption (§8.5), after the skeleton trial (S1.6).
+3. ~~**clang-format** adoption (§8.5)~~ Decided 2026-11-05: no
+   clang-format; formatting cleanup by AI instead (§8.5, skeleton plan §5a).
 4. **Final Python module name** after nanobind (skeleton: keep the current
    name for now).
 5. **`make check` tests the installed library** in conda/pixi builds

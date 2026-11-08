@@ -154,7 +154,7 @@ The division between Support/Interface/Implementation is somewhat loose - it's m
 ### C++
 
 - Formatted with clang-format: `.clang-format` at the top of the source tree (the same file as
-  swig-rules-skeleton's; clang-format 22, pinned in the pixi env). `make format` formats `lib/`,
+  cxx-python-skeleton's, formerly swig-rules-skeleton; clang-format 22, pinned in the pixi env). `make format` formats `lib/`,
   `make format-check` checks it, `make lint` runs clang-tidy with the checks in `.clang-tidy`.
   Format what you change. `.clang-format-ignore` excludes the generated wrappers (`bindings/`) and
   vendored code (`thirdparty/`, `boost_fix/`, `lib/GeoCalCore/Support/boost/`). `.i` files aren't
@@ -198,14 +198,18 @@ Check `hostname` to see which machine you are on. Most work happens on JPL machi
 
 Paths differ between `rifle` (JPL) and `frenchpeas` (home). Check `hostname`, or just check which path exists, since
 only one is valid on each machine. Paths in `claude_documents/` were mostly written on rifle; on frenchpeas, use the
-matching path from this table.
+matching path from this table. The skeleton repository was renamed on 2026-11-06 (`swig-rules-skeleton` →
+`cxx-python-skeleton`, `swig_rules/` → `cxx_python_rules/`); older notes, here and in its `claude_notes/`, use the old names.
 
 | | rifle | frenchpeas |
 |---|---|---|
 | geocal source | `/ssdata/smyth/geocal-repo` (also `/home/smyth/Local/geocal-repo`) | `/data2/smythdata/geocal-repo` |
 | geocal build + pixi env | `/ldata/smyth/geocal-build/build-pixi` | `/data2/smythdata/geocal-build/build-pixi` |
-| swig-rules-skeleton (modernization rehearsal) | `/home/smyth/Local/swig-rules-skeleton` | `/data2/smythdata/swig-rules-skeleton` |
+| cxx-python-skeleton (modernization rehearsal; was swig-rules-skeleton) | `/home/smyth/Local/cxx-python-skeleton` | `/data2/smythdata/cxx-python-skeleton` |
+| cxx-python-skeleton scratch build | `/home/smyth/Local/cxx-python-skeleton-build/build-pixi` | `/data2/smythdata/cxx-python-skeleton-build/build` |
 | framework | `/home/smyth/Local/framework` | `/data2/smythdata/framework` |
+| maia-misc-tools | `/home/smyth/Local/maia-misc-tools` | not on frenchpeas |
+| ecostress-level1 | | `/data2/smythdata/ecostress-level1` is a very old copy; don't use it |
 
 ### frenchpeas (Mike's home machine)
 

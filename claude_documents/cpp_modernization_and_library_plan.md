@@ -1,12 +1,19 @@
 # GeoCal C++ Modernization and Third-Party Library Plan
 
-**Date:** 2026-10-22 (revised the same day after maintainer feedback)
-**Status:** Planning only. Nothing has been implemented in geocal.
-**Where the work starts (2026-10-23):** every step is first rehearsed in the small `swig-rules-skeleton` repository
-(`/home/smyth/Local/swig-rules-skeleton` on rifle, `/data2/smythdata/swig-rules-skeleton` on frenchpeas; branch
+**Date:** 2026-10-22 (revised the same day after maintainer feedback; updated 2026-11-07 from the finished skeleton
+rehearsal, §0, then from an independent review of this plan, §0.5)
+**Status:** Planning. Done in geocal so far: clang-format and `make format`/`format-check`/`lint` (Phase 1 item 7),
+and the `dir_change.h` fix (§8.2). No other step of §5 has started.
+**Where the work starts (2026-10-23):** every step is first rehearsed in the small `swig-rules-skeleton` repository, renamed
+`cxx-python-skeleton` on 2026-11-06 (`/home/smyth/Local/cxx-python-skeleton` on rifle,
+`/data2/smythdata/cxx-python-skeleton` on frenchpeas; branch
 `modernize`), following
 `claude_notes/implementation_plan.md` there (its §0 has the status and next step). geocal work begins once the skeleton
 has worked out the problems.
+**The skeleton has finished its phases (2026-11-07):** S0–S7, then three code review passes, each with a fix plan
+(the third fix plan is written and decided but set aside). §0 says what that found and what it changes here; §0.4
+maps every item of the skeleton's "Notes for geocal" table to a step of this plan. **Next (decided 2026-11-07):** the
+skeleton's third fix plan, at least T0–T2, then geocal's Phase 0.
 **Scope:** The C++ library (`lib/`), its build system, and the third-party C++
 libraries it depends on. Python-only code is covered only where the C++ work
 affects it (the SWIG bindings, pickling).
@@ -17,13 +24,155 @@ documents get some facts wrong, so every number below was measured from the
 current tree (`git ls-files`, generated `*_wrap.cc` excluded) and from the
 reference pixi environment at `../geocal-build/build-pixi`.
 
+## 0. What the skeleton rehearsal found (added 2026-11-07)
+
+Sources, all in the skeleton's `claude_notes/`: `implementation_plan.md` (§0 status, "Notes for geocal" table,
+progress log, §13 decisions), `code_review_2026-11-06.md` with `code_review_fix_plan.md` (steps R0–R9),
+`code_review_2026-11-07.md` with `code_review_2026-11-07_fix_plan.md` (F0–F10), and
+`code_review_2026-11-07_third.md` with `code_review_2026-11-07_third_fix_plan.md` (T0–T9). "Skeleton decision N"
+below means item N of that plan's §13, or D1–D18 of the fix plans.
+
+### 0.1 Where the skeleton is
+
+* Phases S0–S7 are done. The skeleton is C++23 with gcc 14 as the minimum (skeleton decision 22), uses
+  `std::shared_ptr`, `std::optional` and `std::array`, has nanobind bindings (SWIG was removed in S6.6), and uses
+  `mdspan` for raw pointer plus size interfaces (S7).
+* Everything named after SWIG was renamed on 2026-11-06 (skeleton decision 23): `swig_rules/` →
+  `cxx_python_rules/`, `SWIG_MAPPER_NAMESPACE` → `CXX_PYTHON_RULES_NAMESPACE`, `skeleton_swig` →
+  `skeleton_cxx._bindings`. Its notes from before the rename use the old names.
+* The order that worked: S0 → ST (test hardening) → S1 → S2 → S3 → **S5 (samples of geocal's class patterns)
+  before S4** → S4 (`std::shared_ptr`) → S6 (nanobind) → S7. S5 had to come before S4 because S4 breaks the python
+  bindings until S6, and the samples' SWIG results were the S6 target. The bindings were broken for one day.
+* After S7, three fresh code reviews, each followed by a fix plan. The first two fix plans are done (except CI,
+  deferred to the JPL runner). The third is written and decided but **set aside, not started**.
+
+### 0.2 What each review pass found that the phases had missed
+
+All findings were confirmed with small test programs before being called bugs.
+
+| Pass | Found | Fixed in the skeleton? | geocal today (checked 2026-11-07) |
+|---|---|---|---|
+| **1** (2026-11-06, after S7) | **Bugs in code that came from geocal and framework:** Blitz serialization scrambles column-major arrays, reads reversed arrays out of bounds, and scrambles a load into a column-major target, with no error in any case; copying an `Observer` copies its self pointer, so registering the copy registers the original; loading an archive `chdir`s the whole process, which is unsafe with threads. **Bugs from the conversion:** `None` for a `shared_ptr` argument crashes python; C++ writes into read-only numpy arrays; the rules library hard-coded `Skeleton::`. **Old idioms:** implicit converting constructors, `typedef`, `const_cast` where `mutable` belongs, `std::map` as a public base, `range_check` macros, two exception types for the same errors, autoconf macros leaking from installed headers, 13 uninitialized members (the review named 4). **Bindings** that still looked generated. | Yes (R1–R9). Bindings rewritten by hand (2,704 → 1,561 lines) and the converter changed to write that style; strict warning flags; `.clang-tidy` grew from 7 checks to 17 plus `bugprone-*`. | The Blitz serialization and Observer copy bugs and the `chdir` are in geocal's code now (same code). The Blitz ones are latent: geocal serializes no column-major, reversed or nonzero-base array (plan review). **`None` for a `shared_ptr` argument crashes geocal's SWIG bindings too** (`ScaleImage(None, 2.0)` segfaults, confirmed 2026-11-07). The rest is code geocal gets in Phases 1 and 6. |
+| **2** (2026-11-07) | **Rules-library bugs:** nested serialization (pickling a python subclass object that holds a C++ object) loses every `weak_ptr` written after it; `serialize_shared_ptr.h` has no include guard; XML archives that hold a python subclass aren't text, so the python string functions failed; the type registry key was shared by all projects. **Tooling gaps:** no sanitizer option, and the hand-configured ASan build **turned out not to be compiled with ASan at all** (configure replaced the `CXXFLAGS` given by hand); no UBSan, no `_GLIBCXX_ASSERTIONS`, no clang build, no CI. Thread safety not written down. Comments full of phase and review history. `configure` accepted Boost 1.46. | Yes (F1–F10), except CI (deferred). Found on the way: pytest's temporary directory was in the source tree, shared by every build directory, so two builds testing at once broke each other. | The `weak_ptr` and include-guard bugs are in geocal's `swig_rules/lib` now (the same commented-out code and unused `ptr_serialize_depth`; no guard). No geocal class serializes a `weak_ptr`, so the first affects downstream code, not geocal's own classes. `configure.ac` still asks for Boost 1.46. |
+| **3** (2026-11-07) | **Bugs at the boundaries, where the tests only ran the happy path:** a python file object whose `write`/`read` raises is silently ignored by the C++ stream adapters; **an archive write to a full disk reports success for small archives, and hangs forever for `.gz`**; python 3.12 passes `configure` but the code needs 3.13; the `.sample` files geocal copies had drifted from the live files; `from skeleton import *` missed the C++ classes. | Not yet: T0–T9 written, decisions D14–D18 made, set aside. | **The archive write bug is in geocal now, confirmed 2026-11-07** with the installed geocal on frenchpeas: `serialize_write` of an `ImageCoordinate` to `/dev/full`, plain or `.gz`, returns with no error; a 20,000-entry `GenericObjectMap` gives `RuntimeError: output stream error` as a plain file and **hangs** (killed after 25 s) as `.gz`. **Also confirmed** (plan review): writing to a nonexistent directory (`/nonexistent_dir_xyz/a.xml`, also `.xml.gz` and `.bin`) returns with no error; geocal's `OstreamCompress` never checks that the file opened (the skeleton fixed that earlier, in R3.3). Both geocal envs (linux, osx) are on python 3.13.7. geocal has no `__all__`. |
+
+### 0.3 What the passes show, and what it means here
+
+1. **Converting code doesn't find its bugs.** The phases changed types and tools across the whole code and kept all
+   tests passing, but the serious bugs found afterwards were old ones the conversion carried along unexamined. geocal
+   has the same code, so it has those bugs now. **Here:** fix them early, in a new Phase 0 step 9, rather than in
+   whichever phase happens to touch the file.
+2. **Each pass found less, and further out.** Pass 1 found bugs and old idioms everywhere, pass 2 the shared rules
+   library and the tooling, pass 3 only the boundaries. The third pass still found two bugs that lose data, so one
+   review would have been too few. **Here:** review passes are part of the plan (§5 "Review passes").
+3. **Most bugs sat where the tests only ran the happy path:** a `BytesIO` that never fails, a disk that never fills,
+   the newest python, the live file rather than its copy, valid arguments only. **Here:** when a phase converts a
+   feature, add at least one failure-path test for it (a bad argument from python, a failing file, a wrong type, the
+   copied file rather than the original).
+4. **Checks that didn't check.** The ASan build that wasn't built with ASan; `make check` testing the installed
+   library (§6.1); a warning flag tried with `-fsyntax-only`, which never runs it (`-Wnull-dereference`); samples
+   nobody compared with the live files; a minimum python no build used. **Here:** when adding a check, break
+   something on purpose once and see the check fail (the skeleton did this for `script/check_all.sh` and its
+   type-registration test).
+5. **Copies drift.** Files copied by hand (between the repositories, or into `.sample` files) drifted within a day.
+   The skeleton will generate its samples (third fix plan T4). **Here:** copy from the skeleton only by diffing file by
+   file (skeleton decision 15), and take samples only from generated ones.
+6. **Baselines made each step checkable.** Each fix plan began with recorded test counts, an API snapshot
+   (`script/api_snapshot.py`), a byte-for-byte golden archive comparison and strict-`xfail` reproductions of each bug,
+   and ended with a table of checks (mostly `grep -r`) showing each problem gone. **Here:** the same tools come in
+   Phase 0 step 4, and each phase records a baseline before it starts.
+7. **Fix plans need their own review.** An independent review of the first fix plan found 13 errors and 11 omissions
+   before any code changed, for example deleting typedefs that were in use, and a fix that covered only one of three
+   related bugs. **Here:** have each geocal phase plan reviewed the same way before starting it.
+
+### 0.4 The skeleton's "Notes for geocal", item by item
+
+The skeleton plan §0 asks a geocal session to check each item of its "Notes for geocal" table against geocal's code
+and record where it goes. The second and third fix plans have their own short lists, included here. "Step 4a" and
+"step 9" are Phase 0 steps.
+
+| Skeleton item | geocal today | Where in this plan |
+|---|---|---|
+| `python-install`: uninstall from the prefix first, then `--ignore-installed` (ST.7, decision 17) | Still `--force-reinstall` (`python/python.am`) | Phase 0 step 9 |
+| `"blah"` seed in `print_to_string`/`Exception`; the `Exception` copy loses its position (ST.7) | Still in `printable.h`, `geocal_exception.h`, `lib/Msp/msp.h`, `lib/swig_quaternion.i`; the copy uses `s_.str(cp)` | Phase 0 step 9 |
+| jsonpickle `DeprecationWarning`: pass `keys=True` | Not passed (`sqlite_shelf.py`) | Phase 0 step 9 |
+| `swig_array.i` typemaps crash on bad input (ST.3) | Unfixed copy | Step 4a (regenerate the wrappers) |
+| `skip_weak_ptr_handling(true)` used stale marks (ST.5) | Nobody calls it | Step 4a |
+| doxygen `DOT_MULTI_TARGETS` obsolete in doxygen 1.18 | Still set (doxygen 1.13), in `swig_rules/doxygen_single.cfg` and `config/doxygen.cfg` | The step 4a copy drops it from `doxygen_single.cfg`; remove it from `config/doxygen.cfg` (which stays for the C++ API docs) when doxygen is updated |
+| Measure test coverage (gcovr) | Not measured | Phase 0 step 4 |
+| Diff `swig_rules/` and `config/m4/` file by file before copying (decision 15) | geocal-only settings exist (`swig_rules/__init__.py`) | Step 4a |
+| `make check` tests the installed library: per-target rpath (ST.11, decision 18) | `geocal_test_all_LDFLAGS = -no-install $(OPENMP_CFLAGS)` (`geocal.am`); `LD_PRELOAD` workaround | Phase 0 step 9; closes §6.1 |
+| `--enable-debug` with no flags; Blitz's `.pc` flags leak `-DNDEBUG -O2` into every build (`ac_blitz.m4`, `ac_enable_debug.m4`) | geocal's copies are the unfixed ones. Debug builds in activated envs also keep `-DNDEBUG` from conda's `CPPFLAGS` and get no `-DBZ_DEBUG`, in geocal and in the skeleton (plan review; skeleton third fix plan T6.11) | Step 4a, after the skeleton's T6.11 |
+| `Exception` (S1.5); its stack trace resolved with `dladdr` and one `addr2line` per module (S6) | Vendored `backtrace.hpp` base | Phase 1 item 6 |
+| clang-format adopted | Done | — |
+| Boost → std inside `swig_rules` (S2) | — | Step 4a |
+| `std::optional`/`std::array` typemaps (S3); the Boost #319 workaround in `serialize_shared_ptr.h`; `geocal_serialize_support.h` includes `boost/serialization/array.hpp`; a returned `std::array` is a numpy array | — | Typemaps in step 4a; the rest in Phase 4 |
+| An observer registered in `load()` is added twice (S5) | geocal's `Observable` doesn't serialize its list | Nothing now; applies if geocal ever serializes observers |
+| SWIG pinned to the committed wrappers' version | `4.4.*` | Until Phase 6 |
+| `script/boost_to_std_ptr.py`, `serialize_shared_ptr.h`, aliasing `to_ptr` (S4) | — | Phase 5 |
+| nanobind bindings and the eight things found in S6 | — | Phase 6 |
+| Golden shelves with python subclass objects, written by the SWIG build | None | Phase 0 step 5 |
+| C++23; `mdspan` for `read_ptr` (S7); the `AC_PROG_AWK` bootstrap warning; don't name a member `range_check` | C++17 | Phase 0 step 3a (C++23 and the bootstrap warning); `read_ptr` in Phase 7 |
+| Rename `swig_rules` → `cxx_python_rules`, `geocal_swig` → `geocal_cxx` | — | Phase 6 |
+| `write_shelve` with a `pathlib.Path` | Already converts (`str(Path(fn))`) | Nothing to do |
+| Blitz serialization: column-major, reversed and strided arrays, the load side; throw on a nonzero base (R1.1, D1) | Same code (`isStorageContiguous()` and `resize`), latent in geocal; geocal also serializes `Array<Time,1>` and lacks 4 element types | Phase 0 step 9 |
+| Copying an `Observer`/`Observable` (R1.2, D2: delete copying) | Same code. The skeleton's trial build found one failure in geocal: `%copyctor QuaternionCamera` | Phase 0 step 9 |
+| `blitz_array.h` hard-coded the skeleton's namespace (R1.3) | — | Phase 6 (take the current files) |
+| Archive loading `chdir`s the process → per-thread archive base directory (R4.1); `read_shelve` still changes directory (decision "option 2") | `serialize_read_generic` uses `DirChange` | Phase 6, class by class |
+| nanobind: `None` crashes; writes into read-only arrays | `None` crashes the SWIG bindings too (`ScaleImage(None, 2.0)`) | Phase 6: the `None` audit (the converter adds no `.none()` by default) |
+| Smaller rules-library fixes: python 3.12 error API, rank-generic Blitz serialization, deduplicated `serialize_function.cc` | — | The Blitz part in Phase 0 step 9; the rest with the Phase 6 copy |
+| Configuration header with only project macros, carrying the namespace and serialization macros (R1.3, R2.11) | `geocal_config.h` comes from autoheader; `geocal_gdal.h` `#undef`s `PACKAGE_*`; `SWIG_MAPPER_NAMESPACE` is a `-D` flag in `bindings/python/python.am` and `#define`d by hand in 7 files | Phase 1 item 8 |
+| `range_check` as functions with `source_location`; `explicit`, default member initializers, rule of zero, `mutable`, `#pragma once` (R1.8, R2) | Macros (`geocal_exception.h`) | Phase 1 items 6 and 9 |
+| Hand-written binding style; updated converter (R6) | — | Phase 6 |
+| Strict warnings and a wider `.clang-tidy` (R7, F6.8, F6.9) | geocal's `.clang-tidy` still has the 7 S1.3 checks; the skeleton's has 25 entries, including the groups `bugprone-*` and `performance-*` | Phase 1 items 3 and 5 |
+| Second review, serialization (F1, F4): per-write `weak_ptr` marks, include guard, registry key per project; in-memory functions renamed | Unfixed. Callers of the old names: `sqlite_shelf.py`, `mars_igc_test.py`, `rsm_grid_test.cc`, `boost_pcall.h` | Marks and guard in Phase 0 step 9; renames and registry in Phase 6 |
+| Second review, library and build (F2, F3, F5–F7): sanitizer option, `_GLIBCXX_ASSERTIONS`, `make golden-check`, `check_all.sh`, pytest temp directory, nothrow `Exception` copies, protected `GenericObject` copy (geocal trial: nothing slices), observer lists as `std::vector`, "Thread safety:" lines | — | Tooling in Phase 0 step 4; classes in Phase 1 items 6, 9, 10; observer lists in Phase 5 |
+| Docstring table compile time (`doxy2nanobind.py`: 3 min 24 s → 0.6 s on geocal's headers) | — | Phase 6 |
+| Third fix plan T1: python stream errors | — | Phase 6 (with `iostream.h` and the converter's flush) |
+| T2: archive write errors and the gzip hang | **Confirmed in geocal** (§0.2) | Phase 0 step 9, after the skeleton does T2 |
+| T3: python 3.13 minimum (step 0: check geocal's and framework's envs) | geocal: 3.13.7 (linux and osx locks). framework: `python<3.9`, which it must leave anyway | Phase 6 |
+| T4: samples generated from the live files | — | Phase 6 (`277b657` predates T4, so step 4a diffs its samples by hand) |
+| T6.6: qualify `polymorphic_[io]archive` | 5 files use the short names | Optional, Phase 1 |
+| T6.9: `CacheInvalidatedObserver::this_obj()` returns `const&` | geocal has no `CacheInvalidatedObserver` | Nothing to do |
+| T7.1: concepts on `serialize_read<T>`, `get<T>` | — | Phase 6 (run the grep the note asks for first) |
+| T7.3: module statics set at import | — | Phase 6 |
+| T7.4: configure check that Blitz is thread safe | frenchpeas's build env (conda-forge `libblitz`) defines `BZ_THREADSAFE`; the afids build the env files now name (`*_1000`) is unchecked | Phase 0 step 9 |
+
+### 0.5 Independent review of this plan (2026-11-07)
+
+A fresh reviewer (a subagent with no part in writing it) checked this plan
+against geocal's code and build, and against the skeleton's notes, code and
+git history. All findings were applied; the main ones were spot-checked again
+before applying. What it changed:
+* **Ordering.** The step 4a copy from `277b657` needs C++20, so the C++23
+  switch moved from Phase 1 to Phase 0 step 3a. The step 9 ports are written
+  in C++17 (they are backported, and the format-string `Exception` comes in
+  Phase 1). `make golden-check` moved to step 5, which creates the corpus.
+  `check_all.sh` starts from a warning and lint baseline, because geocal can't
+  be warning- or lint-clean before Phase 1.
+* **Bugs in geocal it found or confirmed:** archive writes to a directory that
+  doesn't exist "succeed" (added to the T2 row); `None` crashes the SWIG
+  bindings today (`ScaleImage(None, 2.0)`); a CRTP typo in `RayIntersect`;
+  pytest's temporary directory is in the source tree (this plan had said it
+  wasn't); debug builds still get `-DNDEBUG` from conda's `CPPFLAGS`, and no
+  Blitz bounds checking (also in the skeleton, now its T6.11).
+* **Wrong claims corrected:** the nanobind converter adds no `.none()` by
+  default (Phase 6 now has a `None` audit); `.db`/`.json` shelves of C++
+  objects break with the module rename (§10 open item 9);
+  `--without-swig` still compiles the committed wrappers (Phases 5–6 test with
+  `make geocal-check`); the rpath fix doesn't cover the build-tree python tests;
+  the class-by-class move off `chdir` needs a temporary `DirChange`.
+* **Scope:** the `weak_ptr` and Blitz serialization bugs are latent in geocal's
+  own classes; the `maintain_1.28` backports are now specified per row; Phase 1
+  item 8 also covers the namespace macros (R1.3); stale C++20, SWIG-pin and
+  nanobind-"considered" text fixed.
+
 ## Branch strategy and constraints from the maintainer
 
 **Branches.**
 * **`develop_2_0`** is where the modernization work happens (the current
-  branch, 9 commits ahead of `master` as of this writing). GeoCal 2.0 is
-  allowed to **break the API**: `std::shared_ptr`, a possible move to
-  nanobind, C++20.
+  branch, 59 commits ahead of `master` on 2026-11-07). GeoCal 2.0 is
+  allowed to **break the API**: `std::shared_ptr`, nanobind, C++23.
 * **`master` → `maintain_1.28`** (name confirmed; `configure.ac` on
   `master` is version 1.28). Branch it off before 2.0 lands. It serves the
   **closed gcc 11.2 system** and any other user who needs the 1.x API:
@@ -48,7 +197,11 @@ reference pixi environment at `../geocal-build/build-pixi`.
 * Replacing GSL is **desirable** if it isn't too expensive.
 * Blitz++: we currently use the **conda-forge `libblitz`** package, which is
   sufficient. We maintain our own conda packages in `../afids-conda-package`,
-  so we can build our own Blitz there if it is ever needed. GeoCal does not
+  so we can build our own Blitz there if it is ever needed. (*2026-11-07:* the
+  env files now ask for the afids build, `libblitz` `1.0.2.*` build `*_1000`
+  from the afids channel, which patches the headers for gcc warnings.
+  frenchpeas's current build env still has conda-forge's
+  `libblitz-1.0.2-h9c3ff4c_3`.) GeoCal does not
   carry a copy of Blitz.
 * General code cleanup is wanted where it is **reasonably mechanical**. We
   don't want a large manual rewrite.
@@ -96,18 +249,18 @@ reasons are in §3, §4, §6 and §7.
 |---|---|---|
 | gcc/g++ (conda-forge) | 15.1.0 | |
 | Boost | 1.84.0 | conda-forge. |
-| Blitz++ | 1.0.2 (conda-forge `libblitz`) | Upstream is in maintenance mode. We can build our own in `../afids-conda-package` if needed. |
+| Blitz++ | 1.0.2 (conda-forge `libblitz`) | Upstream is in maintenance mode. We can build our own in `../afids-conda-package` if needed. *2026-11-07:* the env files now use the afids build (`*_1000`, patched headers). |
 | GSL | 2.8 | **GPL-3.0.** |
 | GDAL | 3.11.4 | PROJ 9.6.2. |
 | CSPICE | N0067 | |
 | HDF5 / HDFEOS5 | 1.14.6 / 5.1.16 | |
 | FFTW | 3.3.10 | **GPL-2.0+.** Optional. |
-| SWIG | 4.3.1 | `env/pixi.toml` still pins `<4.4.0`, but the 4.4 problem has been fixed and **4.4 can be used now**, so the pin can be dropped. |
+| SWIG | 4.3.1 (4.4.0 in the env since) | `env/pixi.toml` still pins `<4.4.0`, but the 4.4 problem has been fixed and **4.4 can be used now**, so the pin can be dropped. *Update 2026-11-07:* the env files now pin `swig = "4.4.*"`, matching the committed wrappers. |
 | Doxygen | 1.13.2 | |
 | Python / numpy | 3.13.7 / 2.3.3 | |
 | autoconf / automake / libtool | 2.72 / 1.17 / 2.5.4 | |
 | fmt, spdlog | 11.2 / 1.15 | Already in the env; GeoCal does not use them. |
-| Eigen, nanobind, `mdspan`, clang-tidy, clang-format | **not present** | Add to the pixi env when needed. The skeleton's env already has `clang-tools` 22.1.8 and `nanobind` 3.1.0 (skeleton S0.4). |
+| Eigen, nanobind, `mdspan` | **not present** | Add to the pixi env when needed. The skeleton's env has `nanobind` 3.1.0 (pinned `>=3.1,<4`; its forked caster has a `static_assert` on the version) and the Kokkos `mdspan`. `clang-tools` 22 and `clang-22` were added to geocal's env on 2026-11-05. |
 | bear | **don't use** | `bear` (and `intercept-build`) don't run on this host (glibc 2.28 is too old for the conda build). Use the skeleton's `script/make_compile_commands.py` and `script/run_clang_tidy.sh` instead (skeleton S0.4). |
 
 **Other environments:**
@@ -118,8 +271,8 @@ reasons are in §3, §4, §6 and §7.
 * **gcc 11.2 (closed system)** is supported by the `maintain_1.28` branch
   only, not by `develop_2_0`.
 
-**Proposed minimum compiler for 2.0:** **gcc ≥ 14**, in **C++20** mode
-(§7.4). clang/libc++ is best-effort.
+**Proposed minimum compiler for 2.0:** **gcc ≥ 14**, in **C++23** mode
+(decided 2026-11-07; §7.4, §7.5). clang/libc++ is best-effort.
 
 gcc 14 has been available in conda-forge for a long time. Development uses
 whatever the pixi locks give (currently gcc 15 / clang 21).
@@ -197,7 +350,7 @@ GeoTIFF, MSP (optional), MSPI-shared/HDFEOS5 (optional),
 | Blitz++ | **Keep** (conda-forge `libblitz`; our own build in `afids-conda-package` as a fallback) | — | — |
 | HDF5 C++ API | Optional / low priority: HighFive | Low | S |
 | GDAL, PROJ, GeoTIFF, CSPICE, VICAR RTL | Keep; modernize call sites only | — | S |
-| SWIG | Keep for now (4.4 is fine); reconsider with the nanobind pilot (§4) | — | — |
+| SWIG | Keep until Phase 6, then **replace with nanobind** (the skeleton's pilot worked and SWIG is gone there, §4) | High (whole python layer) | L |
 | Autotools | Keep for now (§6) | — | — |
 
 ### 3.2 Boost: details
@@ -270,7 +423,7 @@ which is sufficient; if a patch is ever needed, we can build our own in
 `../afids-conda-package`. Blitz is used everywhere (public API,
 `AutoDerivative`, zero-copy numpy typemaps, serialization).
 
-**C++20 compatibility check (done, §7.2):** Blitz headers compile cleanly
+**C++20 compatibility check (done, §7.3):** Blitz headers compile cleanly
 in gnu++20 with gcc 15. They produce many *deprecation warnings*
 (`-Wdeprecated-copy`, and `-Wvolatile` in `memblock.h`) but **no errors**.
 
@@ -421,7 +574,7 @@ and part of a dependency we already require. It is present in the env.
 Reasons to do it now:
 * It removes 467 vendored files, `thirdparty/libsdbx/sdbx.am`, the header
   install, and the doxygen link.
-* In the C++20 check (§7.2), libsdbx was the **only** part of the GeoCal
+* In the C++20 check (§7.3), libsdbx was the **only** part of the GeoCal
   tree that produced C++20 deprecation warnings (34 ×
   `-Wdeprecated-enum-enum-conversion` in `TreeItem.h`, plus
   `-Wignored-qualifiers`).
@@ -461,8 +614,15 @@ Effort: small (one header, one test, build-file and doc cleanup).
 
 ## 4. Python bindings: SWIG, pybind11, or nanobind
 
-**Stay on SWIG for now**:
-* SWIG 4.4 works now; drop the `<4.4.0` pin in `env/pixi.toml`.
+**Update (2026-11-07): nanobind is the plan for Phase 6.** The skeleton's pilot (S6) passed the tests recorded from
+its last SWIG build, plus four that SWIG had failed. SWIG was removed there (S6.6), and everything was renamed away from SWIG (skeleton decision 23). Two review
+passes then reworked the bindings into ordinary hand-written nanobind code and changed the converter to write that
+style. The rest of this section is the reasoning as it stood before the pilot; Phase 6 (§5) has the design that came
+out of it.
+
+**Stay on SWIG for now** (until Phase 6):
+* SWIG 4.4 works now (the env files pin `4.4.*`, matching the committed
+  wrappers).
 * **Keep committing the generated wrappers.** This is a deliberate
   trade-off so downstream users don't need SWIG. With nanobind the question
   disappears: the bindings are ordinary C++ files compiled by the normal
@@ -480,8 +640,8 @@ pickled classes; 9 directors; RTTI downcasting; Doxygen docstrings; and
 downstream repos `%import` GeoCal's `.i` files, so they would all break at
 once.
 
-**Update (2.0 branch):** a nanobind move is now being considered as part of
-the 2.0 API break. Two points connect it to the rest of this plan:
+**Update (2.0 branch):** a nanobind move is part of the 2.0 API break
+(considered when this was written; decided since, see the 2026-11-07 update above). Two points connect it to the rest of this plan:
 * nanobind supports only `std::shared_ptr`, so the `std::shared_ptr`
   migration must come first (§5 Phase 5 → Phase 6).
 * **SWIG constrains how much C++20 can appear in headers.** I tested SWIG
@@ -494,7 +654,7 @@ the 2.0 API break. Two points connect it to the rest of this plan:
   is in use, those must stay out of SWIG-parsed headers (or sit behind
   `#ifndef SWIG`). nanobind does not parse headers at all (bindings are
   written in C++), so after a move to nanobind the headers can use any C++20
-  feature. That is another argument for nanobind if 2.0 goes that way.
+  feature. That was another argument for nanobind.
 * **C++-only users don't need Python with nanobind either.** Keep today's
   split. Today `libgeocal` has no Python dependency: it only holds abstract
   hooks (`swig_type_mapper_base.h`: `is_python_director_check`,
@@ -596,94 +756,405 @@ the 2.0 API break. Two points connect it to the rest of this plan:
     uses, including the `gsl_multifit_nlinear` solvers).
   * framework already uses Eigen.
   * It has 52 multiple-base SWIG classes and 47 directors, and must first move
-    off `python<3.9`, `swig<4` and C++14.
+    off `python<3.9`, `swig<4` and C++14. (*2026-11-07:* to python ≥ 3.13, the
+    minimum of the nanobind rules, skeleton D14.)
 
 ---
 
 ## 5. Phased plan
 
 All phases are on **`develop_2_0`**. Each phase leaves the tree buildable
-with all C++ and Python tests passing. Phases 0–4 keep the public API almost
-unchanged, apart from the C++20 requirement; Phases 5–6 are the API break.
+with all C++ and Python tests passing. Phases 0–4 keep the public API mostly
+unchanged; the exceptions are the C++23 requirement, the step 9 bug fixes
+(for example no more `QuaternionCamera(other)` copies), and Phase 3 removing
+`gsl_*` from the C++ and python API. Phases 5–6 are the main API break.
+
+**How each phase runs** (what worked in the skeleton, §0.3):
+* Before starting: record a baseline (test counts, warnings, lint findings,
+  `script/api_snapshot.py` output, `make golden-check`), and add any bug
+  reproductions as strict `xfail` tests, so the phase shows them going from
+  failing to passing.
+* A list of intended behavior changes. At the end, the API snapshot and the
+  golden comparison may differ only by those, and each goes into
+  `RELEASE_NOTES_2.0.md`.
+* At least one failure-path test for each feature the phase converts.
+* At the end: `script/check_all.sh` over the gcc 15, gcc 14,
+  `--without-boost-serialization`, sanitizer and clang builds; then
+  `make install` and `make installcheck`. Until Phase 1 has made geocal clean,
+  `check_all.sh` compares warnings and lint findings with the recorded
+  baseline and fails only on new ones (Phase 0 step 4). During Phases 5–6 it
+  runs C++ only (`make geocal-check`, Phase 5).
+* The steps are rehearsed in the skeleton first; copies from it are diffed file
+  by file (skeleton decision 15).
 
 ### Phase 0: Baseline and safety net
 1. **Create the maintenance branch:** `master` → `maintain_1.28`. It stays
    C++17, keeps the current dependencies, and gets bug fixes only; any
    feature it needs is implemented on 2.0 first and backported. Document in
-   the README which branch serves which systems.
+   the README which branch serves which systems. **The step 9 bug fixes are
+   backported to it** (decided 2026-11-07, §10), so it must exist by the first
+   backport at the latest. Each backport is a re-port by hand, not a
+   cherry-pick: `lib/` was reformatted with clang-format only on `develop_2_0`
+   (for example, `blitz_array_serialize_support.cc` differs by 515 lines), and
+   `maintain_1.28` is C++17 for gcc 11.2 (no `ends_with`, no format-string
+   `Exception`). The step 9 table says what 1.28 gets for each row.
 2. Do a clean build and run all tests in the pixi env; record the baseline.
+   **First recreate the build env from the committed lock**, so the baseline
+   matches what the env files describe. On frenchpeas (2026-11-07) the build
+   env is older than `env/linux/pixi.lock`: it has conda-forge's
+   `libblitz-1.0.2-h9c3ff4c_3`, while the env files ask for the afids build
+   (`1.0.2.*`, build `*_1000`, locked as `libblitz-1.0.2-hb0f4dca_1000`).
+   * Recreate it with `make -C env recreate-env`, from a fresh shell. That
+     copies `env/linux/pixi.{toml,lock}` into the build directory (filling in
+     the local afids channel, `../afids-conda-package/afids-conda-channel`)
+     and runs `pixi install --frozen`. A plain `pixi install --frozen` in the
+     build directory would reuse the build directory's own, older copy of the
+     lock. **`recreate-env` deletes all of `geocal-build/build-pixi`**, the
+     configured build tree included, so then configure again
+     (`../build_pixi.sh`; the arguments are also at the top of the old
+     `config.log`).
+   * **Blocker on frenchpeas (2026-11-07):** the local afids channel has no
+     `libblitz` package, and frenchpeas's `afids-conda-package` checkout has
+     no `libblitz` recipe (its local `master` has no commits, and none of the
+     fetched remote branches has the recipe). Build the afids `libblitz` there
+     first, or `pixi install --frozen` fails. The env file's comment points to
+     `afids-conda-package/libblitz`; that recipe is presumably on rifle (not
+     checked).
+   * Then check that `BZ_THREADSAFE` is defined in the new env's
+     `blitz/gnu/bzconfig.h` (step 9), and that the build has the patched
+     headers' fewer Blitz warnings (the `check_all.sh` warning baseline of
+     step 4 is recorded after this).
 3. **Add a minimum-compiler build:** a pixi environment pinned to the 2.0
    minimum (`gxx_linux-64 14.*`, §7.4), run regularly so features newer than
    the minimum are caught when they are added. An occasional osx build is
-   optional (macOS is best-effort).
-4. Add `clang-tools` and `eigen` to `env/pixi.toml` (not `bear`, see §2.2; use
-   the skeleton's `script/make_compile_commands.py` and
-   `script/run_clang_tidy.sh`); drop the SWIG `<4.4.0` pin. `nanobind` and the
-   pinned `mdspan` snapshot are added in Phase 6.
-4a. **Copy the skeleton's `swig_rules/` and changed `config/m4/` files into
-   geocal** (decided). This includes, for example, the `ac_boost.m4` fix for
-   `--without-boost-serialization`. Don't use `git subtree pull` from
-   `swig-rules-repo` / `autoconf-repo`; those are left alone. Merging back
-   upstream can be looked at later; with nanobind, `swig-rules-repo` may stop
-   existing. Re-copy at the start of each geocal phase that depends on a
-   skeleton phase (Phases 1, 4, 5, 6), so geocal always uses rules the skeleton
-   has tested.
-4b. **Sanitizer build**: the skeleton's recipe (skeleton plan §0, "Sanitizer
-   builds") works without a configure option. Use it for the C++ and Python
-   tests at the end of Phases 5 and 6.
+   optional (macOS is best-effort). (The skeleton's gcc 14 env needed
+   `python = "3.13.*"` pinned: a fresh solve gave a python configure couldn't
+   link against.)
+3a. **Require C++23 with gcc 14 as the minimum** (decided 2026-11-07; §7.5,
+   §10; moved here from Phase 1 by the plan review). It has to come before
+   step 4a: the skeleton switched to C++20 in S1.1, before `277b657`, and that
+   commit's rules use C++20 in code compiled into `libgeocal`
+   (`Fname.ends_with(".gz")` in `serialize_function.cc`, `operator<=>` in
+   `swig_type_mapper_base.h`), while geocal is still
+   `AX_CXX_COMPILE_STDCXX([17], [ext], …)` (`config/m4/afids_common.m4`). It
+   costs nothing: strict `-std=c++23` syntax-checks all of geocal's compile
+   database (§7.3). The skeleton did the same in its decision 22, and its
+   current rules library uses C++23 library features (`<spanstream>`,
+   `std::ranges::to`, `fold_left`). Only use library features gcc 14 has: no
+   range formatting (gcc 15), no `std::mdspan` (gcc 16). SWIG parses header
+   syntax, not the `-std` flag, so the SWIG limits on headers (§4) still
+   apply until Phase 6; repeat §4's SWIG header-syntax test with SWIG 4.4.
+   * `config/m4` is a subtree shared with the other AFIDS repos
+     (`autoconf-repo`), so put the requirement in GeoCal's own macros (the
+     skeleton put `AX_CXX_COMPILE_STDCXX([23], [noext], [mandatory])` in its
+     local `skeleton_common.m4`) or coordinate a change to `afids_common.m4`.
+   * Then a full build, `make check`, `make install` and `make installcheck`,
+     including the SWIG wrappers compiled as C++23, and the Msp code (rifle).
+   * Expect libsdbx's `-Wdeprecated-enum-enum-conversion` in about 20 library
+     and test files and 9 wrappers until Phase 2 removes libsdbx.
+   * Check for the bootstrap warning `AC_PROG_AWK was expanded before it was
+     required`; the skeleton fixed it with `AC_REQUIRE([AC_PROG_AWK])` at the
+     top of its common macro.
+4. Add `eigen` to `env/pixi.toml` (not `bear`, see §2.2; use the skeleton's
+   `script/make_compile_commands.py` and `script/run_clang_tidy.sh`).
+   `clang-tools` was added on 2026-11-05 and SWIG is pinned to `4.4.*`.
+   `nanobind` and the pinned `mdspan` snapshot are added in Phase 6. Then the
+   skeleton's checking tools (its second fix plan F2, first fix plan R0),
+   adapted to geocal:
+   * **`--enable-sanitizers[=address,undefined]`** in geocal's local m4 (the
+     skeleton's is in `config/m4_local/skeleton_common.m4`): ASan and UBSan
+     flags added after `AC_ENABLE_DEBUG`, a leak suppression for the accepted
+     Boost truncated-archive leak (skeleton decision 20), and the python tests
+     preloading both runtimes. Check that the flags really appear on the
+     compile lines: the skeleton's earlier hand-configured ASan build turned
+     out not to use them. On frenchpeas, configure it in an env with conda's
+     compiler activation (skeleton `CLAUDE.md`). This replaces the
+     hand-written recipe of the old step 4b.
+   * **`-D_GLIBCXX_ASSERTIONS`** in `--enable-debug` builds (bounds checks in
+     the standard containers; no ABI change). It doesn't depend on `NDEBUG`.
+   * **A clang 22 build** with conda gcc's libstdc++ (`--gcc-install-dir`,
+     `--sysroot`, as `run_clang_tidy.sh` passes). In the skeleton it found
+     `-Wundefined-var-template` and a macro redefinition that gcc didn't
+     report.
+   * **`script/check_all.sh <build directories>`** (build, warnings, `make
+     check`, `make golden-check` once step 5 has it, `format-check`, `lint`,
+     one summary table). **It can't be zero-tolerance in geocal yet:**
+     `make lint` has 2,016 findings for the 7 existing checks (fixed in
+     Phase 1 item 5); the gcc 15 build has about 40 Blitz warnings (38
+     `-Warray-bounds`, 2 `-Wmaybe-uninitialized`, §8.2); libsdbx warns after
+     step 3a until Phase 2; and conda's `DEBUG_CXXFLAGS` include `-Wextra`, so
+     `--enable-debug` builds bring back the 1,501 `-Wunused-parameter`. So
+     record a baseline of warnings and lint findings, fail only on new ones,
+     and switch each to zero-tolerance as Phase 1 items 3–5 make geocal clean.
+     It also needs a C++-only mode (`make geocal-check`) for the
+     `--without-boost-serialization` build and Phases 5–6. Break a test on
+     purpose once and see it fail.
+   * **`script/api_snapshot.py`**: every python class and function with its
+     signature, docstring and properties. Run before and after each phase.
+   * **Coverage** (gcovr; the system `lcov` 1.14 can't read gcc 15 data;
+     recipe in skeleton plan §4a), C++ and python, especially of what
+     Phases 4–6 convert (`swig_rules` typemaps, serialization, directors). The
+     skeleton raised its line coverage from 52% to 82% (91.7% counted with
+     gcovr's `--merge-lines`) in its phase ST, before converting anything;
+     geocal should know its number and add tests where a phase will change
+     untested code.
+   * **pytest's temporary directory is in geocal's source tree** (correction
+     2026-11-07): `python/tests/pytest.ini` has `addopts =
+     --basetemp=./pytest_tmp`, so `cd python; pytest` uses `python/pytest_tmp`
+     and installcheck uses `build-pixi/pytest_tmp`. pytest empties basetemp
+     when it starts, so two runs from the same directory break each other,
+     the bug the skeleton found. Pass `--basetemp=$(abs_builddir)/pytest_tmp`
+     from `python.am`, as the skeleton's `python-check-build` does.
+   * CI is deferred in the skeleton too (to be set up on the JPL runner, its
+     second fix plan "Deferred: CI on the JPL runner"). geocal can use the same
+     workflow on the same runner once the skeleton has one.
+4a. **Copy the rules and m4 files from the skeleton** (decided), after step 3a.
+   **Until Phase 6, copy from the skeleton's last SWIG state, commit
+   `277b657`** ("Step S5", suggested tag `swig-final`), not from its current
+   tree. The current `cxx_python_rules/` has no `.i` files, needs
+   `std::shared_ptr` and C++23, and uses the new names. At `277b657` the
+   directory is still `swig_rules/` with `SWIG_MAPPER_NAMESPACE`, so no renames
+   are needed.
+   * It brings the fixes from the skeleton's ST, S1, S2 and S3: array typemaps
+     that crashed on bad input, the `std::optional`/`std::array` typemaps,
+     Boost → std inside the rules, stale `weak_ptr` marks, the Boost #319
+     workaround. (Checked by the plan review. It does **not** have the
+     include guard, F1.2, or the write-side open check, R3.3; step 9 adds
+     those.)
+   * From `config/m4`: `ac_blitz.m4` (Blitz's `.pc` flags no longer go into
+     every build), `ac_enable_debug.m4` and `ac_boost.m4`
+     (`--without-boost-serialization`).
+   * **That alone doesn't fix geocal's debug builds** (found by the plan
+     review; checked in the skeleton's build directories, not fixed there
+     yet). In an env with conda's compiler activation, which geocal's has,
+     `AC_ENABLE_DEBUG` (geocal's and `277b657`'s) replaces `CXXFLAGS`/`CFLAGS`
+     with conda's `DEBUG_*` flags but leaves `CPPFLAGS`, where the activation
+     put `-DNDEBUG -D_FORTIFY_SOURCE=2 -O2`. So debug builds keep `-DNDEBUG`
+     (it only switches off `assert()`s in library headers such as Boost's;
+     geocal calls no `assert()` itself), and, since conda's `DEBUG_CXXFLAGS`
+     have no `-DBZ_DEBUG`, they get **no Blitz bounds checking**. The skeleton
+     added the fix to its third fix plan as **T6.11** (use `$DEBUG_CPPFLAGS` or
+     strip `-DNDEBUG`; add `-DBZ_DEBUG` in both branches). Copy
+     `ac_enable_debug.m4` after the skeleton has done it. Check: a debug
+     compile line has `-DBZ_DEBUG` and no `-DNDEBUG`. The first debug build
+     with Blitz bounds checks may find out-of-bounds accesses in geocal; fix
+     them as part of this step.
+   * As of 2026-11-07, geocal's `swig_rules/` differs from `277b657` in 41
+     files and `config/m4` in 3 (geocal last synced on 2026-10-23); 18 of the
+     41 differ only in whitespace, because the skeleton's copy is
+     clang-formatted. Format geocal's copy first (or diff with `-w`), then
+     diff file by file: geocal-only settings such as `swig_rules/__init__.py`'s
+     `if True:` must survive. `277b657` is older than the skeleton's generated
+     samples (T4), so its `.sample` files are diffed by hand too.
+   * Regenerate the wrappers in a separate commit. `277b657`'s typemaps were
+     only regenerated with SWIG 4.5 in the skeleton; geocal uses 4.4, so run
+     the full python suite after regenerating.
+   * The copy's `doxygen_single.cfg` drops `DOT_MULTI_TARGETS`;
+     `config/doxygen.cfg` also sets it, and that file stays for the C++ API
+     docs.
+   * The skeleton's later fixes (its review passes) went into files that
+     already used `std::shared_ptr` and nanobind, so they can't be copied into
+     geocal while it still uses SWIG. Step 9 ports the bug fixes among them by
+     hand, and Phase 6 copies the rest.
+   * Don't use `git subtree pull` from the upstream repositories (now
+     `cxx-python-rules` and `autoconf-repo`); they are left alone.
 5. **Golden serialization tests**: existing `unit_test_data` archives and
    pickles of the main classes. Real downstream archives come mainly from
    **ECOSTRESS, where they are embedded in HDF5 files**. Extracting those
    is deferred until the serialization-related phases (4 and 5), and must
-   be done before them.
-6. Add a **`--without-boost-serialization` build** (compile the C++ tests
-   only) to the regular builds, after fixing the 12 files that break it today
-   (§3.2). The skeleton's S0.6 fix is the pattern:
-   * guard the `.cc` files;
-   * guard the body of `swig_rules/lib/serialize_shared_ptr.h`;
-   * define `-DSWIG_HAVE_BOOST_SERIALIZATION` only when serialization is on;
-   * don't require `libboost_serialization` in `ac_boost.m4`.
+   be done before them. geocal has no golden archive generator or corpus yet,
+   so this step adds both, and **`make golden-check`** (write the golden
+   archives into a temporary directory and compare byte for byte; moved here
+   from step 4). Include:
+   * every Blitz element type and rank geocal serializes, including
+     `blitz::Array<Time,1>` (a `PiecewiseLinear` archive);
+   * **shelves holding python subclass objects** (SWIG directors), written
+     now with the SWIG bindings, so Phase 6 can check that nanobind reads them
+     (the skeleton's `unit_test_data/golden/director_python*.xml`);
+   * **`.db` and `.json` shelves holding C++ objects**, written with the SWIG
+     bindings. They store python pickles that name `geocal_swig.<module>`;
+     Phase 6's compatibility shim (decided 2026-11-07) has to keep them
+     loading, and these shelves are its test;
+   * a **byte-identical rewrite test**: load each golden archive, write it
+     again, compare (`golden_archive/rewrite_identical` in the skeleton). It
+     caught a planned change that would have altered archives (pruning dead
+     observers, skeleton F7.2).
+6. Add a **`--without-boost-serialization` build** to the regular builds,
+   after fixing the 12 `.cc` files that break it today (§3.2) by guarding
+   them, the skeleton's S0.6 pattern. The rest of that pattern is already
+   there or comes with step 4a: `-DSWIG_HAVE_BOOST_SERIALIZATION` is already
+   conditional (`bindings/python/python.am`), and the
+   `serialize_shared_ptr.h` guard and the `ac_boost.m4` change come with the
+   copy. It covers only the C++ library and its tests, not the python
+   extension (skeleton decision 19), so it is checked with
+   `make geocal-check`: plain `make` compiles the committed wrappers too.
 7. Optional: automake parallel tests (`parallel_test_execution_plan.md`).
 8. ~~Add `.git-blame-ignore-revs` for the mass-edit commits.~~ Not done
    (maintainer, 2026-11-05: the 2.0 branch changes a lot anyway).
+9. **Fix the bugs the skeleton found that geocal has today** (§0.2, §0.4).
+   One commit each, each with the skeleton's test ported. **Write the fixes in
+   C++17** (`Exception e; e << …; throw e;`, no `ends_with`), even though
+   `develop_2_0` is C++23 by now: they are backported to `maintain_1.28`
+   (decided 2026-11-07), and the format-string `Exception` only arrives in
+   Phase 1 item 6. The skeleton's versions use both, so they are re-written,
+   not copied.
 
-### Phase 1: C++20 switch, cleanup and hygiene
-1. **Require C++20** (§7.4). The change is a single line, but `config/m4`
-   is a subtree shared with the other AFIDS repos (`autoconf-repo`), so
-   either put the requirement in GeoCal's own `configure.ac` or coordinate
-   the change to `afids_common.m4` with those repos. Then do a full build,
-   `make check`, `make install` and `make installcheck`, including the SWIG
-   wrappers compiled as C++20. Do this first, so later phases can use
-   `std::format` etc. directly instead of temporary solutions.
-2. Raise the `AC_BOOST` minimum to what the code really needs. Delete
-   `boost_fix/`, the disabled libraw, and `unused_code/`.
-3. Show third-party headers with `-isystem` (Blitz, Boost, GDAL) so GeoCal's
-   own warnings are visible (§8.1).
+   | Bug | Skeleton fix and test | geocal notes | `maintain_1.28` |
+   |---|---|---|---|
+   | Archive write errors are lost (a small archive to a full disk "succeeds"); a gzip write error hangs at 100% CPU; **a file that can't be opened** (nonexistent directory) "succeeds" too | Third fix plan T2: a sink in the Boost.Iostreams chain that throws on a short write and records the error (Boost swallows exceptions during `flush`/`close`); a `close()` that checks the record; **no** exception mask on the archive's stream (the XML archive writes its closing tag in its destructor); `/dev/full` tests run in subprocesses with a timeout. Plus the write-side open check from R3.3/F3.9 (`Trouble opening file … for writing: <reason>`), which T2 doesn't cover | **All three confirmed in geocal** (§0.2). geocal's class is `OstreamCompress`, not the skeleton's `OutputFile` (that came in R3.3, after S4), so T2 is re-implemented on geocal's structure. Add a nonexistent-directory test next to the `/dev/full` tests. The skeleton hasn't done T2 yet; **decided (2026-11-07): do T0–T2 in the skeleton first, then port** (§10). | Yes; matters most for production. |
+   | Nested serialization loses `weak_ptr`s | F1.1: a per-thread stack of mark sets (`PtrSerializeScope`); `serialize_nested_test.py` and a two-thread C++ test | Same code in `weak_ptr_serialize_support.cc` (the commented-out "outermost lock" logic, an unused `ptr_serialize_depth`). Port by hand (the skeleton's file is from after S4). **No geocal class serializes a `weak_ptr`** (checked by the plan review), so this affects downstream code that does, not geocal itself, and the test needs a test-only class. The bottom set keeps geocal's three tests that write archives directly (`image_coordinate_test.cc`, `igc_rolling_shutter_test.cc`, `blitz_array_serialize_support_test.cc`) working. | Low priority. |
+   | `serialize_shared_ptr.h` has no include guard | F1.2 | `#pragma once`; move the `shared_ptr_helper.hpp` include inside the serialization `#ifdef`; drop `<iostream>`. | Yes. |
+   | Blitz serialization of column-major, reversed and strided arrays; loading into a column-major target | R1.1, then R3.2: the rank-generic `blitz_array_serialize_support.{h,cc}.sample` (one template instead of 37 typedefs and macro lines; archives byte-identical); tests for each case | Same code (`isStorageContiguous()` and `resize`), but **latent in geocal** (plan review): no `ColumnMajor`/`fortranArray` in `lib/`; the only nonzero bases (`reindexSelf` in `igc_map_projected.cc`, `CalcRaster`'s swap tiles) and reversed arrays (locals in `rsm_grid.cc`) aren't serialized, so the nonzero-base throw (skeleton D1) breaks nothing. geocal's list has types the sample lacks: add `blitz::Array<Time,1>` (`PiecewiseLinear`) and the float, unsigned, short and unsigned short types that have typedefs but no `BOOST_SERIALIZATION_SPLIT_FREE` line (the skeleton's ST bug 5). The sample's nonzero-base error uses the format constructor; write it with `<<`. Golden archives must stay identical (step 5). | The column-major, reversed and load fixes only, not the nonzero-base throw (a behavior change); low priority, since latent. |
+   | Copying an `Observer`/`Observable` copies the self pointer | R1.2: delete copying (`Observable() = default;` is then needed); `static_assert` tests | The skeleton's trial build found one failure in geocal: `%copyctor QuaternionCamera` (`quaternion_camera.i`). Drop it, or give `QuaternionCamera` a copy constructor that starts with no observers. The trial used frenchpeas's compile database, which has no MSP: repeat it on rifle. | No: deleting copies removes python `QuaternionCamera(other)`. If 1.28 needs a fix, copies that start unregistered (the skeleton's option A). |
+   | `"blah"` seed in `print_to_string` and `Exception` (outputs shorter than 4 characters come out wrong); the `Exception` copy constructor leaves the stream at position 0 | ST.7: a plain `std::ostringstream`; `s_ << E.s_.str()`; a test with a 1-character `print` | `printable.h`, `geocal_exception.h`, `lib/Msp/msp.h`, `lib/swig_quaternion.i`. Phase 1 item 6 rewrites `Exception` anyway, but this is a bug now. | Yes. |
+   | `RayIntersect : public Printable<ImageGroundConnection>` (CRTP typo; C++ `operator<<` on it is undefined behavior) | Found by the plan review, the kind of mistake Phase 1 item 6's private `Printable` constructor turns into a compile error | `ray_intersect.h` line 11 → `Printable<RayIntersect>`. Python is unaffected (its `.i` doesn't expose `print_to_string`). | Yes. |
+   | `make check` tests the installed library (§6.1) | ST.11 (skeleton decision 18): `-no-install -Wl,-rpath,$(abs_top_builddir)/.libs` on never-installed programs | `geocal_test_all` (`geocal.am`), the only `check_PROGRAMS`. Then drop the `LD_PRELOAD` workaround (§6.1, `resampler_threading_plan.md`). Check with `readelf -d`. The build-tree python tests still need `LD_PRELOAD` (Phase 6 item 7). | If its build has the same problem. |
+   | `python-install` with `--force-reinstall` (leaves a stale copy when switching to editable; can uninstall the env's copy) | ST.7 (skeleton decision 17): a guarded uninstall from the prefix, then `pip install --ignore-installed` | `python/python.am`. Verify both switching directions as in `python_editable_install_plan.md`, and that the env's own install survives. | If it has the same rule. |
+   | jsonpickle `DeprecationWarning` | `keys=True` | `sqlite_shelf.py` (lines 102, 165); check that old `.json` shelves still load. | Yes, if old shelves still load. |
+   | `configure` accepts Boost 1.46 | F3.1 | `configure.ac` line 54 → 1.84 (was Phase 1 item 2). | Only up to what 1.28's code needs (about 1.66, for `asio::thread_pool`, §1), not 1.84. |
+   | Blitz thread safety only assumed | T7.4: configure warns if `BZ_THREADSAFE` isn't defined | frenchpeas's current build env (conda-forge `libblitz-1.0.2-h9c3ff4c_3`) defines it; the env files now ask for the afids build (`*_1000`), which hasn't been checked. geocal's `ThreadPool` users copy Blitz arrays on worker threads, so the check matters more here than in the skeleton. | Optional. |
+
+   Not in step 9:
+   * the archive-load `chdir` (Phase 6, unless threads start reading archives
+     sooner);
+   * the python minimum (3.13, needed by the nanobind code, Phase 6);
+   * **`None` for a `shared_ptr` argument**, which crashes python **today**
+     (`ScaleImage(None, 2.0)` segfaults, exit 139, checked 2026-11-07). The
+     skeleton's fix is on the nanobind side plus null checks in C++ (R1.4), so
+     it belongs to Phase 6's audit. Add C++ null checks earlier where a crash is
+     reported.
+
+### Phase 1: Cleanup and hygiene
+1. ~~Require C++23.~~ Moved to Phase 0 step 3a (plan review, 2026-11-07): the
+   step 4a copy from `277b657` already needs C++20.
+2. Delete `boost_fix/`, the disabled libraw, and `unused_code/`. (The Boost
+   minimum moved to Phase 0 step 9.)
+3. Show third-party headers with `-isystem` (Boost, GDAL; Blitz is done by the
+   Phase 0 `ac_blitz.m4` copy) so GeoCal's own warnings are visible (§8.1).
+   Then the skeleton's warning flags, **one at a time**, each only once geocal
+   is clean for it: `-Wall -Wextra -Wpedantic -Wshadow -Wold-style-cast
+   -Wsuggest-override -Wnon-virtual-dtor -Wconversion -Wsign-conversion`
+   (skeleton R7.1), then `-Wduplicated-cond -Wduplicated-branches
+   -Wlogical-op -Wcast-qual -Wformat=2 -Wdeprecated-copy-dtor` (F6.9). Left
+   out there, with reasons: `-Wnull-dereference` (false positives in
+   libstdc++'s `shared_ptr` in optimized builds), `-Wextra-semi` (macro
+   style). clang 22 needs `-Wno-c2y-extensions` for the Boost.Test files.
+   Add `--enable-werror` for `check_all.sh` and later CI. Decide what to do
+   about geocal's 1501 `-Wunused-parameter` first (§8.1); conda's
+   `DEBUG_CXXFLAGS` already include `-Wextra`, so debug builds show them
+   today. As each flag becomes clean, `check_all.sh` stops using the Phase 0
+   warning baseline for it.
 4. Fix the real issues the compile check turned up (§8.2).
 5. Mechanical idiom fixes with clang-tidy (§8.3), one directory per commit,
-   with wrapper regeneration in separate commits.
-6. **`Exception` and `Printable`** (same as skeleton S1.4–S1.5, which works out
-   the details first):
-   * Boost.Stacktrace held as a member and `std::source_location` replace the
-     vendored backtrace (§3.2, §7.1 item 2);
-   * a format-string `Exception` constructor (§7.1 item 1);
-   * a generic `std::formatter` for `Printable<T>`;
-   * `static_cast` instead of the C-style casts in `Printable`.
+   with wrapper regeneration in separate commits. First clean geocal for the
+   7 checks already in `.clang-tidy` (2,016 findings in 273 files as of
+   2026-11-05). Then take the skeleton's added checks one at a time, each only
+   after geocal is clean for it (the skeleton's `.clang-tidy` says so):
+   `google-explicit-constructor`, `cppcoreguidelines-pro-type-member-init`
+   (in the skeleton it found 13 uninitialized members where a review had seen
+   4), `cppcoreguidelines-prefer-member-initializer`, `modernize-use-using`,
+   `modernize-use-default-member-init`, `readability-container-contains`,
+   `modernize-use-ranges`, `bugprone-*` without
+   `bugprone-easily-swappable-parameters`, `modernize-concat-nested-namespaces`,
+   `modernize-avoid-c-arrays`, `modernize-use-designated-initializers`,
+   `readability-redundant-typename`, `readability-redundant-inline-specifier`,
+   `performance-*` with `-performance-unnecessary-value-param` (below),
+   `misc-use-anonymous-namespace`,
+   `cppcoreguidelines-special-member-functions` (with the skeleton's two
+   options). **Wait until Phase 6** for the checks that change signatures SWIG
+   sees (`modernize-pass-by-value`, `performance-unnecessary-value-param`,
+   §8.4). Check every `--fix` that touches a macro: in the skeleton, merging
+   nested namespaces expanded `CXX_PYTHON_RULES_NAMESPACE` to `Skeleton`.
+   C++ inside `.i` files (for example `lib/swig_quaternion.i`) is only seen
+   in the generated wrappers, which lint skips, so clang-tidy can't fix it:
+   check it by hand (skeleton S1.3). The two repositories can share one
+   `.clang-tidy` again only after Phase 6: the skeleton's file has the two
+   signature-changing checks and a `HeaderFilterRegex` naming
+   `cxx_python_rules/`.
+6. **`Exception` and `Printable`**, as the skeleton ended up after S1.4–S1.5
+   and its review fixes (`lib/skeleton_exception.{h,cc}`, `lib/printable.h`):
+   * Boost.Stacktrace kept as stored addresses (the Boost code in the `.cc`,
+     `-ldl`), with `std::source_location` for the throw site, replacing the
+     vendored backtrace (§3.2, §7.1 item 2). Resolve frames with `dladdr` and
+     one `addr2line` run per module (S6 note: Boost's addr2line backend gave
+     wrong file and line numbers for shared libraries, and took 11 s per trace
+     from python). `binutils` in the env and a configure check.
+   * A format-string constructor (`ExceptionFormat` with a `consteval`
+     `std::format_string` and a defaulted `std::source_location`), constrained
+     to at least one argument so `Exception("50%")` stays literal. Keep the
+     doxygen `\cond` around the template constructor, or doxy2swig breaks the
+     python constructor's docstring.
+   * `operator<<` keeps the stream state between calls (framework relies on
+     `e << std::setprecision(8) << ...`).
+   * **Copies can't throw** (F5.1): message, location and trace in a
+     `std::shared_ptr<const Data>`, copied on write by `operator<<`;
+     `static_assert`s on nothrow copy. An exception class derived from
+     `Exception` that adds its own `std::string` member loses the guarantee;
+     say so in its comment.
+   * `range_check`, `range_check_inclusive`, `range_min_check`,
+     `range_max_check` become function templates with a defaulted
+     `std::source_location` (the caller's file and line), `T` deduced from the
+     value only (`std::type_identity_t` for the bounds), message as before
+     (R1.8). geocal's macros of the same names go. Don't name a member
+     `range_check` while the macro exists.
+   * A generic `std::formatter` for `Printable<T>` (the `PrintableObject`
+     concept), `static_cast` instead of the C-style casts, `Printable<T>`'s
+     constructor private with `T` a friend
+     (`bugprone-crtp-constructor-accessibility`).
+   * A `TypeError : Exception` class for wrong-type arguments (the skeleton
+     has one). The python translation comes in Phase 6.
 7. **clang-format, adopted** (decided 2026-11-05, §8.5): `.clang-format`
    (the same file as swig-rules-skeleton's), `.clang-format-ignore`,
    `make format` / `make format-check`, and `make lint` (clang-tidy with
-   `.clang-tidy`). The one-time reformat of `lib/` was done 2026-11-05; commit
-   it on its own (and the one regenerated wrapper); no
-   `.git-blame-ignore-revs` (maintainer, 2026-11-05). `make lint` currently
-   reports 2,016 findings in 273 files (the §8 clang-tidy cleanup still to do;
-   counts in the skeleton plan). New and changed C++ is
-   formatted with
+   `.clang-tidy`). The one-time reformat of `lib/` was done 2026-11-05 and is
+   committed (`f5ea8926`, `62dc9874`); no `.git-blame-ignore-revs`
+   (maintainer, 2026-11-05). New and changed C++ is formatted with
    `make format`.
+8. **Configuration header with only project macros** (skeleton R1.3 and
+   R2.11). *The namespace and serialization macros* (R1.3):
+   `SWIG_MAPPER_NAMESPACE` and `SWIG_HAVE_BOOST_SERIALIZATION` are `-D` flags
+   only in `bindings/python/python.am`, and `#define SWIG_MAPPER_NAMESPACE
+   GeoCal` is repeated by hand in `vicar_lite_file.cc`, `vicar_file.cc`,
+   `rsm_nitf.cc`, `boost_pcall.h`, `unit_test_support.h`,
+   `geocal_shared_ptr.i` and `swig_quaternion.i`. Installed headers
+   (`weak_ptr_serialize_support.h`, `serialize_function.h`) depend on them,
+   so downstream code has to define them too. Define both in the new
+   `geocal_config.h` template and delete the scattered defines. *The
+   configuration header itself* (R2.11):
+   the installed `geocal_config.h` becomes a small template
+   (`AC_CONFIG_FILES`) defining only `GEOCAL_*` macros, and the autoheader
+   output (`PACKAGE`, `HAVE_*`, ...) becomes a private build header. Then the
+   `#undef PACKAGE_*` in `geocal_gdal.h` can go. Release builds get
+   `BOOST_DISABLE_ASSERTS` on the command line, defined empty (a different
+   definition warned in the skeleton). geocal has a second generated header,
+   `geocal_external_config.h`; decide where its macros go.
+9. **Class design idioms** from the skeleton's reviews (R2, F5), mostly through
+   item 5's checks: `explicit` constructors; default member initializers;
+   rule of zero (no `~X() override = default;` below the first virtual
+   destructor); `#pragma once` in every header (skeleton D3; also prevents
+   include guard clashes between geocal and framework headers); `mutable`
+   instead of `const_cast`; `GenericObject`'s copy operations `protected` and
+   no move operations (F5.2: a defaulted move assignment in a virtual base
+   gives `-Wvirtual-move-assign`; the skeleton's trial over all 624 geocal
+   files found nothing that slices, but that compile database has no MSP, so
+   repeat it on rifle); `[[nodiscard]]` only where ignoring the
+   result is always a mistake (the `serialize_read*` functions, for example).
+   All of these are SWIG-safe.
+10. **Thread safety written down** (F7.1): a "Thread safety:" line in the
+   class comment, starting with the classes `ThreadPool` users touch (the
+   Resampler work) and the shared Support classes. The skeleton's rule: a
+   `const` function that changes `mutable` state without a lock is not safe
+   to call concurrently, and the comment says so. Free-threaded python is a
+   long-term goal there (D9), not required now.
 
 ### Phase 2: Small library swaps that are not in the API
 1. **libsdbx → Boost.Geometry R-tree** (§3.6).
 2. `filesystem`, `regex`, `format` (→ `std::format`), `lexical_cast`,
    `multi_array`, `date_time` (in `geocal_time`, → chrono calendar types) → `std`.
+   The same swaps inside the rules library came with the Phase 0 step 4a copy
+   (skeleton S2). `DirChange` stays as it is: it was never Boost, and restoring
+   through the saved directory handle also works if the old directory was
+   renamed meanwhile.
 3. Remove the corresponding compiled Boost libraries from the build.
 
 ### Phase 3: GSL removal (§3.4)
@@ -698,46 +1169,214 @@ migration.
 **Before starting:** collect the ECOSTRESS archives embedded in HDF5 files
 for the golden tests (Phase 0 step 5).
 `boost::optional` → `std::optional`, then `boost::array` → `std::array`,
-each checked against the golden archives. The `swig_rules` typemap changes come
-from the skeleton (S3), which proves them first.
+each checked against the golden archives. The typemaps came with the Phase 0
+step 4a copy (skeleton S3: one optional typemap macro for both types, the
+`std::array` typemaps and `%python_attribute_std_array`). From the skeleton's
+notes:
+* the **Boost #319 workaround** in `serialize_shared_ptr.h` is needed as soon
+  as geocal serializes a `std::optional` (it is in the `277b657` copy);
+* `geocal_serialize_support.h` always includes
+  `boost/serialization/array.hpp` (the `std::array` serializer), as the
+  skeleton's `skeleton_serialize_support.h` does;
+* the skeleton wrote golden archives with the `boost::` types **before**
+  converting (S3.1), and checked the `std::` build loads them and writes the
+  same bytes;
+* a returned `std::array` is a numpy array in python, not an
+  `Array_double_3` object: record it in `RELEASE_NOTES_2.0.md`.
 
 ### Phase 5: `std::shared_ptr` (GeoCal 2.0 API break)
-As described in §3.2, using the skeleton's migration script (skeleton S4).
-Also in this phase:
-* change `to_ptr`/`const_pointer` (`null_deleter.h`) and `Observer::this_obj`
-  to the aliasing-constructor form (§4 probe results);
-* keep the repo's own `shared_ptr` save/load (`px`, version 1, `track_never`);
-* require byte-identical XML archives against the golden corpus.
+As described in §3.2, using the skeleton's migration script,
+`script/boost_to_std_ptr.py`: run it with `--dry-run` first, then fix what it
+reports (`BOOST_SP_*`, `scoped_ptr`, `using boost::...`) and the standard
+includes that Boost's headers used to pull in (the skeleton found one
+`<vector>`). Not needed: `--swig` for the `.i` files, since the bindings stay
+broken until Phase 6. Also in this phase:
+* copy the skeleton's `serialize_shared_ptr.h` (same archive format: `px`,
+  version 1, `track_never`) and `null_deleter.h`'s aliasing `to_ptr` and
+  `const_pointer`, and change `Observer::this_obj` to match (§4 probe results);
+* require the golden archives to load and a byte-identical rewrite of each
+  (Phase 0 step 5);
+* optional: observer lists as `std::vector` (skeleton D13; Boost writes a
+  `std::list` and a `std::vector` byte for byte the same, checked).
 
 **Decided:** the Python bindings may be broken from Phase 5 until Phase 6
 (nanobind), as in the skeleton's S4. Phase 5 converts only C++ and
 serialization; the SWIG layer (`my_shared_ptr.i` etc.) is not ported to
 `std::shared_ptr`. During Phases 5–6:
-* build with `--without-swig`;
+* build with `--without-swig` **and test with `make geocal-check`**, not
+  `make` or `make check`. `--without-swig` only stops the wrappers being
+  regenerated (`configure.ac` sets `SWIG=/fake_so_fail`); `bindings/python/python.am`
+  still compiles all 227 committed `*_wrap.cc` files, which stop compiling once
+  the C++ uses `std::shared_ptr`, and `make check` depends on `all`. The
+  skeleton used its `make skeleton-check` for the same reason; geocal already
+  has `make geocal-check` (`geocal.am`). `check_all.sh` runs in its C++-only
+  mode;
 * acceptance is the C++ tests, the `--without-boost-serialization` build and
   the golden archives;
-* record the Python test results just before Phase 5, as the Phase 6 target.
+* record the Python test results just before Phase 5, as the Phase 6 target
+  (with the Phase 0 step 5 director shelves already written).
 
-### Phase 6: Binding tool (if nanobind is chosen)
-Follows the skeleton's S6 (the pilot, §4). The design worked out there and
-carried over to geocal:
-* the forked `shared_ptr` caster and the `GenericObject`-rooted type mapper;
+**Keep the broken window short.** In the skeleton it lasted one day. geocal's
+Phase 6 is much bigger (230 `.i` files), so start Phase 6 right after Phase 5,
+and don't land unrelated python work on `develop_2_0` in between. The skeleton
+did its consumer-pattern samples (S5) before S4 for the same reason: geocal's
+equivalent is to have tests for its directors, observers, multiple-base classes
+and arrays passing under SWIG before Phase 5 (the Phase 0 coverage work).
+
+### Phase 6: nanobind
+Follows the skeleton's S6 and the two review passes that reworked it. **Copy**
+the skeleton's current `cxx_python_rules/` (after its third fix plan, if that
+has been done by then; otherwise note which T steps are missing),
+`config/m4/ac_nanobind.m4` and the python package files, replacing
+`swig_rules/`. Drop `swig_rules/include` and the SWIG helpers (list in the
+skeleton's S6.6 progress row). Take samples only from generated files (T4).
+
+**Rename** (skeleton decision 23, "Notes for geocal" rename row): in geocal's own
+files `SWIG_MAPPER_NAMESPACE` → `CXX_PYTHON_RULES_NAMESPACE`,
+`SWIG_HAVE_BOOST_SERIALIZATION` → `CXX_PYTHON_RULES_HAVE_BOOST_SERIALIZATION`,
+`@swigrules@` → `@cxxpythonrules@`, `pkgpythonswig*` → `pkgpythoncxx*`; the
+python package `geocal_swig` → `geocal_cxx`, module `geocal_cxx._bindings`
+(decided 2026-11-07; `geocal/__init__.py`, the mypy overrides, imports in
+scripts). The skeleton's
+perl substitutions are in its rename progress row; longest names first. Remove
+the old `geocal_swig/` from `site-packages` before installing (a stale
+`__init__.pyi` misleads mypy).
+
+**Pickles and shelves** (corrected by the plan review): SWIG-era pickles break,
+because they name the old module (a pickled `ImageCoordinate` refers to
+`geocal_swig.image_coordinate` and `_new_from_serialization`). That includes
+**`.db` and `.json` shelves of C++ objects**, since `sqlite_shelf.py` stores
+`pickle.dumps(value)` (and jsonpickle stores the same reduce data). Only `.xml`
+and `.bin` shelves, which are Boost archives, keep loading. The payload inside
+the pickle is the same Boost binary blob either way, so a small compatibility
+shim can keep old shelves readable: a `find_class` override when
+`sqlite_shelf.py` unpickles, or a stub `geocal_swig` package mapping
+`<module>._new_from_serialization` and `_new_from_init` onto the new support
+module. **Decided (2026-11-07): the shim** (§10), not a conversion script.
+Rehearse it in the skeleton first. Its golden shelves are only `.xml` and
+`.bin` (Boost archives), and its rename (decision 23) accepted breaking
+pickles, so first write `.db`/`.json` shelves of C++ objects from a scratch
+build of its last SWIG commit `277b657` (module `skeleton_swig.<module>`),
+then add the shim and a test there, then here. Test it with
+the Phase 0 step 5 golden `.db`/`.json` shelves. Keep it until the maintainer
+decides old shelves no longer need to load. The SWIG-era names
+that are data stay: `SwigDirector_` in archives and `geocal_object`.
+(`IostreamSwig` and `swig_shelve` are the skeleton's names; geocal's shelve
+module is `sqlite_shelf.py`, and its only `IostreamSwigTest` is in an `.i`
+file no `.am` builds.)
+
+**Generate the bindings** with the skeleton's current `i_to_nanobind.py`
+(`--namespace GeoCal --header-dir lib/... --prefix geocal_nb --out-dir ...
+<all .i>`). It now writes the hand-written style (member pointers,
+`nb::overload_cast`, `"name"_a` with the C++ parameter names, a `docs` helper
+per class, lambdas only for director dispatch and conversions). **It adds no
+`.none()` at all by default** (corrected by the plan review: `.none()` comes
+only with `--allow-none`, which adds it to every `shared_ptr` argument, the
+old crash-prone behavior). So the bindings need a **`None` audit**: grep the
+`.i` files for `shared_ptr` parameters that default to null (32 of them, for
+example `Ref = boost::shared_ptr<Refraction>()` in `orbit.i` and `ipi.i`),
+and geocal's python and the downstream repositories for `None` passed to
+C++; add `.none()` by hand where C++ accepts null, and a null check in C++
+where it doesn't. Count this in the Phase 6 effort. (Under SWIG today `None`
+crashes some calls: `ScaleImage(None, 2.0)` segfaults.) After the third fix
+plan's T1.4 the generator also flushes stream arguments. Keep the pristine output, then hand-fix
+the `HAND CONVERT` items (`%extend`, `%pythoncode`, `%typemap`). In the
+skeleton the hand changes were 92 of 2,327 lines in 7 files. Rules for the
+hand-written files: `cxx_python_rules/nanobind/README.md` "Writing bindings";
+for classes python can subclass, `DirectorNotes.md`.
+
+The design carried over from the skeleton:
+* the forked `shared_ptr` caster (`gc_shared_ptr.h`, with a `static_assert`
+  on the nanobind version) and the `GenericObject`-rooted type registry, with
+  the key per project (F1.4, so geocal and framework can be imported together);
 * `GenericObject : std::enable_shared_from_this<GenericObject>`;
-* primary bound base only, with secondary-base methods bound directly;
+* primary bound base only, with secondary-base methods bound directly
+  (`isinstance(obj, SecondaryBase)` is `False`);
 * trampolines for the 9 directors;
 * `nb::new_` + `std::make_shared` constructors for plain `GenericObject`
-  classes;
+  classes, **not** for director classes;
 * `__reduce__` with the Boost binary blob for pickling, with a
   `multiprocessing.Pool` test (geocal uses it in production);
 * the pinned `mdspan` reference implementation as the array type between
-  `nb::ndarray` and Blitz (§3.3.1);
-* the `.i` → nanobind converter;
-* docstrings from doxygen;
-* `.pyi` stubs.
+  `nb::ndarray` and Blitz (§3.3.1); a non-const `blitz::Array&` parameter
+  rejects read-only and converted arrays;
+* the `TypeError` translation (cleanup item below);
+* docstrings from doxygen through `doxy2nanobind.py`, which writes a
+  constant-data table and replaces it only when its contents change (on
+  geocal's headers a `std::map` initializer took 3 min 24 s to compile; the
+  table takes 0.6 s);
+* `.pyi` stubs;
+* `test_every_class_registered` (catches a missing `register_type`; check
+  that it fails with one removed).
 
-Python API changes are accepted for 2.0 (§10). If the move goes ahead, the
-remaining SWIG limits on headers go away (§4, §7.2), C++23 becomes worth
-switching on (§7.5), and CMake becomes worth reconsidering (§6).
+**Things found in the skeleton's S6 that apply here** (its "Notes for geocal"
+nanobind row, plus later fixes):
+1. Compile the binding files **without `-fvisibility=hidden`**, or director
+   serialization breaks when reading archives of the base class.
+2. `.none()` only on `shared_ptr` arguments C++ accepts as null, added by hand
+   (the `None` audit above); check pointers in C++. A blanket `.none()` let
+   python crash the interpreter with `None`.
+3. No `nb::new_` for director classes.
+4. A director class's binding calls the C++ implementation non-virtually for
+   python subclasses, or `super()` runs the override twice. These lambdas
+   can't be replaced by a helper template (skeleton review 2, §5.5).
+5. A function that runs python callbacks on C++ worker threads (geocal's
+   `ThreadPool` users) needs `nb::call_guard<nb::gil_scoped_release>()`, or it
+   deadlocks. Under SWIG such a callback segfaulted.
+6. nanobind crashes on a null docstring.
+7. The python tests against the build tree need `LD_PRELOAD` of
+   `.libs/libgeocal.so`, as the skeleton's `python-check-build` does: the
+   extension modules are installed programs, so the Phase 0 step 9 rpath fix
+   (never-installed programs only) doesn't cover them, and their RPATH would
+   find the installed `libgeocal` first.
+8. Remove an old `geocal_swig/` install directory before installing.
+9. Overrides that take a C++ reference (observer `notify_update`) use
+   `CXX_PYTHON_RULES_NB_OVERRIDE_REF`, or the python override gets a copy.
+10. **Python 3.13 is the minimum** (`Py_IsFinalizing`); add the configure check
+    to geocal's local m4 (not the shared `afids_python.m4`). geocal's envs are
+    on 3.13.7.
+
+**Also from the skeleton's review passes**, coming with the copy:
+* the in-memory serialization functions are renamed (F4):
+  `serialize_write_binary(Obj)` → `serialize_write_binary_string`,
+  `serialize_read_binary(Data[, Base_dir])` →
+  `serialize_read_binary_generic_string`; the python XML string functions use
+  `bytes` (F1.3). Callers to check: `sqlite_shelf.py`, `mars_igc_test.py`,
+  `rsm_grid_test.cc`, `boost_pcall.h`;
+* the per-thread **archive base directory** instead of `chdir` during loads
+  (R4.1): move each class that opens a file named in an archive to
+  `resolve_archive_path(name)`, class by class (`AirMspiIgc`, the GDAL and
+  VICAR raster images, DEMs, anything reading a file in `load()` or in a
+  constructor called during a load; `spice_helper.cc` uses `DirChange` too).
+  `read_shelve` keeps changing to the shelve's directory until all of them do.
+  **This can't be gradual by itself** (plan review): the copied
+  `serialize_function.cc` has no `DirChange`, so from the copy on, a direct
+  `serialize_read_generic`/`serialize_read<T>` of an archive with relative file
+  names breaks for every class not yet converted. Keep a temporary `DirChange`
+  in geocal's copy of the read functions until the last class uses
+  `resolve_archive_path` (as the skeleton's "option 2" did for `read_shelve`),
+  or convert all of them in the same step as the copy. Also list the
+  process-wide python `chdir`s (`local_target.py`, `vicar_interface.py`,
+  `tempdir.py`) in the thread-safety notes;
+* the python stream adapters let python errors out (T1), module statics set at
+  import (T7.3), concepts on `serialize_read<T>` and `GenericObjectMap::get<T>`
+  (T7.1; first grep geocal for uses with a type outside the `GenericObject`
+  hierarchy);
+* `from geocal import *` must still give the C++ classes. geocal has no
+  `__all__`, so it does today; add a test (T5 found the skeleton's broken).
+
+**Python API changes** for `RELEASE_NOTES_2.0.md`: start from the skeleton
+plan's list (§10, "Python API changes (done in S6...)"): one extension module,
+no `.this`, object identity kept across bases, `isinstance` with a secondary
+base `False`, a `weak_ptr` to a python-only director object expires at once,
+`Array_double_N` classes gone, SWIG pickles unreadable, exceptions
+(`TypeError`, `cpp_exception`, `cpp_source`), keyword names now the C++
+parameter names.
+
+With SWIG gone, the remaining SWIG limits on headers go away (§4, §7.2), and
+the signature-changing clang-tidy checks deferred in Phase 1 item 5 can be
+taken. CMake is not needed for geocal: the skeleton's CMake reference build
+is for framework.
 
 **Cleanup items for this phase.** These were deferred until the new
 bindings exist:
@@ -757,16 +1396,18 @@ bindings exist:
     may be broken from Phase 5 until Phase 6, and the SWIG rules go away with
     nanobind. Do it once the nanobind bindings can turn a C++ exception into a
     Python `TypeError`.
+  * *The skeleton has done this* (S6): `Skeleton::TypeError` in
+    `skeleton_exception.h`, translated to python `TypeError` by
+    `register_exceptions` in `cxx_python_rules_nb.h` (a python override
+    returning the wrong type gives `TypeError` too). The class itself comes in
+    Phase 1 item 6.
   * *Steps:*
     1. Add a GeoCal exception type for wrong-type arguments, for example
        `TypeError : Exception` in `geocal_exception.h`. It must be a GeoCal
        type, not nanobind's `nb::type_error`, because `libgeocal` stays free
-       of nanobind and Python (§4).
+       of nanobind and Python (§4). (Phase 1 item 6.)
     2. Register an exception translator in the binding module that maps it
-       to Python `TypeError`. Don't rely on nanobind's default translations:
-       as far as I know, none of the standard exceptions maps to `TypeError`
-       (`std::invalid_argument` becomes `ValueError`). Check this against the
-       pinned nanobind version.
+       to Python `TypeError` (comes with the copied `cxx_python_rules_nb.h`).
     3. Throw the new type from `IgcMspImp::ground_coordinate_dem`.
     4. Change the Python `IgcMsp` code to match. If the C++ error now reaches
        Python as `TypeError`, the Python check duplicates it and can be
@@ -779,7 +1420,47 @@ bindings exist:
 * FFTW → pocketfft (§3.5). Move it earlier when threading
   `PhaseCorrelationMatcher` (for example in tie-point collection) becomes a goal.
 * GDAL call-site RAII; HighFive.
-* Reassess C++23 (§7.5) once libc++ has caught up.
+* `RasterImage::read_ptr` and its ~14 overrides → a `layout_stride` `mdspan`
+  virtual (`read_into`), with `read_ptr`/`write_ptr` kept as non-virtual
+  wrappers so callers move over gradually. The worked pattern is the
+  skeleton's `lib/raster_sample.{h,cc}` (S7.2), including the contiguity check
+  and temporary for C-library backends (VICAR, GDAL), `read_with_pad` through
+  `submdspan`, and `CalcRaster`'s writable `self.data`. Not wrapped by SWIG,
+  so it can be done any time after Phase 1; it needs the `mdspan` package.
+* Deducing `this` for `Printable<T>` (C++23), **in the skeleton first**
+  (skeleton plan §11); it changes every class's base.
+* Hardening flags (`-D_FORTIFY_SOURCE=3`, `-fstack-protector-strong`,
+  `-D_GLIBCXX_ASSERTIONS` in release builds, or gcc's `-fhardened`): set aside
+  in the skeleton (D17). conda's compiler activation already adds some; measure
+  release-mode `_GLIBCXX_ASSERTIONS` on geocal's hot loops first.
+* CI on the JPL runner, after the skeleton's (§0.1).
+* Free-threaded python: a long-term goal in the skeleton (D9); its
+  `cxx_python_rules/README.md` "Threads" section lists what is left.
+* Reassess `std::mdspan` (gcc 16 minimum) and `std::stacktrace` (when the
+  minimum gcc no longer needs `-lstdc++exp`).
+
+### Review passes (added 2026-11-07)
+A fresh code review, by someone (or a session) that didn't write the code,
+then a fix plan, before moving on. The skeleton needed three after its phases
+(§0.2), and the third still found bugs that lose data. For geocal:
+1. **After Phase 2** (the C++ library modernized, SWIG still in use):
+   `lib/` and `swig_rules/lib/`, for bugs and old idioms, as the skeleton's
+   first pass did. Before the API break, so its fixes are cheap.
+2. **After Phase 6** (the bindings): the binding files, the rules library,
+   the python package and the build, as the skeleton's second pass did.
+3. **A last pass focused on the boundaries**: I/O errors, the environment
+   (minimum versions actually built), copied files, star imports, as the
+   skeleton's third pass did.
+
+What worked in the skeleton: read the code; a wide clang-tidy run, report only
+(its check lists are in the appendices of its second and third reviews);
+confirm each finding with a small program before calling it a bug; then a fix
+plan with "Intended behavior changes", decisions for the maintainer, a baseline
+step (strict-`xfail` reproductions, API snapshot, golden comparison), and a
+final table of checks showing each problem gone. Have the fix plan reviewed
+independently too (§0.3 item 7). Use `grep -r` in the checks: on a directory
+without `-r`, GNU grep reports an error and finds nothing, which looks like a
+pass. The skeleton's reviews were run at a high effort level.
 
 ---
 
@@ -791,7 +1472,16 @@ Unchanged: **not a prerequisite** for anything above. clang-tidy gets its
 Revisit CMake if the binding tool changes, or if the sibling AFIDS repos
 migrate together.
 
-### 6.1 `make check` runs against the installed library (open, 2026-11-03)
+### 6.1 `make check` runs against the installed library (open, 2026-11-03; fix known 2026-11-05)
+
+**Solved in the skeleton** (its ST.11, decision 18), with a fifth option not
+listed below: a per-target rpath on every never-installed program linked to
+the library, `-no-install -Wl,-rpath,$(abs_top_builddir)/.libs`. Automake puts
+per-target `LDFLAGS` before `$(LDFLAGS)`, so `.libs` comes before conda's env
+rpath. Option 4 alone did not fix it there (RUNPATH keeps the same order, and
+`-no-install` programs have no libtool wrapper to set `LD_LIBRARY_PATH`). Not for
+installed programs (the build directory would end up in their rpath). geocal
+applies it in Phase 0 step 9. The original analysis follows.
 
 Found during the Resampler work (`resampler_threading_plan.md`). In the pixi
 build, `geocal_test_all` (and the other uninstalled programs) load the
@@ -842,13 +1532,15 @@ Options to look at, none tried yet:
 
 This affects every project built with `--prefix=$CONDA_PREFIX` in a conda
 or pixi env (the downstream ones too), so the fix probably belongs in the
-shared `config/m4` / skeleton, and should be tried in `swig-rules-skeleton`
-first (§5 Phase 0 step 4a). Add to Phase 0 as a baseline item: `make check`
-has to test the library that was just built.
+shared `config/m4` / skeleton, and should be tried in the skeleton first.
+(*2026-11-07:* done there; the fix is in the `.am` files, not the shared m4,
+and geocal applies it in §5 Phase 0 step 9.)
 
 ---
 
 ## 7. C++20 for GeoCal 2.0
+
+**Update (2026-11-07): decided, C++23, in Phase 0 step 3a** (§7.5, §10). What follows about C++20 still holds; C++23 adds to it.
 
 **Decision (revised):** the gcc 11.2 system is now served by the
 `maintain_1.28` branch, so **`develop_2_0` should require C++20**, with the
@@ -969,7 +1661,12 @@ I syntax-checked (`-fsyntax-only -Wall -Wextra -Wdeprecated`) all 366
   (`pan_sharpen_test.cc:96`).
 * Not covered: Msp and Mspi (their optional dependencies weren't set up),
   the SWIG wrapper `.cc` files, linking, running the tests, and clang/libc++.
-  Phase 1 step 1 (full build and all tests as C++20) closes those gaps.
+  Phase 0 step 3a (full build and all tests as C++23) closes those gaps.
+* **Repeated 2026-11-07, strict C++23** (`-std=c++23`, gcc 15.2,
+  `-fsyntax-only`, by the plan review): all 398 library and test files and all
+  226 wrappers in frenchpeas's compile database compile. The only warnings are
+  the known libsdbx deprecations and one `-Wsign-compare`. Still not covered:
+  Msp, gcc 14, linking and running the tests.
 
 ### 7.4 Proposed minimum compiler for 2.0
 
@@ -980,7 +1677,7 @@ macOS best-effort:
 |---|---|---|---|
 | Linux, gcc / libstdc++ | **gcc 14** | Completes the C++20 *library* (chrono `parse` and time zones, on top of `std::format` from gcc 13); also has nearly all C++23 language features if we move to C++23 later (§7.5). Released 2024, long available in conda-forge. | gcc 15.2 |
 | macOS, clang / libc++ | best-effort | libc++ 21 (current osx lock) has `std::format`, `jthread`, `mdspan`, but no `chrono::parse` and no `std::stacktrace`. | clang 21 / libc++ 21 |
-| Standard | **C++20** (`AX_CXX_COMPILE_STDCXX([20], [noext], [mandatory])`) | `noext` (strict ISO) if nothing depends on GNU extensions; otherwise keep `ext` | |
+| Standard | **C++23** (`AX_CXX_COMPILE_STDCXX([23], [noext], [mandatory])`; decided 2026-11-07, was C++20) | `noext` (strict ISO): nothing in the skeleton or in geocal's compile database needed GNU extensions | |
 
 Where a libstdc++-only feature is used (for example `chrono::parse`), keep
 it in one place, so a fallback can be added if macOS support is ever
@@ -1038,12 +1735,24 @@ However, it would also cost almost nothing. Two reasonable choices:
   away. It's not wrong, but the gain over (A) is small, and it adds a rule
   everyone has to remember.
 
+**Update (2026-11-07): (B), decided by the maintainer**, at Phase 0 step 3a (first planned for Phase 1; the plan review moved it earlier). The
+skeleton moved to C++23 with gcc 14 as the minimum (its decision 22, S7), and
+its rules library, which geocal copies in Phase 6, now uses C++23 library
+features (`<spanstream>`, `std::ranges::to`, `fold_left`,
+`views::cartesian_product`). So geocal needs C++23 by Phase 6 anyway, and
+switching in Phase 1 means code written in between can use it too. The limits
+the skeleton works within: only gcc 14 library features (no range formatting,
+no `std::mdspan`); Kokkos `mdspan` indexes with `m[i, j]` only in C++23 mode,
+and inside a macro such as `BOOST_CHECK_EQUAL` that needs extra parentheses;
+deducing `this` and `std::expected` not used yet. Keep the ABI rule of (B) for
+public headers. The SWIG syntax limits (§4) stay until Phase 6 either way.
+
 ---
 
 ## 8. General mechanical code cleanup
 
 The goal is changes that are **mostly done by tools, easy to review, and
-don't change the public API**. They are done on `develop_2_0` in C++20 mode.
+don't change the public API**. They are done on `develop_2_0` in C++23 mode.
 Tooling: clang-tidy, with `compile_commands.json` from the skeleton's
 `script/make_compile_commands.py` and the wrapper `script/run_clang_tidy.sh`.
 The wrapper adds the conda sysroot and the Blitz config shim clang needs.
@@ -1051,7 +1760,12 @@ Run per directory with `-fix`, followed by a build and the full test suite.
 
 ### 8.1 Make warnings useful first
 Today, 118,947 warnings bury the roughly 1,560 that come from GeoCal's own
-code. Add third-party include directories with `-isystem` instead of `-I`
+code. (*Correction, 2026-11-07 plan review:* that count came from the
+`-fsyntax-only` harness of §7.3, which used `-I` for everything. The real build
+in the conda env already treats `$PREFIX/include` as a system directory: a
+gcc 15 release build has about 40 warnings, 38 `-Warray-bounds` and 2
+`-Wmaybe-uninitialized`, all from Blitz (§8.2). Debug builds add the 1,501
+`-Wunused-parameter`, because conda's `DEBUG_CXXFLAGS` include `-Wextra`.) Add third-party include directories with `-isystem` instead of `-I`
 (in the `ac_blitz.m4`, `ac_boost.m4`, `ac_gdal.m4`… flags, or with a
 GeoCal-side rewrite of the flags). Then decide about `-Wunused-parameter`
 (1501): either turn it off, or fix it only in code that is touched anyway.
@@ -1180,13 +1894,19 @@ Measured on `lib/` (652 files, 106k lines, generated wrappers and
 | Fixes needed on both `maintain_1.28` and `develop_2_0` | Keep 1.x to bug fixes only; fix on `maintain_1.28` first and merge or cherry-pick forward while the code bases are still close. Features go the other way: 2.0 first, then backport. |
 | `--without-boost-serialization` rots again | A regular C++-only build with the option (Phase 0 step 6); drop the option if it becomes a burden. |
 | Threaded `PhaseCorrelationMatcher` hitting FFTW's non-thread-safe planner | pocketfft, or the FFTW interim fixes in §3.5, before parallelizing tie-point collection; parallel-vs-serial unit test. |
-| C++20 syntax in headers breaks SWIG | Keep `<=>`, `requires`, `consteval`/`constinit`, `using enum` out of SWIG-parsed headers until nanobind (§4). |
+| C++20/23 syntax in headers breaks SWIG | Keep `<=>`, `requires`, `consteval`/`constinit`, `using enum` and deducing `this` out of SWIG-parsed headers until nanobind (§4); repeat the SWIG header-syntax test with SWIG 4.4 at the C++23 switch. |
 | Old archives or pickles can no longer be read | Golden archive tests; keep NVP names and layout. |
 | Downstream breakage from `std::shared_ptr` | GeoCal 2.0, migration script, convert reference downstream repos first. |
 | Numeric differences after replacing GSL solvers | One solver family at a time; side-by-side comparison; explicit tolerance review. |
 | Changed tile selection when files overlap after the R-tree swap | Edge-adjacency and overlap tests before the switch; deterministic ordering. |
 | clang-tidy edits breaking SWIG parsing | Only SWIG-compatible checks (§8.4); regenerate wrappers and run the Python tests after each check. |
 | Huge diffs from regenerated wrappers | Separate commits for wrapper regeneration (the wrappers stay in git by design until a nanobind move removes them). |
+| Old bugs carried along unexamined by the mechanical phases (§0.3) | Fix the bugs the skeleton found first (Phase 0 step 9); review passes after Phases 2 and 6 and at the end (§5). |
+| Archive writes that fail silently, or hang on `.gz`, in production now | Phase 0 step 9 (port of the skeleton's T2), with `/dev/full` tests. |
+| A check that silently doesn't run (the skeleton's ASan build without ASan; `make check` on the installed library) | When adding a check, break something on purpose once and see it fail; check the flags in the build log. |
+| Copies of the rules library or samples drifting between the skeleton and geocal | Copy from a named skeleton commit (`277b657` until Phase 6), diff file by file, take samples only from generated ones. |
+| A long window with broken python bindings between Phases 5 and 6 | Record the python results and director shelves before Phase 5; start Phase 6 right after; no unrelated python work in between. |
+| Tests only on the happy path (most of the skeleton's late bugs) | A failure-path test for each converted feature; coverage measured in Phase 0. |
 
 ---
 
@@ -1220,23 +1940,75 @@ Measured on `lib/` (652 files, 106k lines, generated wrappers and
 * **Commit policy in the skeleton:** stage only, the maintainer commits
   (geocal: never commit, per `CLAUDE.md`).
 * **Shared rules come from the skeleton:** copy `swig_rules/` and changed
-  `config/m4/` files from `swig-rules-skeleton` into geocal (§5 Phase 0 step
-  4a). The upstream `swig-rules-repo` / `autoconf-repo` are left alone; merging
-  back may be looked at later (with nanobind, `swig-rules-repo` may go away).
+  `config/m4/` files from the skeleton (`swig-rules-skeleton`, now
+  `cxx-python-skeleton`) into geocal (§5 Phase 0 step 4a). The upstream
+  `swig-rules-repo` (now `cxx-python-rules`) and `autoconf-repo` are left
+  alone; merging back may be looked at later.
 * **Python bindings may be broken from Phase 5 until Phase 6** (§5 Phase 5).
 * **Type check failures raise `TypeError`** in 2.0 (decided 2026-10-25). The
   Python code was changed on `develop_2_0`. The C++ side, starting with
   `IgcMspImp::ground_coordinate_dem` in `igc_msp.cc`, is deferred to a
   Phase 6 cleanup item, once the nanobind bindings can produce a `TypeError`.
 
+**Decided (maintainer, 2026-11-07),** from the skeleton review:
+* **C++23 with gcc 14 as the minimum, at the start of the work** (§5 Phase 0 step 3a, moved there from Phase 1 by the plan review; §7.5),
+  as in the skeleton (its decision 22).
+* **The skeleton's third fix plan goes first, at least T0–T2**, before geocal's
+  Phase 0 (plus T6.11, the debug flags, before geocal's step 4a copies
+  `ac_enable_debug.m4`). T2 is then ported into geocal's `swig_rules/lib/serialize_function.cc`
+  in Phase 0 step 9; the rest of the third fix plan comes with geocal's
+  Phase 6 copy.
+* **The Phase 0 step 9 bug fixes are backported to `maintain_1.28`** (the
+  archive write fix matters most for production). When to cut that branch is
+  still open (item 2 below).
+* **Old `.db`/`.json` shelves keep loading after Phase 6 through a
+  compatibility shim**, not a conversion script (§5 Phase 6, "Pickles and
+  shelves"). They store pickles that name `geocal_swig.<module>`; the shim (a
+  `find_class` override where `sqlite_shelf.py` unpickles, or a stub
+  `geocal_swig` package) maps those names onto the new support module. The
+  payload, a Boost binary archive, is unchanged. Rehearsed in the skeleton
+  first.
+* **The python module after nanobind is `geocal_cxx._bindings`**, with
+  `geocal` still the package users import (§5 Phase 6), as the skeleton's
+  `skeleton_cxx._bindings` (its decision 23).
+
+**Settled in the skeleton, carried over here (2026-11-07)** (these were
+decided by the maintainer for the skeleton, which rehearses geocal; say so if
+any should differ for geocal):
+* **Phase 6 is nanobind.** The pilot worked and SWIG is gone there (§4).
+* **Until Phase 6, rules come from the skeleton's last SWIG commit,
+  `277b657`** (§5 Phase 0 step 4a); from Phase 6, from its current
+  `cxx_python_rules/`.
+* Blitz arrays with a nonzero base: saving throws (skeleton D1). Copying
+  observers: deleted (D2). `#pragma once` in every header (D3).
+* The in-memory serialization functions are renamed and the old names dropped
+  (D8); the python XML string functions use `bytes` (D6).
+* Free-threaded python is a long-term goal, not required (D9); thread safety
+  is written down per class.
+* CI deferred until it can be set up on the JPL runner (D11).
+* Python 3.13 is the minimum from Phase 6 (D14; geocal's envs are 3.13.7).
+
 **Still open:**
 1. **Downstream archive inventory.** ECOSTRESS is probably the only
    producer of persisted archives, and they are embedded in HDF5 files.
    Revisit when the serialization work starts (before Phases 4–5).
-2. **When to cut `maintain_1.28`.**
+2. **When to cut `maintain_1.28`.** At the latest before the first Phase 0
+   step 9 backport (decided item above).
 3. ~~**clang-format** adoption (§8.5)~~ Decided 2026-11-05: clang-format
    adopted, same configuration as the skeleton (§8.5, skeleton plan §5b).
-4. **Final Python module name** after nanobind (skeleton: keep the current
-   name for now).
-5. **`make check` tests the installed library** in conda/pixi builds
-   installed into the env (§6.1). Pick a fix, try it in the skeleton.
+4. ~~**Final Python module name** after nanobind.~~ Decided 2026-11-07:
+   `geocal_cxx._bindings` (above).
+5. ~~**`make check` tests the installed library** in conda/pixi builds
+   installed into the env (§6.1). Pick a fix, try it in the skeleton.~~
+   Fixed in the skeleton (ST.11, decision 18); geocal applies it in Phase 0
+   step 9.
+6. ~~**C++23 instead of C++20 in Phase 1.**~~ Decided 2026-11-07: yes (above),
+   and moved to Phase 0 step 3a.
+7. ~~**Do the skeleton's third fix plan before geocal's Phase 0?**~~ Decided
+   2026-11-07: yes, at least T0–T2 (above).
+8. ~~**Backport the Phase 0 step 9 bug fixes to `maintain_1.28`?**~~ Decided
+   2026-11-07: yes (above). The step 9 table says what 1.28 gets per row
+   (not the behavior-changing parts: deleted observer copies, the
+   nonzero-base throw, Boost 1.84).
+9. ~~**Old `.db`/`.json` shelves of C++ objects after Phase 6.**~~ Decided
+   2026-11-07: a compatibility shim (above).
